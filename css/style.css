@@ -2057,6 +2057,118 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
   color: var(--text-light);
 }
 
+/* --- Accessories --- */
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .accessories-grid { grid-template-columns: 1fr; }
+}
+
+.accessory-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all var(--transition);
+}
+
+.accessory-card:hover {
+  border-color: rgba(5, 46, 22, 0.15);
+  box-shadow: 0 4px 16px var(--shadow-lg);
+}
+
+.accessory-card-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(5, 46, 22, 0.05);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--green-800);
+}
+
+.accessory-card-body { flex: 1; }
+
+.accessory-card-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.accessory-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
+}
+
+.accessory-card-compat {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+}
+
+.accessory-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accessory-card-price {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--copper);
+}
+
+/* --- Scanner Variant Option --- */
+.variant-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  background: rgba(5, 46, 22, 0.03);
+  border: 1px dashed rgba(5, 46, 22, 0.15);
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.variant-info h4 {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.variant-info p {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+}
+
+.variant-action {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.variant-price {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--copper);
+}
+
 /* --- Reviews --- */
 .product-card-rating {
   display: flex;

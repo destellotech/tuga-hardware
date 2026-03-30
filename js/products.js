@@ -4,12 +4,14 @@
    ============================================ */
 
 let productsData = [];
+let accessoriesData = [];
 
 async function loadProducts() {
   try {
     const res = await fetch('/data/products.json');
     const data = await res.json();
     productsData = data.products;
+    accessoriesData = data.accessories || [];
     return productsData;
   } catch (err) {
     console.error('Failed to load products:', err);
@@ -62,9 +64,10 @@ async function renderHomepageProducts() {
   const tabBtns = container.querySelectorAll('.tab-btn');
 
   function filterProducts(category) {
+    const baseProducts = products.filter(p => !p.isVariant);
     const filtered = category === 'all'
-      ? products
-      : products.filter(p => p.category === category);
+      ? baseProducts
+      : baseProducts.filter(p => p.category === category);
     grid.innerHTML = filtered.map(renderProductCard).join('');
   }
 
@@ -88,9 +91,10 @@ async function renderCataloguePage() {
   const filterBtns = document.querySelectorAll('.catalogue-filters .tab-btn');
 
   function filterProducts(category) {
+    const baseProducts = products.filter(p => !p.isVariant);
     const filtered = category === 'all'
-      ? products
-      : products.filter(p => p.category === category);
+      ? baseProducts
+      : baseProducts.filter(p => p.category === category);
     container.innerHTML = filtered.map(renderProductCard).join('');
   }
 
@@ -245,6 +249,10 @@ async function renderProductPage() {
       </div>
     </div>
 
+    ${renderVariantOption(product)}
+
+    ${renderAccessoryRecommendations(product.id)}
+
     ${reviewsData[product.id] ? renderReviewsSection(product.id) : ''}
 
     ${related.length > 0 ? `
@@ -287,6 +295,81 @@ function addProductToCart(productId) {
   showToast(`Added to cart`);
 }
 
+function addAccessoryToCart(accessoryId) {
+  TugaCart.addItem(accessoryId, 1);
+  showToast('Added to cart');
+}
+
+/* --- Accessory Card HTML --- */
+function renderAccessoryCard(acc) {
+  const compatible = acc.compatibleWith.map(id => {
+    const p = productsData.find(pr => pr.id === id);
+    return p ? p.name : '';
+  }).filter(Boolean).join(', ');
+
+  return `
+    <div class="accessory-card">
+      <div class="accessory-card-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M12 8v8M8 12h8"/>
+        </svg>
+      </div>
+      <div class="accessory-card-body">
+        <h3 class="accessory-card-name">${acc.name}</h3>
+        <p class="accessory-card-desc">${acc.description}</p>
+        <p class="accessory-card-compat">Works with: ${compatible}</p>
+        <div class="accessory-card-footer">
+          <span class="accessory-card-price">£${acc.price}</span>
+          <button class="btn btn-sm btn-primary" onclick="addAccessoryToCart('${acc.id}')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* --- Accessories Page --- */
+async function renderAccessoriesPage() {
+  const grid = document.getElementById('accessories-grid');
+  if (!grid) return;
+  await loadProducts();
+  grid.innerHTML = accessoriesData.map(renderAccessoryCard).join('');
+}
+
+/* --- You Might Also Need (Product Page) --- */
+function renderAccessoryRecommendations(productId) {
+  const compatible = accessoriesData.filter(acc => acc.compatibleWith.includes(productId));
+  if (compatible.length === 0) return '';
+
+  const cardsHTML = compatible.slice(0, 4).map(renderAccessoryCard).join('');
+  return `
+    <section class="accessories-section" style="padding-top: 3rem;">
+      <p class="section-tag">// You Might Also Need</p>
+      <h2 class="section-title" style="font-size: 1.5rem;">Accessories</h2>
+      <div class="accessories-grid">${cardsHTML}</div>
+    </section>
+  `;
+}
+
+/* --- Scanner Variant Section (Product Page) --- */
+function renderVariantOption(product) {
+  const variants = productsData.filter(p => p.isVariant && p.variantOf === product.id);
+  if (variants.length === 0) return '';
+
+  return variants.map(v => `
+    <div class="variant-option">
+      <div class="variant-info">
+        <h4>${v.name}</h4>
+        <p>${v.description}</p>
+      </div>
+      <div class="variant-action">
+        <span class="variant-price">£${v.price}</span>
+        <button class="btn btn-sm btn-copper" onclick="addAccessoryToCart('${v.id}')">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', async () => {
   // Load reviews first so they're available for rendering
@@ -296,4 +379,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHomepageProducts();
   renderCataloguePage();
   renderProductPage();
+  renderAccessoriesPage();
 });
