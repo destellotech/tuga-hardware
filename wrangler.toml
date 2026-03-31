@@ -11,11 +11,9 @@ SITE_URL = "https://tugahardware.com"
 SITE_NAME = "Tuga Hardware"
 
 # KV namespace for order storage
-# Create with: wrangler kv namespace create "ORDERS"
-# Then paste the binding here:
-# [[kv_namespaces]]
-# binding = "ORDERS"
-# id = "<your-namespace-id>"
+[[kv_namespaces]]
+binding = "ORDERS"
+id = "dc341cf8ff2b4a2fb6f82c4be084bb7a"
 
 # Secrets (set via CLI, never commit these):
 #   wrangler secret put STRIPE_SECRET_KEY

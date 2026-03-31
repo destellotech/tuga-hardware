@@ -1,0 +1,11 @@
+.git
+.wrangler
+.claude
+.dev.vars
+.env
+config.env
+src
+node_modules
+wrangler.toml
+.gitignore
+.assetsignore
