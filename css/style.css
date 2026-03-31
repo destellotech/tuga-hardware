@@ -514,7 +514,7 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
   .hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 2rem 1.5rem;
   }
   .hero { min-height: auto; padding-top: 60px; padding-bottom: 2rem; }
@@ -522,20 +522,22 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
   .hero h1 { font-size: 2.5rem; }
   .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
   .hero-ctas { justify-content: center; }
-  .hero-visual { order: -1; }
+  .hero-visual { order: -1; max-height: 200px; }
   .spec-badge { display: none; }
   .hero-float-badge { display: none; }
-  .hero-device-svg { width: 160px; height: 230px; }
+  .hero-device-svg { width: 120px; height: 170px; }
 }
 
 @media (max-width: 480px) {
   .hero h1 { font-size: 1.85rem; }
-  .hero-sub { font-size: 0.95rem; }
-  .hero-badge { font-size: 0.7rem; }
+  .hero-sub { font-size: 0.95rem; line-height: 1.6; }
+  .hero-badge { font-size: 0.7rem; padding: 0.4rem 0.75rem; }
   .hero-ctas { flex-direction: column; gap: 0.75rem; }
   .hero-ctas .btn { width: 100%; justify-content: center; }
-  .hero-device-svg { width: 120px; height: 175px; }
-  .hero-inner { padding: 1.5rem 1rem; }
+  .hero-visual { max-height: 150px; }
+  .hero-device-svg { width: 90px; height: 130px; }
+  .hero-inner { padding: 1.5rem 1rem; gap: 1rem; }
+  .hero { padding-bottom: 1.5rem; }
 }
 
 /* --- Trust Bar --- */
