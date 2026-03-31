@@ -514,14 +514,15 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
   .hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
+    justify-items: center;
     gap: 1.5rem;
     padding: 2rem 1.5rem;
   }
   .hero { min-height: auto; padding-top: 60px; padding-bottom: 2rem; }
-  .hero-content { max-width: 100%; }
+  .hero-content { max-width: 100%; margin: 0 auto; }
   .hero h1 { font-size: 2.5rem; }
   .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
-  .hero-ctas { justify-content: center; }
+  .hero-ctas { justify-content: center; width: 100%; }
   .hero-visual { order: -1; max-height: 200px; }
   .spec-badge { display: none; }
   .hero-float-badge { display: none; }
