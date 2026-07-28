@@ -66,7 +66,7 @@ export const money = (n) => `£${Number(n).toLocaleString('en-GB')}`;
 export const imgPath = (product, n = 1) =>
   `/img/products/${product.imageBase}-${n}.webp`;
 
-export const productUrl = (product) => `/products/${product.slug}.html`;
+export const productUrl = (product) => `/products/${product.slug}`;
 
 /** Turn a spec key like `ip_rating` into `IP Rating`. */
 export const specLabel = (key) => {
@@ -193,11 +193,11 @@ export const icons = {
 
 const NAV_LINKS = [
   { href: '/products/', label: 'Tablets', key: 'products' },
-  { href: '/accessories.html', label: 'Accessories', key: 'accessories' },
-  { href: '/bulk.html', label: 'Bulk Orders', key: 'bulk' },
+  { href: '/accessories', label: 'Accessories', key: 'accessories' },
+  { href: '/bulk', label: 'Bulk Orders', key: 'bulk' },
   { href: '/blog/', label: 'Guides', key: 'blog' },
-  { href: '/about.html', label: 'About', key: 'about' },
-  { href: '/contact.html', label: 'Contact', key: 'contact' },
+  { href: '/about', label: 'About', key: 'about' },
+  { href: '/contact', label: 'Contact', key: 'contact' },
 ];
 
 const wordmark = () =>
@@ -217,7 +217,7 @@ const header = (active) => `
         ).join('\n        ')}
       </nav>
       <div class="header-actions">
-        <a href="/cart.html" class="cart-link" aria-label="Basket">
+        <a href="/cart" class="cart-link" aria-label="Basket">
           ${icons.cart(21)}
           <span class="cart-count hidden" data-cart-count>0</span>
         </a>
@@ -240,24 +240,24 @@ const footer = () => `
           <h3>Tablets</h3>
           <nav aria-label="Products">
             ${devices.map((p) => `<a href="${productUrl(p)}">${esc(p.name)}</a>`).join('\n            ')}
-            <a href="/accessories.html">Accessories</a>
+            <a href="/accessories">Accessories</a>
           </nav>
         </div>
         <div class="footer-col">
           <h3>Company</h3>
           <nav aria-label="Company">
-            <a href="/about.html">About</a>
+            <a href="/about">About</a>
             <a href="/blog/">Guides</a>
-            <a href="/bulk.html">Bulk orders</a>
-            <a href="/contact.html">Contact</a>
+            <a href="/bulk">Bulk orders</a>
+            <a href="/contact">Contact</a>
           </nav>
         </div>
         <div class="footer-col">
           <h3>Support</h3>
           <nav aria-label="Support">
-            <a href="/shipping-returns.html">Shipping &amp; returns</a>
-            <a href="/privacy.html">Privacy policy</a>
-            <a href="/terms.html">Terms &amp; conditions</a>
+            <a href="/shipping-returns">Shipping &amp; returns</a>
+            <a href="/privacy">Privacy policy</a>
+            <a href="/terms">Terms &amp; conditions</a>
             <a href="mailto:${SITE.email}">${SITE.email}</a>
           </nav>
         </div>
@@ -277,7 +277,7 @@ const footer = () => `
   </footer>
 
   <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use a single cookie to remember your basket. Nothing else, no tracking by default. <a href="/privacy.html">Privacy policy</a>.</p>
+    <p>We use a single cookie to remember your basket. Nothing else, no tracking by default. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
       <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
       <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>

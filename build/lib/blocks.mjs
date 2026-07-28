@@ -264,7 +264,7 @@ export const ctaBanner = ({
   title = 'Stop replacing broken tablets.',
   text = 'A consumer tablet on a building site is a consumable. Buy the thing that was designed for the job and stop paying for it twice a year.',
   primary = { href: '/products/', label: 'Browse the range' },
-  secondary = { href: '/bulk.html', label: 'Kitting out a team?' },
+  secondary = { href: '/bulk', label: 'Kitting out a team?' },
 } = {}) => `
     <section class="section-dark">
       <div class="container cta-banner">

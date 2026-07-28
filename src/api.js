@@ -174,8 +174,8 @@ async function handleStripeCheckout(request, env) {
     // Create Stripe Checkout Session via the API
     const params = new URLSearchParams();
     params.append('mode', 'payment');
-    params.append('success_url', `${env.SITE_URL}/order-confirmation.html?session_id={CHECKOUT_SESSION_ID}`);
-    params.append('cancel_url', `${env.SITE_URL}/cart.html`);
+    params.append('success_url', `${env.SITE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`);
+    params.append('cancel_url', `${env.SITE_URL}/cart`);
     params.append('payment_method_types[0]', 'card');
     params.append('shipping_address_collection[allowed_countries][0]', 'GB');
     params.append('shipping_address_collection[allowed_countries][1]', 'IE');
@@ -270,8 +270,8 @@ async function handlePayPalOrder(request, env) {
         brand_name: 'Tuga Hardware',
         shipping_preference: 'GET_FROM_FILE',
         user_action: 'PAY_NOW',
-        return_url: `${env.SITE_URL}/order-confirmation.html?provider=paypal`,
-        cancel_url: `${env.SITE_URL}/cart.html`,
+        return_url: `${env.SITE_URL}/order-confirmation?provider=paypal`,
+        cancel_url: `${env.SITE_URL}/cart`,
       },
     };
 

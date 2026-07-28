@@ -440,7 +440,7 @@ ${capture()}
 ${ctaBanner({
   title: 'Not sure which one?',
   text: 'Tell us what you do and how you work, and we will tell you which size to buy — including if the answer is the cheapest one.',
-  primary: { href: '/contact.html', label: 'Ask us' },
+  primary: { href: '/contact', label: 'Ask us' },
   secondary: { href: '/blog/', label: 'Read the guides' },
 })}
 `,
@@ -561,7 +561,7 @@ ${breadcrumbs(trail)}
 
           <div class="bulk-nudge">
             <span>Buying for a team? 2+ units discount automatically.</span>
-            <a class="btn btn-sm btn-outline" href="/bulk.html">See tiers</a>
+            <a class="btn btn-sm btn-outline" href="/bulk">See tiers</a>
           </div>
         </div>
       </div>
@@ -653,7 +653,7 @@ ${productGrid(related)}
 ${ctaBanner({
   title: 'Still deciding?',
   text: 'Email us what you do and we will tell you which of the three sizes fits your day — even if that means pointing you at a cheaper one.',
-  primary: { href: '/contact.html', label: 'Ask a question' },
+  primary: { href: '/contact', label: 'Ask a question' },
   secondary: { href: '/products/', label: 'See all devices' },
 })}
 `;
@@ -684,7 +684,7 @@ write(
     title: 'Accessories for Rugged Tablets | Tuga Hardware',
     description:
       'Docks, mounts, straps, cases and cables for Tuga rugged tablets and handhelds. Free UK delivery on every order.',
-    path: '/accessories.html',
+    path: '/accessories',
     active: 'accessories',
     schema: [breadcrumbSchema(accTrail)],
     body: `
@@ -708,7 +708,7 @@ ${breadcrumbs(accTrail)}
 ${ctaBanner({
   title: 'Need something that is not listed?',
   text: 'If you need a specific mount, dock or cable for a fleet rollout, tell us the requirement and we will source it.',
-  primary: { href: '/contact.html', label: 'Get in touch' },
+  primary: { href: '/contact', label: 'Get in touch' },
   secondary: { href: '/products/', label: 'Browse devices' },
 })}
 `,
@@ -748,7 +748,7 @@ write(
     title: 'Bulk Orders & Team Discounts | Tuga Hardware',
     description:
       'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, no quote forms, free UK delivery.',
-    path: '/bulk.html',
+    path: '/bulk',
     active: 'bulk',
     schema: [breadcrumbSchema(bulkTrail), bulkFaq.schema],
     body: `
@@ -789,7 +789,7 @@ ${breadcrumbs(bulkTrail)}
             <p style="margin-top:1.5rem">Ordering ten or more? You get 10% automatically, and we can raise a proforma invoice for bank transfer if your accounts department prefers it.</p>
             <div style="margin-top:2rem">
               <a class="btn btn-primary" href="/products/">Start an order</a>
-              <a class="btn btn-outline" href="/contact.html" style="margin-left:0.5rem">Request an invoice</a>
+              <a class="btn btn-outline" href="/contact" style="margin-left:0.5rem">Request an invoice</a>
             </div>
           </div>
         </div>
@@ -812,7 +812,7 @@ ${bulkFaq.html}
 ${ctaBanner({
   title: 'Fleet order or framework agreement?',
   text: 'If you are buying for more than fifty devices, or need staged delivery, asset tagging or a specific configuration, email us and we will work it out properly.',
-  primary: { href: '/contact.html', label: 'Talk to us' },
+  primary: { href: '/contact', label: 'Talk to us' },
   secondary: null,
 })}
 `,
@@ -831,7 +831,7 @@ write(
     title: 'About Tuga Hardware | Rugged Tablets for UK Trades',
     description:
       'Why Tuga Hardware exists: professional-grade rugged tablets sold direct at honest prices, without enterprise contracts or consumer-grade compromises.',
-    path: '/about.html',
+    path: '/about',
     active: 'about',
     schema: [breadcrumbSchema(aboutTrail), orgSchema],
     body: `
@@ -874,7 +874,7 @@ ${breadcrumbs(aboutTrail)}
 
         <div style="margin-top:3rem; display:flex; gap:0.75rem; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Browse the range</a>
-          <a class="btn btn-outline" href="/contact.html">Ask us anything</a>
+          <a class="btn btn-outline" href="/contact">Ask us anything</a>
         </div>
       </div>
     </section>
@@ -896,7 +896,7 @@ write(
     title: 'Contact Tuga Hardware | UK Rugged Tablet Support',
     description:
       'Questions about which rugged tablet suits your trade, bulk orders or an existing order? Email UK-based support and get a straight answer.',
-    path: '/contact.html',
+    path: '/contact',
     active: 'contact',
     schema: [breadcrumbSchema(contactTrail), orgSchema],
     body: `
@@ -976,7 +976,7 @@ write(
   page({
     title: 'Your Basket | Tuga Hardware',
     description: 'Review your basket and check out securely. Free UK delivery and automatic team discounts on every order.',
-    path: '/cart.html',
+    path: '/cart',
     noindex: true,
     schema: [],
     body: `
@@ -1008,7 +1008,7 @@ write(
   page({
     title: 'Order Confirmed | Tuga Hardware',
     description: 'Your Tuga Hardware order is confirmed.',
-    path: '/order-confirmation.html',
+    path: '/order-confirmation',
     noindex: true,
     schema: [],
     body: `
@@ -1020,7 +1020,7 @@ write(
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
-          <a class="btn btn-outline" href="/contact.html">Contact support</a>
+          <a class="btn btn-outline" href="/contact">Contact support</a>
         </div>
       </div>
     </section>
@@ -1045,7 +1045,7 @@ const legalPages = [
     h1: 'Privacy Policy',
     description:
       'How Tuga Hardware collects, uses and protects your personal data, and the rights you have under UK GDPR.',
-    path: '/privacy.html',
+    path: '/privacy',
   },
   {
     file: 'terms.html',
@@ -1053,7 +1053,7 @@ const legalPages = [
     h1: 'Terms & Conditions',
     description:
       'The terms that apply when you buy rugged tablets and accessories from Tuga Hardware.',
-    path: '/terms.html',
+    path: '/terms',
   },
   {
     file: 'shipping-returns.html',
@@ -1061,7 +1061,7 @@ const legalPages = [
     h1: 'Shipping & Returns',
     description:
       'Free UK delivery, same-day dispatch before 2pm, and 30-day returns on every Tuga Hardware order.',
-    path: '/shipping-returns.html',
+    path: '/shipping-returns',
   },
 ];
 
@@ -1159,7 +1159,7 @@ posts.forEach((post) => {
     datePublished: post.date,
     dateModified: post.date,
     image: `${SITE.origin}${post.image}`,
-    mainEntityOfPage: `${SITE.origin}/blog/${post.slug}.html`,
+    mainEntityOfPage: `${SITE.origin}/blog/${post.slug}`,
     author: { '@type': 'Organization', name: SITE.name, url: SITE.origin },
     publisher: { '@id': `${SITE.origin}/#organization` },
   };
@@ -1169,7 +1169,7 @@ posts.forEach((post) => {
     page({
       title: `${post.title.replace(/<[^>]+>/g, '')} | Tuga Hardware`,
       description: post.description,
-      path: `/blog/${post.slug}.html`,
+      path: `/blog/${post.slug}`,
       active: 'blog',
       ogType: 'article',
       ogImage: post.image,
@@ -1212,7 +1212,7 @@ ${sectionHead({ tag: 'Keep reading', title: 'More guides' })}
             .slice(0, 3)
             .map(
               (p) => `
-          <a class="post-card reveal" href="/blog/${p.slug}.html">
+          <a class="post-card reveal" href="/blog/${p.slug}">
             <div class="post-card-media"><img src="${p.image}" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
@@ -1269,7 +1269,7 @@ ${breadcrumbs(blogTrail)}
           ${posts
             .map(
               (p) => `
-          <a class="post-card reveal" href="/blog/${p.slug}.html">
+          <a class="post-card reveal" href="/blog/${p.slug}">
             <div class="post-card-media"><img src="${p.image}" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
@@ -1305,19 +1305,19 @@ const urls = [
     priority: '0.9',
     freq: 'weekly',
   })),
-  { loc: '/accessories.html', priority: '0.7', freq: 'monthly' },
-  { loc: '/bulk.html', priority: '0.7', freq: 'monthly' },
+  { loc: '/accessories', priority: '0.7', freq: 'monthly' },
+  { loc: '/bulk', priority: '0.7', freq: 'monthly' },
   { loc: '/blog/', priority: '0.7', freq: 'weekly' },
   ...posts.map((p) => ({
-    loc: `/blog/${p.slug}.html`,
+    loc: `/blog/${p.slug}`,
     priority: '0.6',
     freq: 'monthly',
   })),
-  { loc: '/about.html', priority: '0.5', freq: 'yearly' },
-  { loc: '/contact.html', priority: '0.5', freq: 'yearly' },
-  { loc: '/shipping-returns.html', priority: '0.4', freq: 'yearly' },
-  { loc: '/privacy.html', priority: '0.2', freq: 'yearly' },
-  { loc: '/terms.html', priority: '0.2', freq: 'yearly' },
+  { loc: '/about', priority: '0.5', freq: 'yearly' },
+  { loc: '/contact', priority: '0.5', freq: 'yearly' },
+  { loc: '/shipping-returns', priority: '0.4', freq: 'yearly' },
+  { loc: '/privacy', priority: '0.2', freq: 'yearly' },
+  { loc: '/terms', priority: '0.2', freq: 'yearly' },
 ];
 
 write(
@@ -1342,8 +1342,8 @@ write(
   'robots.txt',
   `User-agent: *
 Allow: /
-Disallow: /cart.html
-Disallow: /order-confirmation.html
+Disallow: /cart
+Disallow: /order-confirmation
 Disallow: /api/
 
 # AI crawlers are welcome — being cited is how a small store gets found.

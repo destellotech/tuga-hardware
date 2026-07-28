@@ -15,13 +15,14 @@ const CANONICAL_HOST = 'www.tugahardware.com';
 /**
  * The Android range was renamed from H6/T8/T10 to a single A-series so the
  * 6" / 8" / 10" ladder reads consistently. Old URLs 301 to the new ones.
+ * Keys are extensionless — .html is stripped before this map is consulted.
  */
 const LEGACY_PATHS = {
-  '/products/tuga-h6.html': '/products/tuga-a6.html',
-  '/products/tuga-t8.html': '/products/tuga-a8.html',
-  '/products/tuga-t10.html': '/products/tuga-a10.html',
-  '/products.html': '/products/',
-  '/blog.html': '/blog/',
+  '/products/tuga-h6': '/products/tuga-a6',
+  '/products/tuga-t8': '/products/tuga-a8',
+  '/products/tuga-t10': '/products/tuga-a10',
+  '/products': '/products/',
+  '/blog': '/blog/',
 };
 
 function redirect(url, status = 301) {
@@ -49,18 +50,29 @@ export default {
       return redirect(url);
     }
 
-    // --- 2. Legacy paths ---------------------------------------------------
+    // --- 2. Pretty URLs ----------------------------------------------------
+    // Canonical URLs are extensionless (matching the asset binding's
+    // html_handling). Turn /about.html into /about with a proper 301 rather
+    // than letting the asset layer answer with a 307.
+    if (url.pathname.endsWith('.html')) {
+      let p = url.pathname.slice(0, -'.html'.length);
+      if (p.endsWith('/index')) p = p.slice(0, -'index'.length);
+      url.pathname = p || '/';
+      return redirect(url);
+    }
+
+    // --- 3. Legacy paths ---------------------------------------------------
     const legacy = LEGACY_PATHS[url.pathname];
     if (legacy) {
       url.pathname = legacy;
       return redirect(url);
     }
 
-    // --- 3. API and webhooks ----------------------------------------------
+    // --- 4. API and webhooks ----------------------------------------------
     const apiResponse = await handleRequest(request, env);
     if (apiResponse) return apiResponse;
 
-    // --- 4. Static assets --------------------------------------------------
+    // --- 5. Static assets --------------------------------------------------
     if (env.ASSETS) {
       const response = await env.ASSETS.fetch(request);
 
