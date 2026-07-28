@@ -11,6 +11,13 @@ assets = { directory = "./", binding = "ASSETS", run_worker_first = true }
 
 [vars]
 SITE_URL = "https://www.tugahardware.com"
+
+# PayPal talks to the sandbox until this is "true". Only flip it once the
+# PAYPAL_CLIENT_ID / PAYPAL_CLIENT_SECRET secrets hold LIVE credentials —
+# live code with sandbox keys fails, and sandbox code with live keys sends
+# customers to a checkout page they cannot pay on. While this is false the
+# cart hides the PayPal button entirely and card checkout is the only option.
+PAYPAL_LIVE = "false"
 SITE_NAME = "Tuga Hardware"
 
 # KV namespace for order storage

@@ -36,6 +36,21 @@
 
   const findItem = (list, id) => list.find((p) => p.id === id);
 
+  /* Which payment buttons to offer. PayPal is only shown when the Worker
+     reports live credentials — otherwise clicking it would send the customer
+     to a sandbox page they cannot pay on. Card is always assumed available so
+     a failed probe never leaves the basket with no way to check out. */
+  let paymentMethods = { card: true, paypal: false };
+
+  async function loadPaymentMethods() {
+    try {
+      const res = await fetch('/api/payment-methods');
+      if (res.ok) paymentMethods = await res.json();
+    } catch {
+      /* Keep the default. */
+    }
+  }
+
   /* -------------------------------------------------------------------- cart */
 
   const Cart = {
@@ -452,7 +467,11 @@
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
       <div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
-        <button class="btn btn-outline btn-block" data-checkout="paypal">Pay with PayPal</button>
+        ${
+          paymentMethods.paypal
+            ? '<button class="btn btn-outline btn-block" data-checkout="paypal">Pay with PayPal</button>'
+            : ''
+        }
       </div>
       <p class="summary-note" data-checkout-status hidden></p>`;
   }
@@ -464,7 +483,7 @@
 
     let products;
     try {
-      products = await getCatalogue();
+      [products] = await Promise.all([getCatalogue(), loadPaymentMethods()]);
     } catch {
       emptyEl.hidden = false;
       return;

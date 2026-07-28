@@ -128,6 +128,9 @@ export async function handleRequest(request, env) {
   if (request.method === 'POST' && path === '/api/subscribe') {
     return handleSubscribe(request, env);
   }
+  if (request.method === 'GET' && path === '/api/payment-methods') {
+    return corsResponse({ card: true, paypal: isPayPalLive(env) });
+  }
   if (request.method === 'POST' && path === '/webhooks/stripe') {
     return handleStripeWebhook(request, env);
   }
@@ -221,6 +224,11 @@ async function handleStripeCheckout(request, env) {
 // =========================================================================
 async function handlePayPalOrder(request, env) {
   try {
+    // Refuse rather than hand back a sandbox URL a customer cannot pay on.
+    if (!isPayPalLive(env)) {
+      return corsError('PayPal is not available right now', 503);
+    }
+
     const { items, discount, total } = await request.json();
 
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -495,12 +503,37 @@ async function handleContact(request, env) {
       return corsError('Please include a message', 422);
     }
 
-    await sendEnquiry(env, {
+    const enquiry = {
       name: String(name || '').slice(0, 120),
       email: String(email).slice(0, 160),
       topic: String(topic || 'Enquiry').slice(0, 80),
       message: String(message).slice(0, 4000),
-    });
+      receivedAt: new Date().toISOString(),
+    };
+
+    // Persist first. Email delivery depends on RESEND_API_KEY and a verified
+    // sending domain; if either is missing we still want the enquiry, not a
+    // 500 and a customer who thinks nobody read it.
+    let stored = false;
+    if (env.ORDERS) {
+      try {
+        await env.ORDERS.put(
+          `enquiry:${enquiry.receivedAt}:${enquiry.email}`,
+          JSON.stringify(enquiry)
+        );
+        stored = true;
+      } catch (kvErr) {
+        console.error('Could not store enquiry:', kvErr);
+      }
+    }
+
+    try {
+      await sendEnquiry(env, enquiry);
+    } catch (mailErr) {
+      console.error('Enquiry email failed:', mailErr);
+      // Only fail the request if the message is now nowhere at all.
+      if (!stored) return corsError('Could not send the message', 500);
+    }
 
     return corsResponse({ ok: true });
   } catch (err) {
@@ -532,6 +565,22 @@ async function handleSubscribe(request, env) {
     console.error('Subscribe error:', err);
     return corsError('Could not subscribe', 500);
   }
+}
+
+/**
+ * Is PayPal pointed at real money?
+ *
+ * The integration defaults to PayPal's sandbox, which returns a
+ * sandbox.paypal.com approval URL that a real customer cannot pay on. The
+ * cart asks this before offering PayPal, so a half-configured integration
+ * shows no button rather than a dead end at checkout.
+ */
+function isPayPalLive(env) {
+  return (
+    env.PAYPAL_LIVE === 'true' &&
+    Boolean(env.PAYPAL_CLIENT_ID) &&
+    Boolean(env.PAYPAL_CLIENT_SECRET)
+  );
 }
 
 // =========================================================================
