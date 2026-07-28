@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
+Disallow: /cart.html
+Disallow: /order-confirmation.html
+Disallow: /api/
 
-Sitemap: https://tugahardware.com/sitemap.xml
+# AI crawlers are welcome — being cited is how a small store gets found.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://www.tugahardware.com/sitemap.xml

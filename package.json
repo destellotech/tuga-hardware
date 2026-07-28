@@ -1,0 +1,11 @@
+{
+  "name": "tuga-hardware",
+  "private": true,
+  "type": "module",
+  "description": "tugahardware.com — static site generator + Cloudflare Worker. All HTML is generated: edit build/, data/products.json or build/content/, then run `npm run build`.",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "preview": "python -m http.server 4321",
+    "deploy": "npm run build && wrangler deploy"
+  }
+}

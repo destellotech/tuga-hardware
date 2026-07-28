@@ -5,6 +5,7 @@
 .env
 config.env
 src
+build
 node_modules
 wrangler.toml
 .gitignore

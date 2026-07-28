@@ -3,11 +3,14 @@ main = "src/worker.js"
 compatibility_date = "2024-09-27"
 compatibility_flags = ["nodejs_compat"]
 
-# Static assets served from the project root (HTML, CSS, JS, images)
-assets = { directory = "./" }
+# Static assets served from the project root (HTML, CSS, JS, images).
+# run_worker_first: the worker must see every request so the canonical-host
+# and legacy-URL redirects in src/worker.js actually fire; it then serves
+# static files itself via the ASSETS binding.
+assets = { directory = "./", binding = "ASSETS", run_worker_first = true }
 
 [vars]
-SITE_URL = "https://tugahardware.com"
+SITE_URL = "https://www.tugahardware.com"
 SITE_NAME = "Tuga Hardware"
 
 # KV namespace for order storage

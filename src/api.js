@@ -4,23 +4,76 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation } from './email.js';
+import { sendOrderConfirmation, sendEnquiry } from './email.js';
 import { saveOrder } from './orders.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
 // ---------------------------------------------------------------------------
+// Prices MUST match data/products.json. The client sends only ids and
+// quantities; every order is re-priced here so a tampered basket cannot
+// change what gets charged.
+// `device: true` marks the items that count toward a bulk discount tier.
+// Accessories are deliberately excluded — otherwise nine £8 adapters would
+// unlock 10% off a £449 tablet.
 const PRODUCTS = {
-  'tuga-h6':            { name: 'Tuga H6',                        price: 36900 },
-  'tuga-t8':            { name: 'Tuga T8',                        price: 44900 },
-  'tuga-t10':           { name: 'Tuga T10',                       price: 29900 },
-  'tuga-wh6':           { name: 'Tuga WH6',                       price: 79900 },
-  'tuga-w8':            { name: 'Tuga W8',                        price: 62900 },
-  'tuga-w10':           { name: 'Tuga W10',                       price: 64900 },
-  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 87900 },
-  'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900 },
-  'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900 },
+  // Devices — Android
+  'tuga-a6':            { name: 'Tuga A6',                        price: 29900, device: true },
+  'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
+  'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
+  // Devices — Windows
+  'tuga-wh6':           { name: 'Tuga WH6',                       price: 79900, device: true },
+  'tuga-w8':            { name: 'Tuga W8',                        price: 62900, device: true },
+  'tuga-w10':           { name: 'Tuga W10',                       price: 64900, device: true },
+  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 87900, device: true },
+  'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900, device: true },
+  'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900, device: true },
+  // Accessories
+  'acc-charging-dock':    { name: 'Charging Dock',                            price: 7900 },
+  'acc-vehicle-mount':    { name: 'Vehicle Mounting Dock',                    price: 10900 },
+  'acc-hand-strap':       { name: 'Hand Strap',                               price: 2400 },
+  'acc-stylus':           { name: 'Capacitive Stylus',                        price: 1600 },
+  'acc-screen-protector': { name: 'Tempered Glass Screen Protector (2 Pack)', price: 1400 },
+  'acc-car-charger':      { name: '12V DC Car Charger',                       price: 2600 },
+  'acc-carry-case':       { name: 'Rugged Carry Case',                        price: 3400 },
+  'acc-belt-holster':     { name: 'Belt Holster',                             price: 2200 },
+  'acc-car-mount':        { name: 'Car Phone Mount',                          price: 1700 },
+  'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
+  'acc-shoulder-strap':   { name: 'Shoulder Strap',                           price: 1900 },
 };
+
+/**
+ * Normalise a client basket into priced lines.
+ *
+ * The client only ever sends ids and quantities — prices come from PRODUCTS
+ * above, so a tampered basket cannot change what is charged. Accepts both
+ * `id` and `productId` for the item key.
+ *
+ * @throws if an id is unknown or a quantity is not a sane integer.
+ */
+function resolveBasket(items) {
+  return items.map((item) => {
+    const id = item.productId ?? item.id;
+    const product = PRODUCTS[id];
+    if (!product) throw new Error(`Unknown product: ${id}`);
+
+    // A missing quantity means 1; anything else must be a sane integer.
+    const quantity = item.quantity === undefined ? 1 : Number(item.quantity);
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+      throw new Error(`Invalid quantity for ${id}`);
+    }
+
+    return { id, product, quantity };
+  });
+}
+
+/** Bulk tiers are earned on devices only. */
+function countDeviceUnits(lines) {
+  return lines.reduce(
+    (sum, line) => sum + (line.product.device ? line.quantity : 0),
+    0
+  );
+}
 
 // Bulk discount tiers: { minQty: discountPercent }
 const DISCOUNT_TIERS = [
@@ -69,6 +122,12 @@ export async function handleRequest(request, env) {
   if (request.method === 'POST' && path === '/api/create-paypal-order') {
     return handlePayPalOrder(request, env);
   }
+  if (request.method === 'POST' && path === '/api/contact') {
+    return handleContact(request, env);
+  }
+  if (request.method === 'POST' && path === '/api/subscribe') {
+    return handleSubscribe(request, env);
+  }
   if (request.method === 'POST' && path === '/webhooks/stripe') {
     return handleStripeWebhook(request, env);
   }
@@ -91,17 +150,16 @@ async function handleStripeCheckout(request, env) {
       return corsError('Cart is empty');
     }
 
-    // Validate items and compute total quantity for bulk discount
-    const totalQty = items.reduce((sum, i) => sum + (i.quantity || 1), 0);
-    const discountPercent = getDiscountPercent(totalQty);
+    // Re-price server-side; the discount the client claims is ignored.
+    const lines = resolveBasket(items);
+    const discountPercent = getDiscountPercent(countDeviceUnits(lines));
 
     // Build Stripe line items
-    const lineItems = items.map(item => {
-      const product = PRODUCTS[item.productId];
-      if (!product) throw new Error(`Unknown product: ${item.productId}`);
-
-      // Apply bulk discount to unit price
-      const unitPrice = Math.round(product.price * (1 - discountPercent / 100));
+    const lineItems = lines.map(({ product, quantity }) => {
+      // The tier discount applies to devices only, matching how it is earned.
+      const unitPrice = product.device
+        ? Math.round(product.price * (1 - discountPercent / 100))
+        : product.price;
 
       return {
         price_data: {
@@ -109,7 +167,7 @@ async function handleStripeCheckout(request, env) {
           product_data: { name: product.name },
           unit_amount: unitPrice,
         },
-        quantity: item.quantity || 1,
+        quantity,
       };
     });
 
@@ -170,17 +228,15 @@ async function handlePayPalOrder(request, env) {
     }
 
     // Validate and recalculate server-side (never trust the client total)
-    const totalQty = items.reduce((sum, i) => sum + (i.quantity || 1), 0);
-    const discountPercent = getDiscountPercent(totalQty);
+    const lines = resolveBasket(items);
+    const discountPercent = getDiscountPercent(countDeviceUnits(lines));
 
     let subtotalPence = 0;
-    const paypalItems = items.map(item => {
-      const product = PRODUCTS[item.productId];
-      if (!product) throw new Error(`Unknown product: ${item.productId}`);
-
-      const qty = item.quantity || 1;
-      const unitPrice = Math.round(product.price * (1 - discountPercent / 100));
-      subtotalPence += unitPrice * qty;
+    const paypalItems = lines.map(({ product, quantity }) => {
+      const unitPrice = product.device
+        ? Math.round(product.price * (1 - discountPercent / 100))
+        : product.price;
+      subtotalPence += unitPrice * quantity;
 
       return {
         name: product.name,
@@ -188,7 +244,7 @@ async function handlePayPalOrder(request, env) {
           currency_code: 'GBP',
           value: (unitPrice / 100).toFixed(2),
         },
-        quantity: String(qty),
+        quantity: String(quantity),
       };
     });
 
@@ -349,14 +405,13 @@ async function handlePayPalWebhook(request, env) {
     }
 
     // Handle order capture completion
-    if (event.event_type === 'CHECKOUT.ORDER.APPROVED' || event.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
+    // Only the APPROVED event carries the full order (purchase_units, payer).
+    // PAYMENT.CAPTURE.COMPLETED delivers a bare capture object — recording it
+    // too would save a duplicate order with no items keyed by the capture id.
+    if (event.event_type === 'CHECKOUT.ORDER.APPROVED') {
       const resource = event.resource;
 
-      // For PAYMENT.CAPTURE.COMPLETED, the resource is the capture object
-      // For CHECKOUT.ORDER.APPROVED, we need to capture the order first
-      if (event.event_type === 'CHECKOUT.ORDER.APPROVED') {
-        await capturePayPalOrder(resource.id, env);
-      }
+      await capturePayPalOrder(resource.id, env);
 
       const purchaseUnit = resource.purchase_units?.[0] || {};
       const payer = resource.payer || {};
@@ -415,6 +470,67 @@ async function handlePayPalWebhook(request, env) {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+}
+
+// =========================================================================
+// CONTACT + SUBSCRIBE
+// =========================================================================
+
+/**
+ * Contact form. Emails support and never leaks whether the send succeeded
+ * for reasons other than a genuine failure.
+ */
+async function handleContact(request, env) {
+  try {
+    const { name, email, topic, message, website } = await request.json();
+
+    // Honeypot: real users never fill a hidden field.
+    if (website) return corsResponse({ ok: true });
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return corsError('A valid email address is required', 422);
+    }
+    if (!message || message.trim().length < 5) {
+      return corsError('Please include a message', 422);
+    }
+
+    await sendEnquiry(env, {
+      name: String(name || '').slice(0, 120),
+      email: String(email).slice(0, 160),
+      topic: String(topic || 'Enquiry').slice(0, 80),
+      message: String(message).slice(0, 4000),
+    });
+
+    return corsResponse({ ok: true });
+  } catch (err) {
+    console.error('Contact form error:', err);
+    return corsError('Could not send the message', 500);
+  }
+}
+
+/**
+ * Buyer's-guide signup. Stored in KV so there is a list to export later;
+ * the send itself is handled manually for now.
+ */
+async function handleSubscribe(request, env) {
+  try {
+    const { email } = await request.json();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return corsError('A valid email address is required', 422);
+    }
+
+    if (env.ORDERS) {
+      await env.ORDERS.put(
+        `subscriber:${email.toLowerCase()}`,
+        JSON.stringify({ email, createdAt: new Date().toISOString() })
+      );
+    }
+
+    return corsResponse({ ok: true });
+  } catch (err) {
+    console.error('Subscribe error:', err);
+    return corsError('Could not subscribe', 500);
   }
 }
 

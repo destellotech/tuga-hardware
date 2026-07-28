@@ -4,6 +4,7 @@
    ============================================ */
 
 const FROM_EMAIL = 'Tuga Hardware <orders@tugahardware.com>';
+const SUPPORT_EMAIL = 'support@tugahardware.com';
 
 // Brand colours (inline CSS — email clients strip <style> blocks)
 const BRAND = {
@@ -74,10 +75,11 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     </tr>
   `).join('');
 
-  const discountRow = discount > 0 ? `
+  // `discount` is the bulk-discount PERCENT (from checkout metadata), not an
+  // amount — the unit prices in the rows above already have it applied.
+  const discountRow = Number(discount) > 0 ? `
     <tr>
-      <td colspan="2" style="padding:8px 0;font-size:14px;color:${BRAND.copper};font-weight:600;">Bulk discount</td>
-      <td style="padding:8px 0;font-size:14px;color:${BRAND.copper};text-align:right;font-weight:600;">&minus;&pound;${(discount / 100).toFixed(2)}</td>
+      <td colspan="3" style="padding:8px 0;font-size:13px;color:${BRAND.copper};font-weight:600;">Bulk discount of ${Number(discount)}% applied — prices above already include it</td>
     </tr>
   ` : '';
 
@@ -185,9 +187,40 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 }
 
 // ---------------------------------------------------------------------------
+// Enquiry from the contact form / a buyer's-guide signup
+// ---------------------------------------------------------------------------
+export async function sendEnquiry(env, { name, email, topic, message }) {
+  const row = (label, value) =>
+    `<tr><td style="padding:6px 12px;font:500 13px monospace;color:#8a8a82">${escapeHtml(label)}</td><td style="padding:6px 12px;font:14px sans-serif;color:#1a1a18">${escapeHtml(value)}</td></tr>`;
+
+  return sendEmail(env, {
+    to: SUPPORT_EMAIL,
+    replyTo: email,
+    subject: `[Tuga] ${topic || 'Enquiry'} — ${name || email}`,
+    html: `<div style="font-family:sans-serif;max-width:640px">
+      <h2 style="font-size:18px;color:#052e16">New enquiry from tugahardware.com</h2>
+      <table style="border-collapse:collapse;margin:16px 0">
+        ${row('Name', name || '—')}
+        ${row('Email', email || '—')}
+        ${row('Topic', topic || '—')}
+      </table>
+      <p style="white-space:pre-wrap;font-size:15px;line-height:1.6;color:#1a1a18">${escapeHtml(message || '')}</p>
+    </div>`,
+  });
+}
+
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ---------------------------------------------------------------------------
 // Low-level Resend API call
 // ---------------------------------------------------------------------------
-async function sendEmail(env, { to, subject, html }) {
+async function sendEmail(env, { to, subject, html, replyTo }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -199,6 +232,7 @@ async function sendEmail(env, { to, subject, html }) {
       to: [to],
       subject,
       html,
+      ...(replyTo ? { reply_to: replyTo } : {}),
     }),
   });
 
