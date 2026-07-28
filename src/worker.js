@@ -36,7 +36,20 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // --- 1. One canonical origin ------------------------------------------
+    // --- 1. Machine endpoints, before any redirect ------------------------
+    // Stripe and PayPal do not follow redirects when delivering a webhook, and
+    // a 301 turns a POST into a GET. Serve /api/ and /webhooks/ on whatever
+    // host they were configured with so a stale apex URL still works.
+    const isMachinePath =
+      url.pathname.startsWith('/api/') || url.pathname.startsWith('/webhooks/');
+
+    if (isMachinePath) {
+      const apiResponse = await handleRequest(request, env);
+      if (apiResponse) return apiResponse;
+      return new Response('Not Found', { status: 404 });
+    }
+
+    // --- 2. One canonical origin ------------------------------------------
     // Split-host indexing (apex vs www) halves the value of every backlink.
     // Skip in local development, where the host is localhost.
     const isLocal =
@@ -50,7 +63,7 @@ export default {
       return redirect(url);
     }
 
-    // --- 2. Pretty URLs ----------------------------------------------------
+    // --- 3. Pretty URLs ----------------------------------------------------
     // Canonical URLs are extensionless (matching the asset binding's
     // html_handling). Turn /about.html into /about with a proper 301 rather
     // than letting the asset layer answer with a 307.
@@ -61,16 +74,12 @@ export default {
       return redirect(url);
     }
 
-    // --- 3. Legacy paths ---------------------------------------------------
+    // --- 4. Legacy paths ---------------------------------------------------
     const legacy = LEGACY_PATHS[url.pathname];
     if (legacy) {
       url.pathname = legacy;
       return redirect(url);
     }
-
-    // --- 4. API and webhooks ----------------------------------------------
-    const apiResponse = await handleRequest(request, env);
-    if (apiResponse) return apiResponse;
 
     // --- 5. Static assets --------------------------------------------------
     if (env.ASSETS) {
