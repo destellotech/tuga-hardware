@@ -277,7 +277,7 @@ const footer = () => `
   </footer>
 
   <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use a single cookie to remember your basket. Nothing else, no tracking by default. <a href="/privacy">Privacy policy</a>.</p>
+    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
       <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
       <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
@@ -359,6 +359,10 @@ ${body}
 ${footer()}
 
   <script src="/js/app.js?v=${JS_V}" defer></script>
+
+  <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
+       data. Kept accurate in the cookie notice and privacy policy. -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
 </body>
 </html>
 `;

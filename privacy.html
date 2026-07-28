@@ -136,7 +136,7 @@
     <p>Our website uses cookies to improve your browsing experience. Cookies are small text files stored on your device when you visit our site. We use the following types of cookies:</p>
     <ul>
       <li><strong>Essential cookies:</strong> required for the website to function, including cart functionality and session management.</li>
-      <li><strong>Analytics cookies:</strong> help us understand how visitors use our site so we can make improvements.</li>
+      <li><strong>Analytics:</strong> we use Cloudflare Web Analytics to count page views and visits. It sets no cookies, does not fingerprint your device or browser, and cannot identify you individually.</li>
     </ul>
     <p>You can manage your cookie preferences through your browser settings. Disabling essential cookies may affect the functionality of the website.</p>
 
@@ -146,7 +146,7 @@
       <li><strong>Stripe:</strong> processes card payments securely. Stripe's privacy policy is available on their website.</li>
       <li><strong>PayPal:</strong> provides an alternative payment method. PayPal's privacy policy is available on their website.</li>
       <li><strong>Shipping providers:</strong> we share your name and delivery address with our logistics partners to fulfil your order.</li>
-      <li><strong>Analytics providers:</strong> we use analytics tools to understand website usage. Data is anonymised where possible.</li>
+      <li><strong>Analytics providers:</strong> Cloudflare Web Analytics processes aggregate page view data on our behalf. No personal data is shared with it and no cookies are set.</li>
     </ul>
     <p>We do not sell your personal data to any third party.</p>
 
@@ -239,7 +239,7 @@
   </footer>
 
   <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use a single cookie to remember your basket. Nothing else, no tracking by default. <a href="/privacy">Privacy policy</a>.</p>
+    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
       <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
       <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
@@ -247,5 +247,9 @@
   </div>
 
   <script src="/js/app.js?v=fdf4ad2ee5" defer></script>
+
+  <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
+       data. Kept accurate in the cookie notice and privacy policy. -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
 </body>
 </html>
