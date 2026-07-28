@@ -103,20 +103,20 @@ const breadcrumbSchema = (trail) => ({
 
 const HOME_FAQ = [
   {
-    q: 'Which size should I get — 6, 8 or 10 inch?',
-    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is what most tradespeople settle on: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day — blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
+    q: 'Which size should I get: 6, 8 or 10 inch?',
+    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is what most tradespeople settle on: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
   },
   {
     q: 'What is the difference between IP67, IP68 and IP69K?',
-    a: 'All three mean fully dust tight. The second digit is water: IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets — which matters if your kit gets jet washed rather than just rained on. For most UK trades IP67 is genuinely enough; IP68 and IP69K are the margin you want if the device lives outdoors.',
+    a: 'All three mean fully dust tight. The second digit is water: IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. For most UK trades IP67 is genuinely enough; IP68 and IP69K are the margin you want if the device lives outdoors.',
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'They are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. It does not make a device indestructible — it means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'They are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
-    a: 'Android if you are using apps: job management, forms, photos, maps, cloud tools. That covers most trades and it is cheaper. Windows only if you need actual desktop software that has no mobile version — diagnostic tools, legacy databases, GIS, CAD viewers or network drives. Windows devices cost roughly twice as much, so do not buy one unless a specific piece of software forces your hand.',
+    a: 'Android if you are using apps: job management, forms, photos, maps, cloud tools. That covers most trades and it is cheaper. Windows only if you need actual desktop software that has no mobile version: diagnostic tools, legacy databases, GIS, CAD viewers or network drives. Windows devices cost roughly twice as much, so do not buy one unless a specific piece of software forces your hand.',
   },
   {
     q: 'How long does delivery take and what does it cost?',
@@ -128,7 +128,7 @@ const HOME_FAQ = [
   },
   {
     q: 'Do you do discounts for teams?',
-    a: 'Yes, and they apply automatically at checkout with no codes or phone calls: 3% off at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more. You can mix and match any models — the tier is based on the total number of devices in the basket.',
+    a: 'Yes, and they apply automatically at checkout with no codes or phone calls: 3% off at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more. You can mix and match any models. The tier is based on the total number of devices in the basket.',
   },
 ];
 
@@ -192,7 +192,7 @@ const hero = () => {
         <div class="hero-content">
           ${eyebrow('Rugged Android & Windows tablets')}
           <h1 class="hero-title">Hard Shell.<br><span class="accent">Long Life.</span></h1>
-          <p class="hero-sub">Waterproof, drop-tested tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift — not for a desk.</p>
+          <p class="hero-sub">Waterproof, drop-tested tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift, not for a desk.</p>
           <div class="hero-ctas">
             <a class="btn btn-inverse btn-lg" href="/products/">Browse the range</a>
             <a class="btn btn-outline-light btn-lg" href="#pick-a-size">Help me pick a size</a>
@@ -252,7 +252,7 @@ ${sizeLadder(androidRange)}
 ${sectionHead({
   tag: 'Every model',
   title: 'The whole range on one page',
-  lede: 'Six devices, three sizes, two operating systems. No configurator, no quote request — the price you see is the price you pay.',
+  lede: 'Six devices, three sizes, two operating systems. No configurator, no quote request. The price you see is the price you pay.',
 })}
 ${compareTable()}
         <div style="margin-top:2rem">
@@ -276,7 +276,7 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Sealed, not splash resistant</h3>
-            <p>An IP68 rating means the housing is fully dust tight and survives sustained immersion — not that it tolerates a light shower. The devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
+            <p>An IP68 rating means the housing is fully dust tight and survives sustained immersion, not that it tolerates a light shower. The devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
               <li>Touchscreen calibrated to work with wet fingers and gloves</li>
@@ -303,7 +303,7 @@ ${sectionHead({
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
             <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. Ours run 500 to 800 nits with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number.</p>
-            <p>Batteries are 10,000mAh and up on the Android range — comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>Batteries are 10,000mAh and up on the Android range, comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
           </div>
         </article>
       </div>
@@ -333,7 +333,7 @@ ${sectionHead({
         <div class="promise-grid">
           <div class="promise reveal">
             <h3>Specs you can verify</h3>
-            <p>Every claim on this site is a published rating you can check — IP number, MIL-STD method, battery capacity in mAh, brightness in nits. No invented durability scores.</p>
+            <p>Every claim on this site is a published rating you can check: IP number, MIL-STD method, battery capacity in mAh, brightness in nits. No invented durability scores.</p>
           </div>
           <div class="promise reveal">
             <h3>One price, shown up front</h3>
@@ -439,7 +439,7 @@ ${capture()}
 
 ${ctaBanner({
   title: 'Not sure which one?',
-  text: 'Tell us what you do and how you work, and we will tell you which size to buy — including if the answer is the cheapest one.',
+  text: 'Tell us what you do and how you work, and we will tell you which size to buy, including if the answer is the cheapest one.',
   primary: { href: '/contact', label: 'Ask us' },
   secondary: { href: '/blog/', label: 'Read the guides' },
 })}
@@ -529,14 +529,14 @@ ${breadcrumbs(trail)}
         </div>
 
         <div class="buy-panel">
-          <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} — ${esc(p.sizeLabel)}&Prime; — ${esc(p.specs.os)}</p>
+          <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} / ${esc(p.sizeLabel)}&Prime; / ${esc(p.specs.os)}</p>
           <h1 class="pdp-title">${esc(p.name)}</h1>
           <p class="pdp-tagline">${esc(p.tagline)}</p>
 
           <div class="pdp-price-row">
             <span class="pdp-price">${money(p.price)}</span>
             ${p.compareAtPrice ? `<span class="pdp-price-was">${money(p.compareAtPrice)}</span>` : ''}
-            <span class="pdp-price-note">Includes VAT — free UK delivery</span>
+            <span class="pdp-price-note">Includes VAT. Free UK delivery</span>
           </div>
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
@@ -652,14 +652,14 @@ ${productGrid(related)}
 
 ${ctaBanner({
   title: 'Still deciding?',
-  text: 'Email us what you do and we will tell you which of the three sizes fits your day — even if that means pointing you at a cheaper one.',
+  text: 'Email us what you do and we will tell you which of the three sizes fits your day, even if that means pointing you at a cheaper one.',
   primary: { href: '/contact', label: 'Ask a question' },
   secondary: { href: '/products/', label: 'See all devices' },
 })}
 `;
 
   return page({
-    title: `${p.name} — ${p.sizeLabel} inch Rugged ${p.category === 'android' ? 'Android' : 'Windows'} ${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} | Tuga Hardware`,
+    title: `${p.name}: ${p.sizeLabel} inch Rugged ${p.category === 'android' ? 'Android' : 'Windows'} ${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} | Tuga Hardware`,
     description: p.description,
     path: productUrl(p),
     active: 'products',
@@ -693,7 +693,7 @@ write(
 ${breadcrumbs(accTrail)}
         ${eyebrow('Accessories')}
         <h1>The bits that make it work on site</h1>
-        <p class="lede">Mounts, docks, straps and cables that fit the devices we sell. Nothing here is a generic listing — each one is matched to specific models.</p>
+        <p class="lede">Mounts, docks, straps and cables that fit the devices we sell. Nothing here is a generic listing. Each one is matched to specific models.</p>
       </div>
     </section>
 
@@ -736,7 +736,7 @@ const BULK_FAQ = [
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
-    a: 'Yes — the same 12-month warranty and 30-day returns apply to every unit regardless of order size.',
+    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size.',
   },
 ];
 
@@ -765,8 +765,8 @@ ${breadcrumbs(bulkTrail)}
       <div class="container">
         <div class="stat-grid">
           <div class="stat reveal"><span class="stat-value">3%</span><span class="stat-label">2 units</span></div>
-          <div class="stat reveal"><span class="stat-value">5%</span><span class="stat-label">3 – 4 units</span></div>
-          <div class="stat reveal"><span class="stat-value">8%</span><span class="stat-label">5 – 9 units</span></div>
+          <div class="stat reveal"><span class="stat-value">5%</span><span class="stat-label">3 to 4 units</span></div>
+          <div class="stat reveal"><span class="stat-value">8%</span><span class="stat-label">5 to 9 units</span></div>
           <div class="stat reveal"><span class="stat-value">10%</span><span class="stat-label">10+ units</span></div>
         </div>
       </div>
@@ -782,7 +782,7 @@ ${breadcrumbs(bulkTrail)}
             ${eyebrow('How it works')}
             <h3>Three steps, no forms</h3>
             <ul class="editorial-list">
-              <li>Add the devices your team needs to the basket — mix and match any models</li>
+              <li>Add the devices your team needs to the basket, mixing and matching any models</li>
               <li>The tier is calculated on the total number of devices and applied at checkout</li>
               <li>Everything ships free, with the same warranty and returns as a single unit</li>
             </ul>
@@ -853,7 +853,7 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>What we actually do</h2>
 
-          <p>We select rugged devices that hit a genuine standard — a published IP rating, a real MIL-STD drop test method, a battery measured in mAh rather than adjectives — and sell them direct at a price with one margin on it instead of four. There is no configurator, no quote request and no minimum order. The price on the page is the price you pay, and delivery is free.</p>
+          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator, no quote request and no minimum order. The price on the page is the price you pay, and delivery is free.</p>
 
           <p>We are deliberately narrow. Six devices, three sizes, two operating systems. It is easier to know six products properly than to list six hundred and know none of them.</p>
 
@@ -905,7 +905,7 @@ write(
 ${breadcrumbs(contactTrail)}
         ${eyebrow('Contact')}
         <h1>Ask before you spend</h1>
-        <p class="lede">Tell us what you do and how you work and we will tell you which size fits — including when the honest answer is the cheapest device in the range.</p>
+        <p class="lede">Tell us what you do and how you work and we will tell you which size fits, including when the honest answer is the cheapest device in the range.</p>
       </div>
     </section>
 
@@ -1346,7 +1346,7 @@ Disallow: /cart
 Disallow: /order-confirmation
 Disallow: /api/
 
-# AI crawlers are welcome — being cited is how a small store gets found.
+# AI crawlers are welcome. Being cited is how a small store gets found.
 User-agent: GPTBot
 Allow: /
 

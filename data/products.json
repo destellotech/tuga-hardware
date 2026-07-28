@@ -13,7 +13,7 @@
       "sizeLabel": "6.8",
       "order": 1,
       "tagline": "The one that lives in your pocket.",
-      "shortFor": "Photos, job sheets, sign-off and comms — on a phone that survives the site.",
+      "shortFor": "Photos, job sheets, sign-off and comms, on a phone that survives the site.",
       "description": "A 6.8 inch rugged Android handheld for tradespeople who need a tough device in their pocket. IP68 and IP69K rated, drop tested to MIL-STD-810H, with a 10600mAh battery and 5G.",
       "longDescription": "The A6 is the smallest device in the range and the one most people start with. It goes in a pocket or a belt holster, survives being dropped down a stairwell, and still has charge at the end of a long shift. The 64MP night vision camera earns its keep in loft spaces, voids and under floors where a torch and a phone in the same hand is one hand too few. 5G means photos and job sheets upload before you have got back to the van.",
       "price": 299,
@@ -21,9 +21,9 @@
       "currency": "GBP",
       "images": ["h6-1.webp", "h6-2.webp", "h6-3.webp"],
       "highlights": [
-        "IP68 + IP69K — survives jet washing, not just rain",
+        "IP68 + IP69K, survives jet washing, not just rain",
         "64MP night vision camera for dark voids and loft spaces",
-        "10600mAh battery — two full days of normal site use",
+        "10600mAh battery, two full days of normal site use",
         "5G, so uploads finish before you leave the job"
       ],
       "specs": {
@@ -61,7 +61,7 @@
       "sizeLabel": "8",
       "order": 2,
       "tagline": "The all-rounder. Fits the van door pocket.",
-      "shortFor": "Forms, maps, site photos and quotes — one-handed, all shift.",
+      "shortFor": "Forms, maps, site photos and quotes, one-handed, all shift.",
       "description": "An 8 inch rugged Android tablet with IP68 protection, 4G LTE and a sunlight readable screen. The size most tradespeople settle on: big enough for forms and drawings, small enough to hold in one hand.",
       "longDescription": "Eight inches is the size most people land on once they have tried all three. It is big enough to fill in a form, read a drawing or follow a route without pinching and zooming, and small enough to hold in one hand up a ladder or drop into a van door pocket. Sunlight readable at 800 nits, sealed to IP68, and drop tested to MIL-STD-810H. Vehicle mountable with 4G LTE built in, so it works as a dashboard unit on the road and a site tablet when you get there.",
       "price": 379,
@@ -69,10 +69,10 @@
       "currency": "GBP",
       "images": ["t8-1.webp", "t8-2.webp", "t8-3.webp"],
       "highlights": [
-        "800 nit sunlight readable screen — usable on a bright roof",
+        "800 nit sunlight readable screen you can use on a bright roof",
         "Fits a van door pocket and one hand",
         "10000mAh battery with 4G LTE for remote sites",
-        "Vehicle mountable — dashboard unit and site tablet in one"
+        "Vehicle mountable, so it is a dashboard unit and site tablet in one"
       ],
       "specs": {
         "screen": "8\" sunlight readable",
@@ -117,7 +117,7 @@
       "currency": "GBP",
       "images": ["t10-1.webp", "t10-2.webp", "t10-3.webp"],
       "highlights": [
-        "10.1 inch screen — read a drawing without pinching and zooming",
+        "10.1 inch screen, so you can read a drawing without pinching and zooming",
         "IP68 + IP69K, the highest sealing in the range",
         "10800mAh battery, the biggest we fit",
         "Dual SIM 4G for patchy rural coverage"
@@ -164,7 +164,7 @@
       "currency": "GBP",
       "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
       "highlights": [
-        "Full Windows 11 Pro — not a mobile OS pretending",
+        "Full Windows 11 Pro, not a mobile OS pretending",
         "Intel N100, 16GB RAM, 512GB SSD",
         "Fits a holster, runs desktop software",
         "Optional integrated 2D barcode scanner"
@@ -211,7 +211,7 @@
       "images": ["w8-1.webp", "w8-2.webp", "w8-3.webp"],
       "highlights": [
         "Full Windows 11 Pro in an 8 inch rugged body",
-        "USB-C, USB-A and HDMI — no adapter bag",
+        "USB-C, USB-A and HDMI, so no adapter bag",
         "Pogo pin dock connector for desk use",
         "Optional integrated 2D barcode scanner"
       ],
@@ -256,7 +256,7 @@
       "currency": "GBP",
       "images": ["w10-1.webp", "w10-2.webp", "w10-3.webp"],
       "highlights": [
-        "RJ45 Ethernet — plug straight into panels and plant",
+        "RJ45 Ethernet, so you can plug straight into panels and plant",
         "10.1 inch FHD, full Windows 11 Pro",
         "USB-C, USB-A, HDMI and Ethernet on board",
         "Optional 2D barcode scanner and UHF reader"

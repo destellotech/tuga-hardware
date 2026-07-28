@@ -93,8 +93,8 @@
        devices only, and only device prices are discounted. */
     tier(deviceUnits) {
       if (deviceUnits >= 10) return { percent: 10, label: '10+ units' };
-      if (deviceUnits >= 5) return { percent: 8, label: '5–9 units' };
-      if (deviceUnits >= 3) return { percent: 5, label: '3–4 units' };
+      if (deviceUnits >= 5) return { percent: 8, label: '5 to 9 units' };
+      if (deviceUnits >= 3) return { percent: 5, label: '3 to 4 units' };
       if (deviceUnits >= 2) return { percent: 3, label: '2 units' };
       return { percent: 0, label: null };
     },
@@ -442,7 +442,7 @@
       </div>
       ${
         totals.discount > 0
-          ? `<div class="summary-row"><span>Bulk discount on devices (${totals.tier.percent}% — ${totals.tier.label})</span><span>&minus;${money(totals.discount)}</span></div>`
+          ? `<div class="summary-row"><span>Bulk discount on devices (${totals.tier.percent}%, ${totals.tier.label})</span><span>&minus;${money(totals.discount)}</span></div>`
           : ''
       }
       <div class="summary-row summary-row-total">
@@ -603,7 +603,7 @@
           contact.reset();
           status.className = 'form-status form-status-ok';
           status.hidden = false;
-          status.textContent = 'Thanks — we will reply within one working day.';
+          status.textContent = 'Thanks. We will reply within one working day.';
         } catch {
           status.className = 'form-status form-status-err';
           status.hidden = false;

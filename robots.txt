@@ -4,7 +4,7 @@ Disallow: /cart
 Disallow: /order-confirmation
 Disallow: /api/
 
-# AI crawlers are welcome — being cited is how a small store gets found.
+# AI crawlers are welcome. Being cited is how a small store gets found.
 User-agent: GPTBot
 Allow: /
 

@@ -51,7 +51,7 @@ export function productCard(p) {
               <img src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" loading="lazy" width="600" height="450">
             </div>
             <div class="product-card-body">
-              <p class="product-card-kicker">${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} — ${esc(p.sizeLabel)}&Prime; — ${p.category === 'android' ? 'Android' : 'Windows'}</p>
+              <p class="product-card-kicker">${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} / ${esc(p.sizeLabel)}&Prime; / ${p.category === 'android' ? 'Android' : 'Windows'}</p>
               <h3 class="product-card-name">${esc(p.name)}</h3>
               <p class="product-card-tagline">${esc(p.tagline)}</p>
               <div class="spec-chips">
