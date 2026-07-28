@@ -238,16 +238,25 @@ ${trustStrip()}
 ${sectionHead({
   tag: 'Start here',
   title: 'Pick the size, not the spec sheet',
-  lede: 'Three Android devices, drawn to scale. Nearly everyone chooses on size, so start there and let the specifications follow. Windows versions of each size are available if your software demands it.',
+  lede: 'Three Android devices, drawn to scale. Nearly everyone chooses on size, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
 })}
 ${sizeLadder(androidRange)}
-        <p class="lede" style="margin-top:2.5rem">
-          Need full Windows instead? <a class="link-arrow" href="/products/?os=windows">See the Windows range</a>
-        </p>
       </div>
     </section>
 
-    <section class="section section-deep">
+    <section class="section section-deep" id="windows">
+      <div class="container">
+${sectionHead({
+  tag: 'Windows range',
+  title: 'The same three sizes, running full Windows 11 Pro',
+  lede: 'Buy these only if a specific piece of desktop software forces your hand: diagnostic tools, legacy databases, GIS, CAD viewers or a network drive. They cost roughly twice the Android equivalents, and for most trades Android does the job.',
+  wide: true,
+})}
+${productGrid(windowsRange)}
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container">
 ${sectionHead({
   tag: 'Every model',
