@@ -13,14 +13,40 @@ import { dirname, join } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(here, '..', '..');
 
-/* Content-hash the shared assets so their URLs change when they do. The
-   worker serves css/js with a one-year immutable cache; without a version
-   in the URL a deploy would never reach returning visitors. */
+/* Content-hash static assets so their URLs change when they do. The worker
+   serves css/js/webp with a one-year immutable cache; without a version in
+   the URL, a changed file keeps the SAME path, so browsers and Cloudflare's
+   edge cache have no signal to refetch — different visitors (and different
+   Cloudflare PoPs) end up stuck on whichever bytes they cached first, for up
+   to a year. This bit product photography on 2026-07-29: replacing an image
+   in place left some edges serving the old file under the unchanged URL. */
 const assetHash = (rel) =>
   createHash('sha256').update(readFileSync(join(ROOT, rel))).digest('hex').slice(0, 10);
 
 const CSS_V = assetHash('css/style.css');
 const JS_V = assetHash('js/app.js');
+
+/** Memoised per path — every image is only hashed once per build. */
+const imageHashCache = new Map();
+
+/**
+ * Append a content-hash query string to a root-relative asset path, e.g.
+ * `/img/products/h6-1.webp` -> `/img/products/h6-1.webp?v=ab12cd34ef`.
+ * Silently returns the path unchanged if the file cannot be read, so a
+ * missing image fails as a 404 at request time rather than breaking the
+ * whole build.
+ */
+export function versioned(rootPath) {
+  if (imageHashCache.has(rootPath)) return imageHashCache.get(rootPath);
+  let out = rootPath;
+  try {
+    out = `${rootPath}?v=${assetHash(rootPath.replace(/^\//, ''))}`;
+  } catch {
+    /* File not found at build time — leave unversioned. */
+  }
+  imageHashCache.set(rootPath, out);
+  return out;
+}
 
 export const SITE = {
   name: 'Tuga Hardware',
@@ -64,7 +90,7 @@ export const esc = (value = '') =>
 export const money = (n) => `£${Number(n).toLocaleString('en-GB')}`;
 
 export const imgPath = (product, n = 1) =>
-  `/img/products/${product.imageBase}-${n}.webp`;
+  versioned(`/img/products/${product.imageBase}-${n}.webp`);
 
 /* Written by build/optimise-images.mjs: src -> available widths. Missing is
    fine; srcset is simply omitted and the full-size image is used. */
@@ -80,18 +106,20 @@ try {
 /**
  * Build srcset/sizes attributes for a generated image.
  *
- * @param {string} src   Full-size path, e.g. `/img/products/t8-1.webp`.
+ * @param {string} src   Full-size path, versioned or not, e.g.
+ *                       `/img/products/t8-1.webp` or `...webp?v=abc123`.
  * @param {string} sizes The CSS `sizes` value describing the rendered width.
  */
 export function responsive(src, sizes) {
-  const widths = imageWidths[src];
+  const rawSrc = src.split('?')[0];
+  const widths = imageWidths[rawSrc];
   if (!widths || widths.length < 2) return '';
 
-  const base = src.replace(/\.webp$/, '');
+  const base = rawSrc.replace(/\.webp$/, '');
   const largest = Math.max(...widths);
 
   const srcset = widths
-    .map((w) => `${w === largest ? src : `${base}-${w}.webp`} ${w}w`)
+    .map((w) => `${versioned(w === largest ? rawSrc : `${base}-${w}.webp`)} ${w}w`)
     .join(', ');
 
   return ` srcset="${srcset}" sizes="${sizes}"`;

@@ -27,6 +27,7 @@ import {
   icons,
   imgPath,
   responsive,
+  versioned,
   productUrl,
   page,
 } from './lib/layout.mjs';
@@ -283,7 +284,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="/img/blog/blog-waterproof.webp" alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-waterproof.webp')}" alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Sealed, not splash resistant</h3>
@@ -298,7 +299,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="/img/blog/blog-construction.webp" alt="Rugged tablet in use on a construction site" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-construction.webp')}" alt="Rugged tablet in use on a construction site" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Drop tested to a real standard</h3>
@@ -309,7 +310,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="/img/blog/blog-field-engineer.webp" alt="Field engineer using a rugged tablet outdoors" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-field-engineer.webp')}" alt="Field engineer using a rugged tablet outdoors" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
@@ -1183,7 +1184,7 @@ posts.forEach((post) => {
       path: `/blog/${post.slug}`,
       active: 'blog',
       ogType: 'article',
-      ogImage: post.image,
+      ogImage: versioned(post.image),
       schema: [orgSchema, articleSchema, breadcrumbSchema(trail)],
       body: `
     <div class="container-narrow">
@@ -1200,7 +1201,7 @@ ${breadcrumbs(trail)}
 
     <div class="container-narrow">
       <div class="post-hero">
-        <img src="${post.image}"${responsive(post.image, '(max-width: 820px) 94vw, 780px')} alt="" loading="eager" width="1200" height="514">
+        <img src="${versioned(post.image)}"${responsive(post.image, '(max-width: 820px) 94vw, 780px')} alt="" loading="eager" width="1200" height="514">
       </div>
 
       <article class="prose">
@@ -1224,7 +1225,7 @@ ${sectionHead({ tag: 'Keep reading', title: 'More guides' })}
             .map(
               (p) => `
           <a class="post-card reveal" href="/blog/${p.slug}">
-            <div class="post-card-media"><img src="${p.image}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
+            <div class="post-card-media"><img src="${versioned(p.image)}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
               <h3>${p.title}</h3>
@@ -1281,7 +1282,7 @@ ${breadcrumbs(blogTrail)}
             .map(
               (p) => `
           <a class="post-card reveal" href="/blog/${p.slug}">
-            <div class="post-card-media"><img src="${p.image}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
+            <div class="post-card-media"><img src="${versioned(p.image)}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
               <h2>${p.title}</h2>
