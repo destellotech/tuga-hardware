@@ -131,6 +131,9 @@ export async function handleRequest(request, env) {
   if (request.method === 'GET' && path === '/api/payment-methods') {
     return corsResponse({ card: true, paypal: isPayPalLive(env) });
   }
+  if (request.method === 'GET' && path === '/api/paypal-check') {
+    return handlePayPalCheck(request, env);
+  }
   if (request.method === 'POST' && path === '/webhooks/stripe') {
     return handleStripeWebhook(request, env);
   }
@@ -581,6 +584,59 @@ function isPayPalLive(env) {
     Boolean(env.PAYPAL_CLIENT_ID) &&
     Boolean(env.PAYPAL_CLIENT_SECRET)
   );
+}
+
+/**
+ * Preflight: can the stored PayPal credentials authenticate?
+ *
+ * Tries the token endpoint on BOTH environments and reports which one the
+ * credentials belong to, so PAYPAL_LIVE can be set from evidence rather than
+ * flipped and hoped for. Returns only PayPal's error code — never the
+ * credentials themselves.
+ */
+async function handlePayPalCheck(request, env) {
+  if (!env.PAYPAL_CLIENT_ID || !env.PAYPAL_CLIENT_SECRET) {
+    return corsResponse({
+      configured: false,
+      hint: 'Set the PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET secrets.',
+    });
+  }
+
+  const credentials = btoa(`${env.PAYPAL_CLIENT_ID}:${env.PAYPAL_CLIENT_SECRET}`);
+
+  const probe = async (base) => {
+    try {
+      const res = await fetch(`${base}/v1/oauth2/token`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Basic ${credentials}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'grant_type=client_credentials',
+      });
+      const data = await res.json().catch(() => ({}));
+      return { ok: res.ok, status: res.status, error: data.error ?? null };
+    } catch (err) {
+      return { ok: false, status: 0, error: 'request_failed' };
+    }
+  };
+
+  const [live, sandbox] = await Promise.all([
+    probe('https://api-m.paypal.com'),
+    probe('https://api-m.sandbox.paypal.com'),
+  ]);
+
+  return corsResponse({
+    configured: true,
+    currentMode: env.PAYPAL_LIVE === 'true' ? 'live' : 'sandbox',
+    live,
+    sandbox,
+    verdict: live.ok
+      ? 'Live credentials. PAYPAL_LIVE can be set to "true".'
+      : sandbox.ok
+        ? 'These are SANDBOX credentials. Create a Live REST app at developer.paypal.com and replace the secrets before setting PAYPAL_LIVE to "true".'
+        : 'Neither environment accepted these credentials.',
+  });
 }
 
 // =========================================================================
