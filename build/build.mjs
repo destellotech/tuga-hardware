@@ -239,7 +239,7 @@ ${trustStrip()}
 ${sectionHead({
   tag: 'Start here',
   title: 'Pick the size, not the spec sheet',
-  lede: 'Three Android devices, drawn to scale. Nearly everyone chooses on size, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
+  lede: 'Three Android devices, one for each size. Nearly everyone chooses on size first, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
 })}
 ${sizeLadder(androidRange)}
       </div>
