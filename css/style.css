@@ -801,26 +801,6 @@ p { text-wrap: pretty; }
   mix-blend-mode: multiply;
 }
 
-/* Title-block caption under the plate, like a technical drawing. */
-.hero-caption {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1rem;
-  width: 100%;
-  max-width: 480px;
-  margin-top: 0.85rem;
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-inverse-light);
-}
-
-.hero-caption strong {
-  color: var(--copper-light);
-  font-weight: 500;
-}
-
 @media (max-width: 980px) {
   .hero-inner { grid-template-columns: 1fr; }
   .hero-content { max-width: 100%; }
@@ -984,11 +964,21 @@ p { text-wrap: pretty; }
 }
 
 @media (max-width: 860px) {
-  .ladder { grid-template-columns: 1fr; gap: var(--space-m); }
+  .ladder { grid-template-columns: 1fr; }
+
+  /* Stacked: the divider has to run across, not down the side. */
+  .ladder-item + .ladder-item {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+
   .ladder-stage { height: auto; padding-block: var(--space-s); }
-  .ladder-item[data-size='6'] .ladder-device img,
-  .ladder-item[data-size='8'] .ladder-device img,
-  .ladder-item[data-size='10'] .ladder-device img { height: clamp(130px, 34vw, 190px); }
+
+  /* Keep the sizes proportional. Flattening them to one height removes the
+     only thing this block exists to show. */
+  .ladder-item[data-size='6'] .ladder-device img { height: clamp(96px, 26vw, 130px); }
+  .ladder-item[data-size='8'] .ladder-device img { height: clamp(130px, 35vw, 178px); }
+  .ladder-item[data-size='10'] .ladder-device img { height: clamp(164px, 44vw, 224px); }
 }
 
 /* --------------------------------------------------------------------------
@@ -1112,15 +1102,6 @@ p { text-wrap: pretty; }
   transform: translateY(-50%);
 }
 
-.spec-chips-boxed .chip {
-  color: var(--ink-mid);
-  background: var(--cream-deep);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  padding: 0.28rem 0.6rem;
-}
-
-.spec-chips-boxed .chip + .chip::before { display: none; }
 
 .product-card-foot {
   display: flex;
