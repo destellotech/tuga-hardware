@@ -66,6 +66,37 @@ export const money = (n) => `£${Number(n).toLocaleString('en-GB')}`;
 export const imgPath = (product, n = 1) =>
   `/img/products/${product.imageBase}-${n}.webp`;
 
+/* Written by build/optimise-images.mjs: src -> available widths. Missing is
+   fine; srcset is simply omitted and the full-size image is used. */
+let imageWidths = {};
+try {
+  imageWidths = JSON.parse(
+    readFileSync(join(ROOT, 'data', 'images.json'), 'utf8')
+  );
+} catch {
+  /* Run `npm run images` to generate it. */
+}
+
+/**
+ * Build srcset/sizes attributes for a generated image.
+ *
+ * @param {string} src   Full-size path, e.g. `/img/products/t8-1.webp`.
+ * @param {string} sizes The CSS `sizes` value describing the rendered width.
+ */
+export function responsive(src, sizes) {
+  const widths = imageWidths[src];
+  if (!widths || widths.length < 2) return '';
+
+  const base = src.replace(/\.webp$/, '');
+  const largest = Math.max(...widths);
+
+  const srcset = widths
+    .map((w) => `${w === largest ? src : `${base}-${w}.webp`} ${w}w`)
+    .join(', ');
+
+  return ` srcset="${srcset}" sizes="${sizes}"`;
+}
+
 export const productUrl = (product) => `/products/${product.slug}`;
 
 /** Turn a spec key like `ip_rating` into `IP Rating`. */

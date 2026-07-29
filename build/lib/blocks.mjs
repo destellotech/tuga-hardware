@@ -7,6 +7,7 @@ import {
   money,
   icons,
   imgPath,
+  responsive,
   productUrl,
   specLabel,
   devices,
@@ -52,7 +53,7 @@ export function productCard(p) {
           <a class="product-card reveal" href="${productUrl(p)}" data-category="${p.category}">
             ${p.badge ? `<span class="product-badge${p.badge === 'Most Popular' ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>` : ''}
             <div class="product-card-media">
-              <img src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" loading="lazy" width="600" height="450">
+              <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px')} alt="${esc(p.name)} rugged ${p.formFactor}" loading="lazy" width="600" height="450">
             </div>
             <div class="product-card-body">
               <p class="product-card-kicker">${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} / ${esc(p.sizeLabel)}&Prime; / ${p.category === 'android' ? 'Android' : 'Windows'}</p>
@@ -89,7 +90,7 @@ export function sizeLadder(range) {
             <a class="ladder-item reveal" href="${productUrl(p)}" data-size="${p.sizeClass}">
               <div class="ladder-stage">
                 <div class="ladder-device">
-                  <img src="${imgPath(p, 1)}" alt="${esc(p.name)}, ${esc(p.sizeLabel)} inch" loading="lazy" width="400" height="400">
+                  <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 860px) 60vw, 280px')} alt="${esc(p.name)}, ${esc(p.sizeLabel)} inch" loading="lazy" width="400" height="400">
                 </div>
               </div>
               <span class="ladder-size">${esc(p.sizeLabel)}<sup>in</sup></span>

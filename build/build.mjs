@@ -26,6 +26,7 @@ import {
   money,
   icons,
   imgPath,
+  responsive,
   productUrl,
   page,
 } from './lib/layout.mjs';
@@ -531,7 +532,7 @@ ${breadcrumbs(trail)}
               .map(
                 (_, i) => `
             <button type="button" class="gallery-thumb${i === 0 ? ' is-active' : ''}" data-gallery-src="${imgPath(p, i + 1)}" aria-label="View image ${i + 1}">
-              <img src="${imgPath(p, i + 1)}" alt="" width="150" height="150" loading="lazy">
+              <img src="${imgPath(p, i + 1)}"${responsive(imgPath(p, i + 1), '74px')} alt="" width="150" height="150" loading="lazy">
             </button>`
               )
               .join('')}
@@ -1199,7 +1200,7 @@ ${breadcrumbs(trail)}
 
     <div class="container-narrow">
       <div class="post-hero">
-        <img src="${post.image}" alt="" loading="eager" width="1200" height="514">
+        <img src="${post.image}"${responsive(post.image, '(max-width: 820px) 94vw, 780px')} alt="" loading="eager" width="1200" height="514">
       </div>
 
       <article class="prose">
@@ -1223,7 +1224,7 @@ ${sectionHead({ tag: 'Keep reading', title: 'More guides' })}
             .map(
               (p) => `
           <a class="post-card reveal" href="/blog/${p.slug}">
-            <div class="post-card-media"><img src="${p.image}" alt="" loading="lazy" width="620" height="388"></div>
+            <div class="post-card-media"><img src="${p.image}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
               <h3>${p.title}</h3>
@@ -1280,7 +1281,7 @@ ${breadcrumbs(blogTrail)}
             .map(
               (p) => `
           <a class="post-card reveal" href="/blog/${p.slug}">
-            <div class="post-card-media"><img src="${p.image}" alt="" loading="lazy" width="620" height="388"></div>
+            <div class="post-card-media"><img src="${p.image}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
               <h2>${p.title}</h2>
