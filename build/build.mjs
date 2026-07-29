@@ -1303,6 +1303,67 @@ ${ctaBanner()}
 );
 
 /* ==========================================================================
+   GOOGLE SHOPPING FEED
+
+   Point Merchant Center at https://www.tugahardware.com/feed.xml as a
+   scheduled fetch. Only the six devices are listed: accessories and the
+   scanner variants share a URL with another item, and Shopping requires a
+   distinct landing page per offer.
+   ========================================================================== */
+
+/** Google's taxonomy ids. A6 is a phone; everything else is a tablet. */
+const googleCategory = (p) =>
+  p.formFactor === 'handheld' && p.category === 'android' ? 267 : 4745;
+
+const feedItems = devices
+  .map((p) => {
+    const url = `${SITE.origin}${productUrl(p)}`;
+    const extraImages = p.images
+      .slice(1)
+      .map(
+        (_, i) =>
+          `      <g:additional_image_link>${SITE.origin}${imgPath(p, i + 2)}</g:additional_image_link>`
+      )
+      .join('\n');
+
+    return `    <item>
+      <g:id>${esc(p.id)}</g:id>
+      <g:title>${esc(`${p.name} ${p.sizeLabel} inch Rugged ${p.category === 'android' ? 'Android' : 'Windows'} ${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'}`)}</g:title>
+      <g:description>${esc(p.description)}</g:description>
+      <g:link>${url}</g:link>
+      <g:image_link>${SITE.origin}${imgPath(p, 1)}</g:image_link>
+${extraImages}
+      <g:availability>in_stock</g:availability>
+      <g:price>${p.price}.00 GBP</g:price>
+      <g:brand>${esc(SITE.name)}</g:brand>
+      <g:mpn>${esc(p.id.toUpperCase())}</g:mpn>
+      <g:condition>new</g:condition>
+      <g:google_product_category>${googleCategory(p)}</g:google_product_category>
+      <g:product_type>${esc(`Rugged Devices > ${p.category === 'android' ? 'Android' : 'Windows'} > ${p.sizeLabel} inch`)}</g:product_type>
+      <g:shipping>
+        <g:country>GB</g:country>
+        <g:service>Free UK delivery</g:service>
+        <g:price>0.00 GBP</g:price>
+      </g:shipping>
+    </item>`;
+  })
+  .join('\n');
+
+write(
+  'feed.xml',
+  `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>${esc(SITE.name)}</title>
+    <link>${SITE.origin}</link>
+    <description>${esc(SITE.description)}</description>
+${feedItems}
+  </channel>
+</rss>
+`
+);
+
+/* ==========================================================================
    SITEMAP + ROBOTS
    ========================================================================== */
 
