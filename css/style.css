@@ -252,16 +252,44 @@ p { text-wrap: pretty; }
 
 .section-dark .eyebrow { color: var(--copper-light); }
 
+/* Title and supporting copy sit side by side on wide screens, separated by a
+   hairline, so the section reads as a spread rather than a narrow column
+   with dead space beside it. */
 .section-head {
-  max-width: 46ch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  padding-bottom: var(--space-m);
   margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--rule);
 }
 
-.section-head-wide { max-width: 62ch; }
+.section-head-title h2 { max-width: 20ch; }
+
+.section-head-body .lede { margin-top: 0; max-width: 48ch; }
+
+.section-dark .section-head { border-bottom-color: var(--rule-inverse); }
 
 .section-head-center {
+  grid-template-columns: 1fr;
+  max-width: 46ch;
   margin-inline: auto;
   text-align: center;
+  border-bottom: none;
+}
+
+.section-head-center .section-head-title h2 { max-width: none; }
+.section-head-center .lede { margin-inline: auto; }
+
+@media (max-width: 860px) {
+  .section-head {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--space-s);
+  }
+
+  .section-head-title h2 { max-width: none; }
 }
 
 .title-xl { font-size: var(--step-6); letter-spacing: -0.035em; }
@@ -633,15 +661,54 @@ p { text-wrap: pretty; }
   -webkit-mask-image: radial-gradient(ellipse 90% 80% at 30% 40%, #000 20%, transparent 78%);
 }
 
+/* Text-led cover, then the photograph full width beneath it. The work photo
+   is a wide 2.7:1 frame, so it is shown at its own proportions rather than
+   cropped into a side panel. */
 .hero-inner {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(2rem, 4vw, 4.5rem);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  padding-block: clamp(3.5rem, 3rem + 6vw, 7.5rem);
+  padding-block: clamp(3rem, 2.5rem + 5vw, 6rem);
 }
 
-.hero-content { max-width: 34ch; }
+.hero-content { max-width: 40ch; }
+
+/* The manufacturer's dimensioned drawing, on a paper-white plate. It is the
+   one honest, un-branded asset in the image set, and a measured drawing says
+   "tool" far better than a marketing render does. */
+.hero-drawing {
+  position: relative;
+  background: var(--white);
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.hero-drawing img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.hero-drawing figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin-top: clamp(0.75rem, 2vw, 1.25rem);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.hero-drawing figcaption strong {
+  color: var(--copper-dark);
+  font-weight: 500;
+}
 
 .hero-title {
   font-size: var(--step-6);
@@ -664,9 +731,14 @@ p { text-wrap: pretty; }
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-s);
+  align-items: stretch;
+  gap: 0.6rem;
   margin-bottom: var(--space-l);
 }
+
+/* Equal-width buttons: two differently sized stacked pills read as an
+   accident rather than a pair. */
+.hero-ctas .btn { flex: 1 1 13rem; }
 
 /* Spec strip under the CTAs — the "at a glance" line */
 .hero-specs {
@@ -703,19 +775,21 @@ p { text-wrap: pretty; }
 /* Hero image with Field-Notes-style annotation callouts */
 .hero-visual {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 320px;
 }
 
+/* A plain white plate. The product photography has a white background, so
+   any other ground leaves a visible rectangle floating on the page. */
 .hero-image-frame {
   position: relative;
   width: 100%;
-  max-width: 460px;
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--rule-inverse);
-  border-radius: var(--radius-lg);
-  background: rgba(247, 244, 239, 0.04);
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  background: var(--white);
   overflow: hidden;
 }
 
@@ -723,90 +797,33 @@ p { text-wrap: pretty; }
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: clamp(1.5rem, 3vw, 2.75rem);
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  mix-blend-mode: multiply;
 }
 
-/* Corner ticks — technical-drawing framing */
-.hero-image-frame::before,
-.hero-image-frame::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-color: var(--copper);
-  border-style: solid;
-  opacity: 0.55;
-}
-
-.hero-image-frame::before {
-  top: 12px; left: 12px;
-  border-width: 1px 0 0 1px;
-}
-
-.hero-image-frame::after {
-  bottom: 12px; right: 12px;
-  border-width: 0 1px 1px 0;
-}
-
-.hero-annotation {
-  position: absolute;
+/* Title-block caption under the plate, like a technical drawing. */
+.hero-caption {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 0.85rem;
   font-family: var(--font-mono);
   font-size: var(--step--2);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-inverse);
-  background: rgba(5, 46, 22, 0.82);
-  border: 1px solid var(--rule-inverse);
-  border-radius: 999px;
-  padding: 0.4rem 0.85rem;
-  backdrop-filter: blur(6px);
-  white-space: nowrap;
+  color: var(--ink-inverse-light);
 }
 
-.hero-annotation::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--copper);
-  flex-shrink: 0;
+.hero-caption strong {
+  color: var(--copper-light);
+  font-weight: 500;
 }
-
-.hero-annotation-1 { top: 12%; right: -4%; }
-.hero-annotation-2 { top: 45%; left: -8%; }
-.hero-annotation-3 { bottom: 14%; right: 2%; }
 
 @media (max-width: 980px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  .hero-content {
-    max-width: 100%;
-    text-align: center;
-    margin-inline: auto;
-  }
-
-  .hero-sub { margin-inline: auto; }
-  .hero-ctas { justify-content: center; }
-  .hero-specs { justify-content: center; text-align: center; }
-  .hero-spec { align-items: center; }
-  .hero-visual { order: -1; min-height: 0; }
-  .hero-image-frame { max-width: 320px; aspect-ratio: 1 / 1; }
-  .hero-annotation-1 { top: 6%; right: -2%; }
-  .hero-annotation-2 { top: 42%; left: -4%; }
-  .hero-annotation-3 { bottom: 8%; right: -2%; }
-}
-
-@media (max-width: 560px) {
-  .hero-annotation { font-size: 0.6rem; padding: 0.32rem 0.6rem; }
-  .hero-annotation-1 { right: -1%; }
-  .hero-annotation-2 { left: -1%; }
-  .hero-annotation-3 { right: -1%; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-content { max-width: 100%; }
 }
 
 /* --------------------------------------------------------------------------
@@ -845,50 +862,52 @@ p { text-wrap: pretty; }
    9. SIZE LADDER — the signature 6" / 8" / 10" selector
    -------------------------------------------------------------------------- */
 
+/* The three devices sit on one shared white band with a common baseline, so
+   the size comparison reads as a scale drawing rather than three cards.
+   Supplier product shots have white backgrounds, so a white ground is the
+   only surface they sit on cleanly. */
 .ladder {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2.5vw, 2.5rem);
-  align-items: end;
+  gap: 0;
+  align-items: stretch;
+  background: var(--white);
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
 }
 
 .ladder-item {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: var(--space-m);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--base), transform var(--base), box-shadow var(--base);
+  padding: var(--space-m) var(--space-m) var(--space-l);
+  transition: background var(--base);
 }
 
-.ladder-item:hover {
-  border-color: var(--copper);
-  transform: translateY(-4px);
-  box-shadow: var(--lift);
-}
+.ladder-item + .ladder-item { border-left: 1px solid var(--rule); }
 
-/* The devices are drawn to true relative scale so the size choice is
-   physical rather than abstract — 6" is visibly smaller than 10". */
+.ladder-item:hover { background: var(--cream); }
+
 .ladder-stage {
   display: grid;
   place-items: end center;
-  height: clamp(150px, 22vw, 260px);
+  height: clamp(160px, 24vw, 280px);
   margin-bottom: var(--space-m);
+  padding-bottom: var(--space-s);
+  border-bottom: 1px solid var(--rule);
 }
 
 .ladder-device {
   position: relative;
   width: 100%;
   display: grid;
-  place-items: center;
+  place-items: end center;
 }
 
 .ladder-device img {
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 12px 24px rgba(5, 46, 22, 0.14));
+  mix-blend-mode: multiply;
 }
 
 .ladder-item[data-size='6'] .ladder-device img { height: clamp(84px, 12vw, 146px); }
@@ -982,41 +1001,37 @@ p { text-wrap: pretty; }
   gap: clamp(1rem, 2vw, 1.75rem);
 }
 
+/* No card chrome: a white image plate, a hairline, and type. Borders and
+   drop shadows on every tile are what make a catalogue look templated. */
 .product-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: border-color var(--base), transform var(--base), box-shadow var(--base);
-}
-
-.product-card:hover {
-  border-color: var(--copper);
-  transform: translateY(-4px);
-  box-shadow: var(--lift);
 }
 
 .product-card-media {
   position: relative;
   aspect-ratio: 4 / 3;
-  background: var(--cream-deep);
+  background: var(--white);
+  border: 1px solid var(--rule);
   display: grid;
   place-items: center;
   padding: var(--space-m);
   overflow: hidden;
+  transition: border-color var(--base);
 }
+
+.product-card:hover .product-card-media { border-color: var(--copper); }
 
 .product-card-media img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  mix-blend-mode: multiply;
   transition: transform var(--slow);
 }
 
-.product-card:hover .product-card-media img { transform: scale(1.045); }
+.product-card:hover .product-card-media img { transform: scale(1.03); }
 
 .product-badge {
   position: absolute;
@@ -1039,7 +1054,7 @@ p { text-wrap: pretty; }
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: var(--space-m);
+  padding: var(--space-s) 0 0;
 }
 
 .product-card-kicker {
@@ -1067,30 +1082,45 @@ p { text-wrap: pretty; }
   line-height: 1.5;
 }
 
+/* Specs read as a technical caption line, not a row of pill tags. */
 .spec-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  align-items: baseline;
+  gap: 0.35rem 0.7rem;
   margin-bottom: var(--space-m);
 }
 
 .chip {
+  position: relative;
   font-family: var(--font-mono);
   font-size: var(--step--2);
   letter-spacing: 0.04em;
-  color: var(--ink-mid);
-  background: var(--cream-deep);
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  padding: 0.28rem 0.6rem;
+  color: var(--ink-light);
   white-space: nowrap;
 }
 
-.chip-solid {
-  background: var(--green-900);
-  color: var(--cream);
-  border-color: var(--green-900);
+.chip + .chip::before {
+  content: '';
+  position: absolute;
+  left: -0.42rem;
+  top: 50%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--copper);
+  transform: translateY(-50%);
 }
+
+.spec-chips-boxed .chip {
+  color: var(--ink-mid);
+  background: var(--cream-deep);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.28rem 0.6rem;
+}
+
+.spec-chips-boxed .chip + .chip::before { display: none; }
 
 .product-card-foot {
   display: flex;
@@ -1261,9 +1291,14 @@ p { text-wrap: pretty; }
   object-fit: cover;
 }
 
+.editorial-media-contain {
+  background: var(--white);
+}
+
 .editorial-media-contain img {
   object-fit: contain;
   padding: var(--space-l);
+  mix-blend-mode: multiply;
 }
 
 .editorial:nth-child(even) .editorial-media { order: 2; }
@@ -1319,35 +1354,20 @@ p { text-wrap: pretty; }
 }
 
 .feature-card {
-  padding: var(--space-m);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--base), transform var(--base);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--rule);
 }
 
-.feature-card:hover { border-color: var(--copper); transform: translateY(-3px); }
+.section-dark .feature-card { border-top-color: var(--rule-inverse); }
 
-.section-dark .feature-card {
-  background: rgba(247, 244, 239, 0.04);
-  border-color: var(--rule-inverse);
-}
-
+/* Icons sit inline at text size rather than inside a rounded tile. */
 .feature-icon {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: var(--radius);
-  background: var(--cream-deep);
+  display: block;
   color: var(--copper-dark);
   margin-bottom: var(--space-s);
 }
 
-.section-dark .feature-icon {
-  background: rgba(196, 133, 108, 0.14);
-  color: var(--copper-light);
-}
+.section-dark .feature-icon { color: var(--copper-light); }
 
 .feature-title {
   font-size: var(--step-1);
@@ -1367,18 +1387,12 @@ p { text-wrap: pretty; }
 .trade-card {
   display: flex;
   flex-direction: column;
-  padding: var(--space-m);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--base), transform var(--base), box-shadow var(--base);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--rule-strong);
+  transition: border-top-color var(--base);
 }
 
-.trade-card:hover {
-  border-color: var(--copper);
-  transform: translateY(-3px);
-  box-shadow: var(--lift);
-}
+.trade-card:hover { border-top-color: var(--copper); }
 
 .trade-card-num {
   font-family: var(--font-mono);
@@ -1707,9 +1721,8 @@ p { text-wrap: pretty; }
 .gallery-main {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: var(--cream-deep);
+  background: var(--white);
   border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -1721,11 +1734,12 @@ p { text-wrap: pretty; }
   height: 100%;
   object-fit: contain;
   padding: clamp(1.5rem, 4vw, 3rem);
+  mix-blend-mode: multiply;
 }
 
 .gallery-thumbs {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -1733,18 +1747,20 @@ p { text-wrap: pretty; }
   width: 74px;
   height: 74px;
   padding: 0.4rem;
-  background: var(--cream-deep);
+  background: var(--white);
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: border-color var(--fast), transform var(--fast);
+  transition: border-color var(--fast);
 }
 
-.gallery-thumb img { width: 100%; height: 100%; object-fit: contain; }
-
-.gallery-thumb:hover { transform: translateY(-2px); }
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
 
 .gallery-thumb.is-active {
   border-color: var(--copper);
@@ -2030,22 +2046,15 @@ p { text-wrap: pretty; }
 .accessory-card {
   display: flex;
   flex-direction: column;
-  padding: var(--space-m);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--base), transform var(--base);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--rule);
+  transition: border-top-color var(--base);
 }
 
-.accessory-card:hover { border-color: var(--copper); transform: translateY(-3px); }
+.accessory-card:hover { border-top-color: var(--copper); }
 
 .accessory-icon {
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius);
-  background: var(--cream-deep);
+  display: block;
   color: var(--copper-dark);
   margin-bottom: var(--space-s);
 }

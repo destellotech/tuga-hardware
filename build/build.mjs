@@ -216,14 +216,15 @@ const hero = () => {
             </div>
           </div>
         </div>
-        <div class="hero-visual">
-          <div class="hero-image-frame">
-            <img src="${imgPath(lead, 1)}" alt="Tuga A8 rugged Android tablet" width="600" height="750" fetchpriority="high">
-          </div>
-          <span class="hero-annotation hero-annotation-1">Sunlight readable</span>
-          <span class="hero-annotation hero-annotation-2">Glove mode</span>
-          <span class="hero-annotation hero-annotation-3">Full-shift battery</span>
-        </div>
+        <figure class="hero-drawing">
+          <img src="${imgPath(lead, 2)}" alt="Dimensioned drawing of the Tuga A8 showing ports, buttons and case dimensions" width="800" height="291" fetchpriority="high">
+          <figcaption>
+            <span><strong>${esc(lead.name)}</strong></span>
+            <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
+            <span>${esc(lead.specs.battery)}</span>
+            <span>${money(lead.price)}</span>
+          </figcaption>
+        </figure>
       </div>
     </section>`;
 };

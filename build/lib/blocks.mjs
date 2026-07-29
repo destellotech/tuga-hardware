@@ -16,11 +16,15 @@ import {
 
 export const eyebrow = (text) => `<span class="eyebrow">${esc(text)}</span>`;
 
+/* Title left, supporting copy right. A narrow single column leaves half the
+   page empty, which is what makes a layout look unconsidered. */
 export const sectionHead = ({ tag, title, lede, center = false, wide = false }) => `
         <div class="section-head${center ? ' section-head-center' : ''}${wide ? ' section-head-wide' : ''} reveal">
-          ${tag ? eyebrow(tag) : ''}
-          <h2 class="title-md">${title}</h2>
-          ${lede ? `<p class="lede">${lede}</p>` : ''}
+          <div class="section-head-title">
+            ${tag ? eyebrow(tag) : ''}
+            <h2 class="title-md">${title}</h2>
+          </div>
+          ${lede ? `<div class="section-head-body"><p class="lede">${lede}</p></div>` : ''}
         </div>`;
 
 export const breadcrumbs = (trail) => `
