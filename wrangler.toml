@@ -30,4 +30,5 @@ id = "dc341cf8ff2b4a2fb6f82c4be084bb7a"
 #   wrangler secret put STRIPE_WEBHOOK_SECRET
 #   wrangler secret put PAYPAL_CLIENT_ID
 #   wrangler secret put PAYPAL_CLIENT_SECRET
+#   wrangler secret put PAYPAL_WEBHOOK_ID   (ID of the webhook for /webhooks/paypal in the PayPal developer dashboard)
 #   wrangler secret put RESEND_API_KEY

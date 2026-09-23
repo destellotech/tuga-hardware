@@ -667,21 +667,63 @@
   function initOrderSummary() {
     const target = $('[data-order-summary]');
     if (!target) return;
-    // The basket has served its purpose once the order is placed.
-    localStorage.removeItem(Cart.KEY);
-    paintCount();
 
-    // Stripe returns ?session_id=cs_..., PayPal ?provider=paypal — neither is
-    // a customer-friendly reference, so just confirm which provider paid.
+    // Stripe returns ?session_id=cs_..., PayPal ?provider=paypal&token=<order id>.
     const params = new URL(window.location).searchParams;
-    const provider = params.get('session_id')
-      ? 'card'
-      : params.get('provider') === 'paypal'
-        ? 'PayPal'
-        : null;
-    if (provider) {
-      target.innerHTML = `<p class="mono">Paid by ${provider}. Your order number is in the confirmation email.</p>`;
-    }
+    const sessionId = params.get('session_id');
+    const paypalOrderId = params.get('provider') === 'paypal' ? params.get('token') : null;
+    if (!sessionId && !paypalOrderId) return;
+
+    const title = $('[data-order-title]');
+    const lede = $('[data-order-lede]');
+    const show = (heading, text, note) => {
+      if (title) title.textContent = heading;
+      if (lede) lede.textContent = text;
+      target.innerHTML = note ? `<p class="mono">${note}</p>` : '';
+    };
+
+    // The server verifies the payment with the provider (and, for PayPal,
+    // collects it) before we tell the customer the order is placed.
+    show('Confirming your order', 'Checking your payment with ' + (sessionId ? 'our card processor' : 'PayPal') + '. This takes a few seconds.', '');
+
+    const attempt = (tries) =>
+      fetch('/api/confirm-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(sessionId ? { sessionId } : { paypalOrderId }),
+      })
+        .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
+        .then(({ ok, data }) => {
+          if (ok && data.status === 'confirmed') {
+            // The basket has served its purpose once the order is placed.
+            localStorage.removeItem(Cart.KEY);
+            paintCount();
+            const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
+            show(
+              'Order confirmed',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
+              `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+            );
+          } else if (ok && data.status === 'unpaid') {
+            show(
+              'Payment not completed',
+              'We could not see a completed payment for this order, so nothing has been charged. Your basket is still saved if you want to try again.',
+              '<a href="/cart">Back to basket</a>'
+            );
+          } else {
+            throw new Error(data.error || 'confirm failed');
+          }
+        })
+        .catch(() => {
+          if (tries > 1) return new Promise((r) => setTimeout(r, 2000)).then(() => attempt(tries - 1));
+          show(
+            'We are checking your order',
+            'Your payment went through to the payment provider, but we could not confirm it just now. Please do not pay again. Contact support and we will confirm your order by email.',
+            '<a href="/contact">Contact support</a>'
+          );
+        });
+
+    attempt(3);
   }
 
   /* ------------------------------------------------------------------- init */

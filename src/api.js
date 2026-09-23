@@ -5,7 +5,7 @@
    ============================================ */
 
 import { sendOrderConfirmation, sendEnquiry } from './email.js';
-import { saveOrder } from './orders.js';
+import { saveOrder, getOrder, updateOrder } from './orders.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -121,6 +121,9 @@ export async function handleRequest(request, env) {
   }
   if (request.method === 'POST' && path === '/api/create-paypal-order') {
     return handlePayPalOrder(request, env);
+  }
+  if (request.method === 'POST' && path === '/api/confirm-order') {
+    return handleConfirmOrder(request, env);
   }
   if (request.method === 'POST' && path === '/api/contact') {
     return handleContact(request, env);
@@ -316,172 +319,245 @@ async function handlePayPalOrder(request, env) {
 }
 
 // =========================================================================
-// 3. STRIPE WEBHOOK
+// 3. ORDER RECORDING (shared by the webhooks and the confirmation page)
 // =========================================================================
-async function handleStripeWebhook(request, env) {
-  try {
-    const rawBody = await request.text();
-    const signature = request.headers.get('stripe-signature');
+//
+// Both providers reach us two ways: the customer's browser lands on
+// /order-confirmation and calls /api/confirm-order, and the provider sends a
+// webhook. Either can arrive first, or only one may arrive at all (a webhook
+// that is not registered, or a customer who closes the tab), so both paths
+// run the same idempotent recorder: verify the payment with the provider,
+// then save and email exactly once per order.
 
-    if (!signature) {
-      return corsError('Missing Stripe signature', 400);
+/**
+ * Save and email an order unless it has already been recorded.
+ * Returns the stored record.
+ */
+async function recordOrder(env, orderDetails) {
+  if (env.ORDERS) {
+    const existing = await getOrder(env.ORDERS, orderDetails.orderId);
+    if (existing) return existing;
+  }
+
+  console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
+
+  let record = orderDetails;
+  if (env.ORDERS) {
+    record = await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
+  }
+
+  if (!orderDetails.customerEmail) {
+    console.error('Order has no customer email, confirmation not sent:', orderDetails.orderId);
+  } else if (!env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set, confirmation not sent:', orderDetails.orderId);
+  } else {
+    let sent = false;
+    try {
+      await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
+      sent = true;
+    } catch (emailErr) {
+      // Log but do not fail: the payment is already taken.
+      console.error('Email send failed:', emailErr);
     }
-
-    // Verify the webhook signature
-    const isValid = await verifyStripeSignature(rawBody, signature, env.STRIPE_WEBHOOK_SECRET);
-    if (!isValid) {
-      return corsError('Invalid signature', 401);
-    }
-
-    const event = JSON.parse(rawBody);
-
-    // We only care about successful payments
-    if (event.type === 'checkout.session.completed') {
-      const session = event.data.object;
-
-      // Retrieve the full session with line items from Stripe
-      const fullSession = await fetchStripeSession(session.id, env);
-
-      const orderDetails = {
-        orderId: session.id,
-        provider: 'stripe',
-        paymentIntent: session.payment_intent,
-        customerEmail: session.customer_details?.email,
-        shippingAddress: session.shipping_details?.address
-          ? {
-              name: session.shipping_details.name,
-              ...session.shipping_details.address,
-            }
-          : null,
-        items: fullSession.line_items?.data?.map(li => ({
-          name: li.description,
-          quantity: li.quantity,
-          unitPrice: li.price?.unit_amount || li.amount_total / li.quantity,
-          total: li.amount_total,
-        })) || [],
-        subtotal: session.amount_subtotal,
-        total: session.amount_total,
-        discount: session.metadata?.discount_percent || 0,
-        currency: session.currency?.toUpperCase() || 'GBP',
-        status: 'pending',
-        paidAt: new Date().toISOString(),
-      };
-
-      console.log('Stripe order received:', orderDetails.orderId);
-
-      // Save to KV (if the binding exists)
+    if (sent) {
+      record = { ...record, emailSentAt: new Date().toISOString() };
       if (env.ORDERS) {
-        await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
-      }
-
-      // Send confirmation email
-      if (orderDetails.customerEmail && env.RESEND_API_KEY) {
-        try {
-          await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
-        } catch (emailErr) {
-          // Log but do not fail the webhook — payment is already captured
-          console.error('Email send failed:', emailErr);
-        }
+        await updateOrder(env.ORDERS, orderDetails.orderId, { emailSentAt: record.emailSentAt })
+          .catch((err) => console.error('Could not mark email sent:', err));
       }
     }
+  }
 
-    // Always return 200 to Stripe so it does not retry
-    return new Response(JSON.stringify({ received: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
+  return record;
+}
+
+/**
+ * Verify a Stripe Checkout Session is paid, then record it.
+ * Returns { paid: false } for a session that has not been paid.
+ */
+async function recordStripeOrder(sessionId, env) {
+  const session = await fetchStripeSession(sessionId, env);
+  if (session.error) throw new Error(`Stripe session lookup failed: ${session.error.message}`);
+  if (session.payment_status !== 'paid') return { paid: false };
+
+  // Newer Stripe API versions moved shipping under collected_information.
+  const shipping = session.collected_information?.shipping_details || session.shipping_details;
+
+  const order = await recordOrder(env, {
+    orderId: session.id,
+    provider: 'stripe',
+    paymentIntent: session.payment_intent,
+    customerEmail: session.customer_details?.email,
+    shippingAddress: shipping?.address
+      ? { name: shipping.name, ...shipping.address }
+      : null,
+    items: session.line_items?.data?.map(li => ({
+      name: li.description,
+      quantity: li.quantity,
+      unitPrice: li.price?.unit_amount || li.amount_total / li.quantity,
+      total: li.amount_total,
+    })) || [],
+    subtotal: session.amount_subtotal,
+    total: session.amount_total,
+    discount: session.metadata?.discount_percent || 0,
+    currency: session.currency?.toUpperCase() || 'GBP',
+    status: 'pending',
+    paidAt: new Date().toISOString(),
+  });
+
+  return { paid: true, order };
+}
+
+/**
+ * Capture an approved PayPal order if it is not captured yet, then record it.
+ * Returns { paid: false } for an order the customer has not approved.
+ */
+async function recordPayPalOrder(orderId, env) {
+  let order = await fetchPayPalOrder(orderId, env);
+
+  if (order.status === 'APPROVED') {
+    try {
+      await capturePayPalOrder(orderId, env);
+    } catch (err) {
+      // The webhook and the confirmation page can race to capture; losing
+      // that race is fine as long as the order ends up COMPLETED.
+      console.warn('PayPal capture did not succeed, re-checking order:', err.message);
+    }
+    order = await fetchPayPalOrder(orderId, env);
+  }
+  if (order.status !== 'COMPLETED') return { paid: false };
+
+  const purchaseUnit = order.purchase_units?.[0] || {};
+  const shipping = purchaseUnit.shipping || {};
+
+  const record = await recordOrder(env, {
+    orderId: order.id,
+    provider: 'paypal',
+    captureId: purchaseUnit.payments?.captures?.[0]?.id,
+    customerEmail: order.payer?.email_address,
+    shippingAddress: shipping.address
+      ? {
+          name: shipping.name?.full_name,
+          line1: shipping.address.address_line_1,
+          line2: shipping.address.address_line_2,
+          city: shipping.address.admin_area_2,
+          postal_code: shipping.address.postal_code,
+          country: shipping.address.country_code,
+        }
+      : null,
+    items: purchaseUnit.items?.map(item => ({
+      name: item.name,
+      quantity: parseInt(item.quantity, 10),
+      unitPrice: Math.round(parseFloat(item.unit_amount?.value || '0') * 100),
+      total: Math.round(parseFloat(item.unit_amount?.value || '0') * 100) * parseInt(item.quantity, 10),
+    })) || [],
+    total: Math.round(parseFloat(purchaseUnit.amount?.value || '0') * 100),
+    currency: purchaseUnit.amount?.currency_code || 'GBP',
+    status: 'pending',
+    paidAt: new Date().toISOString(),
+  });
+
+  return { paid: true, order: record };
+}
+
+/**
+ * Called by /order-confirmation with whatever the provider put on the
+ * return URL: Stripe's session_id, or PayPal's token (the order id).
+ */
+async function handleConfirmOrder(request, env) {
+  try {
+    const { sessionId, paypalOrderId } = await request.json();
+
+    let result;
+    if (typeof sessionId === 'string' && /^cs_(live|test)_[A-Za-z0-9]+$/.test(sessionId)) {
+      result = await recordStripeOrder(sessionId, env);
+    } else if (typeof paypalOrderId === 'string' && /^[A-Z0-9]{10,30}$/.test(paypalOrderId)) {
+      result = await recordPayPalOrder(paypalOrderId, env);
+    } else {
+      return corsError('Missing or invalid order reference');
+    }
+
+    if (!result.paid) return corsResponse({ status: 'unpaid' });
+
+    // Only what the confirmation page shows: no address or email.
+    const { order } = result;
+    return corsResponse({
+      status: 'confirmed',
+      provider: order.provider,
+      total: order.total,
+      currency: order.currency,
+      emailSent: Boolean(order.emailSentAt),
     });
   } catch (err) {
-    console.error('Stripe webhook error:', err);
-    // Still return 200 to avoid Stripe retries on transient errors
-    return new Response(JSON.stringify({ received: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    console.error('Confirm order error:', err);
+    return corsError('Could not confirm the order', 502);
   }
 }
 
 // =========================================================================
-// 4. PAYPAL WEBHOOK
+// 4. STRIPE WEBHOOK
+// =========================================================================
+async function handleStripeWebhook(request, env) {
+  const rawBody = await request.text();
+  const signature = request.headers.get('stripe-signature');
+
+  if (!signature) {
+    return corsError('Missing Stripe signature', 400);
+  }
+
+  const isValid = await verifyStripeSignature(rawBody, signature, env.STRIPE_WEBHOOK_SECRET);
+  if (!isValid) {
+    console.error('Stripe webhook signature invalid: check STRIPE_WEBHOOK_SECRET matches the endpoint in Stripe');
+    return corsError('Invalid signature', 401);
+  }
+
+  const event = JSON.parse(rawBody);
+
+  if (event.type === 'checkout.session.completed') {
+    try {
+      await recordStripeOrder(event.data.object.id, env);
+    } catch (err) {
+      // A 500 makes Stripe retry, which is what we want for a transient failure.
+      console.error('Stripe webhook error:', err);
+      return corsError('Could not record order', 500);
+    }
+  }
+
+  return corsResponse({ received: true });
+}
+
+// =========================================================================
+// 5. PAYPAL WEBHOOK (backup for customers who never reach the return page)
 // =========================================================================
 async function handlePayPalWebhook(request, env) {
-  try {
-    const rawBody = await request.text();
-    const event = JSON.parse(rawBody);
+  const rawBody = await request.text();
 
-    // Verify the webhook with PayPal
-    const isValid = await verifyPayPalWebhook(request, rawBody, env);
-    if (!isValid) {
-      console.error('PayPal webhook verification failed');
-      return corsError('Invalid webhook', 401);
-    }
-
-    // Handle order capture completion
-    // Only the APPROVED event carries the full order (purchase_units, payer).
-    // PAYMENT.CAPTURE.COMPLETED delivers a bare capture object — recording it
-    // too would save a duplicate order with no items keyed by the capture id.
-    if (event.event_type === 'CHECKOUT.ORDER.APPROVED') {
-      const resource = event.resource;
-
-      await capturePayPalOrder(resource.id, env);
-
-      const purchaseUnit = resource.purchase_units?.[0] || {};
-      const payer = resource.payer || {};
-      const shipping = purchaseUnit.shipping || {};
-
-      const orderDetails = {
-        orderId: resource.id,
-        provider: 'paypal',
-        customerEmail: payer.email_address,
-        shippingAddress: shipping.address
-          ? {
-              name: shipping.name?.full_name,
-              line1: shipping.address.address_line_1,
-              line2: shipping.address.address_line_2,
-              city: shipping.address.admin_area_2,
-              postal_code: shipping.address.postal_code,
-              country: shipping.address.country_code,
-            }
-          : null,
-        items: purchaseUnit.items?.map(item => ({
-          name: item.name,
-          quantity: parseInt(item.quantity, 10),
-          unitPrice: Math.round(parseFloat(item.unit_amount?.value || '0') * 100),
-          total: Math.round(parseFloat(item.unit_amount?.value || '0') * 100) * parseInt(item.quantity, 10),
-        })) || [],
-        total: Math.round(parseFloat(purchaseUnit.amount?.value || '0') * 100),
-        currency: purchaseUnit.amount?.currency_code || 'GBP',
-        status: 'pending',
-        paidAt: new Date().toISOString(),
-      };
-
-      console.log('PayPal order received:', orderDetails.orderId);
-
-      // Save to KV
-      if (env.ORDERS) {
-        await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
-      }
-
-      // Send confirmation email
-      if (orderDetails.customerEmail && env.RESEND_API_KEY) {
-        try {
-          await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
-        } catch (emailErr) {
-          console.error('Email send failed:', emailErr);
-        }
-      }
-    }
-
-    return new Response(JSON.stringify({ received: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (err) {
-    console.error('PayPal webhook error:', err);
-    return new Response(JSON.stringify({ received: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  const isValid = await verifyPayPalWebhook(request, rawBody, env);
+  if (!isValid) {
+    console.error('PayPal webhook verification failed: check PAYPAL_WEBHOOK_ID matches the webhook in the PayPal developer dashboard');
+    return corsError('Invalid webhook', 401);
   }
+
+  const event = JSON.parse(rawBody);
+
+  if (event.event_type === 'CHECKOUT.ORDER.APPROVED' || event.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
+    // CAPTURE.COMPLETED carries the capture; its parent order id is in
+    // supplementary_data. Either way we re-read the order from PayPal.
+    const orderId = event.event_type === 'CHECKOUT.ORDER.APPROVED'
+      ? event.resource?.id
+      : event.resource?.supplementary_data?.related_ids?.order_id;
+
+    if (orderId) {
+      try {
+        await recordPayPalOrder(orderId, env);
+      } catch (err) {
+        console.error('PayPal webhook error:', err);
+        return corsError('Could not record order', 500);
+      }
+    }
+  }
+
+  return corsResponse({ received: true });
 }
 
 // =========================================================================
@@ -664,16 +740,16 @@ function getDiscountPercent(totalQty) {
 async function verifyStripeSignature(rawBody, signatureHeader, secret) {
   try {
     // Parse the signature header
-    const parts = signatureHeader.split(',').reduce((acc, part) => {
+    // Stripe can send several v1 signatures (e.g. while a secret is rolled).
+    let timestamp = null;
+    const signatures = [];
+    for (const part of signatureHeader.split(',')) {
       const [key, value] = part.split('=');
-      acc[key.trim()] = value;
-      return acc;
-    }, {});
+      if (key.trim() === 't') timestamp = value;
+      if (key.trim() === 'v1' && value) signatures.push(value);
+    }
 
-    const timestamp = parts.t;
-    const expectedSig = parts.v1;
-
-    if (!timestamp || !expectedSig) return false;
+    if (!timestamp || signatures.length === 0) return false;
 
     // Reject events older than 5 minutes (300 seconds)
     const age = Math.floor(Date.now() / 1000) - parseInt(timestamp, 10);
@@ -695,7 +771,7 @@ async function verifyStripeSignature(rawBody, signatureHeader, secret) {
       .join('');
 
     // Constant-time comparison
-    return timingSafeEqual(computedSig, expectedSig);
+    return signatures.some((sig) => timingSafeEqual(computedSig, sig));
   } catch (err) {
     console.error('Stripe signature verification error:', err);
     return false;
@@ -730,6 +806,19 @@ async function fetchStripeSession(sessionId, env) {
 // ---------------------------------------------------------------------------
 // PayPal helpers
 // ---------------------------------------------------------------------------
+
+async function fetchPayPalOrder(orderId, env) {
+  const accessToken = await getPayPalAccessToken(env);
+  const res = await fetch(`${getPayPalBaseUrl(env)}/v2/checkout/orders/${orderId}`, {
+    headers: { 'Authorization': `Bearer ${accessToken}` },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    console.error('PayPal order lookup failed:', JSON.stringify(data));
+    throw new Error('PayPal order lookup failed');
+  }
+  return data;
+}
 
 /**
  * Determine the PayPal API base URL.
