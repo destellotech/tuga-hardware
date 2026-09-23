@@ -477,11 +477,16 @@ async function recordPayPalOrder(orderId, env) {
  */
 async function handleConfirmOrder(request, env) {
   try {
-    const { sessionId, paypalOrderId } = await request.json();
+    const { sessionId, paymentIntentId, paypalOrderId } = await request.json();
 
     let result;
     if (typeof sessionId === 'string' && /^cs_(live|test)_[A-Za-z0-9]+$/.test(sessionId)) {
       result = await recordStripeOrder(sessionId, env);
+    } else if (typeof paymentIntentId === 'string' && /^pi_[A-Za-z0-9]+$/.test(paymentIntentId)) {
+      // The pi_ reference is what Stripe's own emails and dashboard show.
+      const found = await findStripeSessionByPaymentIntent(paymentIntentId, env);
+      if (!found) return corsError('No checkout found for that payment', 404);
+      result = await recordStripeOrder(found, env);
     } else if (typeof paypalOrderId === 'string' && /^[A-Z0-9]{10,30}$/.test(paypalOrderId)) {
       result = await recordPayPalOrder(paypalOrderId, env);
     } else {
@@ -894,6 +899,16 @@ function timingSafeEqual(a, b) {
 /**
  * Fetch a Stripe Checkout Session with expanded line items.
  */
+async function findStripeSessionByPaymentIntent(paymentIntentId, env) {
+  const res = await fetch(
+    `https://api.stripe.com/v1/checkout/sessions?payment_intent=${encodeURIComponent(paymentIntentId)}&limit=1`,
+    { headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` } }
+  );
+  const data = await res.json();
+  if (!res.ok) throw new Error(`Stripe session search failed: ${data.error?.message}`);
+  return data.data?.[0]?.id ?? null;
+}
+
 async function fetchStripeSession(sessionId, env) {
   const res = await fetch(
     `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items`,
