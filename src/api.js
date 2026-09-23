@@ -137,6 +137,12 @@ export async function handleRequest(request, env) {
   if (request.method === 'GET' && path === '/api/paypal-check') {
     return handlePayPalCheck(request, env);
   }
+  if (request.method === 'GET' && path === '/api/email-check') {
+    return handleEmailCheck(env);
+  }
+  if (request.method === 'GET' && path === '/api/stripe-check') {
+    return handleStripeCheck(env);
+  }
   if (request.method === 'POST' && path === '/webhooks/stripe') {
     return handleStripeWebhook(request, env);
   }
@@ -618,6 +624,93 @@ async function handleContact(request, env) {
   } catch (err) {
     console.error('Contact form error:', err);
     return corsError('Could not send the message', 500);
+  }
+}
+
+/**
+ * Email preflight. Reports whether order emails can be sent, without
+ * sending one: the API key is present and the sending domain is verified.
+ */
+async function handleEmailCheck(env) {
+  if (!env.RESEND_API_KEY) {
+    return corsResponse({ ok: false, verdict: 'RESEND_API_KEY is not set, so no order emails are sent.' });
+  }
+
+  const sendingDomain = 'tugahardware.com';
+  try {
+    const res = await fetch('https://api.resend.com/domains', {
+      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
+    });
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      // A "sending access" key cannot list domains, but may still send fine.
+      const restricted = data.name === 'restricted_api_key';
+      return corsResponse({
+        ok: restricted ? null : false,
+        status: res.status,
+        verdict: restricted
+          ? 'The key is send-only, so the domain status cannot be read. Check it in the Resend dashboard.'
+          : 'Resend rejected the API key.',
+      });
+    }
+
+    const domain = (data.data || []).find((d) => d.name === sendingDomain);
+    return corsResponse({
+      ok: domain?.status === 'verified',
+      domain: sendingDomain,
+      domainStatus: domain?.status ?? 'not added',
+      verdict: domain?.status === 'verified'
+        ? 'Order emails can be sent.'
+        : `${sendingDomain} is not verified in Resend, so emails from orders@${sendingDomain} are refused.`,
+    });
+  } catch (err) {
+    return corsResponse({ ok: false, verdict: 'Could not reach Resend.' });
+  }
+}
+
+/**
+ * Stripe preflight. Reports whether a live webhook endpoint points at this
+ * site and listens for completed checkouts. Returns no ids or secrets.
+ */
+async function handleStripeCheck(env) {
+  if (!env.STRIPE_SECRET_KEY) {
+    return corsResponse({ ok: false, verdict: 'STRIPE_SECRET_KEY is not set.' });
+  }
+
+  const target = `${env.SITE_URL}/webhooks/stripe`;
+  try {
+    const res = await fetch('https://api.stripe.com/v1/webhook_endpoints?limit=100', {
+      headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      return corsResponse({ ok: false, status: res.status, verdict: 'Stripe rejected the request.' });
+    }
+
+    const endpoint = (data.data || []).find((e) => e.url === target);
+    const listens = endpoint && (endpoint.enabled_events.includes('*') ||
+      endpoint.enabled_events.includes('checkout.session.completed'));
+
+    return corsResponse({
+      ok: Boolean(endpoint && endpoint.status === 'enabled' && listens),
+      mode: env.STRIPE_SECRET_KEY.startsWith('sk_live_') || env.STRIPE_SECRET_KEY.startsWith('rk_live_') ? 'live' : 'test',
+      endpointFound: Boolean(endpoint),
+      endpointStatus: endpoint?.status ?? null,
+      listensForCheckoutCompleted: Boolean(listens),
+      webhookSecretSet: Boolean(env.STRIPE_WEBHOOK_SECRET),
+      // Near-misses on our own domain (e.g. no www) are the usual mistake.
+      otherSiteEndpoints: (data.data || []).filter((e) => e !== endpoint && e.url.includes('tugahardware')).map((e) => e.url),
+      verdict: !endpoint
+        ? `No Stripe webhook points at ${target}.`
+        : !listens
+          ? 'The webhook exists but does not listen for checkout.session.completed.'
+          : endpoint.status !== 'enabled'
+            ? 'The webhook exists but is disabled.'
+            : 'Webhook configured. If orders still fail, STRIPE_WEBHOOK_SECRET may not match this endpoint.',
+    });
+  } catch (err) {
+    return corsResponse({ ok: false, verdict: 'Could not reach Stripe.' });
   }
 }
 
