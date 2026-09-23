@@ -170,7 +170,7 @@ const TRADES = [
   {
     icon: icons.leaf(24),
     name: 'Agriculture & grounds',
-    copy: 'Crop records, livestock tracking and field mapping. Rated for mud, frost and the pressure washer afterwards.',
+    copy: 'Crop records, livestock tracking and field mapping. Sealed against mud, rain and frost, with a big screen for maps.',
     pick: 'tuga-a10',
   },
 ];
