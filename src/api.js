@@ -340,16 +340,21 @@ async function handlePayPalOrder(request, env) {
  * Returns the stored record.
  */
 async function recordOrder(env, orderDetails) {
+  let record = null;
   if (env.ORDERS) {
-    const existing = await getOrder(env.ORDERS, orderDetails.orderId);
-    if (existing) return existing;
+    record = await getOrder(env.ORDERS, orderDetails.orderId);
+    // Recorded and emailed already: nothing to do. Recorded but never
+    // emailed (e.g. the email service was down): fall through and retry
+    // the email only.
+    if (record?.emailSentAt) return record;
   }
 
-  console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
-
-  let record = orderDetails;
-  if (env.ORDERS) {
-    record = await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
+  if (!record) {
+    console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
+    record = orderDetails;
+    if (env.ORDERS) {
+      record = await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
+    }
   }
 
   if (!orderDetails.customerEmail) {
@@ -651,7 +656,7 @@ async function handleEmailCheck(env) {
         status: res.status,
         verdict: restricted
           ? 'The key is send-only, so the domain status cannot be read. Check it in the Resend dashboard.'
-          : 'Resend rejected the API key.',
+          : `Resend rejected the API key: ${data.message || res.status}. Create a new key in Resend and set it with \`wrangler secret put RESEND_API_KEY\`.`,
       });
     }
 
@@ -679,6 +684,8 @@ async function handleStripeCheck(env) {
   }
 
   const target = `${env.SITE_URL}/webhooks/stripe`;
+  // The worker serves webhooks on the bare domain too, so either host works.
+  const accepted = [target, target.replace('://www.', '://')];
   try {
     const res = await fetch('https://api.stripe.com/v1/webhook_endpoints?limit=100', {
       headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` },
@@ -688,7 +695,7 @@ async function handleStripeCheck(env) {
       return corsResponse({ ok: false, status: res.status, verdict: 'Stripe rejected the request.' });
     }
 
-    const endpoint = (data.data || []).find((e) => e.url === target);
+    const endpoint = (data.data || []).find((e) => accepted.includes(e.url));
     const listens = endpoint && (endpoint.enabled_events.includes('*') ||
       endpoint.enabled_events.includes('checkout.session.completed'));
 
@@ -701,6 +708,7 @@ async function handleStripeCheck(env) {
       webhookSecretSet: Boolean(env.STRIPE_WEBHOOK_SECRET),
       // Near-misses on our own domain (e.g. no www) are the usual mistake.
       otherSiteEndpoints: (data.data || []).filter((e) => e !== endpoint && e.url.includes('tugahardware')).map((e) => e.url),
+      endpointUrl: endpoint?.url ?? null,
       verdict: !endpoint
         ? `No Stripe webhook points at ${target}.`
         : !listens
