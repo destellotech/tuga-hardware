@@ -359,21 +359,38 @@ async function recordOrder(env, orderDetails) {
 
   if (!orderDetails.customerEmail) {
     console.error('Order has no customer email, confirmation not sent:', orderDetails.orderId);
-  } else if (!env.RESEND_API_KEY) {
-    console.error('RESEND_API_KEY is not set, confirmation not sent:', orderDetails.orderId);
   } else {
-    let sent = false;
-    try {
-      await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
-      sent = true;
-    } catch (emailErr) {
-      // Log but do not fail: the payment is already taken.
-      console.error('Email send failed:', emailErr);
+    let emailVia = null;
+
+    if (env.RESEND_API_KEY) {
+      try {
+        await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
+        emailVia = 'resend';
+      } catch (emailErr) {
+        // Log but do not fail: the payment is already taken.
+        console.error('Email send failed:', emailErr);
+      }
+    } else {
+      console.error('RESEND_API_KEY is not set:', orderDetails.orderId);
     }
-    if (sent) {
-      record = { ...record, emailSentAt: new Date().toISOString() };
+
+    // Fallback for card orders: have Stripe email its own receipt. Setting
+    // receipt_email on a live payment sends one regardless of dashboard
+    // settings, including on a payment that has already succeeded.
+    // (PayPal always emails its own receipt to the payer.)
+    if (!emailVia && orderDetails.provider === 'stripe' && orderDetails.paymentIntent) {
+      try {
+        await sendStripeReceipt(orderDetails.paymentIntent, orderDetails.customerEmail, env);
+        emailVia = 'stripe-receipt';
+      } catch (err) {
+        console.error('Stripe receipt fallback failed:', err);
+      }
+    }
+
+    if (emailVia) {
+      record = { ...record, emailSentAt: new Date().toISOString(), emailVia };
       if (env.ORDERS) {
-        await updateOrder(env.ORDERS, orderDetails.orderId, { emailSentAt: record.emailSentAt })
+        await updateOrder(env.ORDERS, orderDetails.orderId, { emailSentAt: record.emailSentAt, emailVia })
           .catch((err) => console.error('Could not mark email sent:', err));
       }
     }
@@ -503,6 +520,7 @@ async function handleConfirmOrder(request, env) {
       total: order.total,
       currency: order.currency,
       emailSent: Boolean(order.emailSentAt),
+      emailVia: order.emailVia ?? null,
     });
   } catch (err) {
     console.error('Confirm order error:', err);
@@ -899,6 +917,21 @@ function timingSafeEqual(a, b) {
 /**
  * Fetch a Stripe Checkout Session with expanded line items.
  */
+async function sendStripeReceipt(paymentIntentId, email, env) {
+  const res = await fetch(`https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentIntentId)}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({ receipt_email: email }).toString(),
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(`Stripe receipt failed: ${data.error?.message || res.status}`);
+  }
+}
+
 async function findStripeSessionByPaymentIntent(paymentIntentId, env) {
   const res = await fetch(
     `https://api.stripe.com/v1/checkout/sessions?payment_intent=${encodeURIComponent(paymentIntentId)}&limit=1`,
