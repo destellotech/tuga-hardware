@@ -122,7 +122,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: 'Delivery is free across mainland UK on every order, with no minimum. Orders placed before 2pm on a working day are dispatched the same day and typically arrive within two to three working days.',
+    a: `Delivery is free to every UK address, with no minimum order. Devices ship direct from the manufacturer, so please allow ${SITE.deliveryWindow} for delivery. We email a tracking number as soon as your order ships.`,
   },
   {
     q: 'What if it is not right for me?',
@@ -1028,7 +1028,7 @@ write(
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
         <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.</p>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Please allow ${SITE.deliveryWindow} for delivery.</p>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
@@ -1072,7 +1072,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery, same-day dispatch before 2pm, and 30-day returns on every Tuga Hardware order.',
+      `Free UK delivery in ${SITE.deliveryWindow}, tracked from dispatch, and 30-day returns on every Tuga Hardware order.`,
     path: '/shipping-returns',
   },
 ];

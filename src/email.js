@@ -6,6 +6,10 @@
 const FROM_EMAIL = 'Tuga Hardware <orders@tugahardware.com>';
 const SUPPORT_EMAIL = 'support@tugahardware.com';
 
+// Must match SITE.deliveryWindow in build/lib/layout.mjs, which feeds every
+// page on the site. Orders ship direct from the manufacturer.
+const DELIVERY_WINDOW = '10 to 20 working days';
+
 // Brand colours (inline CSS — email clients strip <style> blocks)
 const BRAND = {
   green: '#052e16',
@@ -64,7 +68,10 @@ function emailWrapper(title, bodyHtml) {
 // Order confirmation email
 // ---------------------------------------------------------------------------
 export async function sendOrderConfirmation(env, email, orderDetails) {
-  const { orderId, items, subtotal, discount, total, shippingAddress } = orderDetails;
+  const { orderId, reference, items, discount, total, shippingAddress, invoiceUrl } = orderDetails;
+  // Customers quote this to support. Fall back to the provider's id only for
+  // an order recorded before references existed.
+  const orderNumber = reference || orderId;
 
   // Build line-item rows
   const itemRows = items.map(item => `
@@ -101,8 +108,12 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     <p style="margin:0 0 24px;font-size:15px;color:${BRAND.mutedText};">Thanks for your order. Here is your summary.</p>
 
     <p style="margin:0 0 20px;font-size:14px;color:${BRAND.darkText};">
-      <strong>Order:</strong> ${orderId}
+      <strong>Order number:</strong> ${escapeHtml(orderNumber)}
     </p>
+    ${invoiceUrl ? `
+    <p style="margin:0 0 20px;font-size:14px;color:${BRAND.darkText};">
+      <a href="${escapeHtml(invoiceUrl)}" style="color:${BRAND.copper};font-weight:600;">Download your invoice</a>
+    </p>` : ''}
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
       <tr style="border-bottom:2px solid ${BRAND.green};">
@@ -123,9 +134,9 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">What happens next?</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        Your order is being processed and will ship within 2 business days.
-        Typical delivery to the UK is 10 to 20 working days. We will email you
-        a tracking number once your order has shipped.
+        Your order ships direct from the manufacturer. Please allow
+        ${DELIVERY_WINDOW} for delivery. We will email you a tracking
+        number as soon as it ships.
       </p>
     </div>
 
@@ -139,7 +150,7 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
 
   return sendEmail(env, {
     to: email,
-    subject: `Order confirmed — ${orderId}`,
+    subject: `Order confirmed — ${orderNumber}`,
     html,
   });
 }
@@ -166,7 +177,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Delivery estimate</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        UK delivery typically takes 10 to 20 working days from dispatch.
+        Most orders arrive within ${DELIVERY_WINDOW} of being placed.
         You can track progress using the link above.
       </p>
     </div>

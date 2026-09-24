@@ -465,6 +465,7 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
+      <p class="summary-note">Paying by card gets you a downloadable invoice, with your company VAT number on it if you add one at checkout.</p>
       <div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
@@ -676,6 +677,9 @@
 
     const title = $('[data-order-title]');
     const lede = $('[data-order-lede]');
+    // The build writes the delivery promise into the page; reuse it rather
+    // than keeping a second copy here that can drift out of date.
+    const confirmedLede = lede ? lede.textContent : '';
     const show = (heading, text, note) => {
       if (title) title.textContent = heading;
       if (lede) lede.textContent = text;
@@ -699,11 +703,28 @@
             localStorage.removeItem(Cart.KEY);
             paintCount();
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
+            // Both values land in innerHTML, so accept only exact shapes: the
+            // reference pattern, and an https link on Stripe's invoice host,
+            // re-serialised by URL so any quote in it is percent-encoded.
+            const ref = /^TUGA-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(data.reference || '') ? data.reference : '';
+            let invoiceHref = '';
+            try {
+              const u = new URL(data.invoiceUrl);
+              if (u.protocol === 'https:' && u.hostname === 'invoice.stripe.com') invoiceHref = u.href;
+            } catch {
+              /* No invoice (PayPal, or not finalised yet). */
+            }
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
-              `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+              confirmedLede,
+              `${ref ? `Your order number is <strong>${ref}</strong>. Quote it if you contact us. ` : ''}Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
+            if (invoiceHref) {
+              target.insertAdjacentHTML(
+                'beforeend',
+                `<p style="margin-top:1.25rem"><a class="link-arrow" href="${invoiceHref}" target="_blank" rel="noopener">Download your invoice</a></p>`
+              );
+            }
           } else if (ok && data.status === 'unpaid') {
             show(
               'Payment not completed',

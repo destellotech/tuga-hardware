@@ -54,6 +54,11 @@ export const SITE = {
   origin: 'https://www.tugahardware.com',
   tagline: 'Hard Shell. Long Life.',
   email: 'support@tugahardware.com',
+  /* The one delivery promise. Orders ship direct from the manufacturer, as
+     the Terms and the Shipping & Returns page state; every other page reads
+     this, so the site cannot promise two different things again. Keep it in
+     step with DELIVERY_WINDOW in src/email.js. */
+  deliveryWindow: '10 to 20 working days',
   description:
     'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.',
 };

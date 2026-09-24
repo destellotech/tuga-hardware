@@ -5,7 +5,14 @@
    ============================================ */
 
 import { sendOrderConfirmation, sendEnquiry } from './email.js';
-import { saveOrder, getOrder, updateOrder } from './orders.js';
+import {
+  saveOrder,
+  getOrder,
+  updateOrder,
+  newOrderReference,
+  isOrderReference,
+  referenceFromOrderId,
+} from './orders.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -186,6 +193,11 @@ async function handleStripeCheckout(request, env) {
       };
     });
 
+    // The customer-facing order number, fixed now so it can go on the
+    // invoice and the card statement description as well as our email.
+    const reference = newOrderReference();
+    const vatRateId = await getInclusiveVatRateId(env);
+
     // Create Stripe Checkout Session via the API
     const params = new URLSearchParams();
     params.append('mode', 'payment');
@@ -195,12 +207,31 @@ async function handleStripeCheckout(request, env) {
     params.append('shipping_address_collection[allowed_countries][0]', 'GB');
     params.append('shipping_address_collection[allowed_countries][1]', 'IE');
 
+    // Couriers want a phone number for a parcel this valuable.
+    params.append('phone_number_collection[enabled]', 'true');
+
+    // Trade buyers reclaim VAT: let them add a business name and VAT number,
+    // and issue a proper invoice they can download after paying.
+    params.append('tax_id_collection[enabled]', 'true');
+    params.append('invoice_creation[enabled]', 'true');
+    params.append('invoice_creation[invoice_data][custom_fields][0][name]', 'Order number');
+    params.append('invoice_creation[invoice_data][custom_fields][0][value]', reference);
+    params.append('invoice_creation[invoice_data][metadata][order_ref]', reference);
+
+    params.append('client_reference_id', reference);
+    params.append('metadata[order_ref]', reference);
+    params.append('payment_intent_data[description]', `Tuga Hardware order ${reference}`);
+    params.append('payment_intent_data[metadata][order_ref]', reference);
+
     // Encode each line item
     lineItems.forEach((li, i) => {
       params.append(`line_items[${i}][price_data][currency]`, li.price_data.currency);
       params.append(`line_items[${i}][price_data][product_data][name]`, li.price_data.product_data.name);
       params.append(`line_items[${i}][price_data][unit_amount]`, li.price_data.unit_amount);
       params.append(`line_items[${i}][quantity]`, li.quantity);
+      // An INCLUSIVE rate itemises the VAT already in the price on the
+      // invoice without changing what is charged.
+      if (vatRateId) params.append(`line_items[${i}][tax_rates][0]`, vatRateId);
     });
 
     // Store discount metadata for the webhook to read
@@ -273,10 +304,16 @@ async function handlePayPalOrder(request, env) {
     // Get PayPal access token
     const accessToken = await getPayPalAccessToken(env);
 
+    // Customer-facing order number. PayPal shows invoice_id in the payer's
+    // receipt and the merchant dashboard, and hands it back on every lookup.
+    const reference = newOrderReference();
+
     // Create PayPal order
     const orderPayload = {
       intent: 'CAPTURE',
       purchase_units: [{
+        invoice_id: reference,
+        description: `Tuga Hardware order ${reference}`,
         amount: {
           currency_code: 'GBP',
           value: totalGBP,
@@ -343,6 +380,21 @@ async function recordOrder(env, orderDetails) {
   let record = null;
   if (env.ORDERS) {
     record = await getOrder(env.ORDERS, orderDetails.orderId);
+
+    // An order first recorded before these fields existed, or before Stripe
+    // had finalised its invoice, picks them up on the next confirmation.
+    if (record) {
+      const backfill = {};
+      for (const key of ['reference', 'invoiceUrl']) {
+        if (!record[key] && orderDetails[key]) backfill[key] = orderDetails[key];
+      }
+      if (Object.keys(backfill).length) {
+        record = { ...record, ...backfill };
+        await updateOrder(env.ORDERS, orderDetails.orderId, backfill)
+          .catch((err) => console.error('Could not backfill order:', err));
+      }
+    }
+
     // Recorded and emailed already: nothing to do. Recorded but never
     // emailed (e.g. the email service was down): fall through and retry
     // the email only.
@@ -410,12 +462,29 @@ async function recordStripeOrder(sessionId, env) {
 
   // Newer Stripe API versions moved shipping under collected_information.
   const shipping = session.collected_information?.shipping_details || session.shipping_details;
+  const customer = session.customer_details || {};
+
+  // Sessions started before order numbers existed carry no order_ref; derive
+  // one from the session id so every retry lands on the same number.
+  const reference = isOrderReference(session.metadata?.order_ref)
+    ? session.metadata.order_ref
+    : await referenceFromOrderId(session.id);
+
+  // Expanded below; null until Stripe finalises it, which is normally done
+  // by the time the session reports paid.
+  const invoice = session.invoice && typeof session.invoice === 'object' ? session.invoice : null;
 
   const order = await recordOrder(env, {
     orderId: session.id,
+    reference,
     provider: 'stripe',
     paymentIntent: session.payment_intent,
-    customerEmail: session.customer_details?.email,
+    customerEmail: customer.email,
+    customerPhone: customer.phone || null,
+    businessName: customer.business_name || null,
+    taxIds: (customer.tax_ids || []).map(({ type, value }) => ({ type, value })),
+    invoiceId: invoice?.id ?? null,
+    invoiceUrl: invoice?.hosted_invoice_url ?? null,
     shippingAddress: shipping?.address
       ? { name: shipping.name, ...shipping.address }
       : null,
@@ -458,11 +527,17 @@ async function recordPayPalOrder(orderId, env) {
   const purchaseUnit = order.purchase_units?.[0] || {};
   const shipping = purchaseUnit.shipping || {};
 
+  const reference = isOrderReference(purchaseUnit.invoice_id)
+    ? purchaseUnit.invoice_id
+    : await referenceFromOrderId(order.id);
+
   const record = await recordOrder(env, {
     orderId: order.id,
+    reference,
     provider: 'paypal',
     captureId: purchaseUnit.payments?.captures?.[0]?.id,
     customerEmail: order.payer?.email_address,
+    customerPhone: order.payer?.phone?.phone_number?.national_number || null,
     shippingAddress: shipping.address
       ? {
           name: shipping.name?.full_name,
@@ -516,6 +591,8 @@ async function handleConfirmOrder(request, env) {
     const { order } = result;
     return corsResponse({
       status: 'confirmed',
+      reference: order.reference ?? null,
+      invoiceUrl: order.invoiceUrl ?? null,
       provider: order.provider,
       total: order.total,
       currency: order.currency,
@@ -722,7 +799,21 @@ async function handleStripeCheck(env) {
     const listens = endpoint && (endpoint.enabled_events.includes('*') ||
       endpoint.enabled_events.includes('checkout.session.completed'));
 
+    // Optional: whether invoices will itemise VAT (see getInclusiveVatRateId).
+    let vatRate = 'not set: invoices show totals without a VAT line';
+    if (env.STRIPE_VAT_RATE_ID) {
+      try {
+        const rate = await fetchStripeTaxRate(env.STRIPE_VAT_RATE_ID, env);
+        vatRate = isUsableVatRate(rate)
+          ? 'ok: active, inclusive 20%'
+          : `refused: must be active, inclusive and 20% (active=${rate.active}, inclusive=${rate.inclusive}, percentage=${rate.percentage})`;
+      } catch {
+        vatRate = 'refused: Stripe could not find that tax rate';
+      }
+    }
+
     return corsResponse({
+      vatRate,
       ok: Boolean(endpoint && endpoint.status === 'enabled' && listens),
       mode: env.STRIPE_SECRET_KEY.startsWith('sk_live_') || env.STRIPE_SECRET_KEY.startsWith('rk_live_') ? 'live' : 'test',
       endpointFound: Boolean(endpoint),
@@ -858,6 +949,50 @@ function getDiscountPercent(totalQty) {
 // ---------------------------------------------------------------------------
 
 /**
+ * The Stripe Tax Rate to itemise VAT on invoices, or null.
+ *
+ * Optional: set STRIPE_VAT_RATE_ID to a rate created in the Stripe dashboard
+ * as 20% VAT, INCLUSIVE, GB. Prices on the site already include VAT, so an
+ * inclusive rate only splits it out on the invoice. An exclusive rate would
+ * add 20% on top of the basket total, so anything but an active inclusive
+ * rate is refused here and checkout carries on without one.
+ *
+ * Cached per isolate: the rate is looked up once, not on every checkout.
+ */
+let vatRateCache = null;
+
+async function getInclusiveVatRateId(env) {
+  if (!env.STRIPE_VAT_RATE_ID) return null;
+  if (vatRateCache?.id === env.STRIPE_VAT_RATE_ID) return vatRateCache.usable ? vatRateCache.id : null;
+
+  try {
+    const rate = await fetchStripeTaxRate(env.STRIPE_VAT_RATE_ID, env);
+    const usable = isUsableVatRate(rate);
+    if (!usable) {
+      console.error('STRIPE_VAT_RATE_ID is not an active, inclusive 20% rate; invoices will not itemise VAT.');
+    }
+    vatRateCache = { id: env.STRIPE_VAT_RATE_ID, usable };
+    return usable ? env.STRIPE_VAT_RATE_ID : null;
+  } catch (err) {
+    // Do not cache a network failure; try again on the next checkout.
+    console.error('Could not look up the VAT rate:', err);
+    return null;
+  }
+}
+
+const isUsableVatRate = (rate) =>
+  Boolean(rate && rate.active && rate.inclusive === true && Number(rate.percentage) === 20);
+
+async function fetchStripeTaxRate(id, env) {
+  const res = await fetch(`https://api.stripe.com/v1/tax_rates/${encodeURIComponent(id)}`, {
+    headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` },
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(`Stripe tax rate lookup failed: ${data.error?.message || res.status}`);
+  return data;
+}
+
+/**
  * Verify Stripe webhook signature using HMAC-SHA256.
  * Implements the same algorithm as Stripe's official SDK.
  */
@@ -944,7 +1079,7 @@ async function findStripeSessionByPaymentIntent(paymentIntentId, env) {
 
 async function fetchStripeSession(sessionId, env) {
   const res = await fetch(
-    `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items`,
+    `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items&expand[]=invoice`,
     {
       headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` },
     }
