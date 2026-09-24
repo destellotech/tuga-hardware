@@ -94,8 +94,24 @@
       this.write(items);
     },
 
+    /** Remove a line. Returns what is needed to put it back with restore(). */
     remove(id) {
-      this.write(this.read().filter((i) => i.id !== id));
+      const items = this.read();
+      const index = items.findIndex((i) => i.id === id);
+      if (index === -1) return null;
+      const [item] = items.splice(index, 1);
+      this.write(items);
+      return { item, index };
+    },
+
+    /** Undo a remove(), putting the line back where it was. */
+    restore(removed) {
+      if (!removed) return;
+      const items = this.read();
+      // Already back (e.g. re-added in another tab): leave it alone.
+      if (items.some((i) => i.id === removed.item.id)) return;
+      items.splice(Math.min(removed.index, items.length), 0, removed.item);
+      this.write(items);
     },
 
     count() {
@@ -174,18 +190,60 @@
 
   let toastTimer;
 
-  function toast(message) {
+  /**
+   * Show a short message at the bottom of the screen.
+   *
+   * @param {string} message
+   * @param {{label: string, href?: string, onClick?: Function}} [action]
+   *   One optional follow-up: a link (View basket) or a button (Undo). A
+   *   toast with an action stays up longer, and never disappears while the
+   *   pointer or keyboard focus is on it.
+   */
+  function toast(message, action) {
     let el = $('.toast');
+    const hide = () => el.classList.remove('is-visible');
+    const hideLater = (ms) => {
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(hide, ms);
+    };
+
     if (!el) {
       el = document.createElement('div');
       el.className = 'toast';
       el.setAttribute('role', 'status');
       document.body.appendChild(el);
+      el.addEventListener('pointerenter', () => clearTimeout(toastTimer));
+      el.addEventListener('focusin', () => clearTimeout(toastTimer));
+      el.addEventListener('pointerleave', () => hideLater(2000));
+      el.addEventListener('focusout', () => hideLater(2000));
     }
-    el.textContent = message;
-    requestAnimationFrame(() => el.classList.add('is-visible'));
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('is-visible'), 2600);
+
+    const text = document.createElement('span');
+    text.textContent = message;
+    el.replaceChildren(text);
+
+    if (action) {
+      const ctl = document.createElement(action.href ? 'a' : 'button');
+      ctl.className = 'toast-action';
+      ctl.textContent = action.label;
+      if (action.href) {
+        ctl.href = action.href;
+      } else {
+        ctl.type = 'button';
+        ctl.addEventListener('click', () => {
+          clearTimeout(toastTimer);
+          hide();
+          action.onClick();
+        });
+      }
+      el.append(ctl);
+    }
+
+    // Flush styles so a just-created toast still slides in, then show it
+    // synchronously: the action has to be focusable straight away.
+    void el.offsetWidth;
+    el.classList.add('is-visible');
+    hideLater(action ? 5000 : 2600);
   }
 
   /* -------------------------------------------------------------------- nav */
@@ -314,7 +372,7 @@
   /* ------------------------------------------------------------ add to cart */
 
   function initAddToCart() {
-    document.addEventListener('click', async (e) => {
+    document.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-add-to-cart]');
       if (!btn) return;
       e.preventDefault();
@@ -329,13 +387,14 @@
 
       Cart.add(id, qty);
 
-      try {
-        const products = await getCatalogue();
-        const product = findItem(products, id);
-        toast(`${product ? product.name : 'Item'} added to basket`);
-      } catch {
-        toast('Added to basket');
-      }
+      // The name is written onto the button at build time, so the
+      // confirmation appears on the same frame as the tap rather than after
+      // a round trip for the catalogue.
+      const name = btn.dataset.name;
+      toast(name ? `${name} added to basket` : 'Added to basket', {
+        label: 'View basket',
+        href: '/cart',
+      });
     });
   }
 
@@ -518,8 +577,27 @@
       const id = row.dataset.line;
 
       if (e.target.closest('[data-line-remove]')) {
-        Cart.remove(id);
-        toast('Removed from basket');
+        const name = $('.cart-item-name', row)?.textContent || 'Item';
+        const removed = Cart.remove(id);
+        // One tap removes a line worth hundreds of pounds, so make it
+        // undoable rather than asking "are you sure?" first.
+        toast(`${name} removed`, {
+          label: 'Undo',
+          onClick: () => {
+            Cart.restore(removed);
+            // The Undo button is about to vanish; keep keyboard focus on the
+            // page rather than letting it drop to <body>.
+            const heading = $('main h1');
+            if (heading) {
+              heading.setAttribute('tabindex', '-1');
+              heading.focus({ preventScroll: true });
+            }
+          },
+        });
+        // Pressed from the keyboard (a click with no pointer detail): the
+        // Remove button has just been destroyed, so hand focus to Undo, which
+        // also holds the toast open until focus leaves it.
+        if (e.detail === 0) $('.toast .toast-action')?.focus();
         return;
       }
 

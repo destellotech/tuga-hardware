@@ -559,7 +559,7 @@ ${breadcrumbs(trail)}
               <input type="number" id="qty" value="1" min="1" max="99" aria-label="Quantity">
               <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn btn-primary btn-lg" data-add-to-cart="${p.id}" data-qty-source="qty">
+            <button class="btn btn-primary btn-lg" data-add-to-cart="${p.id}" data-name="${esc(p.name)}" data-qty-source="qty">
               ${icons.cart(18)} Add to basket
             </button>
           </div>
@@ -627,7 +627,7 @@ ${specSheet(p)}
           </div>
           <div class="variant-action">
             <span class="variant-price">${money(v.price)}</span>
-            <button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}">Add to basket</button>
+            <button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}" data-name="${esc(v.name)}">Add to basket</button>
           </div>
         </div>`
           )

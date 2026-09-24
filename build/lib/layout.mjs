@@ -286,7 +286,8 @@ const header = (active) => `
           <span class="cart-count hidden" data-cart-count>0</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-          ${icons.menu(22)}
+          <span class="nav-toggle-open">${icons.menu(22)}</span>
+          <span class="nav-toggle-close">${icons.close(22)}</span>
         </button>
       </div>
     </div>

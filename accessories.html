@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=2712da91d7">
+  <link rel="stylesheet" href="/css/style.css?v=cef1a8c7ed">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -70,7 +70,8 @@
           <span class="cart-count hidden" data-cart-count>0</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <span class="nav-toggle-open"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+          <span class="nav-toggle-close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
         </button>
       </div>
     </div>
@@ -103,7 +104,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£79</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-charging-dock">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-charging-dock" data-name="Charging Dock">Add to basket</button>
             </div>
           </div>
 
@@ -114,7 +115,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£109</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-vehicle-mount">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-vehicle-mount" data-name="Vehicle Mounting Dock">Add to basket</button>
             </div>
           </div>
 
@@ -125,7 +126,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£24</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-hand-strap">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-hand-strap" data-name="Hand Strap">Add to basket</button>
             </div>
           </div>
 
@@ -136,7 +137,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10, Tuga WH6</p>
             <div class="accessory-foot">
               <span class="accessory-price">£16</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-stylus">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-stylus" data-name="Capacitive Stylus">Add to basket</button>
             </div>
           </div>
 
@@ -147,7 +148,7 @@
             <p class="accessory-compat">Fits: Tuga A6, Tuga A8, Tuga A10, Tuga WH6, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£14</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-screen-protector">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-screen-protector" data-name="Tempered Glass Screen Protector (2 Pack)">Add to basket</button>
             </div>
           </div>
 
@@ -158,7 +159,7 @@
             <p class="accessory-compat">Fits: Tuga A6, Tuga A8, Tuga A10, Tuga WH6, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£26</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-car-charger">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-car-charger" data-name="12V DC Car Charger">Add to basket</button>
             </div>
           </div>
 
@@ -169,7 +170,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£34</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-carry-case">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-carry-case" data-name="Rugged Carry Case">Add to basket</button>
             </div>
           </div>
 
@@ -180,7 +181,7 @@
             <p class="accessory-compat">Fits: Tuga A6, Tuga WH6</p>
             <div class="accessory-foot">
               <span class="accessory-price">£22</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-belt-holster">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-belt-holster" data-name="Belt Holster">Add to basket</button>
             </div>
           </div>
 
@@ -191,7 +192,7 @@
             <p class="accessory-compat">Fits: Tuga A6, Tuga WH6</p>
             <div class="accessory-foot">
               <span class="accessory-price">£17</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-car-mount">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-car-mount" data-name="Car Phone Mount">Add to basket</button>
             </div>
           </div>
 
@@ -202,7 +203,7 @@
             <p class="accessory-compat">Fits: Tuga A6, Tuga A8, Tuga A10, Tuga WH6, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£8</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-otg-adapter">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-otg-adapter" data-name="USB-C to USB-A OTG Adapter">Add to basket</button>
             </div>
           </div>
 
@@ -213,7 +214,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£19</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-shoulder-strap">Add to basket</button>
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-shoulder-strap" data-name="Shoulder Strap">Add to basket</button>
             </div>
           </div>
         </div>
@@ -293,7 +294,7 @@
     </div>
   </div>
 
-  <script src="/js/app.js?v=9a8149ab69" defer></script>
+  <script src="/js/app.js?v=0b271aa482" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
