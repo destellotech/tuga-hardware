@@ -23,8 +23,9 @@ export const ROOT = join(here, '..', '..');
 const assetHash = (rel) =>
   createHash('sha256').update(readFileSync(join(ROOT, rel))).digest('hex').slice(0, 10);
 
-const CSS_V = assetHash('css/style.css');
-const JS_V = assetHash('js/app.js');
+// The pages load the minified files written by build/minify.mjs.
+const CSS_V = assetHash('css/style.min.css');
+const JS_V = assetHash('js/app.min.js');
 
 /** Memoised per path — every image is only hashed once per build. */
 const imageHashCache = new Map();
@@ -59,6 +60,16 @@ export const SITE = {
      this, so the site cannot promise two different things again. Keep it in
      step with DELIVERY_WINDOW in src/email.js. */
   deliveryWindow: '10 to 20 working days',
+  /* A UK limited company must show these on its website. Fill them in from
+     Companies House; each one appears in the footer and the Terms as soon
+     as it is set, and the build warns while the required ones are empty. */
+  company: {
+    legalName: '', // e.g. 'Tuga Hardware Ltd'. Required.
+    registeredIn: '', // e.g. 'England and Wales'. Required.
+    number: '', // Companies House number. Required.
+    registeredOffice: '', // Full registered office address. Required.
+    vatNumber: '', // e.g. 'GB123456789', if VAT registered.
+  },
   description:
     'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.',
 };
@@ -80,6 +91,25 @@ export const variantsOf = (id) =>
   data.products.filter((p) => p.isVariant && p.variantOf === id);
 
 export const productBySlug = (slug) => devices.find((p) => p.slug === slug);
+
+/**
+ * The company identity sentence, built only from the details that are set,
+ * so the site never states something about the company that is not true.
+ * Empty until SITE.company is filled in.
+ */
+export function companyLine() {
+  const c = SITE.company;
+  const parts = [];
+  if (c.legalName && c.number) {
+    parts.push(`${c.legalName} is registered${c.registeredIn ? ` in ${c.registeredIn}` : ''}, company number ${c.number}.`);
+  }
+  if (c.registeredOffice) parts.push(`Registered office: ${c.registeredOffice}.`);
+  if (c.vatNumber) parts.push(`VAT number ${c.vatNumber}.`);
+  return parts.join(' ');
+}
+
+export const missingCompanyDetails = () =>
+  ['legalName', 'registeredIn', 'number', 'registeredOffice'].filter((k) => !SITE.company[k]);
 
 /* --- helpers ------------------------------------------------------------ */
 
@@ -131,6 +161,34 @@ export function responsive(src, sizes) {
 }
 
 export const productUrl = (product) => `/products/${product.slug}`;
+
+/**
+ * Stock status, from the optional `stock` field in products.json. One place
+ * decides what each status means for the page, the structured data and the
+ * Shopping feed, so they cannot disagree. The Worker refuses to sell an
+ * out-of-stock item even if a stale page still offers it.
+ */
+const STOCK = {
+  in_stock: { label: 'In stock', schema: 'https://schema.org/InStock', feed: 'in_stock', buyable: true },
+  out_of_stock: { label: 'Out of stock', schema: 'https://schema.org/OutOfStock', feed: 'out_of_stock', buyable: false },
+};
+
+export function stockOf(item) {
+  const status = STOCK[item.stock ?? 'in_stock'];
+  if (!status) throw new Error(`${item.id}: unknown stock value "${item.stock}" (use in_stock or out_of_stock)`);
+  return status;
+}
+
+/**
+ * An add-to-basket button, or a disabled one when the item cannot be bought.
+ * `extra` carries per-use attributes such as data-qty-source.
+ */
+export function buyButton(item, { className = 'btn', label = 'Add to basket', extra = '' } = {}) {
+  if (!stockOf(item).buyable) {
+    return `<button class="${className}" type="button" disabled aria-disabled="true">Out of stock</button>`;
+  }
+  return `<button class="${className}" type="button" data-add-to-cart="${item.id}" data-name="${esc(item.name)}"${extra}>${label}</button>`;
+}
 
 /** Turn a spec key like `ip_rating` into `IP Rating`. */
 export const specLabel = (key) => {
@@ -328,7 +386,7 @@ const footer = () => `
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.</p>
+        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.${companyLine() ? ` ${esc(companyLine())}` : ''}</p>
         <div class="footer-payments" aria-label="Accepted payment methods">
           ${['Visa', 'Mastercard', 'Amex', 'PayPal']
             .map(
@@ -340,14 +398,33 @@ const footer = () => `
       </div>
     </div>
   </footer>
+`;
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
-    <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
-    </div>
-  </div>`;
+/* --- fonts -------------------------------------------------------------- */
+
+/* Self-hosted Latin subsets of the two Google Fonts (both SIL Open Font
+   License; see fonts/LICENSE.txt). Serving them from our own origin removes
+   a render-blocking third-party round trip, and the heading font is
+   preloaded. The @font-face rules are inlined so their URLs can carry the
+   same content hash as every other long-cached asset. */
+const FONTS = {
+  archivo: '/fonts/archivo-latin.woff2',
+  mono400: '/fonts/dm-mono-400-latin.woff2',
+  mono500: '/fonts/dm-mono-500-latin.woff2',
+};
+
+const LATIN =
+  'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD';
+
+const face = (family, weight, path) =>
+  `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:swap;src:url(${versioned(path)}) format('woff2');unicode-range:${LATIN}}`;
+
+const fontFaces = () =>
+  [
+    face('Archivo', '400 800', FONTS.archivo), // one variable font, every weight
+    face('DM Mono', 400, FONTS.mono400),
+    face('DM Mono', 500, FONTS.mono500),
+  ].join('');
 
 /* --- the page shell ----------------------------------------------------- */
 
@@ -405,10 +482,9 @@ export function page({
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${absImage}">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=${CSS_V}">
+  <link rel="preload" href="${versioned(FONTS.archivo)}" as="font" type="font/woff2" crossorigin>
+  <style>${fontFaces()}</style>
+  <link rel="stylesheet" href="/css/style.min.css?v=${CSS_V}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   ${jsonLd(schema)}
@@ -423,10 +499,10 @@ ${body}
 
 ${footer()}
 
-  <script src="/js/app.js?v=${JS_V}" defer></script>
+  <script src="/js/app.min.js?v=${JS_V}" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
-       data. Kept accurate in the cookie notice and privacy policy. -->
+       data. Kept accurate in the privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
 </body>
 </html>

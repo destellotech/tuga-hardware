@@ -158,19 +158,20 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
 // ---------------------------------------------------------------------------
 // Shipping notification email
 // ---------------------------------------------------------------------------
-export async function sendShippingNotification(env, email, trackingNumber, carrier) {
+export async function sendShippingNotification(env, email, { reference, trackingNumber, carrier }) {
+  const tracking = encodeURIComponent(trackingNumber);
   const trackingUrl = carrier && carrier.toLowerCase().includes('royal mail')
-    ? `https://www.royalmail.com/track-your-item#/tracking-results/${trackingNumber}`
-    : `https://track.aftership.com/${trackingNumber}`;
+    ? `https://www.royalmail.com/track-your-item#/tracking-results/${tracking}`
+    : `https://track.aftership.com/${tracking}`;
 
   const bodyHtml = `
     <h2 style="margin:0 0 8px;font-size:22px;color:${BRAND.green};">Your order has shipped</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${BRAND.mutedText};">Good news — your Tuga Hardware order is on its way.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${BRAND.mutedText};">Good news — your Tuga Hardware order ${escapeHtml(reference)} is on its way.</p>
 
     <div style="padding:24px;background-color:${BRAND.cream};border-radius:6px;text-align:center;">
       <p style="margin:0 0 6px;font-size:13px;color:${BRAND.mutedText};text-transform:uppercase;letter-spacing:1px;">Tracking number</p>
-      <p style="margin:0 0 16px;font-size:20px;font-weight:700;color:${BRAND.green};letter-spacing:1px;">${trackingNumber}</p>
-      ${carrier ? `<p style="margin:0 0 16px;font-size:14px;color:${BRAND.darkText};">Carrier: ${carrier}</p>` : ''}
+      <p style="margin:0 0 16px;font-size:20px;font-weight:700;color:${BRAND.green};letter-spacing:1px;">${escapeHtml(trackingNumber)}</p>
+      ${carrier ? `<p style="margin:0 0 16px;font-size:14px;color:${BRAND.darkText};">Carrier: ${escapeHtml(carrier)}</p>` : ''}
       <a href="${trackingUrl}" style="display:inline-block;padding:12px 32px;background-color:${BRAND.copper};color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;border-radius:6px;">Track your order</a>
     </div>
 
@@ -192,13 +193,80 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 
   return sendEmail(env, {
     to: email,
-    subject: `Your Tuga Hardware order has shipped — ${trackingNumber}`,
+    subject: `Your Tuga Hardware order ${reference} has shipped`,
     html,
   });
 }
 
 // ---------------------------------------------------------------------------
-// Enquiry from the contact form / a buyer's-guide signup
+// Buyer's guide, sent to whoever signs up on the site
+// ---------------------------------------------------------------------------
+// The signup form promises "how 6, 8 and 10 inch actually compare in the
+// hand, what IP and MIL ratings mean in practice, and the questions worth
+// asking before you spend". Every claim here is also on the site (the home
+// page FAQ and product pages); keep them in step. No prices, so nothing here
+// goes stale when the catalogue changes.
+export async function sendBuyersGuide(env, email) {
+  const h = (text) => `<h3 style="margin:28px 0 8px;font-size:16px;color:${BRAND.green};">${text}</h3>`;
+  const p = (text) => `<p style="margin:0 0 12px;font-size:14px;line-height:1.65;color:${BRAND.darkText};">${text}</p>`;
+  const li = (items) => `<ul style="margin:0 0 12px;padding-left:20px;font-size:14px;line-height:1.65;color:${BRAND.darkText};">${items.map((i) => `<li style="margin-bottom:6px;">${i}</li>`).join('')}</ul>`;
+  const site = 'https://www.tugahardware.com';
+
+  const bodyHtml = `
+    <h2 style="margin:0 0 8px;font-size:22px;color:${BRAND.green};">The rugged tablet buyer's guide</h2>
+    <p style="margin:0 0 8px;font-size:15px;color:${BRAND.mutedText};">One page, as promised. Useful whether or not you buy from us.</p>
+
+    ${h('1. Pick the size first')}
+    ${p('Nearly everyone chooses on size, so start there and let the specification follow.')}
+    ${li([
+      '<strong>6 inch (Tuga A6):</strong> goes in a pocket. Right if you mostly take photos, log jobs and stay in touch.',
+      '<strong>8 inch (Tuga A8):</strong> what most tradespeople settle on. Big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket.',
+      '<strong>10 inch (Tuga A10):</strong> for people who read drawings all day: blueprints, BIM viewers, full spreadsheets.',
+    ])}
+    ${p('If you are unsure, the 8 inch is the safe choice. Every size also comes in a Windows version.')}
+
+    ${h('2. What IP67, IP68 and IP69K mean')}
+    ${p('All three mean fully dust tight. The second digit is water. IP67 survives 1 metre of immersion for 30 minutes. IP68 goes deeper and longer. IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on.')}
+    ${p('For most UK trades IP67 is genuinely enough. IP68 and IP69K are the margin you want if the device lives outdoors.')}
+
+    ${h('3. What "drop tested" should mean')}
+    ${p('Look for MIL-STD-810H or 810G. It is a published test method, not a marketing phrase: repeated 1.2 to 1.5 metre drops onto plywood over concrete, on every face and corner, with the device still working afterwards. It does not make a device indestructible. It means the housing, corners and screen are engineered for the drop that kills a consumer tablet.')}
+
+    ${h('4. Android or Windows')}
+    ${p('Android if you use apps: job management, forms, photos, maps, cloud tools. That covers most trades and it is cheaper. Windows only if a specific piece of desktop software has no mobile version: diagnostic tools, legacy databases, GIS, CAD viewers or network drives. Windows devices cost roughly twice as much.')}
+
+    ${h('5. Questions worth asking before you spend')}
+    ${li([
+      'Will I read drawings on it, or mostly take photos and fill in forms? That decides the size.',
+      'Is there one piece of software I must run that only exists on Windows? If not, Android.',
+      'Will it get rained on, or hosed down? That decides IP68 or IP69K.',
+      'Can I read the screen outside? Look for 500 nits or more.',
+      'Will the battery last my longest day, not my average one?',
+      'Does it need to live in a vehicle mount or a dock?',
+      'How many does the team need? Our discounts start at two devices and apply automatically.',
+    ])}
+
+    <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
+      <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
+        Still not sure? Reply to this email with what you do and where the device will be used, and we will tell you which size fits, including when the honest answer is the cheapest one.
+        <br><br>
+        <a href="${site}/products/" style="color:${BRAND.copper};font-weight:600;">Compare the range</a>
+      </p>
+    </div>
+
+    <p style="margin:24px 0 0;font-size:12px;color:${BRAND.mutedText};">You asked for this guide on tugahardware.com. This is the only email you will get from that form.</p>
+  `;
+
+  return sendEmail(env, {
+    to: email,
+    replyTo: SUPPORT_EMAIL,
+    subject: "Your rugged tablet buyer's guide",
+    html: emailWrapper("Buyer's guide — Tuga Hardware", bodyHtml),
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Enquiry from the contact form
 // ---------------------------------------------------------------------------
 export async function sendEnquiry(env, { name, email, topic, message }) {
   const row = (label, value) =>

@@ -17,6 +17,7 @@ import { join } from 'node:path';
 import {
   SITE,
   ROOT,
+  data,
   devices,
   androidRange,
   windowsRange,
@@ -29,6 +30,10 @@ import {
   responsive,
   versioned,
   productUrl,
+  stockOf,
+  buyButton,
+  companyLine,
+  missingCompanyDetails,
   page,
 } from './lib/layout.mjs';
 
@@ -178,7 +183,7 @@ const TRADES = [
 function tradeCard(t) {
   const device = devices.find((d) => d.id === t.pick);
   return `
-          <a class="trade-card reveal" href="${productUrl(device)}">
+          <a class="trade-card" href="${productUrl(device)}">
             <div class="feature-icon">${t.icon}</div>
             <h3>${esc(t.name)}</h3>
             <p>${esc(t.copy)}</p>
@@ -291,8 +296,8 @@ ${sectionHead({
             <p>An IP68 rating means the housing is fully dust tight and survives sustained immersion, not that it tolerates a light shower. The devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
-              <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Rated from &minus;20&deg;C to 60&deg;C, so it starts on a frosty morning</li>
+              <li>Glove mode on the A6 and A8, so you can use the screen without taking your gloves off</li>
+              <li>Android models rated from &minus;20&deg;C to 60&deg;C, so they start on a frosty morning (Windows models &minus;10&deg;C to 50&deg;C)</li>
             </ul>
           </div>
         </article>
@@ -314,8 +319,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. Ours run 500 to 800 nits with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number.</p>
-            <p>Batteries are 10,000mAh and up on the Android range, comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. Most of ours run 500 to 800 nits, so you are not cupping a hand over the screen to read a job number. The A10 is the exception at 350 nits: its big screen is at its best in a vehicle mount or site office rather than direct sun, and we would rather tell you that here than after you have bought one.</p>
+            <p>Batteries on the Android range run from 8,000 to 10,600mAh, comfortably a full shift with heavy use, and up to two days of normal use on the A6. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
           </div>
         </article>
       </div>
@@ -471,6 +476,7 @@ function productPage(p) {
   ];
 
   const variants = variantsOf(p.id);
+  const stock = stockOf(p);
   const related = devices.filter((d) => d.id !== p.id).slice(0, 3);
   const compatible = accessories.filter((a) => a.compatibleWith.includes(p.id));
 
@@ -488,7 +494,7 @@ function productPage(p) {
       url: `${SITE.origin}${productUrl(p)}`,
       price: p.price,
       priceCurrency: 'GBP',
-      availability: 'https://schema.org/InStock',
+      availability: stock.schema,
       itemCondition: 'https://schema.org/NewCondition',
       seller: { '@id': `${SITE.origin}/#organization` },
       priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
@@ -525,14 +531,21 @@ ${breadcrumbs(trail)}
     <div class="container">
       <div class="pdp">
         <div class="pdp-gallery">
-          <div class="gallery-main">
-            <img id="gallery-image" src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" width="800" height="800" fetchpriority="high">
-          </div>
-          <div class="gallery-thumbs" role="group" aria-label="Product images">
+          <div class="gallery-main" data-gallery-track tabindex="0" role="region" aria-label="${esc(p.name)} photos. Swipe, or use the arrow keys, to see more.">
             ${p.images
               .map(
                 (_, i) => `
-            <button type="button" class="gallery-thumb${i === 0 ? ' is-active' : ''}" data-gallery-src="${imgPath(p, i + 1)}" aria-label="View image ${i + 1}">
+            <img src="${imgPath(p, i + 1)}"${responsive(imgPath(p, i + 1), '(max-width: 900px) 92vw, 660px')} alt="${
+                  i === 0 ? `${esc(p.name)} rugged ${p.formFactor}` : `${esc(p.name)}, photo ${i + 1} of ${p.images.length}`
+                }" width="800" height="800"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'}>`
+              )
+              .join('')}
+          </div>
+          <div class="gallery-thumbs" role="group" aria-label="Choose a photo">
+            ${p.images
+              .map(
+                (_, i) => `
+            <button type="button" class="gallery-thumb${i === 0 ? ' is-active' : ''}" data-gallery-index="${i}" aria-label="Show photo ${i + 1}"${i === 0 ? ' aria-current="true"' : ''}>
               <img src="${imgPath(p, i + 1)}"${responsive(imgPath(p, i + 1), '74px')} alt="" width="150" height="150" loading="lazy">
             </button>`
               )
@@ -553,15 +566,21 @@ ${breadcrumbs(trail)}
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
 
+          <p class="pdp-stock${stock.buyable ? '' : ' is-out'}">${esc(stock.label)}${
+            stock.buyable ? '' : `. <a href="/contact">Email us</a> and we will tell you when it is back.`
+          }</p>
+
           <div class="buy-row">
-            <div class="qty">
+            ${
+              stock.buyable
+                ? `<div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
               <input type="number" id="qty" value="1" min="1" max="99" aria-label="Quantity">
               <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
-            </div>
-            <button class="btn btn-primary btn-lg" data-add-to-cart="${p.id}" data-name="${esc(p.name)}" data-qty-source="qty">
-              ${icons.cart(18)} Add to basket
-            </button>
+            </div>`
+                : ''
+            }
+            ${buyButton(p, { className: 'btn btn-primary btn-lg', label: `${icons.cart(18)} Add to basket`, extra: ' data-qty-source="qty"' })}
           </div>
 
           <div class="pdp-assurance">
@@ -620,14 +639,14 @@ ${specSheet(p)}
         ${variants
           .map(
             (v) => `
-        <div class="variant-row reveal">
+        <div class="variant-row">
           <div>
             <h3>${esc(v.name)}</h3>
             <p>${esc(v.description)}</p>
           </div>
           <div class="variant-action">
             <span class="variant-price">${money(v.price)}</span>
-            <button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}" data-name="${esc(v.name)}">Add to basket</button>
+            ${buyButton(v, { className: 'btn btn-sm btn-copper' })}
           </div>
         </div>`
           )
@@ -1041,6 +1060,35 @@ write(
 );
 
 /* ==========================================================================
+   404 — served by src/worker.js, with a 404 status, for any unknown page
+   ========================================================================== */
+
+write(
+  '404.html',
+  page({
+    title: 'Page Not Found | Tuga Hardware',
+    description: 'That page does not exist. Browse the range or get in touch.',
+    path: '/404',
+    noindex: true,
+    schema: [],
+    body: `
+    <section class="section">
+      <div class="container-narrow">
+        ${eyebrow('404')}
+        <h1 class="title-lg">That page is not here</h1>
+        <p class="lede" style="margin-top:1rem">The link may be old, or the address mistyped. Everything we sell is one click away.</p>
+        <div style="margin-top:2rem; display:flex; gap:0.75rem; flex-wrap:wrap">
+          <a class="btn btn-primary" href="/products/">Browse the range</a>
+          <a class="btn btn-outline" href="/blog/">Read the guides</a>
+          <a class="btn btn-outline" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </section>
+`,
+  })
+);
+
+/* ==========================================================================
    LEGAL / POLICY PAGES — content lifted from the previous build
    ========================================================================== */
 
@@ -1048,7 +1096,10 @@ write(
    original hand-written pages by extract-content.mjs. Never read the
    generated output back in; that made rebuilds destructive. */
 const liftProse = (name) =>
-  readFileSync(join(ROOT, 'build', 'content', 'legal', name), 'utf8').trim();
+  readFileSync(join(ROOT, 'build', 'content', 'legal', name), 'utf8')
+    .trim()
+    // Company details come from SITE.company, the same place as the footer.
+    .replace('<!--company-->', esc(companyLine()));
 
 const legalPages = [
   {
@@ -1224,7 +1275,7 @@ ${sectionHead({ tag: 'Keep reading', title: 'More guides' })}
             .slice(0, 3)
             .map(
               (p) => `
-          <a class="post-card reveal" href="/blog/${p.slug}">
+          <a class="post-card" href="/blog/${p.slug}">
             <div class="post-card-media"><img src="${versioned(p.image)}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
@@ -1281,7 +1332,7 @@ ${breadcrumbs(blogTrail)}
           ${posts
             .map(
               (p) => `
-          <a class="post-card reveal" href="/blog/${p.slug}">
+          <a class="post-card" href="/blog/${p.slug}">
             <div class="post-card-media"><img src="${versioned(p.image)}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">${formatDate(p.date)}</p>
@@ -1334,7 +1385,7 @@ const feedItems = devices
       <g:link>${url}</g:link>
       <g:image_link>${SITE.origin}${imgPath(p, 1)}</g:image_link>
 ${extraImages}
-      <g:availability>in_stock</g:availability>
+      <g:availability>${stockOf(p).feed}</g:availability>
       <g:price>${p.price}.00 GBP</g:price>
       <g:brand>${esc(SITE.name)}</g:brand>
       <g:mpn>${esc(p.id.toUpperCase())}</g:mpn>
@@ -1365,11 +1416,44 @@ ${feedItems}
 );
 
 /* ==========================================================================
+   WORKER CATALOGUE
+
+   The Worker re-prices every order server-side. It used to keep its own
+   hand-copied price list, which had to be kept in step with products.json
+   by hand; now the build writes it from the same file the pages come from.
+   It is committed so the Worker and its tests run without a build first.
+   ========================================================================== */
+
+const workerCatalogue = Object.fromEntries([
+  ...data.products.map((p) => [
+    p.id,
+    { name: p.name, price: Math.round(p.price * 100), device: true, stock: p.stock ?? 'in_stock' },
+  ]),
+  ...data.accessories.map((a) => [
+    a.id,
+    { name: a.name, price: Math.round(a.price * 100), device: false, stock: a.stock ?? 'in_stock' },
+  ]),
+]);
+
+write(
+  'src/catalogue.generated.js',
+  `/* Generated by build/build.mjs from data/products.json. Do not edit.
+
+   Prices are in pence. \`device: true\` marks the items that count toward a
+   bulk discount tier; accessories are excluded, otherwise nine £8 adapters
+   would unlock 10% off a £449 tablet. */
+
+export const PRODUCTS = ${JSON.stringify(workerCatalogue, null, 2)};
+`
+);
+
+/* ==========================================================================
    SITEMAP + ROBOTS
    ========================================================================== */
 
-const today = new Date().toISOString().slice(0, 10);
-
+/* lastmod only where there is a real date: a build-time date would claim
+   every page changed on every build, which search engines learn to ignore,
+   and would make the output differ on every run. */
 const urls = [
   { loc: '/', priority: '1.0', freq: 'weekly' },
   { loc: '/products/', priority: '0.9', freq: 'weekly' },
@@ -1385,6 +1469,7 @@ const urls = [
     loc: `/blog/${p.slug}`,
     priority: '0.6',
     freq: 'monthly',
+    lastmod: p.date,
   })),
   { loc: '/about', priority: '0.5', freq: 'yearly' },
   { loc: '/contact', priority: '0.5', freq: 'yearly' },
@@ -1400,8 +1485,8 @@ write(
 ${urls
   .map(
     (u) => `  <url>
-    <loc>${SITE.origin}${u.loc}</loc>
-    <lastmod>${today}</lastmod>
+    <loc>${SITE.origin}${u.loc}</loc>${u.lastmod ? `
+    <lastmod>${u.lastmod}</lastmod>` : ''}
     <changefreq>${u.freq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`
@@ -1448,4 +1533,13 @@ write(
    ========================================================================== */
 
 console.log(`Built ${written.length} files:`);
+
+const missing = missingCompanyDetails();
+if (missing.length) {
+  console.warn(
+    `\nWARNING: company details missing (${missing.join(', ')}). A UK limited company must show ` +
+      'its name, registration number, place of registration and registered office on its website. ' +
+      'Set them in SITE.company in build/lib/layout.mjs.\n'
+  );
+}
 written.forEach((f) => console.log(`  ${f}`));

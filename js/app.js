@@ -337,24 +337,6 @@
     }, 3000);
   }
 
-  /* ---------------------------------------------------------------- cookies */
-
-  function initCookies() {
-    const banner = $('#cookie-banner');
-    if (!banner) return;
-    if (localStorage.getItem('tuga-cookies')) return;
-
-    setTimeout(() => banner.classList.add('is-visible'), 900);
-
-    const dismiss = (choice) => () => {
-      localStorage.setItem('tuga-cookies', choice);
-      banner.classList.remove('is-visible');
-    };
-
-    $('[data-cookie-accept]', banner)?.addEventListener('click', dismiss('accepted'));
-    $('[data-cookie-decline]', banner)?.addEventListener('click', dismiss('declined'));
-  }
-
   /* --------------------------------------------------------------- quantity */
 
   function initQty() {
@@ -400,18 +382,41 @@
 
   /* ---------------------------------------------------------------- gallery */
 
+  /* The photos sit side by side in a snapping scroller (see .gallery-main).
+     Thumbnails scroll it to their photo, and follow along when it is swiped. */
   function initGallery() {
-    const main = $('#gallery-image');
-    const thumbs = $$('.gallery-thumb');
-    if (!main || !thumbs.length) return;
+    const track = $('[data-gallery-track]');
+    const thumbs = $$('[data-gallery-index]');
+    if (!track || !thumbs.length) return;
+
+    const setActive = (index) => {
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('is-active', i === index);
+        if (i === index) t.setAttribute('aria-current', 'true');
+        else t.removeAttribute('aria-current');
+      });
+    };
 
     thumbs.forEach((thumb) => {
       thumb.addEventListener('click', () => {
-        main.src = thumb.dataset.gallerySrc;
-        thumbs.forEach((t) => t.classList.remove('is-active'));
-        thumb.classList.add('is-active');
+        const index = Number(thumb.dataset.galleryIndex);
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollTo({ left: index * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+        setActive(index);
       });
     });
+
+    let frame = 0;
+    track.addEventListener(
+      'scroll',
+      () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() =>
+          setActive(Math.round(track.scrollLeft / Math.max(1, track.clientWidth)))
+        );
+      },
+      { passive: true }
+    );
   }
 
   /* ---------------------------------------------------------------- filters */
@@ -479,7 +484,11 @@
         <div class="cart-item-media">${image}</div>
         <div>
           <p class="cart-item-name">${p.name}</p>
-          <p class="cart-item-meta">${p.tagline || p.description || ''}</p>
+          <p class="cart-item-meta">${
+            p.stock === 'out_of_stock'
+              ? '<strong class="cart-item-out">Out of stock. Remove it to check out.</strong>'
+              : p.tagline || p.description || ''
+          }</p>
           <div class="cart-item-controls">
             <div class="qty">
               <button type="button" data-line-step="-1" aria-label="Decrease quantity for ${p.name}">&minus;</button>
@@ -524,7 +533,7 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
-      <p class="summary-note">Paying by card gets you a downloadable invoice, with your company VAT number on it if you add one at checkout.</p>
+      <p class="summary-note">Secure checkout gives you a downloadable invoice, with your company VAT number on it if you add one.</p>
       <div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
@@ -655,6 +664,14 @@
       });
 
       const payload = await res.json().catch(() => ({}));
+      // 409: something in the basket itself needs changing. The message
+      // says what, and emailing us would not help.
+      if (res.status === 409 && payload.error) {
+        btn.disabled = false;
+        btn.textContent = original;
+        setStatus(`${payload.error}.`);
+        return;
+      }
       if (!res.ok) throw new Error(payload.error || 'Checkout is unavailable');
 
       // Stripe returns {url}; the PayPal handler returns {approvalUrl}.
@@ -725,18 +742,37 @@
           return;
         }
 
+        const btn = $('button[type="submit"]', form);
+        const label = btn ? btn.textContent : '';
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+        }
+
+        // Say only what actually happened: sent, saved to send later, or
+        // failed with a way to get the guide anyway.
+        let message;
         try {
-          await fetch('/api/subscribe', {
+          const res = await fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email.value }),
           });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error);
+          message = data.sent
+            ? 'Sent. Check your inbox in a minute or two.'
+            : 'Got it. We will email the guide to you shortly.';
+          form.reset();
         } catch {
-          /* Non-critical — never block the user on a newsletter signup. */
+          message = 'That did not go through. Email support@tugahardware.com and we will send the guide.';
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = label;
+          }
         }
-
-        form.reset();
-        if (note) note.textContent = 'Sent. Check your inbox in a minute or two.';
+        if (note) note.textContent = message;
       });
     });
   }
@@ -780,7 +816,7 @@
             // The basket has served its purpose once the order is placed.
             localStorage.removeItem(Cart.KEY);
             paintCount();
-            const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
+            const paidBy = data.provider === 'paypal' ? 'Paid with PayPal.' : 'Payment received.';
             // Both values land in innerHTML, so accept only exact shapes: the
             // reference pattern, and an https link on Stripe's invoice host,
             // re-serialised by URL so any quote in it is percent-encoded.
@@ -795,7 +831,7 @@
             show(
               'Order confirmed',
               confirmedLede,
-              `${ref ? `Your order number is <strong>${ref}</strong>. Quote it if you contact us. ` : ''}Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+              `${ref ? `Your order number is <strong>${ref}</strong>. Quote it if you contact us. ` : ''}${paidBy} ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
             if (invoiceHref) {
               target.insertAdjacentHTML(
@@ -803,6 +839,22 @@
                 `<p style="margin-top:1.25rem"><a class="link-arrow" href="${invoiceHref}" target="_blank" rel="noopener">Download your invoice</a></p>`
               );
             }
+          } else if (ok && data.status === 'processing') {
+            // Placed with a method that settles later, such as a bank debit.
+            // The order exists, so the basket has done its job.
+            localStorage.removeItem(Cart.KEY);
+            paintCount();
+            show(
+              'Order placed, payment processing',
+              'Your bank is processing the payment. We will email your order confirmation as soon as it clears, usually within a few working days. Please do not pay again.',
+              ''
+            );
+          } else if (ok && data.status === 'undeliverable') {
+            show(
+              'We cannot deliver to that address',
+              'We deliver to the UK and the Republic of Ireland only, so we did not take the payment. Nothing has been charged. Your basket is still saved if you want to check out with a UK or Irish address.',
+              '<a href="/cart">Back to basket</a>'
+            );
           } else if (ok && data.status === 'unpaid') {
             show(
               'Payment not completed',
@@ -831,7 +883,6 @@
     paintCount();
     initNav();
     initReveal();
-    initCookies();
     initQty();
     initAddToCart();
     initGallery();

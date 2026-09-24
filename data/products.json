@@ -1,5 +1,5 @@
 {
-  "_note": "Single source of truth for the catalogue. `npm run build` regenerates every product page from this file. Prices here MUST match the PRODUCTS map in src/api.js (the server re-prices every order and will reject a mismatch).",
+  "_note": "Single source of truth for the catalogue. `npm run build` regenerates every product page AND src/catalogue.generated.js, the price list the Worker charges from, so run it after any change here. Optional `stock` per item: in_stock (default), out_of_stock or preorder.",
   "products": [
     {
       "id": "tuga-a6",

@@ -163,13 +163,10 @@ p { text-wrap: pretty; }
   border-radius: 2px;
 }
 
+/* Reduced motion: see the end of this file. Movement becomes a fade rather
+   than every transition being switched off, so state changes still read. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -671,22 +668,38 @@ p { text-wrap: pretty; }
 @media (max-width: 900px) {
   .nav-toggle { display: grid; }
 
+  /* Hangs from the bottom of the header. Absolute, not fixed: the header's
+     backdrop-filter makes it the containing block for fixed children, which
+     is what left the closed menu peeking over the logo. z-index -1 keeps it
+     under the header's own content while it drops in. Closed, it is hidden
+     outright, so its links cannot be tabbed to. */
   .primary-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    max-height: calc(100dvh - var(--header-offset, 4.5rem));
+    overflow-y: auto;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
-    transform: translateY(-115%);
-    transition: transform var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    visibility: hidden;
+    transition: opacity var(--fast), transform var(--base), visibility 0s linear var(--base);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition: opacity var(--fast), transform var(--base), visibility 0s;
+  }
 
   .primary-nav a {
     padding-block: 0.95rem;
@@ -1780,23 +1793,34 @@ p { text-wrap: pretty; }
 }
 
 /* Gallery */
+/* A native horizontal scroller: swipe on touch, trackpad or arrow keys
+   elsewhere. The browser supplies the momentum, snapping and edge bounce,
+   so there is no gesture code to get wrong. */
 .gallery-main {
   position: relative;
   aspect-ratio: 1 / 1;
   background: var(--white);
   border: 1px solid var(--rule);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
   margin-bottom: var(--space-s);
 }
 
+.gallery-main::-webkit-scrollbar { display: none; }
+
 .gallery-main img {
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: contain;
   padding: clamp(1.5rem, 4vw, 3rem);
   mix-blend-mode: multiply;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .gallery-thumbs {
@@ -1887,6 +1911,28 @@ p { text-wrap: pretty; }
   color: var(--ink-light);
   width: 100%;
 }
+
+.pdp-stock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--green-700);
+}
+
+.pdp-stock::before {
+  content: '';
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pdp-stock.is-out { color: #b4342a; }
+.pdp-stock a { text-decoration: underline; text-underline-offset: 0.2em; }
 
 .pdp-desc {
   color: var(--ink-mid);
@@ -2209,6 +2255,8 @@ p { text-wrap: pretty; }
   color: var(--ink-light);
   margin-bottom: var(--space-s);
 }
+
+.cart-item-out { color: #b4342a; font-weight: 600; }
 
 .cart-item-controls {
   display: flex;
@@ -2672,42 +2720,8 @@ p { text-wrap: pretty; }
 }
 
 /* --------------------------------------------------------------------------
-   27. COOKIE BANNER + TOAST
+   27. TOAST
    -------------------------------------------------------------------------- */
-
-.cookie-banner {
-  position: fixed;
-  left: var(--gutter);
-  right: var(--gutter);
-  bottom: var(--gutter);
-  z-index: 200;
-  max-width: 42rem;
-  margin-inline: auto;
-  padding: var(--space-m);
-  background: var(--green-900);
-  border: 1px solid var(--rule-inverse);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--lift-lg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-m);
-  flex-wrap: wrap;
-  transform: translateY(calc(100% + var(--gutter) + 1rem));
-  transition: transform var(--base);
-}
-
-.cookie-banner.is-visible { transform: translateY(0); }
-
-.cookie-banner p {
-  font-size: var(--step--1);
-  color: var(--ink-inverse-mid);
-  flex: 1 1 18rem;
-}
-
-.cookie-banner a { color: var(--copper-light); text-decoration: underline; }
-
-.cookie-actions { display: flex; gap: 0.5rem; }
 
 .toast {
   position: fixed;
@@ -2780,6 +2794,11 @@ p { text-wrap: pretty; }
   .reveal { opacity: 1; transform: none; }
 }
 
+/* Without JavaScript nothing would ever add .is-visible, so never hide. */
+@media (scripting: none) {
+  .reveal { opacity: 1; transform: none; }
+}
+
 /* --------------------------------------------------------------------------
    28b. PRESS FEEDBACK
 
@@ -2787,7 +2806,7 @@ p { text-wrap: pretty; }
    @media (hover: hover) blocks), so on a phone they no longer stick after a
    tap. A tapped card gives its own feedback instead, the instant the finger
    lands. It uses the individual `scale` property rather than `transform`,
-   so it stacks on the reveal animation instead of fighting it, and it sits
+   so it stacks on any hover transform instead of replacing it, and it sits
    outside every transition list, so it is immediate in both directions.
    -------------------------------------------------------------------------- */
 
@@ -2810,8 +2829,59 @@ p { text-wrap: pretty; }
    -------------------------------------------------------------------------- */
 
 @media print {
-  .site-header, .site-footer, .cookie-banner, .toast,
+  .site-header, .site-footer, .toast,
   .announce, .buy-row, .capture { display: none !important; }
   body { background: #fff; color: #000; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   30. USER PREFERENCES
+
+   Kept last so they override the rules above.
+   -------------------------------------------------------------------------- */
+
+/* Reduced motion: nothing slides, lifts, zooms or spins, but things still
+   fade, so opening the menu or showing a message is still visible. */
+@media (prefers-reduced-motion: reduce) {
+  .primary-nav,
+  .primary-nav.is-open { transform: none; }
+
+  .toast,
+  .toast.is-visible { transform: translate(-50%, 0); }
+  .toast { opacity: 0; transition: opacity var(--fast), visibility 0s linear var(--fast); }
+  .toast.is-visible { opacity: 1; transition: opacity var(--fast), visibility 0s; }
+
+  .nav-toggle > span,
+  .nav-toggle[aria-expanded='true'] > span { transform: none; }
+
+  .post-card:hover,
+  .post-card:hover .post-card-media img,
+  .product-card:hover .product-card-media img { transform: none; }
+
+  .product-card:active,
+  .post-card:active,
+  .ladder-item:active,
+  .trade-card:active { scale: none; }
+}
+
+/* More contrast: stronger rules and lighter text taken darker. */
+@media (prefers-contrast: more) {
+  :root {
+    --rule: rgba(5, 46, 22, 0.45);
+    --rule-strong: rgba(5, 46, 22, 0.75);
+    --ink-mid: #2b2b28;
+    --ink-light: #50504b;
+    --ink-inverse-mid: rgba(247, 244, 239, 0.9);
+    --ink-inverse-light: rgba(247, 244, 239, 0.75);
+  }
+}
+
+/* Less transparency: a solid header instead of frosted glass. */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background: var(--cream);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }

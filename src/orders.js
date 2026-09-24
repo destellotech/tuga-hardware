@@ -45,6 +45,13 @@ export async function referenceFromOrderId(orderId) {
   return formatReference(new Uint8Array(digest));
 }
 
+/** Look an order up by the number the customer quotes. */
+export async function getOrderByReference(kv, reference) {
+  if (!isOrderReference(reference)) return null;
+  const orderId = await kv.get(`${REF_PREFIX}${reference}`);
+  return orderId ? getOrder(kv, orderId) : null;
+}
+
 /**
  * Save an order to KV.
  * Also adds the order ID to a pending-orders index for quick listing.
