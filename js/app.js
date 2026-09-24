@@ -94,8 +94,24 @@
       this.write(items);
     },
 
+    /** Remove a line. Returns what is needed to put it back with restore(). */
     remove(id) {
-      this.write(this.read().filter((i) => i.id !== id));
+      const items = this.read();
+      const index = items.findIndex((i) => i.id === id);
+      if (index === -1) return null;
+      const [item] = items.splice(index, 1);
+      this.write(items);
+      return { item, index };
+    },
+
+    /** Undo a remove(), putting the line back where it was. */
+    restore(removed) {
+      if (!removed) return;
+      const items = this.read();
+      // Already back (e.g. re-added in another tab): leave it alone.
+      if (items.some((i) => i.id === removed.item.id)) return;
+      items.splice(Math.min(removed.index, items.length), 0, removed.item);
+      this.write(items);
     },
 
     count() {
@@ -174,18 +190,60 @@
 
   let toastTimer;
 
-  function toast(message) {
+  /**
+   * Show a short message at the bottom of the screen.
+   *
+   * @param {string} message
+   * @param {{label: string, href?: string, onClick?: Function}} [action]
+   *   One optional follow-up: a link (View basket) or a button (Undo). A
+   *   toast with an action stays up longer, and never disappears while the
+   *   pointer or keyboard focus is on it.
+   */
+  function toast(message, action) {
     let el = $('.toast');
+    const hide = () => el.classList.remove('is-visible');
+    const hideLater = (ms) => {
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(hide, ms);
+    };
+
     if (!el) {
       el = document.createElement('div');
       el.className = 'toast';
       el.setAttribute('role', 'status');
       document.body.appendChild(el);
+      el.addEventListener('pointerenter', () => clearTimeout(toastTimer));
+      el.addEventListener('focusin', () => clearTimeout(toastTimer));
+      el.addEventListener('pointerleave', () => hideLater(2000));
+      el.addEventListener('focusout', () => hideLater(2000));
     }
-    el.textContent = message;
-    requestAnimationFrame(() => el.classList.add('is-visible'));
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('is-visible'), 2600);
+
+    const text = document.createElement('span');
+    text.textContent = message;
+    el.replaceChildren(text);
+
+    if (action) {
+      const ctl = document.createElement(action.href ? 'a' : 'button');
+      ctl.className = 'toast-action';
+      ctl.textContent = action.label;
+      if (action.href) {
+        ctl.href = action.href;
+      } else {
+        ctl.type = 'button';
+        ctl.addEventListener('click', () => {
+          clearTimeout(toastTimer);
+          hide();
+          action.onClick();
+        });
+      }
+      el.append(ctl);
+    }
+
+    // Flush styles so a just-created toast still slides in, then show it
+    // synchronously: the action has to be focusable straight away.
+    void el.offsetWidth;
+    el.classList.add('is-visible');
+    hideLater(action ? 5000 : 2600);
   }
 
   /* -------------------------------------------------------------------- nav */
@@ -279,24 +337,6 @@
     }, 3000);
   }
 
-  /* ---------------------------------------------------------------- cookies */
-
-  function initCookies() {
-    const banner = $('#cookie-banner');
-    if (!banner) return;
-    if (localStorage.getItem('tuga-cookies')) return;
-
-    setTimeout(() => banner.classList.add('is-visible'), 900);
-
-    const dismiss = (choice) => () => {
-      localStorage.setItem('tuga-cookies', choice);
-      banner.classList.remove('is-visible');
-    };
-
-    $('[data-cookie-accept]', banner)?.addEventListener('click', dismiss('accepted'));
-    $('[data-cookie-decline]', banner)?.addEventListener('click', dismiss('declined'));
-  }
-
   /* --------------------------------------------------------------- quantity */
 
   function initQty() {
@@ -314,7 +354,7 @@
   /* ------------------------------------------------------------ add to cart */
 
   function initAddToCart() {
-    document.addEventListener('click', async (e) => {
+    document.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-add-to-cart]');
       if (!btn) return;
       e.preventDefault();
@@ -329,30 +369,54 @@
 
       Cart.add(id, qty);
 
-      try {
-        const products = await getCatalogue();
-        const product = findItem(products, id);
-        toast(`${product ? product.name : 'Item'} added to basket`);
-      } catch {
-        toast('Added to basket');
-      }
+      // The name is written onto the button at build time, so the
+      // confirmation appears on the same frame as the tap rather than after
+      // a round trip for the catalogue.
+      const name = btn.dataset.name;
+      toast(name ? `${name} added to basket` : 'Added to basket', {
+        label: 'View basket',
+        href: '/cart',
+      });
     });
   }
 
   /* ---------------------------------------------------------------- gallery */
 
+  /* The photos sit side by side in a snapping scroller (see .gallery-main).
+     Thumbnails scroll it to their photo, and follow along when it is swiped. */
   function initGallery() {
-    const main = $('#gallery-image');
-    const thumbs = $$('.gallery-thumb');
-    if (!main || !thumbs.length) return;
+    const track = $('[data-gallery-track]');
+    const thumbs = $$('[data-gallery-index]');
+    if (!track || !thumbs.length) return;
+
+    const setActive = (index) => {
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('is-active', i === index);
+        if (i === index) t.setAttribute('aria-current', 'true');
+        else t.removeAttribute('aria-current');
+      });
+    };
 
     thumbs.forEach((thumb) => {
       thumb.addEventListener('click', () => {
-        main.src = thumb.dataset.gallerySrc;
-        thumbs.forEach((t) => t.classList.remove('is-active'));
-        thumb.classList.add('is-active');
+        const index = Number(thumb.dataset.galleryIndex);
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollTo({ left: index * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+        setActive(index);
       });
     });
+
+    let frame = 0;
+    track.addEventListener(
+      'scroll',
+      () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() =>
+          setActive(Math.round(track.scrollLeft / Math.max(1, track.clientWidth)))
+        );
+      },
+      { passive: true }
+    );
   }
 
   /* ---------------------------------------------------------------- filters */
@@ -420,7 +484,11 @@
         <div class="cart-item-media">${image}</div>
         <div>
           <p class="cart-item-name">${p.name}</p>
-          <p class="cart-item-meta">${p.tagline || p.description || ''}</p>
+          <p class="cart-item-meta">${
+            p.stock === 'out_of_stock'
+              ? '<strong class="cart-item-out">Out of stock. Remove it to check out.</strong>'
+              : p.tagline || p.description || ''
+          }</p>
           <div class="cart-item-controls">
             <div class="qty">
               <button type="button" data-line-step="-1" aria-label="Decrease quantity for ${p.name}">&minus;</button>
@@ -465,6 +533,7 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
+      <p class="summary-note">Secure checkout gives you a downloadable invoice, with your company VAT number on it if you add one.</p>
       <div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
@@ -517,8 +586,27 @@
       const id = row.dataset.line;
 
       if (e.target.closest('[data-line-remove]')) {
-        Cart.remove(id);
-        toast('Removed from basket');
+        const name = $('.cart-item-name', row)?.textContent || 'Item';
+        const removed = Cart.remove(id);
+        // One tap removes a line worth hundreds of pounds, so make it
+        // undoable rather than asking "are you sure?" first.
+        toast(`${name} removed`, {
+          label: 'Undo',
+          onClick: () => {
+            Cart.restore(removed);
+            // The Undo button is about to vanish; keep keyboard focus on the
+            // page rather than letting it drop to <body>.
+            const heading = $('main h1');
+            if (heading) {
+              heading.setAttribute('tabindex', '-1');
+              heading.focus({ preventScroll: true });
+            }
+          },
+        });
+        // Pressed from the keyboard (a click with no pointer detail): the
+        // Remove button has just been destroyed, so hand focus to Undo, which
+        // also holds the toast open until focus leaves it.
+        if (e.detail === 0) $('.toast .toast-action')?.focus();
         return;
       }
 
@@ -576,6 +664,14 @@
       });
 
       const payload = await res.json().catch(() => ({}));
+      // 409: something in the basket itself needs changing. The message
+      // says what, and emailing us would not help.
+      if (res.status === 409 && payload.error) {
+        btn.disabled = false;
+        btn.textContent = original;
+        setStatus(`${payload.error}.`);
+        return;
+      }
       if (!res.ok) throw new Error(payload.error || 'Checkout is unavailable');
 
       // Stripe returns {url}; the PayPal handler returns {approvalUrl}.
@@ -646,18 +742,37 @@
           return;
         }
 
+        const btn = $('button[type="submit"]', form);
+        const label = btn ? btn.textContent : '';
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+        }
+
+        // Say only what actually happened: sent, saved to send later, or
+        // failed with a way to get the guide anyway.
+        let message;
         try {
-          await fetch('/api/subscribe', {
+          const res = await fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email.value }),
           });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error);
+          message = data.sent
+            ? 'Sent. Check your inbox in a minute or two.'
+            : 'Got it. We will email the guide to you shortly.';
+          form.reset();
         } catch {
-          /* Non-critical — never block the user on a newsletter signup. */
+          message = 'That did not go through. Email support@tugahardware.com and we will send the guide.';
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = label;
+          }
         }
-
-        form.reset();
-        if (note) note.textContent = 'Sent. Check your inbox in a minute or two.';
+        if (note) note.textContent = message;
       });
     });
   }
@@ -676,6 +791,9 @@
 
     const title = $('[data-order-title]');
     const lede = $('[data-order-lede]');
+    // The build writes the delivery promise into the page; reuse it rather
+    // than keeping a second copy here that can drift out of date.
+    const confirmedLede = lede ? lede.textContent : '';
     const show = (heading, text, note) => {
       if (title) title.textContent = heading;
       if (lede) lede.textContent = text;
@@ -698,11 +816,44 @@
             // The basket has served its purpose once the order is placed.
             localStorage.removeItem(Cart.KEY);
             paintCount();
-            const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
+            const paidBy = data.provider === 'paypal' ? 'Paid with PayPal.' : 'Payment received.';
+            // Both values land in innerHTML, so accept only exact shapes: the
+            // reference pattern, and an https link on Stripe's invoice host,
+            // re-serialised by URL so any quote in it is percent-encoded.
+            const ref = /^TUGA-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(data.reference || '') ? data.reference : '';
+            let invoiceHref = '';
+            try {
+              const u = new URL(data.invoiceUrl);
+              if (u.protocol === 'https:' && u.hostname === 'invoice.stripe.com') invoiceHref = u.href;
+            } catch {
+              /* No invoice (PayPal, or not finalised yet). */
+            }
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
-              `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+              confirmedLede,
+              `${ref ? `Your order number is <strong>${ref}</strong>. Quote it if you contact us. ` : ''}${paidBy} ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+            );
+            if (invoiceHref) {
+              target.insertAdjacentHTML(
+                'beforeend',
+                `<p style="margin-top:1.25rem"><a class="link-arrow" href="${invoiceHref}" target="_blank" rel="noopener">Download your invoice</a></p>`
+              );
+            }
+          } else if (ok && data.status === 'processing') {
+            // Placed with a method that settles later, such as a bank debit.
+            // The order exists, so the basket has done its job.
+            localStorage.removeItem(Cart.KEY);
+            paintCount();
+            show(
+              'Order placed, payment processing',
+              'Your bank is processing the payment. We will email your order confirmation as soon as it clears, usually within a few working days. Please do not pay again.',
+              ''
+            );
+          } else if (ok && data.status === 'undeliverable') {
+            show(
+              'We cannot deliver to that address',
+              'We deliver to the UK and the Republic of Ireland only, so we did not take the payment. Nothing has been charged. Your basket is still saved if you want to check out with a UK or Irish address.',
+              '<a href="/cart">Back to basket</a>'
             );
           } else if (ok && data.status === 'unpaid') {
             show(
@@ -732,7 +883,6 @@
     paintCount();
     initNav();
     initReveal();
-    initCookies();
     initQty();
     initAddToCart();
     initGallery();

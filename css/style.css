@@ -163,13 +163,10 @@ p { text-wrap: pretty; }
   border-radius: 2px;
 }
 
+/* Reduced motion: see the end of this file. Movement becomes a fade rather
+   than every transition being switched off, so state changes still read. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -350,7 +347,13 @@ p { text-wrap: pretty; }
   border-color: var(--green-900);
 }
 
-.btn-primary:hover {
+@media (hover: hover) {
+  .btn-primary:hover {
+    background: var(--green-700);
+    border-color: var(--green-700);
+  }
+}
+.btn-primary:active {
   background: var(--green-700);
   border-color: var(--green-700);
 }
@@ -361,7 +364,13 @@ p { text-wrap: pretty; }
   border-color: var(--copper-dark);
 }
 
-.btn-copper:hover {
+@media (hover: hover) {
+  .btn-copper:hover {
+    background: var(--copper);
+    border-color: var(--copper);
+  }
+}
+.btn-copper:active {
   background: var(--copper);
   border-color: var(--copper);
 }
@@ -372,7 +381,13 @@ p { text-wrap: pretty; }
   border-color: var(--rule-strong);
 }
 
-.btn-outline:hover {
+@media (hover: hover) {
+  .btn-outline:hover {
+    border-color: var(--green-900);
+    background: rgba(5, 46, 22, 0.04);
+  }
+}
+.btn-outline:active {
   border-color: var(--green-900);
   background: rgba(5, 46, 22, 0.04);
 }
@@ -383,7 +398,13 @@ p { text-wrap: pretty; }
   border-color: var(--cream);
 }
 
-.btn-inverse:hover {
+@media (hover: hover) {
+  .btn-inverse:hover {
+    background: var(--copper-light);
+    border-color: var(--copper-light);
+  }
+}
+.btn-inverse:active {
   background: var(--copper-light);
   border-color: var(--copper-light);
 }
@@ -394,7 +415,13 @@ p { text-wrap: pretty; }
   border-color: var(--rule-inverse);
 }
 
-.btn-outline-light:hover {
+@media (hover: hover) {
+  .btn-outline-light:hover {
+    border-color: var(--cream);
+    background: rgba(247, 244, 239, 0.08);
+  }
+}
+.btn-outline-light:active {
   border-color: var(--cream);
   background: rgba(247, 244, 239, 0.08);
 }
@@ -424,10 +451,12 @@ p { text-wrap: pretty; }
   transition: color var(--fast), border-color var(--fast), gap var(--fast);
 }
 
-.link-arrow:hover {
-  color: var(--copper-dark);
-  border-color: var(--copper);
-  gap: 0.85em;
+@media (hover: hover) {
+  .link-arrow:hover {
+    color: var(--copper-dark);
+    border-color: var(--copper);
+    gap: 0.85em;
+  }
 }
 
 .section-dark .link-arrow {
@@ -435,9 +464,11 @@ p { text-wrap: pretty; }
   border-color: var(--rule-inverse);
 }
 
-.section-dark .link-arrow:hover {
-  color: var(--cream);
-  border-color: var(--copper-light);
+@media (hover: hover) {
+  .section-dark .link-arrow:hover {
+    color: var(--cream);
+    border-color: var(--copper-light);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -549,8 +580,10 @@ p { text-wrap: pretty; }
   transition: transform var(--base);
 }
 
-.primary-nav a:hover { color: var(--green-900); }
-.primary-nav a:hover::after { transform: scaleX(1); }
+@media (hover: hover) {
+  .primary-nav a:hover { color: var(--green-900); }
+  .primary-nav a:hover::after { transform: scaleX(1); }
+}
 
 .primary-nav a[aria-current='page'] {
   color: var(--green-900);
@@ -575,7 +608,10 @@ p { text-wrap: pretty; }
   transition: background var(--fast);
 }
 
-.cart-link:hover { background: rgba(5, 46, 22, 0.06); }
+@media (hover: hover) {
+  .cart-link:hover { background: rgba(5, 46, 22, 0.06); }
+}
+.cart-link:active { background: rgba(5, 46, 22, 0.06); }
 
 .cart-count {
   position: absolute;
@@ -604,27 +640,66 @@ p { text-wrap: pretty; }
   border-radius: var(--radius);
 }
 
-.nav-toggle:hover { background: rgba(5, 46, 22, 0.06); }
+@media (hover: hover) {
+  .nav-toggle:hover { background: rgba(5, 46, 22, 0.06); }
+}
+.nav-toggle:active { background: rgba(5, 46, 22, 0.06); }
+
+/* Both icons share one grid cell. The button's own state decides which
+   shows, so the icon can never disagree with whether the menu is open. The
+   swap turns toward the new icon rather than simply cutting. */
+.nav-toggle > span {
+  grid-area: 1 / 1;
+  display: grid;
+  transition: opacity var(--fast), transform var(--fast);
+}
+
+.nav-toggle-close,
+.nav-toggle[aria-expanded='true'] .nav-toggle-open {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+.nav-toggle[aria-expanded='true'] .nav-toggle-close {
+  opacity: 1;
+  transform: none;
+}
 
 @media (max-width: 900px) {
   .nav-toggle { display: grid; }
 
+  /* Hangs from the bottom of the header. Absolute, not fixed: the header's
+     backdrop-filter makes it the containing block for fixed children, which
+     is what left the closed menu peeking over the logo. z-index -1 keeps it
+     under the header's own content while it drops in. Closed, it is hidden
+     outright, so its links cannot be tabbed to. */
   .primary-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    max-height: calc(100dvh - var(--header-offset, 4.5rem));
+    overflow-y: auto;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
-    transform: translateY(-115%);
-    transition: transform var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    visibility: hidden;
+    transition: opacity var(--fast), transform var(--base), visibility 0s linear var(--base);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition: opacity var(--fast), transform var(--base), visibility 0s;
+  }
 
   .primary-nav a {
     padding-block: 0.95rem;
@@ -866,7 +941,9 @@ p { text-wrap: pretty; }
 
 .ladder-item + .ladder-item { border-left: 1px solid var(--rule); }
 
-.ladder-item:hover { background: var(--cream); }
+@media (hover: hover) {
+  .ladder-item:hover { background: var(--cream); }
+}
 
 .ladder-stage {
   display: grid;
@@ -1011,7 +1088,9 @@ p { text-wrap: pretty; }
   transition: border-color var(--base);
 }
 
-.product-card:hover .product-card-media { border-color: var(--copper); }
+@media (hover: hover) {
+  .product-card:hover .product-card-media { border-color: var(--copper); }
+}
 
 .product-card-media img {
   width: 100%;
@@ -1021,7 +1100,9 @@ p { text-wrap: pretty; }
   transition: transform var(--slow);
 }
 
-.product-card:hover .product-card-media img { transform: scale(1.03); }
+@media (hover: hover) {
+  .product-card:hover .product-card-media img { transform: scale(1.03); }
+}
 
 .product-badge {
   position: absolute;
@@ -1133,7 +1214,9 @@ p { text-wrap: pretty; }
   transition: gap var(--fast);
 }
 
-.product-card:hover .product-card-cta { gap: 0.7rem; }
+@media (hover: hover) {
+  .product-card:hover .product-card-cta { gap: 0.7rem; }
+}
 
 /* Filter tabs */
 .filters {
@@ -1155,7 +1238,10 @@ p { text-wrap: pretty; }
   transition: all var(--fast);
 }
 
-.filter-btn:hover { border-color: var(--green-900); color: var(--green-900); }
+@media (hover: hover) {
+  .filter-btn:hover { border-color: var(--green-900); color: var(--green-900); }
+}
+.filter-btn:active { border-color: var(--green-900); color: var(--green-900); }
 
 .filter-btn.is-active {
   background: var(--green-900);
@@ -1208,7 +1294,9 @@ p { text-wrap: pretty; }
 .compare-table tbody tr:last-child td { border-bottom: none; }
 
 .compare-table tbody tr { transition: background var(--fast); }
-.compare-table tbody tr:hover { background: var(--cream-deep); }
+@media (hover: hover) {
+  .compare-table tbody tr:hover { background: var(--cream-deep); }
+}
 
 .compare-table td:first-child {
   font-family: var(--font-display);
@@ -1373,7 +1461,9 @@ p { text-wrap: pretty; }
   transition: border-top-color var(--base);
 }
 
-.trade-card:hover { border-top-color: var(--copper); }
+@media (hover: hover) {
+  .trade-card:hover { border-top-color: var(--copper); }
+}
 
 .trade-card-num {
   font-family: var(--font-mono);
@@ -1512,7 +1602,9 @@ p { text-wrap: pretty; }
   transition: color var(--fast);
 }
 
-.faq-q:hover { color: var(--copper-dark); }
+@media (hover: hover) {
+  .faq-q:hover { color: var(--copper-dark); }
+}
 
 .faq-icon {
   flex-shrink: 0;
@@ -1682,7 +1774,9 @@ p { text-wrap: pretty; }
 }
 
 .breadcrumbs a { transition: color var(--fast); }
-.breadcrumbs a:hover { color: var(--copper-dark); }
+@media (hover: hover) {
+  .breadcrumbs a:hover { color: var(--copper-dark); }
+}
 .breadcrumbs .sep { opacity: 0.5; }
 .breadcrumbs [aria-current] { color: var(--ink-mid); }
 
@@ -1699,23 +1793,34 @@ p { text-wrap: pretty; }
 }
 
 /* Gallery */
+/* A native horizontal scroller: swipe on touch, trackpad or arrow keys
+   elsewhere. The browser supplies the momentum, snapping and edge bounce,
+   so there is no gesture code to get wrong. */
 .gallery-main {
   position: relative;
   aspect-ratio: 1 / 1;
   background: var(--white);
   border: 1px solid var(--rule);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
   margin-bottom: var(--space-s);
 }
 
+.gallery-main::-webkit-scrollbar { display: none; }
+
 .gallery-main img {
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: contain;
   padding: clamp(1.5rem, 4vw, 3rem);
   mix-blend-mode: multiply;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .gallery-thumbs {
@@ -1807,6 +1912,28 @@ p { text-wrap: pretty; }
   width: 100%;
 }
 
+.pdp-stock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--green-700);
+}
+
+.pdp-stock::before {
+  content: '';
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pdp-stock.is-out { color: #b4342a; }
+.pdp-stock a { text-decoration: underline; text-underline-offset: 0.2em; }
+
 .pdp-desc {
   color: var(--ink-mid);
   line-height: 1.65;
@@ -1841,7 +1968,10 @@ p { text-wrap: pretty; }
   transition: background var(--fast);
 }
 
-.qty button:hover { background: var(--cream-deep); }
+@media (hover: hover) {
+  .qty button:hover { background: var(--cream-deep); }
+}
+.qty button:active { background: var(--cream-deep); }
 
 .qty input {
   width: 3rem;
@@ -2032,7 +2162,9 @@ p { text-wrap: pretty; }
   transition: border-top-color var(--base);
 }
 
-.accessory-card:hover { border-top-color: var(--copper); }
+@media (hover: hover) {
+  .accessory-card:hover { border-top-color: var(--copper); }
+}
 
 .accessory-icon {
   display: block;
@@ -2124,6 +2256,8 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-s);
 }
 
+.cart-item-out { color: #b4342a; font-weight: 600; }
+
 .cart-item-controls {
   display: flex;
   align-items: center;
@@ -2148,7 +2282,9 @@ p { text-wrap: pretty; }
   transition: color var(--fast);
 }
 
-.cart-remove:hover { color: #b4342a; }
+@media (hover: hover) {
+  .cart-remove:hover { color: #b4342a; }
+}
 
 .cart-summary {
   position: sticky;
@@ -2258,7 +2394,9 @@ p { text-wrap: pretty; }
   transition: color var(--fast), border-color var(--fast);
 }
 
-.prose a:hover { color: var(--copper-dark); border-color: var(--copper); }
+@media (hover: hover) {
+  .prose a:hover { color: var(--copper-dark); border-color: var(--copper); }
+}
 
 .prose strong { color: var(--ink); font-weight: 600; }
 
@@ -2369,10 +2507,12 @@ p { text-wrap: pretty; }
   transition: border-color var(--base), transform var(--base), box-shadow var(--base);
 }
 
-.post-card:hover {
-  border-color: var(--copper);
-  transform: translateY(-4px);
-  box-shadow: var(--lift);
+@media (hover: hover) {
+  .post-card:hover {
+    border-color: var(--copper);
+    transform: translateY(-4px);
+    box-shadow: var(--lift);
+  }
 }
 
 .post-card-media {
@@ -2388,7 +2528,9 @@ p { text-wrap: pretty; }
   transition: transform var(--slow);
 }
 
-.post-card:hover .post-card-media img { transform: scale(1.05); }
+@media (hover: hover) {
+  .post-card:hover .post-card-media img { transform: scale(1.05); }
+}
 
 .post-card-body {
   display: flex;
@@ -2545,7 +2687,9 @@ p { text-wrap: pretty; }
   width: fit-content;
 }
 
-.footer-col a:hover { color: var(--cream); }
+@media (hover: hover) {
+  .footer-col a:hover { color: var(--cream); }
+}
 
 .footer-bottom {
   display: flex;
@@ -2576,42 +2720,8 @@ p { text-wrap: pretty; }
 }
 
 /* --------------------------------------------------------------------------
-   27. COOKIE BANNER + TOAST
+   27. TOAST
    -------------------------------------------------------------------------- */
-
-.cookie-banner {
-  position: fixed;
-  left: var(--gutter);
-  right: var(--gutter);
-  bottom: var(--gutter);
-  z-index: 200;
-  max-width: 42rem;
-  margin-inline: auto;
-  padding: var(--space-m);
-  background: var(--green-900);
-  border: 1px solid var(--rule-inverse);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--lift-lg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-m);
-  flex-wrap: wrap;
-  transform: translateY(calc(100% + var(--gutter) + 1rem));
-  transition: transform var(--base);
-}
-
-.cookie-banner.is-visible { transform: translateY(0); }
-
-.cookie-banner p {
-  font-size: var(--step--1);
-  color: var(--ink-inverse-mid);
-  flex: 1 1 18rem;
-}
-
-.cookie-banner a { color: var(--copper-light); text-decoration: underline; }
-
-.cookie-actions { display: flex; gap: 0.5rem; }
 
 .toast {
   position: fixed;
@@ -2619,19 +2729,51 @@ p { text-wrap: pretty; }
   bottom: 2rem;
   z-index: 300;
   transform: translate(-50%, 200%);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
   padding: 0.85rem 1.4rem;
   background: var(--green-900);
   color: var(--cream);
-  border-radius: 999px;
+  border-radius: 1.5rem;
   font-family: var(--font-mono);
   font-size: var(--step--1);
   letter-spacing: 0.05em;
   box-shadow: var(--lift-lg);
-  transition: transform var(--base);
+  /* Visibility flips at the end of the slide out, so a hidden toast's
+     action can't be tabbed to or tapped. */
+  visibility: hidden;
+  transition: transform var(--base), visibility 0s linear var(--base);
   pointer-events: none;
 }
 
-.toast.is-visible { transform: translate(-50%, 0); }
+.toast.is-visible {
+  transform: translate(-50%, 0);
+  visibility: visible;
+  transition: transform var(--base), visibility 0s;
+  pointer-events: auto;
+}
+
+.toast-action {
+  flex-shrink: 0;
+  /* A bigger tap target than the text, without changing the layout. */
+  padding: 0.5rem 0.4rem;
+  margin: -0.5rem -0.4rem;
+  color: var(--copper-light);
+  font: inherit;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  white-space: nowrap;
+}
+
+.toast-action:active { color: var(--cream); }
+
+@media (hover: hover) {
+  .toast-action:hover { color: var(--cream); }
+}
 
 /* --------------------------------------------------------------------------
    28. SCROLL REVEAL
@@ -2652,13 +2794,94 @@ p { text-wrap: pretty; }
   .reveal { opacity: 1; transform: none; }
 }
 
+/* Without JavaScript nothing would ever add .is-visible, so never hide. */
+@media (scripting: none) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   28b. PRESS FEEDBACK
+
+   Hover effects only apply where there is a real pointer (see the
+   @media (hover: hover) blocks), so on a phone they no longer stick after a
+   tap. A tapped card gives its own feedback instead, the instant the finger
+   lands. It uses the individual `scale` property rather than `transform`,
+   so it stacks on any hover transform instead of replacing it, and it sits
+   outside every transition list, so it is immediate in both directions.
+   -------------------------------------------------------------------------- */
+
+.product-card,
+.post-card,
+.ladder-item,
+.trade-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.product-card:active,
+.post-card:active,
+.ladder-item:active,
+.trade-card:active {
+  scale: 0.985;
+}
+
 /* --------------------------------------------------------------------------
    29. PRINT
    -------------------------------------------------------------------------- */
 
 @media print {
-  .site-header, .site-footer, .cookie-banner, .toast,
+  .site-header, .site-footer, .toast,
   .announce, .buy-row, .capture { display: none !important; }
   body { background: #fff; color: #000; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   30. USER PREFERENCES
+
+   Kept last so they override the rules above.
+   -------------------------------------------------------------------------- */
+
+/* Reduced motion: nothing slides, lifts, zooms or spins, but things still
+   fade, so opening the menu or showing a message is still visible. */
+@media (prefers-reduced-motion: reduce) {
+  .primary-nav,
+  .primary-nav.is-open { transform: none; }
+
+  .toast,
+  .toast.is-visible { transform: translate(-50%, 0); }
+  .toast { opacity: 0; transition: opacity var(--fast), visibility 0s linear var(--fast); }
+  .toast.is-visible { opacity: 1; transition: opacity var(--fast), visibility 0s; }
+
+  .nav-toggle > span,
+  .nav-toggle[aria-expanded='true'] > span { transform: none; }
+
+  .post-card:hover,
+  .post-card:hover .post-card-media img,
+  .product-card:hover .product-card-media img { transform: none; }
+
+  .product-card:active,
+  .post-card:active,
+  .ladder-item:active,
+  .trade-card:active { scale: none; }
+}
+
+/* More contrast: stronger rules and lighter text taken darker. */
+@media (prefers-contrast: more) {
+  :root {
+    --rule: rgba(5, 46, 22, 0.45);
+    --rule-strong: rgba(5, 46, 22, 0.75);
+    --ink-mid: #2b2b28;
+    --ink-light: #50504b;
+    --ink-inverse-mid: rgba(247, 244, 239, 0.9);
+    --ink-inverse-light: rgba(247, 244, 239, 0.75);
+  }
+}
+
+/* Less transparency: a solid header instead of frosted glass. */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background: var(--cream);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }

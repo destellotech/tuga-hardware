@@ -10,6 +10,8 @@ import {
   responsive,
   productUrl,
   specLabel,
+  stockOf,
+  buyButton,
   devices,
 } from './layout.mjs';
 
@@ -50,8 +52,14 @@ export function productCard(p) {
   ].filter(Boolean);
 
   return `
-          <a class="product-card reveal" href="${productUrl(p)}" data-category="${p.category}">
-            ${p.badge ? `<span class="product-badge${p.badge === 'Most Popular' ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>` : ''}
+          <a class="product-card" href="${productUrl(p)}" data-category="${p.category}">
+            ${
+              !stockOf(p).buyable
+                ? '<span class="product-badge">Out of stock</span>'
+                : p.badge
+                  ? `<span class="product-badge${p.badge === 'Most Popular' ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>`
+                  : ''
+            }
             <div class="product-card-media">
               <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px')} alt="${esc(p.name)} rugged ${p.formFactor}" loading="lazy" width="600" height="450">
             </div>
@@ -87,7 +95,7 @@ export function sizeLadder(range) {
           ${range
             .map(
               (p) => `
-            <a class="ladder-item reveal" href="${productUrl(p)}" data-size="${p.sizeClass}">
+            <a class="ladder-item" href="${productUrl(p)}" data-size="${p.sizeClass}">
               <div class="ladder-stage">
                 <div class="ladder-device">
                   <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 860px) 60vw, 280px')} alt="${esc(p.name)}, ${esc(p.sizeLabel)} inch" loading="lazy" width="400" height="400">
@@ -130,7 +138,7 @@ export function compareTable(list = devices) {
     .join('');
 
   return `
-        <div class="compare-wrap reveal">
+        <div class="compare-wrap">
           <table class="compare-table">
             <caption class="sr-only">Specification comparison of every Tuga device</caption>
             <thead>
@@ -165,7 +173,7 @@ export function specSheet(p) {
     .join('');
 
   return `
-          <div class="spec-sheet reveal">
+          <div class="spec-sheet">
             <div class="spec-sheet-head">
               <h2>Full specification</h2>
               <span>${esc(p.name)}</span>
@@ -257,7 +265,7 @@ export const capture = () => `
               <input type="email" id="capture-email" name="email" placeholder="you@yourcompany.co.uk" autocomplete="email" required>
               <button class="btn btn-copper" type="submit">Send it</button>
             </form>
-            <p class="capture-note" data-capture-note>One email. No newsletter, no reselling your address.</p>
+            <p class="capture-note" data-capture-note role="status">One email. No newsletter, no reselling your address.</p>
           </div>
         </div>
       </div>
@@ -290,14 +298,14 @@ export function accessoryCard(a) {
     .filter(Boolean);
 
   return `
-          <div class="accessory-card reveal">
+          <div class="accessory-card">
             <div class="accessory-icon">${icons.box(22)}</div>
             <h3>${esc(a.name)}</h3>
             <p>${esc(a.description)}</p>
             <p class="accessory-compat">Fits: ${esc(names.join(', '))}</p>
             <div class="accessory-foot">
               <span class="accessory-price">${money(a.price)}</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>
+              ${buyButton(a, { className: 'btn btn-sm btn-outline' })}
             </div>
           </div>`;
 }

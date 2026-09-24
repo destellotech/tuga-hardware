@@ -4,43 +4,26 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation, sendEnquiry } from './email.js';
-import { saveOrder, getOrder, updateOrder } from './orders.js';
+import { sendOrderConfirmation, sendShippingNotification, sendBuyersGuide, sendEnquiry } from './email.js';
+import {
+  saveOrder,
+  getOrder,
+  updateOrder,
+  listPendingOrders,
+  getOrderByReference,
+  newOrderReference,
+  isOrderReference,
+  referenceFromOrderId,
+} from './orders.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
 // ---------------------------------------------------------------------------
-// Prices MUST match data/products.json. The client sends only ids and
+// Generated from data/products.json by the build, so the prices charged can
+// never drift from the prices shown. The client sends only ids and
 // quantities; every order is re-priced here so a tampered basket cannot
 // change what gets charged.
-// `device: true` marks the items that count toward a bulk discount tier.
-// Accessories are deliberately excluded — otherwise nine £8 adapters would
-// unlock 10% off a £449 tablet.
-const PRODUCTS = {
-  // Devices — Android
-  'tuga-a6':            { name: 'Tuga A6',                        price: 29900, device: true },
-  'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
-  'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
-  // Devices — Windows
-  'tuga-wh6':           { name: 'Tuga WH6',                       price: 79900, device: true },
-  'tuga-w8':            { name: 'Tuga W8',                        price: 62900, device: true },
-  'tuga-w10':           { name: 'Tuga W10',                       price: 64900, device: true },
-  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 87900, device: true },
-  'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900, device: true },
-  'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900, device: true },
-  // Accessories
-  'acc-charging-dock':    { name: 'Charging Dock',                            price: 7900 },
-  'acc-vehicle-mount':    { name: 'Vehicle Mounting Dock',                    price: 10900 },
-  'acc-hand-strap':       { name: 'Hand Strap',                               price: 2400 },
-  'acc-stylus':           { name: 'Capacitive Stylus',                        price: 1600 },
-  'acc-screen-protector': { name: 'Tempered Glass Screen Protector (2 Pack)', price: 1400 },
-  'acc-car-charger':      { name: '12V DC Car Charger',                       price: 2600 },
-  'acc-carry-case':       { name: 'Rugged Carry Case',                        price: 3400 },
-  'acc-belt-holster':     { name: 'Belt Holster',                             price: 2200 },
-  'acc-car-mount':        { name: 'Car Phone Mount',                          price: 1700 },
-  'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
-  'acc-shoulder-strap':   { name: 'Shoulder Strap',                           price: 1900 },
-};
+import { PRODUCTS } from './catalogue.generated.js';
 
 /**
  * Normalise a client basket into priced lines.
@@ -49,23 +32,35 @@ const PRODUCTS = {
  * above, so a tampered basket cannot change what is charged. Accepts both
  * `id` and `productId` for the item key.
  *
- * @throws if an id is unknown or a quantity is not a sane integer.
+ * @throws BasketError if an id is unknown, an item is out of stock, or a
+ *   quantity is not a sane integer. Its message is safe to show the customer.
  */
 function resolveBasket(items) {
   return items.map((item) => {
     const id = item.productId ?? item.id;
-    const product = PRODUCTS[id];
-    if (!product) throw new Error(`Unknown product: ${id}`);
+    const product = Object.hasOwn(PRODUCTS, id) ? PRODUCTS[id] : null;
+    if (!product) throw new BasketError('Your basket has an item we no longer sell. Remove it and try again');
+    if (product.stock === 'out_of_stock') {
+      throw new BasketError(`${product.name} is out of stock. Remove it from your basket to check out`);
+    }
 
     // A missing quantity means 1; anything else must be a sane integer.
     const quantity = item.quantity === undefined ? 1 : Number(item.quantity);
     if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
-      throw new Error(`Invalid quantity for ${id}`);
+      throw new BasketError(`The quantity for ${product.name} must be between 1 and 99`);
     }
 
     return { id, product, quantity };
   });
 }
+
+/** Where we deliver. Stripe enforces it at checkout; PayPal is checked
+ *  before capture, since its checkout accepts any address. Keep in step with
+ *  the Shipping & Returns page and the Terms. */
+const DELIVERY_COUNTRIES = ['GB', 'IE'];
+
+/** A problem with the basket itself, as opposed to a payment provider. */
+class BasketError extends Error {}
 
 /** Bulk tiers are earned on devices only. */
 function countDeviceUnits(lines) {
@@ -115,6 +110,13 @@ export async function handleRequest(request, env) {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
+  // Per-visitor limit on the routes that send email or call a payment
+  // provider, so a script cannot flood support's inbox or Stripe's API.
+  const limitedRoutes = ['/api/create-checkout-session', '/api/create-paypal-order', '/api/contact', '/api/subscribe'];
+  if (request.method === 'POST' && limitedRoutes.includes(path) && (await isRateLimited(request, env, path))) {
+    return corsError('Too many attempts. Please wait a minute and try again', 429);
+  }
+
   // --- API routes ---
   if (request.method === 'POST' && path === '/api/create-checkout-session') {
     return handleStripeCheckout(request, env);
@@ -134,14 +136,21 @@ export async function handleRequest(request, env) {
   if (request.method === 'GET' && path === '/api/payment-methods') {
     return corsResponse({ card: true, paypal: isPayPalLive(env) });
   }
-  if (request.method === 'GET' && path === '/api/paypal-check') {
-    return handlePayPalCheck(request, env);
-  }
-  if (request.method === 'GET' && path === '/api/email-check') {
-    return handleEmailCheck(env);
-  }
-  if (request.method === 'GET' && path === '/api/stripe-check') {
-    return handleStripeCheck(env);
+
+  // --- Owner-only routes: need `Authorization: Bearer <ADMIN_TOKEN>` ---
+  // The preflight checks reveal live/test mode and which secrets are set,
+  // so they sit behind the token with the order tools.
+  const adminRoutes = {
+    'GET /api/paypal-check': () => handlePayPalCheck(request, env),
+    'GET /api/email-check': () => handleEmailCheck(env),
+    'GET /api/stripe-check': () => handleStripeCheck(env),
+    'GET /api/admin/orders': () => handleListOrders(env),
+    'POST /api/admin/ship': () => handleMarkShipped(request, env),
+  };
+  const adminRoute = adminRoutes[`${request.method} ${path}`];
+  if (adminRoute) {
+    const denied = checkAdmin(request, env);
+    return denied || adminRoute();
   }
   if (request.method === 'POST' && path === '/webhooks/stripe') {
     return handleStripeWebhook(request, env);
@@ -186,14 +195,37 @@ async function handleStripeCheckout(request, env) {
       };
     });
 
+    // The customer-facing order number, fixed now so it can go on the
+    // invoice and the card statement description as well as our email.
+    const reference = newOrderReference();
+    const vatRateId = await getInclusiveVatRateId(env);
+
     // Create Stripe Checkout Session via the API
     const params = new URLSearchParams();
     params.append('mode', 'payment');
     params.append('success_url', `${env.SITE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`);
     params.append('cancel_url', `${env.SITE_URL}/cart`);
-    params.append('payment_method_types[0]', 'card');
-    params.append('shipping_address_collection[allowed_countries][0]', 'GB');
-    params.append('shipping_address_collection[allowed_countries][1]', 'IE');
+    // No payment_method_types: the Stripe dashboard decides which methods
+    // to offer (cards, wallets, Link, pay-later, bank methods). Methods that
+    // settle later arrive via checkout.session.async_payment_succeeded.
+    DELIVERY_COUNTRIES.forEach((country, i) =>
+      params.append(`shipping_address_collection[allowed_countries][${i}]`, country));
+
+    // Couriers want a phone number for a parcel this valuable.
+    params.append('phone_number_collection[enabled]', 'true');
+
+    // Trade buyers reclaim VAT: let them add a business name and VAT number,
+    // and issue a proper invoice they can download after paying.
+    params.append('tax_id_collection[enabled]', 'true');
+    params.append('invoice_creation[enabled]', 'true');
+    params.append('invoice_creation[invoice_data][custom_fields][0][name]', 'Order number');
+    params.append('invoice_creation[invoice_data][custom_fields][0][value]', reference);
+    params.append('invoice_creation[invoice_data][metadata][order_ref]', reference);
+
+    params.append('client_reference_id', reference);
+    params.append('metadata[order_ref]', reference);
+    params.append('payment_intent_data[description]', `Tuga Hardware order ${reference}`);
+    params.append('payment_intent_data[metadata][order_ref]', reference);
 
     // Encode each line item
     lineItems.forEach((li, i) => {
@@ -201,6 +233,9 @@ async function handleStripeCheckout(request, env) {
       params.append(`line_items[${i}][price_data][product_data][name]`, li.price_data.product_data.name);
       params.append(`line_items[${i}][price_data][unit_amount]`, li.price_data.unit_amount);
       params.append(`line_items[${i}][quantity]`, li.quantity);
+      // An INCLUSIVE rate itemises the VAT already in the price on the
+      // invoice without changing what is charged.
+      if (vatRateId) params.append(`line_items[${i}][tax_rates][0]`, vatRateId);
     });
 
     // Store discount metadata for the webhook to read
@@ -226,6 +261,7 @@ async function handleStripeCheckout(request, env) {
 
     return corsResponse({ url: session.url });
   } catch (err) {
+    if (err instanceof BasketError) return corsError(err.message, 409);
     console.error('Stripe checkout handler error:', err);
     return corsError('Internal server error', 500);
   }
@@ -273,10 +309,16 @@ async function handlePayPalOrder(request, env) {
     // Get PayPal access token
     const accessToken = await getPayPalAccessToken(env);
 
+    // Customer-facing order number. PayPal shows invoice_id in the payer's
+    // receipt and the merchant dashboard, and hands it back on every lookup.
+    const reference = newOrderReference();
+
     // Create PayPal order
     const orderPayload = {
       intent: 'CAPTURE',
       purchase_units: [{
+        invoice_id: reference,
+        description: `Tuga Hardware order ${reference}`,
         amount: {
           currency_code: 'GBP',
           value: totalGBP,
@@ -319,6 +361,7 @@ async function handlePayPalOrder(request, env) {
 
     return corsResponse({ approvalUrl: approveLink.href, orderId: order.id });
   } catch (err) {
+    if (err instanceof BasketError) return corsError(err.message, 409);
     console.error('PayPal order handler error:', err);
     return corsError('Internal server error', 500);
   }
@@ -343,6 +386,21 @@ async function recordOrder(env, orderDetails) {
   let record = null;
   if (env.ORDERS) {
     record = await getOrder(env.ORDERS, orderDetails.orderId);
+
+    // An order first recorded before these fields existed, or before Stripe
+    // had finalised its invoice, picks them up on the next confirmation.
+    if (record) {
+      const backfill = {};
+      for (const key of ['reference', 'invoiceUrl']) {
+        if (!record[key] && orderDetails[key]) backfill[key] = orderDetails[key];
+      }
+      if (Object.keys(backfill).length) {
+        record = { ...record, ...backfill };
+        await updateOrder(env.ORDERS, orderDetails.orderId, backfill)
+          .catch((err) => console.error('Could not backfill order:', err));
+      }
+    }
+
     // Recorded and emailed already: nothing to do. Recorded but never
     // emailed (e.g. the email service was down): fall through and retry
     // the email only.
@@ -406,16 +464,37 @@ async function recordOrder(env, orderDetails) {
 async function recordStripeOrder(sessionId, env) {
   const session = await fetchStripeSession(sessionId, env);
   if (session.error) throw new Error(`Stripe session lookup failed: ${session.error.message}`);
-  if (session.payment_status !== 'paid') return { paid: false };
+  if (session.payment_status !== 'paid') {
+    // A completed session that is not yet paid used a method that settles
+    // later (e.g. a bank debit). The order is placed; the money is not in.
+    return { paid: false, processing: session.status === 'complete' };
+  }
 
   // Newer Stripe API versions moved shipping under collected_information.
   const shipping = session.collected_information?.shipping_details || session.shipping_details;
+  const customer = session.customer_details || {};
+
+  // Sessions started before order numbers existed carry no order_ref; derive
+  // one from the session id so every retry lands on the same number.
+  const reference = isOrderReference(session.metadata?.order_ref)
+    ? session.metadata.order_ref
+    : await referenceFromOrderId(session.id);
+
+  // Expanded below; null until Stripe finalises it, which is normally done
+  // by the time the session reports paid.
+  const invoice = session.invoice && typeof session.invoice === 'object' ? session.invoice : null;
 
   const order = await recordOrder(env, {
     orderId: session.id,
+    reference,
     provider: 'stripe',
     paymentIntent: session.payment_intent,
-    customerEmail: session.customer_details?.email,
+    customerEmail: customer.email,
+    customerPhone: customer.phone || null,
+    businessName: customer.business_name || null,
+    taxIds: (customer.tax_ids || []).map(({ type, value }) => ({ type, value })),
+    invoiceId: invoice?.id ?? null,
+    invoiceUrl: invoice?.hosted_invoice_url ?? null,
     shippingAddress: shipping?.address
       ? { name: shipping.name, ...shipping.address }
       : null,
@@ -443,6 +522,14 @@ async function recordStripeOrder(sessionId, env) {
 async function recordPayPalOrder(orderId, env) {
   let order = await fetchPayPalOrder(orderId, env);
 
+  // PayPal lets the buyer pick any address. Refuse before taking the money,
+  // rather than refunding an order we cannot deliver.
+  const country = order.purchase_units?.[0]?.shipping?.address?.country_code;
+  if (order.status === 'APPROVED' && country && !DELIVERY_COUNTRIES.includes(country)) {
+    console.warn(`PayPal order ${orderId} not captured: delivery to ${country} is not offered`);
+    return { paid: false, undeliverable: country };
+  }
+
   if (order.status === 'APPROVED') {
     try {
       await capturePayPalOrder(orderId, env);
@@ -458,11 +545,17 @@ async function recordPayPalOrder(orderId, env) {
   const purchaseUnit = order.purchase_units?.[0] || {};
   const shipping = purchaseUnit.shipping || {};
 
+  const reference = isOrderReference(purchaseUnit.invoice_id)
+    ? purchaseUnit.invoice_id
+    : await referenceFromOrderId(order.id);
+
   const record = await recordOrder(env, {
     orderId: order.id,
+    reference,
     provider: 'paypal',
     captureId: purchaseUnit.payments?.captures?.[0]?.id,
     customerEmail: order.payer?.email_address,
+    customerPhone: order.payer?.phone?.phone_number?.national_number || null,
     shippingAddress: shipping.address
       ? {
           name: shipping.name?.full_name,
@@ -510,12 +603,15 @@ async function handleConfirmOrder(request, env) {
       return corsError('Missing or invalid order reference');
     }
 
-    if (!result.paid) return corsResponse({ status: 'unpaid' });
+    if (result.undeliverable) return corsResponse({ status: 'undeliverable' });
+    if (!result.paid) return corsResponse({ status: result.processing ? 'processing' : 'unpaid' });
 
     // Only what the confirmation page shows: no address or email.
     const { order } = result;
     return corsResponse({
       status: 'confirmed',
+      reference: order.reference ?? null,
+      invoiceUrl: order.invoiceUrl ?? null,
       provider: order.provider,
       total: order.total,
       currency: order.currency,
@@ -547,7 +643,10 @@ async function handleStripeWebhook(request, env) {
 
   const event = JSON.parse(rawBody);
 
-  if (event.type === 'checkout.session.completed') {
+  // completed: paid now, or placed with a method that settles later.
+  // async_payment_succeeded: one of those later payments has cleared.
+  // recordStripeOrder only records a session once it is actually paid.
+  if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
     try {
       await recordStripeOrder(event.data.object.id, env);
     } catch (err) {
@@ -555,6 +654,13 @@ async function handleStripeWebhook(request, env) {
       console.error('Stripe webhook error:', err);
       return corsError('Could not record order', 500);
     }
+  }
+
+  if (event.type === 'checkout.session.async_payment_failed') {
+    // Nothing was charged and nothing was recorded; leave a trail in the logs
+    // so a customer asking about it can be answered.
+    const session = event.data.object;
+    console.error('Delayed payment failed:', session.metadata?.order_ref || session.id, session.customer_details?.email || '');
   }
 
   return corsResponse({ received: true });
@@ -592,6 +698,122 @@ async function handlePayPalWebhook(request, env) {
   }
 
   return corsResponse({ received: true });
+}
+
+/**
+ * True when this visitor has used a limited route too often. Uses the
+ * FORM_LIMITER rate-limiting binding in wrangler.toml; without it (local
+ * dev, tests) nothing is limited. A limiter failure lets the request through
+ * rather than blocking a real customer.
+ */
+async function isRateLimited(request, env, route) {
+  if (!env.FORM_LIMITER) return false;
+  const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+  try {
+    const { success } = await env.FORM_LIMITER.limit({ key: `${route}:${ip}` });
+    return !success;
+  } catch (err) {
+    console.error('Rate limiter error:', err);
+    return false;
+  }
+}
+
+// =========================================================================
+// OWNER TOOLS
+// =========================================================================
+//
+//   curl -H "Authorization: Bearer $ADMIN_TOKEN" https://www.tugahardware.com/api/admin/orders
+//
+//   curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" -H "Content-Type: application/json" \
+//     -d '{"reference":"TUGA-7K3M-9QX2","trackingNumber":"AB123456789GB","carrier":"Royal Mail"}' \
+//     https://www.tugahardware.com/api/admin/ship
+
+/** Null when the request carries the admin token, else the response to send. */
+function checkAdmin(request, env) {
+  if (!env.ADMIN_TOKEN) {
+    return corsError('Owner tools are off: set the ADMIN_TOKEN secret to use them', 503);
+  }
+  const header = request.headers.get('authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7) : '';
+  if (!token || !timingSafeEqual(token, env.ADMIN_TOKEN)) {
+    return corsError('Unauthorized', 401);
+  }
+  return null;
+}
+
+/** Orders awaiting dispatch, oldest first, with what is needed to ship them. */
+async function handleListOrders(env) {
+  if (!env.ORDERS) return corsError('Order storage is not configured', 503);
+  const orders = await listPendingOrders(env.ORDERS);
+  orders.sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)));
+  return corsResponse({
+    count: orders.length,
+    orders: orders.map((o) => ({
+      reference: o.reference ?? null,
+      placedAt: o.paidAt ?? o.createdAt,
+      provider: o.provider,
+      email: o.customerEmail ?? null,
+      phone: o.customerPhone ?? null,
+      businessName: o.businessName ?? null,
+      shippingAddress: o.shippingAddress ?? null,
+      items: (o.items || []).map(({ name, quantity }) => ({ name, quantity })),
+      total: o.total,
+      currency: o.currency,
+      confirmationEmailSent: Boolean(o.emailSentAt),
+    })),
+  });
+}
+
+/**
+ * Mark an order shipped and email the customer its tracking number.
+ * Repeating the same call does not email twice; pass "resend": true to.
+ */
+async function handleMarkShipped(request, env) {
+  if (!env.ORDERS) return corsError('Order storage is not configured', 503);
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return corsError('Send a JSON body');
+  }
+  const reference = String(body.reference || '').trim().toUpperCase();
+  const trackingNumber = String(body.trackingNumber || '').trim();
+  const carrier = String(body.carrier || '').trim().slice(0, 60);
+
+  if (!isOrderReference(reference)) return corsError('reference must look like TUGA-XXXX-XXXX', 422);
+  if (!/^[A-Za-z0-9][A-Za-z0-9 -]{3,39}$/.test(trackingNumber)) {
+    return corsError('trackingNumber must be 4 to 40 letters, digits, spaces or hyphens', 422);
+  }
+
+  const order = await getOrderByReference(env.ORDERS, reference);
+  if (!order) return corsError(`No order ${reference}`, 404);
+  if (!order.customerEmail) return corsError(`Order ${reference} has no customer email`, 409);
+
+  const alreadySent = order.shippingEmailSentAt && order.trackingNumber === trackingNumber;
+  if (alreadySent && body.resend !== true) {
+    return corsResponse({ ok: true, reference, status: order.status, emailed: false, note: 'Already marked shipped with this tracking number' });
+  }
+
+  // Record the dispatch first: the parcel has gone whether or not the email does.
+  await updateOrder(env.ORDERS, order.orderId, {
+    status: 'shipped',
+    shippedAt: order.shippedAt ?? new Date().toISOString(),
+    trackingNumber,
+    carrier: carrier || null,
+  });
+
+  try {
+    await sendShippingNotification(env, order.customerEmail, { reference, trackingNumber, carrier });
+  } catch (err) {
+    console.error('Shipping email failed:', err);
+    return corsResponse({ ok: false, reference, status: 'shipped', emailed: false, error: 'Marked shipped, but the email did not send. Call again with "resend": true.' }, 502);
+  }
+
+  await updateOrder(env.ORDERS, order.orderId, { shippingEmailSentAt: new Date().toISOString() })
+    .catch((err) => console.error('Could not mark shipping email sent:', err));
+
+  return corsResponse({ ok: true, reference, status: 'shipped', emailed: true });
 }
 
 // =========================================================================
@@ -721,13 +943,32 @@ async function handleStripeCheck(env) {
     const endpoint = (data.data || []).find((e) => accepted.includes(e.url));
     const listens = endpoint && (endpoint.enabled_events.includes('*') ||
       endpoint.enabled_events.includes('checkout.session.completed'));
+    const listensAsync = endpoint && (endpoint.enabled_events.includes('*') ||
+      endpoint.enabled_events.includes('checkout.session.async_payment_succeeded'));
+
+    // Optional: whether invoices will itemise VAT (see getInclusiveVatRateId).
+    let vatRate = 'not set: invoices show totals without a VAT line';
+    if (env.STRIPE_VAT_RATE_ID) {
+      try {
+        const rate = await fetchStripeTaxRate(env.STRIPE_VAT_RATE_ID, env);
+        vatRate = isUsableVatRate(rate)
+          ? 'ok: active, inclusive 20%'
+          : `refused: must be active, inclusive and 20% (active=${rate.active}, inclusive=${rate.inclusive}, percentage=${rate.percentage})`;
+      } catch {
+        vatRate = 'refused: Stripe could not find that tax rate';
+      }
+    }
 
     return corsResponse({
+      vatRate,
       ok: Boolean(endpoint && endpoint.status === 'enabled' && listens),
       mode: env.STRIPE_SECRET_KEY.startsWith('sk_live_') || env.STRIPE_SECRET_KEY.startsWith('rk_live_') ? 'live' : 'test',
       endpointFound: Boolean(endpoint),
       endpointStatus: endpoint?.status ?? null,
       listensForCheckoutCompleted: Boolean(listens),
+      // Without this, orders paid by a method that settles later (bank
+      // debits) are only recorded if the customer returns to the site.
+      listensForAsyncPaymentSucceeded: Boolean(listensAsync),
       webhookSecretSet: Boolean(env.STRIPE_WEBHOOK_SECRET),
       // Near-misses on our own domain (e.g. no www) are the usual mistake.
       otherSiteEndpoints: (data.data || []).filter((e) => e !== endpoint && e.url.includes('tugahardware')).map((e) => e.url),
@@ -746,24 +987,40 @@ async function handleStripeCheck(env) {
 }
 
 /**
- * Buyer's-guide signup. Stored in KV so there is a list to export later;
- * the send itself is handled manually for now.
+ * Buyer's-guide signup: emails the guide and keeps the address in KV, so
+ * there is a list to export later and an unsent guide can be sent by hand.
  */
 async function handleSubscribe(request, env) {
   try {
     const { email } = await request.json();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (typeof email !== 'string' || email.length > 160 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return corsError('A valid email address is required', 422);
     }
 
-    if (env.ORDERS) {
-      await env.ORDERS.put(
-        `subscriber:${email.toLowerCase()}`,
-        JSON.stringify({ email, createdAt: new Date().toISOString() })
-      );
+    const key = `subscriber:${email.toLowerCase()}`;
+    const existing = env.ORDERS ? JSON.parse((await env.ORDERS.get(key)) || 'null') : null;
+    const record = { email, createdAt: existing?.createdAt ?? new Date().toISOString(), guideSentAt: existing?.guideSentAt ?? null };
+
+    // Once a day per address at most: the form must not become a way to fill
+    // a stranger's inbox. A repeat signup inside the window is told it was sent.
+    const sentRecently = record.guideSentAt && Date.now() - Date.parse(record.guideSentAt) < 24 * 3600 * 1000;
+
+    let sent = Boolean(sentRecently);
+    if (!sentRecently && env.RESEND_API_KEY) {
+      try {
+        await sendBuyersGuide(env, email);
+        record.guideSentAt = new Date().toISOString();
+        sent = true;
+      } catch (err) {
+        console.error("Buyer's guide email failed:", err);
+      }
     }
 
-    return corsResponse({ ok: true });
+    // Keep the address either way, so an unsent guide can be sent by hand.
+    if (env.ORDERS) await env.ORDERS.put(key, JSON.stringify(record));
+
+    if (!sent && !env.ORDERS) return corsError('Could not send the guide', 502);
+    return corsResponse({ ok: true, sent });
   } catch (err) {
     console.error('Subscribe error:', err);
     return corsError('Could not subscribe', 500);
@@ -858,6 +1115,50 @@ function getDiscountPercent(totalQty) {
 // ---------------------------------------------------------------------------
 
 /**
+ * The Stripe Tax Rate to itemise VAT on invoices, or null.
+ *
+ * Optional: set STRIPE_VAT_RATE_ID to a rate created in the Stripe dashboard
+ * as 20% VAT, INCLUSIVE, GB. Prices on the site already include VAT, so an
+ * inclusive rate only splits it out on the invoice. An exclusive rate would
+ * add 20% on top of the basket total, so anything but an active inclusive
+ * rate is refused here and checkout carries on without one.
+ *
+ * Cached per isolate: the rate is looked up once, not on every checkout.
+ */
+let vatRateCache = null;
+
+async function getInclusiveVatRateId(env) {
+  if (!env.STRIPE_VAT_RATE_ID) return null;
+  if (vatRateCache?.id === env.STRIPE_VAT_RATE_ID) return vatRateCache.usable ? vatRateCache.id : null;
+
+  try {
+    const rate = await fetchStripeTaxRate(env.STRIPE_VAT_RATE_ID, env);
+    const usable = isUsableVatRate(rate);
+    if (!usable) {
+      console.error('STRIPE_VAT_RATE_ID is not an active, inclusive 20% rate; invoices will not itemise VAT.');
+    }
+    vatRateCache = { id: env.STRIPE_VAT_RATE_ID, usable };
+    return usable ? env.STRIPE_VAT_RATE_ID : null;
+  } catch (err) {
+    // Do not cache a network failure; try again on the next checkout.
+    console.error('Could not look up the VAT rate:', err);
+    return null;
+  }
+}
+
+const isUsableVatRate = (rate) =>
+  Boolean(rate && rate.active && rate.inclusive === true && Number(rate.percentage) === 20);
+
+async function fetchStripeTaxRate(id, env) {
+  const res = await fetch(`https://api.stripe.com/v1/tax_rates/${encodeURIComponent(id)}`, {
+    headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` },
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(`Stripe tax rate lookup failed: ${data.error?.message || res.status}`);
+  return data;
+}
+
+/**
  * Verify Stripe webhook signature using HMAC-SHA256.
  * Implements the same algorithm as Stripe's official SDK.
  */
@@ -944,7 +1245,7 @@ async function findStripeSessionByPaymentIntent(paymentIntentId, env) {
 
 async function fetchStripeSession(sessionId, env) {
   const res = await fetch(
-    `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items`,
+    `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items&expand[]=invoice`,
     {
       headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` },
     }

@@ -23,10 +23,9 @@
   <meta name="twitter:description" content="A 10.1 inch Full HD rugged Android tablet for when you need real screen space. IP68 sealed and MIL-STD-810H tested, with 8GB RAM, an 8000mAh battery, NFC and dual SIM 4G in a slim 680g body.">
   <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t10-1.webp?v=364c344117">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=2712da91d7">
+  <link rel="preload" href="/fonts/archivo-latin.woff2?v=8f704806db" as="font" type="font/woff2" crossorigin>
+  <style>@font-face{font-family:'Archivo';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/archivo-latin.woff2?v=8f704806db) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-mono-400-latin.woff2?v=e1896b13b2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'DM Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-mono-500-latin.woff2?v=9964608a84) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}</style>
+  <link rel="stylesheet" href="/css/style.min.css?v=8a7a64cb77">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -232,7 +231,8 @@
           <span class="cart-count hidden" data-cart-count>0</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <span class="nav-toggle-open"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+          <span class="nav-toggle-close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
         </button>
       </div>
     </div>
@@ -254,18 +254,21 @@
     <div class="container">
       <div class="pdp">
         <div class="pdp-gallery">
-          <div class="gallery-main">
-            <img id="gallery-image" src="/img/products/t10-1.webp?v=364c344117" alt="Tuga A10 rugged tablet" width="800" height="800" fetchpriority="high">
-          </div>
-          <div class="gallery-thumbs" role="group" aria-label="Product images">
+          <div class="gallery-main" data-gallery-track tabindex="0" role="region" aria-label="Tuga A10 photos. Swipe, or use the arrow keys, to see more.">
             
-            <button type="button" class="gallery-thumb is-active" data-gallery-src="/img/products/t10-1.webp?v=364c344117" aria-label="View image 1">
+            <img src="/img/products/t10-1.webp?v=364c344117" srcset="/img/products/t10-1-400.webp?v=6efb6fb3ea 400w, /img/products/t10-1.webp?v=364c344117 800w" sizes="(max-width: 900px) 92vw, 660px" alt="Tuga A10 rugged tablet" width="800" height="800" fetchpriority="high">
+            <img src="/img/products/t10-2.webp?v=4d5cd07a78" srcset="/img/products/t10-2-400.webp?v=9e4e73e004 400w, /img/products/t10-2.webp?v=4d5cd07a78 800w" sizes="(max-width: 900px) 92vw, 660px" alt="Tuga A10, photo 2 of 3" width="800" height="800" loading="lazy">
+            <img src="/img/products/t10-3.webp?v=ec5f6798ab" srcset="/img/products/t10-3-400.webp?v=e9ca865049 400w, /img/products/t10-3.webp?v=ec5f6798ab 800w" sizes="(max-width: 900px) 92vw, 660px" alt="Tuga A10, photo 3 of 3" width="800" height="800" loading="lazy">
+          </div>
+          <div class="gallery-thumbs" role="group" aria-label="Choose a photo">
+            
+            <button type="button" class="gallery-thumb is-active" data-gallery-index="0" aria-label="Show photo 1" aria-current="true">
               <img src="/img/products/t10-1.webp?v=364c344117" srcset="/img/products/t10-1-400.webp?v=6efb6fb3ea 400w, /img/products/t10-1.webp?v=364c344117 800w" sizes="74px" alt="" width="150" height="150" loading="lazy">
             </button>
-            <button type="button" class="gallery-thumb" data-gallery-src="/img/products/t10-2.webp?v=4d5cd07a78" aria-label="View image 2">
+            <button type="button" class="gallery-thumb" data-gallery-index="1" aria-label="Show photo 2">
               <img src="/img/products/t10-2.webp?v=4d5cd07a78" srcset="/img/products/t10-2-400.webp?v=9e4e73e004 400w, /img/products/t10-2.webp?v=4d5cd07a78 800w" sizes="74px" alt="" width="150" height="150" loading="lazy">
             </button>
-            <button type="button" class="gallery-thumb" data-gallery-src="/img/products/t10-3.webp?v=ec5f6798ab" aria-label="View image 3">
+            <button type="button" class="gallery-thumb" data-gallery-index="2" aria-label="Show photo 3">
               <img src="/img/products/t10-3.webp?v=ec5f6798ab" srcset="/img/products/t10-3-400.webp?v=e9ca865049 400w, /img/products/t10-3.webp?v=ec5f6798ab 800w" sizes="74px" alt="" width="150" height="150" loading="lazy">
             </button>
           </div>
@@ -284,15 +287,15 @@
 
           <p class="pdp-desc">When the job involves drawings, the 8 inch stops being enough. The A10 gives you a full 10.1 inch Full HD screen for blueprints, BIM viewers, spreadsheets and PDF plans, in a slim 14.5mm body sealed to IP68 and tested to MIL-STD-810H. The 8000mAh battery with quick charge gets you through a full shift, and dual SIM 4G keeps you connected across networks on rural and remote sites. This is the one that lives in a vehicle mount or a site office and gets picked up all day.</p>
 
+          <p class="pdp-stock">In stock</p>
+
           <div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
               <input type="number" id="qty" value="1" min="1" max="99" aria-label="Quantity">
               <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn btn-primary btn-lg" data-add-to-cart="tuga-a10" data-qty-source="qty">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> Add to basket
-            </button>
+            <button class="btn btn-primary btn-lg" type="button" data-add-to-cart="tuga-a10" data-name="Tuga A10" data-qty-source="qty"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> Add to basket</button>
           </div>
 
           <div class="pdp-assurance">
@@ -341,7 +344,7 @@
         <span class="eyebrow">The detail</span>
         <h2 class="title-sm" style="margin-bottom:2rem">Specification</h2>
 
-          <div class="spec-sheet reveal">
+          <div class="spec-sheet">
             <div class="spec-sheet-head">
               <h2>Full specification</h2>
               <span>Tuga A10</span>
@@ -442,47 +445,47 @@
         <h2 class="title-sm" style="margin-bottom:2rem">Accessories that fit</h2>
         <div class="card-grid">
           
-          <div class="accessory-card reveal">
+          <div class="accessory-card">
             <div class="accessory-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <h3>Charging Dock</h3>
             <p>Desktop charging dock with a pogo pin connection. Drop the tablet in and it charges. No fiddling with cables in the dark.</p>
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£79</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-charging-dock">Add to basket</button>
+              <button class="btn btn-sm btn-outline" type="button" data-add-to-cart="acc-charging-dock" data-name="Charging Dock">Add to basket</button>
             </div>
           </div>
 
-          <div class="accessory-card reveal">
+          <div class="accessory-card">
             <div class="accessory-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <h3>Vehicle Mounting Dock</h3>
             <p>Locking VESA mount with DC power input. Bolts to a dashboard or windscreen and keeps the tablet secure and charged on the road.</p>
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£109</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-vehicle-mount">Add to basket</button>
+              <button class="btn btn-sm btn-outline" type="button" data-add-to-cart="acc-vehicle-mount" data-name="Vehicle Mounting Dock">Add to basket</button>
             </div>
           </div>
 
-          <div class="accessory-card reveal">
+          <div class="accessory-card">
             <div class="accessory-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <h3>Hand Strap</h3>
             <p>Adjustable hand strap with 360 degree rotation. A secure grip for one handed use on a ladder or in a riser.</p>
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£24</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-hand-strap">Add to basket</button>
+              <button class="btn btn-sm btn-outline" type="button" data-add-to-cart="acc-hand-strap" data-name="Hand Strap">Add to basket</button>
             </div>
           </div>
 
-          <div class="accessory-card reveal">
+          <div class="accessory-card">
             <div class="accessory-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <h3>Capacitive Stylus</h3>
             <p>Precision capacitive stylus for signatures and detail work when the gloves are off. Includes a clip for a pocket or case.</p>
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10, Tuga WH6</p>
             <div class="accessory-foot">
               <span class="accessory-price">£16</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-stylus">Add to basket</button>
+              <button class="btn btn-sm btn-outline" type="button" data-add-to-cart="acc-stylus" data-name="Capacitive Stylus">Add to basket</button>
             </div>
           </div>
         </div>
@@ -492,7 +495,7 @@
         <span class="eyebrow">Compare</span>
         <h2 class="title-sm" style="margin-bottom:2rem">How it sits in the range</h2>
 
-        <div class="compare-wrap reveal">
+        <div class="compare-wrap">
           <table class="compare-table">
             <caption class="sr-only">Specification comparison of every Tuga device</caption>
             <thead>
@@ -573,7 +576,7 @@
 
         <div class="product-grid" data-product-grid>
           
-          <a class="product-card reveal" href="/products/tuga-a6" data-category="android">
+          <a class="product-card" href="/products/tuga-a6" data-category="android">
             
             <div class="product-card-media">
               <img src="/img/products/h6-1.webp?v=e497a97b42" srcset="/img/products/h6-1-400.webp?v=e8b3d3d5bb 400w, /img/products/h6-1-800.webp?v=b7cc2da13d 800w, /img/products/h6-1.webp?v=e497a97b42 1200w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga A6 rugged handheld" loading="lazy" width="600" height="450">
@@ -595,7 +598,7 @@
             </div>
           </a>
 
-          <a class="product-card reveal" href="/products/tuga-a8" data-category="android">
+          <a class="product-card" href="/products/tuga-a8" data-category="android">
             <span class="product-badge product-badge-copper">Most Popular</span>
             <div class="product-card-media">
               <img src="/img/products/t8-1.webp?v=70127b10fb" srcset="/img/products/t8-1-400.webp?v=5b2f76b6dc 400w, /img/products/t8-1-800.webp?v=d0a2e5bb75 800w, /img/products/t8-1.webp?v=70127b10fb 1200w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga A8 rugged tablet" loading="lazy" width="600" height="450">
@@ -617,7 +620,7 @@
             </div>
           </a>
 
-          <a class="product-card reveal" href="/products/tuga-wh6" data-category="windows">
+          <a class="product-card" href="/products/tuga-wh6" data-category="windows">
             
             <div class="product-card-media">
               <img src="/img/products/wh6-1.webp?v=861b6994c6" srcset="/img/products/wh6-1-400.webp?v=327fb12bc9 400w, /img/products/wh6-1-800.webp?v=3a60e921b1 800w, /img/products/wh6-1.webp?v=861b6994c6 1200w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga WH6 rugged handheld" loading="lazy" width="600" height="450">
@@ -707,18 +710,11 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
-    <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
-    </div>
-  </div>
 
-  <script src="/js/app.js?v=ef1f39bd5f" defer></script>
+  <script src="/js/app.min.js?v=4567d07103" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
-       data. Kept accurate in the cookie notice and privacy policy. -->
+       data. Kept accurate in the privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
 </body>
 </html>

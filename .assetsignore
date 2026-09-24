@@ -10,3 +10,11 @@ node_modules
 wrangler.toml
 .gitignore
 .assetsignore
+# Readable sources; the pages load the .min files built from them.
+css/style.css
+js/app.js
+# Tests, CI and package metadata are not part of the site.
+test
+.github
+package.json
+package-lock.json

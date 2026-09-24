@@ -6,6 +6,51 @@
 
 // Key prefix keeps the namespace tidy if the KV is shared
 const PREFIX = 'order:';
+const REF_PREFIX = 'ref:';
+
+// ---------------------------------------------------------------------------
+// Customer-facing order numbers
+// ---------------------------------------------------------------------------
+// The provider ids (cs_live_a1B2…, 5O190127TN…) are unreadable over the
+// phone. Customers get TUGA-XXXX-XXXX instead. The alphabet has 32 symbols
+// with 0/O and 1/I removed, so a reference survives being read aloud, and
+// 32 divides 256 so a random byte maps onto it without bias.
+const REF_ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+const REF_PATTERN = /^TUGA-[2-9A-HJ-NP-Z]{4}-[2-9A-HJ-NP-Z]{4}$/;
+
+const formatReference = (bytes) => {
+  const chars = Array.from(bytes.slice(0, 8), (b) => REF_ALPHABET[b % 32]).join('');
+  return `TUGA-${chars.slice(0, 4)}-${chars.slice(4)}`;
+};
+
+/**
+ * A fresh reference, chosen when checkout starts and stored with the payment
+ * provider (Stripe metadata, PayPal invoice_id). The webhook and the return
+ * page then both read the same value back, however they race.
+ */
+export function newOrderReference() {
+  return formatReference(crypto.getRandomValues(new Uint8Array(8)));
+}
+
+/** True for a well-formed reference, e.g. one read back from a provider. */
+export const isOrderReference = (value) =>
+  typeof value === 'string' && REF_PATTERN.test(value);
+
+/**
+ * Deterministic fallback for a payment that carries no reference: one started
+ * before references existed. Same provider id in, same reference out.
+ */
+export async function referenceFromOrderId(orderId) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(orderId)));
+  return formatReference(new Uint8Array(digest));
+}
+
+/** Look an order up by the number the customer quotes. */
+export async function getOrderByReference(kv, reference) {
+  if (!isOrderReference(reference)) return null;
+  const orderId = await kv.get(`${REF_PREFIX}${reference}`);
+  return orderId ? getOrder(kv, orderId) : null;
+}
 
 /**
  * Save an order to KV.
@@ -25,6 +70,12 @@ export async function saveOrder(kv, orderId, orderData) {
 
   // Store the order itself (expire after 90 days if desired)
   await kv.put(`${PREFIX}${orderId}`, JSON.stringify(record));
+
+  // Index by the customer-facing number, so support can find an order in the
+  // KV dashboard: key ref:TUGA-XXXX-XXXX holds the provider's order id.
+  if (record.reference) {
+    await kv.put(`${REF_PREFIX}${record.reference}`, orderId);
+  }
 
   // Maintain a simple pending-orders index.
   // Workers KV does not support queries, so we keep a list of pending IDs.
@@ -53,6 +104,10 @@ export async function updateOrder(kv, orderId, updates) {
 
   const updated = { ...existing, ...updates, updatedAt: new Date().toISOString() };
   await kv.put(`${PREFIX}${orderId}`, JSON.stringify(updated));
+
+  if (updates.reference) {
+    await kv.put(`${REF_PREFIX}${updates.reference}`, orderId);
+  }
 
   // If status changed away from pending, remove from the pending index
   if (existing.status === 'pending' && updated.status !== 'pending') {

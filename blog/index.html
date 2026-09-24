@@ -23,10 +23,9 @@
   <meta name="twitter:description" content="Practical guides on choosing a rugged tablet: IP ratings explained, real cost comparisons, and the best devices for construction, field service and trades.">
   <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t8-1.webp">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=2712da91d7">
+  <link rel="preload" href="/fonts/archivo-latin.woff2?v=8f704806db" as="font" type="font/woff2" crossorigin>
+  <style>@font-face{font-family:'Archivo';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/archivo-latin.woff2?v=8f704806db) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-mono-400-latin.woff2?v=e1896b13b2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'DM Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-mono-500-latin.woff2?v=9964608a84) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}</style>
+  <link rel="stylesheet" href="/css/style.min.css?v=8a7a64cb77">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -79,7 +78,8 @@
           <span class="cart-count hidden" data-cart-count>0</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <span class="nav-toggle-open"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+          <span class="nav-toggle-close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
         </button>
       </div>
     </div>
@@ -105,7 +105,7 @@
       <div class="container">
         <div class="post-grid">
           
-          <a class="post-card reveal" href="/blog/best-rugged-tablets-construction">
+          <a class="post-card" href="/blog/best-rugged-tablets-construction">
             <div class="post-card-media"><img src="/img/blog/blog-construction.webp?v=4ec6f70eb5" srcset="/img/blog/blog-construction-640.webp?v=0ec664bccd 640w, /img/blog/blog-construction.webp?v=4ec6f70eb5 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">28 March 2026</p>
@@ -114,7 +114,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/ip68-vs-ip67-waterproof-rating">
+          <a class="post-card" href="/blog/ip68-vs-ip67-waterproof-rating">
             <div class="post-card-media"><img src="/img/blog/blog-waterproof.webp?v=bcfe2d1cc2" srcset="/img/blog/blog-waterproof-640.webp?v=bae5152504 640w, /img/blog/blog-waterproof.webp?v=bcfe2d1cc2 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">25 March 2026</p>
@@ -123,7 +123,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/rugged-vs-consumer-tablet-cost">
+          <a class="post-card" href="/blog/rugged-vs-consumer-tablet-cost">
             <div class="post-card-media"><img src="/img/blog/blog-cost.webp?v=42da72f0a1" srcset="/img/blog/blog-cost-640.webp?v=55c9a2ad1c 640w, /img/blog/blog-cost.webp?v=42da72f0a1 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">21 March 2026</p>
@@ -132,7 +132,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/best-tablets-field-engineers">
+          <a class="post-card" href="/blog/best-tablets-field-engineers">
             <div class="post-card-media"><img src="/img/blog/blog-field-engineer.webp?v=aa7f874fbe" srcset="/img/blog/blog-field-engineer-640.webp?v=11f9ea9b25 640w, /img/blog/blog-field-engineer.webp?v=aa7f874fbe 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">18 March 2026</p>
@@ -141,7 +141,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/why-tradespeople-switching-rugged-tablets">
+          <a class="post-card" href="/blog/why-tradespeople-switching-rugged-tablets">
             <div class="post-card-media"><img src="/img/blog/blog-tradespeople.webp?v=b299d157bf" srcset="/img/blog/blog-tradespeople-640.webp?v=bff47f3fc4 640w, /img/blog/blog-tradespeople.webp?v=b299d157bf 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">14 March 2026</p>
@@ -150,7 +150,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/why-rugged-tablets-expensive">
+          <a class="post-card" href="/blog/why-rugged-tablets-expensive">
             <div class="post-card-media"><img src="/img/blog/blog-expensive.webp?v=713bb1c6b2" srcset="/img/blog/blog-expensive-640.webp?v=bc2b1491fd 640w, /img/blog/blog-expensive.webp?v=713bb1c6b2 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">10 March 2026</p>
@@ -159,7 +159,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/best-budget-rugged-tablets-under-400">
+          <a class="post-card" href="/blog/best-budget-rugged-tablets-under-400">
             <div class="post-card-media"><img src="/img/blog/blog-budget.webp?v=4e8b6f57f0" srcset="/img/blog/blog-budget-640.webp?v=a122f8dcee 640w, /img/blog/blog-budget.webp?v=4e8b6f57f0 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">7 March 2026</p>
@@ -168,7 +168,7 @@
               <span class="product-card-cta">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             </div>
           </a>
-          <a class="post-card reveal" href="/blog/do-you-need-enterprise-rugged-tablet">
+          <a class="post-card" href="/blog/do-you-need-enterprise-rugged-tablet">
             <div class="post-card-media"><img src="/img/blog/blog-enterprise.webp?v=07f236e9fd" srcset="/img/blog/blog-enterprise-640.webp?v=ecd846d1ac 640w, /img/blog/blog-enterprise.webp?v=07f236e9fd 1200w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy" width="620" height="388"></div>
             <div class="post-card-body">
               <p class="post-card-date">3 March 2026</p>
@@ -195,7 +195,7 @@
               <input type="email" id="capture-email" name="email" placeholder="you@yourcompany.co.uk" autocomplete="email" required>
               <button class="btn btn-copper" type="submit">Send it</button>
             </form>
-            <p class="capture-note" data-capture-note>One email. No newsletter, no reselling your address.</p>
+            <p class="capture-note" data-capture-note role="status">One email. No newsletter, no reselling your address.</p>
           </div>
         </div>
       </div>
@@ -266,18 +266,11 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
-    <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
-    </div>
-  </div>
 
-  <script src="/js/app.js?v=ef1f39bd5f" defer></script>
+  <script src="/js/app.min.js?v=4567d07103" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
-       data. Kept accurate in the cookie notice and privacy policy. -->
+       data. Kept accurate in the privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
 </body>
 </html>
