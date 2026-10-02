@@ -201,11 +201,13 @@
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
 
-      // The mobile drawer hangs off the bottom of the header.
+      // The mobile drawer hangs off the bottom of the header. The header's
+      // backdrop-filter makes it the drawer's containing block, so the
+      // offset is the header's own height, not its position on screen.
       const setOffset = () =>
         document.documentElement.style.setProperty(
           '--header-offset',
-          header.getBoundingClientRect().bottom + 'px'
+          header.getBoundingClientRect().height + 'px'
         );
       setOffset();
       window.addEventListener('resize', setOffset);
@@ -701,7 +703,7 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Devices ship direct from the manufacturer and typically arrive within 10 to 20 working days. We will email you a tracking number as soon as yours ships.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
           } else if (ok && data.status === 'unpaid') {

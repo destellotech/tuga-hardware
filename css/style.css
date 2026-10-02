@@ -619,12 +619,19 @@ p { text-wrap: pretty; }
     background: var(--cream);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
-    transform: translateY(-115%);
-    transition: transform var(--base);
+    /* Lift the closed menu clear of the header as well as itself, and hide
+       it so its links are not focusable while closed. */
+    transform: translateY(calc(-100% - var(--header-offset, 4.5rem)));
+    visibility: hidden;
+    transition: transform var(--base), visibility 0s linear var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform var(--base);
+  }
 
   .primary-nav a {
     padding-block: 0.95rem;
