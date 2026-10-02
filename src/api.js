@@ -29,10 +29,10 @@ const PRODUCTS = {
   'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900, device: true },
   'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900, device: true },
   // Accessories
-  'acc-charging-dock':    { name: 'Charging Dock',                            price: 7900 },
+  'acc-charging-dock':    { name: 'Charging Dock',                            price: 4999 },
   'acc-vehicle-mount':    { name: 'Vehicle Mounting Dock',                    price: 10900 },
   'acc-hand-strap':       { name: 'Hand Strap',                               price: 2400 },
-  'acc-stylus':           { name: 'Capacitive Stylus',                        price: 1600 },
+  'acc-stylus':           { name: 'Capacitive Stylus',                        price: 1499 },
   'acc-screen-protector': { name: 'Tempered Glass Screen Protector (2 Pack)', price: 1400 },
   'acc-car-charger':      { name: '12V DC Car Charger',                       price: 2600 },
   'acc-carry-case':       { name: 'Rugged Carry Case',                        price: 3400 },
