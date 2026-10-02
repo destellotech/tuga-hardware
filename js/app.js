@@ -703,7 +703,7 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Devices ship direct from the manufacturer and typically arrive within 10 to 20 working days. We will email you a tracking number as soon as yours ships.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Your order typically arrives within 10 to 20 working days. We will email you a tracking number as soon as it ships.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
           } else if (ok && data.status === 'unpaid') {

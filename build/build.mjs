@@ -122,7 +122,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: 'Delivery is free to every UK address, with no minimum. Devices ship direct from the manufacturer, which is how we keep the price down, so please allow 10 to 20 working days. We email you a tracking number as soon as your order ships.',
+    a: 'Delivery is free to every UK address, with no minimum. Please allow 10 to 20 working days. We email you a tracking number as soon as your order ships.',
   },
   {
     q: 'What if it is not right for me?',
@@ -1028,7 +1028,7 @@ write(
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
         <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Devices ship direct from the manufacturer and typically arrive within 10 to 20 working days. We will email you a tracking number as soon as yours ships.</p>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Your order typically arrives within 10 to 20 working days. We will email you a tracking number as soon as it ships.</p>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
@@ -1072,7 +1072,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery direct from the manufacturer in 10 to 20 working days, and 30-day returns on every Tuga Hardware order.',
+      'Free UK delivery in 10 to 20 working days and 30-day returns on every Tuga Hardware order.',
     path: '/shipping-returns',
   },
 ];
