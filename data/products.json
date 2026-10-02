@@ -353,7 +353,7 @@
       "name": "Charging Dock",
       "slug": "charging-dock",
       "description": "Desktop charging dock with a pogo pin connection. Drop the tablet in and it charges. No fiddling with cables in the dark.",
-      "price": 79,
+      "price": 49.99,
       "currency": "GBP",
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
@@ -383,7 +383,7 @@
       "name": "Capacitive Stylus",
       "slug": "stylus",
       "description": "Precision capacitive stylus for signatures and detail work when the gloves are off. Includes a clip for a pocket or case.",
-      "price": 16,
+      "price": 14.99,
       "currency": "GBP",
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10", "tuga-wh6"],
       "category": "universal"
