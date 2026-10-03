@@ -122,7 +122,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: 'Delivery is free across mainland UK on every order, with no minimum. Orders placed before 2pm on a working day are dispatched the same day and typically arrive within two to three working days.',
+    a: `Delivery is free across mainland UK on every order, with no minimum. Devices ship direct from the manufacturer, so allow ${SITE.delivery.lead} from order to door. We email tracking as soon as it ships.`,
   },
   {
     q: 'What if it is not right for me?',
@@ -292,7 +292,7 @@ ${sectionHead({
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
               <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Rated from &minus;20&deg;C to 60&deg;C, so it starts on a frosty morning</li>
+              <li>Android range rated from &minus;20&deg;C to 60&deg;C, Windows range from &minus;10&deg;C to 50&deg;C, so it starts on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -314,8 +314,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. Ours run 500 to 800 nits with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number.</p>
-            <p>Batteries are 10,000mAh and up on the Android range, comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits and the W8 700, with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number. Every device lists its exact brightness in the spec sheet, including the ones that are not sunlight readable.</p>
+            <p>Batteries are 10,000mAh and up on the Android handheld and 8 inch tablet, and 8,000mAh on the 10 inch: comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
           </div>
         </article>
       </div>
@@ -499,6 +499,21 @@ function productPage(p) {
           '@type': 'DefinedRegion',
           addressCountry: 'GB',
         },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: SITE.delivery.handlingDaysMin,
+            maxValue: SITE.delivery.handlingDaysMax,
+            unitCode: 'DAY',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: SITE.delivery.transitDaysMin,
+            maxValue: SITE.delivery.transitDaysMax,
+            unitCode: 'DAY',
+          },
+        },
       },
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
@@ -528,7 +543,7 @@ ${breadcrumbs(trail)}
           <div class="gallery-main">
             <img id="gallery-image" src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" width="800" height="800" fetchpriority="high">
           </div>
-          <div class="gallery-thumbs" role="group" aria-label="Product images">
+          ${p.images.length > 1 ? `<div class="gallery-thumbs" role="group" aria-label="Product images">
             ${p.images
               .map(
                 (_, i) => `
@@ -537,7 +552,7 @@ ${breadcrumbs(trail)}
             </button>`
               )
               .join('')}
-          </div>
+          </div>` : ''}
         </div>
 
         <div class="buy-panel">
@@ -548,7 +563,7 @@ ${breadcrumbs(trail)}
           <div class="pdp-price-row">
             <span class="pdp-price">${money(p.price)}</span>
             ${p.compareAtPrice ? `<span class="pdp-price-was">${money(p.compareAtPrice)}</span>` : ''}
-            <span class="pdp-price-note">Includes VAT. Free UK delivery</span>
+            <span class="pdp-price-note">Includes VAT. Free UK delivery, ${SITE.delivery.lead}</span>
           </div>
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
@@ -1028,7 +1043,7 @@ write(
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
         <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.</p>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Delivery takes ${SITE.delivery.lead} and we email tracking as soon as it ships.</p>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
@@ -1072,7 +1087,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery, same-day dispatch before 2pm, and 30-day returns on every Tuga Hardware order.',
+      `Free UK delivery in ${SITE.delivery.lead}, and 30-day returns on every Tuga Hardware order.`,
     path: '/shipping-returns',
   },
 ];
@@ -1345,7 +1360,11 @@ ${extraImages}
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>${SITE.delivery.transitDaysMin}</g:min_transit_time>
+        <g:max_transit_time>${SITE.delivery.transitDaysMax}</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>${SITE.delivery.handlingDaysMin}</g:min_handling_time>
+      <g:max_handling_time>${SITE.delivery.handlingDaysMax}</g:max_handling_time>
     </item>`;
   })
   .join('\n');

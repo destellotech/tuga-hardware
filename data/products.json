@@ -19,7 +19,7 @@
       "price": 299,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": ["h6-1.webp", "h6-2.webp", "h6-3.webp"],
+      "images": ["h6-1.webp"],
       "highlights": [
         "IP68 + IP69K, survives jet washing, not just rain",
         "64MP night vision camera for dark voids and loft spaces",
@@ -67,7 +67,7 @@
       "price": 379,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": ["t8-1.webp", "t8-2.webp", "t8-3.webp"],
+      "images": ["t8-1.webp", "t8-2.webp"],
       "highlights": [
         "800 nit sunlight readable screen you can use on a bright roof",
         "Fits a van door pocket and one hand",
@@ -163,7 +163,7 @@
       "price": 799,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
+      "images": ["wh6-1.webp", "wh6-2.webp"],
       "highlights": [
         "Full Windows 11 Pro, not a mobile OS pretending",
         "Intel N100, 16GB RAM, 512GB SSD",
@@ -209,7 +209,7 @@
       "price": 629,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": ["w8-1.webp", "w8-2.webp", "w8-3.webp"],
+      "images": ["w8-1.webp"],
       "highlights": [
         "Full Windows 11 Pro in an 8 inch rugged body",
         "USB-C, USB-A and HDMI, so no adapter bag",
@@ -297,7 +297,7 @@
       "price": 879,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
+      "images": ["wh6-1.webp", "wh6-2.webp"],
       "specs": {},
       "features": ["Everything in the standard WH6", "Integrated 2D barcode scanner", "Reads all major barcode formats"],
       "inBox": ["Tuga WH6 with scanner", "USB-C cable", "UK power adapter", "Quick start guide"],
@@ -318,7 +318,7 @@
       "price": 699,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": ["w8-1.webp", "w8-2.webp", "w8-3.webp"],
+      "images": ["w8-1.webp"],
       "specs": {},
       "features": ["Everything in the standard W8", "Integrated 2D barcode scanner", "Reads all major barcode formats"],
       "inBox": ["Tuga W8 with scanner", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
