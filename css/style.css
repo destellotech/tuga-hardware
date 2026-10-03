@@ -612,7 +612,9 @@ p { text-wrap: pretty; }
   .primary-nav {
     position: fixed;
     inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    /* The header's backdrop-filter makes it the containing block for this
+       fixed drawer, so 100% is the header's own bottom edge. */
+    top: 100%;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -620,11 +622,21 @@ p { text-wrap: pretty; }
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
     transform: translateY(-115%);
-    transition: transform var(--base);
+    /* The closed drawer must not be hittable: translateY(-115%) is relative
+       to the drawer's own height, so its tail used to sit over the wordmark
+       and the hamburger and swallow every tap. */
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform var(--base), visibility 0s var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform var(--base), visibility 0s;
+  }
 
   .primary-nav a {
     padding-block: 0.95rem;

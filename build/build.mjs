@@ -109,8 +109,8 @@ const HOME_FAQ = [
     a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is what most tradespeople settle on: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
   },
   {
-    q: 'What is the difference between IP67, IP68 and IP69K?',
-    a: 'All three mean fully dust tight. The second digit is water: IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. For most UK trades IP67 is genuinely enough; IP68 and IP69K are the margin you want if the device lives outdoors.',
+    q: 'What is the difference between IP65, IP67, IP68 and IP69K?',
+    a: 'All four mean fully dust tight. The second digit is water: IP65 handles rain and water jets from any direction but is not rated for immersion, IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. IP65 suits a device that lives in a van or cab; IP67 and above is what you want if it could end up in a puddle, and IP68 and IP69K are the margin if it lives outdoors.',
   },
   {
     q: 'Do these actually survive being dropped?',
@@ -122,7 +122,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: 'Delivery is free across mainland UK on every order, with no minimum. Orders placed before 2pm on a working day are dispatched the same day and typically arrive within two to three working days.',
+    a: `Delivery is free across mainland UK on every order, with no minimum. Devices ship direct from the manufacturer, so allow ${SITE.delivery.lead} from order to door. We email tracking as soon as it ships. We also ship internationally: email us your country and we will quote delivery before you pay.`,
   },
   {
     q: 'What if it is not right for me?',
@@ -219,7 +219,7 @@ const hero = () => {
           </div>
         </div>
         <figure class="hero-drawing">
-          <img src="${imgPath(lead, 2)}" alt="Dimensioned drawing of the Tuga A8 showing ports, buttons and case dimensions" width="800" height="291" fetchpriority="high">
+          <img src="${versioned('/img/hero/tuga-a8.webp')}" alt="Tuga A8 rugged tablet, front and back" width="746" height="562" fetchpriority="high">
           <figcaption>
             <span><strong>${esc(lead.name)}</strong></span>
             <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
@@ -292,7 +292,7 @@ ${sectionHead({
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
               <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Rated from &minus;20&deg;C to 60&deg;C, so it starts on a frosty morning</li>
+              <li>The A6 and A10 are rated from &minus;20&deg;C to 60&deg;C, the A8 and the Windows range from &minus;10&deg;C to 50&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -314,8 +314,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. Ours run 500 to 800 nits with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number.</p>
-            <p>Batteries are 10,000mAh and up on the Android range, comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 and W8 run 700 nits, so you are not cupping a hand over the screen to read a job number. Every device lists its exact brightness in the spec sheet, including the ones that are not sunlight readable.</p>
+            <p>The A6 carries a 10,600mAh battery and the A10 8,000mAh, enough for a full shift with heavy use. The A8 has 6,000mAh and is built to dock instead, with a DC input and pogo pins so it charges in the van between jobs. There is nothing clever about the big ones; there is simply room inside a rugged body for a much larger cell.</p>
           </div>
         </article>
       </div>
@@ -499,6 +499,21 @@ function productPage(p) {
           '@type': 'DefinedRegion',
           addressCountry: 'GB',
         },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: SITE.delivery.handlingDaysMin,
+            maxValue: SITE.delivery.handlingDaysMax,
+            unitCode: 'DAY',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: SITE.delivery.transitDaysMin,
+            maxValue: SITE.delivery.transitDaysMax,
+            unitCode: 'DAY',
+          },
+        },
       },
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
@@ -528,7 +543,7 @@ ${breadcrumbs(trail)}
           <div class="gallery-main">
             <img id="gallery-image" src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" width="800" height="800" fetchpriority="high">
           </div>
-          <div class="gallery-thumbs" role="group" aria-label="Product images">
+          ${p.images.length > 1 ? `<div class="gallery-thumbs" role="group" aria-label="Product images">
             ${p.images
               .map(
                 (_, i) => `
@@ -537,7 +552,7 @@ ${breadcrumbs(trail)}
             </button>`
               )
               .join('')}
-          </div>
+          </div>` : ''}
         </div>
 
         <div class="buy-panel">
@@ -548,7 +563,7 @@ ${breadcrumbs(trail)}
           <div class="pdp-price-row">
             <span class="pdp-price">${money(p.price)}</span>
             ${p.compareAtPrice ? `<span class="pdp-price-was">${money(p.compareAtPrice)}</span>` : ''}
-            <span class="pdp-price-note">Includes VAT. Free UK delivery</span>
+            <span class="pdp-price-note">${SITE.vatRegistered ? 'Includes VAT' : 'No VAT charged'}. Free UK delivery, ${SITE.delivery.lead}</span>
           </div>
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
@@ -746,6 +761,14 @@ const BULK_FAQ = [
     q: 'Can you invoice us instead of taking card payment?',
     a: 'For orders of ten units or more we can raise a proforma invoice for bank transfer. Email us with what you need and a company address and we will send one over.',
   },
+  ...(SITE.vatRegistered
+    ? []
+    : [
+        {
+          q: 'Can we reclaim VAT on the order?',
+          a: 'Not at the moment. We are not VAT registered yet, so our prices and invoices carry no VAT and there is nothing to reclaim. The price you see is the total you pay.',
+        },
+      ]),
   {
     q: 'Do bulk orders still get the warranty and returns?',
     a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size.',
@@ -877,7 +900,7 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>Based in the UK</h2>
 
-          <p>Prices are in pounds and include VAT. Delivery is free across mainland UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
+          <p>Prices are in pounds${SITE.vatRegistered ? ' and include VAT' : '. We are not VAT registered yet, so there is no VAT on top and the price shown is what you pay'}. Delivery is free across mainland UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
 
           <h2>Still early</h2>
 
@@ -959,6 +982,7 @@ ${breadcrumbs(contactTrail)}
                 <select id="topic" name="topic">
                   <option>Choosing a device</option>
                   <option>Bulk or fleet order</option>
+                  <option>International delivery quote</option>
                   <option>An existing order</option>
                   <option>Warranty or return</option>
                   <option>Something else</option>
@@ -1028,7 +1052,7 @@ write(
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
         <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.</p>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Delivery takes ${SITE.delivery.lead} and we email tracking as soon as it ships.</p>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
@@ -1072,7 +1096,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery, same-day dispatch before 2pm, and 30-day returns on every Tuga Hardware order.',
+      `Free UK delivery in ${SITE.delivery.lead}, and 30-day returns on every Tuga Hardware order.`,
     path: '/shipping-returns',
   },
 ];
@@ -1345,7 +1369,11 @@ ${extraImages}
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>${SITE.delivery.transitDaysMin}</g:min_transit_time>
+        <g:max_transit_time>${SITE.delivery.transitDaysMax}</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>${SITE.delivery.handlingDaysMin}</g:min_handling_time>
+      <g:max_handling_time>${SITE.delivery.handlingDaysMax}</g:max_handling_time>
     </item>`;
   })
   .join('\n');

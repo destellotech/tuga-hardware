@@ -123,9 +123,9 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">What happens next?</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        Your order is being processed and will ship within 2 business days.
-        Typical delivery to the UK is 10 to 20 working days. We will email you
-        a tracking number once your order has shipped.
+        Your order is being processed. Delivery to the UK takes 7 to 10
+        working days from today, and we will email you a tracking number as
+        soon as your order has shipped.
       </p>
     </div>
 
@@ -166,7 +166,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Delivery estimate</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        UK delivery typically takes 10 to 20 working days from dispatch.
+        Delivery typically completes within 7 to 10 working days of your order.
         You can track progress using the link above.
       </p>
     </div>

@@ -56,6 +56,30 @@ export const SITE = {
   email: 'support@tugahardware.com',
   description:
     'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.',
+  // The ONE delivery promise. Every page, email and feed reads from here;
+  // src/email.js and js/app.js carry the same wording because they run
+  // outside the build. Change all three together.
+  delivery: {
+    lead: '7 to 10 working days',
+    // Google feed / schema.org, in business days.
+    handlingDaysMin: 0,
+    handlingDaysMax: 2,
+    transitDaysMin: 5,
+    transitDaysMax: 8,
+  },
+  // Not VAT registered yet: no VAT is charged, so nothing on the site may say
+  // prices "include VAT". When this flips to true, also restore the VAT
+  // sentence in build/content/legal/terms.html and fill in legal.vatNumber.
+  vatRegistered: false,
+  // Trader identity for the footer. Required for distance selling and for
+  // Merchant Center. Any empty field is simply not rendered.
+  legal: {
+    companyName: '',
+    companyNumber: '',
+    registeredAddress: '',
+    vatNumber: '',
+    phone: '',
+  },
 };
 
 export const data = JSON.parse(
@@ -287,6 +311,18 @@ const header = (active) => `
     </div>
   </header>`;
 
+const legalLine = () => {
+  const l = SITE.legal;
+  const parts = [
+    l.companyName && `${esc(SITE.name)} is a trading name of ${esc(l.companyName)}`,
+    l.companyNumber && `registered in England and Wales, company number ${esc(l.companyNumber)}`,
+    l.registeredAddress && `registered office ${esc(l.registeredAddress)}`,
+    l.vatNumber && `VAT number ${esc(l.vatNumber)}`,
+    l.phone && `<a href="tel:${esc(l.phone.replace(/\s+/g, ''))}">${esc(l.phone)}</a>`,
+  ].filter(Boolean);
+  return parts.length ? `<br>${parts.join('. ')}.` : '';
+};
+
 const footer = () => `
   <footer class="site-footer">
     <div class="container">
@@ -322,7 +358,7 @@ const footer = () => `
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.</p>
+        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.${legalLine()}</p>
         <div class="footer-payments" aria-label="Accepted payment methods">
           ${['Visa', 'Mastercard', 'Amex', 'PayPal']
             .map(

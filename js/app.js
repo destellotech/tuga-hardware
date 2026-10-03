@@ -452,7 +452,7 @@
         <span>${money(totals.subtotal)}</span>
       </div>
       <div class="summary-row">
-        <span>Delivery</span>
+        <span>Delivery, 7 to 10 working days</span>
         <span class="summary-free">Free</span>
       </div>
       ${
@@ -465,6 +465,7 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
+      <p class="summary-note">Delivering outside the UK or Ireland? <a href="/contact">Ask for a delivery quote</a> before checkout.</p>
       <div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
@@ -657,7 +658,7 @@
         }
 
         form.reset();
-        if (note) note.textContent = 'Sent. Check your inbox in a minute or two.';
+        if (note) note.textContent = 'Thanks. A real person sends the guide, so allow one working day.';
       });
     });
   }
@@ -701,7 +702,7 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Delivery takes 7 to 10 working days and we email tracking as soon as it ships.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
           } else if (ok && data.status === 'unpaid') {

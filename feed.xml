@@ -10,8 +10,7 @@
       <g:description>A 6.8 inch rugged Android handheld for tradespeople who need a tough device in their pocket. IP68 and IP69K rated, drop tested to MIL-STD-810H, with a 10600mAh battery and 5G.</g:description>
       <g:link>https://www.tugahardware.com/products/tuga-a6</g:link>
       <g:image_link>https://www.tugahardware.com/img/products/h6-1.webp?v=e497a97b42</g:image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/h6-2.webp?v=9518385774</g:additional_image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/h6-3.webp?v=758e71f82d</g:additional_image_link>
+
       <g:availability>in_stock</g:availability>
       <g:price>299.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
@@ -23,16 +22,20 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>5</g:min_transit_time>
+        <g:max_transit_time>8</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>0</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-a8</g:id>
       <g:title>Tuga A8 8 inch Rugged Android Tablet</g:title>
-      <g:description>An 8 inch rugged Android tablet with IP68 protection, 4G LTE and a sunlight readable screen. The size most tradespeople settle on: big enough for forms and drawings, small enough to hold in one hand.</g:description>
+      <g:description>An 8 inch rugged Android tablet built to dock. A 700 nit screen, IP65 sealing and MIL-STD-810G drop testing, with pogo pins, a DC input and a full-size USB port, so it works as a vehicle unit on the road and a site tablet when you get there.</g:description>
       <g:link>https://www.tugahardware.com/products/tuga-a8</g:link>
-      <g:image_link>https://www.tugahardware.com/img/products/t8-1.webp?v=70127b10fb</g:image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/t8-2.webp?v=a1fdf80eb3</g:additional_image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/t8-3.webp?v=29c40e4e91</g:additional_image_link>
+      <g:image_link>https://www.tugahardware.com/img/products/t8-1.webp?v=ba1af91cfd</g:image_link>
+      <g:additional_image_link>https://www.tugahardware.com/img/products/t8-2.webp?v=1c951aca41</g:additional_image_link>
+      <g:additional_image_link>https://www.tugahardware.com/img/products/t8-3.webp?v=227a4a1d4b</g:additional_image_link>
       <g:availability>in_stock</g:availability>
       <g:price>379.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
@@ -44,7 +47,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>5</g:min_transit_time>
+        <g:max_transit_time>8</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>0</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-a10</g:id>
@@ -65,7 +72,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>5</g:min_transit_time>
+        <g:max_transit_time>8</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>0</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-wh6</g:id>
@@ -74,7 +85,6 @@
       <g:link>https://www.tugahardware.com/products/tuga-wh6</g:link>
       <g:image_link>https://www.tugahardware.com/img/products/wh6-1.webp?v=861b6994c6</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/wh6-2.webp?v=12f8c10c1c</g:additional_image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/wh6-3.webp?v=c69731d707</g:additional_image_link>
       <g:availability>in_stock</g:availability>
       <g:price>799.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
@@ -86,7 +96,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>5</g:min_transit_time>
+        <g:max_transit_time>8</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>0</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-w8</g:id>
@@ -94,8 +108,7 @@
       <g:description>An 8 inch rugged Windows 11 Pro tablet with an Intel processor, full USB ports and HDMI output. For professionals who need Windows software in the field without giving up durability.</g:description>
       <g:link>https://www.tugahardware.com/products/tuga-w8</g:link>
       <g:image_link>https://www.tugahardware.com/img/products/w8-1.webp?v=31df35f0be</g:image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/w8-2.webp?v=5227fbae70</g:additional_image_link>
-      <g:additional_image_link>https://www.tugahardware.com/img/products/w8-3.webp?v=9c096b7d52</g:additional_image_link>
+
       <g:availability>in_stock</g:availability>
       <g:price>629.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
@@ -107,7 +120,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>5</g:min_transit_time>
+        <g:max_transit_time>8</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>0</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-w10</g:id>
@@ -128,7 +145,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>5</g:min_transit_time>
+        <g:max_transit_time>8</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>0</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
   </channel>
 </rss>
