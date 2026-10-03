@@ -109,8 +109,8 @@ const HOME_FAQ = [
     a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is what most tradespeople settle on: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
   },
   {
-    q: 'What is the difference between IP67, IP68 and IP69K?',
-    a: 'All three mean fully dust tight. The second digit is water: IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. For most UK trades IP67 is genuinely enough; IP68 and IP69K are the margin you want if the device lives outdoors.',
+    q: 'What is the difference between IP65, IP67, IP68 and IP69K?',
+    a: 'All four mean fully dust tight. The second digit is water: IP65 handles rain and water jets from any direction but is not rated for immersion, IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. IP65 suits a device that lives in a van or cab; IP67 and above is what you want if it could end up in a puddle, and IP68 and IP69K are the margin if it lives outdoors.',
   },
   {
     q: 'Do these actually survive being dropped?',
@@ -219,7 +219,7 @@ const hero = () => {
           </div>
         </div>
         <figure class="hero-drawing">
-          <img src="${imgPath(lead, 2)}" alt="Dimensioned drawing of the Tuga A8 showing ports, buttons and case dimensions" width="800" height="291" fetchpriority="high">
+          <img src="${versioned('/img/hero/tuga-a8.webp')}" alt="Tuga A8 rugged tablet, front and back" width="746" height="562" fetchpriority="high">
           <figcaption>
             <span><strong>${esc(lead.name)}</strong></span>
             <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
@@ -292,7 +292,7 @@ ${sectionHead({
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
               <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Android range rated from &minus;20&deg;C to 60&deg;C, Windows range from &minus;10&deg;C to 50&deg;C, so it starts on a frosty morning</li>
+              <li>The A6 and A10 are rated from &minus;20&deg;C to 60&deg;C, the A8 and the Windows range from &minus;10&deg;C to 50&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -314,8 +314,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits and the W8 700, with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number. Every device lists its exact brightness in the spec sheet, including the ones that are not sunlight readable.</p>
-            <p>Batteries are 10,000mAh and up on the Android handheld and 8 inch tablet, and 8,000mAh on the 10 inch: comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 and W8 run 700 nits, so you are not cupping a hand over the screen to read a job number. Every device lists its exact brightness in the spec sheet, including the ones that are not sunlight readable.</p>
+            <p>The A6 carries a 10,600mAh battery and the A10 8,000mAh, enough for a full shift with heavy use. The A8 has 6,000mAh and is built to dock instead, with a DC input and pogo pins so it charges in the van between jobs. There is nothing clever about the big ones; there is simply room inside a rugged body for a much larger cell.</p>
           </div>
         </article>
       </div>
