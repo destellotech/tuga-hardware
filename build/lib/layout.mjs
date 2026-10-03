@@ -67,6 +67,10 @@ export const SITE = {
     transitDaysMin: 5,
     transitDaysMax: 8,
   },
+  // Not VAT registered yet: no VAT is charged, so nothing on the site may say
+  // prices "include VAT". When this flips to true, also restore the VAT
+  // sentence in build/content/legal/terms.html and fill in legal.vatNumber.
+  vatRegistered: false,
   // Trader identity for the footer. Required for distance selling and for
   // Merchant Center. Any empty field is simply not rendered.
   legal: {

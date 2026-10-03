@@ -563,7 +563,7 @@ ${breadcrumbs(trail)}
           <div class="pdp-price-row">
             <span class="pdp-price">${money(p.price)}</span>
             ${p.compareAtPrice ? `<span class="pdp-price-was">${money(p.compareAtPrice)}</span>` : ''}
-            <span class="pdp-price-note">Includes VAT. Free UK delivery, ${SITE.delivery.lead}</span>
+            <span class="pdp-price-note">${SITE.vatRegistered ? 'Includes VAT' : 'No VAT charged'}. Free UK delivery, ${SITE.delivery.lead}</span>
           </div>
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
@@ -761,6 +761,14 @@ const BULK_FAQ = [
     q: 'Can you invoice us instead of taking card payment?',
     a: 'For orders of ten units or more we can raise a proforma invoice for bank transfer. Email us with what you need and a company address and we will send one over.',
   },
+  ...(SITE.vatRegistered
+    ? []
+    : [
+        {
+          q: 'Can we reclaim VAT on the order?',
+          a: 'Not at the moment. We are not VAT registered yet, so our prices and invoices carry no VAT and there is nothing to reclaim. The price you see is the total you pay.',
+        },
+      ]),
   {
     q: 'Do bulk orders still get the warranty and returns?',
     a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size.',
@@ -892,7 +900,7 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>Based in the UK</h2>
 
-          <p>Prices are in pounds and include VAT. Delivery is free across mainland UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
+          <p>Prices are in pounds${SITE.vatRegistered ? ' and include VAT' : '. We are not VAT registered yet, so there is no VAT on top and the price shown is what you pay'}. Delivery is free across mainland UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
 
           <h2>Still early</h2>
 
