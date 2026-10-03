@@ -465,6 +465,7 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
+      <p class="summary-note">Delivering outside the UK or Ireland? <a href="/contact">Ask for a delivery quote</a> before checkout.</p>
       <div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${

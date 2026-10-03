@@ -122,7 +122,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: `Delivery is free across mainland UK on every order, with no minimum. Devices ship direct from the manufacturer, so allow ${SITE.delivery.lead} from order to door. We email tracking as soon as it ships.`,
+    a: `Delivery is free across mainland UK on every order, with no minimum. Devices ship direct from the manufacturer, so allow ${SITE.delivery.lead} from order to door. We email tracking as soon as it ships. We also ship internationally: email us your country and we will quote delivery before you pay.`,
   },
   {
     q: 'What if it is not right for me?',
@@ -974,6 +974,7 @@ ${breadcrumbs(contactTrail)}
                 <select id="topic" name="topic">
                   <option>Choosing a device</option>
                   <option>Bulk or fleet order</option>
+                  <option>International delivery quote</option>
                   <option>An existing order</option>
                   <option>Warranty or return</option>
                   <option>Something else</option>
