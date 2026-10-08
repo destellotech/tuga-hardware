@@ -68,12 +68,14 @@ const orgSchema = {
   name: SITE.name,
   url: SITE.origin,
   email: SITE.email,
+  telephone: '+44 1279 912065',
   description: SITE.description,
   areaServed: { '@type': 'Country', name: 'United Kingdom' },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
     email: SITE.email,
+    telephone: '+44 1279 912065',
     areaServed: 'GB',
     availableLanguage: 'English',
   },
@@ -928,6 +930,9 @@ ${breadcrumbs(contactTrail)}
             <h3 class="title-xs">Email us directly</h3>
             <p style="margin-top:0.75rem"><a class="link-arrow" href="mailto:${SITE.email}">${SITE.email}</a></p>
             <p style="margin-top:1.5rem">We answer within one working day, usually much sooner. For order questions, include your order number and we will pull it up.</p>
+
+            <h3 class="title-xs" style="margin-top:2.5rem">Or call us</h3>
+            <p style="margin-top:0.75rem"><a class="link-arrow" href="${SITE.phoneHref}">${SITE.phone}</a></p>
 
             <h3 class="title-xs" style="margin-top:2.5rem">What we can help with</h3>
             <ul class="editorial-list">

@@ -54,6 +54,8 @@ export const SITE = {
   origin: 'https://www.tugahardware.com',
   tagline: 'Hard Shell. Long Life.',
   email: 'support@tugahardware.com',
+  phone: '01279 912065',
+  phoneHref: 'tel:+441279912065',
   description:
     'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.',
 };
@@ -318,6 +320,7 @@ const footer = () => `
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>
             <a href="mailto:${SITE.email}">${SITE.email}</a>
+            <a href="${SITE.phoneHref}">${SITE.phone}</a>
           </nav>
         </div>
       </div>
