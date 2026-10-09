@@ -107,7 +107,7 @@ const breadcrumbSchema = (trail) => ({
 const HOME_FAQ = [
   {
     q: 'Which size should I get: 6, 8 or 10 inch?',
-    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is what most tradespeople settle on: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
+    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is where we would point most trades: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
   },
   {
     q: 'What is the difference between IP67, IP68 and IP69K?',
@@ -115,7 +115,7 @@ const HOME_FAQ = [
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'They are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'The A6, A8, A10 and WH6 are tested to MIL-STD-810H and the W8 to 810G, which includes repeated drops of around 1.2 metres onto plywood over concrete. That is a real standard rather than marketing language. We do not have drop test documentation for the W10 yet, so we do not claim one for it. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
@@ -295,9 +295,9 @@ ${sectionHead({
             <h3>Sealed, not splash resistant</h3>
             <p>An IP68 rating means the housing is fully dust tight and survives sustained immersion, not that it tolerates a light shower. The devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
             <ul class="editorial-list">
-              <li>Gasket-sealed ports and a sealed speaker membrane</li>
-              <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Rated from &minus;20&deg;C to 60&deg;C, so it starts on a frosty morning</li>
+              <li>Sealed ports and speaker, which is exactly what the IP test checks</li>
+              <li>Glove mode on the A6 and A8, so the screen works without taking gloves off</li>
+              <li>Android models rated from &minus;20&deg;C to 60&deg;C, so they start on a frosty morning; the Windows models from &minus;10&deg;C to 50&deg;C</li>
             </ul>
           </div>
         </article>
@@ -308,7 +308,7 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Drop tested to a real standard</h3>
-            <p>MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
+            <p>MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls of around 1.2 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards. Five of our six devices carry it (the W8 is tested to the earlier 810G); the W10 does not have a published drop rating, and we say so.</p>
             <p>In practice that comes from reinforced corners, a rubberised over-mould and a screen recessed behind a raised bezel, so the glass does not take the first hit when it lands face down.</p>
           </div>
         </article>
@@ -320,7 +320,7 @@ ${sectionHead({
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
             <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A6, A8, WH6 and W8 run 500 to 800 nits, so you are not cupping a hand over the screen to read a job number. The A10 is the exception at 350 nits: it is built for reading drawings in a van or site cabin, and if you work in direct sun all day the A8 is the better buy.</p>
-            <p>Batteries are 10,000mAh and up on the Android range, comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>The A6 and A8 carry 10,000mAh or more and the A10 8,000mAh, comfortably a full shift with heavy use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
           </div>
         </article>
       </div>
@@ -423,7 +423,7 @@ write(
 ${breadcrumbs(productsTrail)}
         ${eyebrow('The range')}
         <h1>Rugged tablets &amp; handhelds</h1>
-        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed, drop tested and shipped free. Not sure? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
+        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to IP67 or better and shipped free. Not sure? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
       </div>
     </section>
 
