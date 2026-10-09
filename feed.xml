@@ -23,6 +23,8 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>10</g:min_transit_time>
+        <g:max_transit_time>20</g:max_transit_time>
       </g:shipping>
     </item>
     <item>
@@ -44,6 +46,8 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>10</g:min_transit_time>
+        <g:max_transit_time>20</g:max_transit_time>
       </g:shipping>
     </item>
     <item>
@@ -65,6 +69,8 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>10</g:min_transit_time>
+        <g:max_transit_time>20</g:max_transit_time>
       </g:shipping>
     </item>
     <item>
@@ -86,6 +92,8 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>10</g:min_transit_time>
+        <g:max_transit_time>20</g:max_transit_time>
       </g:shipping>
     </item>
     <item>
@@ -107,6 +115,8 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>10</g:min_transit_time>
+        <g:max_transit_time>20</g:max_transit_time>
       </g:shipping>
     </item>
     <item>
@@ -128,6 +138,8 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>10</g:min_transit_time>
+        <g:max_transit_time>20</g:max_transit_time>
       </g:shipping>
     </item>
   </channel>

@@ -1,0 +1,41 @@
+# Tuga Hardware
+
+> Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery. Prices include VAT. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
+
+Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work at roughly half the price; Windows only when desktop software requires it.
+
+## Devices
+
+- [Tuga A6](https://www.tugahardware.com/products/tuga-a6): £299. 6.8 inch handheld, Android 14, IP68 + IP69K, MIL-STD-810H, 10600mAh, 320g. Photos, job sheets, sign-off and comms, on a phone that survives the site.
+- [Tuga A8](https://www.tugahardware.com/products/tuga-a8): £379. 8 inch tablet, Android 14, IP68, MIL-STD-810H, 10000mAh, 680g. Forms, maps, site photos and quotes, one-handed, all shift.
+- [Tuga A10](https://www.tugahardware.com/products/tuga-a10): £449. 10.1 inch tablet, Android 14, IP68, MIL-STD-810H, 8000mAh, 680g. Blueprints, BIM viewers, full spreadsheets and PDF plans.
+- [Tuga WH6](https://www.tugahardware.com/products/tuga-wh6): £799. 6.5 inch handheld, Windows 11 Pro, IP67, MIL-STD-810H, 10000mAh, 450g. Legacy Windows software and network drives, in a holster.
+- [Tuga W8](https://www.tugahardware.com/products/tuga-w8): £629. 8 inch tablet, Windows 11 Pro, IP67, MIL-STD-810G, 5000mAh, 750g. Windows software in the field, with real ports.
+- [Tuga W10](https://www.tugahardware.com/products/tuga-w10): £649. 10.1 inch tablet, Windows 11 Pro, IP67, 5000mAh, 1138g. Engineers and surveyors who need Ethernet, HDMI and a full screen.
+
+## Choosing
+
+- [Which Tuga? picker](https://www.tugahardware.com/which-tuga): four questions to a recommendation
+- [Rugged tablets for construction sites](https://www.tugahardware.com/for/construction): Rugged tablets for UK construction sites. Big enough to read drawings, sealed against dust and rain, with honest advice on which size suits managers and trades.
+- [Rugged tablets for electricians](https://www.tugahardware.com/for/electricians): Rugged Android tablets and handhelds for UK electricians. Sealed against plaster dust and damp, readable in lofts, and priced for a sole trader or a small firm.
+- [Rugged tablets for field service engineers](https://www.tugahardware.com/for/field-service): Rugged tablets for UK field service engineers. Job sheets, parts lookups and customer sign-off on a device that lives in the van and survives plant rooms.
+- [Rugged devices for logistics and delivery](https://www.tugahardware.com/for/logistics): Rugged handhelds for UK delivery drivers and logistics teams. Proof of delivery, scanning and navigation on devices built for cab vibration and cold mornings.
+
+## Buying
+
+- [Bulk orders and calculator](https://www.tugahardware.com/bulk): automatic team discounts
+- [Trade accounts](https://www.tugahardware.com/trade): order on invoice, pay by bank transfer
+- [Accessories](https://www.tugahardware.com/accessories)
+- [Shipping and returns](https://www.tugahardware.com/shipping-returns)
+- [Contact](https://www.tugahardware.com/contact): support@tugahardware.com
+
+## Guides
+
+- [](https://www.tugahardware.com/blog/why-tradespeople-switching-rugged-tablets): 
+- [](https://www.tugahardware.com/blog/why-rugged-tablets-expensive): 
+- [](https://www.tugahardware.com/blog/rugged-vs-consumer-tablet-cost): 
+- [](https://www.tugahardware.com/blog/ip68-vs-ip67-waterproof-rating): 
+- [](https://www.tugahardware.com/blog/do-you-need-enterprise-rugged-tablet): 
+- [](https://www.tugahardware.com/blog/best-tablets-field-engineers): 
+- [](https://www.tugahardware.com/blog/best-rugged-tablets-construction): 
+- [](https://www.tugahardware.com/blog/best-budget-rugged-tablets-under-400): 

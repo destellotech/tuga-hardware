@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /cart
 Disallow: /order-confirmation
+Disallow: /review
 Disallow: /api/
 
 # AI crawlers are welcome. Being cited is how a small store gets found.

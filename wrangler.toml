@@ -20,6 +20,11 @@ SITE_URL = "https://www.tugahardware.com"
 PAYPAL_LIVE = "true"
 SITE_NAME = "Tuga Hardware"
 
+# Daily at 09:00 UTC: email review requests for orders old enough to have
+# been delivered and used (src/reviews.js).
+[triggers]
+crons = ["0 9 * * *"]
+
 # KV namespace for order storage
 [[kv_namespaces]]
 binding = "ORDERS"

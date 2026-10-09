@@ -187,6 +187,42 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 }
 
 // ---------------------------------------------------------------------------
+// Review request, sent once per order by the daily cron (src/reviews.js)
+// ---------------------------------------------------------------------------
+export async function sendReviewRequest(env, email, { items, reviewUrl }) {
+  const names = (items || []).map((i) => escapeHtml(i.name)).join(', ') || 'your order';
+
+  const bodyHtml = `
+    <h2 style="margin:0 0 8px;font-size:22px;color:${BRAND.green};">How is it holding up?</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${BRAND.mutedText};line-height:1.6;">
+      You have had your ${names} for a few weeks now. We are a small UK operation and
+      honest reviews from people who actually use the kit are how other tradespeople
+      decide whether to trust us. Good or bad, we publish what you write.
+    </p>
+
+    <div style="text-align:center;margin:32px 0;">
+      <a href="${reviewUrl}" style="display:inline-block;padding:14px 36px;background-color:${BRAND.copper};color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;border-radius:6px;">Leave a review</a>
+    </div>
+
+    <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
+      It takes about a minute. If something is wrong with the device, reply to this
+      email instead and we will sort it out under your warranty.
+    </p>
+
+    <p style="margin:32px 0 0;font-size:12px;color:${BRAND.mutedText};">
+      This is the only review email we will send about this order.
+    </p>
+  `;
+
+  return sendEmail(env, {
+    to: email,
+    subject: 'How is your Tuga holding up?',
+    html: emailWrapper('How is it holding up? — Tuga Hardware', bodyHtml),
+    replyTo: SUPPORT_EMAIL,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Enquiry from the contact form / a buyer's-guide signup
 // ---------------------------------------------------------------------------
 export async function sendEnquiry(env, { name, email, topic, message }) {
