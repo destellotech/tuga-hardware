@@ -3,6 +3,8 @@
    Branded transactional emails via fetch.
    ============================================ */
 
+import { DELIVERY, TRADER_STATEMENT } from './store-config.js';
+
 const FROM_EMAIL = 'Tuga Hardware <orders@tugahardware.com>';
 const SUPPORT_EMAIL = 'support@tugahardware.com';
 
@@ -45,7 +47,7 @@ function emailWrapper(title, bodyHtml) {
         <!-- Footer -->
         <tr>
           <td style="background-color:${BRAND.green};padding:24px 40px;text-align:center;">
-            <p style="margin:0;font-size:13px;color:${BRAND.cream};">Tuga Hardware Ltd &bull; United Kingdom</p>
+            <p style="margin:0;font-size:13px;color:${BRAND.cream};">${TRADER_STATEMENT}</p>
             <p style="margin:8px 0 0;font-size:12px;color:${BRAND.copper};">
               <a href="https://tugahardware.com" style="color:${BRAND.copper};text-decoration:none;">tugahardware.com</a> &bull;
               <a href="mailto:support@tugahardware.com" style="color:${BRAND.copper};text-decoration:none;">support@tugahardware.com</a>
@@ -123,9 +125,7 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">What happens next?</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        Your order is being processed and will ship within 2 business days.
-        Typical delivery to the UK is 10 to 20 working days. We will email you
-        a tracking number once your order has shipped.
+        Your order is being processed. ${DELIVERY.summary}
       </p>
     </div>
 
@@ -166,7 +166,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Delivery estimate</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        UK delivery typically takes 10 to 20 working days from dispatch.
+        Your order should arrive within ${DELIVERY.days} of being placed.
         You can track progress using the link above.
       </p>
     </div>
@@ -189,7 +189,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 // ---------------------------------------------------------------------------
 // Enquiry from the contact form / a buyer's-guide signup
 // ---------------------------------------------------------------------------
-export async function sendEnquiry(env, { name, email, topic, message }) {
+export async function sendEnquiry(env, { name, email, company, topic, message }) {
   const row = (label, value) =>
     `<tr><td style="padding:6px 12px;font:500 13px monospace;color:#8a8a82">${escapeHtml(label)}</td><td style="padding:6px 12px;font:14px sans-serif;color:#1a1a18">${escapeHtml(value)}</td></tr>`;
 
@@ -202,6 +202,7 @@ export async function sendEnquiry(env, { name, email, topic, message }) {
       <table style="border-collapse:collapse;margin:16px 0">
         ${row('Name', name || '—')}
         ${row('Email', email || '—')}
+        ${row('Company', company || '—')}
         ${row('Topic', topic || '—')}
       </table>
       <p style="white-space:pre-wrap;font-size:15px;line-height:1.6;color:#1a1a18">${escapeHtml(message || '')}</p>

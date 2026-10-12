@@ -23,7 +23,7 @@
       "highlights": [
         "IP68 + IP69K, survives jet washing, not just rain",
         "64MP night vision camera for dark voids and loft spaces",
-        "10600mAh battery, two full days of normal site use",
+        "10600mAh battery with 33W fast charging",
         "5G, so uploads finish before you leave the job"
       ],
       "specs": {
@@ -41,7 +41,7 @@
         "cpu": "MediaTek Dimensity 6300 5G",
         "connectivity": "5G, Wi-Fi 5, Bluetooth 5.2, NFC",
         "camera": "64MP night vision + 50MP main",
-        "weight": "320g",
+        "weight": "441g",
         "operating_temp": "-20°C to 60°C"
       },
       "features": ["Gorilla Glass 5", "Glove mode", "NFC", "GPS + GLONASS + BeiDou", "Fingerprint sensor", "Face unlock", "USB-C OTG", "Night vision camera", "33W fast charge"],
@@ -94,7 +94,7 @@
       },
       "features": ["Sunlight readable display", "Glove mode", "GPS + GLONASS", "Vehicle mountable", "USB-C + USB-A", "NFC"],
       "inBox": ["Tuga A8 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
-      "badge": "Most Popular",
+      "badge": null,
       "positioning": "The all-rounder. The sweet spot between portability and screen space."
     },
     {
@@ -251,7 +251,7 @@
       "tagline": "The full desktop experience. Anywhere.",
       "shortFor": "Engineers and surveyors who need Ethernet, HDMI and a full screen.",
       "description": "A 10.1 inch rugged Windows 11 Pro tablet with an Intel N100 processor and a full port selection including RJ45 Ethernet and HDMI. For engineers, surveyors and field professionals who need full desktop capability.",
-      "longDescription": "The W10 is the full desktop experience in a rugged package. An Intel N100 processor (up to 3.4GHz), 8GB of RAM and 128GB of storage run Windows 11 Pro on a 10.1 inch IPS touchscreen. The port selection is what sets it apart: HDMI, RJ45 Ethernet, USB-C and USB-A for direct connections to plant, panels and network gear that has never seen Wi-Fi. Sealed to IP67, with a removable 5000mAh battery, NFC, a microSD slot and a pogo pin dock connector. Options include 4G LTE, GPS, a fingerprint reader, a 2D barcode scanner and a UHF RFID reader.",
+      "longDescription": "The W10 is the full desktop experience in a rugged package. An Intel N100 processor (up to 3.4GHz), 8GB of RAM and 128GB of storage run Windows 11 Pro on a 10.1 inch IPS touchscreen. The port selection is what sets it apart: HDMI, RJ45 Ethernet, USB-C and USB-A for direct connections to plant, panels and network gear that has never seen Wi-Fi. Rated IP65 for dust and water jets, with a removable 5000mAh battery, NFC, a microSD slot and a pogo pin dock connector. Options include 4G LTE, GPS, a fingerprint reader, a 2D barcode scanner and a UHF RFID reader.",
       "price": 649,
       "compareAtPrice": null,
       "currency": "GBP",
@@ -268,14 +268,14 @@
         "ram": "8GB",
         "storage": "128GB",
         "expandable_storage": "microSD (TF) slot",
-        "ip_rating": "IP67",
+        "ip_rating": "IP65",
         "battery": "5000mAh",
         "charging": "USB-C, 9V/3A fast charge",
         "os": "Windows 11 Pro",
         "cpu": "Intel N100, up to 3.4GHz",
         "connectivity": "Dual-band Wi-Fi 5, Bluetooth 5.2, NFC, 100Mbps Ethernet, optional 4G LTE",
         "camera": "5MP autofocus rear + 2MP autofocus front",
-        "weight": "1138g",
+        "weight": "1197g",
         "dimensions": "280 x 198 x 22mm"
       },
       "features": ["Windows 11 Pro", "Intel N100 processor", "HDMI + RJ45 + USB-C + USB-A", "Removable battery", "NFC (13.56MHz)", "Pogo pin dock connector", "Optional 4G LTE and GPS", "Optional fingerprint reader", "Optional 2D barcode scanner", "Optional UHF RFID reader"],

@@ -465,14 +465,18 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
-      <div class="checkout-actions">
+      ${
+        document.body.hasAttribute('data-sales-paused')
+          ? `<p class="summary-note" role="status">We have paused new orders while we move to UK stock. Email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> and we will tell you as soon as a device is available.</p>`
+          : `<div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
           paymentMethods.paypal
             ? '<button class="btn btn-outline btn-block" data-checkout="paypal">Pay with PayPal</button>'
             : ''
         }
-      </div>
+      </div>`
+      }
       <p class="summary-note" data-checkout-status hidden></p>`;
   }
 
@@ -597,6 +601,19 @@
   function initForms() {
     const contact = $('[data-contact-form]');
     if (contact) {
+      // Product pages link here with ?quote=<product name> for business quotes.
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('quote')) {
+        const topic = $('#topic', contact);
+        if (topic && topic.options.length) topic.selectedIndex = 0;
+        const product = params.get('quote');
+        const message = $('#message', contact);
+        if (message && !message.value) {
+          message.value = product
+            ? `Quote request: ${product}\nQuantity: \nDelivery postcode: \n`
+            : 'Quote request\nDevices and quantities: \nDelivery postcode: \n';
+        }
+      }
       contact.addEventListener('submit', async (e) => {
         e.preventDefault();
         const status = $('[data-form-status]', contact);
@@ -701,8 +718,14 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Please allow 7 to 10 working days for delivery.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+            );
+          } else if (ok && data.status === 'unsupported_country') {
+            show(
+              'We deliver to the UK only',
+              'Your PayPal delivery address is outside the UK, so we have not taken payment and nothing has been charged. If you have a UK delivery address, change it in PayPal and try again.',
+              '<a href="/cart">Back to basket</a>'
             );
           } else if (ok && data.status === 'unpaid') {
             show(

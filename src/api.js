@@ -6,6 +6,7 @@
 
 import { sendOrderConfirmation, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
+import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -116,6 +117,16 @@ export async function handleRequest(request, env) {
   }
 
   // --- API routes ---
+  // While orders are paused (src/store-config.js), refuse new checkouts even
+  // from a basket saved before the pause. Confirming an order that was
+  // already paid still works.
+  if (
+    SALES_PAUSED &&
+    request.method === 'POST' &&
+    (path === '/api/create-checkout-session' || path === '/api/create-paypal-order')
+  ) {
+    return corsError(SALES_PAUSED_MESSAGE, 503);
+  }
   if (request.method === 'POST' && path === '/api/create-checkout-session') {
     return handleStripeCheckout(request, env);
   }
@@ -132,7 +143,7 @@ export async function handleRequest(request, env) {
     return handleSubscribe(request, env);
   }
   if (request.method === 'GET' && path === '/api/payment-methods') {
-    return corsResponse({ card: true, paypal: isPayPalLive(env) });
+    return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
   }
   if (request.method === 'GET' && path === '/api/paypal-check') {
     return handlePayPalCheck(request, env);
@@ -192,8 +203,9 @@ async function handleStripeCheckout(request, env) {
     params.append('success_url', `${env.SITE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`);
     params.append('cancel_url', `${env.SITE_URL}/cart`);
     params.append('payment_method_types[0]', 'card');
-    params.append('shipping_address_collection[allowed_countries][0]', 'GB');
-    params.append('shipping_address_collection[allowed_countries][1]', 'IE');
+    SHIPPING_COUNTRIES.forEach((country, i) => {
+      params.append(`shipping_address_collection[allowed_countries][${i}]`, country);
+    });
 
     // Encode each line item
     lineItems.forEach((li, i) => {
@@ -443,6 +455,17 @@ async function recordStripeOrder(sessionId, env) {
 async function recordPayPalOrder(orderId, env) {
   let order = await fetchPayPalOrder(orderId, env);
 
+  // PayPal takes the address from the buyer's account and cannot be limited
+  // to the UK up front, so refuse to capture an order shipping anywhere else.
+  // An approved order that is never captured expires and nothing is charged.
+  if (order.status === 'APPROVED') {
+    const country = order.purchase_units?.[0]?.shipping?.address?.country_code;
+    if (!SHIPPING_COUNTRIES.includes(country)) {
+      console.warn(`PayPal order ${orderId} not captured: ships to ${country || 'unknown'}`);
+      return { paid: false, reason: 'country' };
+    }
+  }
+
   if (order.status === 'APPROVED') {
     try {
       await capturePayPalOrder(orderId, env);
@@ -510,7 +533,9 @@ async function handleConfirmOrder(request, env) {
       return corsError('Missing or invalid order reference');
     }
 
-    if (!result.paid) return corsResponse({ status: 'unpaid' });
+    if (!result.paid) {
+      return corsResponse({ status: result.reason === 'country' ? 'unsupported_country' : 'unpaid' });
+    }
 
     // Only what the confirmation page shows: no address or email.
     const { order } = result;
@@ -604,7 +629,7 @@ async function handlePayPalWebhook(request, env) {
  */
 async function handleContact(request, env) {
   try {
-    const { name, email, topic, message, website } = await request.json();
+    const { name, email, company, topic, message, website } = await request.json();
 
     // Honeypot: real users never fill a hidden field.
     if (website) return corsResponse({ ok: true });
@@ -619,6 +644,7 @@ async function handleContact(request, env) {
     const enquiry = {
       name: String(name || '').slice(0, 120),
       email: String(email).slice(0, 160),
+      company: String(company || '').slice(0, 160),
       topic: String(topic || 'Enquiry').slice(0, 80),
       message: String(message).slice(0, 4000),
       receivedAt: new Date().toISOString(),

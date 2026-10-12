@@ -33,6 +33,18 @@ import {
 } from './lib/layout.mjs';
 
 import {
+  SALES_PAUSED,
+  SALES_PAUSED_MESSAGE,
+  TRADER,
+  TRADER_STATEMENT,
+  TRADER_ADDRESS_LINE,
+  PRICE_NOTE,
+  DELIVERY,
+  QUOTE_TOPIC,
+  quoteUrl,
+} from '../src/store-config.js';
+
+import {
   eyebrow,
   sectionHead,
   breadcrumbs,
@@ -66,9 +78,23 @@ const orgSchema = {
   '@type': 'Organization',
   '@id': `${SITE.origin}/#organization`,
   name: SITE.name,
+  legalName: TRADER.legalName,
   url: SITE.origin,
   email: SITE.email,
   description: SITE.description,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: TRADER.address.street,
+    addressLocality: TRADER.address.town,
+    addressRegion: TRADER.address.county,
+    postalCode: TRADER.address.postcode,
+    addressCountry: TRADER.address.country,
+  },
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'Companies House company number',
+    value: TRADER.companyNumber,
+  },
   areaServed: { '@type': 'Country', name: 'United Kingdom' },
   contactPoint: {
     '@type': 'ContactPoint',
@@ -122,7 +148,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: 'Delivery is free across mainland UK on every order, with no minimum. Orders placed before 2pm on a working day are dispatched the same day and typically arrive within two to three working days.',
+    a: DELIVERY.summary,
   },
   {
     q: 'What if it is not right for me?',
@@ -264,7 +290,7 @@ ${productGrid(windowsRange)}
 ${sectionHead({
   tag: 'Every model',
   title: 'The whole range on one page',
-  lede: 'Six devices, three sizes, two operating systems. No configurator, no quote request. The price you see is the price you pay.',
+  lede: 'Six devices, three sizes, two operating systems. Buy one online at the price shown, or ask for a business quote and pay by bank transfer.',
 })}
 ${compareTable()}
         <div style="margin-top:2rem">
@@ -314,8 +340,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. Ours run 500 to 800 nits with an anti-reflective treatment, so you are not cupping a hand over the screen to read a job number.</p>
-            <p>Batteries are 10,000mAh and up on the Android range, comfortably a full shift with heavy use, and usually two days of normal use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits and the A6 560, so you are not cupping a hand over the screen to read a job number. The A10 is 350 nits, which suits drawings indoors and in the van more than bright sun. Each product page lists the maker's figure.</p>
+            <p>Batteries on the Android range run from 8,000mAh to 10,600mAh, against roughly 5,000mAh in a typical phone. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell. Real run time depends on screen brightness and signal, so treat the capacity as a comparison, not a promise of hours.</p>
           </div>
         </article>
       </div>
@@ -349,7 +375,7 @@ ${sectionHead({
           </div>
           <div class="promise reveal">
             <h3>One price, shown up front</h3>
-            <p>No quote forms, no minimum order, no enterprise licensing. Free UK delivery on everything, and team discounts applied automatically at checkout.</p>
+            <p>No minimum order and no enterprise licensing. Free UK delivery on everything, team discounts applied automatically at checkout, and a quote with a proforma invoice for any business that wants to pay by bank transfer.</p>
           </div>
           <div class="promise reveal">
             <h3>30 days to change your mind</h3>
@@ -488,7 +514,7 @@ function productPage(p) {
       url: `${SITE.origin}${productUrl(p)}`,
       price: p.price,
       priceCurrency: 'GBP',
-      availability: 'https://schema.org/InStock',
+      availability: SALES_PAUSED ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: { '@id': `${SITE.origin}/#organization` },
       priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
@@ -498,6 +524,12 @@ function productPage(p) {
         shippingDestination: {
           '@type': 'DefinedRegion',
           addressCountry: 'GB',
+        },
+        // Matches DELIVERY.days: 7 to 10 working days in total.
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: { '@type': 'QuantitativeValue', minValue: 6, maxValue: 7, unitCode: 'DAY' },
+          transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' },
         },
       },
       hasMerchantReturnPolicy: {
@@ -548,12 +580,18 @@ ${breadcrumbs(trail)}
           <div class="pdp-price-row">
             <span class="pdp-price">${money(p.price)}</span>
             ${p.compareAtPrice ? `<span class="pdp-price-was">${money(p.compareAtPrice)}</span>` : ''}
-            <span class="pdp-price-note">Includes VAT. Free UK delivery</span>
+            <span class="pdp-price-note">${esc(PRICE_NOTE)}. ${esc(DELIVERY.short)}</span>
           </div>
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
 
-          <div class="buy-row">
+          ${
+            SALES_PAUSED
+              ? `<div class="buy-row">
+            <p class="pdp-paused" role="status">${esc(SALES_PAUSED_MESSAGE)}</p>
+            <a class="btn btn-primary btn-lg" href="${quoteUrl(p.name)}">Ask about availability</a>
+          </div>`
+              : `<div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
               <input type="number" id="qty" value="1" min="1" max="99" aria-label="Quantity">
@@ -563,9 +601,11 @@ ${breadcrumbs(trail)}
               ${icons.cart(18)} Add to basket
             </button>
           </div>
+          <p class="pdp-quote">Buying for a business? <a href="${quoteUrl(p.name)}">Get a quote and pay by bank transfer</a>. Trial units welcome.</p>`
+          }
 
           <div class="pdp-assurance">
-            <div>${icons.truck(16)}<span>Free UK delivery</span></div>
+            <div>${icons.truck(16)}<span>${esc(DELIVERY.short)}</span></div>
             <div>${icons.shieldCheck(16)}<span>12-month warranty</span></div>
             <div>${icons.refresh(16)}<span>30-day returns</span></div>
             <div>${icons.lock(16)}<span>Secure checkout</span></div>
@@ -627,7 +667,7 @@ ${specSheet(p)}
           </div>
           <div class="variant-action">
             <span class="variant-price">${money(v.price)}</span>
-            <button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}">Add to basket</button>
+            ${SALES_PAUSED ? '' : `<button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}">Add to basket</button>`}
           </div>
         </div>`
           )
@@ -744,7 +784,7 @@ const BULK_FAQ = [
   },
   {
     q: 'Can you invoice us instead of taking card payment?',
-    a: 'For orders of ten units or more we can raise a proforma invoice for bank transfer. Email us with what you need and a company address and we will send one over.',
+    a: 'Yes, for any business order, including a single trial unit. Ask for a quote with what you need and your company billing and delivery addresses, and we will send a proforma invoice for bank transfer. We can also complete your supplier setup forms.',
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
@@ -759,7 +799,7 @@ write(
   page({
     title: 'Bulk Orders & Team Discounts | Tuga Hardware',
     description:
-      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, no quote forms, free UK delivery.',
+      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, free UK delivery, and business quotes with proforma invoices.',
     path: '/bulk',
     active: 'bulk',
     schema: [breadcrumbSchema(bulkTrail), bulkFaq.schema],
@@ -798,10 +838,10 @@ ${breadcrumbs(bulkTrail)}
               <li>The tier is calculated on the total number of devices and applied at checkout</li>
               <li>Everything ships free, with the same warranty and returns as a single unit</li>
             </ul>
-            <p style="margin-top:1.5rem">Ordering ten or more? You get 10% automatically, and we can raise a proforma invoice for bank transfer if your accounts department prefers it.</p>
+            <p style="margin-top:1.5rem">Prefer to pay by bank transfer, or want one unit to trial before the rest? Ask for a quote and we will send a proforma invoice and complete your supplier forms.</p>
             <div style="margin-top:2rem">
               <a class="btn btn-primary" href="/products/">Start an order</a>
-              <a class="btn btn-outline" href="/contact" style="margin-left:0.5rem">Request an invoice</a>
+              <a class="btn btn-outline" href="/contact?quote=#enquiry" style="margin-left:0.5rem">Get a business quote</a>
             </div>
           </div>
         </div>
@@ -865,7 +905,7 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>What we actually do</h2>
 
-          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator, no quote request and no minimum order. The price on the page is the price you pay, and delivery is free.</p>
+          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator and no minimum order. The price on the page is the price you pay, delivery is free, and businesses can ask for a quote and pay by bank transfer.</p>
 
           <p>We are deliberately narrow. Six devices, three sizes, two operating systems. It is easier to know six products properly than to list six hundred and know none of them.</p>
 
@@ -877,9 +917,11 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>Based in the UK</h2>
 
-          <p>Prices are in pounds and include VAT. Delivery is free across mainland UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
+          <p>Prices are in pounds and there is no VAT to add: ${esc(TRADER.legalName)} is not VAT registered, so the price on the page is the total. Delivery is free across the UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
 
           <h2>Still early</h2>
+
+          <p>${esc(TRADER_STATEMENT)}</p>
 
           <p>We are a young operation and we would rather say that than pretend otherwise. What that means for you in practice: you get direct access to the people running it, decisions get made quickly, and if you tell us something about the range is wrong, we can actually change it.</p>
         </div>
@@ -929,6 +971,11 @@ ${breadcrumbs(contactTrail)}
             <p style="margin-top:0.75rem"><a class="link-arrow" href="mailto:${SITE.email}">${SITE.email}</a></p>
             <p style="margin-top:1.5rem">We answer within one working day, usually much sooner. For order questions, include your order number and we will pull it up.</p>
 
+            <h3 class="title-xs" style="margin-top:2.5rem">Who you are dealing with</h3>
+            <p style="margin-top:0.75rem">${esc(TRADER.tradingName)} is a trading name of ${esc(TRADER.legalName)}, registered in ${esc(TRADER.registeredIn)}, company number ${esc(TRADER.companyNumber)}.</p>
+            <p>Registered office: ${esc(TRADER_ADDRESS_LINE)}.</p>
+            <p>${esc(TRADER.legalName)} is not VAT registered, so no VAT is charged.</p>
+
             <h3 class="title-xs" style="margin-top:2.5rem">What we can help with</h3>
             <ul class="editorial-list">
               <li>Which of the three sizes suits your trade</li>
@@ -940,7 +987,7 @@ ${breadcrumbs(contactTrail)}
           </div>
 
           <div>
-            <form class="form" data-contact-form novalidate>
+            <form class="form" id="enquiry" data-contact-form novalidate>
               <!-- Honeypot: hidden from humans, checked server-side -->
               <div class="field" style="position:absolute;left:-9999px" aria-hidden="true">
                 <label for="website">Website</label>
@@ -957,12 +1004,17 @@ ${breadcrumbs(contactTrail)}
               <div class="field">
                 <label for="topic">What is it about?</label>
                 <select id="topic" name="topic">
+                  <option>${esc(QUOTE_TOPIC)}</option>
                   <option>Choosing a device</option>
                   <option>Bulk or fleet order</option>
                   <option>An existing order</option>
                   <option>Warranty or return</option>
                   <option>Something else</option>
                 </select>
+              </div>
+              <div class="field">
+                <label for="company">Company <span class="field-optional">(optional)</span></label>
+                <input type="text" id="company" name="company" autocomplete="organization">
               </div>
               <div class="field">
                 <label for="message">Message</label>
@@ -1028,7 +1080,7 @@ write(
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
         <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.</p>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. ${esc(DELIVERY.summary)}</p>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
@@ -1072,7 +1124,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery, same-day dispatch before 2pm, and 30-day returns on every Tuga Hardware order.',
+      'Free UK delivery in 7 to 10 working days and 30-day returns on every Tuga Hardware order.',
     path: '/shipping-returns',
   },
 ];
@@ -1334,7 +1386,7 @@ const feedItems = devices
       <g:link>${url}</g:link>
       <g:image_link>${SITE.origin}${imgPath(p, 1)}</g:image_link>
 ${extraImages}
-      <g:availability>in_stock</g:availability>
+      <g:availability>${SALES_PAUSED ? 'out_of_stock' : 'in_stock'}</g:availability>
       <g:price>${p.price}.00 GBP</g:price>
       <g:brand>${esc(SITE.name)}</g:brand>
       <g:mpn>${esc(p.id.toUpperCase())}</g:mpn>
@@ -1345,7 +1397,11 @@ ${extraImages}
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>1</g:min_transit_time>
+        <g:max_transit_time>3</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>6</g:min_handling_time>
+      <g:max_handling_time>7</g:max_handling_time>
     </item>`;
   })
   .join('\n');

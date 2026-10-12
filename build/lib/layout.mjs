@@ -9,6 +9,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { SALES_PAUSED, TRADER_STATEMENT } from '../../src/store-config.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(here, '..', '..');
@@ -55,7 +56,7 @@ export const SITE = {
   tagline: 'Hard Shell. Long Life.',
   email: 'support@tugahardware.com',
   description:
-    'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.',
+    'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested. Free UK delivery.',
 };
 
 export const data = JSON.parse(
@@ -264,7 +265,11 @@ const wordmark = () =>
 
 const header = (active) => `
   <div class="announce">
-    <strong>Free UK delivery</strong><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns<span class="announce-sep">/</span>Bulk discounts from 2 units
+    ${
+      SALES_PAUSED
+        ? `<strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>`
+        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes and proforma invoices</a><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns`
+    }
   </div>
   <header class="site-header" id="site-header">
     <div class="container header-inner">
@@ -293,7 +298,7 @@ const footer = () => `
       <div class="footer-grid">
         <div class="footer-about">
           <a href="/" class="wordmark" aria-label="${esc(SITE.name)} home">${wordmark()}</a>
-          <p>Rugged tablets and handhelds for UK trades. We pick the kit, test it, price it honestly and ship it free. No enterprise contracts, no sales calls.</p>
+          <p>Rugged tablets and handhelds for UK trades. We pick the kit, check every spec against the maker's own documents, price it honestly and ship it free. No enterprise contracts, no sales calls.</p>
         </div>
         <div class="footer-col">
           <h3>Tablets</h3>
@@ -322,7 +327,7 @@ const footer = () => `
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.</p>
+        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved. ${esc(TRADER_STATEMENT)}</p>
         <div class="footer-payments" aria-label="Accepted payment methods">
           ${['Visa', 'Mastercard', 'Amex', 'PayPal']
             .map(
@@ -407,7 +412,7 @@ export function page({
 
   ${jsonLd(schema)}
 </head>
-<body${bodyClass ? ` class="${bodyClass}"` : ''}>
+<body${bodyClass ? ` class="${bodyClass}"` : ''}${SALES_PAUSED ? ' data-sales-paused' : ''}>
   <a href="#main" class="skip-link">Skip to content</a>
 ${header(active)}
 
