@@ -1635,7 +1635,7 @@ ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
               return `
           <a class="works-card reveal" href="/works-with/${esc(w.slug)}">
             <p class="product-card-kicker">${esc(w.vendor)}</p>
-            <h2>${esc(w.software)}</h2>
+            <h2>${esc(w.software.split(' (')[0])}</h2>
             <p>${esc(w.meta_description)}</p>
             <span class="works-pick">Our pick: ${esc(d.name)}, ${money(d.price)}</span>
             <span class="product-card-cta">Read ${icons.arrowRight(14)}</span>
