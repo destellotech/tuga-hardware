@@ -708,6 +708,12 @@
               'Thank you. A confirmation email is on its way with your order number and delivery details. Devices ship direct from the manufacturer and take 10 to 20 working days to arrive.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
+          } else if (ok && data.status === 'unsupported_country') {
+            show(
+              'We deliver to the UK only',
+              'Your PayPal delivery address is outside the UK, so we have not taken payment and nothing has been charged. If you have a UK delivery address, change it in PayPal and try again.',
+              '<a href="/cart">Back to basket</a>'
+            );
           } else if (ok && data.status === 'unpaid') {
             show(
               'Payment not completed',

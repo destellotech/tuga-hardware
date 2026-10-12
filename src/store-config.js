@@ -45,6 +45,9 @@ export const TRADER_STATEMENT = `${TRADER.tradingName} is a trading name of ${TR
 export const VAT_REGISTERED = false;
 export const PRICE_NOTE = 'No VAT to add';
 
+/** We deliver to UK addresses only. Checkout refuses anything else. */
+export const SHIPPING_COUNTRIES = ['GB'];
+
 /**
  * Devices currently ship direct from the manufacturer. Keep every delivery
  * promise on the site, in the API and in emails pointed at these strings.
