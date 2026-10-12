@@ -465,14 +465,18 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
-      <div class="checkout-actions">
+      ${
+        document.body.hasAttribute('data-sales-paused')
+          ? `<p class="summary-note" role="status">We have paused new orders while we move to UK stock. Email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> and we will tell you as soon as a device is available.</p>`
+          : `<div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
           paymentMethods.paypal
             ? '<button class="btn btn-outline btn-block" data-checkout="paypal">Pay with PayPal</button>'
             : ''
         }
-      </div>
+      </div>`
+      }
       <p class="summary-note" data-checkout-status hidden></p>`;
   }
 
@@ -701,7 +705,7 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Devices ship direct from the manufacturer and take 10 to 20 working days to arrive.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
           } else if (ok && data.status === 'unpaid') {

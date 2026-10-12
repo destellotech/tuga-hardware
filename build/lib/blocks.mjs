@@ -12,6 +12,7 @@ import {
   specLabel,
   devices,
 } from './layout.mjs';
+import { SALES_PAUSED } from '../../src/store-config.js';
 
 /* --- small pieces -------------------------------------------------------- */
 
@@ -297,7 +298,7 @@ export function accessoryCard(a) {
             <p class="accessory-compat">Fits: ${esc(names.join(', '))}</p>
             <div class="accessory-foot">
               <span class="accessory-price">${money(a.price)}</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>
+              ${SALES_PAUSED ? '' : `<button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>`}
             </div>
           </div>`;
 }

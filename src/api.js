@@ -6,6 +6,7 @@
 
 import { sendOrderConfirmation, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
+import { SALES_PAUSED, SALES_PAUSED_MESSAGE } from './store-config.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -116,6 +117,16 @@ export async function handleRequest(request, env) {
   }
 
   // --- API routes ---
+  // While orders are paused (src/store-config.js), refuse new checkouts even
+  // from a basket saved before the pause. Confirming an order that was
+  // already paid still works.
+  if (
+    SALES_PAUSED &&
+    request.method === 'POST' &&
+    (path === '/api/create-checkout-session' || path === '/api/create-paypal-order')
+  ) {
+    return corsError(SALES_PAUSED_MESSAGE, 503);
+  }
   if (request.method === 'POST' && path === '/api/create-checkout-session') {
     return handleStripeCheckout(request, env);
   }
@@ -132,7 +143,7 @@ export async function handleRequest(request, env) {
     return handleSubscribe(request, env);
   }
   if (request.method === 'GET' && path === '/api/payment-methods') {
-    return corsResponse({ card: true, paypal: isPayPalLive(env) });
+    return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
   }
   if (request.method === 'GET' && path === '/api/paypal-check') {
     return handlePayPalCheck(request, env);

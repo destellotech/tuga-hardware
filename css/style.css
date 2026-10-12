@@ -2662,3 +2662,15 @@ p { text-wrap: pretty; }
   body { background: #fff; color: #000; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Orders paused (src/store-config.js SALES_PAUSED) */
+.announce a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pdp-paused {
+  flex: 1 1 100%;
+  margin: 0;
+  color: var(--ink-light);
+}

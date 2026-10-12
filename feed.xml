@@ -3,7 +3,7 @@
   <channel>
     <title>Tuga Hardware</title>
     <link>https://www.tugahardware.com</link>
-    <description>Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.</description>
+    <description>Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested. Free UK delivery.</description>
     <item>
       <g:id>tuga-a6</g:id>
       <g:title>Tuga A6 6.8 inch Rugged Android Handheld</g:title>
@@ -12,7 +12,7 @@
       <g:image_link>https://www.tugahardware.com/img/products/h6-1.webp?v=e497a97b42</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/h6-2.webp?v=9518385774</g:additional_image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/h6-3.webp?v=758e71f82d</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
+      <g:availability>out_of_stock</g:availability>
       <g:price>299.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-A6</g:mpn>
@@ -23,7 +23,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>9</g:min_transit_time>
+        <g:max_transit_time>18</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>1</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-a8</g:id>
@@ -33,7 +37,7 @@
       <g:image_link>https://www.tugahardware.com/img/products/t8-1.webp?v=70127b10fb</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/t8-2.webp?v=a1fdf80eb3</g:additional_image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/t8-3.webp?v=29c40e4e91</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
+      <g:availability>out_of_stock</g:availability>
       <g:price>379.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-A8</g:mpn>
@@ -44,7 +48,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>9</g:min_transit_time>
+        <g:max_transit_time>18</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>1</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-a10</g:id>
@@ -54,7 +62,7 @@
       <g:image_link>https://www.tugahardware.com/img/products/t10-1.webp?v=364c344117</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/t10-2.webp?v=4d5cd07a78</g:additional_image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/t10-3.webp?v=ec5f6798ab</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
+      <g:availability>out_of_stock</g:availability>
       <g:price>449.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-A10</g:mpn>
@@ -65,7 +73,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>9</g:min_transit_time>
+        <g:max_transit_time>18</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>1</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-wh6</g:id>
@@ -75,7 +87,7 @@
       <g:image_link>https://www.tugahardware.com/img/products/wh6-1.webp?v=861b6994c6</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/wh6-2.webp?v=12f8c10c1c</g:additional_image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/wh6-3.webp?v=c69731d707</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
+      <g:availability>out_of_stock</g:availability>
       <g:price>799.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-WH6</g:mpn>
@@ -86,7 +98,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>9</g:min_transit_time>
+        <g:max_transit_time>18</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>1</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-w8</g:id>
@@ -96,7 +112,7 @@
       <g:image_link>https://www.tugahardware.com/img/products/w8-1.webp?v=31df35f0be</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/w8-2.webp?v=5227fbae70</g:additional_image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/w8-3.webp?v=9c096b7d52</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
+      <g:availability>out_of_stock</g:availability>
       <g:price>629.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-W8</g:mpn>
@@ -107,7 +123,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>9</g:min_transit_time>
+        <g:max_transit_time>18</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>1</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
     <item>
       <g:id>tuga-w10</g:id>
@@ -117,7 +137,7 @@
       <g:image_link>https://www.tugahardware.com/img/products/w10-1.webp?v=c1d17b9146</g:image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/w10-2.webp?v=5f54fd5ba8</g:additional_image_link>
       <g:additional_image_link>https://www.tugahardware.com/img/products/w10-3.webp?v=6017414549</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
+      <g:availability>out_of_stock</g:availability>
       <g:price>649.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-W10</g:mpn>
@@ -128,7 +148,11 @@
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
+        <g:min_transit_time>9</g:min_transit_time>
+        <g:max_transit_time>18</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>1</g:min_handling_time>
+      <g:max_handling_time>2</g:max_handling_time>
     </item>
   </channel>
 </rss>
