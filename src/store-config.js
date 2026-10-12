@@ -49,15 +49,14 @@ export const PRICE_NOTE = 'No VAT to add';
 export const SHIPPING_COUNTRIES = ['GB'];
 
 /**
- * Devices are shipped to us in the UK first and sent on from here, so we are
- * the importer and customers never pay charges on delivery. Keep every
- * delivery promise on the site, in the API and in emails pointed at these
- * strings.
+ * Keep every delivery promise on the site, in the API and in emails pointed
+ * at these strings. Do not claim UK stock or same-day dispatch unless it is
+ * true at the time.
  */
 export const DELIVERY = {
   days: '7 to 10 working days',
   summary:
-    'Delivery is free to UK addresses on every order, with no minimum. Devices come to us in the UK first and we send them on, typically 7 to 10 working days from order, with no customs or import charges to pay on delivery. We email a tracking number when your order is on its way.',
+    'Delivery is free to UK addresses on every order, with no minimum. Please allow 7 to 10 working days from order. We email a tracking number when your order is on its way.',
   short: 'Free UK delivery in 7 to 10 working days',
 };
 

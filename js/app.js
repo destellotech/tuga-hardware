@@ -718,7 +718,7 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Delivery is typically 7 to 10 working days, with no import charges to pay.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Please allow 7 to 10 working days for delivery.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
           } else if (ok && data.status === 'unsupported_country') {

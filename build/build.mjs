@@ -525,7 +525,7 @@ function productPage(p) {
           '@type': 'DefinedRegion',
           addressCountry: 'GB',
         },
-        // Matches DELIVERY.days: 7 to 10 working days in total, via us in the UK.
+        // Matches DELIVERY.days: 7 to 10 working days in total.
         deliveryTime: {
           '@type': 'ShippingDeliveryTime',
           handlingTime: { '@type': 'QuantitativeValue', minValue: 6, maxValue: 7, unitCode: 'DAY' },
@@ -1124,7 +1124,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery in 7 to 10 working days with no import charges, and 30-day returns on every Tuga Hardware order.',
+      'Free UK delivery in 7 to 10 working days and 30-day returns on every Tuga Hardware order.',
     path: '/shipping-returns',
   },
 ];
