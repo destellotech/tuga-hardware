@@ -42,22 +42,11 @@ const PRODUCTS = {
   'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
   'acc-shoulder-strap':   { name: 'Shoulder Strap',                           price: 1900 },
   // Warranty add-ons: one per device unit. Never discounted, never a device.
-  'wty-3yr-tuga-a6': { name: "3-Year Warranty for Tuga A6", price: 4500, warrantyFor: 'tuga-a6', tier: '3yr' },
-  'wty-3yr-tuga-a8': { name: "3-Year Warranty for Tuga A8", price: 4900, warrantyFor: 'tuga-a8', tier: '3yr' },
-  'wty-3yr-tuga-a10': { name: "3-Year Warranty for Tuga A10", price: 5900, warrantyFor: 'tuga-a10', tier: '3yr' },
-  'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 9900, warrantyFor: 'tuga-wh6', tier: '3yr' },
-  'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
+  // Total Care is sold on a quote and proforma only, so it has no SKU here.
+  'wty-3yr-tuga-a10': { name: "3-Year Warranty for Tuga A10", price: 6500, warrantyFor: 'tuga-a10', tier: '3yr' },
   'wty-3yr-tuga-w10': { name: "3-Year Warranty for Tuga W10", price: 7900, warrantyFor: 'tuga-w10', tier: '3yr' },
-  'wty-care-tuga-a6': { name: "Total Care for Tuga A6", price: 9900, warrantyFor: 'tuga-a6', tier: 'care' },
-  'wty-care-tuga-a8': { name: "Total Care for Tuga A8", price: 10900, warrantyFor: 'tuga-a8', tier: 'care' },
-  'wty-care-tuga-a10': { name: "Total Care for Tuga A10", price: 12900, warrantyFor: 'tuga-a10', tier: 'care' },
-  'wty-care-tuga-wh6': { name: "Total Care for Tuga WH6", price: 19900, warrantyFor: 'tuga-wh6', tier: 'care' },
-  'wty-care-tuga-w8': { name: "Total Care for Tuga W8", price: 15900, warrantyFor: 'tuga-w8', tier: 'care' },
-  'wty-care-tuga-w10': { name: "Total Care for Tuga W10", price: 16900, warrantyFor: 'tuga-w10', tier: 'care' },
+  'wty-3yr-tuga-a6': { name: "3-Year Warranty for Tuga A6", price: 6500, warrantyFor: 'tuga-a6', tier: '3yr' },
 };
-
-/** Total Care is a fleet product; mirrors data/products.json warranty.careMinUnits. */
-const CARE_MIN_UNITS = 5;
 
 /** Scanner variants carry their base device's warranty. */
 const baseDeviceId = (id) => id.replace(/-scanner$/, '');
@@ -96,12 +85,10 @@ function resolveBasket(items) {
  */
 function validateWarranties(lines) {
   const deviceUnits = {};
-  let totalDevices = 0;
   for (const line of lines) {
     if (!line.product.device) continue;
     const base = baseDeviceId(line.id);
     deviceUnits[base] = (deviceUnits[base] || 0) + line.quantity;
-    totalDevices += line.quantity;
   }
   for (const line of lines) {
     const w = line.product.warrantyFor;
@@ -109,9 +96,6 @@ function validateWarranties(lines) {
     const units = deviceUnits[w] || 0;
     if (line.quantity > units) {
       throw new BasketError(`${line.product.name} covers one device each: you have ${line.quantity} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
-    }
-    if (line.product.tier === 'care' && totalDevices < CARE_MIN_UNITS) {
-      throw new BasketError(`Total Care is for orders of ${CARE_MIN_UNITS} or more devices; choose the 3-Year Warranty for smaller orders`);
     }
   }
 }

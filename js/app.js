@@ -576,22 +576,16 @@
     try {
       const products = await getCatalogue();
       const units = {};
-      let totalDevices = 0;
       items.forEach((i) => {
         if (/^(acc|wty)-/.test(i.id)) return;
         const base = i.id.replace(/-scanner$/, '');
         units[base] = (units[base] || 0) + i.quantity;
-        totalDevices += i.quantity;
       });
       for (const i of items) {
         const p = findItem(products, i.id);
         if (!p || !p.warrantyFor) continue;
         if (i.quantity > (units[p.warrantyFor] || 0)) {
           setStatus(`${p.name} covers one device each. Reduce it to match the number of ${p.warrantyFor.replace('tuga-', 'Tuga ').toUpperCase()} units in the basket.`);
-          return;
-        }
-        if (p.tier === 'care' && totalDevices < 5) {
-          setStatus('Total Care is for orders of 5 or more devices. Choose the 3-Year Warranty for smaller orders, or ask for a quote.');
           return;
         }
       }

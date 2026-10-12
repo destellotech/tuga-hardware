@@ -79,31 +79,44 @@ const warrantyCopy = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'war
 const paidTiers = warranty.tiers.filter((t) => !t.included);
 const fromPrice = (t) => Math.min(...Object.values(t.prices || { x: 0 }));
 
-/** The three radio options under a product's buy box. */
+/** The cover options under a product's buy box. Quote-only tiers are shown
+    with their price and a link to the quote form rather than a radio. */
 function warrantyChooser(p) {
   const base = p.id.replace(/-scanner$/, '');
-  const options = paidTiers.filter((t) => t.prices && t.prices[base] !== undefined);
-  if (!options.length) return '';
+  const paid = paidTiers.filter((t) => t.prices && t.prices[base] !== undefined);
+  if (!paid.length) return '';
   const standard = warrantyTier('standard');
+  const radios = paid.filter((t) => !t.quoteOnly);
+  const quoteTiers = paid.filter((t) => t.quoteOnly);
   return `
           <fieldset class="protect" data-warranty-chooser>
             <legend>${eyebrow('Cover')}</legend>
             <label class="protect-opt">
               <input type="radio" name="warranty" value="" data-warranty-choice checked>
-              <span class="protect-text"><strong>${esc(standard?.name || 'Standard')}</strong>${esc(standard?.summary || '12 months against defects')}</span>
+              <span class="protect-text"><strong>${esc(standard?.name || 'Standard warranty')}</strong>${esc(standard?.summary || '12 months against defects')}</span>
               <span class="protect-price">Included</span>
             </label>
-            ${options
+            ${radios
               .map(
                 (t) => `
             <label class="protect-opt">
               <input type="radio" name="warranty" value="wty-${t.id}-${base}" data-warranty-choice>
-              <span class="protect-text"><strong>${esc(t.name)}${t.recommended ? ' <span class="pick-tag">Recommended</span>' : ''}</strong>${esc(t.summary)}</span>
+              <span class="protect-text"><strong>${esc(t.name)}${t.recommended ? ' <span class="pick-tag">Recommended</span>' : ''}</strong>${esc(t.chooser || t.summary)}</span>
               <span class="protect-price">+${money(t.prices[base])}<small>per device</small></span>
             </label>`
               )
               .join('')}
-            <a class="protect-link" href="/warranty">Compare all three and read the terms</a>
+            ${quoteTiers
+              .map(
+                (t) => `
+            <div class="protect-opt protect-quote">
+              <span class="protect-marker" aria-hidden="true"></span>
+              <span class="protect-text"><strong>${esc(t.name)}</strong>${esc(t.chooser || t.summary)} <a href="${quoteUrl(`${t.name} for ${p.name}`)}">Ask for a fleet quote</a></span>
+              <span class="protect-price">${money(t.prices[base])}<small>per device</small></span>
+            </div>`
+              )
+              .join('')}
+            <a class="protect-link" href="/warranty">Compare the plans and read the terms</a>
           </fieldset>`;
 }
 
@@ -1142,22 +1155,40 @@ const liftProse = (name) =>
   readFileSync(join(ROOT, 'build', 'content', 'legal', name), 'utf8').trim();
 
 /* ==========================================================================
-   WARRANTY PAGE
+   WARRANTY PAGE + PLAN TERMS
    ========================================================================== */
+
+const planTerms = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty-terms.json'), 'utf8'));
+const warrantyDevices = devices.filter((d) => paidTiers.some((t) => t.prices?.[d.id] !== undefined));
+const clauseText = (c) => c.replace(/^(\d+)\.\s+/, '');
+const clauseNumber = (c) => (c.match(/^(\d+)\./) || [])[1];
 
 {
   const trail = [{ label: 'Home', href: '/' }, { label: 'Warranty' }];
   const faqBlock = faq(warrantyCopy.faq, { heading: 'Warranty questions', tag: 'Questions' });
-  const tierCard = (t, points, featured) => `
+  const careTier = warrantyTier('care');
+  const tierCard = (t) => {
+    const points = warrantyCopy.tier_points[t.id] || [];
+    const featured = t.id === 'care';
+    const kicker = t.included ? 'Included' : t.minUnits ? `Business fleets of ${t.minUnits}+` : t.recommended ? 'Recommended' : 'Add-on';
+    return `
           <article class="tier${featured ? ' tier-featured' : ''}${t.included ? ' tier-standard' : ''} reveal">
-            <p class="tier-kicker">${t.included ? 'Included' : t.minUnits ? `Fleets of ${t.minUnits}+` : t.recommended ? 'Recommended' : 'Add-on'}</p>
+            <p class="tier-kicker">${esc(kicker)}</p>
             <h2>${esc(t.name)}</h2>
             <p class="tier-price">${t.included ? 'With every device' : `From ${money(fromPrice(t))} <small>per device</small>`}</p>
-            <p class="tier-summary">${esc(t.summary)}</p>
+            <p class="tier-summary">${esc(warrantyCopy.taglines?.[t.id] || t.summary)}</p>
             <ul class="tier-points">
-              ${(points || []).map((x) => `<li>${esc(x)}</li>`).join('\n              ')}
+              ${points.map((x) => `<li>${esc(x)}</li>`).join('\n              ')}
             </ul>
+            ${
+              t.quoteOnly
+                ? `<p class="tier-cta"><a class="btn btn-inverse" href="${quoteUrl(t.name)}">Ask for a fleet quote</a></p>`
+                : t.included
+                  ? ''
+                  : `<p class="tier-cta"><a class="btn btn-primary" href="/products/">Add it on any device page</a></p>`
+            }
           </article>`;
+  };
 
   write(
     'warranty.html',
@@ -1179,18 +1210,26 @@ ${breadcrumbs(trail)}
     <section class="section">
       <div class="container">
         <div class="tier-grid">
-          ${warranty.tiers.map((t) => tierCard(t, warrantyCopy.tier_points[t.id], t.id === 'care')).join('')}
+          ${warranty.tiers.map(tierCard).join('')}
         </div>
-        ${warrantyCopy.care_note ? `<aside class="callout" style="margin-top:var(--space-l)"><strong>Accidental damage.</strong> ${esc(warrantyCopy.care_note)}</aside>` : ''}
+        <aside class="callout" style="margin-top:var(--space-l)"><strong>Accidental damage.</strong> ${esc(warrantyCopy.care_note)}</aside>
       </div>
     </section>
 
     <section class="section section-tint">
+      <div class="container-narrow">
+        <div class="prose">
+          ${(warrantyCopy.intro || []).map((p) => `<p>${esc(p)}</p>`).join('\n          ')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container">
-${sectionHead({ tag: 'Prices', title: 'What each option costs, per device', lede: 'No VAT to add. Add it at checkout, or ask for it on your quote.' })}
+${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 'The amounts payable today. Destello Tech Ltd is not VAT registered. Plans are never discounted and do not count toward the device discount tiers.' })}
         <div class="compare-wrap reveal">
           <table class="compare-table">
-            <caption class="sr-only">Warranty prices per device</caption>
+            <caption class="sr-only">Plan prices per device</caption>
             <thead>
               <tr>
                 <th scope="col">Device</th>
@@ -1199,27 +1238,34 @@ ${sectionHead({ tag: 'Prices', title: 'What each option costs, per device', lede
               </tr>
             </thead>
             <tbody>
-              ${devices
+              ${warrantyDevices
                 .map(
                   (d) => `
               <tr>
                 <td><a href="${productUrl(d)}">${esc(d.name)}</a></td>
                 <td class="cell-mono">${money(d.price)}</td>
-                ${paidTiers.map((t) => `<td class="cell-price">${t.prices?.[d.id] !== undefined ? money(t.prices[d.id]) : 'n/a'}</td>`).join('')}
+                ${paidTiers
+                  .map((t) =>
+                    t.prices?.[d.id] !== undefined
+                      ? `<td class="cell-price">${money(t.prices[d.id])}${t.quoteOnly ? `<small class="cell-note">fleets of ${t.minUnits}+, on quote</small>` : ''}</td>`
+                      : `<td class="cell-mono">Not offered</td>`
+                  )
+                  .join('')}
               </tr>`
                 )
                 .join('')}
             </tbody>
           </table>
         </div>
+        ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more A10 and W10 devices. It can also be paid monthly with the devices through our lease funder for limited companies, LLPs and public bodies, subject to the funder's quotation.</p>` : ''}
       </div>
     </section>
 
-    <section class="section">
+    <section class="section section-tint">
       <div class="container">
-${sectionHead({ tag: 'Side by side', title: 'What is covered' })}
+${sectionHead({ tag: 'Side by side', title: 'What each plan does', lede: 'Every line in the paid columns has a numbered clause in the Plan Terms.' })}
         <div class="compare-wrap reveal">
-          <table class="compare-table">
+          <table class="compare-table compare-table-wrap">
             <caption class="sr-only">Comparison of the three cover levels</caption>
             <thead>
               <tr>
@@ -1247,25 +1293,71 @@ ${sectionHead({ tag: 'Side by side', title: 'What is covered' })}
       </div>
     </section>
 
-    <section class="section section-tint">
+    <section class="section">
       <div class="container-narrow">
         ${eyebrow('Claims')}
         <h2 class="title-md">How a claim works</h2>
-        <ol class="step-list">
-          ${warrantyCopy.claim_steps.map((s) => `<li>${esc(s)}</li>`).join('\n          ')}
+        <ol class="step-list step-list-long">
+          ${warrantyCopy.claim_steps.map((s) => `<li>${esc(clauseText(s))}</li>`).join('\n          ')}
         </ol>
-        <p style="margin-top:1.5rem" class="disclaimer">The full terms for each level are in the <a href="/terms#warranty">Warranty section of our Terms</a>. Nothing on this page replaces them, and nothing in them is different from this page.</p>
       </div>
     </section>
 
 ${faqBlock.html}
 
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Information for consumers')}
+        <h2 class="title-sm">If you are buying for yourself rather than a business</h2>
+        <p class="consumer-info">${esc(warrantyCopy.consumer_info)}</p>
+        <p class="disclaimer" style="margin-top:1.25rem">The full terms are the <a href="/warranty-terms">Plan Terms</a>, which also set out the standard warranty in clauses 44 to 49, and our <a href="/terms#warranty">Terms and Conditions</a>. Nothing on this page replaces them, and nothing in them is different from this page.</p>
+      </div>
+    </section>
+
 ${ctaBanner({
-  title: 'Add it at checkout, or put it on the quote.',
-  text: 'Choose the cover under the Add to basket button on any device page. Business buyers can ask for it line by line on a proforma.',
+  title: 'Add it on the device page, or put it on the quote.',
+  text: 'Choose the 3-Year Warranty under Add to basket on any A10, W10 or A6 page. Business buyers can ask for either plan line by line on a proforma.',
   primary: { href: '/products/', label: 'Browse the range' },
-  secondary: { href: '/contact?quote=#enquiry', label: 'Get a business quote' },
+  secondary: { href: quoteUrl('Total Care'), label: 'Ask for a fleet quote' },
 })}
+`,
+    })
+  );
+
+  const termsTrail = [{ label: 'Home', href: '/' }, { label: 'Warranty', href: '/warranty' }, { label: 'Plan Terms' }];
+  write(
+    'warranty-terms.html',
+    page({
+      title: `${planTerms.title} | Tuga Hardware`,
+      description: 'The numbered terms of the Tuga 3-Year Warranty, Tuga Total Care and the standard 12-month warranty.',
+      path: '/warranty-terms',
+      schema: [orgSchema, breadcrumbSchema(termsTrail)],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(termsTrail)}
+        ${eyebrow('Plan Terms')}
+        <h1>${esc(planTerms.title)}</h1>
+        <p class="lede">${esc(planTerms.intro)}</p>
+        <p class="post-meta"><span>Last updated: ${esc(planTerms.last_updated)}</span></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-narrow">
+        <div class="prose clauses">
+          ${planTerms.clauses
+            .map((c) => {
+              const n = clauseNumber(c);
+              return n
+                ? `<p id="clause-${n}"><strong>${n}.</strong> ${esc(clauseText(c))}</p>`
+                : `<p id="schedule-1"><strong>${esc(c.split('.')[0])}.</strong> ${esc(c.slice(c.indexOf('.') + 1).trim())}</p>`;
+            })
+            .join('\n          ')}
+        </div>
+        <p class="disclaimer" style="margin-top:2rem">See also our <a href="/terms">Terms and Conditions</a>, <a href="/warranty">warranty page</a> and <a href="/shipping-returns">shipping and returns</a>.</p>
+      </div>
+    </section>
 `,
     })
   );
@@ -1606,6 +1698,7 @@ const urls = [
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
   { loc: '/bulk', priority: '0.7', freq: 'monthly' },
   { loc: '/warranty', priority: '0.7', freq: 'monthly' },
+  { loc: '/warranty-terms', priority: '0.4', freq: 'yearly' },
   { loc: '/blog/', priority: '0.7', freq: 'weekly' },
   ...posts.map((p) => ({
     loc: `/blog/${p.slug}`,

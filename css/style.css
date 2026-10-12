@@ -2776,3 +2776,20 @@ p { text-wrap: pretty; }
   white-space: nowrap;
 }
 .protect-text strong .pick-tag { font-weight: 400; }
+
+/* Quote-only tier row in the chooser, tier card CTA, Plan Terms clauses */
+.protect-quote { cursor: default; }
+.protect-marker {
+  width: 13px; height: 13px; margin-top: 0.35rem;
+  border: 1px solid var(--rule-strong); border-radius: 50%; opacity: 0.5;
+}
+.protect-text a { color: var(--copper-dark); text-decoration: underline; text-underline-offset: 2px; }
+.tier-cta { margin-top: var(--space-m); }
+.tier-cta .btn { width: 100%; justify-content: center; }
+.cell-note { display: block; font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem; }
+.compare-table-wrap td, .compare-table-wrap th { white-space: normal; min-width: 180px; vertical-align: top; line-height: 1.5; }
+.compare-table-wrap th[scope="row"] { font-weight: 600; color: var(--ink); }
+.step-list-long li { margin-bottom: 1rem; }
+.consumer-info { color: var(--ink-mid); line-height: 1.7; max-width: var(--measure); }
+.clauses p { margin-bottom: 1.1rem; }
+.clauses p strong { color: var(--green-900); font-family: var(--font-mono); font-weight: 500; margin-right: 0.35rem; }

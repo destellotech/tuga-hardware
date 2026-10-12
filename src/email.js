@@ -85,6 +85,27 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     </tr>
   ` : '';
 
+  // A paid plan is registered to the device serial at dispatch. Consumers who
+  // buy an extended warranty must be told of their 45-day cancellation right
+  // at purchase (Supply of Extended Warranties on Domestic Electrical Goods
+  // Order 2005, article 8).
+  const hasPlan = items.some((item) => /^3-Year Warranty/.test(item.name || ''));
+  const planBlock = hasPlan ? `
+    <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
+      <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Your 3-Year Warranty</h3>
+      <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
+        The plan is registered to each device's serial number when it is dispatched,
+        and the dispatch email will list the serial, the plan and its end date.
+        The Plan Terms are at
+        <a href="https://www.tugahardware.com/warranty-terms" style="color:${BRAND.copper};">tugahardware.com/warranty-terms</a>.
+        If you bought as a consumer, you may cancel the plan within 45 days of
+        purchase for a full refund if you have made no claim, by emailing
+        <a href="mailto:support@tugahardware.com" style="color:${BRAND.copper};">support@tugahardware.com</a>;
+        business buyers have 30 days. Your statutory rights are not affected.
+      </p>
+    </div>
+  ` : '';
+
   const shippingBlock = shippingAddress ? `
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 12px;font-size:15px;color:${BRAND.green};">Shipping to</h3>
@@ -121,6 +142,8 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     </table>
 
     ${shippingBlock}
+
+    ${planBlock}
 
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">What happens next?</h3>
