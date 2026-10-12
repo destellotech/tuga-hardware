@@ -98,7 +98,7 @@ function warrantyChooser(p) {
                 (t) => `
             <label class="protect-opt">
               <input type="radio" name="warranty" value="wty-${t.id}-${base}" data-warranty-choice>
-              <span class="protect-text"><strong>${esc(t.name)}</strong>${esc(t.summary)}</span>
+              <span class="protect-text"><strong>${esc(t.name)}${t.recommended ? ' <span class="pick-tag">Recommended</span>' : ''}</strong>${esc(t.summary)}</span>
               <span class="protect-price">+${money(t.prices[base])}<small>per device</small></span>
             </label>`
               )
@@ -170,7 +170,7 @@ const breadcrumbSchema = (trail) => ({
 const HOME_FAQ = [
   {
     q: 'Which size should I get: 6, 8 or 10 inch?',
-    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is what most tradespeople settle on: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
+    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is the middle ground: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 10.1 inch A10 is our pick for Android apps.',
   },
   {
     q: 'What is the difference between IP67, IP68 and IP69K?',
@@ -611,7 +611,7 @@ ${breadcrumbs(trail)}
         </div>
 
         <div class="buy-panel" data-buy-box>
-          <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} / ${esc(p.sizeLabel)}&Prime; / ${esc(p.specs.os)}</p>
+          <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} / ${esc(p.sizeLabel)}&Prime; / ${esc(p.specs.os)}${p.badge ? ` <span class="pick-tag">${esc(p.badge)}</span>` : ''}</p>
           <h1 class="pdp-title">${esc(p.name)}</h1>
           <p class="pdp-tagline">${esc(p.tagline)}</p>
 
@@ -892,7 +892,7 @@ ${breadcrumbs(bulkTrail)}
 ${sectionHead({
   tag: 'The range',
   title: 'What to put in the basket',
-  lede: 'For most teams the 8 inch Android is the right default, with a couple of 10 inch units for whoever handles the drawings.',
+  lede: 'Our pick for most teams is the 10.1 inch Android A10, with the W10 for anyone whose software only runs on Windows. The 6.8 inch A6 suits people who need a device in a pocket more than a screen for drawings.',
 })}
 ${compareTable()}
       </div>
@@ -1150,7 +1150,7 @@ const liftProse = (name) =>
   const faqBlock = faq(warrantyCopy.faq, { heading: 'Warranty questions', tag: 'Questions' });
   const tierCard = (t, points, featured) => `
           <article class="tier${featured ? ' tier-featured' : ''}${t.included ? ' tier-standard' : ''} reveal">
-            <p class="tier-kicker">${t.included ? 'Included' : t.minUnits ? `Fleets of ${t.minUnits}+` : 'Add-on'}</p>
+            <p class="tier-kicker">${t.included ? 'Included' : t.minUnits ? `Fleets of ${t.minUnits}+` : t.recommended ? 'Recommended' : 'Add-on'}</p>
             <h2>${esc(t.name)}</h2>
             <p class="tier-price">${t.included ? 'With every device' : `From ${money(fromPrice(t))} <small>per device</small>`}</p>
             <p class="tier-summary">${esc(t.summary)}</p>

@@ -2758,3 +2758,21 @@ p { text-wrap: pretty; }
 .step-list li::marker { font-family: var(--font-mono); color: var(--copper-dark); }
 .disclaimer { font-size: var(--step--1); color: var(--ink-light); line-height: 1.6; max-width: var(--measure); }
 .disclaimer a { color: inherit; }
+
+/* Inline pick tag: "Our pick", "Recommended". One place to restyle if the
+   label ever becomes data-driven ("Most ordered") once there are order counts. */
+.pick-tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--copper);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--copper-dark);
+  white-space: nowrap;
+}
+.protect-text strong .pick-tag { font-weight: 400; }
