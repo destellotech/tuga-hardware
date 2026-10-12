@@ -629,7 +629,7 @@ async function handlePayPalWebhook(request, env) {
  */
 async function handleContact(request, env) {
   try {
-    const { name, email, topic, message, website } = await request.json();
+    const { name, email, company, topic, message, website } = await request.json();
 
     // Honeypot: real users never fill a hidden field.
     if (website) return corsResponse({ ok: true });
@@ -644,6 +644,7 @@ async function handleContact(request, env) {
     const enquiry = {
       name: String(name || '').slice(0, 120),
       email: String(email).slice(0, 160),
+      company: String(company || '').slice(0, 160),
       topic: String(topic || 'Enquiry').slice(0, 80),
       message: String(message).slice(0, 4000),
       receivedAt: new Date().toISOString(),

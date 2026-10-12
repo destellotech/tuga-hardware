@@ -268,7 +268,7 @@ const header = (active) => `
     ${
       SALES_PAUSED
         ? `<strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>`
-        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns<span class="announce-sep">/</span>Bulk discounts from 2 units`
+        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes and proforma invoices</a><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns`
     }
   </div>
   <header class="site-header" id="site-header">

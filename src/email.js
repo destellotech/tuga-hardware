@@ -189,7 +189,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 // ---------------------------------------------------------------------------
 // Enquiry from the contact form / a buyer's-guide signup
 // ---------------------------------------------------------------------------
-export async function sendEnquiry(env, { name, email, topic, message }) {
+export async function sendEnquiry(env, { name, email, company, topic, message }) {
   const row = (label, value) =>
     `<tr><td style="padding:6px 12px;font:500 13px monospace;color:#8a8a82">${escapeHtml(label)}</td><td style="padding:6px 12px;font:14px sans-serif;color:#1a1a18">${escapeHtml(value)}</td></tr>`;
 
@@ -202,6 +202,7 @@ export async function sendEnquiry(env, { name, email, topic, message }) {
       <table style="border-collapse:collapse;margin:16px 0">
         ${row('Name', name || '—')}
         ${row('Email', email || '—')}
+        ${row('Company', company || '—')}
         ${row('Topic', topic || '—')}
       </table>
       <p style="white-space:pre-wrap;font-size:15px;line-height:1.6;color:#1a1a18">${escapeHtml(message || '')}</p>

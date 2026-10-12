@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=cba9f5fba6">
+  <link rel="stylesheet" href="/css/style.css?v=76bc5de3fd">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -84,7 +84,7 @@
     "url": "https://www.tugahardware.com/products/tuga-w10",
     "price": 649,
     "priceCurrency": "GBP",
-    "availability": "https://schema.org/OutOfStock",
+    "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "seller": {
       "@id": "https://www.tugahardware.com/#organization"
@@ -105,14 +105,14 @@
         "@type": "ShippingDeliveryTime",
         "handlingTime": {
           "@type": "QuantitativeValue",
-          "minValue": 1,
-          "maxValue": 2,
+          "minValue": 6,
+          "maxValue": 7,
           "unitCode": "DAY"
         },
         "transitTime": {
           "@type": "QuantitativeValue",
-          "minValue": 9,
-          "maxValue": 18,
+          "minValue": 1,
+          "maxValue": 3,
           "unitCode": "DAY"
         }
       }
@@ -223,11 +223,11 @@
   ]
 }</script>
 </head>
-<body data-sales-paused>
+<body>
   <a href="#main" class="skip-link">Skip to content</a>
 
   <div class="announce">
-    <strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>
+    <strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes and proforma invoices</a><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns
   </div>
   <header class="site-header" id="site-header">
     <div class="container header-inner">
@@ -293,18 +293,25 @@
           <div class="pdp-price-row">
             <span class="pdp-price">£649</span>
             
-            <span class="pdp-price-note">No VAT to add. Free UK delivery in 10 to 20 working days</span>
+            <span class="pdp-price-note">No VAT to add. Free UK delivery in 7 to 10 working days</span>
           </div>
 
           <p class="pdp-desc">The W10 is the full desktop experience in a rugged package. An Intel N100 processor (up to 3.4GHz), 8GB of RAM and 128GB of storage run Windows 11 Pro on a 10.1 inch IPS touchscreen. The port selection is what sets it apart: HDMI, RJ45 Ethernet, USB-C and USB-A for direct connections to plant, panels and network gear that has never seen Wi-Fi. Rated IP65 for dust and water jets, with a removable 5000mAh battery, NFC, a microSD slot and a pogo pin dock connector. Options include 4G LTE, GPS, a fingerprint reader, a 2D barcode scanner and a UHF RFID reader.</p>
 
           <div class="buy-row">
-            <p class="pdp-paused" role="status">We have paused new orders while we move to UK stock. Email support@tugahardware.com and we will tell you as soon as a device is available.</p>
-            <a class="btn btn-primary btn-lg" href="/contact">Ask about availability</a>
+            <div class="qty">
+              <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
+              <input type="number" id="qty" value="1" min="1" max="99" aria-label="Quantity">
+              <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
+            </div>
+            <button class="btn btn-primary btn-lg" data-add-to-cart="tuga-w10" data-qty-source="qty">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> Add to basket
+            </button>
           </div>
+          <p class="pdp-quote">Buying for a business? <a href="/contact?quote=Tuga%20W10#enquiry">Get a quote and pay by bank transfer</a>. Trial units welcome.</p>
 
           <div class="pdp-assurance">
-            <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free UK delivery in 10 to 20 working days</span></div>
+            <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free UK delivery in 7 to 10 working days</span></div>
             <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>12-month warranty</span></div>
             <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg><span>30-day returns</span></div>
             <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>Secure checkout</span></div>
@@ -445,7 +452,7 @@
           </div>
           <div class="variant-action">
             <span class="variant-price">£729</span>
-            
+            <button class="btn btn-sm btn-copper" data-add-to-cart="tuga-w10-scanner">Add to basket</button>
           </div>
         </div>
       </section>
@@ -463,7 +470,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£49.99</span>
-              
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-charging-dock">Add to basket</button>
             </div>
           </div>
 
@@ -474,7 +481,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£109</span>
-              
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-vehicle-mount">Add to basket</button>
             </div>
           </div>
 
@@ -485,7 +492,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10</p>
             <div class="accessory-foot">
               <span class="accessory-price">£24</span>
-              
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-hand-strap">Add to basket</button>
             </div>
           </div>
 
@@ -496,7 +503,7 @@
             <p class="accessory-compat">Fits: Tuga A8, Tuga A10, Tuga W8, Tuga W10, Tuga WH6</p>
             <div class="accessory-foot">
               <span class="accessory-price">£14.99</span>
-              
+              <button class="btn btn-sm btn-outline" data-add-to-cart="acc-stylus">Add to basket</button>
             </div>
           </div>
         </div>
@@ -729,7 +736,7 @@
     </div>
   </div>
 
-  <script src="/js/app.js?v=25233dc74b" defer></script>
+  <script src="/js/app.js?v=8dca54eaf6" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->

@@ -2674,3 +2674,12 @@ p { text-wrap: pretty; }
   margin: 0;
   color: var(--ink-light);
 }
+
+/* Business quote link under the buy box */
+.pdp-quote {
+  margin: 0.75rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-light);
+}
+.pdp-quote a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.field-optional { font-weight: 400; opacity: 0.7; }

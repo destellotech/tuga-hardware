@@ -601,6 +601,19 @@
   function initForms() {
     const contact = $('[data-contact-form]');
     if (contact) {
+      // Product pages link here with ?quote=<product name> for business quotes.
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('quote')) {
+        const topic = $('#topic', contact);
+        if (topic && topic.options.length) topic.selectedIndex = 0;
+        const product = params.get('quote');
+        const message = $('#message', contact);
+        if (message && !message.value) {
+          message.value = product
+            ? `Quote request: ${product}\nQuantity: \nDelivery postcode: \n`
+            : 'Quote request\nDevices and quantities: \nDelivery postcode: \n';
+        }
+      }
       contact.addEventListener('submit', async (e) => {
         e.preventDefault();
         const status = $('[data-form-status]', contact);
@@ -705,7 +718,7 @@
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Devices ship direct from the manufacturer and take 10 to 20 working days to arrive.',
+              'Thank you. A confirmation email is on its way with your order number and delivery details. Delivery is typically 7 to 10 working days, with no import charges to pay.',
               `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
             );
           } else if (ok && data.status === 'unsupported_country') {

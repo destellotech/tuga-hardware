@@ -13,7 +13,7 @@
  * report the devices as out of stock. Set to false, rebuild and deploy to
  * reopen.
  */
-export const SALES_PAUSED = true;
+export const SALES_PAUSED = false;
 
 export const SALES_PAUSED_MESSAGE =
   'We have paused new orders while we move to UK stock. Email support@tugahardware.com and we will tell you as soon as a device is available.';
@@ -49,12 +49,23 @@ export const PRICE_NOTE = 'No VAT to add';
 export const SHIPPING_COUNTRIES = ['GB'];
 
 /**
- * Devices currently ship direct from the manufacturer. Keep every delivery
- * promise on the site, in the API and in emails pointed at these strings.
+ * Devices are shipped to us in the UK first and sent on from here, so we are
+ * the importer and customers never pay charges on delivery. Keep every
+ * delivery promise on the site, in the API and in emails pointed at these
+ * strings.
  */
 export const DELIVERY = {
-  days: '10 to 20 working days',
+  days: '7 to 10 working days',
   summary:
-    'Delivery is free to UK addresses on every order, with no minimum. Devices ship direct from the manufacturer and take 10 to 20 working days to arrive. We email a tracking number as soon as your order ships.',
-  short: 'Free UK delivery in 10 to 20 working days',
+    'Delivery is free to UK addresses on every order, with no minimum. Devices come to us in the UK first and we send them on, typically 7 to 10 working days from order, with no customs or import charges to pay on delivery. We email a tracking number when your order is on its way.',
+  short: 'Free UK delivery in 7 to 10 working days',
 };
+
+/**
+ * Most business buyers want a quote, a proforma invoice and a bank transfer
+ * rather than a card checkout. Product pages link to the contact form with
+ * this topic preselected.
+ */
+export const QUOTE_TOPIC = 'Business quote or proforma invoice';
+export const quoteUrl = (productName) =>
+  `/contact?quote=${encodeURIComponent(productName)}#enquiry`;
