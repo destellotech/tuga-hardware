@@ -71,6 +71,8 @@ export const devices = data.products
 export const androidRange = devices.filter((p) => p.category === 'android');
 export const windowsRange = devices.filter((p) => p.category === 'windows');
 export const accessories = data.accessories;
+export const warranty = data.warranty ?? { tiers: [], careMinUnits: 5 };
+export const warrantyTier = (id) => warranty.tiers.find((t) => t.id === id);
 
 export const variantsOf = (id) =>
   data.products.filter((p) => p.isVariant && p.variantOf === id);
@@ -319,6 +321,7 @@ const footer = () => `
         <div class="footer-col">
           <h3>Support</h3>
           <nav aria-label="Support">
+            <a href="/warranty">Warranty</a>
             <a href="/shipping-returns">Shipping &amp; returns</a>
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>

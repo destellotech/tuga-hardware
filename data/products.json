@@ -458,5 +458,157 @@
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     }
+  ],
+  "warranty": {
+    "_note": "Paid warranty tiers. Prices here MUST match the wty-* entries in src/api.js PRODUCTS. The warranty page copy lives in build/content/warranty.json.",
+    "careMinUnits": 5,
+    "tiers": [
+      {
+        "id": "standard",
+        "name": "Standard",
+        "months": 12,
+        "included": true,
+        "summary": "12 months against defects, 30-day returns. Included with every device."
+      },
+      {
+        "id": "3yr",
+        "name": "3-Year Warranty",
+        "months": 36,
+        "summary": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+        "prices": {
+          "tuga-a6": 45,
+          "tuga-a8": 49,
+          "tuga-a10": 59,
+          "tuga-wh6": 99,
+          "tuga-w8": 79,
+          "tuga-w10": 79
+        }
+      },
+      {
+        "id": "care",
+        "name": "Total Care",
+        "months": 36,
+        "summary": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+        "prices": {
+          "tuga-a6": 99,
+          "tuga-a8": 109,
+          "tuga-a10": 129,
+          "tuga-wh6": 199,
+          "tuga-w8": 159,
+          "tuga-w10": 169
+        },
+        "minUnits": 5
+      }
+    ]
+  },
+  "warranties": [
+    {
+      "id": "wty-3yr-tuga-a6",
+      "name": "3-Year Warranty for Tuga A6",
+      "description": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+      "price": 45,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a6",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-a8",
+      "name": "3-Year Warranty for Tuga A8",
+      "description": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+      "price": 49,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a8",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-a10",
+      "name": "3-Year Warranty for Tuga A10",
+      "description": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+      "price": 59,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a10",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-wh6",
+      "name": "3-Year Warranty for Tuga WH6",
+      "description": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+      "price": 99,
+      "currency": "GBP",
+      "warrantyFor": "tuga-wh6",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-w8",
+      "name": "3-Year Warranty for Tuga W8",
+      "description": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+      "price": 79,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w8",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-w10",
+      "name": "3-Year Warranty for Tuga W10",
+      "description": "Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.",
+      "price": 79,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w10",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-care-tuga-a6",
+      "name": "Total Care for Tuga A6",
+      "description": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+      "price": 99,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a6",
+      "tier": "care"
+    },
+    {
+      "id": "wty-care-tuga-a8",
+      "name": "Total Care for Tuga A8",
+      "description": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+      "price": 109,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a8",
+      "tier": "care"
+    },
+    {
+      "id": "wty-care-tuga-a10",
+      "name": "Total Care for Tuga A10",
+      "description": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+      "price": 129,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a10",
+      "tier": "care"
+    },
+    {
+      "id": "wty-care-tuga-wh6",
+      "name": "Total Care for Tuga WH6",
+      "description": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+      "price": 199,
+      "currency": "GBP",
+      "warrantyFor": "tuga-wh6",
+      "tier": "care"
+    },
+    {
+      "id": "wty-care-tuga-w8",
+      "name": "Total Care for Tuga W8",
+      "description": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+      "price": 159,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w8",
+      "tier": "care"
+    },
+    {
+      "id": "wty-care-tuga-w10",
+      "name": "Total Care for Tuga W10",
+      "description": "36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.",
+      "price": 169,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w10",
+      "tier": "care"
+    }
   ]
 }

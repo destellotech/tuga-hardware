@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=76bc5de3fd">
+  <link rel="stylesheet" href="/css/style.css?v=ce31523610">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -290,7 +290,7 @@
           </div>
         </div>
 
-        <div class="buy-panel">
+        <div class="buy-panel" data-buy-box>
           <p class="pdp-kicker">Rugged handheld / 6.5&Prime; / Windows 11 Pro</p>
           <h1 class="pdp-title">Tuga WH6</h1>
           <p class="pdp-tagline">Windows in your pocket.</p>
@@ -303,6 +303,27 @@
 
           <p class="pdp-desc">The WH6 puts full Windows 11 Pro in your pocket. An Intel N100, 16GB of RAM and a 512GB SSD mean you can run the legacy Windows software your industry never moved off, reach network drives, and manage field data without compromise. Sealed to IP67 and drop tested to MIL-STD-810H, with a 10000mAh battery and 4G LTE. A barcode scanner variant is available for warehouse and logistics work, and a charging dock is sold separately for desk use.</p>
 
+          
+          <fieldset class="protect" data-warranty-chooser>
+            <legend><span class="eyebrow">Cover</span></legend>
+            <label class="protect-opt">
+              <input type="radio" name="warranty" value="" data-warranty-choice checked>
+              <span class="protect-text"><strong>Standard</strong>12 months against defects, 30-day returns. Included with every device.</span>
+              <span class="protect-price">Included</span>
+            </label>
+            
+            <label class="protect-opt">
+              <input type="radio" name="warranty" value="wty-3yr-tuga-wh6" data-warranty-choice>
+              <span class="protect-text"><strong>3-Year Warranty</strong>Extends cover against defects to 36 months, adds battery cover, and we pay carriage both ways.</span>
+              <span class="protect-price">+£99<small>per device</small></span>
+            </label>
+            <label class="protect-opt">
+              <input type="radio" name="warranty" value="wty-care-tuga-wh6" data-warranty-choice>
+              <span class="protect-text"><strong>Total Care</strong>36 months with a replacement dispatched next working day, a battery service at month 18 and set-up help. For fleets of 5 or more.</span>
+              <span class="protect-price">+£199<small>per device</small></span>
+            </label>
+            <a class="protect-link" href="/warranty">Compare all three and read the terms</a>
+          </fieldset>
           <div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
@@ -317,7 +338,7 @@
 
           <div class="pdp-assurance">
             <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free UK delivery in 7 to 10 working days</span></div>
-            <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>12-month warranty</span></div>
+            <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span><a href="/warranty">12-month warranty, 3-year option</a></span></div>
             <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg><span>30-day returns</span></div>
             <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>Secure checkout</span></div>
           </div>
@@ -715,6 +736,7 @@
         <div class="footer-col">
           <h3>Support</h3>
           <nav aria-label="Support">
+            <a href="/warranty">Warranty</a>
             <a href="/shipping-returns">Shipping &amp; returns</a>
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>
@@ -742,7 +764,7 @@
     </div>
   </div>
 
-  <script src="/js/app.js?v=1096909d05" defer></script>
+  <script src="/js/app.js?v=cabbda68e4" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->

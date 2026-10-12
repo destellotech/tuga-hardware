@@ -1,0 +1,57 @@
+{
+  "_note": "Copy for /warranty. Prices and tier names come from data/products.json; this file holds the words. Replace with the designed copy when the warranty design is signed off.",
+  "title": "Warranty and Total Care",
+  "meta_description": "Every Tuga device comes with 12 months of cover. Add a 3-Year Warranty, or Total Care with next-working-day replacement for fleets. Prices published, terms in writing.",
+  "h1": "Three levels of cover. All of them in writing.",
+  "lede": "Every device includes 12 months against defects. If you want longer, or you run a fleet that cannot be without a device, there are two paid options with published prices and terms you can forward to your finance team.",
+  "tier_points": {
+    "standard": [
+      "12 months against manufacturing defects from the date of delivery",
+      "30-day returns for any reason, in original condition",
+      "Email support from someone who has handled the hardware"
+    ],
+    "3yr": [
+      "36 months against manufacturing defects from the date of delivery",
+      "Battery covered: replaced or the device swapped if capacity falls below 80%",
+      "We pay carriage both ways within mainland UK",
+      "Repair or replacement, your choice of refund if we cannot do either",
+      "One price per device, added at checkout or on your quote"
+    ],
+    "care": [
+      "Everything in the 3-Year Warranty",
+      "Replacement dispatched next working day, before the faulty unit comes back",
+      "Battery service at month 18: new battery on the W10, capacity check and swap if needed on Android devices",
+      "Devices delivered set up with your apps and settings",
+      "A loan unit for trials and roll-outs",
+      "Take-back and a data-wipe certificate at end of life",
+      "For orders of 5 or more devices"
+    ]
+  },
+  "care_note": "Accidental damage (a cracked screen, a drop that breaks the casing) is not covered by any tier yet. We will add it only when an authorised insurer underwrites it, and we will say so on this page when that happens.",
+  "comparison_rows": [
+    { "label": "Length", "standard": "12 months", "three_year": "36 months", "total_care": "36 months" },
+    { "label": "Manufacturing defects", "standard": "Yes", "three_year": "Yes", "total_care": "Yes" },
+    { "label": "Battery", "standard": "Defects only", "three_year": "Replaced below 80% capacity", "total_care": "Replaced below 80%, plus a month-18 service" },
+    { "label": "If it fails", "standard": "Repair or replace", "three_year": "Repair or replace, carriage paid both ways", "total_care": "Replacement dispatched next working day" },
+    { "label": "Set-up with your software", "standard": "No", "three_year": "No", "total_care": "Yes" },
+    { "label": "Loan unit", "standard": "No", "three_year": "No", "total_care": "Yes" },
+    { "label": "End-of-life take-back and data wipe", "standard": "Take-back on request", "three_year": "Take-back on request", "total_care": "Included, with a certificate" },
+    { "label": "Accidental damage", "standard": "No", "three_year": "No", "total_care": "Not yet (see note)" },
+    { "label": "Minimum order", "standard": "None", "three_year": "None", "total_care": "5 devices" }
+  ],
+  "claim_steps": [
+    "Email support@tugahardware.com with the order number, the serial number and what is wrong. Photos or a short video help.",
+    "We reply within one working day with a returns label (3-Year Warranty) or confirm the replacement dispatch (Total Care).",
+    "Send the faulty unit back in any suitable box. Under both paid tiers the carriage is on us.",
+    "We repair or replace and send it back, or keep the replacement you already have under Total Care.",
+    "Your cover continues for the rest of the original term on the repaired or replacement device."
+  ],
+  "faq": [
+    { "q": "Can I add the 3-Year Warranty later?", "a": "Yes, within 30 days of delivery, at the same price. Email us with the order number and we will send a payment link." },
+    { "q": "Does a replacement restart the warranty?", "a": "No. Cover runs from the original delivery date for the original term, whichever device you end up holding." },
+    { "q": "What is not covered?", "a": "Accidental damage, liquid damage beyond the device's rating, cosmetic wear, software problems, consumables such as styluses and straps, and anything caused by unauthorised repair or misuse. The full list is in the Terms." },
+    { "q": "What does next working day mean under Total Care?", "a": "Tell us before 2pm on a working day and the replacement leaves the same day for next-day delivery in mainland UK. After 2pm it leaves the next working day." },
+    { "q": "We are a business. Can this go on the proforma?", "a": "Yes. Ask for a quote and we will list the cover per device alongside the hardware." },
+    { "q": "Does this affect my legal rights?", "a": "No. Consumers keep every right under the Consumer Rights Act 2015. These options sit on top of them." }
+  ]
+}
