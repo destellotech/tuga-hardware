@@ -609,10 +609,15 @@ p { text-wrap: pretty; }
 @media (max-width: 900px) {
   .nav-toggle { display: grid; }
 
+  /* The header's backdrop-filter makes it the containing block for fixed
+     descendants, so anchor the drawer to the header itself. */
   .primary-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    pointer-events: none;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -620,11 +625,17 @@ p { text-wrap: pretty; }
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
     transform: translateY(-115%);
-    transition: transform var(--base);
+    transition: transform var(--base), visibility 0s linear var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
+    z-index: -1;
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform var(--base), visibility 0s;
+  }
 
   .primary-nav a {
     padding-block: 0.95rem;
