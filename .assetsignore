@@ -10,3 +10,6 @@ node_modules
 wrangler.toml
 .gitignore
 .assetsignore
+package.json
+package-lock.json
+data/images.json
