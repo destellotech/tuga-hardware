@@ -617,7 +617,7 @@ ${breadcrumbs(trail)}
             <button type="button" class="gallery-zoom" data-zoom aria-label="Enlarge image">${icons.zoom(18)}</button>
             <img id="gallery-image" src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" width="800" height="800" fetchpriority="high">
           </div>
-          <div class="gallery-thumbs" role="group" aria-label="Product images">
+          ${p.images.length > 1 ? `<div class="gallery-thumbs" role="group" aria-label="Product images">
             ${p.images
               .map(
                 (_, i) => `
@@ -626,7 +626,7 @@ ${breadcrumbs(trail)}
             </button>`
               )
               .join('')}
-          </div>
+          </div>` : ''}
           ${
             /* Optional abuse-test footage: "video": { "src", "poster", "caption" }
                in products.json. Short, silent loops work best. */
