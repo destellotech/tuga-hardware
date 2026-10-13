@@ -375,6 +375,8 @@
       if (btn.dataset.qtySource) {
         const input = document.getElementById(btn.dataset.qtySource);
         qty = Math.max(1, parseInt(input?.value, 10) || 1);
+      } else if (btn.dataset.pickerQty) {
+        qty = Math.max(1, Math.min(99, parseInt(btn.dataset.pickerQty, 10) || 1));
       }
 
       // A product page can offer a warranty for the device being added; it is
@@ -542,7 +544,9 @@
     const nextTier =
       d === 1
         ? 'Add one more device for 3% off both'
-        : d >= 2 && d < 5
+        : d === 2
+          ? 'Add one more device for 5% off'
+          : d >= 3 && d < 5
           ? `Add ${5 - d} more ${5 - d === 1 ? 'device' : 'devices'} for 8% off`
           : d >= 5 && d < 10
             ? `Add ${10 - d} more ${10 - d === 1 ? 'device' : 'devices'} for 10% off`
@@ -955,6 +959,362 @@
     attempt(3);
   }
 
+  /* --------------------------------------------------------------- lightbox */
+
+  function initLightbox() {
+    const dialog = $('[data-lightbox]');
+    const zoom = $('[data-zoom]');
+    const main = $('#gallery-image');
+    if (!dialog || !zoom || !main || typeof dialog.showModal !== 'function') {
+      if (zoom) zoom.hidden = true;
+      return;
+    }
+
+    const img = $('[data-lightbox-image]', dialog);
+    const sources = $$('.gallery-thumb').map((t) => t.dataset.gallerySrc);
+    if (!sources.length) sources.push(main.src);
+    let index = 0;
+
+    const show = (i) => {
+      index = (i + sources.length) % sources.length;
+      img.src = sources[index];
+    };
+
+    const open = () => {
+      const current = sources.findIndex((s) => main.src.endsWith(s));
+      show(current < 0 ? 0 : current);
+      dialog.showModal();
+    };
+
+    zoom.addEventListener('click', open);
+    main.addEventListener('click', open);
+    main.style.cursor = 'zoom-in';
+
+    $$('[data-lightbox-step]', dialog).forEach((btn) =>
+      btn.addEventListener('click', () => show(index + Number(btn.dataset.lightboxStep)))
+    );
+    $('[data-lightbox-close]', dialog).addEventListener('click', () => dialog.close());
+    // Click on the backdrop (the dialog itself, not its contents) closes it.
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(index + 1);
+      if (e.key === 'ArrowLeft') show(index - 1);
+    });
+    if (sources.length < 2) $$('.lightbox-nav', dialog).forEach((b) => (b.hidden = true));
+  }
+
+  /* ----------------------------------------------------------------- picker */
+
+  /* Recommend one device from four answers. Deliberately plain rules, so the
+     result can be explained in a sentence and never upsells by accident. */
+  function recommend(answers, list) {
+    const os = answers.os === 'windows' ? 'windows' : 'android';
+    const size = answers.size;
+    const base = list.find((p) => !p.variantOf && p.os === os && p.size === size);
+    const reasons = [];
+
+    if (answers.os === 'unsure') {
+      reasons.push('You were not sure about software, so we went with Android: it runs the apps most trades use and costs noticeably less. Ask us if a specific program worries you.');
+    } else if (os === 'android') {
+      reasons.push('Android runs the apps you use and costs noticeably less than the Windows equivalent.');
+    } else {
+      reasons.push('Full Windows 11, so your desktop software runs as it does in the office.');
+    }
+
+    reasons.push(
+      size === '6'
+        ? 'The 6 inch size goes in a pocket or a belt holster.'
+        : size === '8'
+          ? 'Eight inches is big enough for forms and drawings, small enough for one hand.'
+          : 'The 10 inch screen shows a full drawing or spreadsheet without constant zooming.'
+    );
+
+    let pick = base;
+    if (answers.scan === 'lots') {
+      const scanner = list.find((p) => p.variantOf === base.id);
+      if (scanner) {
+        pick = scanner;
+        reasons.push('A built-in scanner engine reads barcodes far faster than a camera when scanning is the job.');
+      } else {
+        reasons.push('Android devices scan with the camera, which is fine for occasional use. For all-day scanning the Windows models are available with a dedicated scanner engine.');
+      }
+    } else if (answers.scan === 'some') {
+      reasons.push('The camera handles the odd barcode or serial number with a free scanning app.');
+    }
+
+    // The cheaper sibling or the obvious alternative, for honesty.
+    let alt = null;
+    if (os === 'windows' && answers.scan !== 'lots') {
+      alt = list.find((p) => !p.variantOf && p.os === 'android' && p.size === size);
+      if (alt) alt = { ...alt, why: `If your software turns out to have an app, the ${alt.name} does the same job for ${money(pick.price - alt.price)} less.` };
+    } else if (os === 'android' && size === '10') {
+      alt = list.find((p) => p.id === 'tuga-a8');
+      if (alt) alt = { ...alt, why: `Working mostly outdoors? The ${alt.name} has a much brighter screen and is ${money(pick.price - alt.price)} cheaper.` };
+    } else if (os === 'android' && size === '6') {
+      alt = list.find((p) => p.id === 'tuga-a8');
+      if (alt) alt = { ...alt, why: `If you fill in long forms, the ${alt.name} gives you a lot more screen for ${money(alt.price - pick.price)} more.` };
+    } else if (os === 'android' && size === '8') {
+      alt = list.find((p) => p.id === 'tuga-a6');
+      if (alt) alt = { ...alt, why: `Mostly photos and calls? The ${alt.name} fits a pocket and saves ${money(pick.price - alt.price)}.` };
+    }
+
+    return { pick, reasons, alt };
+  }
+
+  function initPicker() {
+    const form = $('[data-picker]');
+    const result = $('[data-picker-result]');
+    const dataEl = $('#picker-data');
+    if (!form || !result || !dataEl) return;
+
+    const list = JSON.parse(dataEl.textContent);
+    const steps = $$('[data-picker-step]', form);
+    let current = 0;
+
+    const go = (i) => {
+      current = i;
+      steps.forEach((s, n) => (s.hidden = n !== i));
+      result.hidden = true;
+      form.hidden = false;
+      steps[i].querySelector('input')?.focus({ preventScroll: true });
+    };
+
+    const render = () => {
+      const answers = Object.fromEntries(new FormData(form).entries());
+      const qty = Number(answers.qty) || 1;
+      const { pick, reasons, alt } = recommend(answers, list);
+      const tier = Cart.tier(qty);
+      const unit = Math.round(pick.price * (1 - tier.percent / 100) * 100) / 100;
+
+      result.innerHTML = `
+        <div class="picker-pick">
+          <div class="picker-pick-media"><img src="${pick.image}" alt="${pick.name}" width="400" height="400"></div>
+          <div>
+            <span class="eyebrow">Our pick</span>
+            <h2 class="title-md">${pick.name}</h2>
+            <p class="pdp-tagline">${pick.tagline}</p>
+            <ul class="check-list picker-reasons">${reasons.map((r) => `<li><span>${r}</span></li>`).join('')}</ul>
+            <p class="mono picker-specs">${pick.ip} / ${pick.battery} / ${pick.weight}</p>
+            <div class="picker-price">
+              <span class="pdp-price">${money(qty > 1 ? unit : pick.price)}</span>
+              <span class="pdp-price-note">${
+                qty > 1
+                  ? `each, with ${tier.percent}% off from ${qty} devices. Fine-tune quantities in the basket`
+                  : 'No VAT to add. Free UK delivery'
+              }</span>
+            </div>
+            <div class="picker-actions">
+              <button class="btn btn-primary btn-lg" data-add-to-cart="${pick.id}" data-picker-qty="${qty}">Add ${qty > 1 ? qty + ' ' : ''}to basket</button>
+              <a class="btn btn-outline btn-lg" href="${pick.url}">See the full spec</a>
+            </div>
+            ${alt ? `<p class="picker-alt">${alt.why} <a class="link-arrow" href="${alt.url}">View the ${alt.name}</a></p>` : ''}
+            <button type="button" class="picker-back" data-picker-restart>&larr; Start again</button>
+          </div>
+        </div>`;
+
+      form.hidden = true;
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    form.addEventListener('change', (e) => {
+      if (e.target.type !== 'radio') return;
+      // A short pause so the selected state registers before moving on.
+      setTimeout(() => (current < steps.length - 1 ? go(current + 1) : render()), 180);
+    });
+
+    form.addEventListener('click', (e) => {
+      if (e.target.closest('[data-picker-back]')) go(Math.max(0, current - 1));
+    });
+
+    result.addEventListener('click', (e) => {
+      if (e.target.closest('[data-picker-restart]')) {
+        form.reset();
+        go(0);
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------- calculator */
+
+  function initCalc() {
+    const calc = $('[data-calc]');
+    if (!calc) return;
+
+    const rows = $$('[data-calc-row]', calc);
+    const addBtn = $('[data-calc-add]', calc);
+    const printBtn = $('[data-calc-print]', calc);
+    const dateEl = $('[data-calc-date]', calc);
+    if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    const qtyOf = (row) => Math.max(0, Math.min(99, parseInt($('[data-calc-qty]', row).value, 10) || 0));
+
+    const update = () => {
+      const units = rows.reduce((n, r) => n + qtyOf(r), 0);
+      const tier = Cart.tier(units);
+      let fullPence = 0;
+      let totalPence = 0;
+
+      rows.forEach((row) => {
+        const qty = qtyOf(row);
+        const unitPence = Math.round(Number(row.dataset.price) * 100);
+        // Same per-unit rounding as the server (src/api.js).
+        const chargedPence = Math.round(unitPence * (1 - tier.percent / 100));
+        fullPence += unitPence * qty;
+        totalPence += chargedPence * qty;
+        row.classList.toggle('is-selected', qty > 0);
+        $('[data-calc-unit]', row).innerHTML =
+          tier.percent > 0
+            ? `${money(chargedPence / 100)} <s>${money(unitPence / 100)}</s>`
+            : money(unitPence / 100);
+        $('[data-calc-line]', row).textContent = qty ? money((chargedPence * qty) / 100) : '';
+      });
+
+      $('[data-calc-units]', calc).textContent = units;
+      $('[data-calc-tier]', calc).textContent = `${tier.percent}%`;
+      $('[data-calc-saving]', calc).textContent = money((fullPence - totalPence) / 100);
+      $('[data-calc-total]', calc).textContent = money(totalPence / 100);
+
+      const next = units < 2 ? [2, 3] : units < 3 ? [3, 5] : units < 5 ? [5, 8] : units < 10 ? [10, 10] : null;
+      $('[data-calc-note]', calc).textContent = next
+        ? `Add ${next[0] - units} more ${next[0] - units === 1 ? 'device' : 'devices'} for ${next[1]}% off every device. Delivery is free.`
+        : 'Top tier reached: 10% off every device. Delivery is free.';
+
+      // Destello Tech Ltd is not VAT registered (src/store-config.js), so the
+      // total is the whole price.
+      $('[data-calc-vat]', calc).textContent = units ? 'No VAT to add.' : '';
+
+      addBtn.disabled = printBtn.disabled = units === 0;
+    };
+
+    calc.addEventListener('click', (e) => {
+      const step = e.target.closest('[data-calc-step]');
+      if (!step) return;
+      const input = $('[data-calc-qty]', step.closest('[data-calc-row]'));
+      input.value = Math.max(0, Math.min(99, (parseInt(input.value, 10) || 0) + Number(step.dataset.calcStep)));
+      update();
+    });
+    calc.addEventListener('input', update);
+
+    addBtn.addEventListener('click', () => {
+      rows.forEach((row) => {
+        const qty = qtyOf(row);
+        if (qty) Cart.add(row.dataset.calcRow, qty);
+      });
+      toast('Added to basket');
+      setTimeout(() => (window.location.href = '/cart'), 600);
+    });
+
+    printBtn.addEventListener('click', () => {
+      document.body.classList.add('printing-quote');
+      window.print();
+      document.body.classList.remove('printing-quote');
+    });
+
+    update();
+  }
+
+  /* ------------------------------------------------------------- API forms */
+
+  /* Any <form data-api-form="/api/..."> posts its fields as JSON and shows
+     data-success on a 2xx. Used by the trade and warranty pages. */
+  function initApiForms() {
+    $$('[data-api-form]').forEach((form) => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const status = $('[data-form-status]', form);
+        const btn = $('button[type="submit"]', form);
+        const label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        try {
+          const res = await fetch(form.dataset.apiForm, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(form).entries())),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error || 'That did not send');
+
+          form.reset();
+          status.className = 'form-status form-status-ok';
+          status.textContent = form.dataset.success;
+        } catch (err) {
+          status.className = 'form-status form-status-err';
+          status.innerHTML = `${err.message}. You can also email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a>.`;
+        } finally {
+          status.hidden = false;
+          btn.disabled = false;
+          btn.textContent = label;
+        }
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------- review page */
+
+  function initReview() {
+    const form = $('[data-review-form]');
+    const lede = $('[data-review-lede]');
+    if (!form || !lede) return;
+
+    const token = new URL(window.location).searchParams.get('t');
+    const fail = (msg) => {
+      lede.innerHTML = `${msg} If you bought from us and want to leave a review, <a href="/contact">get in touch</a>.`;
+    };
+    if (!token) return fail('This page needs the link from your review email.');
+
+    fetch(`/api/review?t=${encodeURIComponent(token)}`)
+      .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok) return fail(data.error || 'This review link is not valid.');
+        lede.textContent = data.alreadyReviewed
+          ? `You have already reviewed your ${data.items.join(', ')}. Submitting again replaces your earlier review.`
+          : `Your ${data.items.join(', ')}. Good or bad, other tradespeople want to hear it.`;
+        form.hidden = false;
+      })
+      .catch(() => fail('We could not load your order just now.'));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = $('[data-form-status]', form);
+      const payload = Object.fromEntries(new FormData(form).entries());
+      if (!payload.rating) {
+        status.className = 'form-status form-status-err';
+        status.textContent = 'Please choose a star rating.';
+        status.hidden = false;
+        return;
+      }
+
+      const btn = $('button[type="submit"]', form);
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...payload, t: token }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'That did not save');
+        form.hidden = true;
+        lede.textContent = 'Thank you. Your review will appear on the site once we have checked it is about the product.';
+      } catch (err) {
+        status.className = 'form-status form-status-err';
+        status.textContent = `${err.message}. Please try again.`;
+        status.hidden = false;
+        btn.disabled = false;
+      }
+    });
+  }
+
   /* ------------------------------------------------------------------- init */
 
   function init() {
@@ -971,6 +1331,11 @@
     initCartPage();
     initForms();
     initOrderSummary();
+    initLightbox();
+    initPicker();
+    initCalc();
+    initApiForms();
+    initReview();
   }
 
   if (document.readyState === 'loading') {
