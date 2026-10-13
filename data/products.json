@@ -181,7 +181,7 @@
         "ip_rating": "IP65",
         "mil_std": "MIL-STD-810H",
         "drop_spec": "1.5m",
-        "battery": "4000mAh, removable",
+        "battery": "4000mAh",
         "charging": "USB-C PD fast charge, pogo pin for dock",
         "os": "Windows 11 IoT",
         "cpu": "Intel Celeron N5100, up to 2.8GHz",
