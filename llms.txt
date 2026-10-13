@@ -1,17 +1,17 @@
 # Tuga Hardware
 
-> Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery. Prices include VAT. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
+> Rugged tablets and handhelds built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery. Prices include VAT. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
 
 Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work at roughly half the price; Windows only when desktop software requires it.
 
 ## Devices
 
-- [Tuga A6](https://www.tugahardware.com/products/tuga-a6): £299. 6.8 inch handheld, Android 14, IP68 + IP69K, MIL-STD-810H, 10600mAh, 320g. Photos, job sheets, sign-off and comms, on a phone that survives the site.
+- [Tuga A6](https://www.tugahardware.com/products/tuga-a6): £299. 6.8 inch handheld, Android 14, IP68 + IP69K, MIL-STD-810H, 10600mAh, 441g. Photos, job sheets, sign-off and comms, on a phone that survives the site.
 - [Tuga A8](https://www.tugahardware.com/products/tuga-a8): £379. 8 inch tablet, Android 14, IP68, MIL-STD-810H, 10000mAh, 680g. Forms, maps, site photos and quotes, one-handed, all shift.
 - [Tuga A10](https://www.tugahardware.com/products/tuga-a10): £449. 10.1 inch tablet, Android 14, IP68, MIL-STD-810H, 8000mAh, 680g. Blueprints, BIM viewers, full spreadsheets and PDF plans.
-- [Tuga WH6](https://www.tugahardware.com/products/tuga-wh6): £799. 6.5 inch handheld, Windows 11 Pro, IP67, MIL-STD-810H, 10000mAh, 450g. Legacy Windows software and network drives, in a holster.
+- [Tuga WH6](https://www.tugahardware.com/products/tuga-wh6): £699. 6.5 inch handheld, Windows 11 IoT, IP65, MIL-STD-810H, 4000mAh, 470g. Legacy Windows software and network drives, in a holster.
 - [Tuga W8](https://www.tugahardware.com/products/tuga-w8): £629. 8 inch tablet, Windows 11 Pro, IP67, MIL-STD-810G, 5000mAh, 750g. Windows software in the field, with real ports.
-- [Tuga W10](https://www.tugahardware.com/products/tuga-w10): £649. 10.1 inch tablet, Windows 11 Pro, IP67, 5000mAh, 1138g. Engineers and surveyors who need Ethernet, HDMI and a full screen.
+- [Tuga W10](https://www.tugahardware.com/products/tuga-w10): £649. 10.1 inch tablet, Windows 11 Pro, IP65, 5000mAh, 1197g. Engineers and surveyors who need Ethernet, HDMI and a full screen.
 
 ## Choosing
 

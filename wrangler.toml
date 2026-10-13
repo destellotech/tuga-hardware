@@ -6,7 +6,8 @@ compatibility_flags = ["nodejs_compat"]
 # Static assets served from the project root (HTML, CSS, JS, images).
 # run_worker_first: the worker must see every request so the canonical-host
 # and legacy-URL redirects in src/worker.js actually fire; it then serves
-# static files itself via the ASSETS binding.
+# static files itself via the ASSETS binding. Unknown paths get /404.html
+# with a 404 status from the worker (not_found_handling stays at its default).
 assets = { directory = "./", binding = "ASSETS", run_worker_first = true }
 
 [vars]

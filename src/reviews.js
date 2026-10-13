@@ -8,9 +8,9 @@
 import { sendReviewRequest } from './email.js';
 import { updateOrder } from './orders.js';
 
-// Devices ship direct from the manufacturer in 10 to 20 working days, so
-// wait for the slowest delivery plus a fortnight of actual use.
-const REVIEW_DELAY_DAYS = 42;
+// Delivery takes 7 to 10 working days (DELIVERY in store-config.js), so wait
+// for the slowest delivery plus a fortnight of actual use.
+const REVIEW_DELAY_DAYS = 28;
 
 // Orders older than this are never asked: the request would feel random.
 const REVIEW_MAX_AGE_DAYS = 90;

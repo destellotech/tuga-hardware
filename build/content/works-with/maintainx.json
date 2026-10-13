@@ -1,0 +1,147 @@
+{
+  "slug": "maintainx",
+  "software": "MaintainX",
+  "vendor": "MaintainX Inc. (part of Autodesk)",
+  "vendor_url": "https://www.getmaintainx.com/",
+  "title": "Rugged tablet for MaintainX: UK buyer's guide",
+  "meta_description": "MaintainX publishes Android 7.0 or later, 6GB RAM recommended. The Tuga A10 (Android 14, 8GB RAM, IP68) meets both and runs the Android app.",
+  "target_query": "best tablet for MaintainX",
+  "h1": "Rugged tablet for MaintainX",
+  "intro": [
+    "MaintainX is a cloud CMMS and enterprise asset management platform covering work orders, preventive maintenance, assets, checklists and inspections, parts inventory and meter readings. The vendor says it is used by over 14,000 companies, lists industries from general manufacturing, food and beverage and automotive through to facility management, fleet maintenance, distribution centres and hospitality, and states on its own site that it has joined Autodesk. Maintenance managers plan and assign work from the web application; technicians carry out that work from the mobile app.",
+    "On the floor or on site, the mobile app is where the field features live. The vendor documents offline mode, QR code and barcode scanning through the device camera, in-app photo capture and the work order timer as mobile-only, and its Google Play listing describes scanning a QR code on an asset to open its maintenance history, work orders and safety protocols. That means a device carried round a plant all shift, put down on concrete, splashed near wet processes and left in a van overnight, which is where a consumer tablet with a glass back and an unrated case tends to fail early.",
+    "This page sets out what MaintainX publishes about the devices it runs on, which Tuga rugged tablets meet those published requirements, where the Windows option fits and where it does not, and how a UK maintenance or engineering team can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 7.0 (Nougat) or later with Google Play access",
+      "detail": "The vendor's Supported Devices page states Android 7.0 (Nougat) or later with access to the Google Play Store, and iOS 16.4 or later for Apple devices. The Google Play listing for MaintainX - CMMS & EAM (package com.commas.client, version 5.43 at the time of checking, minimum API level 24) shows device chips for Phone and Tablet. Enterprise plan customers whose devices lack Google Play access can distribute the app through an MDM solution.",
+      "source_url": "https://help.getmaintainx.com/supported-devices-and-browsers"
+    },
+    {
+      "requirement": "Memory and storage: 4GB RAM minimum, 6GB or more recommended",
+      "detail": "The same page gives a RAM minimum of 4GB and a recommendation of 6GB or more, with 150 to 200MB of available storage as the minimum and 300MB or more recommended. An older troubleshooting article still quotes 2GB or more; the Supported Devices page is the current figure.",
+      "source_url": "https://help.getmaintainx.com/supported-devices-and-browsers"
+    },
+    {
+      "requirement": "Offline mode is mobile app only, and the device must be online first",
+      "detail": "Technicians can update work orders while offline or on limited connectivity. The app stores a cache of work orders on the device; you choose how many to cache in Offline Settings, and eligible work orders are added by due date, soonest first. Offline mode activates automatically when the app cannot connect, or can be switched on manually with the Is Offline toggle in Offline Settings. You must connect to the internet first so the cache can be created or updated, and you cannot switch organisations while offline. When you reconnect and turn offline mode off, cached work orders sync automatically or manually depending on the Update cache setting (Manually, or Connected to any network). Offline mode is available on all four plans but marked Not available on web.",
+      "source_url": "https://help.getmaintainx.com/offline-mode"
+    },
+    {
+      "requirement": "QR code and barcode scanning uses the device camera, in the mobile app only",
+      "detail": "MaintainX can scan both QR codes and barcodes but can only display and generate QR codes. Scanning is listed among the mobile-only features alongside in-app photo capture and the work order timer; none of these is available in the web application. No support for a dedicated hardware scan engine or an external scanner is documented, so on any device the scan path is the camera.",
+      "source_url": "https://help.getmaintainx.com/about-qr-codes-and-barcodes"
+    },
+    {
+      "requirement": "Windows: no native app, desktop browser only",
+      "detail": "No native Windows app or Microsoft Store listing is published. Windows users run the web application at app.getmaintainx.com, which the vendor says works best and is tested on the last 5 versions of Chrome, Firefox, Edge and Opera and the last 3 major versions of Safari. The vendor warns that MaintainX might not display correctly on mobile browsers and recommends the mobile application on handheld devices. Reporting, Purchase Orders and the Library (Work Order Templates) are web-only.",
+      "source_url": "https://help.getmaintainx.com/mobile-vs-web-overview"
+    },
+    {
+      "requirement": "NFC and RFID: not documented",
+      "detail": "No mention of NFC or RFID reading was found on the vendor site, the help centre, the Google Play listing or the App Store listing. The only asset identification method documented is QR code and barcode scanning through the camera. The NFC radio on the Tuga A10 and A6 and the optional UHF RFID reader on the Tuga W10 should not be treated as MaintainX features.",
+      "source_url": "https://help.getmaintainx.com/about-qr-codes-and-barcodes"
+    },
+    {
+      "requirement": "Shared devices: workstation mode on the Enterprise plan",
+      "detail": "The vendor publishes no screen-size guidance. For shared devices it describes workstation mode (Enterprise plan only) for tablets and mobile devices shared across multiple shifts and for desktop and laptop devices installed on facility floors, with 4 digit PIN sign-in per user. You must be connected to the internet to log into a workstation device.",
+      "source_url": "https://help.getmaintainx.com/about-workstation-mode"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "MaintainX's field features (offline work orders, camera QR and barcode scanning, photo capture, the work order timer) are documented as mobile-app only, so the device a technician carries needs to run the Android app, not a browser. The Tuga A10 runs Android 14 against a published requirement of Android 7.0 or later, carries 8GB of RAM against a recommended 6GB or more, and has 128GB of storage against a recommended 300MB or more. Its 10.1 inch 1920 x 1200 screen gives room for checklists and procedures, the 13MP rear camera with flash is the scan and photo path the app uses, and the IP68 and MIL-STD-810H ratings cover dust, immersion, drops and site vehicles (for high-pressure washdown areas, the A6 below adds IP69K). It is the device an industrial asset-management firm has already bought from us for maintenance technicians at an aerospace manufacturer, running a different CMMS mobile app.",
+      "fit": [
+        "Requirement: Android 7.0 or later with Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met.",
+        "Requirement: 4GB RAM minimum, 6GB or more recommended, 300MB or more storage recommended. Tuga A10: 8GB RAM and 128GB storage, with microSD up to 2TB.",
+        "Requirement: QR code and barcode scanning through the device camera. Tuga A10: 13MP rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: a device that keeps working offline through a shift. Tuga A10: 8000mAh battery, IP68, MIL-STD-810H, operating temperature -20 to 60C, and the app's offline cache of work orders stored on the device.",
+        "Requirement: readable screen for checklists and inspections. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, 680g."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Where technicians want something that fits a pocket or a belt holster, work across a large estate or outdoors on 5G, or rely heavily on photos of defects, the Tuga A6 runs the same MaintainX Android app on a 6.78 inch handheld. It runs Android 14 with 12GB of RAM and 256GB of storage, so it clears the published Android 7.0 and 6GB recommended figures with more headroom than the A10. The Google Play listing carries both Phone and Tablet device chips, so the phone-sized layout is one the vendor publishes for. The trade-off is screen area: a 6.78 inch display shows less of a long checklist or a procedure at once than the A10's 10.1 inch panel.",
+      "fit": [
+        "Requirement: Android 7.0 or later with Google Play. Tuga A6: Android 14 with Google Play.",
+        "Requirement: 6GB or more RAM recommended. Tuga A6: 12GB RAM and 256GB storage, microSD up to 2TB.",
+        "Requirement: camera-based QR and barcode scanning and in-app photo capture. Tuga A6: 64MP night-vision camera and 50MP main camera (scanning through the camera via the app).",
+        "Requirement: a device that survives washdown and outdoor use. Tuga A6: IP68 and IP69K, MIL-STD-810H, Gorilla Glass 5, glove mode, operating temperature -20 to 60C, 441g.",
+        "Requirement: connectivity on large or outdoor sites. Tuga A6: 5G, Wi-Fi 5, Bluetooth 5.2, GPS + GLONASS + BeiDou, 10600mAh battery with 33W fast charge."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "MaintainX has no native Windows app. The Tuga W10 runs Windows 11 Pro, so it can run the full MaintainX web application in desktop Chrome or Edge, which are among the browsers the vendor says it tests on, including the web-only Reporting, Purchase Orders and Library modules. That makes it a fit for a supervisor's station, a planning office, or a shared floor workstation on the Enterprise plan, and it has Ethernet and HDMI for a fixed position. It is not the device for a technician in the field: the web application has no offline mode, no camera scanning, no in-app photo capture and no work order timer, and the W10 is IP65 rather than IP68, so it is protected against water jets but not rated for immersion.",
+      "fit": [
+        "Requirement: a desktop browser from the vendor's tested list (Chrome, Edge, Firefox, Opera, last 5 versions). Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: access to web-only modules (Reporting, Purchase Orders, Library). Tuga W10: full web application, Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage.",
+        "Requirement: a fixed or shared station on the facility floor (workstation mode, Enterprise plan). Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery.",
+        "Requirement: dust and splash protection in a plant office or line-side position. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 10.1 inch 1280 x 800 multi-touch screen, 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Create a MaintainX account at getmaintainx.com or ask your administrator to add the technician as a user in your existing organisation. The vendor offers a free Basic plan and Requester accounts are free, so a trial costs nothing on the software side.",
+    "On the Tuga A10 or A6, open Google Play and install MaintainX - CMMS & EAM (package com.commas.client, developer MaintainX Inc.). Enterprise plan customers without Google Play access can distribute the app through an MDM solution instead.",
+    "Sign in on the device with the technician's account. If your organisation uses workstation mode on the Enterprise plan, the shared device is set up once and each user then logs in with a 4 digit PIN; the device must be connected to the internet to log in.",
+    "Before the first shift without connectivity, keep the device online long enough for the offline cache to build, then review the Offline Settings in the app (choose how many work orders to cache, whether to cache work orders assigned to you or to you and your teams, and whether the cache updates manually or whenever connected to any network). Offline mode also switches on automatically when the app cannot connect.",
+    "On a Tuga W10, open app.getmaintainx.com in Edge or Chrome and sign in. Use it for the web-only Reporting, Purchase Orders and Library modules; it will not scan with the camera or work offline.",
+    "For the A10 and W10, fit the charging dock where devices live between shifts, or the vehicle mounting dock for fleet and site vehicles; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Charging dock, £49.99 (Tuga A10 and W10), for devices shared across shifts",
+    "Vehicle mounting dock, £109, for fleet maintenance and multi-site technicians",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34"
+  ],
+  "faq": [
+    {
+      "q": "Will MaintainX run on the Tuga A10?",
+      "a": "MaintainX publishes a requirement of Android 7.0 (Nougat) or later with Google Play access, 4GB RAM minimum with 6GB or more recommended, and 300MB or more of storage recommended. The Tuga A10 runs Android 14 with Google Play, has 8GB RAM and 128GB storage, so it meets each published figure. The Tuga A6 (Android 14, 12GB RAM, 256GB) does the same. We do not describe any device as certified or tested by MaintainX; these are the vendor's published requirements set against the device specifications."
+    },
+    {
+      "q": "Does MaintainX work offline on these tablets?",
+      "a": "Yes, in the Android mobile app. The vendor's help centre documents an offline mode on all four plans that stores a cache of work orders on the device (you choose how many) and lets technicians update them without a connection, syncing when connectivity returns. The device has to be online first so the cache can be created. Offline mode is not available in the web application, so a Tuga W10 running MaintainX in a browser cannot work offline."
+    },
+    {
+      "q": "Can we scan asset QR codes and barcodes with the camera, and does NFC help?",
+      "a": "MaintainX documents scanning both QR codes and barcodes through the device camera in the mobile app. The Tuga A10 has a 13MP rear camera with flash and the A6 has a 50MP main camera, and in both cases scanning runs through the camera via the app; there is no dedicated scan engine on the A10 and no external scanner support is documented by the vendor. NFC and RFID are not mentioned anywhere in the vendor's documentation, so the NFC radio on the A10 and A6 and the optional UHF RFID reader on the W10 should not be bought for MaintainX."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £299 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    },
+    {
+      "q": "Should technicians have the 10.1 inch A10 or the 6.78 inch A6?",
+      "a": "The vendor publishes no screen-size guidance and its Google Play listing carries both Phone and Tablet device chips, so both layouts are ones it ships for. The A10's 10.1 inch 1920 x 1200 screen shows more of a checklist, inspection form or procedure at once and suits a vehicle or charging dock. The A6 at 441g fits a pocket or belt holster, has 5G, a 10600mAh battery and a higher-resolution camera, and suits technicians who walk a large estate or work outdoors. Many teams mix the two."
+    }
+  ],
+  "not_recommended_note": "MaintainX has no native Windows app, so the Tuga W10 only runs the web application in a desktop browser. The vendor documents offline mode, camera QR and barcode scanning, in-app photo capture and the work order timer as mobile-only, so a W10 cannot do any of those; it suits a supervisor, planner or shared Enterprise-plan workstation, not a technician in the field. On the Android side, the only asset identification method the vendor documents is camera scanning, with no dedicated scan engine or external scanner support published, so scanning on the A10 and A6 is through the camera only. NFC and RFID are not documented by MaintainX, so the NFC on the A10 and A6 and the optional UHF RFID reader on the W10 are not MaintainX features. Reporting, Purchase Orders and the Library are web-only, and the vendor advises against mobile browsers, so an Android-only team will still need a desktop or laptop for those modules. The vendor is US-based, prices in dollars and names no UK customers on its site, although it advertises UK-based EMEA sales roles and publishes a UK Modern Slavery Act statement.",
+  "disclaimer": "MaintainX is a product of MaintainX Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by MaintainX Inc.",
+  "sources": [
+    "https://www.getmaintainx.com/",
+    "https://www.getmaintainx.com/about",
+    "https://www.getmaintainx.com/industries",
+    "https://www.getmaintainx.com/pricing",
+    "https://www.getmaintainx.com/jobs",
+    "https://www.getmaintainx.com/jobs/enterprise-account-director-emea-5e2dda60",
+    "https://www.getmaintainx.com/modern-slavery-act-statement",
+    "https://app.getmaintainx.com/",
+    "https://play.google.com/store/apps/details?id=com.commas.client&hl=en_GB",
+    "https://apps.apple.com/gb/app/maintainx-work-orders/id1437854484",
+    "https://help.getmaintainx.com/supported-devices-and-browsers",
+    "https://help.getmaintainx.com/offline-mode",
+    "https://help.getmaintainx.com/mobile-vs-web-overview",
+    "https://help.getmaintainx.com/about-qr-codes-and-barcodes",
+    "https://help.getmaintainx.com/about-workstation-mode",
+    "https://help.getmaintainx.com/install-the-mobile-app",
+    "https://help.getmaintainx.com/troubleshooting-mobile-application-is-lagging"
+  ]
+}

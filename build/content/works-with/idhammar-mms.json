@@ -1,0 +1,122 @@
+{
+  "slug": "idhammar-mms",
+  "software": "Idhammar MMS (with the Idhammar Connect mobile app)",
+  "vendor": "Idhammar Systems Limited",
+  "vendor_url": "https://www.idhammarsystems.com/",
+  "title": "Rugged tablet for Idhammar MMS",
+  "meta_description": "Rugged Android tablets for the Idhammar Connect app (Idhammar MMS): the Android 5.0 minimum, offline sync, camera scanning, and the Tuga A10 and A6.",
+  "target_query": "Idhammar Connect Android tablet",
+  "h1": "Rugged tablet for Idhammar MMS",
+  "intro": [
+    "Idhammar MMS is the maintenance management system (CMMS) and OEE platform from Idhammar Systems Limited, a UK software company based in London SW19 which says it has supplied CMMS and OEE systems since 1971. Its customer list is heavy on UK food and drink manufacturing (the vendor names Unilever, Premier Foods, Hovis, 2 Sisters, Aunt Bessies, Aspall and Chivers Brothers), and a sector edition called Idhammar Response is sold to emergency services, including fire and rescue. The mobile side is Idhammar Connect, an Android app released on Google Play on 3 October 2023 that lets technicians, stores staff and station personnel handle work orders, inspections, defect reports and inventory checks away from a desk.",
+    "On the plant floor or in a fire station workshop that means carrying a device between lines, plant rooms and stores, often with gloves on, near wash-down areas and sometimes where Wi-Fi is poor. A consumer tablet usually has no ingress or drop rating, so it needs a case and careful handling in those conditions. A rugged Android tablet is the usual answer, provided it meets the app's published requirements.",
+    "This page sets out what Idhammar Systems publishes about running Idhammar Connect, matches those requirements to the Tuga A10 and Tuga A6, and covers setup, accessories and the questions buyers usually ask. Where the vendor publishes nothing (screen size, NFC, Windows), we say so rather than guess."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android device running Android 5.0 or later",
+      "detail": "Idhammar Connect (package com.idhammar.connect) is published on Google Play by a developer shown as Idhammar MMS; the About the developer panel names IDHAMMAR SYSTEMS LIMITED at Dalton House, 60 Windsor Avenue, London SW19 2RR. The listing's app data gives a minimum of Android 5.0 and up (API level 21), with the current version 9.0.1 updated on 6 August 2026 and 100+ downloads. Check the Requires Android line in the App info panel of the live listing before you order a fleet.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.idhammar.connect&hl=en_GB&gl=GB"
+    },
+    {
+      "requirement": "No iOS or Windows app found; some features may stay on the desktop",
+      "detail": "The vendor's launch post (31 October 2023) calls Idhammar Connect its Android app and says users work directly from their Android devices. The same post says that some features might still be exclusive to the desktop version, at least in the initial phases. Apple's App Store search for the GB and US storefronts returned no Idhammar app, and a Microsoft Store search for the GB market returned no Idhammar products. Idhammar Systems publishes no Windows, browser or hardware requirements for the desktop system.",
+      "source_url": "https://www.idhammarsystems.com/idhammar-connect-mobile-cmms/"
+    },
+    {
+      "requirement": "Offline working with automatic sync when reconnected",
+      "detail": "The vendor's blog post of 27 March 2025 states that having no internet is not problematic, that teams can work offline with Idhammar Connect, and that it syncs automatically once back online. The Google Play description itself does not mention offline use, so this rests on the vendor's blog rather than the store listing.",
+      "source_url": "https://www.idhammarsystems.com/why-mobile-apps-are-a-game-changer/"
+    },
+    {
+      "requirement": "Barcode and QR code scanning on parts and assets",
+      "detail": "The vendor's blog post of 27 March 2025 says barcode and QR code scanning speeds up identifying the correct part or equipment, and presents Idhammar Connect as its app for this way of working. A December 2023 post says mobile devices can be used to scan barcodes to identify assets and that their in-built cameras can be used to attach images to work orders. The vendor does not say how scanning is done, publishes no dedicated scanner requirement and no list of supported scanners, so plan on camera-based scanning and confirm with Idhammar Systems.",
+      "source_url": "https://www.idhammarsystems.com/why-mobile-apps-are-a-game-changer/"
+    },
+    {
+      "requirement": "NFC and RFID: not a published feature",
+      "detail": "A search of the vendor site for NFC returns no results, and NFC does not appear in the Google Play listing. RFID appears once, in a November 2022 blog post as a general industry comment about asset tracking devices, not as an Idhammar Connect feature. Do not buy on the assumption that NFC or RFID tagging works with the app.",
+      "source_url": "https://www.idhammarsystems.com/how-you-can-profit-from-a-cloud-based-inventory-management-system/"
+    },
+    {
+      "requirement": "Mobile use where Wi-Fi signal may be poor, with a camera for photos and files",
+      "detail": "The vendor's emergency services page says Idhammar Connect gives firefighters access via mobile devices to report defects on the move and perform inspections and inventories on the station forecourt where Wi-Fi signal may be poor. The sectors page says station staff record station tests and inventory checks via a mobile device and that checks performed at the fireground are synchronised on return to the station. The Google Play data safety section says the app may collect photos and videos and files and docs, and that data is encrypted in transit, so expect technicians to use the camera for attachments.",
+      "source_url": "https://www.idhammarsystems.com/emergency-services/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Idhammar Connect is an Android app with a published minimum of Android 5.0, and the Tuga A10 runs Android 14, so it meets that requirement with a wide margin. The 10.1 inch 1920 x 1200 display gives room for work order lists and inspection forms, the 13MP rear camera with flash covers camera-based barcode and QR scanning and photo attachments, and the tablet is rated IP68 and MIL-STD-810H. Dual SIM 4G means technicians can sync away from site Wi-Fi, and the 8000mAh battery and pogo pin connector work with the charging and vehicle docks. At £449 with no VAT to add and a single trial unit available, it is the straightforward choice for a maintenance team on Idhammar MMS.",
+      "fit": [
+        "App requires Android 5.0 or later: the A10 runs Android 14.",
+        "Camera-based barcode and QR scanning: 13MP rear camera with flash (scanning is handled by the app through the camera; there is no dedicated scan engine).",
+        "Offline capture with sync when back online: 128GB storage plus microSD up to 2TB, 4G dual SIM and dual-band Wi-Fi 5 for syncing wherever signal is available.",
+        "Plant floor and workshop conditions: IP68, MIL-STD-810H, tempered glass, operating temperature -20 to 60C.",
+        "Long shifts and vehicle use: 8000mAh battery, pogo pin connector for the £49.99 charging dock or £109 vehicle mounting dock."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is a 6.78 inch handheld that also runs Android 14, so it meets the same Android 5.0 minimum. It suits technicians, stores staff and firefighters who need a device carried in one hand or in a belt holster rather than a tablet carried in two, and it adds 5G, a 10600mAh battery with 33W fast charging and IP69K on top of IP68. The 50MP main camera is well suited to reading barcodes and QR labels and to photographing defects. The trade-off is screen size: a 6.78 inch display shows less of a work order or inspection form at once than the 10.1 inch A10, and the vendor publishes no screen-size guidance, so trial both if you are unsure.",
+      "fit": [
+        "App requires Android 5.0 or later: the A6 runs Android 14.",
+        "Camera-based scanning and defect photos: 50MP main camera and 64MP night-vision camera.",
+        "Poor-signal sites and remote sync: 5G, Wi-Fi 5, 10600mAh battery with 33W fast charge.",
+        "Hostile environments and gloved use: IP68 plus IP69K, MIL-STD-810H, Gorilla Glass 5, glove mode, -20 to 60C operating range.",
+        "Carried all day: 441g, fits the £22 belt holster."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Idhammar Connect is the vendor's mobile app for the Idhammar MMS system, so arrange user accounts for your technicians with Idhammar Systems or your Idhammar administrator before the devices arrive.",
+    "On the Tuga A10 or A6, sign in to Google Play and install Idhammar Connect (package com.idhammar.connect, developer shown as Idhammar MMS).",
+    "Open the app and sign in with the credentials your Idhammar administrator provides.",
+    "Before taking devices to areas with poor signal, confirm with your administrator how offline working and automatic sync are configured for your system, and test a sync on return to Wi-Fi or mobile signal.",
+    "Grant the app camera and storage permissions when prompted so that barcode or QR scanning and photo attachments work.",
+    "Fit the A10 to the charging dock or vehicle mounting dock, or clip the A6 into a belt holster, and set a charging routine at shift end."
+  ],
+  "accessories": [
+    "Charging dock, £49.99 (Tuga A10): keeps a shared tablet charged between shifts via the pogo pin connector.",
+    "Vehicle mounting dock, £109 (Tuga A10): for maintenance vans and fire service appliances that carry a tablet between sites or stations.",
+    "Tempered glass screen protector 2-pack, £14: adds a replaceable layer over the A10 display on busy production lines.",
+    "Belt holster, £22 (Tuga A6): keeps the handheld on a technician's belt between checks."
+  ],
+  "faq": [
+    {
+      "q": "Will the Tuga A10 run Idhammar Connect?",
+      "a": "Idhammar Connect is listed on Google Play with a minimum of Android 5.0 and up. The Tuga A10 and Tuga A6 both run Android 14, so they meet that requirement. We have not tested the app ourselves and Idhammar Systems publishes no list of supported devices, so we recommend a single trial unit before a fleet order."
+    },
+    {
+      "q": "Does Idhammar Connect work offline?",
+      "a": "According to the vendor's own blog, yes: teams can work offline with Idhammar Connect and it syncs automatically once back online. The Google Play description does not mention offline working, so confirm the setup for your system with Idhammar Systems. Both Tuga devices have ample storage (128GB on the A10, 256GB on the A6, each with microSD up to 2TB) and 4G or 5G for syncing away from Wi-Fi."
+    },
+    {
+      "q": "Can we trial one unit before ordering for the whole team, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is not VAT registered, so prices have no VAT to add. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more. Delivery is free within the UK in 7 to 10 working days (UK delivery only), with 30-day returns and a 12-month warranty."
+    },
+    {
+      "q": "Should we choose the 10.1 inch A10 or the 6.78 inch A6?",
+      "a": "Idhammar Systems publishes no screen-size guidance. The A10 (10.1 inch, 1920 x 1200, 680g, £449) shows more of a work order or inspection form at once and docks in a vehicle or charging dock. The A6 (6.78 inch, 441g, £299) is carried in one hand or a belt holster, adds 5G, IP69K and a larger 10600mAh battery, and has a higher-resolution camera. Teams that fill in long forms usually prefer the A10; staff walking rounds or doing stock checks often prefer the A6. Trialling one of each is the simplest way to decide."
+    }
+  ],
+  "disclaimer": "Idhammar MMS and Idhammar Connect are products of Idhammar Systems Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Idhammar Systems Limited.",
+  "sources": [
+    "https://www.idhammarsystems.com/",
+    "https://www.idhammarsystems.com/idhammar-connect-mobile-cmms/",
+    "https://www.idhammarsystems.com/why-mobile-apps-are-a-game-changer/",
+    "https://www.idhammarsystems.com/do-you-want-the-right-tools-in-the-right-place-cmms-software-can-help/",
+    "https://www.idhammarsystems.com/how-you-can-profit-from-a-cloud-based-inventory-management-system/",
+    "https://www.idhammarsystems.com/sectors/",
+    "https://www.idhammarsystems.com/emergency-services/",
+    "https://www.idhammarsystems.com/idhammar-response-emergency-services/",
+    "https://www.idhammarsystems.com/about-us/",
+    "https://www.idhammarsystems.com/services/",
+    "https://www.idhammarsystems.com/?s=NFC",
+    "https://play.google.com/store/apps/details?id=com.idhammar.connect&hl=en_GB&gl=GB",
+    "https://find-and-update.company-information.service.gov.uk/company/01912489"
+  ],
+  "not_recommended_note": "Idhammar Connect is published as an Android app. We found no iOS app and no Windows app or Microsoft Store listing, and Idhammar Systems publishes no Windows or browser requirements for the desktop system, so we do not recommend the Windows-based Tuga W10 for this app. The vendor also says that some features might still be exclusive to the desktop version, so technicians may still need a PC for some tasks. The vendor does not say how barcode and QR scanning is done; the Tuga A10 and A6 have no dedicated scan engine and the vendor publishes no supported-scanner list, so plan on camera-based scanning. NFC and RFID are not published Idhammar Connect features, so do not buy either device for that purpose."
+}

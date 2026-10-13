@@ -6,6 +6,7 @@
 
 import { sendOrderConfirmation, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
+import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -22,10 +23,10 @@ const PRODUCTS = {
   'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
   'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
   // Devices — Windows
-  'tuga-wh6':           { name: 'Tuga WH6',                       price: 79900, device: true },
+  'tuga-wh6':           { name: 'Tuga WH6',                       price: 69900, device: true },
   'tuga-w8':            { name: 'Tuga W8',                        price: 62900, device: true },
   'tuga-w10':           { name: 'Tuga W10',                       price: 64900, device: true },
-  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 87900, device: true },
+  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 77900, device: true },
   'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900, device: true },
   'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900, device: true },
   // Accessories
@@ -36,11 +37,27 @@ const PRODUCTS = {
   'acc-screen-protector': { name: 'Tempered Glass Screen Protector (2 Pack)', price: 1400 },
   'acc-car-charger':      { name: '12V DC Car Charger',                       price: 2600 },
   'acc-carry-case':       { name: 'Rugged Carry Case',                        price: 3400 },
+  'acc-wh6-cradle':       { name: 'WH6 Charging Cradle',                      price: 7900 },
   'acc-belt-holster':     { name: 'Belt Holster',                             price: 2200 },
   'acc-car-mount':        { name: 'Car Phone Mount',                          price: 1700 },
   'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
   'acc-shoulder-strap':   { name: 'Shoulder Strap',                           price: 1900 },
+  // Warranty add-ons: one per device unit. Never discounted, never a device.
+  // Total Care is sold on a quote and proforma only, so it has no SKU here.
+  'wty-3yr-tuga-a10': { name: "3-Year Warranty for Tuga A10", price: 6500, warrantyFor: 'tuga-a10', tier: '3yr' },
+  'wty-3yr-tuga-w10': { name: "3-Year Warranty for Tuga W10", price: 7900, warrantyFor: 'tuga-w10', tier: '3yr' },
+  'wty-3yr-tuga-a6': { name: "3-Year Warranty for Tuga A6", price: 6500, warrantyFor: 'tuga-a6', tier: '3yr' },
 };
+
+/** Scanner variants carry their base device's warranty. */
+const baseDeviceId = (id) => id.replace(/-scanner$/, '');
+
+/**
+ * Map a provider line-item name back to our product id. Stripe and PayPal
+ * only echo the name we sent, which is PRODUCTS[id].name.
+ */
+const productIdForName = (name) =>
+  Object.keys(PRODUCTS).find((id) => PRODUCTS[id].name === name) ?? null;
 
 /**
  * Normalise a client basket into priced lines.
@@ -51,20 +68,44 @@ const PRODUCTS = {
  *
  * @throws if an id is unknown or a quantity is not a sane integer.
  */
+/** A problem with what the customer sent, shown to them as a 400. */
+class BasketError extends Error {}
+
 function resolveBasket(items) {
   return items.map((item) => {
     const id = item.productId ?? item.id;
     const product = PRODUCTS[id];
-    if (!product) throw new Error(`Unknown product: ${id}`);
+    if (!product) throw new BasketError(`Unknown product: ${id}`);
 
     // A missing quantity means 1; anything else must be a sane integer.
     const quantity = item.quantity === undefined ? 1 : Number(item.quantity);
     if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
-      throw new Error(`Invalid quantity for ${id}`);
+      throw new BasketError(`Invalid quantity for ${id}`);
     }
 
     return { id, product, quantity };
   });
+}
+
+/**
+ * A warranty line is only valid for a device in the same basket, one per
+ * unit. Throws with a message the basket page can show.
+ */
+function validateWarranties(lines) {
+  const deviceUnits = {};
+  for (const line of lines) {
+    if (!line.product.device) continue;
+    const base = baseDeviceId(line.id);
+    deviceUnits[base] = (deviceUnits[base] || 0) + line.quantity;
+  }
+  for (const line of lines) {
+    const w = line.product.warrantyFor;
+    if (!w) continue;
+    const units = deviceUnits[w] || 0;
+    if (line.quantity > units) {
+      throw new BasketError(`${line.product.name} covers one device each: you have ${line.quantity} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
+    }
+  }
 }
 
 /** Bulk tiers are earned on devices only. */
@@ -116,6 +157,16 @@ export async function handleRequest(request, env) {
   }
 
   // --- API routes ---
+  // While orders are paused (src/store-config.js), refuse new checkouts even
+  // from a basket saved before the pause. Confirming an order that was
+  // already paid still works.
+  if (
+    SALES_PAUSED &&
+    request.method === 'POST' &&
+    (path === '/api/create-checkout-session' || path === '/api/create-paypal-order')
+  ) {
+    return corsError(SALES_PAUSED_MESSAGE, 503);
+  }
   if (request.method === 'POST' && path === '/api/create-checkout-session') {
     return handleStripeCheckout(request, env);
   }
@@ -144,7 +195,7 @@ export async function handleRequest(request, env) {
     return handleReviewSubmit(request, env);
   }
   if (request.method === 'GET' && path === '/api/payment-methods') {
-    return corsResponse({ card: true, paypal: isPayPalLive(env) });
+    return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
   }
   if (request.method === 'GET' && path === '/api/paypal-check') {
     return handlePayPalCheck(request, env);
@@ -179,6 +230,7 @@ async function handleStripeCheckout(request, env) {
 
     // Re-price server-side; the discount the client claims is ignored.
     const lines = resolveBasket(items);
+    validateWarranties(lines);
     const discountPercent = getDiscountPercent(countDeviceUnits(lines));
 
     // Build Stripe line items
@@ -206,8 +258,9 @@ async function handleStripeCheckout(request, env) {
     // No payment_method_types: Checkout then offers every method switched on
     // in the Stripe dashboard (Settings > Payment methods) that suits the
     // basket, so Apple Pay, Google Pay and Klarna appear without a deploy.
-    params.append('shipping_address_collection[allowed_countries][0]', 'GB');
-    params.append('shipping_address_collection[allowed_countries][1]', 'IE');
+    SHIPPING_COUNTRIES.forEach((country, i) => {
+      params.append(`shipping_address_collection[allowed_countries][${i}]`, country);
+    });
 
     // Encode each line item
     lineItems.forEach((li, i) => {
@@ -240,6 +293,7 @@ async function handleStripeCheckout(request, env) {
 
     return corsResponse({ url: session.url });
   } catch (err) {
+    if (err instanceof BasketError) return corsError(err.message, 400);
     console.error('Stripe checkout handler error:', err);
     return corsError('Internal server error', 500);
   }
@@ -263,6 +317,7 @@ async function handlePayPalOrder(request, env) {
 
     // Validate and recalculate server-side (never trust the client total)
     const lines = resolveBasket(items);
+    validateWarranties(lines);
     const discountPercent = getDiscountPercent(countDeviceUnits(lines));
 
     let subtotalPence = 0;
@@ -333,6 +388,7 @@ async function handlePayPalOrder(request, env) {
 
     return corsResponse({ approvalUrl: approveLink.href, orderId: order.id });
   } catch (err) {
+    if (err instanceof BasketError) return corsError(err.message, 400);
     console.error('PayPal order handler error:', err);
     return corsError('Internal server error', 500);
   }
@@ -350,6 +406,19 @@ async function handlePayPalOrder(request, env) {
 // then save and email exactly once per order.
 
 /**
+ * Has our own confirmation (with the order summary and, for a plan, the
+ * 45-day cancellation notice) gone out? Records written before receiptVia
+ * existed marked a Stripe receipt as emailSentAt with emailVia
+ * 'stripe-receipt'; that receipt carries neither, so it does not count.
+ */
+const confirmationSent = (record) =>
+  Boolean(record?.emailSentAt) && record.emailVia !== 'stripe-receipt';
+
+/** Has Stripe already been asked to email its own receipt for this order? */
+const receiptSent = (record) =>
+  Boolean(record?.receiptSentAt) || record?.emailVia === 'stripe-receipt';
+
+/**
  * Save and email an order unless it has already been recorded.
  * Returns the stored record.
  */
@@ -357,10 +426,10 @@ async function recordOrder(env, orderDetails) {
   let record = null;
   if (env.ORDERS) {
     record = await getOrder(env.ORDERS, orderDetails.orderId);
-    // Recorded and emailed already: nothing to do. Recorded but never
-    // emailed (e.g. the email service was down): fall through and retry
-    // the email only.
-    if (record?.emailSentAt) return record;
+    // Recorded and confirmed by email already: nothing to do. Recorded but
+    // never confirmed (the email service was down, even if Stripe sent its
+    // receipt): fall through and retry our own confirmation only.
+    if (confirmationSent(record)) return record;
   }
 
   if (!record) {
@@ -374,12 +443,12 @@ async function recordOrder(env, orderDetails) {
   if (!orderDetails.customerEmail) {
     console.error('Order has no customer email, confirmation not sent:', orderDetails.orderId);
   } else {
-    let emailVia = null;
+    let updates = null;
 
     if (env.RESEND_API_KEY) {
       try {
         await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
-        emailVia = 'resend';
+        updates = { emailSentAt: new Date().toISOString(), emailVia: 'resend' };
       } catch (emailErr) {
         // Log but do not fail: the payment is already taken.
         console.error('Email send failed:', emailErr);
@@ -392,19 +461,28 @@ async function recordOrder(env, orderDetails) {
     // receipt_email on a live payment sends one regardless of dashboard
     // settings, including on a payment that has already succeeded.
     // (PayPal always emails its own receipt to the payer.)
-    if (!emailVia && orderDetails.provider === 'stripe' && orderDetails.paymentIntent) {
+    // The receipt is NOT our confirmation: it has no plan notice, so it is
+    // tracked separately (receiptVia) and the next confirm-order or webhook
+    // call retries the Resend confirmation. Ask Stripe only once.
+    if (!updates && orderDetails.provider === 'stripe' && orderDetails.paymentIntent && !receiptSent(record)) {
       try {
         await sendStripeReceipt(orderDetails.paymentIntent, orderDetails.customerEmail, env);
-        emailVia = 'stripe-receipt';
+        updates = { receiptSentAt: new Date().toISOString(), receiptVia: 'stripe-receipt' };
       } catch (err) {
         console.error('Stripe receipt fallback failed:', err);
       }
     }
 
-    if (emailVia) {
-      record = { ...record, emailSentAt: new Date().toISOString(), emailVia };
+    if (updates) {
+      // A legacy record that counted the receipt as the confirmation keeps
+      // that fact under the new fields.
+      if (record.emailVia === 'stripe-receipt' && updates.emailVia === 'resend') {
+        updates.receiptSentAt = record.receiptSentAt || record.emailSentAt;
+        updates.receiptVia = 'stripe-receipt';
+      }
+      record = { ...record, ...updates };
       if (env.ORDERS) {
-        await updateOrder(env.ORDERS, orderDetails.orderId, { emailSentAt: record.emailSentAt, emailVia })
+        await updateOrder(env.ORDERS, orderDetails.orderId, updates)
           .catch((err) => console.error('Could not mark email sent:', err));
       }
     }
@@ -422,6 +500,9 @@ async function recordStripeOrder(sessionId, env) {
   if (session.error) throw new Error(`Stripe session lookup failed: ${session.error.message}`);
   if (session.payment_status !== 'paid') return { paid: false };
 
+  // Listed separately: an expanded session carries at most 10 line items.
+  const lineItems = await fetchStripeLineItems(sessionId, env);
+
   // Newer Stripe API versions moved shipping under collected_information.
   const shipping = session.collected_information?.shipping_details || session.shipping_details;
 
@@ -433,12 +514,13 @@ async function recordStripeOrder(sessionId, env) {
     shippingAddress: shipping?.address
       ? { name: shipping.name, ...shipping.address }
       : null,
-    items: session.line_items?.data?.map(li => ({
+    items: lineItems.map(li => ({
+      id: productIdForName(li.description),
       name: li.description,
       quantity: li.quantity,
       unitPrice: li.price?.unit_amount || li.amount_total / li.quantity,
       total: li.amount_total,
-    })) || [],
+    })),
     subtotal: session.amount_subtotal,
     total: session.amount_total,
     discount: session.metadata?.discount_percent || 0,
@@ -456,6 +538,17 @@ async function recordStripeOrder(sessionId, env) {
  */
 async function recordPayPalOrder(orderId, env) {
   let order = await fetchPayPalOrder(orderId, env);
+
+  // PayPal takes the address from the buyer's account and cannot be limited
+  // to the UK up front, so refuse to capture an order shipping anywhere else.
+  // An approved order that is never captured expires and nothing is charged.
+  if (order.status === 'APPROVED') {
+    const country = order.purchase_units?.[0]?.shipping?.address?.country_code;
+    if (!SHIPPING_COUNTRIES.includes(country)) {
+      console.warn(`PayPal order ${orderId} not captured: ships to ${country || 'unknown'}`);
+      return { paid: false, reason: 'country' };
+    }
+  }
 
   if (order.status === 'APPROVED') {
     try {
@@ -488,6 +581,7 @@ async function recordPayPalOrder(orderId, env) {
         }
       : null,
     items: purchaseUnit.items?.map(item => ({
+      id: productIdForName(item.name),
       name: item.name,
       quantity: parseInt(item.quantity, 10),
       unitPrice: Math.round(parseFloat(item.unit_amount?.value || '0') * 100),
@@ -524,17 +618,25 @@ async function handleConfirmOrder(request, env) {
       return corsError('Missing or invalid order reference');
     }
 
-    if (!result.paid) return corsResponse({ status: 'unpaid' });
+    if (!result.paid) {
+      return corsResponse({ status: result.reason === 'country' ? 'unsupported_country' : 'unpaid' });
+    }
 
     // Only what the confirmation page shows: no address or email.
     const { order } = result;
+    // emailSent is true only for our own confirmation; a Stripe receipt is
+    // reported through emailVia so the page can say what actually arrived.
+    const emailSent = confirmationSent(order);
     return corsResponse({
       status: 'confirmed',
+      orderId: order.orderId,
       provider: order.provider,
       total: order.total,
       currency: order.currency,
-      emailSent: Boolean(order.emailSentAt),
-      emailVia: order.emailVia ?? null,
+      emailSent,
+      emailVia: emailSent ? 'resend' : receiptSent(order) ? 'stripe-receipt' : null,
+      hasPlan: (order.items || []).some((item) =>
+        String(item.id || productIdForName(item.name) || '').startsWith('wty-')),
     });
   } catch (err) {
     console.error('Confirm order error:', err);
@@ -618,10 +720,10 @@ async function handlePayPalWebhook(request, env) {
  */
 async function handleContact(request, env) {
   try {
-    const { name, email, topic, message, website } = await request.json();
+    const { name, email, company, topic, message, website } = await request.json();
 
     // Honeypot: real users never fill a hidden field.
-    if (website) return corsResponse({ ok: true });
+    if (website) return corsResponse({ ok: true, emailed: true });
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return corsError('A valid email address is required', 422);
@@ -633,6 +735,7 @@ async function handleContact(request, env) {
     const enquiry = {
       name: String(name || '').slice(0, 120),
       email: String(email).slice(0, 160),
+      company: String(company || '').slice(0, 160),
       topic: String(topic || 'Enquiry').slice(0, 80),
       message: String(message).slice(0, 4000),
       receivedAt: new Date().toISOString(),
@@ -654,15 +757,13 @@ async function handleContact(request, env) {
       }
     }
 
-    try {
-      await sendEnquiry(env, enquiry);
-    } catch (mailErr) {
-      console.error('Enquiry email failed:', mailErr);
-      // Only fail the request if the message is now nowhere at all.
-      if (!stored) return corsError('Could not send the message', 500);
-    }
+    const emailed = await deliverEnquiry(env, enquiry);
+    // Only fail the request if the message is now nowhere at all.
+    if (!emailed && !stored) return corsError('Could not send the message', 500);
 
-    return corsResponse({ ok: true });
+    // emailed: false tells the page the message is kept but support has not
+    // been notified yet, so it can say so rather than promise a quick reply.
+    return corsResponse({ ok: true, emailed });
   } catch (err) {
     console.error('Contact form error:', err);
     return corsError('Could not send the message', 500);
@@ -760,27 +861,66 @@ async function handleStripeCheck(env) {
 }
 
 /**
- * Buyer's-guide signup. Stored in KV so there is a list to export later;
- * the send itself is handled manually for now.
+ * Send an enquiry to support. Returns whether the email went out; a failure
+ * is logged, never thrown, because the caller has usually stored it already.
+ */
+async function deliverEnquiry(env, enquiry) {
+  try {
+    await sendEnquiry(env, enquiry);
+    return true;
+  } catch (mailErr) {
+    console.error('Enquiry email failed:', mailErr);
+    return false;
+  }
+}
+
+/**
+ * "Not sure which size?" form: a request for personal size advice. Stored in
+ * KV as before and sent to support through the enquiry email so someone
+ * replies. Same contract as /api/contact: { ok, emailed }.
  */
 async function handleSubscribe(request, env) {
   try {
-    const { email } = await request.json();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const { email, website, message, page } = await request.json();
+
+    // Honeypot: real users never fill a hidden field.
+    if (website) return corsResponse({ ok: true, emailed: true });
+
+    if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return corsError('A valid email address is required', 422);
     }
 
+    const advice = {
+      email: email.slice(0, 160),
+      topic: 'Size advice request',
+      message: [
+        'Please send personal advice on which tablet size suits this customer.',
+        message ? `Note: ${String(message).slice(0, 2000)}` : '',
+        page ? `Sent from: ${String(page).slice(0, 200)}` : '',
+      ].filter(Boolean).join('\n'),
+      createdAt: new Date().toISOString(),
+    };
+
+    let stored = false;
     if (env.ORDERS) {
-      await env.ORDERS.put(
-        `subscriber:${email.toLowerCase()}`,
-        JSON.stringify({ email, createdAt: new Date().toISOString() })
-      );
+      try {
+        await env.ORDERS.put(
+          `subscriber:${advice.email.toLowerCase()}`,
+          JSON.stringify({ email: advice.email, topic: advice.topic, createdAt: advice.createdAt })
+        );
+        stored = true;
+      } catch (kvErr) {
+        console.error('Could not store size advice request:', kvErr);
+      }
     }
 
-    return corsResponse({ ok: true });
+    const emailed = await deliverEnquiry(env, advice);
+    if (!emailed && !stored) return corsError('Could not send the request', 500);
+
+    return corsResponse({ ok: true, emailed });
   } catch (err) {
     console.error('Subscribe error:', err);
-    return corsError('Could not subscribe', 500);
+    return corsError('Could not send the request', 500);
   }
 }
 
@@ -1150,7 +1290,7 @@ function timingSafeEqual(a, b) {
 }
 
 /**
- * Fetch a Stripe Checkout Session with expanded line items.
+ * Ask Stripe to email its own receipt for a payment.
  */
 async function sendStripeReceipt(paymentIntentId, email, env) {
   const res = await fetch(`https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentIntentId)}`, {
@@ -1177,14 +1317,43 @@ async function findStripeSessionByPaymentIntent(paymentIntentId, env) {
   return data.data?.[0]?.id ?? null;
 }
 
+/**
+ * Fetch a Stripe Checkout Session (line items come from fetchStripeLineItems).
+ */
 async function fetchStripeSession(sessionId, env) {
   const res = await fetch(
-    `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items`,
+    `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
     {
       headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` },
     }
   );
   return res.json();
+}
+
+/**
+ * Every line item of a Checkout Session. `expand[]=line_items` stops at 10,
+ * which a team order with plans and accessories can pass, so page through
+ * the list endpoint instead.
+ */
+async function fetchStripeLineItems(sessionId, env) {
+  const items = [];
+  let startingAfter = null;
+  // A basket holds at most a few dozen lines; the cap only guards a loop.
+  for (let page = 0; page < 20; page++) {
+    const params = new URLSearchParams({ limit: '100' });
+    if (startingAfter) params.set('starting_after', startingAfter);
+    const res = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}/line_items?${params}`,
+      { headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` } }
+    );
+    const data = await res.json();
+    if (!res.ok) throw new Error(`Stripe line items lookup failed: ${data.error?.message || res.status}`);
+    const pageItems = data.data || [];
+    items.push(...pageItems);
+    if (!data.has_more || pageItems.length === 0) break;
+    startingAfter = pageItems[pageItems.length - 1].id;
+  }
+  return items;
 }
 
 // ---------------------------------------------------------------------------

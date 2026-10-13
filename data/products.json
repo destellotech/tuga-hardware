@@ -23,7 +23,7 @@
       "highlights": [
         "IP68 + IP69K, survives jet washing, not just rain",
         "64MP night vision camera for dark voids and loft spaces",
-        "10600mAh battery, two full days of normal site use",
+        "10600mAh battery with 33W fast charging",
         "5G, so uploads finish before you leave the job"
       ],
       "specs": {
@@ -41,7 +41,7 @@
         "cpu": "MediaTek Dimensity 6300 5G",
         "connectivity": "5G, Wi-Fi 5, Bluetooth 5.2, NFC",
         "camera": "64MP night vision + 50MP main",
-        "weight": "320g",
+        "weight": "441g",
         "operating_temp": "-20°C to 60°C"
       },
       "features": ["Gorilla Glass 5", "Glove mode", "NFC", "GPS + GLONASS + BeiDou", "Fingerprint sensor", "Face unlock", "USB-C OTG", "Night vision camera", "33W fast charge"],
@@ -62,8 +62,8 @@
       "order": 2,
       "tagline": "The all-rounder. Fits the van door pocket.",
       "shortFor": "Forms, maps, site photos and quotes, one-handed, all shift.",
-      "description": "An 8 inch rugged Android tablet with IP68 protection, 4G LTE and a sunlight readable screen. The middle size: big enough for forms and drawings, small enough to hold in one hand.",
-      "longDescription": "Eight inches is the middle of the range for a reason. It is big enough to fill in a form, read a drawing or follow a route without pinching and zooming, and small enough to hold in one hand up a ladder or drop into a van door pocket. Sunlight readable at 800 nits, sealed to IP68, and drop tested to MIL-STD-810H. Vehicle mountable with 4G LTE built in, so it works as a dashboard unit on the road and a site tablet when you get there.",
+      "description": "An 8 inch rugged Android tablet with IP68 protection, 4G LTE and a sunlight readable screen. A middle size: big enough for forms and drawings, small enough to hold in one hand.",
+      "longDescription": "Eight inches is the middle of the three sizes. It is big enough to fill in a form, read a drawing or follow a route without pinching and zooming, and small enough to hold in one hand up a ladder or drop into a van door pocket. Sunlight readable at 800 nits, sealed to IP68, and drop tested to MIL-STD-810H. Vehicle mountable with 4G LTE built in, so it works as a dashboard unit on the road and a site tablet when you get there.",
       "price": 379,
       "compareAtPrice": null,
       "currency": "GBP",
@@ -94,7 +94,7 @@
       },
       "features": ["Sunlight readable display", "Glove mode", "GPS + GLONASS", "Vehicle mountable", "USB-C + USB-A", "NFC"],
       "inBox": ["Tuga A8 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
-      "badge": "Our Pick",
+      "badge": null,
       "positioning": "The all-rounder. The sweet spot between portability and screen space."
     },
     {
@@ -143,7 +143,7 @@
       },
       "features": ["NFC", "GPS + Galileo + BeiDou + QZSS + NavIC", "Dual-band Wi-Fi", "Dual SIM", "Pogo pin connector", "3.5mm headphone jack", "USB-C"],
       "inBox": ["Tuga A10 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
-      "badge": "Biggest Screen",
+      "badge": "Our pick for Android",
       "positioning": "The site tablet. Blueprints, BIM viewers, full spreadsheets, PDF plans."
     },
     {
@@ -158,37 +158,42 @@
       "order": 4,
       "tagline": "Windows in your pocket.",
       "shortFor": "Legacy Windows software and network drives, in a holster.",
-      "description": "A 6.5 inch rugged Windows 11 Pro handheld for professionals who need desktop software on the move. Run legacy apps, access network drives, and manage field data from a device that fits in a holster.",
-      "longDescription": "The WH6 puts full Windows 11 Pro in your pocket. An Intel N100, 16GB of RAM and a 512GB SSD mean you can run the legacy Windows software your industry never moved off, reach network drives, and manage field data without compromise. Sealed to IP67 and drop tested to MIL-STD-810H, with a 10000mAh battery and 4G LTE. A barcode scanner variant is available for warehouse and logistics work.",
-      "price": 799,
+      "description": "A 6.5 inch rugged Windows 11 handheld for professionals who need desktop software on the move. Run legacy apps, access network drives, and manage field data from a device that fits in a holster.",
+      "longDescription": "The WH6 puts full Windows 11 in your pocket. An Intel Celeron N5100, 8GB of RAM and 128GB of storage (plus a microSD slot for more) run the Windows software your industry never moved off, reach network drives, and manage field data without compromise. It is rated IP65 and MIL-STD-810H, survives 1.5 metre drops, and works from -20°C to 60°C. The 4000mAh battery is removable, so a spare keeps you going through a long shift, and 4G LTE, GPS + GLONASS and NFC are on board. USB-A and USB-C ports connect straight to instruments and peripherals. A 2D barcode scanner is available as an option for warehouse and logistics work, and a charging dock is sold separately for desk use.",
+      "price": 699,
       "compareAtPrice": null,
       "currency": "GBP",
       "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
       "highlights": [
-        "Full Windows 11 Pro, not a mobile OS pretending",
-        "Intel N100, 16GB RAM, 512GB SSD",
+        "Full Windows 11, not a mobile OS pretending",
+        "Intel Celeron N5100, 8GB RAM, 128GB storage",
+        "Removable 4000mAh battery, so a spare keeps you running",
         "Fits a holster, runs desktop software",
         "Optional integrated 2D barcode scanner"
       ],
       "specs": {
-        "screen": "6.5\" IPS",
-        "resolution": "1280 x 720",
-        "display_brightness": "500 nits",
-        "ram": "16GB",
-        "storage": "512GB SSD",
-        "ip_rating": "IP67",
+        "screen": "6.5\" IPS, 20:9, multi-touch",
+        "resolution": "720 x 1600",
+        "display_brightness": "400 nits",
+        "ram": "8GB LPDDR4",
+        "storage": "128GB eMMC",
+        "expandable_storage": "microSD (TF) slot, up to 512GB",
+        "ip_rating": "IP65",
         "mil_std": "MIL-STD-810H",
-        "battery": "10000mAh",
-        "charging": "Fast charge, dock available",
-        "os": "Windows 11 Pro",
-        "cpu": "Intel N100",
-        "connectivity": "4G LTE, Wi-Fi 5, Bluetooth 5.0",
-        "camera": "8MP rear + 2MP front",
-        "weight": "450g",
-        "operating_temp": "-10°C to 50°C"
+        "drop_spec": "1.5m",
+        "battery": "4000mAh",
+        "charging": "USB-C PD fast charge, pogo pin for dock",
+        "os": "Windows 11 IoT",
+        "cpu": "Intel Celeron N5100, up to 2.8GHz",
+        "connectivity": "4G LTE, dual-band Wi-Fi 5, Bluetooth 5.0, NFC, GPS + GLONASS",
+        "ports": "USB-C (OTG), USB-A, microSD, Nano-SIM, pogo pin",
+        "camera": "8MP autofocus rear + 5MP front",
+        "weight": "470g",
+        "dimensions": "183.1 x 88.6 x 24.1mm",
+        "operating_temp": "-20°C to 60°C"
       },
-      "features": ["Windows 11 Pro", "Intel N100", "16GB RAM", "512GB SSD", "4G LTE", "GPS + GLONASS", "USB-C", "Barcode scanner optional"],
-      "inBox": ["Tuga WH6 handheld", "USB-C cable", "UK power adapter", "Quick start guide"],
+      "features": ["Windows 11", "Intel Celeron N5100", "8GB RAM", "128GB storage + microSD", "Removable battery", "4G LTE", "GPS + GLONASS", "NFC", "USB-C + USB-A", "Pogo pin dock connector", "Barcode scanner optional"],
+      "inBox": ["Tuga WH6 handheld", "Removable battery", "USB-C cable", "UK power adapter", "Quick start guide"],
       "badge": null,
       "positioning": "Windows in your pocket for professionals who need desktop software on the move."
     },
@@ -251,7 +256,7 @@
       "tagline": "The full desktop experience. Anywhere.",
       "shortFor": "Engineers and surveyors who need Ethernet, HDMI and a full screen.",
       "description": "A 10.1 inch rugged Windows 11 Pro tablet with an Intel N100 processor and a full port selection including RJ45 Ethernet and HDMI. For engineers, surveyors and field professionals who need full desktop capability.",
-      "longDescription": "The W10 is the full desktop experience in a rugged package. An Intel N100 processor (up to 3.4GHz), 8GB of RAM and 128GB of storage run Windows 11 Pro on a 10.1 inch IPS touchscreen. The port selection is what sets it apart: HDMI, RJ45 Ethernet, USB-C and USB-A for direct connections to plant, panels and network gear that has never seen Wi-Fi. Sealed to IP67, with a removable 5000mAh battery, NFC, a microSD slot and a pogo pin dock connector. Options include 4G LTE, GPS, a fingerprint reader, a 2D barcode scanner and a UHF RFID reader.",
+      "longDescription": "The W10 is the full desktop experience in a rugged package. An Intel N100 processor (up to 3.4GHz), 8GB of RAM and 128GB of storage run Windows 11 Pro on a 10.1 inch IPS touchscreen. The port selection is what sets it apart: HDMI, RJ45 Ethernet, USB-C and USB-A for direct connections to plant, panels and network gear that has never seen Wi-Fi. Rated IP65 for dust and water jets, with a removable 5000mAh battery, NFC, a microSD slot and a pogo pin dock connector. Options include 4G LTE, GPS, a fingerprint reader, a 2D barcode scanner and a UHF RFID reader.",
       "price": 649,
       "compareAtPrice": null,
       "currency": "GBP",
@@ -268,19 +273,19 @@
         "ram": "8GB",
         "storage": "128GB",
         "expandable_storage": "microSD (TF) slot",
-        "ip_rating": "IP67",
+        "ip_rating": "IP65",
         "battery": "5000mAh",
         "charging": "USB-C, 9V/3A fast charge",
         "os": "Windows 11 Pro",
         "cpu": "Intel N100, up to 3.4GHz",
         "connectivity": "Dual-band Wi-Fi 5, Bluetooth 5.2, NFC, 100Mbps Ethernet, optional 4G LTE",
         "camera": "5MP autofocus rear + 2MP autofocus front",
-        "weight": "1138g",
+        "weight": "1197g",
         "dimensions": "280 x 198 x 22mm"
       },
       "features": ["Windows 11 Pro", "Intel N100 processor", "HDMI + RJ45 + USB-C + USB-A", "Removable battery", "NFC (13.56MHz)", "Pogo pin dock connector", "Optional 4G LTE and GPS", "Optional fingerprint reader", "Optional 2D barcode scanner", "Optional UHF RFID reader"],
       "inBox": ["Tuga W10 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
-      "badge": null,
+      "badge": "Our pick for Windows",
       "positioning": "The full desktop experience. Real screen estate, full ports, full Windows."
     },
     {
@@ -293,8 +298,8 @@
       "isVariant": true,
       "variantOf": "tuga-wh6",
       "tagline": "Windows in your pocket. Scan anything.",
-      "description": "The Tuga WH6 with an integrated 2D barcode scanner. Full Windows 11 Pro in a rugged handheld with professional scanning for warehouse, logistics and inventory work.",
-      "price": 879,
+      "description": "The Tuga WH6 with an integrated 2D barcode scanner. Full Windows 11 in a rugged handheld with professional scanning for warehouse, logistics and inventory work.",
+      "price": 779,
       "compareAtPrice": null,
       "currency": "GBP",
       "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
@@ -419,6 +424,16 @@
       "category": "tablet"
     },
     {
+      "id": "acc-wh6-cradle",
+      "name": "WH6 Charging Cradle",
+      "slug": "wh6-cradle",
+      "description": "Desktop charging cradle for the Tuga WH6, with a pogo pin connection. Drop the handheld in and it charges, ready for the next shift.",
+      "price": 79,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-wh6"],
+      "category": "handheld"
+    },
+    {
       "id": "acc-belt-holster",
       "name": "Belt Holster",
       "slug": "belt-holster",
@@ -457,6 +472,74 @@
       "currency": "GBP",
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
+    }
+  ],
+  "warranty": {
+    "_note": "Paid plans. Prices here MUST match the wty-* entries in src/api.js PRODUCTS. Total Care is quote-only (no checkout SKU). Page copy lives in build/content/warranty.json; Plan Terms in build/content/warranty-terms.json.",
+    "tiers": [
+      {
+        "id": "standard",
+        "name": "Standard warranty",
+        "months": 12,
+        "included": true,
+        "summary": "12 months against defects in materials and workmanship. Included with every device."
+      },
+      {
+        "id": "3yr",
+        "name": "3-Year Warranty",
+        "months": 36,
+        "recommended": true,
+        "summary": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims.",
+        "prices": {
+          "tuga-a10": 65,
+          "tuga-w10": 79,
+          "tuga-a6": 65
+        },
+        "chooser": "36 months against defects, including battery defects (not normal capacity loss). UK carriage paid both ways on accepted claims."
+      },
+      {
+        "id": "care",
+        "name": "Total Care",
+        "months": 36,
+        "quoteOnly": true,
+        "businessOnly": true,
+        "minUnits": 10,
+        "summary": "For business fleets of ten or more A10 and W10 devices. A swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
+        "prices": {
+          "tuga-a10": 279,
+          "tuga-w10": 299
+        },
+        "chooser": "Business fleets of ten or more A10 and W10 devices. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
+      }
+    ]
+  },
+  "warranties": [
+    {
+      "id": "wty-3yr-tuga-a10",
+      "name": "3-Year Warranty for Tuga A10",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
+      "price": 65,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a10",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-w10",
+      "name": "3-Year Warranty for Tuga W10",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
+      "price": 79,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w10",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-a6",
+      "name": "3-Year Warranty for Tuga A6",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
+      "price": 65,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a6",
+      "tier": "3yr"
     }
   ]
 }

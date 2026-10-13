@@ -610,21 +610,39 @@ p { text-wrap: pretty; }
   .nav-toggle { display: grid; }
 
   .primary-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    /* The sticky header is the containing block, so the drawer hangs off its
+       bottom edge and moves with it. No measured offset needed. */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
-    transform: translateY(-115%);
-    transition: transform var(--base);
+    /* Closed: faded out and hidden from the tab order. The old fixed drawer
+       was translated up by 115% of its own height, which left its bottom
+       showing whenever the header was taller than 15% of the drawer. */
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--base), transform var(--base), visibility 0s linear var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity var(--base), transform var(--base), visibility 0s;
+  }
+
+  /* Keep the announcement bar to one line on phones. */
+  .announce-more { display: none; }
 
   .primary-nav a {
     padding-block: 0.95rem;
@@ -1813,6 +1831,122 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-m);
 }
 
+/* Warranty chooser: one selectable row per plan, price on the right */
+.protect {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-m);
+  min-width: 0;
+}
+
+.protect legend {
+  padding: 0;
+  margin-bottom: 0.6rem;
+}
+
+.protect-opt {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.25rem 0.75rem;
+  align-items: start;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--fast), background var(--fast);
+}
+
+.protect-opt + .protect-opt { margin-top: 0.5rem; }
+
+.protect-opt:hover { border-color: var(--green-700); }
+
+.protect-opt:has(input:checked) {
+  border-color: var(--green-900);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--green-900);
+}
+
+.protect-opt input,
+.protect-marker {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.15rem 0 0;
+  accent-color: var(--green-900);
+}
+
+.protect-text {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
+.protect-text strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.protect-text a {
+  color: var(--copper-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.protect-price {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--green-900);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}
+
+.protect-price small {
+  display: block;
+  font-size: var(--step--2);
+  color: var(--ink-light);
+}
+
+/* Total Care is quote-only: no radio, quieter frame */
+.protect-quote {
+  cursor: default;
+  border-style: dashed;
+  background: transparent;
+}
+
+.protect-quote:hover { border-color: var(--rule-strong); }
+
+.protect-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: var(--step--1);
+  color: var(--copper-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Editorial label: "Recommended", "Our pick for Android" */
+.pick-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+  border-radius: 999px;
+  background: var(--green-900);
+  color: var(--cream);
+  vertical-align: middle;
+}
+
 .buy-row {
   display: flex;
   gap: 0.6rem;
@@ -2139,7 +2273,13 @@ p { text-wrap: pretty; }
   font-size: var(--step-1);
 }
 
+/* 44px tall so it is an easy tap on a phone, without growing the row much. */
 .cart-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 0.6rem;
   font-family: var(--font-mono);
   font-size: var(--step--2);
   letter-spacing: 0.08em;
@@ -2663,8 +2803,502 @@ p { text-wrap: pretty; }
   .reveal { opacity: 1; transform: none; }
 }
 
+/* Orders paused (src/store-config.js SALES_PAUSED) */
+.announce a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pdp-paused {
+  flex: 1 1 100%;
+  margin: 0;
+  color: var(--ink-light);
+}
+
+/* Business quote link under the buy box */
+.pdp-quote {
+  margin: 0.75rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-light);
+}
+.pdp-quote a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.field-optional { font-weight: 400; opacity: 0.7; }
+
 /* --------------------------------------------------------------------------
-   30. TOOLS: picker, bulk calculator, lightbox, trade pick, forms extras
+   Works with pages
+   -------------------------------------------------------------------------- */
+.section-tint { background: var(--cream-deep); }
+
+.req-list {
+  list-style: none;
+  margin: var(--space-l) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+.req {
+  padding: var(--space-m) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.req h3 { font-size: var(--step-1); margin-bottom: 0.4rem; }
+.req p { color: var(--ink-mid); line-height: 1.65; max-width: var(--measure); }
+.req-source {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--copper-dark);
+  text-decoration: none;
+}
+.req-source:hover { text-decoration: underline; }
+
+.pick-list { display: grid; gap: var(--space-xl); margin-top: var(--space-l); }
+.pick {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.pick-card .product-card { height: auto; }
+.pick-body h3 { font-size: var(--step-3); letter-spacing: -0.02em; margin: 0.75rem 0 0.75rem; }
+.pick-price { font-family: var(--font-mono); font-weight: 400; font-size: var(--step-1); color: var(--copper-dark); margin-left: 0.5rem; }
+.pick-body > p { color: var(--ink-mid); line-height: 1.7; max-width: var(--measure); margin-bottom: 1rem; }
+.pick-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+@media (max-width: 760px) { .pick { grid-template-columns: 1fr; } }
+
+.callout {
+  margin-top: var(--space-l);
+  padding: var(--space-m);
+  border-left: 3px solid var(--copper);
+  background: var(--cream-deep);
+  color: var(--ink-mid);
+  line-height: 1.65;
+  max-width: var(--measure);
+}
+
+.setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); }
+@media (max-width: 700px) { .setup-grid { grid-template-columns: 1fr; } }
+.step-list { margin: var(--space-m) 0 0; padding-left: 1.4rem; color: var(--ink-mid); line-height: 1.65; }
+.step-list li { margin-bottom: 0.75rem; }
+.step-list li::marker { font-family: var(--font-mono); color: var(--copper-dark); }
+
+.disclaimer { font-size: var(--step--1); color: var(--ink-light); line-height: 1.6; max-width: var(--measure); }
+.sources { margin-top: var(--space-m); font-size: var(--step--1); color: var(--ink-light); }
+.sources summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.06em; text-transform: uppercase; }
+.sources ul { margin: 0.75rem 0 0; padding-left: 1.2rem; }
+.sources li { margin-bottom: 0.35rem; overflow-wrap: anywhere; }
+.sources a { color: inherit; }
+
+.works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-m); }
+.works-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: var(--space-m);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--fast), box-shadow var(--fast);
+}
+.works-card:hover { transform: translateY(-2px); box-shadow: var(--lift); }
+.works-card h2 { font-size: var(--step-2); letter-spacing: -0.02em; }
+.works-card > p { color: var(--ink-mid); line-height: 1.6; flex: 1; }
+.works-pick { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em; text-transform: uppercase; color: var(--copper-dark); }
+
+/* --------------------------------------------------------------------------
+   WARRANTY — plan cards, claim steps, plan terms
+   -------------------------------------------------------------------------- */
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-m);
+}
+
+@media (max-width: 960px) {
+  .tier-grid { grid-template-columns: 1fr; max-width: 560px; }
+}
+
+.tier {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-l) var(--space-m) var(--space-m);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+}
+
+.tier h2 {
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.tier-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper-dark);
+  margin-bottom: 0.75rem;
+}
+
+.tier-price {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--green-900);
+  line-height: 1.1;
+}
+
+.tier-price small {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink-light);
+}
+
+.tier-standard .tier-price { font-size: var(--step-0); font-weight: 600; }
+
+.tier-summary {
+  margin-top: var(--space-s);
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--rule);
+  color: var(--ink-mid);
+  line-height: 1.6;
+}
+
+/* The full point list is long: fold it so the three plans compare at a glance */
+.tier-more {
+  margin-top: var(--space-m);
+  border-top: 1px solid var(--rule);
+}
+
+.tier-more summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-900);
+}
+
+.tier-more summary::-webkit-details-marker { display: none; }
+
+.tier-more summary span {
+  margin-left: auto;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+}
+
+.tier-more summary::after {
+  content: '+';
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform var(--fast);
+}
+
+.tier-more[open] summary::after { transform: rotate(45deg); }
+
+.tier-points {
+  display: grid;
+  gap: 0.7rem;
+  padding-bottom: var(--space-s);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-mid);
+}
+
+.tier-points li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.tier-points li::before {
+  content: '';
+  position: absolute;
+  left: 0.15rem;
+  top: 0.4em;
+  width: 0.55rem;
+  height: 0.3rem;
+  border-left: 2px solid var(--green-600);
+  border-bottom: 2px solid var(--green-600);
+  transform: rotate(-45deg);
+}
+
+.tier-cta { margin-top: auto; padding-top: var(--space-s); }
+.tier-cta .btn { width: 100%; }
+
+/* 3-Year: the one we point people to */
+.tier-recommended {
+  border-color: var(--green-900);
+  box-shadow: inset 0 0 0 1px var(--green-900), var(--lift);
+}
+
+.tier-recommended .tier-kicker {
+  position: absolute;
+  top: 0;
+  left: var(--space-m);
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--green-900);
+  color: var(--cream);
+  letter-spacing: 0.1em;
+}
+
+/* Total Care: the fleet product, in the dark house colour */
+.tier-featured {
+  background: var(--green-900);
+  border-color: var(--green-900);
+  color: var(--ink-inverse-mid);
+}
+
+.tier-featured h2,
+.tier-featured .tier-price { color: var(--cream); }
+.tier-featured .tier-kicker { color: var(--copper-light); }
+.tier-featured .tier-price small { color: var(--ink-inverse-light); }
+.tier-featured .tier-summary { color: var(--ink-inverse-mid); border-color: var(--rule-inverse); }
+.tier-featured .tier-more { border-color: var(--rule-inverse); }
+.tier-featured .tier-more summary { color: var(--cream); }
+.tier-featured .tier-more summary span { color: var(--ink-inverse-light); }
+.tier-featured .tier-points { color: var(--ink-inverse-mid); }
+.tier-featured .tier-points li::before { border-color: var(--copper-light); }
+
+/* Comparison with sentences in the cells: let them wrap and keep row labels in view */
+.compare-table-wrap th,
+.compare-table-wrap td {
+  vertical-align: top;
+  line-height: 1.5;
+  min-width: 13rem;
+}
+
+.compare-table-wrap tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 9.5rem;
+  max-width: 11rem;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green-900);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.compare-table-wrap td:first-child {
+  font-family: inherit;
+  font-weight: 400;
+  color: inherit;
+}
+
+.compare-table-wrap tbody tr:hover th { background: var(--cream-deep); }
+
+.compare-table .cell-note {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 400;
+  color: var(--ink-light);
+}
+
+/* Claim steps: a numbered track down the left, a title per step */
+.step-list-long {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-l);
+}
+
+.step-list-long li {
+  counter-increment: step;
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0 0 var(--space-m) 3.25rem;
+}
+
+.step-list-long li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green-900);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+}
+
+.step-list-long li::after {
+  content: '';
+  position: absolute;
+  left: calc(1.125rem - 0.5px);
+  top: 2.6rem;
+  bottom: 0.35rem;
+  border-left: 1px dashed var(--rule-strong);
+}
+
+.step-list-long li:last-child::after { display: none; }
+
+.step-list-long strong {
+  padding-top: 0.35rem;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.step-list-long span {
+  font-size: var(--step--1);
+  line-height: 1.65;
+}
+
+.consumer-info {
+  margin-top: var(--space-s);
+  color: var(--ink-mid);
+  line-height: 1.7;
+  max-width: var(--measure);
+}
+
+/* Plan Terms: hanging clause numbers so a clause can be found by number */
+.clauses > p {
+  position: relative;
+  padding-left: 2.75rem;
+  scroll-margin-top: 6rem;
+}
+
+.clauses > p > strong:first-child {
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--copper-dark);
+}
+
+.clauses > p:target {
+  background: var(--cream-deep);
+  box-shadow: -0.75rem 0 0 var(--cream-deep), 0.75rem 0 0 var(--cream-deep);
+}
+
+.compare-table-wrap thead th:first-child { left: 0; z-index: 2; }
+
+@media (max-width: 640px) {
+  .compare-table-wrap { min-width: 0; }
+  .compare-table-wrap th,
+  .compare-table-wrap td { min-width: 11rem; padding: 0.8rem 0.9rem; }
+  .compare-table-wrap tbody th { min-width: 6.5rem; max-width: 7.5rem; letter-spacing: 0.03em; }
+}
+
+/* Cart: 3-Year Warranty offer tucked under the device it covers */
+.cart-offer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s) var(--space-m);
+  flex-wrap: wrap;
+  margin-top: -1px;
+  padding: var(--space-s) var(--space-m);
+  border: 1px dashed var(--rule-strong);
+  border-top-style: solid;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  background: var(--cream-deep);
+}
+
+.cart-item:has(+ .cart-offer) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.cart-offer + .cart-item { margin-top: var(--space-s); }
+
+.cart-offer-text { flex: 1 1 240px; }
+
+.cart-offer-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.cart-offer-meta {
+  margin-top: 0.2rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
+.cart-offer-meta a { color: var(--copper-dark); text-decoration: underline; text-underline-offset: 0.2em; }
+
+.cart-offer-btn { flex: 0 0 auto; }
+
+@media (max-width: 520px) {
+  .cart-offer-btn { width: 100%; }
+}
+
+/* Phones: small buttons and filters still need a 44px tap target. */
+@media (max-width: 640px) {
+  .btn-sm,
+  .filter-btn { min-height: 44px; }
+}
+
+/* Order confirmation: the reference the customer quotes to support */
+.order-ref {
+  margin-bottom: var(--space-s);
+  font-size: var(--step-0);
+  color: var(--ink-mid);
+}
+
+.order-ref strong {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-2);
+  letter-spacing: 0.04em;
+  color: var(--green-900);
+  overflow-wrap: anywhere;
+}
+
+.order-plan-note {
+  max-width: 34rem;
+  margin: var(--space-m) auto 0;
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--radius-lg);
+  background: var(--cream-deep);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  text-align: left;
+  color: var(--ink);
+}
+
+.order-plan-note a,
+.capture-note a { text-decoration: underline; text-underline-offset: 0.2em; }
+
+}
+
+/* --------------------------------------------------------------------------
+   TOOLS: picker, bulk calculator, lightbox, trade pick, forms extras
    -------------------------------------------------------------------------- */
 
 /* Which Tuga? picker */

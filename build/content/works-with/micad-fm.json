@@ -1,0 +1,146 @@
+{
+  "slug": "micad-fm",
+  "software": "Micad FM",
+  "vendor": "Micad Systems (UK) Limited",
+  "vendor_url": "https://www.micadsoftware.com/",
+  "title": "Rugged tablet for Micad FM (estates and facilities app)",
+  "meta_description": "Micad FM app needs Android 5.0 or later. Tuga A10 and A6 run Android 14. Rugged tablets with GPS, camera, IP68, 12-month warranty, free UK delivery.",
+  "target_query": "rugged tablet for Micad FM app",
+  "h1": "Rugged tablet for Micad FM (Micad estates and facilities software)",
+  "intro": [
+    "Micad FM is the helpdesk and maintenance module of Micad's estates and facilities software, made by Micad Systems (UK) Limited of Altrincham. Micad says its software is used by more than 180 of approximately 240 NHS trusts, and its case studies name Birmingham Community Healthcare NHS Foundation Trust, South London and Maudsley NHS Trust, Brunel University and the universities of Bristol and Bath. Since K1 Investment Management combined Micad with SINGU in July 2025, Micad has marketed its current CAFM platform as SINGU FM, but the Micad FM mobile app remains on Google Play and the App Store.",
+    "Micad describes the app as used by maintenance operatives for the Micad FM Helpdesk system. On site they work through a customisable jobs list, time jobs with a stopwatch, pause them or send them back to a supervisor, record stock parts, upload photos, raise remedial works against assets and capture signatures. The app uses one PDA licence from the customer's Micad FM system, needs Location Services on to send GPS data, and can create jobs and upload images while out of signal, synchronising when a connection returns. That is a day of corridors, plant rooms, roof spaces and van cabs, where a consumer tablet with a glass back and no ingress rating is at a disadvantage.",
+    "This page sets out what Micad publishes about the app's device requirements, which of the three Tuga rugged devices meet them, where Micad has published nothing (barcode scanning, NFC, screen size), and how to get a unit running. Tuga Hardware is independent of Micad, so everything about the software below is taken from Micad's own site, its Google Play and App Store listings and its G-Cloud listing."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 5.0 or later",
+      "detail": "The Micad FM app on Google Play (package uk.co.micad.fm, developer Micad Systems (UK)) requires Android 5.0 and up. The listing shows version 1.0.11, updated on 23 October 2024, with the release note 'Bug fixes and Android 14 support'. The Tuga A10 and A6 both run Android 14, so they meet the published requirement.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.micad.fm"
+    },
+    {
+      "requirement": "One PDA licence per handheld",
+      "detail": "The listing states 'This App uses one PDA licence from the Micad FM system'. Each device you put in a technician's hands therefore needs a licence under your organisation's Micad contract. The app itself is free to download.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.micad.fm"
+    },
+    {
+      "requirement": "GPS and push notifications",
+      "detail": "Micad states that 'Location Services' must be turned on to send GPS data and 'Notifications' must be turned on to receive push notifications. A device therefore needs a satellite positioning receiver and a data connection for notifications to arrive in the field.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.micad.fm"
+    },
+    {
+      "requirement": "Limited offline working",
+      "detail": "Micad says the app's offline capabilities allow users to upload images and create jobs, which synchronise with the main Micad FM system when a connection is re-established. The listing does not say the full jobs list or job completion works without signal, and a public review dated 7 March 2024 reports not being able to upload job information or view the next job when out of signal. Plan for mobile data (4G or 5G) rather than relying on offline mode.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.micad.fm"
+    },
+    {
+      "requirement": "Camera for photos and a touchscreen for signatures",
+      "detail": "The app's published feature list includes photo upload and signature capture on completion of a reactive task. A camera and a touchscreen that works with a finger or stylus are therefore needed. Micad does not publish a camera resolution or screen size.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.micad.fm"
+    },
+    {
+      "requirement": "Web platform: modern browser and an internet connection",
+      "detail": "Micad's G-Cloud 14 listing for its Estates and Facilities Management SaaS Platform says the platform supports Microsoft Edge, Chrome and Safari and needs 'A valid internet connection to access Micad software'. No other hardware requirements are published. Windows users work in a browser.",
+      "source_url": "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/839672510573154"
+    },
+    {
+      "requirement": "No Windows version of the Micad FM app",
+      "detail": "A search of the Microsoft Store for Micad returns only Micad Audit, published by Micad Systems (UK). Micad FM is not listed there, and Micad publishes the Micad FM app on Google Play and the App Store only, so a Windows device can only reach the Micad FM system through the browser-based platform.",
+      "source_url": "https://apps.microsoft.com/search?query=micad&hl=en-gb&gl=GB"
+    },
+    {
+      "requirement": "Barcode, NFC and RFID: nothing published",
+      "detail": "Neither the Google Play nor the App Store listing for Micad FM mentions barcode or QR scanning, NFC or RFID. Micad publishes a separate Micad GLN Scanner app for GS1 GLN location barcodes, but its listing says it 'Uses Micad IPR API' and needs a Micad IPR system, not Micad FM. Do not buy hardware for Micad FM on the assumption that scanning or tag reading is part of the app.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.micad.glnscanner"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "The Tuga A10 is the primary pick because Micad FM is an Android app and the A10 runs Android 14, which meets the published Android 5.0 or later requirement and matches the Android 14 support named in Micad's October 2024 release note. It has GPS, Galileo and BeiDou positioning for the Location Services requirement, 4G dual SIM for push notifications and job sync away from Wi-Fi, a 13MP rear camera with flash for job photos, and a 10.1 inch 1920 x 1200 screen that gives room for a jobs list and a signature box. IP68 and MIL-STD-810H ratings and a -20 to 60C operating range cover plant rooms, external works and the van. At £449 with no VAT to add it is the sensible unit to trial first.",
+      "fit": [
+        "Requires Android 5.0 or later: the A10 runs Android 14.",
+        "Location Services must be on to send GPS data: the A10 has GPS, Galileo and BeiDou positioning.",
+        "Push notifications and job sync need a data connection: the A10 has 4G dual SIM and dual-band Wi-Fi 5.",
+        "Photo upload and signature capture: 13MP rear camera with flash and a 10.1 inch FHD IPS touchscreen with tempered glass.",
+        "Built for site use: 8000mAh battery, IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is the alternative for teams that want a pocketable handheld rather than a tablet. It also runs Android 14, so it meets Micad's Android 5.0 or later requirement, and it adds 5G, GPS with GLONASS and BeiDou, a 50MP main camera and a 64MP night-vision camera for photos in dark risers and plant rooms, and a 10600mAh battery with 33W fast charging. IP68 plus IP69K and MIL-STD-810H ratings, Gorilla Glass 5 and glove mode suit engineers who keep the device on a belt. The trade-off is a 6.78 inch screen, which is closer to the PDA form factor Micad's licensing language implies but gives less room for a jobs list than the A10.",
+      "fit": [
+        "Requires Android 5.0 or later: the A6 runs Android 14.",
+        "Location Services must be on to send GPS data: the A6 has GPS, GLONASS and BeiDou positioning.",
+        "Push notifications and sync out of Wi-Fi range: 5G and Wi-Fi 5.",
+        "Photo upload in poorly lit spaces: 50MP main camera and 64MP night-vision camera.",
+        "Carried on the person: 441g, 10600mAh battery with 33W fast charge, IP68 and IP69K, glove mode, fingerprint and face unlock."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "The Tuga W10 is not a device for the Micad FM mobile app, because Micad publishes that app for Android and iOS only and it is not listed in the Microsoft Store. It is an option only for helpdesk, supervisor or workshop users who work in the main Micad web platform, which Micad's G-Cloud listing says supports Microsoft Edge, Chrome and Safari with a valid internet connection. The W10 runs Windows 11 Pro with a desktop browser on a 10.1 inch 1280 x 800 touchscreen, has RJ45 Ethernet and HDMI for a fixed position in a workshop or estates office, and is IP65 rated, so it tolerates dust and water jets but is not rated for immersion. Run time from its removable 5000mAh battery depends on load, so plan for a dock or mains power rather than a shift away from it.",
+      "fit": [
+        "Web platform supports Microsoft Edge, Chrome and Safari: the W10 runs Windows 11 Pro with a desktop browser.",
+        "Valid internet connection required: dual-band Wi-Fi 5, 100Mbps RJ45 Ethernet, optional 4G LTE.",
+        "Fixed workshop or office position: HDMI output, USB-A, USB-C and a pogo pin dock connector for the £49.99 charging dock.",
+        "Dusty workshop environment: IP65 rated, not rated for immersion."
+      ]
+    }
+  ],
+  "not_recommended_note": "Micad publishes no barcode, QR, NFC or RFID feature for the Micad FM app, so none of these devices should be bought for Micad FM on the expectation of scanning or tag reading. The A10 and A6 have NFC hardware and cameras, but any camera scanning is app-dependent and neither has a dedicated scan engine. The W10 cannot run the Micad FM mobile app, which Micad publishes for Android and iOS only; it suits browser-based use of the main platform. Buyers should also note that the Android app was last updated on 23 October 2024, carries a 2.0 star rating from 6 reviews on Google Play, and that reviews report freezing, being logged off and problems out of signal. Offline support is limited to creating jobs and uploading images, so a 4G or 5G SIM is advisable. Micad now markets its current CAFM platform as SINGU FM, so check with Micad that Micad FM remains the app your contract supports before ordering a fleet.",
+  "setup_steps": [
+    "Confirm with your Micad account team or helpdesk administrator that a PDA licence from your Micad FM system is available for each device, since the app uses one PDA licence per handheld.",
+    "On the Tuga A10 or A6, sign in to a Google account (a managed work account if your organisation uses one) and install Micad FM from Google Play, developer Micad Systems (UK), package uk.co.micad.fm.",
+    "Open the app and sign in with the credentials your Micad administrator issues. Allow Location Services and Notifications when prompted, as Micad states both must be on for GPS data and push notifications.",
+    "Insert a 4G SIM (A10) or 5G SIM (A6) so that jobs and notifications reach the technician away from Wi-Fi, and note from the Micad FM listing that jobs and images created offline synchronise once a connection returns.",
+    "For a W10 used by helpdesk or workshop staff, open the Micad web platform in Microsoft Edge or Chrome, sign in, and connect Ethernet or Wi-Fi for the required internet connection.",
+    "Fit the hand strap (supplied with the A10) or belt holster (A6), and add a vehicle mounting dock or charging dock where the device lives in a van or returns to a workshop at the end of each shift."
+  ],
+  "accessories": [
+    "Charging dock, £49.99 (A10 and W10), for devices that return to an estates office or workshop at the end of a shift",
+    "Vehicle mounting dock, £109, for mobile engineers who work from a van between sites",
+    "Tempered glass screen protector 2-pack, £14, for screens that take signatures and photos all day",
+    "Belt holster, £22 (A6), for operatives who want the handheld on their person rather than in a bag"
+  ],
+  "faq": [
+    {
+      "q": "Will the Tuga A10 run the Micad FM app?",
+      "a": "Micad's Google Play listing says Micad FM requires Android 5.0 and up, and its October 2024 release note says it added Android 14 support. The Tuga A10 and Tuga A6 both run Android 14, so they meet that published requirement. Tuga Hardware is independent of Micad and makes no claim beyond that published requirement, so we recommend trialling a single unit with your own Micad FM system before a fleet order."
+    },
+    {
+      "q": "Does Micad FM work offline on a Tuga tablet?",
+      "a": "Partly. Micad states that users can upload images and create jobs offline, and these synchronise with the main Micad FM system when a connection is re-established. Micad does not say the full jobs list or job completion works without signal, and a public review dated 7 March 2024 reports not being able to view the next job when out of signal. Both the A10 (4G dual SIM) and the A6 (5G) take a SIM, so technicians can stay connected on site rather than relying on offline mode."
+    },
+    {
+      "q": "Can we trial one unit before buying for the whole team, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome, and it comes with the same 30-day returns and 12-month warranty as any order. Business buyers can request a quote and pay by bank transfer against a proforma invoice. Tuga Hardware is not VAT registered, so the listed prices (A10 £449, A6 £299, W10 £649) have no VAT to add. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more. Delivery is free within the UK in 7 to 10 working days, and UK only."
+    },
+    {
+      "q": "Should we choose the 10.1 inch A10 or the 6.78 inch A6 for engineers?",
+      "a": "Micad publishes no screen-size guidance for the Micad FM app, so this is a judgement about how your operatives work. The A10 has a 10.1 inch 1920 x 1200 screen, 8GB RAM, 128GB storage, 4G and an 8000mAh battery at 680g, which gives more room for a jobs list and signature capture. The A6 has a 6.78 inch FHD+ 120Hz screen, 12GB RAM, 256GB storage, 5G, a 10600mAh battery with 33W fast charge and a 50MP main camera at 441g, and fits in a pocket or belt holster. Both run Android 14 and both are rated IP68 and MIL-STD-810H; the A6 adds IP69K."
+    }
+  ],
+  "disclaimer": "Micad FM is a product of Micad Systems (UK) Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Micad Systems (UK) Limited.",
+  "sources": [
+    "https://www.micadsoftware.com/",
+    "https://www.micadsoftware.com/solutions/sectors/healthcare/",
+    "https://www.micadsoftware.com/company/about-micad/",
+    "https://www.micadsoftware.com/pricing/",
+    "https://www.micadsoftware.com/solutions/products/cafm-cmms-facilities-management-software-singu/",
+    "https://www.micadsoftware.com/blog/k1-combines-micad-and-singu-to-transform-european-commercial-real-estate-technology/",
+    "https://www.micadsoftware.com/case-studies/bchcs-estates-management-transformation-with-singu/",
+    "https://www.micadsoftware.com/case-studies/south-london-and-maudsley-nhs-trust-enhances-compliance-with-zetasafe-integration/",
+    "https://www.micadsoftware.com/case-studies/brunel-university-enhances-compliance-with-zetasafe-integration/",
+    "https://www.micadsoftware.com/case-studies/university-of-bristol-enhances-compliance-with-zetasafe-integration/",
+    "https://www.micadsoftware.com/case-studies/university-of-bath-streamlines-compliance-with-zetasafe-integration/",
+    "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/839672510573154",
+    "https://play.google.com/store/apps/details?id=uk.co.micad.fm",
+    "https://play.google.com/store/apps/details?id=uk.co.micad.glnscanner",
+    "https://apps.apple.com/gb/app/micad-fm/id1544292587",
+    "https://apps.microsoft.com/search?query=micad&hl=en-gb&gl=GB"
+  ]
+}

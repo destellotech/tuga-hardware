@@ -22,6 +22,8 @@ import {
   androidRange,
   windowsRange,
   accessories,
+  warranty,
+  warrantyTier,
   variantsOf,
   esc,
   money,
@@ -32,6 +34,18 @@ import {
   productUrl,
   page,
 } from './lib/layout.mjs';
+
+import {
+  SALES_PAUSED,
+  SALES_PAUSED_MESSAGE,
+  TRADER,
+  TRADER_STATEMENT,
+  TRADER_ADDRESS_LINE,
+  PRICE_NOTE,
+  DELIVERY,
+  QUOTE_TOPIC,
+  quoteUrl,
+} from '../src/store-config.js';
 
 import {
   eyebrow,
@@ -59,6 +73,57 @@ function write(relPath, contents) {
 }
 
 /* ==========================================================================
+   WARRANTY — tiers from data/products.json, copy from build/content/warranty.json
+   ========================================================================== */
+
+const warrantyCopy = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty.json'), 'utf8'));
+const paidTiers = warranty.tiers.filter((t) => !t.included);
+const fromPrice = (t) => Math.min(...Object.values(t.prices || { x: 0 }));
+/** True when the 3-Year Warranty is sold for this device (scanner variants share the base id). */
+const has3yr = (p) => warrantyTier('3yr')?.prices?.[p.id.replace(/-scanner$/, '')] !== undefined;
+
+/** The cover options under a product's buy box. Quote-only tiers are shown
+    with their price and a link to the quote form rather than a radio. */
+function warrantyChooser(p) {
+  const base = p.id.replace(/-scanner$/, '');
+  const paid = paidTiers.filter((t) => t.prices && t.prices[base] !== undefined);
+  if (!paid.length) return '';
+  const standard = warrantyTier('standard');
+  const radios = paid.filter((t) => !t.quoteOnly);
+  const quoteTiers = paid.filter((t) => t.quoteOnly);
+  return `
+          <fieldset class="protect" data-warranty-chooser>
+            <legend>${eyebrow('Cover')}</legend>
+            <label class="protect-opt">
+              <input type="radio" name="warranty" value="" data-warranty-choice checked>
+              <span class="protect-text"><strong>${esc(standard?.name || 'Standard warranty')}</strong>${esc(standard?.summary || '12 months against defects')}</span>
+              <span class="protect-price">Included</span>
+            </label>
+            ${radios
+              .map(
+                (t) => `
+            <label class="protect-opt">
+              <input type="radio" name="warranty" value="wty-${t.id}-${base}" data-warranty-choice>
+              <span class="protect-text"><strong>${esc(t.name)}${t.recommended ? ' <span class="pick-tag">Recommended</span>' : ''}</strong>${esc(t.chooser || t.summary)}</span>
+              <span class="protect-price">+${money(t.prices[base])}<small>per device</small></span>
+            </label>`
+              )
+              .join('')}
+            ${quoteTiers
+              .map(
+                (t) => `
+            <div class="protect-opt protect-quote">
+              <span class="protect-marker" aria-hidden="true"></span>
+              <span class="protect-text"><strong>${esc(t.name)}</strong>${esc(t.chooser || t.summary)} <a href="${quoteUrl(`${t.name} for ${p.name}`)}">Ask for a fleet quote</a></span>
+              <span class="protect-price">${money(t.prices[base])}<small>per device</small></span>
+            </div>`
+              )
+              .join('')}
+            <a class="protect-link" href="/warranty">Compare the plans and read the terms</a>
+          </fieldset>`;
+}
+
+/* ==========================================================================
    ORGANISATION SCHEMA — attached to every page via the home page + PDPs
    ========================================================================== */
 
@@ -67,9 +132,21 @@ const orgSchema = {
   '@type': 'Organization',
   '@id': `${SITE.origin}/#organization`,
   name: SITE.name,
+  legalName: TRADER.legalName,
   url: SITE.origin,
   email: SITE.email,
   description: SITE.description,
+  // Country only: the registered office appears on the legal pages, not in
+  // structured data.
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: TRADER.address.country,
+  },
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'Companies House company number',
+    value: TRADER.companyNumber,
+  },
   areaServed: { '@type': 'Country', name: 'United Kingdom' },
   contactPoint: {
     '@type': 'ContactPoint',
@@ -107,7 +184,7 @@ const breadcrumbSchema = (trail) => ({
 const HOME_FAQ = [
   {
     q: 'Which size should I get: 6, 8 or 10 inch?',
-    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is where we would point most trades: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 8 inch is the safe choice.',
+    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is the middle ground: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 10.1 inch A10 is our pick for Android apps.',
   },
   {
     q: 'What is the difference between IP67, IP68 and IP69K?',
@@ -115,7 +192,7 @@ const HOME_FAQ = [
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'The A6, A8, A10 and WH6 are tested to MIL-STD-810H and the W8 to 810G, which includes repeated drops of around 1.2 metres onto plywood over concrete. That is a real standard rather than marketing language. We do not have drop test documentation for the W10 yet, so we do not claim one for it. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'Five of the six are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The W10 has no MIL-STD rating, so treat it with more care if it lives on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
@@ -123,7 +200,7 @@ const HOME_FAQ = [
   },
   {
     q: 'How long does delivery take and what does it cost?',
-    a: 'Delivery is free to every UK address, with no minimum. Devices ship direct from the manufacturer, which is a large part of why the prices are what they are, so allow 10 to 20 working days. We email a tracking number as soon as your order ships. If you need a device sooner than that, email us before you order and we will tell you honestly whether it is possible.',
+    a: DELIVERY.summary,
   },
   {
     q: 'What if it is not right for me?',
@@ -199,19 +276,19 @@ const hero = () => {
         <div class="hero-content">
           ${eyebrow('Rugged Android & Windows tablets')}
           <h1 class="hero-title">Hard Shell.<br><span class="accent">Long Life.</span></h1>
-          <p class="hero-sub">Waterproof, drop-tested tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift, not for a desk.</p>
+          <p class="hero-sub">Sealed, rugged tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift, not for a desk.</p>
           <div class="hero-ctas">
             <a class="btn btn-inverse btn-lg" href="/products/">Browse the range</a>
             <a class="btn btn-outline-light btn-lg" href="/which-tuga">Help me choose</a>
           </div>
           <div class="hero-specs">
             <div class="hero-spec">
-              <span class="hero-spec-value">IP68</span>
-              <span class="hero-spec-label">Sealed</span>
+              <span class="hero-spec-value">IP65+</span>
+              <span class="hero-spec-label">Every model sealed</span>
             </div>
             <div class="hero-spec">
               <span class="hero-spec-value">810H</span>
-              <span class="hero-spec-label">Drop tested</span>
+              <span class="hero-spec-label">Most models drop tested</span>
             </div>
             <div class="hero-spec">
               <span class="hero-spec-value">10,600<span style="font-size:0.5em">mAh</span></span>
@@ -246,7 +323,7 @@ ${trustStrip()}
 ${sectionHead({
   tag: 'Start here',
   title: 'Pick the size, not the spec sheet',
-  lede: 'Three Android devices, one for each size. Nearly everyone chooses on size first, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
+  lede: 'Three Android devices, one for each size. Size makes the biggest difference day to day, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
 })}
 ${sizeLadder(androidRange)}
       </div>
@@ -269,7 +346,7 @@ ${productGrid(windowsRange)}
 ${sectionHead({
   tag: 'Every model',
   title: 'The whole range on one page',
-  lede: 'Six devices, three sizes, two operating systems. No configurator, no quote request. The price you see is the price you pay.',
+  lede: 'Six devices, three sizes, two operating systems. Buy one online at the price shown, or ask for a business quote and pay by bank transfer.',
 })}
 ${compareTable()}
         <div style="margin-top:2rem">
@@ -292,12 +369,12 @@ ${sectionHead({
             <img src="${versioned('/img/blog/blog-waterproof.webp')}" alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
-            <h3>Sealed, not splash resistant</h3>
-            <p>An IP68 rating means the housing is fully dust tight and survives sustained immersion, not that it tolerates a light shower. The devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
+            <h3>Sealed against dust and water</h3>
+            <p>Every device is rated at least IP65: fully dust tight and protected against water jets from any direction. Most go further. An IP67 or IP68 rating means the housing survives immersion, not just a light shower, and the devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
             <ul class="editorial-list">
-              <li>Sealed ports and speaker, which is exactly what the IP test checks</li>
-              <li>Glove mode on the A6 and A8, so the screen works without taking gloves off</li>
-              <li>Android models rated from &minus;20&deg;C to 60&deg;C, so they start on a frosty morning; the Windows models from &minus;10&deg;C to 50&deg;C</li>
+              <li>Gasket-sealed ports and a sealed speaker membrane</li>
+              <li>Touchscreen calibrated to work with wet fingers and gloves</li>
+              <li>Android models rated from &minus;20&deg;C to 60&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -308,7 +385,7 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Drop tested to a real standard</h3>
-            <p>MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls of around 1.2 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards. Five of our six devices carry it (the W8 is tested to the earlier 810G); the W10 does not have a published drop rating, and we say so.</p>
+            <p>Five of the six devices carry a MIL-STD-810H or 810G rating; the W10 does not. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
             <p>In practice that comes from reinforced corners, a rubberised over-mould and a screen recessed behind a raised bezel, so the glass does not take the first hit when it lands face down.</p>
           </div>
         </article>
@@ -319,8 +396,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A6, A8, WH6 and W8 run 500 to 800 nits, so you are not cupping a hand over the screen to read a job number. The A10 is the exception at 350 nits: it is built for reading drawings in a van or site cabin, and if you work in direct sun all day the A8 is the better buy.</p>
-            <p>The A6 and A8 carry 10,000mAh or more and the A10 8,000mAh, comfortably a full shift with heavy use. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits and the A6 560, so you are not cupping a hand over the screen to read a job number. The A10 is 350 nits, which suits drawings indoors and in the van more than bright sun. Each product page lists the maker's figure.</p>
+            <p>Batteries on the Android range run from 8,000mAh to 10,600mAh, against roughly 5,000mAh in a typical phone. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell. Real run time depends on screen brightness and signal, so treat the capacity as a comparison, not a promise of hours.</p>
           </div>
         </article>
       </div>
@@ -354,7 +431,7 @@ ${sectionHead({
           </div>
           <div class="promise reveal">
             <h3>One price, shown up front</h3>
-            <p>No quote forms, no minimum order, no enterprise licensing. Free UK delivery on everything, and team discounts applied automatically at checkout.</p>
+            <p>No minimum order and no enterprise licensing. Free UK delivery on everything, team discounts applied automatically at checkout, and a quote with a proforma invoice for any business that wants to pay by bank transfer.</p>
           </div>
           <div class="promise reveal">
             <h3>30 days to change your mind</h3>
@@ -380,7 +457,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. From £299 with free UK delivery.',
+      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. From £299 with free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -400,7 +477,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP68 rated, drop tested, free UK delivery and 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP69K sealed, most drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -423,7 +500,7 @@ write(
 ${breadcrumbs(productsTrail)}
         ${eyebrow('The range')}
         <h1>Rugged tablets &amp; handhelds</h1>
-        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to IP67 or better and shipped free. Not sure? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
+        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the W10 are drop tested to MIL-STD-810H or 810G. Not sure which? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
       </div>
     </section>
 
@@ -493,7 +570,7 @@ function productPage(p) {
       url: `${SITE.origin}${productUrl(p)}`,
       price: p.price,
       priceCurrency: 'GBP',
-      availability: 'https://schema.org/InStock',
+      availability: SALES_PAUSED ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: { '@id': `${SITE.origin}/#organization` },
       priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
@@ -504,11 +581,11 @@ function productPage(p) {
           '@type': 'DefinedRegion',
           addressCountry: 'GB',
         },
-        // Shipped direct from the manufacturer: 10 to 20 working days.
+        // Matches DELIVERY.days: 7 to 10 working days in total.
         deliveryTime: {
           '@type': 'ShippingDeliveryTime',
-          handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
-          transitTime: { '@type': 'QuantitativeValue', minValue: 10, maxValue: 20, unitCode: 'DAY' },
+          handlingTime: { '@type': 'QuantitativeValue', minValue: 6, maxValue: 7, unitCode: 'DAY' },
+          transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' },
         },
       },
       hasMerchantReturnPolicy: {
@@ -518,7 +595,7 @@ function productPage(p) {
           'https://schema.org/MerchantReturnFiniteReturnWindow',
         merchantReturnDays: 30,
         returnMethod: 'https://schema.org/ReturnByMail',
-        returnFees: 'https://schema.org/FreeReturn',
+        returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
       },
     },
     additionalProperty: Object.entries(p.specs).map(([k, v]) => ({
@@ -570,19 +647,26 @@ ${breadcrumbs(trail)}
           <button type="button" class="lightbox-nav lightbox-next" data-lightbox-step="1" aria-label="Next image">&rarr;</button>
         </dialog>
 
-        <div class="buy-panel">
-          <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} / ${esc(p.sizeLabel)}&Prime; / ${esc(p.specs.os)}</p>
+        <div class="buy-panel" data-buy-box>
+          <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} / ${esc(p.sizeLabel)}&Prime; / ${esc(p.specs.os)}${p.badge ? ` <span class="pick-tag">${esc(p.badge)}</span>` : ''}</p>
           <h1 class="pdp-title">${esc(p.name)}</h1>
           <p class="pdp-tagline">${esc(p.tagline)}</p>
 
           <div class="pdp-price-row">
             <span class="pdp-price">${money(p.price)}</span>
             ${p.compareAtPrice ? `<span class="pdp-price-was">${money(p.compareAtPrice)}</span>` : ''}
-            <span class="pdp-price-note">Includes VAT. Free UK delivery</span>
+            <span class="pdp-price-note">${esc(PRICE_NOTE)}. ${esc(DELIVERY.short)}</span>
           </div>
 
           <p class="pdp-desc">${esc(p.longDescription)}</p>
 
+          ${
+            SALES_PAUSED
+              ? `<div class="buy-row">
+            <p class="pdp-paused" role="status">${esc(SALES_PAUSED_MESSAGE)}</p>
+            <a class="btn btn-primary btn-lg" href="${quoteUrl(p.name)}">Ask about availability</a>
+          </div>`
+              : `${warrantyChooser(p)}
           <div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
@@ -593,10 +677,12 @@ ${breadcrumbs(trail)}
               ${icons.cart(18)} Add to basket
             </button>
           </div>
+          <p class="pdp-quote">Buying for a business? <a href="${quoteUrl(p.name)}">Get a quote and pay by bank transfer</a>. Trial units welcome.</p>`
+          }
 
           <div class="pdp-assurance">
-            <div>${icons.truck(16)}<span>Free UK delivery</span></div>
-            <div>${icons.shieldCheck(16)}<span>12-month warranty</span></div>
+            <div>${icons.truck(16)}<span>${esc(DELIVERY.short)}</span></div>
+            <div>${icons.shieldCheck(16)}<span><a href="/warranty">${has3yr(p) ? '12-month warranty, 3-year option' : '12-month warranty'}</a></span></div>
             <div>${icons.refresh(16)}<span>30-day returns</span></div>
             <div>${icons.lock(16)}<span>Secure checkout</span></div>
           </div>
@@ -657,7 +743,7 @@ ${specSheet(p)}
           </div>
           <div class="variant-action">
             <span class="variant-price">${money(v.price)}</span>
-            <button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}">Add to basket</button>
+            ${SALES_PAUSED ? '' : `<button class="btn btn-sm btn-copper" data-add-to-cart="${v.id}">Add to basket</button>`}
           </div>
         </div>`
           )
@@ -774,11 +860,11 @@ const BULK_FAQ = [
   },
   {
     q: 'Can you invoice us instead of taking card payment?',
-    a: 'Yes. <a href="/trade">Open a trade account</a> to order on invoice and pay by bank transfer. For a one-off order of ten units or more we can also raise a proforma invoice: email us what you need and a company address.',
+    a: 'Yes, for any business order, including a single trial unit. Ask for a quote with what you need and your company billing and delivery addresses, and we will send a proforma invoice for bank transfer. We can also complete your supplier setup forms. If you buy regularly, <a href="/trade">apply for a trade account</a> to order on invoice.',
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
-    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size.',
+    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size. Business fleets of ten or more A10 and W10 devices can ask for a Total Care quote: a swap unit dispatched the same working day for claims accepted by 14:00. See the <a href="/warranty">warranty page</a>.',
   },
 ];
 
@@ -789,7 +875,7 @@ write(
   page({
     title: 'Bulk Orders & Team Discounts | Tuga Hardware',
     description:
-      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, no quote forms, free UK delivery.',
+      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, free UK delivery, and business quotes with proforma invoices.',
     path: '/bulk',
     active: 'bulk',
     schema: [breadcrumbSchema(bulkTrail), bulkFaq.schema],
@@ -899,10 +985,10 @@ ${sectionHead({
               <li>The tier is calculated on the total number of devices and applied at checkout</li>
               <li>Everything ships free, with the same warranty and returns as a single unit</li>
             </ul>
-            <p style="margin-top:1.5rem">Ordering ten or more? You get 10% automatically. If your accounts department would rather pay on invoice, <a href="/trade">open a trade account</a>.</p>
+            <p style="margin-top:1.5rem">Prefer to pay by bank transfer, or want one unit to trial before the rest? Ask for a quote and we will send a proforma invoice and complete your supplier forms. Buying regularly? <a href="/trade">Apply for a trade account</a> to order on invoice.</p>
             <div style="margin-top:2rem">
               <a class="btn btn-primary" href="/products/">Start an order</a>
-              <a class="btn btn-outline" href="/trade" style="margin-left:0.5rem">Pay on invoice</a>
+              <a class="btn btn-outline" href="/contact?quote=#enquiry" style="margin-left:0.5rem">Get a business quote</a>
             </div>
           </div>
         </div>
@@ -914,7 +1000,7 @@ ${sectionHead({
 ${sectionHead({
   tag: 'The range',
   title: 'What to put in the basket',
-  lede: 'For most teams the 8 inch Android is the right default, with a couple of 10 inch units for whoever handles the drawings.',
+  lede: 'Our pick for most teams is the 10.1 inch Android A10, with the W10 for anyone whose software only runs on Windows. The 6.8 inch A6 suits people who need a device in a pocket more than a screen for drawings.',
 })}
 ${compareTable()}
       </div>
@@ -1171,15 +1257,15 @@ ${tradeFaq.html}
    WARRANTY REGISTRATION
    ========================================================================== */
 
-const warrantyTrail = [{ label: 'Home', href: '/' }, { label: 'Register your warranty' }];
+const warrantyTrail = [{ label: 'Home', href: '/' }, { label: 'Warranty', href: '/warranty' }, { label: 'Register your device' }];
 
 write(
-  'warranty.html',
+  'register-warranty.html',
   page({
     title: 'Register Your Warranty | Tuga Hardware',
     description:
       'Register your Tuga rugged tablet or handheld against its serial number, so a warranty claim takes one email instead of a search for the receipt.',
-    path: '/warranty',
+    path: '/register-warranty',
     schema: [breadcrumbSchema(warrantyTrail)],
     body: `
     <section class="page-header">
@@ -1344,7 +1430,7 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>What we actually do</h2>
 
-          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator, no quote request and no minimum order. The price on the page is the price you pay, and delivery is free.</p>
+          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method where the device has one, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator and no minimum order. The price on the page is the price you pay, delivery is free, and businesses can ask for a quote and pay by bank transfer.</p>
 
           <p>We are deliberately narrow. Six devices, three sizes, two operating systems. It is easier to know six products properly than to list six hundred and know none of them.</p>
 
@@ -1356,9 +1442,11 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>Based in the UK</h2>
 
-          <p>Prices are in pounds and include VAT. Delivery is free across mainland UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
+          <p>Prices are in pounds and there is no VAT to add: ${esc(TRADER.legalName)} is not VAT registered, so the price on the page is the total. Delivery is free across the UK. Support is a UK email address answered by someone who has handled the hardware, not a ticket queue in another timezone. If something goes wrong inside the 12-month warranty, we sort it out.</p>
 
           <h2>Still early</h2>
+
+          <p>${esc(TRADER_STATEMENT)}</p>
 
           <p>We are a young operation and we would rather say that than pretend otherwise. What that means for you in practice: you get direct access to the people running it, decisions get made quickly, and if you tell us something about the range is wrong, we can actually change it.</p>
         </div>
@@ -1408,6 +1496,11 @@ ${breadcrumbs(contactTrail)}
             <p style="margin-top:0.75rem"><a class="link-arrow" href="mailto:${SITE.email}">${SITE.email}</a></p>
             <p style="margin-top:1.5rem">We answer within one working day, usually much sooner. For order questions, include your order number and we will pull it up.</p>
 
+            <h3 class="title-xs" style="margin-top:2.5rem">Who you are dealing with</h3>
+            <p style="margin-top:0.75rem">${esc(TRADER.tradingName)} is a trading name of ${esc(TRADER.legalName)}, registered in ${esc(TRADER.registeredIn)}, company number ${esc(TRADER.companyNumber)}.</p>
+            <p>Registered office: ${esc(TRADER_ADDRESS_LINE)}.</p>
+            <p>${esc(TRADER.legalName)} is not VAT registered, so no VAT is charged.</p>
+
             <h3 class="title-xs" style="margin-top:2.5rem">What we can help with</h3>
             <ul class="editorial-list">
               <li>Which of the three sizes suits your trade</li>
@@ -1419,7 +1512,7 @@ ${breadcrumbs(contactTrail)}
           </div>
 
           <div>
-            <form class="form" data-contact-form novalidate>
+            <form class="form" id="enquiry" data-contact-form novalidate>
               <!-- Honeypot: hidden from humans, checked server-side -->
               <div class="field" style="position:absolute;left:-9999px" aria-hidden="true">
                 <label for="website">Website</label>
@@ -1436,12 +1529,17 @@ ${breadcrumbs(contactTrail)}
               <div class="field">
                 <label for="topic">What is it about?</label>
                 <select id="topic" name="topic">
+                  <option>${esc(QUOTE_TOPIC)}</option>
                   <option>Choosing a device</option>
                   <option>Bulk or fleet order</option>
                   <option>An existing order</option>
                   <option>Warranty or return</option>
                   <option>Something else</option>
                 </select>
+              </div>
+              <div class="field">
+                <label for="company">Company <span class="field-optional">(optional)</span></label>
+                <input type="text" id="company" name="company" autocomplete="organization">
               </div>
               <div class="field">
                 <label for="message">Message</label>
@@ -1497,8 +1595,8 @@ write(
 write(
   'order-confirmation.html',
   page({
-    title: 'Order Confirmed | Tuga Hardware',
-    description: 'Your Tuga Hardware order is confirmed.',
+    title: 'Your Order | Tuga Hardware',
+    description: 'Your Tuga Hardware order reference and confirmation status.',
     path: '/order-confirmation',
     noindex: true,
     schema: [],
@@ -1506,12 +1604,41 @@ write(
     <section class="section">
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
-        <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number. Devices ship direct from the manufacturer, so allow 10 to 20 working days for delivery; we email a tracking number as soon as yours ships.</p>
+        <h1 class="title-lg" data-order-title>Checking your order</h1>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Checking your order...</p>
+        <noscript><p class="lede" style="margin-inline:auto">If you have just paid, check your email for your receipt or contact <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> with your name and the time you paid.</p></noscript>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
           <a class="btn btn-outline" href="/contact">Contact support</a>
+        </div>
+      </div>
+    </section>
+`,
+  })
+);
+
+/* ==========================================================================
+   404 — src/worker.js serves this with status 404 for any unknown path
+   ========================================================================== */
+
+write(
+  '404.html',
+  page({
+    title: 'Page Not Found | Tuga Hardware',
+    description: 'We could not find that page. Browse the range, see which apps the tablets run, or get in touch.',
+    path: '/404',
+    noindex: true,
+    schema: [],
+    body: `
+    <section class="section">
+      <div class="container-narrow" style="text-align:center">
+        <h1 class="title-lg">We could not find that page</h1>
+        <p class="lede" style="margin-inline:auto">The link may be old, or the address mistyped. These will get you back on track.</p>
+        <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
+          <a class="btn btn-primary" href="/products/">Browse the range</a>
+          <a class="btn btn-outline" href="/works-with/">Works with your apps</a>
+          <a class="btn btn-outline" href="/contact">Contact us</a>
         </div>
       </div>
     </section>
@@ -1528,6 +1655,224 @@ write(
    generated output back in; that made rebuilds destructive. */
 const liftProse = (name) =>
   readFileSync(join(ROOT, 'build', 'content', 'legal', name), 'utf8').trim();
+
+/* ==========================================================================
+   WARRANTY PAGE + PLAN TERMS
+   ========================================================================== */
+
+const planTerms = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty-terms.json'), 'utf8'));
+const warrantyDevices = devices.filter((d) => paidTiers.some((t) => t.prices?.[d.id] !== undefined));
+const clauseText = (c) => c.replace(/^(\d+)\.\s+/, '');
+const clauseNumber = (c) => (c.match(/^(\d+)\./) || [])[1];
+
+{
+  const trail = [{ label: 'Home', href: '/' }, { label: 'Warranty' }];
+  const faqBlock = faq(warrantyCopy.faq, { heading: 'Warranty questions', tag: 'Questions' });
+  const careTier = warrantyTier('care');
+  const tierCard = (t) => {
+    const points = warrantyCopy.tier_points[t.id] || [];
+    const featured = t.id === 'care';
+    const kicker = t.included ? 'Included' : t.minUnits ? `Business fleets of ${t.minUnits}+` : t.recommended ? 'Recommended' : 'Add-on';
+    return `
+          <article class="tier${featured ? ' tier-featured' : ''}${t.included ? ' tier-standard' : ''}${t.recommended ? ' tier-recommended' : ''} reveal">
+            <p class="tier-kicker">${esc(kicker)}</p>
+            <h2>${esc(t.name)}</h2>
+            <p class="tier-price">${t.included ? 'With every device' : `From ${money(fromPrice(t))} <small>per device</small>`}</p>
+            <p class="tier-summary">${esc(warrantyCopy.taglines?.[t.id] || t.summary)}</p>
+            <details class="tier-more">
+              <summary>What's covered <span>${points.length} points</span></summary>
+              <ul class="tier-points">
+                ${points.map((x) => `<li>${esc(x)}</li>`).join('\n                ')}
+              </ul>
+            </details>
+            ${
+              t.quoteOnly
+                ? `<p class="tier-cta"><a class="btn btn-inverse" href="${quoteUrl(t.name)}">Ask for a fleet quote</a></p>`
+                : t.included
+                  ? ''
+                  : `<p class="tier-cta"><a class="btn btn-primary" href="/products/">Add it on any device page</a></p>`
+            }
+          </article>`;
+  };
+
+  write(
+    'warranty.html',
+    page({
+      title: `${warrantyCopy.title} | Tuga Hardware`,
+      description: warrantyCopy.meta_description,
+      path: '/warranty',
+      schema: [orgSchema, breadcrumbSchema(trail), faqBlock.schema],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(trail)}
+        ${eyebrow('Warranty')}
+        <h1>${esc(warrantyCopy.h1)}</h1>
+        <p class="lede">${esc(warrantyCopy.lede)}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="tier-grid">
+          ${warranty.tiers.map(tierCard).join('')}
+        </div>
+        <aside class="callout" style="margin-top:var(--space-l)"><strong>Accidental damage.</strong> ${esc(warrantyCopy.care_note)}</aside>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        <div class="prose">
+          ${(warrantyCopy.intro || []).map((p) => `<p>${esc(p)}</p>`).join('\n          ')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 'The amounts payable today. Destello Tech Ltd is not VAT registered. Plans are never discounted and do not count toward the device discount tiers.' })}
+        <div class="compare-wrap reveal">
+          <table class="compare-table">
+            <caption class="sr-only">Plan prices per device</caption>
+            <thead>
+              <tr>
+                <th scope="col">Device</th>
+                <th scope="col">Device price</th>
+                ${paidTiers.map((t) => `<th scope="col">${esc(t.name)}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${warrantyDevices
+                .map(
+                  (d) => `
+              <tr>
+                <td><a href="${productUrl(d)}">${esc(d.name)}</a></td>
+                <td class="cell-mono">${money(d.price)}</td>
+                ${paidTiers
+                  .map((t) =>
+                    t.prices?.[d.id] !== undefined
+                      ? `<td class="cell-price">${money(t.prices[d.id])}${t.quoteOnly ? `<small class="cell-note">fleets of ${t.minUnits}+, on quote</small>` : ''}</td>`
+                      : `<td class="cell-mono">Not offered</td>`
+                  )
+                  .join('')}
+              </tr>`
+                )
+                .join('')}
+            </tbody>
+          </table>
+        </div>
+        ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more A10 and W10 devices. It can also be paid monthly with the devices through our lease funder for limited companies, LLPs and public bodies, subject to the funder's quotation.</p>` : ''}
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container">
+${sectionHead({ tag: 'Side by side', title: 'What each plan does', lede: 'Every line in the paid columns has a numbered clause in the Plan Terms.' })}
+        <div class="compare-wrap reveal">
+          <table class="compare-table compare-table-wrap">
+            <caption class="sr-only">Comparison of the three cover levels</caption>
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Standard</th>
+                <th scope="col">3-Year Warranty</th>
+                <th scope="col">Total Care</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${warrantyCopy.comparison_rows
+                .map(
+                  (r) => `
+              <tr>
+                <th scope="row">${esc(r.label)}</th>
+                <td>${esc(r.standard)}</td>
+                <td>${esc(r.three_year)}</td>
+                <td>${esc(r.total_care)}</td>
+              </tr>`
+                )
+                .join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-narrow">
+        ${eyebrow('Claims')}
+        <h2 class="title-md">How a claim works</h2>
+        <ol class="step-list step-list-long">
+          ${warrantyCopy.claim_steps
+            .map((s) => {
+              // Each step opens with a short title sentence: lift it out as a heading.
+              const [, head, rest] = clauseText(s).match(/^([^.]{1,60}\.)\s*([\s\S]*)$/) || [, '', clauseText(s)];
+              return `<li>${head ? `<strong>${esc(head.slice(0, -1))}</strong>` : ''}<span>${esc(rest)}</span></li>`;
+            })
+            .join('\n          ')}
+        </ol>
+      </div>
+    </section>
+
+${faqBlock.html}
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Information for consumers')}
+        <h2 class="title-sm">If you are buying for yourself rather than a business</h2>
+        <p class="consumer-info">${esc(warrantyCopy.consumer_info)}</p>
+        <p class="disclaimer" style="margin-top:1.25rem">The full terms are the <a href="/warranty-terms">Plan Terms</a>, which also set out the standard warranty in clauses 44 to 49, and our <a href="/terms#warranty">Terms and Conditions</a>. Nothing on this page replaces them, and nothing in them is different from this page.</p>
+      </div>
+    </section>
+
+${ctaBanner({
+  title: 'Add it on the device page, or put it on the quote.',
+  text: 'Choose the 3-Year Warranty under Add to basket on any A10, W10 or A6 page. Business buyers can ask for either plan line by line on a proforma.',
+  primary: { href: '/products/', label: 'Browse the range' },
+  secondary: { href: quoteUrl('Total Care'), label: 'Ask for a fleet quote' },
+})}
+`,
+    })
+  );
+
+  const termsTrail = [{ label: 'Home', href: '/' }, { label: 'Warranty', href: '/warranty' }, { label: 'Plan Terms' }];
+  write(
+    'warranty-terms.html',
+    page({
+      title: `${planTerms.title} | Tuga Hardware`,
+      description: 'The numbered terms of the Tuga 3-Year Warranty, Tuga Total Care and the standard 12-month warranty.',
+      path: '/warranty-terms',
+      schema: [orgSchema, breadcrumbSchema(termsTrail)],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(termsTrail)}
+        ${eyebrow('Plan Terms')}
+        <h1>${esc(planTerms.title)}</h1>
+        <p class="lede">${esc(planTerms.intro)}</p>
+        <p class="post-meta"><span>Last updated: ${esc(planTerms.last_updated)}</span></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-narrow">
+        <div class="prose clauses">
+          ${planTerms.clauses
+            .map((c) => {
+              const n = clauseNumber(c);
+              return n
+                ? `<p id="clause-${n}"><strong>${n}.</strong> ${esc(clauseText(c))}</p>`
+                : `<p id="schedule-1"><strong>${esc(c.split('.')[0])}.</strong> ${esc(c.slice(c.indexOf('.') + 1).trim())}</p>`;
+            })
+            .join('\n          ')}
+        </div>
+        <p class="disclaimer" style="margin-top:2rem">See also our <a href="/terms">Terms and Conditions</a>, <a href="/warranty">warranty page</a> and <a href="/shipping-returns">shipping and returns</a>.</p>
+      </div>
+    </section>
+`,
+    })
+  );
+}
 
 const legalPages = [
   {
@@ -1551,7 +1896,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery direct from the manufacturer in 10 to 20 working days, tracked, with 30-day returns on every Tuga Hardware order.',
+      'Free UK delivery in 7 to 10 working days and 30-day returns on every Tuga Hardware order.',
     path: '/shipping-returns',
   },
 ];
@@ -1688,7 +2033,7 @@ ${post.body}
 
         <div class="prose-cta">
           <h3>Rugged tablets from ${money(Math.min(...devices.map((d) => d.price)))}</h3>
-          <p>IP68 sealed, MIL-STD drop tested, all-day battery. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
+          <p>IP65 to IP69K sealed, most models MIL-STD drop tested. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
           <a class="link-arrow" href="/products/">Browse the range</a>
         </div>
       </article>
@@ -1963,7 +2308,7 @@ const feedItems = devices
       <g:link>${url}</g:link>
       <g:image_link>${SITE.origin}${imgPath(p, 1)}</g:image_link>
 ${extraImages}
-      <g:availability>in_stock</g:availability>
+      <g:availability>${SALES_PAUSED ? 'out_of_stock' : 'in_stock'}</g:availability>
       <g:price>${p.price}.00 GBP</g:price>
       <g:brand>${esc(SITE.name)}</g:brand>
       <g:mpn>${esc(p.id.toUpperCase())}</g:mpn>
@@ -1974,9 +2319,11 @@ ${extraImages}
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
         <g:price>0.00 GBP</g:price>
-        <g:min_transit_time>10</g:min_transit_time>
-        <g:max_transit_time>20</g:max_transit_time>
+        <g:min_transit_time>1</g:min_transit_time>
+        <g:max_transit_time>3</g:max_transit_time>
       </g:shipping>
+      <g:min_handling_time>6</g:min_handling_time>
+      <g:max_handling_time>7</g:max_handling_time>
     </item>`;
   })
   .join('\n');
@@ -1994,6 +2341,245 @@ ${feedItems}
 </rss>
 `
 );
+
+
+/* ==========================================================================
+   WORKS WITH — one page per maintenance / field software package
+   Content: build/content/works-with/<slug>.json (see PAGE_SCHEMA in the
+   workflow that produced them). Every software claim carries a source URL;
+   device recommendations may only use the ids in WORKS_WITH_DEVICES.
+   ========================================================================== */
+
+const WORKS_WITH_DEVICES = ['tuga-a10', 'tuga-w10', 'tuga-a6'];
+const deviceById = (id) => devices.find((d) => d.id === id);
+
+const worksWith = readdirSync(join(ROOT, 'build', 'content', 'works-with'))
+  .filter((f) => f.endsWith('.json') && !f.startsWith('_'))
+  .map((f) => JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'works-with', f), 'utf8')))
+  .filter((w) => {
+    const ok = w.slug && w.software && w.title && w.recommended?.length;
+    if (!ok) console.warn(`works-with: skipping malformed entry ${w.slug ?? '(no slug)'}`);
+    return ok;
+  })
+  .map((w) => ({
+    ...w,
+    recommended: w.recommended.filter((r) => WORKS_WITH_DEVICES.includes(r.device_id) && deviceById(r.device_id)),
+  }))
+  .sort((a, b) => a.software.localeCompare(b.software));
+
+const hostOf = (url) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+};
+
+const worksWithTrail = [{ label: 'Home', href: '/' }, { label: 'Works with', href: '/works-with/' }];
+
+worksWith.forEach((w) => {
+  const trail = [...worksWithTrail, { label: w.software }];
+  const primary = w.recommended.find((r) => r.role === 'primary') || w.recommended[0];
+  const primaryDevice = deviceById(primary.device_id);
+  const faqBlock = w.faq?.length ? faq(w.faq, { heading: `${w.software} on a Tuga device`, tag: 'Questions' }) : null;
+
+  const requirementRows = (w.requirements || [])
+    .map(
+      (r) => `
+          <li class="req">
+            <h3>${esc(r.requirement)}</h3>
+            <p>${esc(r.detail)}${r.source_url ? ` <a class="req-source" href="${esc(r.source_url)}" rel="nofollow noopener" target="_blank">Source: ${esc(hostOf(r.source_url))}</a>` : ''}</p>
+          </li>`
+    )
+    .join('');
+
+  const picks = w.recommended
+    .map((r) => {
+      const d = deviceById(r.device_id);
+      return `
+        <article class="pick reveal">
+          <div class="pick-card">${productCard(d)}</div>
+          <div class="pick-body">
+            ${eyebrow(r.role === 'primary' ? 'Our pick' : 'Alternative')}
+            <h3>${esc(d.name)} <span class="pick-price">${money(d.price)}</span></h3>
+            <p>${esc(r.why)}</p>
+            <ul class="editorial-list">
+              ${(r.fit || []).map((f) => `<li>${esc(f)}</li>`).join('\n              ')}
+            </ul>
+            <div class="pick-actions">
+              <a class="btn btn-primary" href="${quoteUrl(d.name)}">Get a business quote</a>
+              <a class="btn btn-outline" href="${productUrl(d)}">Full specification</a>
+            </div>
+          </div>
+        </article>`;
+    })
+    .join('');
+
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE.origin}/works-with/${w.slug}`,
+    name: w.title,
+    description: w.meta_description,
+    about: { '@type': 'SoftwareApplication', name: w.software, url: w.vendor_url, author: { '@type': 'Organization', name: w.vendor } },
+    mentions: w.recommended.map((r) => ({ '@type': 'Product', name: deviceById(r.device_id).name, url: `${SITE.origin}${productUrl(deviceById(r.device_id))}` })),
+    publisher: { '@id': `${SITE.origin}/#organization` },
+  };
+
+  write(
+    `works-with/${w.slug}.html`,
+    page({
+      title: `${w.title} | Tuga Hardware`,
+      description: w.meta_description,
+      path: `/works-with/${w.slug}`,
+      active: 'works-with',
+      ogImage: imgPath(primaryDevice, 1),
+      schema: [orgSchema, breadcrumbSchema(trail), webPageSchema, ...(faqBlock ? [faqBlock.schema] : [])],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(trail)}
+        ${eyebrow('Works with')}
+        <h1>${esc(w.h1)}</h1>
+        <p class="lede">${esc(w.intro?.[0] || w.meta_description)}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-narrow">
+        <div class="prose">
+          ${(w.intro || []).slice(1).map((p) => `<p>${esc(p)}</p>`).join('\n          ')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Requirements')}
+        <h2 class="title-md">What ${esc(w.software)} needs from a device</h2>
+        <p class="lede">Each item below comes from ${esc(w.vendor)}'s own listing or documentation, with the source linked.</p>
+        <ul class="req-list">${requirementRows}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+${sectionHead({ tag: 'Devices', title: `Which Tuga device fits ${esc(w.software)}`, lede: 'Picked on the published requirements above and nothing else.' })}
+        <div class="pick-list">${picks}
+        </div>
+        ${w.not_recommended_note ? `<aside class="callout"><strong>Worth knowing.</strong> ${esc(w.not_recommended_note)}</aside>` : ''}
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        <div class="setup-grid">
+          <div>
+            ${eyebrow('Setting up')}
+            <h2 class="title-sm">Getting ${esc(w.software)} running</h2>
+            <ol class="step-list">
+              ${(w.setup_steps || []).map((s) => `<li>${esc(s)}</li>`).join('\n              ')}
+            </ol>
+          </div>
+          ${
+            w.accessories?.length
+              ? `<div>
+            ${eyebrow('Accessories')}
+            <h2 class="title-sm">Worth adding</h2>
+            <ul class="editorial-list">
+              ${w.accessories.map((a) => `<li>${esc(a)}</li>`).join('\n              ')}
+            </ul>
+            <p style="margin-top:1rem"><a class="link-arrow" href="/accessories">All accessories</a></p>
+          </div>`
+              : ''
+          }
+        </div>
+      </div>
+    </section>
+
+${faqBlock ? faqBlock.html : ''}
+
+    <section class="section">
+      <div class="container-narrow">
+        <p class="disclaimer">${esc(w.disclaimer)}</p>
+        ${
+          w.sources?.length
+            ? `<details class="sources">
+          <summary>Sources checked for this page</summary>
+          <ul>
+            ${w.sources.map((s) => `<li><a href="${esc(s)}" rel="nofollow noopener" target="_blank">${esc(s)}</a></li>`).join('\n            ')}
+          </ul>
+        </details>`
+            : ''
+        }
+      </div>
+    </section>
+
+${ctaBanner({
+  title: 'Trial one unit before you kit out the team.',
+  text: `Order a single ${primaryDevice.name} at ${money(primaryDevice.price)}, no VAT to add, with 30 days to send it back if it is not right. Business quotes and proforma invoices on request.`,
+  primary: { href: quoteUrl(primaryDevice.name), label: 'Get a quote' },
+  secondary: { href: productUrl(primaryDevice), label: `See the ${primaryDevice.name}` },
+})}
+`,
+    })
+  );
+});
+
+if (worksWith.length) {
+  write(
+    'works-with/index.html',
+    page({
+      title: 'Rugged tablets for maintenance and field software | Tuga Hardware',
+      description:
+        'Which Tuga rugged tablet runs your CMMS, EAM or inspection software. Published requirements checked against each device, with a trial unit and business quotes available.',
+      path: '/works-with/',
+      active: 'works-with',
+      schema: [orgSchema, breadcrumbSchema(worksWithTrail)],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
+        ${eyebrow('Works with')}
+        <h1>Rugged tablets for the software your team already runs</h1>
+        <p class="lede">Maintenance, asset management and inspection apps publish what they need from a device. We check those requirements against each Tuga tablet and say plainly which one fits, and where it does not.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="works-grid">
+          ${worksWith
+            .map((w) => {
+              const p = w.recommended.find((r) => r.role === 'primary') || w.recommended[0];
+              const d = deviceById(p.device_id);
+              return `
+          <a class="works-card reveal" href="/works-with/${esc(w.slug)}">
+            <p class="product-card-kicker">${esc(w.vendor)}</p>
+            <h2>${esc(w.software.split(' (')[0])}</h2>
+            <p>${esc(w.meta_description)}</p>
+            <span class="works-pick">Our pick: ${esc(d.name)}, ${money(d.price)}</span>
+            <span class="product-card-cta">Read ${icons.arrowRight(14)}</span>
+          </a>`;
+            })
+            .join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Not listed?')}
+        <h2 class="title-md">Tell us what you run</h2>
+        <p class="lede">Send the app name and the devices you have now. We will check the published requirements against the range and tell you which device fits, including when the answer is none of them.</p>
+        <p style="margin-top:1.5rem"><a class="btn btn-primary" href="/contact?quote=#enquiry">Ask about your software</a></p>
+      </div>
+    </section>
+`,
+    })
+  );
+}
 
 /* ==========================================================================
    SITEMAP + ROBOTS
@@ -2013,12 +2599,20 @@ const urls = [
   ...trades.map((t) => ({ loc: `/for/${t.slug}`, priority: '0.7', freq: 'monthly' })),
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
   { loc: '/trade', priority: '0.6', freq: 'monthly' },
-  { loc: '/warranty', priority: '0.4', freq: 'yearly' },
+  { loc: '/register-warranty', priority: '0.4', freq: 'yearly' },
   { loc: '/bulk', priority: '0.7', freq: 'monthly' },
+  { loc: '/warranty', priority: '0.7', freq: 'monthly' },
+  { loc: '/warranty-terms', priority: '0.4', freq: 'yearly' },
   { loc: '/blog/', priority: '0.7', freq: 'weekly' },
   ...posts.map((p) => ({
     loc: `/blog/${p.slug}`,
     priority: '0.6',
+    freq: 'monthly',
+  })),
+  ...(worksWith.length ? [{ loc: '/works-with/', priority: '0.8', freq: 'weekly' }] : []),
+  ...worksWith.map((w) => ({
+    loc: `/works-with/${w.slug}`,
+    priority: '0.8',
     freq: 'monthly',
   })),
   { loc: '/about', priority: '0.5', freq: 'yearly' },
@@ -2050,9 +2644,6 @@ write(
   'robots.txt',
   `User-agent: *
 Allow: /
-Disallow: /cart
-Disallow: /order-confirmation
-Disallow: /review
 Disallow: /api/
 
 # AI crawlers are welcome. Being cited is how a small store gets found.
