@@ -23,10 +23,10 @@ const PRODUCTS = {
   'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
   'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
   // Devices — Windows
-  'tuga-wh6':           { name: 'Tuga WH6',                       price: 79900, device: true },
+  'tuga-wh6':           { name: 'Tuga WH6',                       price: 69900, device: true },
   'tuga-w8':            { name: 'Tuga W8',                        price: 62900, device: true },
   'tuga-w10':           { name: 'Tuga W10',                       price: 64900, device: true },
-  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 87900, device: true },
+  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 77900, device: true },
   'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900, device: true },
   'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900, device: true },
   // Accessories
@@ -37,6 +37,7 @@ const PRODUCTS = {
   'acc-screen-protector': { name: 'Tempered Glass Screen Protector (2 Pack)', price: 1400 },
   'acc-car-charger':      { name: '12V DC Car Charger',                       price: 2600 },
   'acc-carry-case':       { name: 'Rugged Carry Case',                        price: 3400 },
+  'acc-wh6-cradle':       { name: 'WH6 Charging Cradle',                      price: 7900 },
   'acc-belt-holster':     { name: 'Belt Holster',                             price: 2200 },
   'acc-car-mount':        { name: 'Car Phone Mount',                          price: 1700 },
   'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
@@ -184,6 +185,18 @@ export async function handleRequest(request, env) {
   if (request.method === 'POST' && path === '/api/subscribe') {
     return handleSubscribe(request, env);
   }
+  if (request.method === 'POST' && path === '/api/trade-apply') {
+    return handleTradeApply(request, env);
+  }
+  if (request.method === 'POST' && path === '/api/warranty-register') {
+    return handleWarrantyRegister(request, env);
+  }
+  if (request.method === 'GET' && path === '/api/review') {
+    return handleReviewLookup(url, env);
+  }
+  if (request.method === 'POST' && path === '/api/review') {
+    return handleReviewSubmit(request, env);
+  }
   if (request.method === 'GET' && path === '/api/payment-methods') {
     return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
   }
@@ -245,7 +258,9 @@ async function handleStripeCheckout(request, env) {
     params.append('mode', 'payment');
     params.append('success_url', `${env.SITE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`);
     params.append('cancel_url', `${env.SITE_URL}/cart`);
-    params.append('payment_method_types[0]', 'card');
+    // No payment_method_types: Checkout then offers every method switched on
+    // in the Stripe dashboard (Settings > Payment methods) that suits the
+    // basket, so Apple Pay, Google Pay and Klarna appear without a deploy.
     SHIPPING_COUNTRIES.forEach((country, i) => {
       params.append(`shipping_address_collection[allowed_countries][${i}]`, country);
     });
@@ -980,6 +995,227 @@ async function handlePayPalCheck(request, env) {
         : 'Neither environment accepted these credentials.',
   });
 }
+
+// =========================================================================
+// TRADE ACCOUNTS, WARRANTY REGISTRATION, REVIEWS
+// =========================================================================
+//
+// All three follow the contact form's rule: persist to KV first, then email
+// support, and only fail the request if the submission is now nowhere.
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Trim a value to a string of at most `max` characters. */
+const clip = (value, max) => String(value ?? '').trim().slice(0, max);
+
+/**
+ * Store a submission and email support about it.
+ * Returns a Response: ok if either the store or the email succeeded.
+ */
+async function storeAndNotify(env, key, record, enquiry) {
+  let stored = false;
+  if (env.ORDERS) {
+    try {
+      await env.ORDERS.put(key, JSON.stringify(record));
+      stored = true;
+    } catch (kvErr) {
+      console.error(`Could not store ${key}:`, kvErr);
+    }
+  }
+
+  try {
+    await sendEnquiry(env, enquiry);
+  } catch (mailErr) {
+    console.error(`Notification email failed for ${key}:`, mailErr);
+    if (!stored) return corsError('Could not send the form', 500);
+  }
+
+  return corsResponse({ ok: true });
+}
+
+/**
+ * Trade account application. Approval is manual: support reads the
+ * application, checks the company, and replies with invoice terms.
+ */
+async function handleTradeApply(request, env) {
+  try {
+    const body = await request.json();
+    if (body.website) return corsResponse({ ok: true }); // honeypot
+
+    const application = {
+      company: clip(body.company, 160),
+      name: clip(body.name, 120),
+      email: clip(body.email, 160),
+      phone: clip(body.phone, 40),
+      companyNumber: clip(body.companyNumber, 20),
+      vatNumber: clip(body.vatNumber, 20),
+      devices: clip(body.devices, 40),
+      message: clip(body.message, 4000),
+      receivedAt: new Date().toISOString(),
+      status: 'new',
+    };
+
+    if (!EMAIL_RE.test(application.email)) {
+      return corsError('A valid email address is required', 422);
+    }
+    if (application.company.length < 2) {
+      return corsError('Please give your company name', 422);
+    }
+
+    const lines = [
+      `Company: ${application.company}`,
+      `Contact: ${application.name}`,
+      `Phone: ${application.phone || 'not given'}`,
+      `Companies House number: ${application.companyNumber || 'not given'}`,
+      `VAT number: ${application.vatNumber || 'not given'}`,
+      `Devices per year: ${application.devices || 'not given'}`,
+      '',
+      application.message,
+    ];
+
+    return storeAndNotify(
+      env,
+      `trade:${application.receivedAt}:${application.email.toLowerCase()}`,
+      application,
+      {
+        name: application.name || application.company,
+        email: application.email,
+        topic: 'Trade account application',
+        message: lines.join('\n'),
+      }
+    );
+  } catch (err) {
+    console.error('Trade application error:', err);
+    return corsError('Could not send the form', 500);
+  }
+}
+
+/** Warranty registration: ties a serial number to a customer. */
+async function handleWarrantyRegister(request, env) {
+  try {
+    const body = await request.json();
+    if (body.website) return corsResponse({ ok: true }); // honeypot
+
+    const registration = {
+      name: clip(body.name, 120),
+      email: clip(body.email, 160),
+      model: clip(body.model, 40),
+      serial: clip(body.serial, 40).toUpperCase(),
+      orderRef: clip(body.orderRef, 80),
+      purchaseDate: clip(body.purchaseDate, 10),
+      receivedAt: new Date().toISOString(),
+    };
+
+    if (!EMAIL_RE.test(registration.email)) {
+      return corsError('A valid email address is required', 422);
+    }
+    if (!PRODUCTS[registration.model]?.device) {
+      return corsError('Please choose your model', 422);
+    }
+    if (!/^[A-Z0-9][A-Z0-9 \-/]{3,39}$/.test(registration.serial)) {
+      return corsError('That does not look like a serial number', 422);
+    }
+    if (registration.purchaseDate && !/^\d{4}-\d{2}-\d{2}$/.test(registration.purchaseDate)) {
+      registration.purchaseDate = '';
+    }
+
+    return storeAndNotify(
+      env,
+      `warranty:${registration.serial}:${registration.receivedAt}`,
+      registration,
+      {
+        name: registration.name,
+        email: registration.email,
+        topic: 'Warranty registration',
+        message: [
+          `Model: ${PRODUCTS[registration.model].name}`,
+          `Serial: ${registration.serial}`,
+          `Order reference: ${registration.orderRef || 'not given'}`,
+          `Purchase date: ${registration.purchaseDate || 'not given'}`,
+        ].join('\n'),
+      }
+    );
+  } catch (err) {
+    console.error('Warranty registration error:', err);
+    return corsError('Could not send the form', 500);
+  }
+}
+
+/**
+ * Resolve a review token (sent in the review-request email) to its order.
+ * Tokens are random and single-purpose, so the link reveals nothing on its
+ * own and cannot be guessed from an order id.
+ */
+async function orderForReviewToken(token, env) {
+  if (!env.ORDERS || typeof token !== 'string' || !/^[0-9a-f-]{36}$/.test(token)) return null;
+  const orderId = await env.ORDERS.get(`reviewtoken:${token}`);
+  if (!orderId) return null;
+  return getOrder(env.ORDERS, orderId);
+}
+
+/** What the review page shows before submitting: item names only. */
+async function handleReviewLookup(url, env) {
+  const order = await orderForReviewToken(url.searchParams.get('t'), env);
+  if (!order) return corsError('This review link has expired or is not valid', 404);
+
+  const existing = await env.ORDERS.get(`review:${order.orderId}`);
+  return corsResponse({
+    items: (order.items || []).map((i) => i.name),
+    alreadyReviewed: Boolean(existing),
+  });
+}
+
+/**
+ * Store a review for moderation. Nothing is published automatically.
+ * Moderation may only remove reviews that are unlawful, abusive or not about
+ * the product: the DMCC Act 2024 bans hiding genuine negative reviews.
+ */
+async function handleReviewSubmit(request, env) {
+  try {
+    const body = await request.json();
+    const order = await orderForReviewToken(body.t, env);
+    if (!order) return corsError('This review link has expired or is not valid', 404);
+
+    const rating = Number(body.rating);
+    if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+      return corsError('Please choose a star rating', 422);
+    }
+
+    const review = {
+      orderId: order.orderId,
+      items: (order.items || []).map((i) => i.name),
+      rating,
+      title: clip(body.title, 120),
+      body: clip(body.body, 4000),
+      displayName: clip(body.displayName, 60) || 'Verified buyer',
+      trade: clip(body.trade, 60),
+      verifiedPurchase: true,
+      paidAt: order.paidAt,
+      createdAt: new Date().toISOString(),
+      status: 'pending',
+    };
+
+    return storeAndNotify(env, `review:${order.orderId}`, review, {
+      name: review.displayName,
+      email: order.customerEmail || SUPPORT_FALLBACK,
+      topic: `New ${rating}-star review (awaiting moderation)`,
+      message: [
+        `Order: ${order.orderId}`,
+        `Items: ${review.items.join(', ')}`,
+        `Rating: ${rating}/5`,
+        `Trade: ${review.trade || 'not given'}`,
+        '',
+        review.title,
+        review.body,
+      ].join('\n'),
+    });
+  } catch (err) {
+    console.error('Review submit error:', err);
+    return corsError('Could not save the review', 500);
+  }
+}
+
+const SUPPORT_FALLBACK = 'support@tugahardware.com';
 
 // =========================================================================
 // HELPER FUNCTIONS
