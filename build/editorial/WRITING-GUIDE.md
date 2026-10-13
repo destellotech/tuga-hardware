@@ -40,7 +40,7 @@ Use the date the post is written.
   give real advice, including when a cheaper option or another product is
   the better choice.
 - Lead with the answer, then explain. Short paragraphs.
-- No em dashes. Avoid hype words ("revolutionary", "game changer",
+- No em dashes or en dashes. Avoid hype words ("revolutionary", "game changer",
   "unleash", "seamless"). Avoid AI tells like "In today's fast-paced world"
   or "it's important to note".
 - About 1,200 to 1,800 words.
@@ -58,6 +58,26 @@ Use the date the post is written.
   site as a legal risk. Use general, verifiable statements instead of
   numbers you cannot source.
 - No legal, regulatory or financial advice beyond general signposting.
+- Store-wide facts live in `src/store-config.js`; copy them, never improvise:
+  - Delivery is free to UK addresses only, in 7 to 10 working days. Never
+    mention Ireland or international shipping, same-day dispatch, UK stock
+    or "direct from the manufacturer".
+  - Destello Tech Ltd is not VAT registered. Write "No VAT to add"; never
+    say prices "include VAT" or mention VAT invoices.
+- No popularity, best-seller or "most trades choose" claims, and no
+  superlatives about our own devices ("the best", "unbeatable"). "Best X
+  for Y" titles are fine for buyer guides, but the body compares on specs.
+- No first-hand claims we cannot back: "we tested", "in our experience",
+  "our customers tell us".
+- Work out price gaps and ratios from products.json every time. They vary:
+  scanner versions cost £70 more on the W8 and £80 more on the WH6 and W10,
+  and Windows is not "double" Android across the range.
+- The operating system differs by model: the WH6 runs Windows 11 IoT, the
+  W8 and W10 Windows 11 Pro. Say "Windows 11" when talking about the range.
+- If products.json does not list something (voice calls, vibration
+  testing, dimensions for the A8 or W8, software update periods), do not
+  state it. Tell readers to check their own apps on the device rather than
+  implying they will run.
 - Do not name or criticise competitors by brand.
 
 ## Links
