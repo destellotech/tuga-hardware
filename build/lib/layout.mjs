@@ -56,7 +56,7 @@ export const SITE = {
   tagline: 'Hard Shell. Long Life.',
   email: 'support@tugahardware.com',
   description:
-    'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested. Free UK delivery.',
+    'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery.',
 };
 
 export const data = JSON.parse(

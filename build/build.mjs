@@ -78,6 +78,8 @@ function write(relPath, contents) {
 const warrantyCopy = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty.json'), 'utf8'));
 const paidTiers = warranty.tiers.filter((t) => !t.included);
 const fromPrice = (t) => Math.min(...Object.values(t.prices || { x: 0 }));
+/** True when the 3-Year Warranty is sold for this device (scanner variants share the base id). */
+const has3yr = (p) => warrantyTier('3yr')?.prices?.[p.id.replace(/-scanner$/, '')] !== undefined;
 
 /** The cover options under a product's buy box. Quote-only tiers are shown
     with their price and a link to the quote form rather than a radio. */
@@ -133,12 +135,10 @@ const orgSchema = {
   url: SITE.origin,
   email: SITE.email,
   description: SITE.description,
+  // Country only: the registered office appears on the legal pages, not in
+  // structured data.
   address: {
     '@type': 'PostalAddress',
-    streetAddress: TRADER.address.street,
-    addressLocality: TRADER.address.town,
-    addressRegion: TRADER.address.county,
-    postalCode: TRADER.address.postcode,
     addressCountry: TRADER.address.country,
   },
   identifier: {
@@ -191,7 +191,7 @@ const HOME_FAQ = [
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'They are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'Five of the six are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The W10 has no MIL-STD rating, so treat it with more care if it lives on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
@@ -271,19 +271,19 @@ const hero = () => {
         <div class="hero-content">
           ${eyebrow('Rugged Android & Windows tablets')}
           <h1 class="hero-title">Hard Shell.<br><span class="accent">Long Life.</span></h1>
-          <p class="hero-sub">Waterproof, drop-tested tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift, not for a desk.</p>
+          <p class="hero-sub">Sealed, rugged tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift, not for a desk.</p>
           <div class="hero-ctas">
             <a class="btn btn-inverse btn-lg" href="/products/">Browse the range</a>
             <a class="btn btn-outline-light btn-lg" href="#pick-a-size">Help me pick a size</a>
           </div>
           <div class="hero-specs">
             <div class="hero-spec">
-              <span class="hero-spec-value">IP68</span>
-              <span class="hero-spec-label">Sealed</span>
+              <span class="hero-spec-value">IP65+</span>
+              <span class="hero-spec-label">Every model sealed</span>
             </div>
             <div class="hero-spec">
               <span class="hero-spec-value">810H</span>
-              <span class="hero-spec-label">Drop tested</span>
+              <span class="hero-spec-label">Most models drop tested</span>
             </div>
             <div class="hero-spec">
               <span class="hero-spec-value">10,600<span style="font-size:0.5em">mAh</span></span>
@@ -318,7 +318,7 @@ ${trustStrip()}
 ${sectionHead({
   tag: 'Start here',
   title: 'Pick the size, not the spec sheet',
-  lede: 'Three Android devices, one for each size. Nearly everyone chooses on size first, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
+  lede: 'Three Android devices, one for each size. Size makes the biggest difference day to day, so start there and let the specifications follow. Every size also comes in a Windows version, <a href="#windows">further down the page</a>.',
 })}
 ${sizeLadder(androidRange)}
       </div>
@@ -364,12 +364,12 @@ ${sectionHead({
             <img src="${versioned('/img/blog/blog-waterproof.webp')}" alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
-            <h3>Sealed, not splash resistant</h3>
-            <p>An IP68 rating means the housing is fully dust tight and survives sustained immersion, not that it tolerates a light shower. The devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
+            <h3>Sealed against dust and water</h3>
+            <p>Every device is rated at least IP65: fully dust tight and protected against water jets from any direction. Most go further. An IP67 or IP68 rating means the housing survives immersion, not just a light shower, and the devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
               <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Rated from &minus;20&deg;C to 60&deg;C, so it starts on a frosty morning</li>
+              <li>Android models rated from &minus;20&deg;C to 60&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -380,7 +380,7 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Drop tested to a real standard</h3>
-            <p>MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
+            <p>Five of the six devices carry a MIL-STD-810H or 810G rating; the W10 does not. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
             <p>In practice that comes from reinforced corners, a rubberised over-mould and a screen recessed behind a raised bezel, so the glass does not take the first hit when it lands face down.</p>
           </div>
         </article>
@@ -452,7 +452,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. From £299 with free UK delivery.',
+      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. From £299 with free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -472,7 +472,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP68 rated, drop tested, free UK delivery and 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP69K sealed, most drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -495,7 +495,7 @@ write(
 ${breadcrumbs(productsTrail)}
         ${eyebrow('The range')}
         <h1>Rugged tablets &amp; handhelds</h1>
-        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed, drop tested and shipped free.</p>
+        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the W10 are drop tested to MIL-STD-810H or 810G.</p>
       </div>
     </section>
 
@@ -590,7 +590,7 @@ function productPage(p) {
           'https://schema.org/MerchantReturnFiniteReturnWindow',
         merchantReturnDays: 30,
         returnMethod: 'https://schema.org/ReturnByMail',
-        returnFees: 'https://schema.org/FreeReturn',
+        returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
       },
     },
     additionalProperty: Object.entries(p.specs).map(([k, v]) => ({
@@ -658,7 +658,7 @@ ${breadcrumbs(trail)}
 
           <div class="pdp-assurance">
             <div>${icons.truck(16)}<span>${esc(DELIVERY.short)}</span></div>
-            <div>${icons.shieldCheck(16)}<span><a href="/warranty">12-month warranty, 3-year option</a></span></div>
+            <div>${icons.shieldCheck(16)}<span><a href="/warranty">${has3yr(p) ? '12-month warranty, 3-year option' : '12-month warranty'}</a></span></div>
             <div>${icons.refresh(16)}<span>30-day returns</span></div>
             <div>${icons.lock(16)}<span>Secure checkout</span></div>
           </div>
@@ -840,7 +840,7 @@ const BULK_FAQ = [
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
-    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size. Fleets of 5 or more can add Total Care, with a replacement dispatched next working day. See the warranty page for prices.',
+    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size. Business fleets of ten or more A10 and W10 devices can ask for a Total Care quote: a swap unit dispatched the same working day for claims accepted by 14:00. See the <a href="/warranty">warranty page</a>.',
   },
 ];
 
@@ -957,7 +957,7 @@ ${breadcrumbs(aboutTrail)}
 
           <h2>What we actually do</h2>
 
-          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator and no minimum order. The price on the page is the price you pay, delivery is free, and businesses can ask for a quote and pay by bank transfer.</p>
+          <p>We select rugged devices that hit a genuine standard (a published IP rating, a real MIL-STD drop test method where the device has one, a battery measured in mAh rather than adjectives) and sell them direct at a price with one margin on it instead of four. There is no configurator and no minimum order. The price on the page is the price you pay, delivery is free, and businesses can ask for a quote and pay by bank transfer.</p>
 
           <p>We are deliberately narrow. Six devices, three sizes, two operating systems. It is easier to know six products properly than to list six hundred and know none of them.</p>
 
@@ -1122,8 +1122,8 @@ write(
 write(
   'order-confirmation.html',
   page({
-    title: 'Order Confirmed | Tuga Hardware',
-    description: 'Your Tuga Hardware order is confirmed.',
+    title: 'Your Order | Tuga Hardware',
+    description: 'Your Tuga Hardware order reference and confirmation status.',
     path: '/order-confirmation',
     noindex: true,
     schema: [],
@@ -1131,12 +1131,41 @@ write(
     <section class="section">
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
-        <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. ${esc(DELIVERY.summary)}</p>
+        <h1 class="title-lg" data-order-title>Checking your order</h1>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Checking your order...</p>
+        <noscript><p class="lede" style="margin-inline:auto">If you have just paid, check your email for your receipt or contact <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> with your name and the time you paid.</p></noscript>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
           <a class="btn btn-outline" href="/contact">Contact support</a>
+        </div>
+      </div>
+    </section>
+`,
+  })
+);
+
+/* ==========================================================================
+   404 — src/worker.js serves this with status 404 for any unknown path
+   ========================================================================== */
+
+write(
+  '404.html',
+  page({
+    title: 'Page Not Found | Tuga Hardware',
+    description: 'We could not find that page. Browse the range, see which apps the tablets run, or get in touch.',
+    path: '/404',
+    noindex: true,
+    schema: [],
+    body: `
+    <section class="section">
+      <div class="container-narrow" style="text-align:center">
+        <h1 class="title-lg">We could not find that page</h1>
+        <p class="lede" style="margin-inline:auto">The link may be old, or the address mistyped. These will get you back on track.</p>
+        <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
+          <a class="btn btn-primary" href="/products/">Browse the range</a>
+          <a class="btn btn-outline" href="/works-with/">Works with your apps</a>
+          <a class="btn btn-outline" href="/contact">Contact us</a>
         </div>
       </div>
     </section>
@@ -1448,7 +1477,10 @@ const BLOG_IMAGES = {
 /** Read a blog fragment from build/content/blog/. */
 function readPost(file) {
   const slug = file.replace(/\.html$/, '');
-  const raw = readFileSync(join(ROOT, 'build', 'content', 'blog', file), 'utf8');
+  // Normalise CRLF: Windows checkouts (core.autocrlf) otherwise break the
+  // meta block regexes and every field silently comes back empty.
+  const raw = readFileSync(join(ROOT, 'build', 'content', 'blog', file), 'utf8')
+    .replace(/\r\n/g, '\n');
 
   const meta = (raw.match(/<!--meta\n([\s\S]*?)\n-->/) || [])[1] ?? '';
   const field = (name) =>
@@ -1531,7 +1563,7 @@ ${post.body}
 
         <div class="prose-cta">
           <h3>Rugged tablets from ${money(Math.min(...devices.map((d) => d.price)))}</h3>
-          <p>IP68 sealed, MIL-STD drop tested, all-day battery. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
+          <p>IP65 to IP69K sealed, most models MIL-STD drop tested. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
           <a class="link-arrow" href="/products/">Browse the range</a>
         </div>
       </article>
@@ -1988,8 +2020,6 @@ write(
   'robots.txt',
   `User-agent: *
 Allow: /
-Disallow: /cart
-Disallow: /order-confirmation
 Disallow: /api/
 
 # AI crawlers are welcome. Being cited is how a small store gets found.
