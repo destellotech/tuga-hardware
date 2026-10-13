@@ -1024,7 +1024,7 @@ p { text-wrap: pretty; }
   border: 1px solid var(--rule);
   display: grid;
   place-items: center;
-  padding: var(--space-m);
+  padding: var(--space-xs);
   overflow: hidden;
   transition: border-color var(--base);
 }
