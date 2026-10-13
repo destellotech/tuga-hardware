@@ -160,7 +160,7 @@
       "shortFor": "Legacy Windows software and network drives, in a holster.",
       "description": "A 6.5 inch rugged Windows 11 handheld for professionals who need desktop software on the move. Run legacy apps, access network drives, and manage field data from a device that fits in a holster.",
       "longDescription": "The WH6 puts full Windows 11 in your pocket. An Intel Celeron N5100, 8GB of RAM and 128GB of storage (plus a microSD slot for more) run the Windows software your industry never moved off, reach network drives, and manage field data without compromise. It is rated IP65 and MIL-STD-810H, survives 1.5 metre drops, and works from -20°C to 60°C. The 4000mAh battery is removable, so a spare keeps you going through a long shift, and 4G LTE, GPS + GLONASS and NFC are on board. USB-A and USB-C ports connect straight to instruments and peripherals. A 2D barcode scanner is available as an option for warehouse and logistics work, and a charging dock is sold separately for desk use.",
-      "price": 799,
+      "price": 699,
       "compareAtPrice": null,
       "currency": "GBP",
       "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
@@ -299,7 +299,7 @@
       "variantOf": "tuga-wh6",
       "tagline": "Windows in your pocket. Scan anything.",
       "description": "The Tuga WH6 with an integrated 2D barcode scanner. Full Windows 11 in a rugged handheld with professional scanning for warehouse, logistics and inventory work.",
-      "price": 879,
+      "price": 779,
       "compareAtPrice": null,
       "currency": "GBP",
       "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
@@ -422,6 +422,16 @@
       "currency": "GBP",
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
+    },
+    {
+      "id": "acc-wh6-cradle",
+      "name": "WH6 Charging Cradle",
+      "slug": "wh6-cradle",
+      "description": "Desktop charging cradle for the Tuga WH6, with a pogo pin connection. Drop the handheld in and it charges, ready for the next shift.",
+      "price": 79,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-wh6"],
+      "category": "handheld"
     },
     {
       "id": "acc-belt-holster",

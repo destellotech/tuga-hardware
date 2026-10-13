@@ -23,10 +23,10 @@ const PRODUCTS = {
   'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
   'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
   // Devices — Windows
-  'tuga-wh6':           { name: 'Tuga WH6',                       price: 79900, device: true },
+  'tuga-wh6':           { name: 'Tuga WH6',                       price: 69900, device: true },
   'tuga-w8':            { name: 'Tuga W8',                        price: 62900, device: true },
   'tuga-w10':           { name: 'Tuga W10',                       price: 64900, device: true },
-  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 87900, device: true },
+  'tuga-wh6-scanner':   { name: 'Tuga WH6 with Barcode Scanner',  price: 77900, device: true },
   'tuga-w8-scanner':    { name: 'Tuga W8 with 2D Scanner',        price: 69900, device: true },
   'tuga-w10-scanner':   { name: 'Tuga W10 with 2D Scanner',       price: 72900, device: true },
   // Accessories
@@ -37,6 +37,7 @@ const PRODUCTS = {
   'acc-screen-protector': { name: 'Tempered Glass Screen Protector (2 Pack)', price: 1400 },
   'acc-car-charger':      { name: '12V DC Car Charger',                       price: 2600 },
   'acc-carry-case':       { name: 'Rugged Carry Case',                        price: 3400 },
+  'acc-wh6-cradle':       { name: 'WH6 Charging Cradle',                      price: 7900 },
   'acc-belt-holster':     { name: 'Belt Holster',                             price: 2200 },
   'acc-car-mount':        { name: 'Car Phone Mount',                          price: 1700 },
   'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
