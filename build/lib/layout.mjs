@@ -257,6 +257,7 @@ const NAV_LINKS = [
   { href: '/products/', label: 'Tablets', key: 'products' },
   { href: '/accessories', label: 'Accessories', key: 'accessories' },
   { href: '/bulk', label: 'Bulk Orders', key: 'bulk' },
+  { href: '/works-with/', label: 'Works with', key: 'works-with' },
   { href: '/blog/', label: 'Guides', key: 'blog' },
   { href: '/about', label: 'About', key: 'about' },
   { href: '/contact', label: 'Contact', key: 'contact' },
@@ -270,7 +271,7 @@ const header = (active) => `
     ${
       SALES_PAUSED
         ? `<strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>`
-        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes and proforma invoices</a><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns`
+        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes<span class="announce-more"> and proforma invoices</span></a><span class="announce-more"><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns</span>`
     }
   </div>
   <header class="site-header" id="site-header">
@@ -313,6 +314,7 @@ const footer = () => `
           <h3>Company</h3>
           <nav aria-label="Company">
             <a href="/about">About</a>
+            <a href="/works-with/">Works with your software</a>
             <a href="/blog/">Guides</a>
             <a href="/bulk">Bulk orders</a>
             <a href="/contact">Contact</a>

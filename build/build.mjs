@@ -1681,6 +1681,245 @@ ${feedItems}
 `
 );
 
+
+/* ==========================================================================
+   WORKS WITH — one page per maintenance / field software package
+   Content: build/content/works-with/<slug>.json (see PAGE_SCHEMA in the
+   workflow that produced them). Every software claim carries a source URL;
+   device recommendations may only use the ids in WORKS_WITH_DEVICES.
+   ========================================================================== */
+
+const WORKS_WITH_DEVICES = ['tuga-a10', 'tuga-w10', 'tuga-a6'];
+const deviceById = (id) => devices.find((d) => d.id === id);
+
+const worksWith = readdirSync(join(ROOT, 'build', 'content', 'works-with'))
+  .filter((f) => f.endsWith('.json') && !f.startsWith('_'))
+  .map((f) => JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'works-with', f), 'utf8')))
+  .filter((w) => {
+    const ok = w.slug && w.software && w.title && w.recommended?.length;
+    if (!ok) console.warn(`works-with: skipping malformed entry ${w.slug ?? '(no slug)'}`);
+    return ok;
+  })
+  .map((w) => ({
+    ...w,
+    recommended: w.recommended.filter((r) => WORKS_WITH_DEVICES.includes(r.device_id) && deviceById(r.device_id)),
+  }))
+  .sort((a, b) => a.software.localeCompare(b.software));
+
+const hostOf = (url) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+};
+
+const worksWithTrail = [{ label: 'Home', href: '/' }, { label: 'Works with', href: '/works-with/' }];
+
+worksWith.forEach((w) => {
+  const trail = [...worksWithTrail, { label: w.software }];
+  const primary = w.recommended.find((r) => r.role === 'primary') || w.recommended[0];
+  const primaryDevice = deviceById(primary.device_id);
+  const faqBlock = w.faq?.length ? faq(w.faq, { heading: `${w.software} on a Tuga device`, tag: 'Questions' }) : null;
+
+  const requirementRows = (w.requirements || [])
+    .map(
+      (r) => `
+          <li class="req">
+            <h3>${esc(r.requirement)}</h3>
+            <p>${esc(r.detail)}${r.source_url ? ` <a class="req-source" href="${esc(r.source_url)}" rel="nofollow noopener" target="_blank">Source: ${esc(hostOf(r.source_url))}</a>` : ''}</p>
+          </li>`
+    )
+    .join('');
+
+  const picks = w.recommended
+    .map((r) => {
+      const d = deviceById(r.device_id);
+      return `
+        <article class="pick reveal">
+          <div class="pick-card">${productCard(d)}</div>
+          <div class="pick-body">
+            ${eyebrow(r.role === 'primary' ? 'Our pick' : 'Alternative')}
+            <h3>${esc(d.name)} <span class="pick-price">${money(d.price)}</span></h3>
+            <p>${esc(r.why)}</p>
+            <ul class="editorial-list">
+              ${(r.fit || []).map((f) => `<li>${esc(f)}</li>`).join('\n              ')}
+            </ul>
+            <div class="pick-actions">
+              <a class="btn btn-primary" href="${quoteUrl(d.name)}">Get a business quote</a>
+              <a class="btn btn-outline" href="${productUrl(d)}">Full specification</a>
+            </div>
+          </div>
+        </article>`;
+    })
+    .join('');
+
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE.origin}/works-with/${w.slug}`,
+    name: w.title,
+    description: w.meta_description,
+    about: { '@type': 'SoftwareApplication', name: w.software, url: w.vendor_url, author: { '@type': 'Organization', name: w.vendor } },
+    mentions: w.recommended.map((r) => ({ '@type': 'Product', name: deviceById(r.device_id).name, url: `${SITE.origin}${productUrl(deviceById(r.device_id))}` })),
+    publisher: { '@id': `${SITE.origin}/#organization` },
+  };
+
+  write(
+    `works-with/${w.slug}.html`,
+    page({
+      title: `${w.title} | Tuga Hardware`,
+      description: w.meta_description,
+      path: `/works-with/${w.slug}`,
+      active: 'works-with',
+      ogImage: imgPath(primaryDevice, 1),
+      schema: [orgSchema, breadcrumbSchema(trail), webPageSchema, ...(faqBlock ? [faqBlock.schema] : [])],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(trail)}
+        ${eyebrow('Works with')}
+        <h1>${esc(w.h1)}</h1>
+        <p class="lede">${esc(w.intro?.[0] || w.meta_description)}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-narrow">
+        <div class="prose">
+          ${(w.intro || []).slice(1).map((p) => `<p>${esc(p)}</p>`).join('\n          ')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Requirements')}
+        <h2 class="title-md">What ${esc(w.software)} needs from a device</h2>
+        <p class="lede">Each item below comes from ${esc(w.vendor)}'s own listing or documentation, with the source linked.</p>
+        <ul class="req-list">${requirementRows}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+${sectionHead({ tag: 'Devices', title: `Which Tuga device fits ${esc(w.software)}`, lede: 'Picked on the published requirements above and nothing else.' })}
+        <div class="pick-list">${picks}
+        </div>
+        ${w.not_recommended_note ? `<aside class="callout"><strong>Worth knowing.</strong> ${esc(w.not_recommended_note)}</aside>` : ''}
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        <div class="setup-grid">
+          <div>
+            ${eyebrow('Setting up')}
+            <h2 class="title-sm">Getting ${esc(w.software)} running</h2>
+            <ol class="step-list">
+              ${(w.setup_steps || []).map((s) => `<li>${esc(s)}</li>`).join('\n              ')}
+            </ol>
+          </div>
+          ${
+            w.accessories?.length
+              ? `<div>
+            ${eyebrow('Accessories')}
+            <h2 class="title-sm">Worth adding</h2>
+            <ul class="editorial-list">
+              ${w.accessories.map((a) => `<li>${esc(a)}</li>`).join('\n              ')}
+            </ul>
+            <p style="margin-top:1rem"><a class="link-arrow" href="/accessories">All accessories</a></p>
+          </div>`
+              : ''
+          }
+        </div>
+      </div>
+    </section>
+
+${faqBlock ? faqBlock.html : ''}
+
+    <section class="section">
+      <div class="container-narrow">
+        <p class="disclaimer">${esc(w.disclaimer)}</p>
+        ${
+          w.sources?.length
+            ? `<details class="sources">
+          <summary>Sources checked for this page</summary>
+          <ul>
+            ${w.sources.map((s) => `<li><a href="${esc(s)}" rel="nofollow noopener" target="_blank">${esc(s)}</a></li>`).join('\n            ')}
+          </ul>
+        </details>`
+            : ''
+        }
+      </div>
+    </section>
+
+${ctaBanner({
+  title: 'Trial one unit before you kit out the team.',
+  text: `Order a single ${primaryDevice.name} at ${money(primaryDevice.price)}, no VAT to add, with 30 days to send it back if it is not right. Business quotes and proforma invoices on request.`,
+  primary: { href: quoteUrl(primaryDevice.name), label: 'Get a quote' },
+  secondary: { href: productUrl(primaryDevice), label: `See the ${primaryDevice.name}` },
+})}
+`,
+    })
+  );
+});
+
+if (worksWith.length) {
+  write(
+    'works-with/index.html',
+    page({
+      title: 'Rugged tablets for maintenance and field software | Tuga Hardware',
+      description:
+        'Which Tuga rugged tablet runs your CMMS, EAM or inspection software. Published requirements checked against each device, with a trial unit and business quotes available.',
+      path: '/works-with/',
+      active: 'works-with',
+      schema: [orgSchema, breadcrumbSchema(worksWithTrail)],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
+        ${eyebrow('Works with')}
+        <h1>Rugged tablets for the software your team already runs</h1>
+        <p class="lede">Maintenance, asset management and inspection apps publish what they need from a device. We check those requirements against each Tuga tablet and say plainly which one fits, and where it does not.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="works-grid">
+          ${worksWith
+            .map((w) => {
+              const p = w.recommended.find((r) => r.role === 'primary') || w.recommended[0];
+              const d = deviceById(p.device_id);
+              return `
+          <a class="works-card reveal" href="/works-with/${esc(w.slug)}">
+            <p class="product-card-kicker">${esc(w.vendor)}</p>
+            <h2>${esc(w.software.split(' (')[0])}</h2>
+            <p>${esc(w.meta_description)}</p>
+            <span class="works-pick">Our pick: ${esc(d.name)}, ${money(d.price)}</span>
+            <span class="product-card-cta">Read ${icons.arrowRight(14)}</span>
+          </a>`;
+            })
+            .join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Not listed?')}
+        <h2 class="title-md">Tell us what you run</h2>
+        <p class="lede">Send the app name and the devices you have now. We will check the published requirements against the range and tell you which device fits, including when the answer is none of them.</p>
+        <p style="margin-top:1.5rem"><a class="btn btn-primary" href="/contact?quote=#enquiry">Ask about your software</a></p>
+      </div>
+    </section>
+`,
+    })
+  );
+}
+
 /* ==========================================================================
    SITEMAP + ROBOTS
    ========================================================================== */
@@ -1703,6 +1942,12 @@ const urls = [
   ...posts.map((p) => ({
     loc: `/blog/${p.slug}`,
     priority: '0.6',
+    freq: 'monthly',
+  })),
+  ...(worksWith.length ? [{ loc: '/works-with/', priority: '0.8', freq: 'weekly' }] : []),
+  ...worksWith.map((w) => ({
+    loc: `/works-with/${w.slug}`,
+    priority: '0.8',
     freq: 'monthly',
   })),
   { loc: '/about', priority: '0.5', freq: 'yearly' },

@@ -461,7 +461,6 @@
   ],
   "warranty": {
     "_note": "Paid plans. Prices here MUST match the wty-* entries in src/api.js PRODUCTS. Total Care is quote-only (no checkout SKU). Page copy lives in build/content/warranty.json; Plan Terms in build/content/warranty-terms.json.",
-    "batteryGuarantee": true,
     "tiers": [
       {
         "id": "standard",
@@ -475,13 +474,13 @@
         "name": "3-Year Warranty",
         "months": 36,
         "recommended": true,
-        "summary": "36 months against defects, one battery replacement if capacity falls below the stated threshold before the end of month 24, and we pay UK carriage both ways on accepted claims.",
+        "summary": "36 months against defects, battery included, and we pay UK carriage both ways on accepted claims.",
         "prices": {
           "tuga-a10": 65,
           "tuga-w10": 79,
           "tuga-a6": 65
         },
-        "chooser": "36 months against defects, one battery replacement if it drops below the stated threshold before month 24, carriage paid both ways."
+        "chooser": "36 months against defects, battery included, carriage paid both ways."
       },
       {
         "id": "care",
@@ -503,7 +502,7 @@
     {
       "id": "wty-3yr-tuga-a10",
       "name": "3-Year Warranty for Tuga A10",
-      "description": "36 months against defects, one battery replacement before the end of month 24 if below the stated capacity threshold, carriage paid both ways. One per device.",
+      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a10",
@@ -512,7 +511,7 @@
     {
       "id": "wty-3yr-tuga-w10",
       "name": "3-Year Warranty for Tuga W10",
-      "description": "36 months against defects, one battery replacement before the end of month 24 if below the stated capacity threshold, carriage paid both ways. One per device.",
+      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
       "price": 79,
       "currency": "GBP",
       "warrantyFor": "tuga-w10",
@@ -521,7 +520,7 @@
     {
       "id": "wty-3yr-tuga-a6",
       "name": "3-Year Warranty for Tuga A6",
-      "description": "36 months against defects, one battery replacement before the end of month 24 if below the stated capacity threshold, carriage paid both ways. One per device.",
+      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a6",

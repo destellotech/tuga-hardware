@@ -23,6 +23,7 @@ const LEGACY_PATHS = {
   '/products/tuga-t10': '/products/tuga-a10',
   '/products': '/products/',
   '/blog': '/blog/',
+  '/works-with': '/works-with/',
 };
 
 function redirect(url, status = 301) {

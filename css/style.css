@@ -610,21 +610,39 @@ p { text-wrap: pretty; }
   .nav-toggle { display: grid; }
 
   .primary-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    /* The sticky header is the containing block, so the drawer hangs off its
+       bottom edge and moves with it. No measured offset needed. */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
-    transform: translateY(-115%);
-    transition: transform var(--base);
+    /* Closed: faded out and hidden from the tab order. The old fixed drawer
+       was translated up by 115% of its own height, which left its bottom
+       showing whenever the header was taller than 15% of the drawer. */
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--base), transform var(--base), visibility 0s linear var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity var(--base), transform var(--base), visibility 0s;
+  }
+
+  /* Keep the announcement bar to one line on phones. */
+  .announce-more { display: none; }
 
   .primary-nav a {
     padding-block: 0.95rem;
@@ -2685,65 +2703,48 @@ p { text-wrap: pretty; }
 .field-optional { font-weight: 400; opacity: 0.7; }
 
 /* --------------------------------------------------------------------------
-   Warranty: chooser on the product page and tier cards on /warranty
+   Works with pages
    -------------------------------------------------------------------------- */
-.protect {
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  padding: var(--space-s) var(--space-m) var(--space-m);
-  margin: 0 0 var(--space-m);
-}
-.protect legend { padding: 0 0.4rem; }
-.protect-opt {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.75rem;
-  align-items: start;
-  padding: 0.7rem 0;
-  border-top: 1px solid var(--rule);
-  cursor: pointer;
-}
-.protect-opt:first-of-type { border-top: 0; }
-.protect-opt input { margin-top: 0.3rem; accent-color: var(--green-900); }
-.protect-text { font-size: var(--step--1); line-height: 1.5; color: var(--ink-mid); }
-.protect-text strong { display: block; color: var(--ink); font-size: var(--step-0); }
-.protect-price {
-  font-family: var(--font-mono);
-  font-size: var(--step-0);
-  color: var(--green-900);
-  text-align: right;
-  white-space: nowrap;
-}
-.protect-price small { display: block; font-size: var(--step--2); color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.06em; }
-.protect-link { display: inline-block; margin-top: 0.75rem; font-size: var(--step--1); color: var(--copper-dark); }
-.cart-item-glyph { font-size: 1.5rem; color: var(--green-900); display: grid; place-items: center; width: 100%; height: 100%; }
-
-.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-m); align-items: stretch; }
-.tier {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-l) var(--space-m);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-}
-.tier-standard { background: transparent; }
-.tier-featured { background: var(--green-900); color: var(--ink-inverse); border-color: var(--green-900); box-shadow: var(--lift-lg); }
-.tier-featured h2, .tier-featured .tier-price { color: var(--ink-inverse); }
-.tier-featured .tier-kicker, .tier-featured .tier-price small { color: var(--copper-light); }
-.tier-featured .tier-summary, .tier-featured .tier-points { color: var(--ink-inverse-mid); }
-.tier-featured .tier-points li { border-color: var(--rule-inverse); }
-.tier-kicker { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper-dark); }
-.tier h2 { font-size: var(--step-3); letter-spacing: -0.024em; margin: 0.5rem 0 0.25rem; }
-.tier-price { font-family: var(--font-mono); font-size: var(--step-1); color: var(--green-900); margin-bottom: 0.75rem; }
-.tier-price small { font-size: var(--step--2); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-light); margin-left: 0.35rem; }
-.tier-summary { color: var(--ink-mid); line-height: 1.6; margin-bottom: var(--space-s); }
-.tier-points { list-style: none; margin: auto 0 0; padding: 0; }
-.tier-points li { padding: 0.6rem 0; border-top: 1px solid var(--rule); font-size: var(--step--1); line-height: 1.5; color: var(--ink-mid); }
-.tier-points li::before { content: '\2713'; font-family: var(--font-mono); color: var(--copper); margin-right: 0.6rem; }
-
-/* Shared blocks (also used by the works-with pages) */
 .section-tint { background: var(--cream-deep); }
+
+.req-list {
+  list-style: none;
+  margin: var(--space-l) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+.req {
+  padding: var(--space-m) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.req h3 { font-size: var(--step-1); margin-bottom: 0.4rem; }
+.req p { color: var(--ink-mid); line-height: 1.65; max-width: var(--measure); }
+.req-source {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--copper-dark);
+  text-decoration: none;
+}
+.req-source:hover { text-decoration: underline; }
+
+.pick-list { display: grid; gap: var(--space-xl); margin-top: var(--space-l); }
+.pick {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.pick-card .product-card { height: auto; }
+.pick-body h3 { font-size: var(--step-3); letter-spacing: -0.02em; margin: 0.75rem 0 0.75rem; }
+.pick-price { font-family: var(--font-mono); font-weight: 400; font-size: var(--step-1); color: var(--copper-dark); margin-left: 0.5rem; }
+.pick-body > p { color: var(--ink-mid); line-height: 1.7; max-width: var(--measure); margin-bottom: 1rem; }
+.pick-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+@media (max-width: 760px) { .pick { grid-template-columns: 1fr; } }
+
 .callout {
   margin-top: var(--space-l);
   padding: var(--space-m);
@@ -2753,43 +2754,34 @@ p { text-wrap: pretty; }
   line-height: 1.65;
   max-width: var(--measure);
 }
+
+.setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); }
+@media (max-width: 700px) { .setup-grid { grid-template-columns: 1fr; } }
 .step-list { margin: var(--space-m) 0 0; padding-left: 1.4rem; color: var(--ink-mid); line-height: 1.65; }
 .step-list li { margin-bottom: 0.75rem; }
 .step-list li::marker { font-family: var(--font-mono); color: var(--copper-dark); }
+
 .disclaimer { font-size: var(--step--1); color: var(--ink-light); line-height: 1.6; max-width: var(--measure); }
-.disclaimer a { color: inherit; }
+.sources { margin-top: var(--space-m); font-size: var(--step--1); color: var(--ink-light); }
+.sources summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.06em; text-transform: uppercase; }
+.sources ul { margin: 0.75rem 0 0; padding-left: 1.2rem; }
+.sources li { margin-bottom: 0.35rem; overflow-wrap: anywhere; }
+.sources a { color: inherit; }
 
-/* Inline pick tag: "Our pick", "Recommended". One place to restyle if the
-   label ever becomes data-driven ("Most ordered") once there are order counts. */
-.pick-tag {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 0.4rem;
-  padding: 0.15rem 0.55rem;
-  border: 1px solid var(--copper);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--copper-dark);
-  white-space: nowrap;
+.works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-m); }
+.works-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: var(--space-m);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--fast), box-shadow var(--fast);
 }
-.protect-text strong .pick-tag { font-weight: 400; }
-
-/* Quote-only tier row in the chooser, tier card CTA, Plan Terms clauses */
-.protect-quote { cursor: default; }
-.protect-marker {
-  width: 13px; height: 13px; margin-top: 0.35rem;
-  border: 1px solid var(--rule-strong); border-radius: 50%; opacity: 0.5;
-}
-.protect-text a { color: var(--copper-dark); text-decoration: underline; text-underline-offset: 2px; }
-.tier-cta { margin-top: var(--space-m); }
-.tier-cta .btn { width: 100%; justify-content: center; }
-.cell-note { display: block; font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem; }
-.compare-table-wrap td, .compare-table-wrap th { white-space: normal; min-width: 180px; vertical-align: top; line-height: 1.5; }
-.compare-table-wrap th[scope="row"] { font-weight: 600; color: var(--ink); }
-.step-list-long li { margin-bottom: 1rem; }
-.consumer-info { color: var(--ink-mid); line-height: 1.7; max-width: var(--measure); }
-.clauses p { margin-bottom: 1.1rem; }
-.clauses p strong { color: var(--green-900); font-family: var(--font-mono); font-weight: 500; margin-right: 0.35rem; }
+.works-card:hover { transform: translateY(-2px); box-shadow: var(--lift); }
+.works-card h2 { font-size: var(--step-2); letter-spacing: -0.02em; }
+.works-card > p { color: var(--ink-mid); line-height: 1.6; flex: 1; }
+.works-pick { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em; text-transform: uppercase; color: var(--copper-dark); }
