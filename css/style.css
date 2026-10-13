@@ -628,6 +628,7 @@ p { text-wrap: pretty; }
     opacity: 0;
     transform: translateY(-0.5rem);
     visibility: hidden;
+    pointer-events: none;
     transition: opacity var(--base), transform var(--base), visibility 0s linear var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
   }
@@ -636,6 +637,7 @@ p { text-wrap: pretty; }
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
+    pointer-events: auto;
     transition: opacity var(--base), transform var(--base), visibility 0s;
   }
 
