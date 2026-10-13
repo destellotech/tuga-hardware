@@ -3,7 +3,7 @@
    Branded transactional emails via fetch.
    ============================================ */
 
-import { DELIVERY, TRADER_STATEMENT } from './store-config.js';
+import { DELIVERY, TRADER, TRADER_ADDRESS_LINE, TRADER_STATEMENT } from './store-config.js';
 
 const FROM_EMAIL = 'Tuga Hardware <orders@tugahardware.com>';
 const SUPPORT_EMAIL = 'support@tugahardware.com';
@@ -150,6 +150,34 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">What happens next?</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
         Your order is being processed. ${DELIVERY.summary}
+      </p>
+    </div>
+
+    <div style="margin-top:32px;padding:20px;border:1px solid ${BRAND.cream};border-radius:6px;">
+      <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Your right to cancel</h3>
+      <p style="margin:0 0 12px;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
+        If you bought as a consumer, you may cancel this purchase within 14 days
+        after the day you receive the device, without giving a reason, even if
+        you have opened the box or switched it on. Tell us by email to
+        <a href="mailto:support@tugahardware.com" style="color:${BRAND.copper};">support@tugahardware.com</a>
+        or by post; you can use the form below but you do not have to. We refund
+        you within 14 days of getting the goods back, or of your proof that you
+        have sent them. Unless the item is faulty or we sent the wrong item, you
+        pay the cost of returning it, and we may deduct for handling beyond what
+        is needed to check the device works. Business buyers may return an unused
+        device in its original condition within 30 days of delivery. A faulty
+        device can be rejected for a full refund within 30 days of delivery.
+        Your statutory rights are not affected.
+      </p>
+      <p style="margin:0;font-size:13px;color:${BRAND.mutedText};line-height:1.6;">
+        <strong>Model cancellation form</strong> (complete and return this form only if you wish to cancel the contract)<br>
+        To ${TRADER.legalName} trading as ${TRADER.tradingName}, ${TRADER_ADDRESS_LINE}, support@tugahardware.com:<br>
+        I/We hereby give notice that I/We cancel my/our contract of sale of the following goods: ...<br>
+        Ordered on / received on: ...<br>
+        Name of consumer(s): ...<br>
+        Address of consumer(s): ...<br>
+        Signature of consumer(s) (only if this form is notified on paper): ...<br>
+        Date: ...
       </p>
     </div>
 
