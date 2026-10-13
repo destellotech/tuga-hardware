@@ -1831,6 +1831,122 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-m);
 }
 
+/* Warranty chooser: one selectable row per plan, price on the right */
+.protect {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-m);
+  min-width: 0;
+}
+
+.protect legend {
+  padding: 0;
+  margin-bottom: 0.6rem;
+}
+
+.protect-opt {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.25rem 0.75rem;
+  align-items: start;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--fast), background var(--fast);
+}
+
+.protect-opt + .protect-opt { margin-top: 0.5rem; }
+
+.protect-opt:hover { border-color: var(--green-700); }
+
+.protect-opt:has(input:checked) {
+  border-color: var(--green-900);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--green-900);
+}
+
+.protect-opt input,
+.protect-marker {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.15rem 0 0;
+  accent-color: var(--green-900);
+}
+
+.protect-text {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
+.protect-text strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.protect-text a {
+  color: var(--copper-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.protect-price {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--green-900);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}
+
+.protect-price small {
+  display: block;
+  font-size: var(--step--2);
+  color: var(--ink-light);
+}
+
+/* Total Care is quote-only: no radio, quieter frame */
+.protect-quote {
+  cursor: default;
+  border-style: dashed;
+  background: transparent;
+}
+
+.protect-quote:hover { border-color: var(--rule-strong); }
+
+.protect-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: var(--step--1);
+  color: var(--copper-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Editorial label: "Recommended", "Our pick for Android" */
+.pick-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+  border-radius: 999px;
+  background: var(--green-900);
+  color: var(--cream);
+  vertical-align: middle;
+}
+
 .buy-row {
   display: flex;
   gap: 0.6rem;
