@@ -1172,14 +1172,17 @@ const clauseNumber = (c) => (c.match(/^(\d+)\./) || [])[1];
     const featured = t.id === 'care';
     const kicker = t.included ? 'Included' : t.minUnits ? `Business fleets of ${t.minUnits}+` : t.recommended ? 'Recommended' : 'Add-on';
     return `
-          <article class="tier${featured ? ' tier-featured' : ''}${t.included ? ' tier-standard' : ''} reveal">
+          <article class="tier${featured ? ' tier-featured' : ''}${t.included ? ' tier-standard' : ''}${t.recommended ? ' tier-recommended' : ''} reveal">
             <p class="tier-kicker">${esc(kicker)}</p>
             <h2>${esc(t.name)}</h2>
             <p class="tier-price">${t.included ? 'With every device' : `From ${money(fromPrice(t))} <small>per device</small>`}</p>
             <p class="tier-summary">${esc(warrantyCopy.taglines?.[t.id] || t.summary)}</p>
-            <ul class="tier-points">
-              ${points.map((x) => `<li>${esc(x)}</li>`).join('\n              ')}
-            </ul>
+            <details class="tier-more">
+              <summary>What's covered <span>${points.length} points</span></summary>
+              <ul class="tier-points">
+                ${points.map((x) => `<li>${esc(x)}</li>`).join('\n                ')}
+              </ul>
+            </details>
             ${
               t.quoteOnly
                 ? `<p class="tier-cta"><a class="btn btn-inverse" href="${quoteUrl(t.name)}">Ask for a fleet quote</a></p>`
@@ -1298,7 +1301,13 @@ ${sectionHead({ tag: 'Side by side', title: 'What each plan does', lede: 'Every 
         ${eyebrow('Claims')}
         <h2 class="title-md">How a claim works</h2>
         <ol class="step-list step-list-long">
-          ${warrantyCopy.claim_steps.map((s) => `<li>${esc(clauseText(s))}</li>`).join('\n          ')}
+          ${warrantyCopy.claim_steps
+            .map((s) => {
+              // Each step opens with a short title sentence: lift it out as a heading.
+              const [, head, rest] = clauseText(s).match(/^([^.]{1,60}\.)\s*([\s\S]*)$/) || [, '', clauseText(s)];
+              return `<li>${head ? `<strong>${esc(head.slice(0, -1))}</strong>` : ''}<span>${esc(rest)}</span></li>`;
+            })
+            .join('\n          ')}
         </ol>
       </div>
     </section>
