@@ -1481,7 +1481,10 @@ const BLOG_IMAGES = {
 /** Read a blog fragment from build/content/blog/. */
 function readPost(file) {
   const slug = file.replace(/\.html$/, '');
-  const raw = readFileSync(join(ROOT, 'build', 'content', 'blog', file), 'utf8');
+  // Normalise CRLF: Windows checkouts (core.autocrlf) otherwise break the
+  // meta block regexes and every field silently comes back empty.
+  const raw = readFileSync(join(ROOT, 'build', 'content', 'blog', file), 'utf8')
+    .replace(/\r\n/g, '\n');
 
   const meta = (raw.match(/<!--meta\n([\s\S]*?)\n-->/) || [])[1] ?? '';
   const field = (name) =>
