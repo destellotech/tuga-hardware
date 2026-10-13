@@ -1,0 +1,139 @@
+{
+  "slug": "limble-cmms",
+  "software": "Limble CMMS",
+  "vendor": "Limble Solutions, Inc.",
+  "vendor_url": "https://limble.com/",
+  "title": "Rugged tablet for Limble CMMS",
+  "meta_description": "Rugged Android and Windows tablets for Limble CMMS. Limble's Android app needs Android 7.0 or later; the Tuga A10 runs Android 14. Free UK delivery.",
+  "target_query": "Limble CMMS rugged tablet",
+  "h1": "Rugged tablet for Limble CMMS",
+  "intro": [
+    "Limble is a cloud-based CMMS used by maintenance, facilities and engineering teams in manufacturing, food and beverage, energy, healthcare, hospitality, property and fleet. Managers plan preventive maintenance and run reports in a desktop browser. Technicians carry the Limble mobile app on a phone or tablet to open work orders, follow task instructions, scan asset QR codes, log time, consume parts and add completion notes, often on a plant floor, a roof or a remote site.",
+    "A consumer tablet does not last long in that environment. It is not sealed against dust and wash-down water, its glass cracks when it drops from a ladder, the screen washes out under skylights, and the battery runs flat before the end of a shift. When a plant has poor Wi-Fi, a device without 4G leaves the technician waiting to sync.",
+    "This page lists what Limble publishes about the devices it runs on, matches those requirements to the three Tuga rugged devices we sell in the UK, and explains the limits honestly, including the parts of Limble that only work on certain plans."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 7.0 or later for the Limble mobile app",
+      "detail": "The Google Play listing for the new Limble app (package com.limblecmms.mobileApp, developer Limble Solutions, version 2.0.4, updated 28 September 2026) states that it requires Android 7.0 and up. The older Limble CMMS (Legacy) app (version 3.2.3, updated 28 July 2025) requires Android 6.0 and up, and its listing says it will remain available during the transition to the new app.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.limblecmms.mobileApp&hl=en_GB"
+    },
+    {
+      "requirement": "Vendor device recommendations: 4GB RAM, 2GHz quad-core processor, a camera, a recent Android version",
+      "detail": "Limble's Mobile Device Best Practices article describes these as recommendations for best results and not requirements: at least 2GB RAM with 4GB recommended, a processor with at least 2GHz top speed and at least 4 physical cores, any camera as long as the device has one, the latest two versions of Android or iOS, and a device under four years old. No make or model is named and no screen size guidance is published.",
+      "source_url": "https://help.limblecmms.com/en/articles/4550787-mobile-device-best-practices"
+    },
+    {
+      "requirement": "Camera for QR code scanning",
+      "detail": "Limble's barcode article says that from the mobile app you click Scan QR Code, and when the camera appears you scan the barcode and the matching part or asset card opens. Imported non-Limble barcodes are read the same way, although Limble's new app article lists non-Limble barcodes as not yet available in the new app. No dedicated or Bluetooth scanner is mentioned in Limble's documentation.",
+      "source_url": "https://help.limblecmms.com/en/articles/9653334-adding-barcodes-to-limble"
+    },
+    {
+      "requirement": "Offline mode: Premium+ and Enterprise plans, mobile app only, limited scope",
+      "detail": "Mobile App Offline Mode is listed under Premium+ and Enterprise on Limble's pricing page, not Standard. In the new app, offline work covers bookmarked tasks that are fully downloaded (completing instructions, logging time, consuming already-associated parts, adding completion notes) plus QR code scanning. You cannot create tasks, add parts to tasks, request purchases or edit asset or part data offline, and Limble warns not to close the app while working offline or in-progress work may be lost.",
+      "source_url": "https://help.limblecmms.com/en/articles/11698403-using-the-new-limble-mobile-app"
+    },
+    {
+      "requirement": "Windows: a supported desktop browser, no native Windows app",
+      "detail": "Limble's help centre lists supported browsers as Chrome (latest major version), Microsoft Edge (latest two major versions), Firefox (latest major version or ESR) and Safari (latest two major versions). Internet Explorer and the legacy version of Edge are not supported. Limble recommends at least 30 Mbps download and 2 Mbps upload. We found no Windows app or Microsoft Store listing; Windows users run the web app in a browser.",
+      "source_url": "https://help.limblecmms.com/en/articles/5246501-internet-browsers-supported-by-limble"
+    },
+    {
+      "requirement": "Connectivity for syncing work orders",
+      "detail": "Limble is cloud-based and the mobile app works online or offline, but offline access depends on plan and on tasks being downloaded first. The legacy app's offline article states you must first be logged into Limble and sync your task data before entering offline mode, so a device with its own mobile data connection reduces the chance of a technician reaching a site without their tasks.",
+      "source_url": "https://help.limblecmms.com/en/articles/8857152-offline-mode"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Limble's technician app is an Android and iOS app, so an Android tablet is the natural device for the people doing the work. The Tuga A10 runs Android 14, which meets the published Play Store minimum of Android 7.0 and up for the new Limble app and Android 6.0 and up for the legacy app. Its octa-core 2.2GHz processor and 8GB RAM exceed Limble's recommended 2GHz, four cores and 4GB RAM. Scanning in Limble is camera-based, so the 13MP rear camera with flash does the job without a dedicated scan engine. IP68 and MIL-STD-810H ratings, a 10.1 inch 1920 x 1200 display and 4G dual SIM make it suited to plant floors and remote sites where a consumer tablet would struggle. It is £449 with free UK delivery.",
+      "fit": [
+        "Requires Android 7.0 and up: the A10 runs Android 14",
+        "Recommended 2GHz processor with 4 cores and 4GB RAM: MediaTek MT8781 octa-core 2.2GHz with 8GB RAM and 128GB storage",
+        "Camera-based QR code scanning: 13MP rear camera with flash (app-dependent, no dedicated scan engine)",
+        "Syncing tasks before going offline on a Premium+ or Enterprise plan: 4G dual SIM plus dual-band Wi-Fi 5",
+        "Plant floor and outdoor use: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery"
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For technicians who want a handheld that fits in a pocket or a belt holster, the Tuga A6 is a 6.78 inch Android 14 device at £299. It meets the same Android 7.0 minimum and Limble's processor and RAM recommendations, with 12GB RAM and 256GB storage. The 560 nit screen is brighter than the A10's 350 nits for outdoor reading, the 50MP main camera handles QR codes, and 5G gives faster syncing where coverage exists. The trade-off is screen size: Limble publishes no tablet layout guidance, so check whether your technicians prefer reading task instructions and task lists on a 6.78 inch screen or a 10.1 inch one.",
+      "fit": [
+        "Requires Android 7.0 and up: the A6 runs Android 14",
+        "Recommended 4GB RAM and 2GHz quad-core: MediaTek Dimensity 6300 with 12GB RAM",
+        "Camera-based QR code scanning: 50MP main camera and 64MP night-vision camera",
+        "Fast syncing before offline work: 5G plus Wi-Fi 5",
+        "Harsh environments: IP68 and IP69K, MIL-STD-810H, Gorilla Glass 5, glove mode, 10600mAh battery with 33W fast charge"
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Limble has no native Windows app, but managers and supervisors who configure PMs, build dashboards and run reports do that in a desktop browser. The Tuga W10 runs Windows 11 Pro, so it can run Edge or Chrome, both on Limble's supported browser list, and therefore the full Limble web app on the shop floor. It suits a site that standardises on Windows, needs Ethernet for a fixed workstation, or wants to put Limble dashboards on a screen over HDMI. It is not the right device for Limble's mobile offline mode, which is an Android and iOS app feature, and its IP65 rating covers water jets but not immersion.",
+      "fit": [
+        "Supported browser (Edge latest two major versions or Chrome latest major version): Windows 11 Pro on the W10 runs both",
+        "Recommended 30 Mbps connection for the web app: dual-band Wi-Fi 5 and 100Mbps RJ45 Ethernet, with optional 4G LTE",
+        "Dashboards on a wall screen: HDMI output",
+        "Fixed or shared workstation: pogo pin dock connector, removable 5000mAh battery, charging dock available",
+        "Dusty workshop use: IP65 (dust tight, protected against water jets, not rated for immersion)"
+      ]
+    }
+  ],
+  "not_recommended_note": "Limble's offline mode is only included in the Premium+ and Enterprise plans, and even then it covers bookmarked, fully downloaded tasks in the mobile app rather than everything. No tablet changes that. There is no native Windows app, so the Tuga W10 runs Limble in a browser and does not get the mobile offline mode. Limble does not document NFC or RFID support, so although the A10, A6 and W10 have NFC hardware, we make no claim that Limble uses it. The new Limble app launched with English-language support and Limble's help article now lists multi-language support; the same article lists non-Limble barcodes, purchasing, vendors and some custom dashboards as not yet available in the new app, with the legacy app remaining available during the transition. Limble's own device article says many customers have had success with recent Apple phones and tablets; it does not recommend any Android make or model, and we do not claim the Tuga devices are tested or approved by Limble.",
+  "setup_steps": [
+    "Use your existing Limble account, or have your Limble administrator create user logins for each technician.",
+    "On a Tuga A10 or A6, open Google Play and install the Limble app (developer Limble Solutions). If your team still uses the older app, it is listed separately as Limble CMMS (Legacy). On a Tuga W10, open Edge or Chrome and go to your Limble web address.",
+    "Sign in with the technician's Limble credentials. Allow camera access if prompted so the Scan QR Code function can read asset labels.",
+    "If your plan is Premium+ or Enterprise and you need offline mode, follow Limble's help article for your app version. In the new app, bookmark the tasks you need so they download before you lose signal. In the legacy app, offline mode is off by default and is enabled per user under Edit Profile, and task data must be synced before going offline.",
+    "Print and attach Limble QR codes to assets, then test a scan on the device before rolling out to the whole team.",
+    "On the A10, fit the hand strap from the box. Add a screen protector, and install a charging dock or vehicle mounting dock where devices are stored or carried between jobs."
+  ],
+  "accessories": [
+    "Charging dock, £49.99 (A10, W10), for a shared charging point in the workshop or stores",
+    "Vehicle mounting dock, £109, for mobile and field technicians",
+    "Tempered glass screen protector 2-pack, £14",
+    "Belt holster, £22 (A6), for technicians carrying the handheld on the floor"
+  ],
+  "faq": [
+    {
+      "q": "Will the Tuga A10 run the Limble mobile app?",
+      "a": "The Google Play listing for the new Limble app states it requires Android 7.0 and up, and the legacy Limble CMMS app requires Android 6.0 and up. The Tuga A10 and Tuga A6 both run Android 14, so they meet the published minimum. Limble's device article recommends at least 2GB RAM (4GB recommended), a 2GHz processor with four cores and a camera; the A10 has 8GB RAM, an octa-core 2.2GHz processor and a 13MP rear camera. Tuga Hardware is independent of Limble and these devices are not tested or approved by Limble."
+    },
+    {
+      "q": "Does Limble work offline on a rugged tablet?",
+      "a": "Partly, and it depends on your Limble plan. Limble's pricing page lists Mobile App Offline Mode under Premium+ and Enterprise, not Standard. In the new app you can open the app, scan QR codes and work on bookmarked tasks that have been fully downloaded, but you cannot create tasks, add parts to tasks or edit asset data offline, and Limble warns not to close the app while working offline or you may lose in-progress work. The 4G in the A10 and the 5G in the A6 help technicians sync before heading somewhere without Wi-Fi."
+    },
+    {
+      "q": "Can we trial one unit before buying for the whole team?",
+      "a": "Yes. A single trial unit before a fleet order is welcome. Delivery is free within the UK in 7 to 10 working days, and there is a 30-day return period and a 12-month warranty. When you order the rest, multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    },
+    {
+      "q": "Do you invoice businesses?",
+      "a": "Yes. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd) is not VAT registered, so the prices shown have no VAT to add. We deliver to UK addresses only."
+    },
+    {
+      "q": "Should technicians have the 10.1 inch A10 or the 6.78 inch A6?",
+      "a": "Limble publishes no screen size or tablet layout guidance, so this is a workflow decision. The A10's 10.1 inch 1920 x 1200 screen gives more room for task instructions, task lists and photos, and it comes with a hand strap in the box. The A6 is a 441g handheld with a brighter 560 nit screen, 5G, a higher resolution camera and IP69K in addition to IP68, and it fits in a belt holster. Trialling one of each is a reasonable way to decide."
+    }
+  ],
+  "disclaimer": "Limble CMMS is a product of Limble Solutions, Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Limble Solutions, Inc.",
+  "sources": [
+    "https://play.google.com/store/apps/details?id=com.limblecmms.mobileApp&hl=en_GB",
+    "https://play.google.com/store/apps/details?id=io.gonative.android.rkknl&hl=en_GB",
+    "https://limble.com/",
+    "https://limble.com/pricing",
+    "https://limble.com/products/mobile-app",
+    "https://limble.com/terms-of-service",
+    "https://help.limblecmms.com/en/articles/4550787-mobile-device-best-practices",
+    "https://help.limblecmms.com/en/articles/5246501-internet-browsers-supported-by-limble",
+    "https://help.limblecmms.com/en/articles/11698403-using-the-new-limble-mobile-app",
+    "https://help.limblecmms.com/en/articles/8857152-offline-mode",
+    "https://help.limblecmms.com/en/articles/9653334-adding-barcodes-to-limble",
+    "https://help.limblecmms.com/en/articles/3152487-the-mobile-app-qr-code-scanner",
+    "https://help.limblecmms.com/en/collections/2171550-qr-codes",
+    "https://limble.com/blog/why-we-rebuilt-our-mobile-app-copy/"
+  ]
+}

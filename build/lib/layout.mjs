@@ -255,6 +255,7 @@ const NAV_LINKS = [
   { href: '/products/', label: 'Tablets', key: 'products' },
   { href: '/accessories', label: 'Accessories', key: 'accessories' },
   { href: '/bulk', label: 'Bulk Orders', key: 'bulk' },
+  { href: '/works-with/', label: 'Works with', key: 'works-with' },
   { href: '/blog/', label: 'Guides', key: 'blog' },
   { href: '/about', label: 'About', key: 'about' },
   { href: '/contact', label: 'Contact', key: 'contact' },
@@ -311,6 +312,7 @@ const footer = () => `
           <h3>Company</h3>
           <nav aria-label="Company">
             <a href="/about">About</a>
+            <a href="/works-with/">Works with your software</a>
             <a href="/blog/">Guides</a>
             <a href="/bulk">Bulk orders</a>
             <a href="/contact">Contact</a>
