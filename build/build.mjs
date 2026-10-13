@@ -17,6 +17,7 @@ import { join } from 'node:path';
 import {
   SITE,
   ROOT,
+  data,
   devices,
   androidRange,
   windowsRange,
@@ -217,24 +218,28 @@ const TRADES = [
   {
     icon: icons.bolt(24),
     name: 'Electricians',
+    page: '/for/electricians',
     copy: 'EICR and certification apps, compliance photos, job sign-off. Sealed against the dust in a consumer unit and the damp in a meter cupboard.',
     pick: 'tuga-a8',
   },
   {
     icon: icons.building(24),
     name: 'Construction',
+    page: '/for/construction',
     copy: 'Site plans, snag lists and daily reports. A big screen you can read a drawing on, in a body that survives a fall off the scaffold boards.',
     pick: 'tuga-a10',
   },
   {
     icon: icons.wrench(24),
     name: 'Field service',
+    page: '/for/field-service',
     copy: 'Job sheets, customer signature, photo evidence, parts lookup. One device that does the whole visit without going back to the van.',
     pick: 'tuga-a8',
   },
   {
     icon: icons.truck(24),
     name: 'Logistics & delivery',
+    page: '/for/logistics',
     copy: 'Proof of delivery, route tracking and barcode scanning from the cab. Vehicle mountable and charging while you drive.',
     pick: 'tuga-a6',
   },
@@ -255,7 +260,7 @@ const TRADES = [
 function tradeCard(t) {
   const device = devices.find((d) => d.id === t.pick);
   return `
-          <a class="trade-card reveal" href="${productUrl(device)}">
+          <a class="trade-card reveal" href="${t.page ?? productUrl(device)}">
             <div class="feature-icon">${t.icon}</div>
             <h3>${esc(t.name)}</h3>
             <p>${esc(t.copy)}</p>
@@ -274,7 +279,7 @@ const hero = () => {
           <p class="hero-sub">Sealed, rugged tablets and handhelds for UK trades. Built for rain, dust, concrete and a twelve-hour shift, not for a desk.</p>
           <div class="hero-ctas">
             <a class="btn btn-inverse btn-lg" href="/products/">Browse the range</a>
-            <a class="btn btn-outline-light btn-lg" href="#pick-a-size">Help me pick a size</a>
+            <a class="btn btn-outline-light btn-lg" href="/which-tuga">Help me choose</a>
           </div>
           <div class="hero-specs">
             <div class="hero-spec">
@@ -328,7 +333,7 @@ ${sizeLadder(androidRange)}
       <div class="container">
 ${sectionHead({
   tag: 'Windows range',
-  title: 'The same three sizes, running full Windows 11 Pro',
+  title: 'The same three sizes, running full Windows 11',
   lede: 'Buy these only if a specific piece of desktop software forces your hand: diagnostic tools, legacy databases, GIS, CAD viewers or a network drive. They cost roughly twice the Android equivalents, and for most trades Android does the job.',
   wide: true,
 })}
@@ -495,7 +500,7 @@ write(
 ${breadcrumbs(productsTrail)}
         ${eyebrow('The range')}
         <h1>Rugged tablets &amp; handhelds</h1>
-        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the W10 are drop tested to MIL-STD-810H or 810G.</p>
+        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the W10 are drop tested to MIL-STD-810H or 810G. Not sure which? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
       </div>
     </section>
 
@@ -609,6 +614,7 @@ ${breadcrumbs(trail)}
       <div class="pdp">
         <div class="pdp-gallery">
           <div class="gallery-main">
+            <button type="button" class="gallery-zoom" data-zoom aria-label="Enlarge image">${icons.zoom(18)}</button>
             <img id="gallery-image" src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" width="800" height="800" fetchpriority="high">
           </div>
           <div class="gallery-thumbs" role="group" aria-label="Product images">
@@ -621,7 +627,25 @@ ${breadcrumbs(trail)}
               )
               .join('')}
           </div>
+          ${
+            /* Optional abuse-test footage: "video": { "src", "poster", "caption" }
+               in products.json. Short, silent loops work best. */
+            p.video
+              ? `
+          <figure class="pdp-video">
+            <video src="${versioned(p.video.src)}"${p.video.poster ? ` poster="${versioned(p.video.poster)}"` : ''} autoplay muted loop playsinline preload="metadata" aria-label="${esc(p.video.caption || `${p.name} video`)}"></video>
+            ${p.video.caption ? `<figcaption>${esc(p.video.caption)}</figcaption>` : ''}
+          </figure>`
+              : ''
+          }
         </div>
+
+        <dialog class="lightbox" data-lightbox aria-label="${esc(p.name)} images">
+          <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">${icons.close(22)}</button>
+          <button type="button" class="lightbox-nav lightbox-prev" data-lightbox-step="-1" aria-label="Previous image">&larr;</button>
+          <img data-lightbox-image src="" alt="${esc(p.name)}">
+          <button type="button" class="lightbox-nav lightbox-next" data-lightbox-step="1" aria-label="Next image">&rarr;</button>
+        </dialog>
 
         <div class="buy-panel" data-buy-box>
           <p class="pdp-kicker">${p.formFactor === 'handheld' ? 'Rugged handheld' : 'Rugged tablet'} / ${esc(p.sizeLabel)}&Prime; / ${esc(p.specs.os)}${p.badge ? ` <span class="pick-tag">${esc(p.badge)}</span>` : ''}</p>
@@ -836,7 +860,7 @@ const BULK_FAQ = [
   },
   {
     q: 'Can you invoice us instead of taking card payment?',
-    a: 'Yes, for any business order, including a single trial unit. Ask for a quote with what you need and your company billing and delivery addresses, and we will send a proforma invoice for bank transfer. We can also complete your supplier setup forms.',
+    a: 'Yes, for any business order, including a single trial unit. Ask for a quote with what you need and your company billing and delivery addresses, and we will send a proforma invoice for bank transfer. We can also complete your supplier setup forms. If you buy regularly, <a href="/trade">apply for a trade account</a> to order on invoice.',
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
@@ -876,6 +900,77 @@ ${breadcrumbs(bulkTrail)}
       </div>
     </section>
 
+    <section class="section section-deep" id="calculator">
+      <div class="container">
+${sectionHead({
+  tag: 'Calculator',
+  title: 'Price up your team',
+  lede: 'Set the quantities and the discount works itself out, exactly as checkout will charge it. Add the lot to the basket, or print a quote for whoever signs it off.',
+})}
+        <div class="calc" data-calc>
+          <div class="calc-quote-head">
+            <strong>${esc(SITE.name)}: quotation</strong>
+            <span>${SITE.origin.replace('https://', '')} / ${SITE.email}</span>
+            <span data-calc-date></span>
+          </div>
+          <div class="compare-wrap">
+            <table class="compare-table calc-table">
+              <caption class="sr-only">Bulk order calculator</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Device</th>
+                  <th scope="col">Unit price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Line total</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.products
+                  .slice()
+                  .sort((a, b) => {
+                    const oa = devices.find((d) => d.id === (a.variantOf ?? a.id))?.order ?? 99;
+                    const ob = devices.find((d) => d.id === (b.variantOf ?? b.id))?.order ?? 99;
+                    return oa - ob || (a.isVariant ? 1 : 0) - (b.isVariant ? 1 : 0);
+                  })
+                  .map(
+                    (p) => `
+                <tr data-calc-row="${p.id}" data-price="${p.price}">
+                  <td><a href="${productUrl(p.isVariant ? devices.find((d) => d.id === p.variantOf) : p)}">${esc(p.name)}</a></td>
+                  <td class="cell-mono" data-calc-unit>${money(p.price)}</td>
+                  <td>
+                    <div class="qty qty-sm">
+                      <button type="button" data-calc-step="-1" aria-label="One fewer ${esc(p.name)}">&minus;</button>
+                      <input type="number" value="0" min="0" max="99" inputmode="numeric" data-calc-qty aria-label="Quantity of ${esc(p.name)}">
+                      <button type="button" data-calc-step="1" aria-label="One more ${esc(p.name)}">+</button>
+                    </div>
+                  </td>
+                  <td class="cell-price" data-calc-line></td>
+                </tr>`
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="calc-summary" aria-live="polite">
+            <div class="calc-figures">
+              <div><span class="stat-label">Devices</span><strong data-calc-units>0</strong></div>
+              <div><span class="stat-label">Discount</span><strong data-calc-tier>0%</strong></div>
+              <div><span class="stat-label">You save</span><strong data-calc-saving>£0</strong></div>
+              <div><span class="stat-label">Total</span><strong data-calc-total>£0</strong></div>
+            </div>
+            <p class="calc-note" data-calc-note>Add two or more devices to unlock a discount. Delivery is free.</p>
+            <p class="calc-vat" data-calc-vat></p>
+            <div class="calc-actions">
+              <button type="button" class="btn btn-primary" data-calc-add disabled>Add to basket</button>
+              <button type="button" class="btn btn-outline" data-calc-print disabled>Print a quote</button>
+              <a class="btn btn-outline" href="/trade">Pay on invoice instead</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-deep">
       <div class="container">
         <div class="editorial">
@@ -890,7 +985,7 @@ ${breadcrumbs(bulkTrail)}
               <li>The tier is calculated on the total number of devices and applied at checkout</li>
               <li>Everything ships free, with the same warranty and returns as a single unit</li>
             </ul>
-            <p style="margin-top:1.5rem">Prefer to pay by bank transfer, or want one unit to trial before the rest? Ask for a quote and we will send a proforma invoice and complete your supplier forms.</p>
+            <p style="margin-top:1.5rem">Prefer to pay by bank transfer, or want one unit to trial before the rest? Ask for a quote and we will send a proforma invoice and complete your supplier forms. Buying regularly? <a href="/trade">Apply for a trade account</a> to order on invoice.</p>
             <div style="margin-top:2rem">
               <a class="btn btn-primary" href="/products/">Start an order</a>
               <a class="btn btn-outline" href="/contact?quote=#enquiry" style="margin-left:0.5rem">Get a business quote</a>
@@ -919,6 +1014,383 @@ ${ctaBanner({
   primary: { href: '/contact', label: 'Talk to us' },
   secondary: null,
 })}
+`,
+  })
+);
+
+/* ==========================================================================
+   WHICH TUGA? — a four-question picker
+   ========================================================================== */
+
+/* Only what the picker needs, inlined so it works without a second fetch.
+   The recommendation logic lives in js/app.js (initPicker). */
+const pickerData = data.products.map((p) => {
+  const base = p.isVariant ? devices.find((d) => d.id === p.variantOf) : p;
+  return {
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    os: base.category,
+    size: base.sizeClass,
+    variantOf: p.variantOf ?? null,
+    url: productUrl(base),
+    image: imgPath(base, 1),
+    tagline: p.isVariant ? p.description : base.tagline,
+    ip: base.specs.ip_rating,
+    battery: base.specs.battery,
+    weight: base.specs.weight,
+  };
+});
+
+const pickerStep = (n, name, question, hint, options) => `
+          <fieldset class="picker-step" data-picker-step="${n}"${n > 1 ? ' hidden' : ''}>
+            <legend>
+              <span class="picker-count">Question ${n} of 4</span>
+              <span class="picker-question">${question}</span>
+            </legend>
+            ${hint ? `<p class="picker-hint">${hint}</p>` : ''}
+            <div class="picker-options">
+              ${options
+                .map(
+                  (o) => `
+              <label class="picker-option">
+                <input type="radio" name="${name}" value="${o.value}">
+                <span class="picker-option-title">${o.title}</span>
+                <span class="picker-option-text">${o.text}</span>
+              </label>`
+                )
+                .join('')}
+            </div>
+            ${n > 1 ? '<button type="button" class="picker-back" data-picker-back>&larr; Back</button>' : ''}
+          </fieldset>`;
+
+const pickerTrail = [{ label: 'Home', href: '/' }, { label: 'Which Tuga?' }];
+
+write(
+  'which-tuga.html',
+  page({
+    title: 'Which Rugged Tablet Should I Buy? | Tuga Hardware',
+    description:
+      'Four questions, one answer. Find the right rugged tablet or handheld for your trade: Android or Windows, 6, 8 or 10 inch, with or without a scanner.',
+    path: '/which-tuga',
+    active: 'products',
+    schema: [breadcrumbSchema(pickerTrail)],
+    body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(pickerTrail)}
+        ${eyebrow('Which Tuga?')}
+        <h1>Four questions, one answer</h1>
+        <p class="lede">No spec sheets. Tell us how you work and we will point you at one device, including when the right answer is the cheapest one.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <form class="picker" data-picker novalidate>
+${pickerStep(1, 'os', 'What does it need to run?', 'If every tool you use has an app, Android does the job for noticeably less.', [
+  { value: 'android', title: 'Apps', text: 'Job sheets, forms, photos, maps, email, cloud tools.' },
+  { value: 'windows', title: 'Windows software', text: 'Desktop programs with no app version: diagnostics, GIS, CAD viewers, network drives.' },
+  { value: 'unsure', title: 'Not sure', text: 'We will assume apps. You can always ask us before buying.' },
+])}
+${pickerStep(2, 'size', 'Where does it live during the day?', null, [
+  { value: '6', title: 'Pocket or belt', text: 'Photos, sign-off, comms. Out of the way until you need it.' },
+  { value: '8', title: 'One hand, van door pocket', text: 'Forms and drawings at a readable size, still small enough for one hand.' },
+  { value: '10', title: 'On the bonnet or a trestle', text: 'Plans, PDFs and spreadsheets at full size, read for long stretches.' },
+])}
+${pickerStep(3, 'scan', 'Do you scan barcodes?', null, [
+  { value: 'lots', title: 'All day', text: 'Stock, parcels, assets. Scanning is the job.' },
+  { value: 'some', title: 'Now and then', text: 'The odd serial number or parts label.' },
+  { value: 'none', title: 'No', text: 'Not part of the work.' },
+])}
+${pickerStep(4, 'qty', 'How many do you need?', 'Team discounts apply automatically at checkout. No codes, no sales call.', [
+  { value: '1', title: 'Just me', text: 'One device.' },
+  { value: '2', title: 'A small crew', text: '2 to 4 devices, 3% to 5% off.' },
+  { value: '5', title: 'A team', text: '5 to 9 devices, 8% off.' },
+  { value: '10', title: 'A fleet', text: '10 or more, 10% off.' },
+])}
+        </form>
+
+        <div class="picker-result" data-picker-result hidden aria-live="polite"></div>
+
+        <noscript><p class="lede">The picker needs JavaScript. The short version: Android 8 inch (the <a href="/products/tuga-a8">Tuga A8</a>) suits most trades. <a href="/contact">Ask us</a> if you are unsure.</p></noscript>
+      </div>
+    </section>
+
+    <script type="application/json" id="picker-data">${JSON.stringify(pickerData).replace(/</g, '\\u003c')}</script>
+
+${ctaBanner({
+  title: 'Rather ask a person?',
+  text: 'Email us what you do and where the device will be used. We answer within one working day.',
+  primary: { href: '/contact', label: 'Ask us' },
+  secondary: { href: '/products/', label: 'See every device' },
+})}
+`,
+  })
+);
+
+/* ==========================================================================
+   TRADE ACCOUNTS
+   ========================================================================== */
+
+const tradeTrail = [{ label: 'Home', href: '/' }, { label: 'Trade accounts' }];
+
+const honeypot = `
+              <div class="field" style="position:absolute;left:-9999px" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+              </div>`;
+
+const TRADE_FAQ = [
+  {
+    q: 'Who can open a trade account?',
+    a: 'Any UK registered business, sole traders included. We check the company details you give us and reply within one working day.',
+  },
+  {
+    q: 'What payment terms do you offer?',
+    a: 'Approved accounts can order on invoice and pay by bank transfer. Terms depend on the business and order size; we agree them when we approve the account. Card checkout stays available for every order.',
+  },
+  {
+    q: 'Do you charge VAT?',
+    a: `No. ${TRADER.legalName} is not VAT registered, so no VAT is charged and there is none to reclaim: the price on the site is the total. Every order comes with an invoice for your records.`,
+  },
+  {
+    q: 'Does a trade account change the discount?',
+    a: 'The automatic team discounts (up to 10% at ten devices) apply to everyone. For larger rollouts, staged deliveries or framework agreements, tell us what you need on the form and we will quote properly.',
+  },
+];
+
+const tradeFaq = faq(TRADE_FAQ, { heading: 'Trade account questions' });
+
+write(
+  'trade.html',
+  page({
+    title: 'Trade Accounts: Pay on Invoice | Tuga Hardware',
+    description:
+      'Open a Tuga Hardware trade account: order rugged tablets on invoice and pay by bank transfer. No VAT to add. For UK businesses and sole traders.',
+    path: '/trade',
+    active: 'bulk',
+    schema: [breadcrumbSchema(tradeTrail), tradeFaq.schema],
+    body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(tradeTrail)}
+        ${eyebrow('Trade accounts')}
+        <h1>Order on invoice, pay by bank transfer</h1>
+        <p class="lede">For businesses that would rather not put a fleet of tablets on someone's personal card. Apply once, then order the way your accounts department likes.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="editorial" style="align-items:start">
+          <div class="editorial-body">
+            <h2 class="title-xs">What you get</h2>
+            <ul class="editorial-list">
+              <li>Order on invoice and pay by bank transfer</li>
+              <li>An invoice for every order, and no VAT to add</li>
+              <li>The same automatic team discounts, up to 10% at ten devices</li>
+                            <li>Help with staged deliveries and mixed fleets</li>
+            </ul>
+            <p style="margin-top:1.5rem">Just want a few units now? You do not need an account. <a class="link-arrow" href="/bulk">Use the bulk calculator</a></p>
+          </div>
+
+          <div>
+            <form class="form" data-api-form="/api/trade-apply" data-success="Thanks. We will check the details and reply within one working day." novalidate>
+${honeypot}
+              <div class="field">
+                <label for="company">Company name</label>
+                <input type="text" id="company" name="company" autocomplete="organization" required>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="name">Your name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel">
+                </div>
+              </div>
+              <div class="field">
+                <label for="email">Work email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="companyNumber">Companies House no.</label>
+                  <input type="text" id="companyNumber" name="companyNumber" inputmode="text" placeholder="Optional">
+                </div>
+                <div class="field">
+                  <label for="vatNumber">VAT number</label>
+                  <input type="text" id="vatNumber" name="vatNumber" placeholder="Optional">
+                </div>
+              </div>
+              <div class="field">
+                <label for="devices">Devices per year, roughly</label>
+                <select id="devices" name="devices">
+                  <option>Fewer than 10</option>
+                  <option>10 to 49</option>
+                  <option>50 to 199</option>
+                  <option>200 or more</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message">Anything we should know?</label>
+                <textarea id="message" name="message" placeholder="What the devices are for, payment terms you need, delivery sites."></textarea>
+              </div>
+              <button class="btn btn-primary btn-lg" type="submit">Apply for an account</button>
+              <p class="form-status hidden" data-form-status role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+${tradeFaq.html}
+`,
+  })
+);
+
+/* ==========================================================================
+   WARRANTY REGISTRATION
+   ========================================================================== */
+
+const warrantyTrail = [{ label: 'Home', href: '/' }, { label: 'Warranty', href: '/warranty' }, { label: 'Register your device' }];
+
+write(
+  'register-warranty.html',
+  page({
+    title: 'Register Your Warranty | Tuga Hardware',
+    description:
+      'Register your Tuga rugged tablet or handheld against its serial number, so a warranty claim takes one email instead of a search for the receipt.',
+    path: '/register-warranty',
+    schema: [breadcrumbSchema(warrantyTrail)],
+    body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(warrantyTrail)}
+        ${eyebrow('Warranty')}
+        <h1>Register your device</h1>
+        <p class="lede">Every device has a 12-month warranty whether you register or not. Registering ties the serial number to you, so if something goes wrong a claim is one email rather than a hunt for the receipt.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="editorial" style="align-items:start">
+          <div class="editorial-body">
+            <h2 class="title-xs">Finding the serial number</h2>
+            <ul class="editorial-list">
+              <li>On the label on the box, next to the barcode</li>
+              <li>Android: Settings, About tablet (or About phone), Status, Serial number</li>
+              <li>Windows: Settings, System, About, or run <code>wmic bios get serialnumber</code></li>
+            </ul>
+            <h2 class="title-xs" style="margin-top:2.5rem">Registering a fleet?</h2>
+            <p style="margin-top:0.75rem">Email <a href="mailto:${SITE.email}">${SITE.email}</a> a spreadsheet of serial numbers with your order reference and we will register them all at once.</p>
+          </div>
+
+          <div>
+            <form class="form" data-api-form="/api/warranty-register" data-success="Registered. Keep this email address handy: it is how we will find the device if you ever need to claim." novalidate>
+${honeypot}
+              <div class="field-row">
+                <div class="field">
+                  <label for="name">Your name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="email">Email address</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+              </div>
+              <div class="field">
+                <label for="model">Model</label>
+                <select id="model" name="model" required>
+                  <option value="">Choose your device</option>
+                  ${data.products.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join('\n                  ')}
+                </select>
+              </div>
+              <div class="field">
+                <label for="serial">Serial number</label>
+                <input type="text" id="serial" name="serial" required autocapitalize="characters" spellcheck="false" minlength="4" maxlength="40">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="orderRef">Order reference</label>
+                  <input type="text" id="orderRef" name="orderRef" placeholder="Optional">
+                </div>
+                <div class="field">
+                  <label for="purchaseDate">Purchase date</label>
+                  <input type="date" id="purchaseDate" name="purchaseDate">
+                </div>
+              </div>
+              <button class="btn btn-primary btn-lg" type="submit">Register device</button>
+              <p class="form-status hidden" data-form-status role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+`,
+  })
+);
+
+/* ==========================================================================
+   REVIEW — reached only from the review-request email (src/reviews.js)
+   ========================================================================== */
+
+write(
+  'review.html',
+  page({
+    title: 'Leave a Review | Tuga Hardware',
+    description: 'Tell other tradespeople how your Tuga is holding up.',
+    path: '/review',
+    noindex: true,
+    schema: [],
+    body: `
+    <section class="page-header">
+      <div class="container-narrow">
+        ${eyebrow('Review')}
+        <h1>How is it holding up?</h1>
+        <p class="lede" data-review-lede>Loading your order&hellip;</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-narrow">
+        <form class="form" data-review-form hidden novalidate>
+          <fieldset class="stars" aria-required="true">
+            <legend class="field-legend">Overall rating</legend>
+            ${[5, 4, 3, 2, 1]
+              .map(
+                (n) => `<input type="radio" id="star-${n}" name="rating" value="${n}"><label for="star-${n}" title="${n} star${n > 1 ? 's' : ''}"><span class="sr-only">${n} star${n > 1 ? 's' : ''}</span></label>`
+              )
+              .join('')}
+          </fieldset>
+          <div class="field">
+            <label for="title">Headline</label>
+            <input type="text" id="title" name="title" maxlength="120" placeholder="e.g. Survived a fall off the scaffold">
+          </div>
+          <div class="field">
+            <label for="body">Your review</label>
+            <textarea id="body" name="body" maxlength="4000" placeholder="What you use it for, what it has survived, anything you would change."></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="displayName">Name to show</label>
+              <input type="text" id="displayName" name="displayName" maxlength="60" placeholder="e.g. Dan, Leeds">
+            </div>
+            <div class="field">
+              <label for="trade">Your trade</label>
+              <input type="text" id="trade" name="trade" maxlength="60" placeholder="e.g. Electrician">
+            </div>
+          </div>
+          <p class="form-note">We publish every genuine review, good or bad, marked as a verified purchase. We only remove reviews that are abusive or not about the product.</p>
+          <button class="btn btn-primary btn-lg" type="submit">Submit review</button>
+          <p class="form-status hidden" data-form-status role="status"></p>
+        </form>
+      </div>
+    </section>
 `,
   })
 );
@@ -1658,6 +2130,156 @@ ${ctaBanner()}
 );
 
 /* ==========================================================================
+   TRADE LANDING PAGES — /for/<trade>, prose in build/content/trades/
+   ========================================================================== */
+
+/** Read a trade fragment: a meta comment, then body HTML. */
+function readTrade(file) {
+  const raw = readFileSync(join(ROOT, 'build', 'content', 'trades', file), 'utf8').replace(/\r\n/g, '\n');
+  const meta = (raw.match(/<!--meta\n([\s\S]*?)\n-->/) || [])[1] ?? '';
+  const field = (name) =>
+    (meta.match(new RegExp(`^${name}: (.*)$`, 'm')) || [])[1]?.trim() ?? '';
+
+  const pick = devices.find((d) => d.id === field('pick'));
+  if (!pick) throw new Error(`build/content/trades/${file}: unknown pick "${field('pick')}"`);
+
+  return {
+    slug: file.replace(/\.html$/, ''),
+    title: field('title'),
+    description: field('description'),
+    h1: field('h1'),
+    lede: field('lede'),
+    pick,
+    also: field('also')
+      .split(',')
+      .map((id) => devices.find((d) => d.id === id.trim()))
+      .filter(Boolean),
+    body: raw.replace(/<!--meta\n[\s\S]*?\n-->/, '').trim(),
+  };
+}
+
+const trades = readdirSync(join(ROOT, 'build', 'content', 'trades'))
+  .filter((f) => f.endsWith('.html'))
+  .map(readTrade);
+
+trades.forEach((t) => {
+  const trail = [
+    { label: 'Home', href: '/' },
+    { label: 'Tablets', href: '/products/' },
+    { label: t.h1 },
+  ];
+
+  write(
+    `for/${t.slug}.html`,
+    page({
+      title: t.title,
+      description: t.description,
+      path: `/for/${t.slug}`,
+      active: 'products',
+      ogImage: imgPath(t.pick, 1),
+      schema: [orgSchema, breadcrumbSchema(trail)],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(trail)}
+        ${eyebrow('By trade')}
+        <h1>${esc(t.h1)}</h1>
+        <p class="lede">${esc(t.lede)}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="trade-pick-panel reveal">
+          <div class="trade-pick-media">
+            <img src="${imgPath(t.pick, 1)}"${responsive(imgPath(t.pick, 1), '(max-width: 820px) 80vw, 360px')} alt="${esc(t.pick.name)}" width="400" height="400">
+          </div>
+          <div>
+            ${eyebrow("What we'd buy")}
+            <h2 class="title-sm">${esc(t.pick.name)}</h2>
+            <p class="pdp-tagline">${esc(t.pick.tagline)}</p>
+            <p class="trade-pick-specs mono">${esc(t.pick.sizeLabel)}&Prime; / ${esc(t.pick.specs.ip_rating)} / ${esc(t.pick.specs.battery)} / ${esc(t.pick.specs.weight)}</p>
+            <div class="trade-pick-actions">
+              <span class="pdp-price">${money(t.pick.price)}</span>
+              <button class="btn btn-primary" data-add-to-cart="${t.pick.id}">${icons.cart(18)} Add to basket</button>
+              <a class="btn btn-outline" href="${productUrl(t.pick)}">Full spec</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container-narrow">
+        <article class="prose">
+${t.body}
+        </article>
+      </div>
+    </section>
+
+    ${
+      t.also.length
+        ? `<section class="section section-deep">
+      <div class="container">
+${sectionHead({ tag: 'Also worth a look', title: 'The alternatives' })}
+${productGrid(t.also)}
+      </div>
+    </section>`
+        : ''
+    }
+
+${ctaBanner({
+  title: 'Kitting out the whole crew?',
+  text: 'Discounts apply automatically from two devices, up to 10% at ten. Or open a trade account and pay on invoice.',
+  primary: { href: '/bulk#calculator', label: 'Price up your team' },
+  secondary: { href: '/trade', label: 'Trade accounts' },
+})}
+`,
+    })
+  );
+});
+
+/* ==========================================================================
+   llms.txt — a plain map of the site for AI assistants (llmstxt.org)
+   ========================================================================== */
+
+write(
+  'llms.txt',
+  `# ${SITE.name}
+
+> ${SITE.description} No VAT to add. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
+
+Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work and costs noticeably less; Windows only when desktop software requires it.
+
+## Devices
+
+${devices
+  .map(
+    (p) =>
+      `- [${p.name}](${SITE.origin}${productUrl(p)}): ${money(p.price)}. ${p.sizeLabel} inch ${p.formFactor}, ${p.specs.os}, ${p.specs.ip_rating}${p.specs.mil_std ? `, ${p.specs.mil_std}` : ''}, ${p.specs.battery}, ${p.specs.weight}. ${p.shortFor}`
+  )
+  .join('\n')}
+
+## Choosing
+
+- [Which Tuga? picker](${SITE.origin}/which-tuga): four questions to a recommendation
+${trades.map((t) => `- [${t.h1}](${SITE.origin}/for/${t.slug}): ${t.description}`).join('\n')}
+
+## Buying
+
+- [Bulk orders and calculator](${SITE.origin}/bulk): automatic team discounts
+- [Trade accounts](${SITE.origin}/trade): order on invoice, pay by bank transfer
+- [Accessories](${SITE.origin}/accessories)
+- [Shipping and returns](${SITE.origin}/shipping-returns)
+- [Contact](${SITE.origin}/contact): ${SITE.email}
+
+## Guides
+
+${posts.map((p) => `- [${p.title.replace(/<[^>]+>/g, '')}](${SITE.origin}/blog/${p.slug}): ${p.description}`).join('\n')}
+`
+);
+
+/* ==========================================================================
    GOOGLE SHOPPING FEED
 
    Point Merchant Center at https://www.tugahardware.com/feed.xml as a
@@ -1975,7 +2597,11 @@ const urls = [
     priority: '0.9',
     freq: 'weekly',
   })),
+  { loc: '/which-tuga', priority: '0.8', freq: 'monthly' },
+  ...trades.map((t) => ({ loc: `/for/${t.slug}`, priority: '0.7', freq: 'monthly' })),
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
+  { loc: '/trade', priority: '0.6', freq: 'monthly' },
+  { loc: '/register-warranty', priority: '0.4', freq: 'yearly' },
   { loc: '/bulk', priority: '0.7', freq: 'monthly' },
   { loc: '/warranty', priority: '0.7', freq: 'monthly' },
   { loc: '/warranty-terms', priority: '0.4', freq: 'yearly' },
