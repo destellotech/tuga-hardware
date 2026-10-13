@@ -212,6 +212,11 @@ export const icons = {
       s
     ),
   check: (s) => svg('<path d="M20 6L9 17l-5-5"/>', s),
+  zoom: (s) =>
+    svg(
+      '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>',
+      s
+    ),
   arrowRight: (s) => svg('<path d="M5 12h14M12 5l7 7-7 7"/>', s),
   menu: (s) =>
     svg(
@@ -319,6 +324,8 @@ const footer = () => `
             <a href="/works-with/">Works with your software</a>
             <a href="/blog/">Guides</a>
             <a href="/bulk">Bulk orders</a>
+            <a href="/trade">Trade accounts</a>
+            <a href="/which-tuga">Which Tuga?</a>
             <a href="/contact">Contact</a>
           </nav>
         </div>
@@ -327,6 +334,7 @@ const footer = () => `
           <nav aria-label="Support">
             <a href="/warranty">Warranty</a>
             <a href="/shipping-returns">Shipping &amp; returns</a>
+            <a href="/register-warranty">Register your warranty</a>
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>
             <a href="mailto:${SITE.email}">${SITE.email}</a>
