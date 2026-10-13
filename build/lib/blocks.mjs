@@ -250,15 +250,20 @@ export const capture = () => `
         <div class="capture reveal">
           <div>
             <h2>Not sure which size you need?</h2>
-            <p>We will send you the one-page buyer's guide: how 6, 8 and 10 inch actually compare in the hand, what IP and MIL ratings mean in practice, and the questions worth asking before you spend.</p>
+            <p>Leave your email and one of us will reply personally with the size we would pick for your work, and why. Tell us your trade in the reply and we will be more precise.</p>
           </div>
           <div>
             <form class="capture-form" data-capture-form novalidate>
+              <!-- Honeypot: hidden from humans, checked server-side -->
+              <div style="position:absolute;left:-9999px" aria-hidden="true">
+                <label for="capture-website">Website</label>
+                <input type="text" id="capture-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
               <label class="sr-only" for="capture-email">Email address</label>
               <input type="email" id="capture-email" name="email" placeholder="you@yourcompany.co.uk" autocomplete="email" required>
-              <button class="btn btn-copper" type="submit">Send it</button>
+              <button class="btn btn-copper" type="submit">Ask us</button>
             </form>
-            <p class="capture-note" data-capture-note>One email. No newsletter, no reselling your address.</p>
+            <p class="capture-note" data-capture-note>A reply from a person. No newsletter, no reselling your address.</p>
           </div>
         </div>
       </div>

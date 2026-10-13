@@ -2,10 +2,11 @@
    TUGA HARDWARE — Cloudflare Worker entry point
 
    Order of business per request:
-     1. Canonical host + trailing-slash redirects
-     2. Legacy product URL redirects
-     3. API / webhook routes
-     4. Static assets
+     1. API / webhook routes
+     2. One redirect to the final URL: https, canonical host, pretty path,
+        legacy product URLs
+     3. Static assets, with security headers on HTML
+     4. Anything else: the generated 404 page with a real 404 status
    ============================================ */
 
 import { handleRequest } from './api.js';
@@ -15,7 +16,8 @@ const CANONICAL_HOST = 'www.tugahardware.com';
 /**
  * The Android range was renamed from H6/T8/T10 to a single A-series so the
  * 6" / 8" / 10" ladder reads consistently. Old URLs 301 to the new ones.
- * Keys are extensionless — .html is stripped before this map is consulted.
+ * Keys are extensionless with no trailing slash — canonicalPath() strips
+ * both before this map is consulted.
  */
 const LEGACY_PATHS = {
   '/products/tuga-h6': '/products/tuga-a6',
@@ -26,11 +28,80 @@ const LEGACY_PATHS = {
   '/works-with': '/works-with/',
 };
 
+/**
+ * Paths that are real directory indexes (a folder with an index.html). These
+ * keep their trailing slash; every other path loses it.
+ */
+const DIRECTORY_INDEXES = new Set(['/', '/products/', '/blog/', '/works-with/']);
+
+/** Headers for every HTML page. No CSP: Stripe and PayPal load their own scripts. */
+const SECURITY_HEADERS = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Frame-Options': 'DENY',
+};
+
 function redirect(url, status = 301) {
   return new Response(null, {
     status,
     headers: { Location: url.toString(), 'Cache-Control': 'public, max-age=3600' },
   });
+}
+
+/**
+ * The canonical form of a path: extensionless, /x/index → /x/, no trailing
+ * slash except on a real directory index, then any legacy rename. Doing all
+ * of it before redirecting means an old URL reaches its destination in one
+ * 301 instead of a chain.
+ */
+function canonicalPath(pathname) {
+  let p = pathname;
+
+  // Canonical URLs are extensionless (matching the asset binding's
+  // html_handling). Turn /about.html into /about with a proper 301 rather
+  // than letting the asset layer answer with a 307.
+  if (p.endsWith('.html')) p = p.slice(0, -'.html'.length);
+  if (p.endsWith('/index')) p = p.slice(0, -'index'.length);
+
+  if (p.endsWith('/') && !DIRECTORY_INDEXES.has(p)) {
+    p = p.replace(/\/+$/, '') || '/';
+  }
+
+  return LEGACY_PATHS[p] || p || '/';
+}
+
+/** Copy a response so its headers are mutable, adding the HTML security headers. */
+function withHtmlHeaders(response, status = response.status) {
+  const out = new Response(response.body, {
+    status,
+    statusText: status === response.status ? response.statusText : '',
+    headers: new Headers(response.headers),
+  });
+  const type = out.headers.get('Content-Type') || '';
+  if (type.includes('text/html')) {
+    for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+      out.headers.set(name, value);
+    }
+  }
+  return out;
+}
+
+/** The generated /404.html (build/build.mjs), served with a 404 status. */
+async function notFound(request, env) {
+  if (env.ASSETS) {
+    // Ask for the extensionless path: the asset layer 307s /404.html to /404.
+    const pageUrl = new URL('/404', request.url);
+    const page = await env.ASSETS.fetch(new Request(pageUrl, { method: 'GET' }));
+    if (page.ok) {
+      const response = withHtmlHeaders(page, 404);
+      response.headers.set('Cache-Control', 'no-store');
+      return request.method === 'HEAD'
+        ? new Response(null, { status: 404, headers: response.headers })
+        : response;
+    }
+  }
+  return new Response('Not Found', { status: 404 });
 }
 
 export default {
@@ -50,41 +121,34 @@ export default {
       return new Response('Not Found', { status: 404 });
     }
 
-    // --- 2. One canonical origin ------------------------------------------
-    // Split-host indexing (apex vs www) halves the value of every backlink.
-    // Skip in local development, where the host is localhost.
+    // --- 2. One redirect to the final URL ----------------------------------
+    // Split-host indexing (apex vs www) halves the value of every backlink,
+    // and a page must never be served over plain http. Skip host and scheme
+    // in local development, where the host is localhost. Path and query are
+    // kept.
     const isLocal =
       url.hostname === 'localhost' ||
       url.hostname === '127.0.0.1' ||
       url.hostname.endsWith('.workers.dev');
 
-    if (!isLocal && url.hostname !== CANONICAL_HOST) {
-      url.hostname = CANONICAL_HOST;
-      url.protocol = 'https:';
-      return redirect(url);
+    const target = new URL(url);
+    if (!isLocal) {
+      target.protocol = 'https:';
+      target.hostname = CANONICAL_HOST;
+      target.port = '';
+    }
+    target.pathname = canonicalPath(url.pathname);
+
+    if (target.href !== url.href) {
+      return redirect(target);
     }
 
-    // --- 3. Pretty URLs ----------------------------------------------------
-    // Canonical URLs are extensionless (matching the asset binding's
-    // html_handling). Turn /about.html into /about with a proper 301 rather
-    // than letting the asset layer answer with a 307.
-    if (url.pathname.endsWith('.html')) {
-      let p = url.pathname.slice(0, -'.html'.length);
-      if (p.endsWith('/index')) p = p.slice(0, -'index'.length);
-      url.pathname = p || '/';
-      return redirect(url);
-    }
-
-    // --- 4. Legacy paths ---------------------------------------------------
-    const legacy = LEGACY_PATHS[url.pathname];
-    if (legacy) {
-      url.pathname = legacy;
-      return redirect(url);
-    }
-
-    // --- 5. Static assets --------------------------------------------------
-    if (env.ASSETS) {
+    // --- 3. Static assets --------------------------------------------------
+    // /404 is the not-found page itself; never serve it as a 200.
+    if (env.ASSETS && url.pathname !== '/404') {
       const response = await env.ASSETS.fetch(request);
+
+      if (response.status === 404) return notFound(request, env);
 
       // Long-cache immutable assets; let HTML revalidate so deploys land.
       if (response.ok && /\.(?:css|js|webp|svg|woff2?)$/.test(url.pathname)) {
@@ -93,9 +157,10 @@ export default {
         return new Response(response.body, { status: response.status, headers });
       }
 
-      return response;
+      return withHtmlHeaders(response);
     }
 
-    return new Response('Not Found', { status: 404 });
+    // --- 4. Not found ------------------------------------------------------
+    return notFound(request, env);
   },
 };
