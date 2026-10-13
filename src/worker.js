@@ -10,6 +10,7 @@
    ============================================ */
 
 import { handleRequest } from './api.js';
+import { sendReviewRequests } from './reviews.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
 
@@ -162,5 +163,10 @@ export default {
 
     // --- 4. Not found ------------------------------------------------------
     return notFound(request, env);
+  },
+
+  // Daily cron (see [triggers] in wrangler.toml).
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(sendReviewRequests(env));
   },
 };
