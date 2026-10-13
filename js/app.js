@@ -400,6 +400,9 @@
       };
 
       chooser.addEventListener('change', update);
+      // Back from the quote form can restore the checked radio from the page
+      // cache without firing change, so re-read it whenever the page is shown.
+      window.addEventListener('pageshow', update);
       input?.addEventListener('change', () => {
         const min = Math.max(1, parseInt(input.min, 10) || 1);
         if ((parseInt(input.value, 10) || 0) < min) input.value = min;
