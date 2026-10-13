@@ -1122,8 +1122,8 @@ write(
 write(
   'order-confirmation.html',
   page({
-    title: 'Order Confirmed | Tuga Hardware',
-    description: 'Your Tuga Hardware order is confirmed.',
+    title: 'Your Order | Tuga Hardware',
+    description: 'Your Tuga Hardware order reference and confirmation status.',
     path: '/order-confirmation',
     noindex: true,
     schema: [],
@@ -1131,8 +1131,9 @@ write(
     <section class="section">
       <div class="container-narrow" style="text-align:center">
         <div class="feature-icon" style="margin:0 auto 1.5rem; width:3.5rem; height:3.5rem">${icons.check(28)}</div>
-        <h1 class="title-lg" data-order-title>Order confirmed</h1>
-        <p class="lede" style="margin-inline:auto" data-order-lede>Thank you. A confirmation email is on its way with your order number and delivery details. ${esc(DELIVERY.summary)}</p>
+        <h1 class="title-lg" data-order-title>Checking your order</h1>
+        <p class="lede" style="margin-inline:auto" data-order-lede>Checking your order...</p>
+        <noscript><p class="lede" style="margin-inline:auto">If you have just paid, check your email for your receipt or contact <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> with your name and the time you paid.</p></noscript>
         <div data-order-summary style="margin-top:2rem"></div>
         <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
           <a class="btn btn-primary" href="/products/">Continue browsing</a>
