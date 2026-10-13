@@ -46,6 +46,9 @@ const PRODUCTS = {
   'wty-3yr-tuga-a10': { name: "3-Year Warranty for Tuga A10", price: 6500, warrantyFor: 'tuga-a10', tier: '3yr' },
   'wty-3yr-tuga-w10': { name: "3-Year Warranty for Tuga W10", price: 7900, warrantyFor: 'tuga-w10', tier: '3yr' },
   'wty-3yr-tuga-a6': { name: "3-Year Warranty for Tuga A6", price: 6500, warrantyFor: 'tuga-a6', tier: '3yr' },
+  'wty-3yr-tuga-a8': { name: "3-Year Warranty for Tuga A8", price: 6500, warrantyFor: 'tuga-a8', tier: '3yr' },
+  'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
+  'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
 };
 
 /** Scanner variants carry their base device's warranty. */

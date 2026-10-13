@@ -1867,8 +1867,7 @@ p { text-wrap: pretty; }
   box-shadow: inset 0 0 0 1px var(--green-900);
 }
 
-.protect-opt input,
-.protect-marker {
+.protect-opt input {
   width: 1.1rem;
   height: 1.1rem;
   margin: 0.15rem 0 0;
@@ -1912,15 +1911,6 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   color: var(--ink-light);
 }
-
-/* Total Care is quote-only: no radio, quieter frame */
-.protect-quote {
-  cursor: default;
-  border-style: dashed;
-  background: transparent;
-}
-
-.protect-quote:hover { border-color: var(--rule-strong); }
 
 .protect-link {
   display: inline-block;
@@ -1999,6 +1989,24 @@ p { text-wrap: pretty; }
 .qty input:focus { outline: none; }
 
 .buy-row .btn { flex: 1 1 200px; }
+
+/* A quote-only cover tier turns the buy button into a quote request: the
+   basket icon swaps for a message icon of the same size, and the fleet
+   minimum and price bands sit under the stepper. Empty, the note takes no
+   space but stays in the tree as a live region. */
+.buy-icon { display: inline-flex; }
+.buy-icon-quote,
+.btn[data-quote-mode] .buy-icon { display: none; }
+.btn[data-quote-mode] .buy-icon-quote { display: inline-flex; }
+
+.cover-note {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
+.cover-note:not(:empty) { margin: calc(0.5rem - var(--space-m)) 0 var(--space-m); }
 
 .pdp-assurance {
   display: grid;

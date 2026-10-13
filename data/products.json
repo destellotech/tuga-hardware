@@ -478,7 +478,10 @@
         "prices": {
           "tuga-a10": 65,
           "tuga-w10": 79,
-          "tuga-a6": 65
+          "tuga-a6": 65,
+          "tuga-a8": 65,
+          "tuga-w8": 79,
+          "tuga-wh6": 89
         },
         "chooser": "36 months against defects, including battery defects (not normal capacity loss). UK carriage paid both ways on accepted claims."
       },
@@ -488,13 +491,21 @@
         "months": 36,
         "quoteOnly": true,
         "businessOnly": true,
-        "minUnits": 10,
-        "summary": "For business fleets of ten or more A10 and W10 devices. A swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
-        "prices": {
-          "tuga-a10": 279,
-          "tuga-w10": 299
+        "minUnits": 5,
+        "smallFleet": {
+          "maxUnits": 9,
+          "surcharge": 30
         },
-        "chooser": "Business fleets of ten or more A10 and W10 devices. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
+        "summary": "For business fleets of five or more devices, any Tuga model. A swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
+        "prices": {
+          "tuga-a6": 249,
+          "tuga-a8": 269,
+          "tuga-a10": 279,
+          "tuga-w8": 299,
+          "tuga-w10": 299,
+          "tuga-wh6": 329
+        },
+        "chooser": "Business fleets of five or more devices. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
       }
     ]
   },
@@ -524,6 +535,33 @@
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a6",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-a8",
+      "name": "3-Year Warranty for Tuga A8",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
+      "price": 65,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a8",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-w8",
+      "name": "3-Year Warranty for Tuga W8",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
+      "price": 79,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w8",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-wh6",
+      "name": "3-Year Warranty for Tuga WH6",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
+      "price": 89,
+      "currency": "GBP",
+      "warrantyFor": "tuga-wh6",
       "tier": "3yr"
     }
   ]

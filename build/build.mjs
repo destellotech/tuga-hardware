@@ -81,15 +81,32 @@ const fromPrice = (t) => Math.min(...Object.values(t.prices || { x: 0 }));
 /** True when the 3-Year Warranty is sold for this device (scanner variants share the base id). */
 const has3yr = (p) => warrantyTier('3yr')?.prices?.[p.id.replace(/-scanner$/, '')] !== undefined;
 
-/** The cover options under a product's buy box. Quote-only tiers are shown
-    with their price and a link to the quote form rather than a radio. */
+/** Total Care's two price bands for a device: fleets of minUnits to
+    smallFleet.maxUnits pay the surcharge on top of the 10+ price. */
+const careBands = (t, base) => {
+  const large = t.prices?.[base];
+  if (large === undefined) return null;
+  const small = t.smallFleet ? large + t.smallFleet.surcharge : large;
+  const smallMax = t.smallFleet?.maxUnits ?? t.minUnits;
+  return { small, large, min: t.minUnits || 1, smallMax, largeMin: t.smallFleet ? smallMax + 1 : t.minUnits || 1 };
+};
+/** "5 to 9 devices: £309 per device; 10 or more: £279." */
+const careBandText = (t, base) => {
+  const b = careBands(t, base);
+  if (!b) return '';
+  return t.smallFleet
+    ? `${b.min} to ${b.smallMax} devices: ${money(b.small)} per device; ${b.largeMin} or more: ${money(b.large)}.`
+    : `${money(b.large)} per device.`;
+};
+
+/** The cover options under a product's buy box. Every tier is a radio: a
+    paid checkout plan adds its SKU with the device; a quote-only tier turns
+    the main button into a quote request (js/app.js, initCoverChooser). */
 function warrantyChooser(p) {
   const base = p.id.replace(/-scanner$/, '');
   const paid = paidTiers.filter((t) => t.prices && t.prices[base] !== undefined);
   if (!paid.length) return '';
   const standard = warrantyTier('standard');
-  const radios = paid.filter((t) => !t.quoteOnly);
-  const quoteTiers = paid.filter((t) => t.quoteOnly);
   return `
           <fieldset class="protect" data-warranty-chooser>
             <legend>${eyebrow('Cover')}</legend>
@@ -98,25 +115,24 @@ function warrantyChooser(p) {
               <span class="protect-text"><strong>${esc(standard?.name || 'Standard warranty')}</strong>${esc(standard?.summary || '12 months against defects')}</span>
               <span class="protect-price">Included</span>
             </label>
-            ${radios
-              .map(
-                (t) => `
+            ${paid
+              .map((t) => {
+                if (!t.quoteOnly) {
+                  return `
             <label class="protect-opt">
               <input type="radio" name="warranty" value="wty-${t.id}-${base}" data-warranty-choice>
               <span class="protect-text"><strong>${esc(t.name)}${t.recommended ? ' <span class="pick-tag">Recommended</span>' : ''}</strong>${esc(t.chooser || t.summary)}</span>
               <span class="protect-price">+${money(t.prices[base])}<small>per device</small></span>
-            </label>`
-              )
-              .join('')}
-            ${quoteTiers
-              .map(
-                (t) => `
-            <div class="protect-opt protect-quote">
-              <span class="protect-marker" aria-hidden="true"></span>
-              <span class="protect-text"><strong>${esc(t.name)}</strong>${esc(t.chooser || t.summary)} <a href="${quoteUrl(`${t.name} for ${p.name}`)}">Ask for a fleet quote</a></span>
-              <span class="protect-price">${money(t.prices[base])}<small>per device</small></span>
-            </div>`
-              )
+            </label>`;
+                }
+                const b = careBands(t, base);
+                return `
+            <label class="protect-opt">
+              <input type="radio" name="warranty" value="" data-warranty-choice data-quote-tier="${esc(t.name)}" data-quote-min="${b.min}" data-quote-note="${esc(`${t.name} is for business fleets of ${b.min} or more. ${careBandText(t, base)}`)}">
+              <span class="protect-text"><strong>${esc(t.name)}</strong>${esc(t.chooser || t.summary)} ${esc(careBandText(t, base))} On a quote.</span>
+              <span class="protect-price">from ${money(b.large)}<small>per device</small></span>
+            </label>`;
+              })
               .join('')}
             <a class="protect-link" href="/warranty">Compare the plans and read the terms</a>
           </fieldset>`;
@@ -649,10 +665,11 @@ ${breadcrumbs(trail)}
               <input type="number" id="qty" value="1" min="1" max="99" aria-label="Quantity">
               <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn btn-primary btn-lg" data-add-to-cart="${p.id}" data-qty-source="qty">
-              ${icons.cart(18)} Add to basket
+            <button class="btn btn-primary btn-lg" data-add-to-cart="${p.id}" data-qty-source="qty" data-device-name="${esc(p.name)}" aria-describedby="cover-note">
+              <span class="buy-icon" aria-hidden="true">${icons.cart(18)}</span><span class="buy-icon buy-icon-quote" aria-hidden="true">${icons.chat(18)}</span> <span data-buy-label>Add to basket</span>
             </button>
           </div>
+          <p class="cover-note" id="cover-note" aria-live="polite" data-cover-note></p>
           <p class="pdp-quote">Buying for a business? <a href="${quoteUrl(p.name)}">Get a quote and pay by bank transfer</a>. Trial units welcome.</p>`
           }
 
@@ -840,7 +857,7 @@ const BULK_FAQ = [
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
-    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size. Business fleets of ten or more A10 and W10 devices can ask for a Total Care quote: a swap unit dispatched the same working day for claims accepted by 14:00. See the <a href="/warranty">warranty page</a>.',
+    a: 'Yes. The same 12-month warranty and 30-day returns apply to every unit regardless of order size. Business fleets of five or more devices, on any model, can ask for a Total Care quote: a swap unit dispatched the same working day for claims accepted by 14:00. See the <a href="/warranty">warranty page</a>.',
   },
 ];
 
@@ -1204,7 +1221,7 @@ const clauseNumber = (c) => (c.match(/^(\d+)\./) || [])[1];
           <article class="tier${featured ? ' tier-featured' : ''}${t.included ? ' tier-standard' : ''}${t.recommended ? ' tier-recommended' : ''} reveal">
             <p class="tier-kicker">${esc(kicker)}</p>
             <h2>${esc(t.name)}</h2>
-            <p class="tier-price">${t.included ? 'With every device' : `From ${money(fromPrice(t))} <small>per device</small>`}</p>
+            <p class="tier-price">${t.included ? 'With every device' : `From ${money(fromPrice(t))} <small>per device${t.smallFleet ? `, ${t.smallFleet.maxUnits + 1}+ devices; ${money(t.smallFleet.surcharge)} more at ${t.minUnits} to ${t.smallFleet.maxUnits}` : ''}</small>`}</p>
             <p class="tier-summary">${esc(warrantyCopy.taglines?.[t.id] || t.summary)}</p>
             <details class="tier-more">
               <summary>What's covered <span>${points.length} points</span></summary>
@@ -1279,7 +1296,7 @@ ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 
                 ${paidTiers
                   .map((t) =>
                     t.prices?.[d.id] !== undefined
-                      ? `<td class="cell-price">${money(t.prices[d.id])}${t.quoteOnly ? `<small class="cell-note">fleets of ${t.minUnits}+, on quote</small>` : ''}</td>`
+                      ? `<td class="cell-price">${money(t.prices[d.id])}${t.quoteOnly ? `<small class="cell-note">${t.smallFleet ? `${t.smallFleet.maxUnits + 1}+ devices; ${money(careBands(t, d.id).small)} at ${t.minUnits} to ${t.smallFleet.maxUnits}` : `fleets of ${t.minUnits}+`}, on quote</small>` : ''}</td>`
                       : `<td class="cell-mono">Not offered</td>`
                   )
                   .join('')}
@@ -1289,7 +1306,7 @@ ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 
             </tbody>
           </table>
         </div>
-        ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more A10 and W10 devices. It can also be paid monthly with the devices through our lease funder for limited companies, LLPs and public bodies, subject to the funder's quotation.</p>` : ''}
+        ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more devices on any model, sole traders included${careTier.smallFleet ? `; fleets of ${careTier.minUnits} to ${careTier.smallFleet.maxUnits} devices pay ${money(careTier.smallFleet.surcharge)} more per device than the ${careTier.smallFleet.maxUnits + 1}+ prices shown` : ''}. It can also be paid monthly with the devices through our lease funder for limited companies, LLPs and public bodies, subject to the funder's quotation.</p>` : ''}
       </div>
     </section>
 
@@ -1354,7 +1371,7 @@ ${faqBlock.html}
 
 ${ctaBanner({
   title: 'Add it on the device page, or put it on the quote.',
-  text: 'Choose the 3-Year Warranty under Add to basket on any A10, W10 or A6 page. Business buyers can ask for either plan line by line on a proforma.',
+  text: 'Choose the 3-Year Warranty, or ask for Total Care, under Cover on any device page. Business buyers can ask for either plan line by line on a proforma.',
   primary: { href: '/products/', label: 'Browse the range' },
   secondary: { href: quoteUrl('Total Care'), label: 'Ask for a fleet quote' },
 })}
