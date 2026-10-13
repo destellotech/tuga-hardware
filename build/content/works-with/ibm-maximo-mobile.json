@@ -1,0 +1,143 @@
+{
+  "slug": "ibm-maximo-mobile",
+  "software": "IBM Maximo Mobile",
+  "vendor": "IBM (International Business Machines Corp.)",
+  "vendor_url": "https://www.ibm.com/products/maximo",
+  "title": "Rugged tablet for IBM Maximo Mobile",
+  "meta_description": "IBM Maximo Mobile needs Android 11+ or Windows 10/11 and 3 GB memory. Which Tuga rugged tablet meets that, with offline, NFC and camera scanning.",
+  "target_query": "IBM Maximo Mobile rugged tablet",
+  "h1": "Rugged tablet for IBM Maximo Mobile",
+  "intro": [
+    "IBM Maximo Mobile is the mobile client for IBM Maximo Manage within the Maximo Application Suite. IBM describes it as a role-based mobile solution that lets technicians and supervisors manage work and assets from virtually any location, with apps for Technician, Inspections, Approvals, Assets, Inventory Counting, Receiving, Issues and Transfers and Service Requests. IBM's own UK case studies include Transport for London, with roughly 10,000 field technicians on Maximo, and the power generator VPI, which runs Maximo Application Suite across four sites.",
+    "On the floor or on site a technician uses the app to pick up assigned work orders, record labour, materials and tools, change status, complete inspection forms, scan bar codes and QR codes with the device camera and, on Android, tap NFC tags on assets or locations to pull up their work orders. IBM documents that the app keeps an encrypted local data store and synchronises automatically when connectivity returns. In practice that means work in plant rooms, tunnels and substations without signal, which is a hard job for a consumer tablet: no ingress rating, a glass back that cracks when dropped on a gantry, a battery that does not last a shift and a screen that does not respond to gloves.",
+    "This page lists what IBM publishes about device requirements for Maximo Mobile, maps those requirements to the Tuga A10, Tuga W10 and Tuga A6, and is honest about what is not documented. It is written for maintenance, engineering and facilities managers, and the buyers who provision devices for them, who already run Maximo and need hardware for technicians."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform and minimum operating system",
+      "detail": "IBM's device requirements page states the device must have Android version 11 or higher, iOS version 14.3 or higher, or Windows 10 version 10.0.17763.0 or better, or Windows 11 installed. The Google Play listing gives the required Android version as 11 and the Microsoft Store listing gives Windows 10 version 17763.0 or higher on x86 or x64.",
+      "source_url": "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery?topic=mobile-device-requirements-maximo"
+    },
+    {
+      "requirement": "Minimum memory of 3 GB, storage depends on data downloaded",
+      "detail": "IBM states the minimum memory required is 3 GB, and that long inspection forms or maps with many records may need more memory and processing power. Storage needed depends on how much data the user downloads for offline use; IBM gives no fixed figure.",
+      "source_url": "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery?topic=mobile-device-requirements-maximo"
+    },
+    {
+      "requirement": "Offline working with encrypted local data and automatic sync",
+      "detail": "IBM documents that the app can be used online or offline. A local JSON data store is created on the device and encrypted with a key held in the device keystore. When connectivity is restored, local data is automatically synchronised, and users can also trigger a manual sync. First login requires network connectivity, and some apps, such as Assist and Parts Identifier, require the user to be online.",
+      "source_url": "https://www.ibm.com/docs/en/mas-cd/maximo-manage/continuous-delivery?topic=mobile-maximo-authentication-data-flow"
+    },
+    {
+      "requirement": "Bar code and QR scanning through the device camera",
+      "detail": "IBM's Maximo Mobile overview page says the Receiving app can use the device camera to read bar codes and QR codes to find purchase orders. IBM's bar code format support page lists the supported formats per platform (for example QR Code, Data Matrix, Code 128, Code 39, EAN-8, EAN-13 and UPC-A on Android, with PDF417 on Windows). By default the reader tries all formats, and IBM's configuring default bar code formats page describes restricting them through the mxe.barcode.readers setting in each app's configuration. IBM's documentation does not describe dedicated or Bluetooth scanner support for this app.",
+      "source_url": "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/cd?topic=mobile-bar-code-format-support"
+    },
+    {
+      "requirement": "NFC tag scanning on Android and iOS",
+      "detail": "IBM's What's new in Maximo Mobile 8.11 page says you can use an Android or iOS device to scan asset or location NFC tags to show all the work orders for that asset or location. NFC is not documented for the Windows client. RFID is not documented for Maximo Mobile on the Maximo Application Suite.",
+      "source_url": "https://www.ibm.com/docs/SSLPL8_cd/com.ibm.mam.doc/overview/c_wn_mobile_8.11.html"
+    },
+    {
+      "requirement": "Windows devices need WebView2 Runtime and install from the Microsoft Store or IBM portal",
+      "detail": "IBM states that Windows devices must include the WebView2 Runtime. The Windows client is listed on the Microsoft Store as IBM Maximo Mobile, publisher International Business Machines Corp., for Windows 10 version 17763.0 or higher on x86 and x64, last updated 7 October 2026. IBM's device requirements page also mentions download from the IBM portal for Windows.",
+      "source_url": "https://apps.microsoft.com/detail/9p0z4hnm1421"
+    },
+    {
+      "requirement": "Device security credentials and IBM's accessory guidance for technicians",
+      "detail": "IBM's authentication and data flow page says that each time the app opens, users are prompted for their device's security credentials so the app can access the encrypted local data store, whose key is saved in the device keystore. IBM's device requirements page says that for shared devices, PIN and biometrics must be available for authentication on the device. The same page recommends hard cases, screen protectors, and a stylus, rubber pens or touchscreen-sensitive gloves for technicians. IBM publishes no specific device models or screen sizes.",
+      "source_url": "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery?topic=mobile-device-requirements-maximo"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "IBM publishes Maximo Mobile for Android, iOS and Windows, so there are two Tuga routes: Android on the A10 or A6, and Windows on the W10. For most technician teams the Tuga A10 is the sensible first unit. It runs Android 14, which is above IBM's Android 11 floor, and has 8GB of RAM against IBM's 3 GB minimum, so inspection forms and map views with many records have headroom. The 10.1 inch 1920 x 1200 screen gives room for work order detail and inspection forms, the 13MP rear camera handles IBM's camera-based bar code and QR scanning (which is controlled by the app, not a dedicated scan engine), and NFC is on board for the asset and location tag feature IBM documents for Android. IP68 and MIL-STD-810H ratings, a -20 to 60C operating range and an 8000mAh battery suit plant rooms, yards and substations. At £449 with no VAT to add it costs less than the W10 for a trial unit before a fleet order.",
+      "fit": [
+        "IBM requires Android 11 or higher: the Tuga A10 runs Android 14, so it meets that requirement.",
+        "IBM's minimum memory is 3 GB, with more advised for long inspection forms and maps: the A10 has 8GB RAM and 128GB storage, plus microSD up to 2TB for offline data and attachments.",
+        "IBM documents bar code and QR scanning through the device camera: the A10 has a 13MP rear camera with flash (scanning is app-dependent, there is no dedicated scan engine).",
+        "IBM documents NFC asset and location tag scanning on Android: the A10 has NFC.",
+        "IBM documents offline working with automatic sync when connectivity returns: the A10 has 4G dual SIM and dual-band Wi-Fi 5 for sync, an 8000mAh battery, and IP68 and MIL-STD-810H ratings for the sites where signal drops out."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Choose the Tuga W10 if your organisation has standardised on Windows devices or wants a tablet that doubles as a workshop or storeroom PC. IBM's Windows client requires Windows 10 version 10.0.17763.0 or better, or Windows 11, on x86 or x64 with the WebView2 Runtime; the W10 runs Windows 11 Pro on an Intel N100 (x64) with 8GB RAM, so it meets the published OS, architecture and 3 GB memory floor. It adds 100Mbps RJ45 Ethernet, HDMI, USB-A and USB-C, which the Android tablets do not have, and a removable 5000mAh battery that can be swapped rather than waiting on a charge. Two honest caveats: IBM documents NFC tag scanning for Android and iOS only, not Windows, and the W10's optional 2D barcode scanner and optional UHF RFID reader are not documented by IBM for this app, so plan on camera scanning with the 5MP rear camera unless you verify otherwise with IBM or your Maximo partner. The W10 is IP65, so it is protected against dust and water jets but is not rated for immersion.",
+      "fit": [
+        "IBM requires Windows 10 version 10.0.17763.0 or better, or Windows 11, on x86 or x64: the Tuga W10 runs Windows 11 Pro on an Intel N100, an x64 processor, so it meets that requirement.",
+        "IBM's minimum memory is 3 GB: the W10 has 8GB RAM and 128GB storage with a microSD slot.",
+        "IBM documents camera-based bar code and QR scanning, and lists PDF417 among the Windows formats: the W10 has a 5MP rear camera (scanning is app-dependent; the optional 2D barcode scanner is not documented by IBM for this app).",
+        "Storeroom and workshop use for Receiving, Inventory Counting and Issues and Transfers: the W10 has 100Mbps RJ45 Ethernet, HDMI, USB-A and USB-C and a pogo pin dock connector for the £49.99 charging dock.",
+        "IBM documents offline working and automatic sync: the W10 has dual-band Wi-Fi 5, optional 4G LTE, and a removable 5000mAh battery that can be swapped between shifts (run time depends on load)."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is the pick where technicians need something that fits in a pocket or belt holster, where 5G coverage matters for faster sync, or where the camera is used heavily for scanning and attaching photos to work orders. It runs Android 14 with 12GB RAM and 256GB storage, well above IBM's Android 11 and 3 GB floor, and has NFC for the asset and location tag feature IBM documents on Android. The 6.78 inch 560-nit screen is bright for outdoor reading and has glove mode, which lines up with IBM's recommendation of touchscreen-sensitive gloves for technicians. IP68, IP69K and MIL-STD-810H ratings and a 10600mAh battery suit long shifts in wet or dusty environments. The trade-off is screen size: inspection forms and map views are easier on the A10's 10.1 inch display.",
+      "fit": [
+        "IBM requires Android 11 or higher: the Tuga A6 runs Android 14, so it meets that requirement.",
+        "IBM's minimum memory is 3 GB: the A6 has 12GB RAM and 256GB storage, plus microSD up to 2TB.",
+        "IBM documents NFC asset and location tag scanning on Android: the A6 has NFC.",
+        "IBM documents camera-based bar code and QR scanning: the A6 has a 50MP main camera and a 64MP night-vision camera (scanning is app-dependent, there is no dedicated scan engine).",
+        "IBM recommends touchscreen-sensitive gloves, says users are prompted for device security credentials to open the local data store, and requires PIN and biometrics on shared devices: the A6 has glove mode, fingerprint and face unlock, Gorilla Glass 5, and IP68 plus IP69K ratings."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Confirm with your Maximo administrator or IBM partner that your organisation has IBM Maximo Application Suite with Maximo Manage and that your technicians have user accounts with the right role-based apps assigned. Maximo Mobile is the client for that deployment, not standalone software.",
+    "On a Tuga A10 or A6, install IBM Maximo Mobile from Google Play (package com.ibm.iot.maximo.mobile, published by International Business Machines Corp.). Do not install the separate app called IBM Maximo Mobile for EAM, whose Play listing says it is for a Maximo Asset Management 7.6.1.3 system. On a Tuga W10, install IBM Maximo Mobile from the Microsoft Store, or from the IBM portal if your administrator directs you there, and confirm the WebView2 Runtime is present as IBM requires.",
+    "Set a device PIN, fingerprint or face unlock on the tablet before first use. IBM states that users are prompted for their device's security credentials so the app can access the encrypted local data store, and that shared devices must have PIN and biometrics available for authentication.",
+    "Connect the device to Wi-Fi or mobile data for first login, since IBM states the first login requires network connectivity, then sign in with your Maximo credentials and allow the initial data download to complete.",
+    "Test offline working the way IBM describes it: put the device in flight mode (airplane mode in IBM's wording), open a work order, record an update, then restore connectivity and confirm the change synchronises. Also test camera scanning on an asset bar code and, on the Android devices, an NFC tag if your site uses them.",
+    "Fit the tempered glass screen protector and hand strap, and set up the charging dock or vehicle mounting dock so devices return to a known place at shift end."
+  ],
+  "accessories": [
+    "Tempered glass screen protector 2-pack, £14 (IBM recommends screen protectors for technician devices)",
+    "Capacitive stylus, £14.99 (IBM recommends a stylus or rubber pen for technicians; useful for inspection forms)",
+    "Charging dock, £49.99 (A10 and W10, via the pogo pin connector)",
+    "Vehicle mounting dock, £109 (for mobile technicians working from vans)"
+  ],
+  "faq": [
+    {
+      "q": "Will IBM Maximo Mobile run on a Tuga tablet?",
+      "a": "IBM publishes Maximo Mobile for Android 11 or higher, iOS 14.3 or higher, and Windows 10 version 10.0.17763.0 or better or Windows 11, with a 3 GB minimum memory. The Tuga A10 and A6 run Android 14 with 8GB and 12GB RAM, and the Tuga W10 runs Windows 11 Pro on an Intel N100 (x64) with 8GB RAM, so all three meet the published requirements. IBM does not publish a list of supported device models, and Tuga Hardware has no relationship with IBM, so this match is based on IBM's published requirements only. You still need a Maximo Application Suite deployment with Maximo Manage and user licensing from IBM or your partner for the app to work."
+    },
+    {
+      "q": "Does Maximo Mobile work offline on the tablet?",
+      "a": "Yes, according to IBM's documentation. The app creates an encrypted local data store on the device and can be used when the device is in airplane mode, the network adapter is disabled, bandwidth is low or Maximo Manage is unreachable. Local data synchronises automatically when connectivity is restored, and users can trigger a manual sync. The first login requires a network connection, and IBM notes that some apps, such as Assist and Parts Identifier, require the user to be online."
+    },
+    {
+      "q": "Can we trial one unit before ordering for the whole team?",
+      "a": "Yes. A single trial unit before a fleet order is welcome. There is a 30-day returns period and a 12-month warranty. Delivery is free within the UK and takes 7 to 10 working days. We deliver to UK addresses only."
+    },
+    {
+      "q": "Do you invoice businesses, and are there discounts for multiple units?",
+      "a": "Yes. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so the prices shown have no VAT to add. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    },
+    {
+      "q": "Should we choose the 10.1 inch A10 or the 6.78 inch A6?",
+      "a": "Both run Android 14 and meet IBM's published Android 11 and 3 GB memory requirements, and both have NFC for the asset and location tag feature IBM documents on Android. The A10's 10.1 inch 1920 x 1200 screen gives more room for inspection forms and map views, which IBM says can need more memory and processing power. The A6 is lighter at 441g, has 5G, a brighter 560-nit screen, glove mode and a 50MP main camera, and fits a belt holster. Pick the A10 for form-heavy work and the A6 where a pocketable handheld or 5G matters more."
+    }
+  ],
+  "not_recommended_note": "Points to weigh before buying. None of the Tuga devices has a dedicated scan engine that IBM documents for this app: IBM describes bar code and QR scanning through the device camera, and does not describe dedicated or Bluetooth scanner support for Maximo Mobile on the Maximo Application Suite, so the W10's optional 2D barcode scanner should be treated as unverified for this app. RFID, including the W10's optional UHF RFID reader, is not documented by IBM for Maximo Mobile on MAS. IBM documents NFC tag scanning for Android and iOS devices only, so do not rely on NFC with the Windows client on the W10. The Assist app requires an ARCore-supported Android device and an online connection; we have not verified whether any Tuga device is on Google's ARCore list, so do not assume Assist or AR features will work. A user-submitted request on IBM's Ideas portal (August 2026, under review) reports that the Windows client has no in-app zoom for users on rugged Windows tablets; this is a feature request rather than IBM documentation, but it is relevant to the W10's 1280 x 800 display and worth checking on a trial unit. Finally, if your organisation has an Apple device policy (IBM's Transport for London case study describes field staff on iPad and iPhone), Tuga does not sell iOS devices.",
+  "disclaimer": "IBM Maximo Mobile is a product of IBM (International Business Machines Corp.). Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by IBM.",
+  "sources": [
+    "https://www.ibm.com/products/maximo",
+    "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/cd?topic=overview-maximo-mobile",
+    "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery?topic=mobile-device-requirements-maximo",
+    "https://www.ibm.com/docs/en/mas-cd/maximo-manage/continuous-delivery?topic=mobile-maximo-authentication-data-flow",
+    "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/cd?topic=mobile-bar-code-format-support",
+    "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/cd?topic=mobile-configuring-default-bar-code-formats",
+    "https://www.ibm.com/docs/SSLPL8_cd/com.ibm.mam.doc/overview/c_wn_mobile_8.11.html",
+    "https://play.google.com/store/apps/details?id=com.ibm.iot.maximo.mobile&hl=en_GB",
+    "https://play.google.com/store/apps/details?id=com.ibm.iot.maximo.mobileeam&hl=en_GB",
+    "https://apps.microsoft.com/detail/9p0z4hnm1421",
+    "https://www.ibm.com/case-studies/transport-for-london",
+    "https://www.ibm.com/case-studies/vpi",
+    "https://ibm-ai-apps.ideas.ibm.com/ideas/MASMOBILE-I-914"
+  ]
+}

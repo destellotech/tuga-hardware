@@ -1,0 +1,134 @@
+{
+  "slug": "upkeep",
+  "software": "UpKeep",
+  "vendor": "UpKeep Technologies, Inc.",
+  "vendor_url": "https://upkeep.com/",
+  "title": "Rugged tablet for UpKeep CMMS",
+  "meta_description": "Tuga A10, W10 and A6 rugged tablets for UpKeep: Android 8.0 requirement, offline mode plan limits, camera scanning and setup steps for UK teams.",
+  "target_query": "rugged tablet for UpKeep",
+  "h1": "Rugged tablet for UpKeep",
+  "intro": [
+    "UpKeep is a cloud CMMS and asset operations platform that its vendor describes as trusted by more than 4,000 companies for work orders, compliance and preventive maintenance. Its industry pages cover manufacturing plants, facility management, food and beverage, healthcare, property management, hospitality, data centres, energy and utilities, schools and government and public works. The Google Play listing positions the mobile app as a replacement for pen and paper, spreadsheets and outdated desktop-based software.",
+    "On the floor, technicians use the Android or iOS app to open and close work orders, work through inspection checklists, add notes and photos, look up asset history and parts, and scan asset barcodes or QR codes with the camera. UpKeep's own technical requirements article says tablets are ideal for technicians because large screens make work orders, inspections and checklists easy to navigate. Its primary tablet recommendations are consumer models (iPad, Samsung Galaxy Tab A9, Lenovo Tab P12), and for harsh sites it suggests rugged devices from Panasonic, Zebra and Samsung. It does not name Tuga devices, and we do not claim it does. A plant room, a washdown area, a cold store or a van exposes a tablet to drops, dust, water and low temperatures, which is the case for a rugged alternative.",
+    "This page sets out what UpKeep publishes about devices (platform, offline mode, scanning, connectivity), which of the three Tuga rugged devices meets each requirement and how, where the gaps are (offline mode plan limits, browser-only Windows access, undocumented NFC and RFID), and the steps to get a unit running. Prices are in pounds, delivery is UK only and a single trial unit is welcome before a fleet order."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 8.0 or later on a phone or tablet",
+      "detail": "The Android app, UpKeep Maintenance Management (version 5.59.0 on the GB Google Play listing, updated 5 October 2026), requires Android 8.0 and up. The vendor's technical requirements article states the Android minimum is Android 8.0 (Oreo) or later and lists smartphones and tablets as supported device types. Its recommended tablets are the iPad (10th generation or newer), iPad Air, Samsung Galaxy Tab A9 and Lenovo Tab P12. For harsh sites it says to consider rugged devices including Panasonic Toughbook, Zebra ET-series tablets or Samsung Galaxy XCover. No Tuga device is named by the vendor.",
+      "source_url": "https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep"
+    },
+    {
+      "requirement": "Windows access is through the web app in a browser, not a native app",
+      "detail": "The vendor states that UpKeep does not have a native Windows or desktop app. On a Windows 10 or 11 PC you use the web application in the most recent version of Chrome (which the vendor recommends for the best experience), Firefox or Edge. The vendor lists the web application as requiring a Wi-Fi or cellular connection, with offline mode available on mobile. Creating purchase orders is only possible in the web application, not the mobile app.",
+      "source_url": "https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep"
+    },
+    {
+      "requirement": "Offline mode is a mobile app feature on the Professional and Enterprise plans only",
+      "detail": "Full offline checklist functionality is live on both iOS and Android apps. Offline, technicians can update work order status, complete checklist tasks with notes, numerical values and photos, view due date, description, parts, asset and location, and create work orders that save as drafts and submit on reconnection. Professional caches up to 5 work orders automatically with up to 2 drafts and 5 task image uploads; Enterprise caches between 5 and 100 work orders with unlimited drafts and image uploads. Sync is automatic on reconnection and the vendor recommends keeping the app open for a few seconds so background sync completes. The vendor's technical requirements article lists offline mode as available on mobile and says the web application requires a Wi-Fi or cellular connection.",
+      "source_url": "https://help.onupkeep.com/en/articles/4712557-how-to-use-upkeep-offline"
+    },
+    {
+      "requirement": "Barcode and QR scanning through the device camera, using the scan feature inside the UpKeep app",
+      "detail": "UpKeep supports UPC and QR codes for assets and parts, and the Google Play description says you can scan an asset barcode with your camera and assign it to a work order. The help centre states you must use the scan feature in UpKeep's mobile app rather than a generic camera app. Scanning is available on the Essential, Premium, Professional and Enterprise plans. The technical requirements article says UpKeep supports scanning natively via the device camera and lists the Zebra DS2200, Honeywell Voyager and Socket Mobile S700 as dedicated scanner options (https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep).",
+      "source_url": "https://help.onupkeep.com/en/articles/2589850-how-to-create-asset-qr-codes-for-all-assets"
+    },
+    {
+      "requirement": "NFC and RFID: not documented by UpKeep",
+      "detail": "No vendor source we checked (technical requirements, asset and parts QR code articles, cycle counts, the Play and App Store listings or the mobile CMMS product page) documents reading NFC or RFID tags in the UpKeep app. Only barcodes, UPC codes and QR codes are mentioned, and the dedicated scanners the vendor lists are all barcode scanners. Do not buy a device for UpKeep on the basis of NFC or RFID.",
+      "source_url": "https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep"
+    },
+    {
+      "requirement": "A large screen for work orders, inspections and checklists",
+      "detail": "The vendor describes tablets as ideal for technicians because large screens make work orders, inspections and checklists easy to navigate. No specific inch figure is given. The vendor also says hardware recommendations are guidelines and that you should verify current OS compatibility with your UpKeep representative.",
+      "source_url": "https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep"
+    },
+    {
+      "requirement": "Wi-Fi 5 or 6, or an LTE or 5G data plan",
+      "detail": "Reliable Wi-Fi is recommended for real-time sync. Supported networking is Wi-Fi 5 and Wi-Fi 6 access points and LTE or 5G data plans, with offline mode for low-connectivity areas and automatic sync when the device reconnects. The mobile CMMS product page says changes queue while the phone is out of range and sync on reconnect.",
+      "source_url": "https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "UpKeep is mobile-first and its vendor says tablets with large screens suit technicians best, so the Tuga A10 (£449) is the primary pick. It runs Android 14, which meets the published Android 8.0 and up requirement for the UpKeep Maintenance Management app, and its 10.1 inch 1920 x 1200 display gives checklists and work orders the screen area the vendor recommends. It is IP68 and MIL-STD-810H rated with an operating range of -20 to 60C, so it is built for plant rooms, washdown areas and cold stores. UpKeep's own rugged suggestions for harsh sites are Panasonic Toughbook, Zebra ET-series and Samsung Galaxy XCover; the A10 is not named by UpKeep, and we present it only as a device that meets the published requirement. The 13MP rear camera handles the in-app barcode and QR scan feature; there is no dedicated scan engine, so scanning speed depends on the app and lighting. 4G dual SIM and dual-band Wi-Fi 5 match the vendor's networking guidance, and the pogo pin connector takes the charging dock or vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 8.0 and up. The A10 runs Android 14, so it meets the published minimum.",
+        "Requirement: scanning through the camera using the UpKeep scan feature. The A10 has a 13MP rear camera with flash; scanning is app-dependent and there is no dedicated scan engine.",
+        "Requirement: a large screen for work orders, inspections and checklists. The A10 has a 10.1 inch FHD IPS display at 1920 x 1200, 350 nits, with tempered glass.",
+        "Requirement: Wi-Fi 5 or 6 access points, or an LTE data plan, for real-time sync. The A10 has dual-band Wi-Fi 5 and 4G dual SIM.",
+        "Site conditions: IP68, MIL-STD-810H, -20 to 60C operating temperature, 8000mAh battery, 680g, hand strap included in the box."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 (£299) is the alternative for technicians who want a handheld that fits a pocket or belt holster rather than a tablet, or who work where 5G coverage or a better camera matters more than screen size. It runs Android 14, meeting the Android 8.0 and up requirement for the same UpKeep app. Its 6.78 inch screen is smaller than the tablets the vendor recommends, so checklists and work orders will show less at once, but it is FHD+ at 120Hz and 560 nits, brighter than the A10. The 50MP main camera is used for the in-app scan feature. IP68 plus IP69K, MIL-STD-810H, glove mode and a 10600mAh battery with 33W fast charge suit long shifts in harsh areas. At 441g it is lighter than the A10 (680g) and the W10 (1197g).",
+      "fit": [
+        "Requirement: Android 8.0 and up. The A6 runs Android 14, so it meets the published minimum.",
+        "Requirement: scanning through the camera using the UpKeep scan feature. The A6 has a 50MP main camera and a 64MP night-vision camera; scanning is app-dependent.",
+        "Requirement: LTE or 5G data plan for sync away from Wi-Fi. The A6 has 5G and Wi-Fi 5.",
+        "Screen: 6.78 inch FHD+ 120Hz at 560 nits. This is smaller than the vendor's recommended tablets, so choose it only where a pocketable handheld matters more than screen area.",
+        "Site conditions: IP68 + IP69K, MIL-STD-810H, -20 to 60C, Gorilla Glass 5, glove mode, fingerprint and face unlock, 10600mAh battery, 441g."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "The Tuga W10 (£649) is only the right choice if your team needs the full UpKeep web application on a rugged device, for example supervisors raising purchase orders, which the vendor says can only be done in the web app, or sites that want a wired Ethernet connection or an HDMI output to a bench monitor. UpKeep has no native Windows app, so on the W10 you run the web app in a current browser on Windows 11 Pro, and the vendor lists Windows 10 and 11 PCs with the latest Chrome, Firefox or Edge as supported. The important limit is that the vendor lists the web app as requiring a Wi-Fi or cellular connection, with offline mode available on the mobile apps, so the W10 is not the device for technicians who lose signal. It is IP65 (dust tight, protected against water jets, not rated for immersion) with a removable 5000mAh battery. The optional 2D barcode scanner and optional UHF RFID reader are not among the scanners UpKeep documents, so do not buy them expecting UpKeep support.",
+      "fit": [
+        "Requirement: UpKeep web app in the latest Chrome, Firefox or Edge on a Windows 10 or 11 PC. The W10 runs Windows 11 Pro on an Intel N100 up to 3.4GHz with 8GB RAM and 128GB storage.",
+        "Requirement: a Wi-Fi or cellular connection, because the vendor lists offline mode for the mobile apps, not the web app. The W10 has dual-band Wi-Fi 5, 100Mbps RJ45 Ethernet and optional 4G LTE.",
+        "Use case: purchase orders are web app only. The W10 gives a 10.1 inch 1280 x 800 multi-touch display plus HDMI, USB-A and USB-C for a monitor, keyboard and mouse at a maintenance desk.",
+        "Site conditions: IP65, not rated for immersion; removable 5000mAh battery (run time depends on load); 1197g; pogo pin dock connector for the charging dock or vehicle mounting dock."
+      ]
+    }
+  ],
+  "not_recommended_note": "UpKeep is not iOS-only, so both Android devices run the native app. Four caveats matter before you buy. First, offline mode is only on the Professional and Enterprise plans, and Professional caches at most 5 work orders with 2 drafts and 5 task images, so an Essential or Premium account gets no offline working on any device. Second, the Tuga W10 can only run the browser-based web app, which the vendor lists as requiring a Wi-Fi or cellular connection, and its optional 2D barcode scanner and optional UHF RFID reader are not among the scanners UpKeep documents (Zebra DS2200, Honeywell Voyager, Socket Mobile S700). Third, the A10 and A6 scan through the camera using the in-app scan feature; they have no dedicated scan engine, and NFC or RFID reading is not documented by UpKeep for any device, so the NFC on all three Tuga devices should not be counted as an UpKeep feature. Fourth, UpKeep's own suggestions for harsh sites are Panasonic Toughbook, Zebra ET-series tablets and Samsung Galaxy XCover; it does not name Tuga devices, it says hardware recommendations are guidelines, and it advises verifying OS compatibility with your UpKeep representative.",
+  "setup_steps": [
+    "Use your existing UpKeep account or start a free trial on upkeep.com (the vendor states no credit card is required). Confirm which plan you are on, because offline mode is a Professional and Enterprise feature.",
+    "On a Tuga A10 or A6, open Google Play and install UpKeep Maintenance Management by UpKeep Technologies, Inc. (Android 8.0 and up; the devices run Android 14). On a Tuga W10, open Edge or Chrome and sign in to the UpKeep web application instead; there is no Windows app to install.",
+    "Sign in with each technician's UpKeep user credentials. Connect to your site Wi-Fi or fit a SIM (4G on the A10, 5G on the A6, optional 4G LTE on the W10) so the app can sync.",
+    "If you are on Professional or Enterprise, read the vendor's offline article: work orders assigned to the technician, non-operational asset work orders and those due within the working week are cached automatically, others can be bookmarked in advance, and the app should be kept open after reconnecting so background sync finishes.",
+    "Test scanning on an asset or parts QR code using the scan feature inside the UpKeep app, not a generic camera app. If you use one of the Bluetooth scanners UpKeep lists, pair it through the device's Bluetooth 5.2 settings.",
+    "Fit the hand strap (included with the A10) or a case, apply a screen protector, and connect the charging dock or vehicle mounting dock to the pogo pin connector on the A10 or W10."
+  ],
+  "faq": [
+    {
+      "q": "Will UpKeep run on the Tuga A10 and A6?",
+      "a": "UpKeep's Android app, UpKeep Maintenance Management, requires Android 8.0 and up according to its Google Play listing and the vendor's technical requirements article. The Tuga A10 and Tuga A6 both run Android 14, so they meet that published requirement. We are an independent seller and do not claim the devices are certified or tested by UpKeep; the vendor names other rugged brands for harsh sites and advises verifying OS compatibility with your UpKeep representative."
+    },
+    {
+      "q": "Does UpKeep work offline on these devices?",
+      "a": "On the A10 and A6, offline mode is available if your organisation is on the Professional or Enterprise plan. Professional caches up to 5 work orders with 2 drafts and 5 task image uploads; Enterprise caches between 5 and 100 work orders with unlimited drafts and image uploads. Changes sync automatically on reconnection. The W10 runs the web app, which the vendor lists as requiring a Wi-Fi or cellular connection, with offline mode available on the mobile apps."
+    },
+    {
+      "q": "Can we trial one unit and pay by invoice?",
+      "a": "Yes. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd) is not VAT registered, so there is no VAT to add to the listed prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    },
+    {
+      "q": "Should we choose the 10.1 inch A10 or the 6.78 inch A6?",
+      "a": "UpKeep says large screens make work orders, inspections and checklists easier to navigate, and its recommended tablets are the iPad, iPad Air, Samsung Galaxy Tab A9 and Lenovo Tab P12, with no specific screen size given. The A10's 10.1 inch 1920 x 1200 display is the closer match for checklist-heavy work. The A6 suits technicians who need something pocketable at 441g, 5G rather than 4G, a brighter 560 nit screen, or IP69K washdown protection, and who accept seeing less of each work order at a time. Both run Android 14 and the same UpKeep app."
+    }
+  ],
+  "disclaimer": "UpKeep is a product of UpKeep Technologies, Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by UpKeep Technologies, Inc.",
+  "sources": [
+    "https://upkeep.com/",
+    "https://upkeep.com/pricing/",
+    "https://upkeep.com/solutions/",
+    "https://upkeep.com/product/mobile-cmms/",
+    "https://play.google.com/store/apps/details?id=com.onupkeep&hl=en_GB&gl=GB",
+    "https://help.onupkeep.com/en/articles/109731-what-technical-requirements-are-needed-to-use-upkeep",
+    "https://help.onupkeep.com/en/articles/4712557-how-to-use-upkeep-offline",
+    "https://help.onupkeep.com/en/articles/2589850-how-to-create-asset-qr-codes-for-all-assets",
+    "https://help.onupkeep.com/en/articles/1750207-how-to-create-and-manage-purchase-orders"
+  ],
+  "accessories": [
+    "Charging dock, £49.99 (A10, W10), for end-of-shift charging via the pogo pin connector",
+    "Vehicle mounting dock, £109, for fleet and field service technicians working from a van",
+    "Tempered glass screen protector 2-pack, £14, for screens exposed to grit and tools",
+    "Rugged carry case, £34, for moving between sites"
+  ]
+}

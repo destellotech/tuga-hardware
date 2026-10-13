@@ -9,6 +9,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { SALES_PAUSED, TRADER_STATEMENT } from '../../src/store-config.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(here, '..', '..');
@@ -57,7 +58,7 @@ export const SITE = {
   phone: '01279 912065',
   phoneHref: 'tel:+441279912065',
   description:
-    'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested, all-day battery. Free UK delivery.',
+    'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery.',
 };
 
 export const data = JSON.parse(
@@ -72,6 +73,8 @@ export const devices = data.products
 export const androidRange = devices.filter((p) => p.category === 'android');
 export const windowsRange = devices.filter((p) => p.category === 'windows');
 export const accessories = data.accessories;
+export const warranty = data.warranty ?? { tiers: [], careMinUnits: 5 };
+export const warrantyTier = (id) => warranty.tiers.find((t) => t.id === id);
 
 export const variantsOf = (id) =>
   data.products.filter((p) => p.isVariant && p.variantOf === id);
@@ -256,6 +259,7 @@ const NAV_LINKS = [
   { href: '/products/', label: 'Tablets', key: 'products' },
   { href: '/accessories', label: 'Accessories', key: 'accessories' },
   { href: '/bulk', label: 'Bulk Orders', key: 'bulk' },
+  { href: '/works-with/', label: 'Works with', key: 'works-with' },
   { href: '/blog/', label: 'Guides', key: 'blog' },
   { href: '/about', label: 'About', key: 'about' },
   { href: '/contact', label: 'Contact', key: 'contact' },
@@ -266,7 +270,11 @@ const wordmark = () =>
 
 const header = (active) => `
   <div class="announce">
-    <strong>Free UK delivery</strong><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns<span class="announce-sep">/</span>Bulk discounts from 2 units
+    ${
+      SALES_PAUSED
+        ? `<strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>`
+        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes<span class="announce-more"> and proforma invoices</span></a><span class="announce-more"><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns</span>`
+    }
   </div>
   <header class="site-header" id="site-header">
     <div class="container header-inner">
@@ -295,7 +303,7 @@ const footer = () => `
       <div class="footer-grid">
         <div class="footer-about">
           <a href="/" class="wordmark" aria-label="${esc(SITE.name)} home">${wordmark()}</a>
-          <p>Rugged tablets and handhelds for UK trades. We pick the kit, test it, price it honestly and ship it free. No enterprise contracts, no sales calls.</p>
+          <p>Rugged tablets and handhelds for UK trades. We pick the kit, check every spec against the maker's own documents, price it honestly and ship it free. No enterprise contracts, no sales calls.</p>
         </div>
         <div class="footer-col">
           <h3>Tablets</h3>
@@ -308,6 +316,7 @@ const footer = () => `
           <h3>Company</h3>
           <nav aria-label="Company">
             <a href="/about">About</a>
+            <a href="/works-with/">Works with your software</a>
             <a href="/blog/">Guides</a>
             <a href="/bulk">Bulk orders</a>
             <a href="/contact">Contact</a>
@@ -316,6 +325,7 @@ const footer = () => `
         <div class="footer-col">
           <h3>Support</h3>
           <nav aria-label="Support">
+            <a href="/warranty">Warranty</a>
             <a href="/shipping-returns">Shipping &amp; returns</a>
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>
@@ -325,7 +335,7 @@ const footer = () => `
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.</p>
+        <p class="footer-legal">&copy; ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved. ${esc(TRADER_STATEMENT)}</p>
         <div class="footer-payments" aria-label="Accepted payment methods">
           ${['Visa', 'Mastercard', 'Amex', 'PayPal']
             .map(
@@ -410,7 +420,7 @@ export function page({
 
   ${jsonLd(schema)}
 </head>
-<body${bodyClass ? ` class="${bodyClass}"` : ''}>
+<body${bodyClass ? ` class="${bodyClass}"` : ''}${SALES_PAUSED ? ' data-sales-paused' : ''}>
   <a href="#main" class="skip-link">Skip to content</a>
 ${header(active)}
 
