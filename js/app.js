@@ -529,7 +529,7 @@
       <div class="cart-offer">
         <div class="cart-offer-text">
           <p class="cart-offer-title">Cover ${missing === 1 ? 'it' : `all ${missing}`} for 3 years <span class="pick-tag">Recommended</span></p>
-          <p class="cart-offer-meta">36 months against defects on your ${device}, battery included, carriage paid both ways. <a href="/warranty">How it works</a></p>
+          <p class="cart-offer-meta">36 months against defects on your ${device}, including battery defects. UK carriage paid both ways on accepted claims. <a href="/warranty">How it works</a></p>
         </div>
         <button type="button" class="btn btn-outline cart-offer-btn" data-add-warranty="${wty.id}" data-qty="${missing}">
           Add for ${money(wty.price * missing)}
