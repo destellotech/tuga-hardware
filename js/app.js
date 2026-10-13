@@ -30,7 +30,8 @@
     const res = await fetch('/data/products.json');
     if (!res.ok) throw new Error('Could not load the product catalogue');
     const data = await res.json();
-    catalogue = [...data.products, ...data.accessories];
+    catalogue = [...data.products, ...data.accessories, ...(data.warranties || [])];
+    knownIds = new Set(catalogue.map((p) => p.id));
     return catalogue;
   }
 
@@ -53,6 +54,28 @@
 
   /* -------------------------------------------------------------------- cart */
 
+  /* Product ids renamed since launch. Mirrors LEGACY_PATHS in src/worker.js:
+     a basket saved before the rename still holds the old id, which the
+     catalogue (and the server) no longer recognise. Scanner variants and
+     plans carry the device id inside theirs, so the prefix is swapped. */
+  const LEGACY_IDS = {
+    'tuga-h6': 'tuga-a6',
+    'tuga-t8': 'tuga-a8',
+    'tuga-t10': 'tuga-a10',
+  };
+
+  const currentId = (id) => {
+    for (const [from, to] of Object.entries(LEGACY_IDS)) {
+      const m = id.match(new RegExp(`^(wty-[a-z0-9]+-)?${from}(-scanner)?$`));
+      if (m) return `${m[1] || ''}${to}${m[2] || ''}`;
+    }
+    return id;
+  };
+
+  /* Ids in the live catalogue, once it has loaded. Until then read() can only
+     rename legacy ids; pruneCart() drops anything still unknown. */
+  let knownIds = null;
+
   const Cart = {
     KEY: 'tuga-cart',
 
@@ -60,13 +83,21 @@
       try {
         const raw = JSON.parse(localStorage.getItem(this.KEY) || '[]');
         if (!Array.isArray(raw)) return [];
-        // Clamp quantities so corrupted storage can't produce NaN totals.
-        return raw
+        // Clamp quantities so corrupted storage can't produce NaN totals, and
+        // merge lines that a legacy rename turns into the same id.
+        const items = [];
+        raw
           .filter((i) => i && typeof i.id === 'string')
-          .map((i) => ({
-            id: i.id,
-            quantity: Math.min(99, Math.max(1, Math.floor(Number(i.quantity)) || 1)),
-          }));
+          .forEach((i) => {
+            const id = currentId(i.id);
+            if (knownIds && !knownIds.has(id)) return;
+            const quantity = Math.max(1, Math.floor(Number(i.quantity)) || 1);
+            const existing = items.find((x) => x.id === id);
+            if (existing) existing.quantity += quantity;
+            else items.push({ id, quantity });
+          });
+        items.forEach((i) => (i.quantity = Math.min(99, i.quantity)));
+        return items;
       } catch {
         return [];
       }
@@ -121,7 +152,7 @@
       this.read().forEach((entry) => {
         const product = findItem(products, entry.id);
         if (!product) return;
-        const isDevice = !String(product.id).startsWith('acc-');
+        const isDevice = !/^(acc|wty)-/.test(String(product.id));
         if (isDevice) deviceUnits += entry.quantity;
         entries.push({ ...entry, product, isDevice });
       });
@@ -161,6 +192,25 @@
       };
     },
   };
+
+  /* Rewrite a stored basket that holds legacy or unknown ids, so the badge,
+     the basket page and checkout all see the same lines. */
+  async function pruneCart() {
+    let stored;
+    try {
+      stored = localStorage.getItem(Cart.KEY);
+    } catch {
+      return;
+    }
+    if (!stored || stored === '[]') return;
+    try {
+      await getCatalogue();
+    } catch {
+      return;
+    }
+    const cleaned = Cart.read();
+    if (JSON.stringify(cleaned) !== stored) Cart.write(cleaned);
+  }
 
   function paintCount() {
     const n = Cart.count();
@@ -327,15 +377,34 @@
         qty = Math.max(1, parseInt(input?.value, 10) || 1);
       }
 
-      Cart.add(id, qty);
+      // A product page can offer a warranty for the device being added; it is
+      // one line per device unit, so it takes the same quantity. Only the main
+      // Add to basket inside the buy box reads the chooser: accessory and
+      // scanner-variant buttons elsewhere on the page never add a plan, and
+      // the plan must cover the device actually being added.
+      const box = btn.closest('[data-buy-box]');
+      const chooser = box ? box.querySelector('[data-warranty-choice]:checked') : null;
+      let warrantySku = chooser?.value || '';
 
+      let products = null;
       try {
-        const products = await getCatalogue();
-        const product = findItem(products, id);
-        toast(`${product ? product.name : 'Item'} added to basket`);
+        products = await getCatalogue();
       } catch {
-        toast('Added to basket');
+        /* Fall back to the id convention below. */
       }
+
+      if (warrantySku) {
+        const base = id.replace(/-scanner$/, '');
+        const plan = products ? findItem(products, warrantySku) : null;
+        const covers = plan ? plan.warrantyFor === base : warrantySku.endsWith(`-${base}`);
+        if (/^(acc|wty)-/.test(id) || !covers) warrantySku = '';
+      }
+
+      Cart.add(id, qty);
+      if (warrantySku) Cart.add(warrantySku, qty);
+
+      const product = products ? findItem(products, id) : null;
+      toast(`${product ? product.name : 'Item'}${warrantySku ? ' and warranty' : ''} added to basket`);
     });
   }
 
@@ -413,7 +482,9 @@
     const p = line.product;
     const image = p.imageBase
       ? `<img src="/img/products/${p.imageBase}-1.webp" alt="" width="120" height="120" loading="lazy">`
-      : '<span aria-hidden="true">◧</span>';
+      : p.warrantyFor
+        ? '<span class="cart-item-glyph" aria-hidden="true">✓</span>'
+        : '<span aria-hidden="true">◧</span>';
 
     return `
       <div class="cart-item" data-line="${p.id}">
@@ -431,6 +502,38 @@
             <span class="cart-item-price">${money(line.lineTotal)}</span>
           </div>
         </div>
+      </div>`;
+  }
+
+  /* Under a device with no (or not enough) 3-Year Warranty in the basket,
+     offer it once with a single button. Scanner variants share the base
+     device's warranty, so the offer sits under whichever line comes first. */
+  function warrantyOffer(line, lines, products) {
+    const p = line.product;
+    if (/^(acc|wty)-/.test(p.id)) return '';
+    const base = p.id.replace(/-scanner$/, '');
+    const wty = products.find((x) => x.warrantyFor === base);
+    if (!wty) return '';
+    const firstForBase = lines.find((l) => l.product.id.replace(/-scanner$/, '') === base);
+    if (firstForBase !== line) return '';
+
+    const units = lines
+      .filter((l) => !/^(acc|wty)-/.test(l.product.id) && l.product.id.replace(/-scanner$/, '') === base)
+      .reduce((n, l) => n + l.quantity, 0);
+    const covered = lines.find((l) => l.product.id === wty.id)?.quantity || 0;
+    const missing = units - covered;
+    if (missing <= 0) return '';
+
+    const device = findItem(products, base)?.name || p.name;
+    return `
+      <div class="cart-offer">
+        <div class="cart-offer-text">
+          <p class="cart-offer-title">Cover ${missing === 1 ? 'it' : `all ${missing}`} for 3 years <span class="pick-tag">Recommended</span></p>
+          <p class="cart-offer-meta">36 months against defects on your ${device}, including battery defects. UK carriage paid both ways on accepted claims. <a href="/warranty">How it works</a></p>
+        </div>
+        <button type="button" class="btn btn-outline cart-offer-btn" data-add-warranty="${wty.id}" data-qty="${missing}">
+          Add for ${money(wty.price * missing)}
+        </button>
       </div>`;
   }
 
@@ -465,14 +568,18 @@
         <span>${money(totals.total)}</span>
       </div>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
-      <div class="checkout-actions">
+      ${
+        document.body.hasAttribute('data-sales-paused')
+          ? `<p class="summary-note" role="status">We have paused new orders while we move to UK stock. Email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> and we will tell you as soon as a device is available.</p>`
+          : `<div class="checkout-actions">
         <button class="btn btn-primary btn-lg btn-block" data-checkout="stripe">Checkout securely</button>
         ${
           paymentMethods.paypal
             ? '<button class="btn btn-outline btn-block" data-checkout="paypal">Pay with PayPal</button>'
             : ''
         }
-      </div>
+      </div>`
+      }
       <p class="summary-note" data-checkout-status hidden></p>`;
   }
 
@@ -500,7 +607,9 @@
     emptyEl.hidden = true;
     layout.hidden = false;
 
-    $('[data-cart-items]').innerHTML = totals.lines.map(cartItemRow).join('');
+    $('[data-cart-items]').innerHTML = totals.lines
+      .map((line) => cartItemRow(line) + warrantyOffer(line, totals.lines, products))
+      .join('');
     $('[data-cart-summary]').innerHTML = cartSummary(totals);
   }
 
@@ -512,6 +621,13 @@
     document.addEventListener('cart:change', renderCart);
 
     layout.addEventListener('click', (e) => {
+      const offer = e.target.closest('[data-add-warranty]');
+      if (offer) {
+        Cart.add(offer.dataset.addWarranty, Number(offer.dataset.qty) || 1);
+        toast('3-Year Warranty added');
+        return;
+      }
+
       const row = e.target.closest('[data-line]');
       if (!row) return;
       const id = row.dataset.line;
@@ -558,6 +674,28 @@
       status.textContent = msg || '';
     };
 
+    // Mirror the server's warranty rule so the shopper gets a clear message
+    // here instead of a failed redirect.
+    try {
+      const products = await getCatalogue();
+      const units = {};
+      items.forEach((i) => {
+        if (/^(acc|wty)-/.test(i.id)) return;
+        const base = i.id.replace(/-scanner$/, '');
+        units[base] = (units[base] || 0) + i.quantity;
+      });
+      for (const i of items) {
+        const p = findItem(products, i.id);
+        if (!p || !p.warrantyFor) continue;
+        if (i.quantity > (units[p.warrantyFor] || 0)) {
+          setStatus(`${p.name} covers one device each. Reduce it to match the number of ${p.warrantyFor.replace('tuga-', 'Tuga ').toUpperCase()} units in the basket.`);
+          return;
+        }
+      }
+    } catch {
+      /* The server checks again; never block checkout on a catalogue fetch. */
+    }
+
     btn.disabled = true;
     const original = btn.textContent;
     btn.textContent = 'Redirecting…';
@@ -594,9 +732,27 @@
 
   /* ------------------------------------------------------------------ forms */
 
+  /* A mailto: link to support with the subject and body filled in, so a
+     customer can send an enquiry with one tap when our own email fails. */
+  const mailto = (subject, body) =>
+    `mailto:support@tugahardware.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
   function initForms() {
     const contact = $('[data-contact-form]');
     if (contact) {
+      // Product pages link here with ?quote=<product name> for business quotes.
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('quote')) {
+        const topic = $('#topic', contact);
+        if (topic && topic.options.length) topic.selectedIndex = 0;
+        const product = params.get('quote');
+        const message = $('#message', contact);
+        if (message && !message.value) {
+          message.value = product
+            ? `Quote request: ${product}\nQuantity: \nDelivery postcode: \n`
+            : 'Quote request\nDevices and quantities: \nDelivery postcode: \n';
+        }
+      }
       contact.addEventListener('submit', async (e) => {
         e.preventDefault();
         const status = $('[data-form-status]', contact);
@@ -618,11 +774,24 @@
             body: JSON.stringify(payload),
           });
           if (!res.ok) throw new Error();
+          const data = await res.json().catch(() => ({}));
 
-          contact.reset();
-          status.className = 'form-status form-status-ok';
           status.hidden = false;
-          status.textContent = 'Thanks. We will reply within one working day.';
+          if (data.emailed === false) {
+            // Stored, but the enquiry email did not go out: hand the customer
+            // a ready-made email so it still reaches us today.
+            const body = [payload.message || '', '', `Name: ${payload.name || ''}`]
+              .concat(payload.company ? [`Company: ${payload.company}`] : [])
+              .join('\n');
+            status.className = 'form-status form-status-err';
+            status.innerHTML =
+              'Your message is saved, but our email system did not confirm it. Please also email ' +
+              `<a href="${mailto(payload.topic || 'Enquiry', body)}">support@tugahardware.com</a> so it reaches us today.`;
+          } else {
+            contact.reset();
+            status.className = 'form-status form-status-ok';
+            status.textContent = 'Thanks. We will reply within one working day.';
+          }
         } catch {
           status.className = 'form-status form-status-err';
           status.hidden = false;
@@ -646,18 +815,38 @@
           return;
         }
 
+        // A request for personal size advice: the server emails it to
+        // support and says whether that email went out.
+        const btn = $('button[type="submit"]', form);
+        const honeypot = $('[name="website"]', form);
+        const address = email.value;
+        if (btn) btn.disabled = true;
+
         try {
-          await fetch('/api/subscribe', {
+          const res = await fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email.value }),
+            body: JSON.stringify({ email: address, website: honeypot ? honeypot.value : '' }),
           });
-        } catch {
-          /* Non-critical — never block the user on a newsletter signup. */
-        }
+          if (!res.ok) throw new Error();
+          const data = await res.json().catch(() => ({}));
 
-        form.reset();
-        if (note) note.textContent = 'Sent. Check your inbox in a minute or two.';
+          form.reset();
+          if (!note) return;
+          if (data.emailed === false) {
+            note.innerHTML =
+              `Please email <a href="${mailto('Size advice request', `Please recommend a size for me. My email is ${address}.`)}">support@tugahardware.com</a> and we will reply today.`;
+          } else {
+            note.textContent = 'Thanks. We will email you a size recommendation within one working day.';
+          }
+        } catch {
+          if (note) {
+            note.innerHTML =
+              'That did not send. Email <a href="mailto:support@tugahardware.com?subject=Size%20advice%20request">support@tugahardware.com</a> and we will reply today.';
+          }
+        } finally {
+          if (btn) btn.disabled = false;
+        }
       });
     });
   }
@@ -668,23 +857,33 @@
     const target = $('[data-order-summary]');
     if (!target) return;
 
-    // Stripe returns ?session_id=cs_..., PayPal ?provider=paypal&token=<order id>.
-    const params = new URL(window.location).searchParams;
-    const sessionId = params.get('session_id');
-    const paypalOrderId = params.get('provider') === 'paypal' ? params.get('token') : null;
-    if (!sessionId && !paypalOrderId) return;
-
     const title = $('[data-order-title]');
     const lede = $('[data-order-lede]');
     const show = (heading, text, note) => {
       if (title) title.textContent = heading;
       if (lede) lede.textContent = text;
-      target.innerHTML = note ? `<p class="mono">${note}</p>` : '';
+      target.innerHTML = note || '';
     };
+
+    // Stripe returns ?session_id=cs_..., PayPal ?provider=paypal&token=<order id>.
+    const params = new URL(window.location).searchParams;
+    const sessionId = params.get('session_id');
+    const paypalOrderId = params.get('provider') === 'paypal' ? params.get('token') : null;
+    if (!sessionId && !paypalOrderId) {
+      show(
+        'No order reference',
+        'We could not find an order reference on this page. If you have just paid, check your email or contact support@tugahardware.com.',
+        ''
+      );
+      return;
+    }
+
+    const esc = (s) =>
+      String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
     // The server verifies the payment with the provider (and, for PayPal,
     // collects it) before we tell the customer the order is placed.
-    show('Confirming your order', 'Checking your payment with ' + (sessionId ? 'our card processor' : 'PayPal') + '. This takes a few seconds.', '');
+    show('Checking your order', 'Checking your payment with ' + (sessionId ? 'our card processor' : 'PayPal') + '. This takes a few seconds.', '');
 
     const attempt = (tries) =>
       fetch('/api/confirm-order', {
@@ -699,16 +898,46 @@
             localStorage.removeItem(Cart.KEY);
             paintCount();
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
+            const ref = data.orderId ? String(data.orderId) : '';
+            const keep = `Keep this page${ref ? `: your order reference is ${ref}` : ''}.`;
+
+            // Only promise an email we know went out. A Stripe receipt is a
+            // payment receipt, not our order confirmation.
+            let text;
+            if (data.emailSent === true && data.emailVia !== 'stripe-receipt') {
+              text = 'A confirmation email with your order number and delivery details is on its way.';
+            } else if (data.emailVia === 'stripe-receipt') {
+              text = `Stripe has emailed your payment receipt. ${keep} We will email your order confirmation from support@tugahardware.com.`;
+            } else {
+              text = `${keep} We will email your confirmation from support@tugahardware.com within one working day.`;
+            }
+
+            // Mirrors the plan block in the confirmation email (src/email.js)
+            // and clause 34 of the Plan Terms.
+            const plan = data.hasPlan
+              ? '<p class="order-plan-note"><strong>3-Year Warranty:</strong> if you bought as a consumer, you can cancel the plan within 45 days of purchase for a full refund if you have made no claim; business buyers have 30 days. <a href="/warranty-terms">Plan Terms</a></p>'
+              : '';
+
             show(
               'Order confirmed',
-              'Thank you. A confirmation email is on its way with your order number and delivery details. Orders placed before 2pm on a working day are dispatched the same day.',
-              `Paid by ${paidBy}. ${data.emailSent ? 'Confirmation email sent.' : 'If the confirmation email does not arrive, contact support and we will send it again.'}`
+              text,
+              (ref
+                ? `<p class="order-ref">Order reference <strong data-order-ref>${esc(ref)}</strong></p>`
+                : '') +
+                `<p class="mono">Paid by ${paidBy}. Please allow 7 to 10 working days for delivery.</p>` +
+                plan
+            );
+          } else if (ok && data.status === 'unsupported_country') {
+            show(
+              'We deliver to the UK only',
+              'Your PayPal delivery address is outside the UK, so we have not taken payment and nothing has been charged. If you have a UK delivery address, change it in PayPal and try again.',
+              '<p class="mono"><a href="/cart">Back to basket</a></p>'
             );
           } else if (ok && data.status === 'unpaid') {
             show(
               'Payment not completed',
               'We could not see a completed payment for this order, so nothing has been charged. Your basket is still saved if you want to try again.',
-              '<a href="/cart">Back to basket</a>'
+              '<p class="mono"><a href="/cart">Back to basket</a></p>'
             );
           } else {
             throw new Error(data.error || 'confirm failed');
@@ -719,7 +948,7 @@
           show(
             'We are checking your order',
             'Your payment went through to the payment provider, but we could not confirm it just now. Please do not pay again. Contact support and we will confirm your order by email.',
-            '<a href="/contact">Contact support</a>'
+            '<p class="mono"><a href="/contact">Contact support</a></p>'
           );
         });
 
@@ -730,6 +959,7 @@
 
   function init() {
     paintCount();
+    pruneCart();
     initNav();
     initReveal();
     initCookies();

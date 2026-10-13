@@ -12,6 +12,7 @@ import {
   specLabel,
   devices,
 } from './layout.mjs';
+import { SALES_PAUSED } from '../../src/store-config.js';
 
 /* --- small pieces -------------------------------------------------------- */
 
@@ -51,7 +52,7 @@ export function productCard(p) {
 
   return `
           <a class="product-card reveal" href="${productUrl(p)}" data-category="${p.category}">
-            ${p.badge ? `<span class="product-badge${p.badge === 'Most Popular' ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>` : ''}
+            ${p.badge ? `<span class="product-badge${/^(Our pick|Recommended|Most)/i.test(p.badge) ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>` : ''}
             <div class="product-card-media">
               <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px')} alt="${esc(p.name)} rugged ${p.formFactor}" loading="lazy" width="600" height="450">
             </div>
@@ -118,7 +119,7 @@ export function compareTable(list = devices) {
     .map(
       (p) => `
               <tr>
-                <td><a href="${productUrl(p)}">${esc(p.name)}</a></td>
+                <td><a href="${productUrl(p)}">${esc(p.name)}</a>${p.badge ? ` <span class="pick-tag">${esc(p.badge)}</span>` : ''}</td>
                 <td class="cell-mono">${esc(p.sizeLabel)}&Prime; ${p.formFactor === 'handheld' ? 'handheld' : 'tablet'}</td>
                 <td class="cell-mono">${esc(p.specs.os)}</td>
                 <td class="cell-mono">${esc(p.specs.ip_rating)}</td>
@@ -249,15 +250,20 @@ export const capture = () => `
         <div class="capture reveal">
           <div>
             <h2>Not sure which size you need?</h2>
-            <p>We will send you the one-page buyer's guide: how 6, 8 and 10 inch actually compare in the hand, what IP and MIL ratings mean in practice, and the questions worth asking before you spend.</p>
+            <p>Leave your email and one of us will reply personally with the size we would pick for your work, and why. Tell us your trade in the reply and we will be more precise.</p>
           </div>
           <div>
             <form class="capture-form" data-capture-form novalidate>
+              <!-- Honeypot: hidden from humans, checked server-side -->
+              <div style="position:absolute;left:-9999px" aria-hidden="true">
+                <label for="capture-website">Website</label>
+                <input type="text" id="capture-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
               <label class="sr-only" for="capture-email">Email address</label>
               <input type="email" id="capture-email" name="email" placeholder="you@yourcompany.co.uk" autocomplete="email" required>
-              <button class="btn btn-copper" type="submit">Send it</button>
+              <button class="btn btn-copper" type="submit">Ask us</button>
             </form>
-            <p class="capture-note" data-capture-note>One email. No newsletter, no reselling your address.</p>
+            <p class="capture-note" data-capture-note>A reply from a person. No newsletter, no reselling your address.</p>
           </div>
         </div>
       </div>
@@ -297,7 +303,7 @@ export function accessoryCard(a) {
             <p class="accessory-compat">Fits: ${esc(names.join(', '))}</p>
             <div class="accessory-foot">
               <span class="accessory-price">${money(a.price)}</span>
-              <button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>
+              ${SALES_PAUSED ? '' : `<button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>`}
             </div>
           </div>`;
 }

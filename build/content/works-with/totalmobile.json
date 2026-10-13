@@ -1,0 +1,156 @@
+{
+  "slug": "totalmobile",
+  "software": "Totalmobile (Field First platform and the Totalmobile Mobile Working app, also called Mobilise)",
+  "vendor": "TotalMobile Solutions Ltd",
+  "vendor_url": "https://www.totalmobile.com/",
+  "title": "Rugged tablets for the Totalmobile Mobile Working app",
+  "meta_description": "Rugged Android and Windows tablets for the Totalmobile app: published OS requirements, offline working, Tuga device specs and UK business invoicing.",
+  "target_query": "Totalmobile compatible tablet",
+  "h1": "Rugged tablets for the Totalmobile Mobile Working app (Mobilise)",
+  "intro": [
+    "Totalmobile is a UK field service and mobile workforce management platform, headquartered in Belfast and sold as the Field First platform. The vendor lists sectors including local government, social housing, housing associations and housing contractors, facilities management, health and social care, utilities and telecoms, and names organisations such as Sheffield City Council, Southampton City Council, SNG, Bromford Flagship LiveWest, Fortem and Morgan Sindall Property Services on its site.",
+    "The operative-facing part is the Mobile Working capability, which the vendor's documentation library lists as Mobile Working (Mobilise). It is installed as the Totalmobile app, which the vendor describes as supported by iOS, Android and Windows devices or operating systems. Staff see assigned work in a job calendar or map view, follow pre-approved workflows, and capture data through forms with drop-down menus, photographs, voice recordings, free text and signatures. The vendor states the app has full offline capability, with critical job information stored locally on the device and updates syncing when connectivity is restored.",
+    "A consumer tablet carried in and out of vans, lofts, plant rooms and tenants' homes is more likely to crack, run flat or fail in rain and cold than to be replaced because its software is out of date. This page sets out what Totalmobile publishes about its app's platform requirements, which Tuga devices meet those published requirements, and what cannot be verified because the vendor does not publish it."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android app from Google Play",
+      "detail": "The Totalmobile app (package com.totalmobile, developer TotalMobile Solutions Ltd) is published on Google Play. When checked on 12 October 2026 the listing did not display a Requires Android label, so the minimum Android version is unverified. Check the current listing in the Play app before relying on a figure. Both Tuga Android devices run Android 14.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.totalmobile"
+    },
+    {
+      "requirement": "Windows app from the Microsoft Store",
+      "detail": "The Totalmobile app for Windows (product ID 9WZDNCRCWSN4, publisher TotalMobile Solutions Limited) lists Windows 10 version 14393.0 or higher on x86, x64 or Arm, available on PC, Mobile and Surface Hub. The store notes add that Totalmobile for Windows v8 and later requires Windows 10 1709. Listed features are visits, forms, bulletins, homescreen and map my day.",
+      "source_url": "https://apps.microsoft.com/detail/9wzdncrcwsn4"
+    },
+    {
+      "requirement": "Offline working",
+      "detail": "The Mobile Working page states full offline capability, with all critical job information stored locally on the device, no dependency on signal, and updates syncing automatically when connectivity is restored. The Asset Management page also lists offline working alongside photo documentation and signature capture. The vendor's G-Cloud 15 listing on the UK Digital Marketplace adds that offline mobile capability may limit some features until connectivity is restored.",
+      "source_url": "https://www.totalmobile.com/platform/mobile-working/"
+    },
+    {
+      "requirement": "Camera and touchscreen for data capture",
+      "detail": "Smart forms offer drop-down menus, photographs, voice recordings and free text, and staff capture signatures and photos on site. The Windows app's store listing declares webcam and microphone permissions. A device therefore needs a usable rear camera and a touchscreen for signatures, and voice recording needs a working microphone; check voice capture on a trial unit with your own configured forms.",
+      "source_url": "https://www.totalmobile.com/platform/mobile-working/"
+    },
+    {
+      "requirement": "Location for map view",
+      "detail": "Staff view assigned work through a job calendar or map view, and the Windows store listing declares a location permission. A device with GPS makes the map view and location features usable away from Wi-Fi.",
+      "source_url": "https://apps.microsoft.com/detail/9wzdncrcwsn4"
+    },
+    {
+      "requirement": "Mobile data for sync between jobs",
+      "detail": "The vendor says field teams can complete work digitally from their mobile device, online or offline, with updates syncing when connectivity is restored. A tablet with a SIM slot keeps the day's jobs updating between visits rather than waiting for depot Wi-Fi.",
+      "source_url": "https://www.totalmobile.com/capabilities/mobile-workforce-management/"
+    },
+    {
+      "requirement": "Browser for the back office",
+      "detail": "The 2025 Field First platform brochure describes the platform as SaaS with cloud-based hosting, and the vendor's G-Cloud 15 listing states that the service has a web browser interface (Microsoft Edge, Chrome and Safari) and that the desktop service provides the full back-office environment for planners, managers and administrators, while the mobile service is built for frontline field workers. Supervisors who need both will want a device with a full desktop browser.",
+      "source_url": "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/771837214669180"
+    },
+    {
+      "requirement": "NFC permission on Windows (feature not documented)",
+      "detail": "The Windows store listing declares the permission to use devices that support Near Field Communication services. The vendor does not document what NFC is used for, and no barcode, QR or RFID feature is described on the vendor site, in the 2025 platform brochure or in any store listing. Do not buy on the assumption that these features exist in the app.",
+      "source_url": "https://apps.microsoft.com/detail/9wzdncrcwsn4"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "The Tuga A10 is the pick for operatives running the Android app on a tablet. It runs Android 14, a current release, and its 10.1 inch 1920 x 1200 screen gives room for guided workflows, forms and signature capture. The IP68 and MIL-STD-810H ratings, the -20 to 60C operating range and the 8000mAh battery suit a van-based day across tenants' homes and plant rooms. 4G dual SIM keeps jobs syncing between visits, and GPS supports the map view. The A10 has no dedicated scan engine and does not list a fingerprint reader.",
+      "fit": [
+        "Android app on Google Play: the A10 runs Android 14, with a MediaTek MT8781 octa-core 2.2GHz processor, 8GB RAM and 128GB storage for the app and its locally held job data, plus microSD up to 2TB.",
+        "Photographs and signatures: 13MP rear camera with flash, 5MP front camera and a 10.1 inch FHD IPS touchscreen at 350 nits under tempered glass.",
+        "Offline working and sync between jobs: 4G dual SIM, dual-band Wi-Fi 5 and Bluetooth 5.2, with an 8000mAh battery.",
+        "Map view and location: GPS, Galileo and BeiDou positioning.",
+        "Repairs and maintenance environments: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, hand strap in the box, pogo pin connector, USB-C and 3.5mm jack."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Where operatives need a pocketable device, for example gas servicing engineers, homecare staff or lone workers who do not want a 10 inch tablet in hand, the Tuga A6 runs the same Android app on Android 14 in a 6.78 inch handheld at 441g. It adds 5G, a 10600mAh battery with 33W fast charge, IP69K on top of IP68, glove mode, and fingerprint and face unlock for the device itself. The trade-off is screen size: forms and the calendar view have less room than on the A10.",
+      "fit": [
+        "Android app on Google Play: Android 14 on a MediaTek Dimensity 6300 5G, 12GB RAM and 256GB storage, microSD up to 2TB.",
+        "Sync between jobs in poor signal areas: 5G, Wi-Fi 5 and Bluetooth 5.2, with a 10600mAh battery and 33W fast charge.",
+        "Photographs for forms: 64MP night-vision camera and 50MP main camera, useful in unlit lofts, meter cupboards and voids.",
+        "Map view and location: GPS, GLONASS and BeiDou.",
+        "Handheld use in wet and dirty conditions: IP68 and IP69K, MIL-STD-810H, Gorilla Glass 5, 560 nit 120Hz screen, glove mode, 441g, operating temperature -20 to 60C."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Totalmobile also publishes a Windows app in the Microsoft Store, and its G-Cloud listing describes a web browser interface for the back-office desktop service. For teams standardised on Windows, or supervisors who need the operative app and the browser-based admin tools on one device, the Tuga W10 runs Windows 11 Pro on an Intel N100 (x64), a later OS than the Windows 10 version 14393.0 the store lists and one of its listed architectures. It adds RJ45 Ethernet, HDMI and USB-A for depot use. Its IP65 rating is for dust and water jets, not immersion, and its removable 5000mAh battery is smaller than the Android devices' batteries, so real run time depends on load. The Windows store notes refer to an October 2024 9.27 release while the Android app is at 9.42.9, so confirm with Totalmobile that the Windows app is supported for your deployment.",
+      "fit": [
+        "Windows app requirement of Windows 10 version 14393.0 or higher on x86, x64 or Arm: the W10 runs Windows 11 Pro on an Intel N100 up to 3.4GHz (x64), with 8GB RAM and 128GB storage.",
+        "Browser-based back office: a full desktop browser on a 10.1 inch 1280 x 800 multi-touch IPS screen, with HDMI for an external monitor.",
+        "Photographs: 5MP rear camera and 2MP front camera for the webcam permission the store listing declares.",
+        "NFC permission declared by the Windows app: the W10 includes NFC hardware. What the app does with NFC is not documented by the vendor.",
+        "Depot and vehicle use: 100Mbps RJ45 Ethernet, USB-C, USB-A, pogo pin dock connector, optional 4G LTE and GPS, removable 5000mAh battery, IP65, 1197g."
+      ]
+    }
+  ],
+  "not_recommended_note": "Totalmobile publishes no supported-device list, hardware minimums or screen-size guidance. The public home page of its documentation library at docs.totalmobile.com lists product names only, and the product documentation behind it requires a login, so nothing on this page is a vendor recommendation. The Android app's minimum Android version could not be read from the Play listing and should be checked in the Play app before purchase. Barcode, QR, NFC and RFID features are not documented anywhere by the vendor; the only evidence is an NFC permission declared by the Windows app. If your forms are configured to scan codes, that would be camera-based through the app, and the Tuga A10 and A6 have no dedicated scan engine (the W10 offers an optional 2D barcode scanner and optional UHF RFID reader, but no Totalmobile feature using them is documented). The W10 is IP65 and not rated for immersion, and its 5000mAh battery is not an all-day battery under heavy use. The A10 does not list a fingerprint reader, which matters if your organisation uses the app's optional fingerprint sign-in. The Android app's Play rating was 3.1 from 104 reviews on 12 October 2026, which is a comment on the software rather than any device.",
+  "setup_steps": [
+    "Confirm with your Totalmobile administrator which platform your organisation deploys and obtain the site address, instance name and user credentials for your organisation. Totalmobile is deployed per organisation, so devices are set up under your existing contract rather than through a public sign-up.",
+    "Install the app: on the Tuga A10 or A6, open Google Play, search for Totalmobile (developer TotalMobile Solutions Ltd, package com.totalmobile) and install. On the Tuga W10, open the Microsoft Store and install Totalmobile (product ID 9WZDNCRCWSN4).",
+    "Activate with the details your administrator issued and grant the permissions the app requests. The Windows listing declares location, webcam, microphone, home or work network, internet and NFC permissions; photographs, voice recordings and the map view depend on these.",
+    "Run the first sync on Wi-Fi or mobile data before the operative leaves the depot, then check that assigned jobs are visible with the device in flight mode to confirm the offline capability the vendor describes.",
+    "If your IT team uses mobile device management, enrol the tablet before handing it over, and insert the SIM in the A10 or A6 (or specify the optional 4G LTE module when ordering the W10) so jobs sync between visits.",
+    "Fit the vehicle mounting dock in the van or a charging dock at the depot, and add a tempered glass screen protector before the device goes out. The A10 ships with a hand strap in the box."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109",
+    "Charging dock, £49.99 (A10, W10)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34",
+    "Belt holster, £22 (A6)"
+  ],
+  "faq": [
+    {
+      "q": "Will the Tuga A10 run the Totalmobile app?",
+      "a": "The Totalmobile app is published on Google Play by TotalMobile Solutions Ltd, and the Tuga A10 runs Android 14. The Play listing did not display a minimum Android version when we checked on 12 October 2026, so we cannot quote one, but Android 14 is a current release. We do not claim the A10 is certified or tested by TotalMobile Solutions Ltd; we state the published requirement and the device's operating system. A single trial unit is the right way to confirm it against your own configured forms."
+    },
+    {
+      "q": "Does Totalmobile work offline on these tablets?",
+      "a": "The vendor states that the Mobile Working capability has full offline capability, with all critical job information stored locally on the device, no dependency on signal, and updates syncing automatically when connectivity is restored. Its G-Cloud listing adds that some features may be limited until connectivity returns. That is a property of the app rather than the tablet. The A10 (4G dual SIM), A6 (5G) and W10 (optional 4G LTE) all give the app a mobile data connection for syncing between jobs."
+    },
+    {
+      "q": "Can we trial one unit, and do you invoice councils, housing associations and contractors?",
+      "a": "Yes to both. Tuga Hardware welcomes a single trial unit before a fleet order, and business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the listed prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    },
+    {
+      "q": "Should operatives have the 10.1 inch A10 or the 6.78 inch A6?",
+      "a": "Both run Android 14 and the same Android app. The A10 (£449) has a 10.1 inch 1920 x 1200 screen, which gives more room for forms, the calendar view and signatures, and it weighs 680g. The A6 (£299) is a 6.78 inch handheld at 441g with 5G, a 10600mAh battery, a 64MP night-vision camera, IP69K in addition to IP68, glove mode and fingerprint and face unlock. Choose the A10 for form-heavy repairs work and the A6 where the device must fit in a pocket or where camera quality in dark spaces matters more than screen size."
+    },
+    {
+      "q": "Is there a Windows option for Totalmobile?",
+      "a": "Yes. Totalmobile publishes a Windows app in the Microsoft Store (product ID 9WZDNCRCWSN4) listing Windows 10 version 14393.0 or higher on x86, x64 or Arm, and its G-Cloud listing describes a web browser interface for the back-office desktop service. The Tuga W10 (£649) runs Windows 11 Pro on an Intel N100 (x64) with 8GB RAM and 128GB storage, plus RJ45 Ethernet, HDMI, USB-A and a removable 5000mAh battery. It is IP65 rather than IP68, so it is protected against water jets but not rated for immersion. The Windows store notes are dated October 2024, so confirm with Totalmobile that the Windows app is supported for your deployment."
+    }
+  ],
+  "disclaimer": "Totalmobile, Field First and Mobilise are products of TotalMobile Solutions Ltd. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by TotalMobile Solutions Ltd.",
+  "sources": [
+    "https://www.totalmobile.com/",
+    "https://www.totalmobile.com/about-us/",
+    "https://www.totalmobile.com/platform/mobile-working/",
+    "https://www.totalmobile.com/resources/mobile-working-brochure/",
+    "https://www.totalmobile.com/platform/asset-management/",
+    "https://www.totalmobile.com/capabilities/mobile-workforce-management/",
+    "https://www.totalmobile.com/wp-content/uploads/2025/06/Field-First-Platform-Overview-Brochure-2025.pdf",
+    "https://www.totalmobile.com/sectors/local-government-social-housing/",
+    "https://www.totalmobile.com/sectors/facilities-management/",
+    "https://www.totalmobile.com/news/southampton-city-council-invests-in-faster-more-responsive-housing-repairs/",
+    "https://www.totalmobile.com/news/sng-reshapes-frontline-services-across-housing-portfolio/",
+    "https://www.totalmobile.com/news/bromford-flagship-livewest-completes-repairs-platform-rollout-across-80000-homes/",
+    "https://www.totalmobile.com/news/morgan-sindall-property-services-selects-totalmobile-to-strengthen-repairs-and-property-services-for-thousands-of-properties-across-the-uk/",
+    "https://www.totalmobile.com/news/chesterfield-borough-council-partners-with-totalmobile-to-transform-housing-repairs/",
+    "https://www.totalmobile.com/customer-success/fortem/",
+    "https://play.google.com/store/apps/details?id=com.totalmobile",
+    "https://apps.microsoft.com/detail/9wzdncrcwsn4",
+    "https://apps.apple.com/gb/app/totalmobile/id497680819",
+    "https://docs.totalmobile.com/home/Home.htm",
+    "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/771837214669180"
+  ]
+}
