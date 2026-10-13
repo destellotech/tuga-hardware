@@ -333,7 +333,7 @@ ${sizeLadder(androidRange)}
       <div class="container">
 ${sectionHead({
   tag: 'Windows range',
-  title: 'The same three sizes, running full Windows 11 Pro',
+  title: 'The same three sizes, running full Windows 11',
   lede: 'Buy these only if a specific piece of desktop software forces your hand: diagnostic tools, legacy databases, GIS, CAD viewers or a network drive. They cost roughly twice the Android equivalents, and for most trades Android does the job.',
   wide: true,
 })}
@@ -957,7 +957,7 @@ ${sectionHead({
               <div><span class="stat-label">Devices</span><strong data-calc-units>0</strong></div>
               <div><span class="stat-label">Discount</span><strong data-calc-tier>0%</strong></div>
               <div><span class="stat-label">You save</span><strong data-calc-saving>£0</strong></div>
-              <div><span class="stat-label">Total inc. VAT</span><strong data-calc-total>£0</strong></div>
+              <div><span class="stat-label">Total</span><strong data-calc-total>£0</strong></div>
             </div>
             <p class="calc-note" data-calc-note>Add two or more devices to unlock a discount. Delivery is free.</p>
             <p class="calc-vat" data-calc-vat></p>
@@ -1088,14 +1088,14 @@ ${breadcrumbs(pickerTrail)}
     <section class="section">
       <div class="container">
         <form class="picker" data-picker novalidate>
-${pickerStep(1, 'os', 'What does it need to run?', 'If every tool you use has an app, Android does the job for about half the price.', [
+${pickerStep(1, 'os', 'What does it need to run?', 'If every tool you use has an app, Android does the job for noticeably less.', [
   { value: 'android', title: 'Apps', text: 'Job sheets, forms, photos, maps, email, cloud tools.' },
   { value: 'windows', title: 'Windows software', text: 'Desktop programs with no app version: diagnostics, GIS, CAD viewers, network drives.' },
   { value: 'unsure', title: 'Not sure', text: 'We will assume apps. You can always ask us before buying.' },
 ])}
 ${pickerStep(2, 'size', 'Where does it live during the day?', null, [
   { value: '6', title: 'Pocket or belt', text: 'Photos, sign-off, comms. Out of the way until you need it.' },
-  { value: '8', title: 'One hand, van door pocket', text: 'Forms and drawings at a readable size. What most trades choose.' },
+  { value: '8', title: 'One hand, van door pocket', text: 'Forms and drawings at a readable size, still small enough for one hand.' },
   { value: '10', title: 'On the bonnet or a trestle', text: 'Plans, PDFs and spreadsheets at full size, read for long stretches.' },
 ])}
 ${pickerStep(3, 'scan', 'Do you scan barcodes?', null, [
@@ -1151,8 +1151,8 @@ const TRADE_FAQ = [
     a: 'Approved accounts can order on invoice and pay by bank transfer. Terms depend on the business and order size; we agree them when we approve the account. Card checkout stays available for every order.',
   },
   {
-    q: 'Do trade prices include VAT?',
-    a: 'Prices on the site include UK VAT, and we issue a VAT invoice for any order on request, so a VAT registered business can reclaim it. UK business to business sales are still charged VAT; it is not removed at checkout.',
+    q: 'Do you charge VAT?',
+    a: `No. ${TRADER.legalName} is not VAT registered, so no VAT is charged and there is none to reclaim: the price on the site is the total. Every order comes with an invoice for your records.`,
   },
   {
     q: 'Does a trade account change the discount?',
@@ -1167,7 +1167,7 @@ write(
   page({
     title: 'Trade Accounts: Pay on Invoice | Tuga Hardware',
     description:
-      'Open a Tuga Hardware trade account: order rugged tablets on invoice, pay by bank transfer, VAT invoices on every order. For UK businesses and sole traders.',
+      'Open a Tuga Hardware trade account: order rugged tablets on invoice and pay by bank transfer. No VAT to add. For UK businesses and sole traders.',
     path: '/trade',
     active: 'bulk',
     schema: [breadcrumbSchema(tradeTrail), tradeFaq.schema],
@@ -1188,10 +1188,9 @@ ${breadcrumbs(tradeTrail)}
             <h2 class="title-xs">What you get</h2>
             <ul class="editorial-list">
               <li>Order on invoice and pay by bank transfer</li>
-              <li>VAT invoices for every order, on request</li>
+              <li>An invoice for every order, and no VAT to add</li>
               <li>The same automatic team discounts, up to 10% at ten devices</li>
-              <li>One named contact who knows your order history</li>
-              <li>Help with staged deliveries and mixed fleets</li>
+                            <li>Help with staged deliveries and mixed fleets</li>
             </ul>
             <p style="margin-top:1.5rem">Just want a few units now? You do not need an account. <a class="link-arrow" href="/bulk">Use the bulk calculator</a></p>
           </div>
@@ -2245,9 +2244,9 @@ write(
   'llms.txt',
   `# ${SITE.name}
 
-> ${SITE.description} Prices include VAT. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
+> ${SITE.description} No VAT to add. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
 
-Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work at roughly half the price; Windows only when desktop software requires it.
+Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work and costs noticeably less; Windows only when desktop software requires it.
 
 ## Devices
 

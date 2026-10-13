@@ -544,7 +544,9 @@
     const nextTier =
       d === 1
         ? 'Add one more device for 3% off both'
-        : d >= 2 && d < 5
+        : d === 2
+          ? 'Add one more device for 5% off'
+          : d >= 3 && d < 5
           ? `Add ${5 - d} more ${5 - d === 1 ? 'device' : 'devices'} for 8% off`
           : d >= 5 && d < 10
             ? `Add ${10 - d} more ${10 - d === 1 ? 'device' : 'devices'} for 10% off`
@@ -1014,11 +1016,11 @@
     const reasons = [];
 
     if (answers.os === 'unsure') {
-      reasons.push('You were not sure about software, so we went with Android: it runs the apps most trades use and costs about half as much. Ask us if a specific program worries you.');
+      reasons.push('You were not sure about software, so we went with Android: it runs the apps most trades use and costs noticeably less. Ask us if a specific program worries you.');
     } else if (os === 'android') {
-      reasons.push('Android runs the apps you use and costs about half what the Windows equivalent does.');
+      reasons.push('Android runs the apps you use and costs noticeably less than the Windows equivalent.');
     } else {
-      reasons.push('Full Windows 11 Pro, so your desktop software runs as it does in the office.');
+      reasons.push('Full Windows 11, so your desktop software runs as it does in the office.');
     }
 
     reasons.push(
@@ -1036,7 +1038,7 @@
         pick = scanner;
         reasons.push('A built-in scanner engine reads barcodes far faster than a camera when scanning is the job.');
       } else {
-        reasons.push('Android devices scan with the camera, which is fine for occasional use. For all-day scanning the Windows models come with a dedicated scanner engine.');
+        reasons.push('Android devices scan with the camera, which is fine for occasional use. For all-day scanning the Windows models are available with a dedicated scanner engine.');
       }
     } else if (answers.scan === 'some') {
       reasons.push('The camera handles the odd barcode or serial number with a free scanning app.');
@@ -1100,7 +1102,7 @@
               <span class="pdp-price-note">${
                 qty > 1
                   ? `each, with ${tier.percent}% off from ${qty} devices. Fine-tune quantities in the basket`
-                  : 'Includes VAT. Free UK delivery'
+                  : 'No VAT to add. Free UK delivery'
               }</span>
             </div>
             <div class="picker-actions">
@@ -1177,14 +1179,12 @@
 
       const next = units < 2 ? [2, 3] : units < 3 ? [3, 5] : units < 5 ? [5, 8] : units < 10 ? [10, 10] : null;
       $('[data-calc-note]', calc).textContent = next
-        ? `Add ${next[0] - units} more ${next[0] - units === 1 ? 'device' : 'devices'} for ${next[1]}% off everything. Delivery is free.`
+        ? `Add ${next[0] - units} more ${next[0] - units === 1 ? 'device' : 'devices'} for ${next[1]}% off every device. Delivery is free.`
         : 'Top tier reached: 10% off every device. Delivery is free.';
 
-      // Prices include 20% VAT, so VAT is one sixth of the total.
-      const vat = Math.round(totalPence / 6);
-      $('[data-calc-vat]', calc).textContent = units
-        ? `Of which VAT ${money(vat / 100)}. Net ${money((totalPence - vat) / 100)}.`
-        : '';
+      // Destello Tech Ltd is not VAT registered (src/store-config.js), so the
+      // total is the whole price.
+      $('[data-calc-vat]', calc).textContent = units ? 'No VAT to add.' : '';
 
       addBtn.disabled = printBtn.disabled = units === 0;
     };
