@@ -15,7 +15,7 @@
       "tagline": "The one that lives in your pocket.",
       "shortFor": "Photos, job sheets, sign-off and comms, on a phone that survives the site.",
       "description": "A 6.8 inch rugged Android handheld for tradespeople who need a tough device in their pocket. IP68 and IP69K rated, drop tested to MIL-STD-810H, with a 10600mAh battery and 5G.",
-      "longDescription": "The A6 is the smallest device in the range and the one most people start with. It goes in a pocket or a belt holster, survives being dropped down a stairwell, and still has charge at the end of a long shift. The 64MP night vision camera earns its keep in loft spaces, voids and under floors where a torch and a phone in the same hand is one hand too few. 5G means photos and job sheets upload before you have got back to the van.",
+      "longDescription": "The A6 is the smallest device in the range. It goes in a pocket or a belt holster, survives being dropped down a stairwell, and still has charge at the end of a long shift. The 64MP night vision camera earns its keep in loft spaces, voids and under floors where a torch and a phone in the same hand is one hand too few. 5G means photos and job sheets upload before you have got back to the van.",
       "price": 299,
       "compareAtPrice": null,
       "currency": "GBP",
@@ -62,8 +62,8 @@
       "order": 2,
       "tagline": "The all-rounder. Fits the van door pocket.",
       "shortFor": "Forms, maps, site photos and quotes, one-handed, all shift.",
-      "description": "An 8 inch rugged Android tablet with IP68 protection, 4G LTE and a sunlight readable screen. The size most tradespeople settle on: big enough for forms and drawings, small enough to hold in one hand.",
-      "longDescription": "Eight inches is the size most people land on once they have tried all three. It is big enough to fill in a form, read a drawing or follow a route without pinching and zooming, and small enough to hold in one hand up a ladder or drop into a van door pocket. Sunlight readable at 800 nits, sealed to IP68, and drop tested to MIL-STD-810H. Vehicle mountable with 4G LTE built in, so it works as a dashboard unit on the road and a site tablet when you get there.",
+      "description": "An 8 inch rugged Android tablet with IP68 protection, 4G LTE and a sunlight readable screen. A middle size: big enough for forms and drawings, small enough to hold in one hand.",
+      "longDescription": "Eight inches is the middle of the three sizes. It is big enough to fill in a form, read a drawing or follow a route without pinching and zooming, and small enough to hold in one hand up a ladder or drop into a van door pocket. Sunlight readable at 800 nits, sealed to IP68, and drop tested to MIL-STD-810H. Vehicle mountable with 4G LTE built in, so it works as a dashboard unit on the road and a site tablet when you get there.",
       "price": 379,
       "compareAtPrice": null,
       "currency": "GBP",
@@ -474,13 +474,13 @@
         "name": "3-Year Warranty",
         "months": 36,
         "recommended": true,
-        "summary": "36 months against defects, battery included, and we pay UK carriage both ways on accepted claims.",
+        "summary": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims.",
         "prices": {
           "tuga-a10": 65,
           "tuga-w10": 79,
           "tuga-a6": 65
         },
-        "chooser": "36 months against defects, battery included, carriage paid both ways."
+        "chooser": "36 months against defects, including battery defects (not normal capacity loss). UK carriage paid both ways on accepted claims."
       },
       {
         "id": "care",
@@ -494,7 +494,7 @@
           "tuga-a10": 279,
           "tuga-w10": 299
         },
-        "chooser": "Business fleets of ten or more A10 and W10 devices. Swap unit dispatched the same working day, batteries serviced at month 18, your software image on every device."
+        "chooser": "Business fleets of ten or more A10 and W10 devices. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
       }
     ]
   },
@@ -502,7 +502,7 @@
     {
       "id": "wty-3yr-tuga-a10",
       "name": "3-Year Warranty for Tuga A10",
-      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a10",
@@ -511,7 +511,7 @@
     {
       "id": "wty-3yr-tuga-w10",
       "name": "3-Year Warranty for Tuga W10",
-      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
       "price": 79,
       "currency": "GBP",
       "warrantyFor": "tuga-w10",
@@ -520,7 +520,7 @@
     {
       "id": "wty-3yr-tuga-a6",
       "name": "3-Year Warranty for Tuga A6",
-      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a6",

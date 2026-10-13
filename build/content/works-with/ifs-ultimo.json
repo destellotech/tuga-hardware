@@ -41,7 +41,7 @@
     {
       "requirement": "NFC and RFID: not listed as Ultimo Go+ features",
       "detail": "The current Google Play and App Store descriptions, the App Store release history and the public ultimo.com pages we checked do not list NFC or RFID tag reading among Ultimo Go+ features. We do not claim it works. If tag reading matters to you, confirm it with IFS Ultimo before buying. The NFC on Tuga devices is a hardware fact only.",
-      "source_url": "https://itunes.apple.com/lookup?id=991748989&country=gb"
+      "source_url": "https://apps.apple.com/gb/app/ultimo-go/id991748989"
     },
     {
       "requirement": "No published hardware or screen-size guidance",
@@ -138,7 +138,6 @@
     "https://www.ultimo.com/resources/customer-cases/manufacturing-technology-centre",
     "https://www.ultimo.com/resources/customer-cases/bristol-port-company",
     "https://play.google.com/store/apps/details?id=com.ultimo.UltimoGoPlus",
-    "https://apps.apple.com/gb/app/ultimo-go/id991748989",
-    "https://itunes.apple.com/lookup?id=991748989&country=gb"
+    "https://apps.apple.com/gb/app/ultimo-go/id991748989"
   ]
 }
