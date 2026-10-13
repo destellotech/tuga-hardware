@@ -30,7 +30,7 @@
     const res = await fetch('/data/products.json');
     if (!res.ok) throw new Error('Could not load the product catalogue');
     const data = await res.json();
-    catalogue = [...data.products, ...data.accessories];
+    catalogue = [...data.products, ...data.accessories, ...(data.warranties || [])];
     return catalogue;
   }
 
@@ -121,7 +121,7 @@
       this.read().forEach((entry) => {
         const product = findItem(products, entry.id);
         if (!product) return;
-        const isDevice = !String(product.id).startsWith('acc-');
+        const isDevice = !/^(acc|wty)-/.test(String(product.id));
         if (isDevice) deviceUnits += entry.quantity;
         entries.push({ ...entry, product, isDevice });
       });
@@ -329,10 +329,17 @@
 
       Cart.add(id, qty);
 
+      // A product page can offer a warranty for the device being added; it is
+      // one line per device unit, so it takes the same quantity.
+      const scope = btn.closest('[data-buy-box]') || document;
+      const chooser = scope.querySelector('[data-warranty-choice]:checked');
+      const warrantySku = chooser?.value || '';
+      if (warrantySku) Cart.add(warrantySku, qty);
+
       try {
         const products = await getCatalogue();
         const product = findItem(products, id);
-        toast(`${product ? product.name : 'Item'} added to basket`);
+        toast(`${product ? product.name : 'Item'}${warrantySku ? ' and warranty' : ''} added to basket`);
       } catch {
         toast('Added to basket');
       }
@@ -413,7 +420,9 @@
     const p = line.product;
     const image = p.imageBase
       ? `<img src="/img/products/${p.imageBase}-1.webp" alt="" width="120" height="120" loading="lazy">`
-      : '<span aria-hidden="true">◧</span>';
+      : p.warrantyFor
+        ? '<span class="cart-item-glyph" aria-hidden="true">✓</span>'
+        : '<span aria-hidden="true">◧</span>';
 
     return `
       <div class="cart-item" data-line="${p.id}">
@@ -561,6 +570,28 @@
       status.hidden = !msg;
       status.textContent = msg || '';
     };
+
+    // Mirror the server's warranty rule so the shopper gets a clear message
+    // here instead of a failed redirect.
+    try {
+      const products = await getCatalogue();
+      const units = {};
+      items.forEach((i) => {
+        if (/^(acc|wty)-/.test(i.id)) return;
+        const base = i.id.replace(/-scanner$/, '');
+        units[base] = (units[base] || 0) + i.quantity;
+      });
+      for (const i of items) {
+        const p = findItem(products, i.id);
+        if (!p || !p.warrantyFor) continue;
+        if (i.quantity > (units[p.warrantyFor] || 0)) {
+          setStatus(`${p.name} covers one device each. Reduce it to match the number of ${p.warrantyFor.replace('tuga-', 'Tuga ').toUpperCase()} units in the basket.`);
+          return;
+        }
+      }
+    } catch {
+      /* The server checks again; never block checkout on a catalogue fetch. */
+    }
 
     btn.disabled = true;
     const original = btn.textContent;

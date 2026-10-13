@@ -52,7 +52,7 @@ export function productCard(p) {
 
   return `
           <a class="product-card reveal" href="${productUrl(p)}" data-category="${p.category}">
-            ${p.badge ? `<span class="product-badge${p.badge === 'Most Popular' ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>` : ''}
+            ${p.badge ? `<span class="product-badge${/^(Our pick|Recommended|Most)/i.test(p.badge) ? ' product-badge-copper' : ''}">${esc(p.badge)}</span>` : ''}
             <div class="product-card-media">
               <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px')} alt="${esc(p.name)} rugged ${p.formFactor}" loading="lazy" width="600" height="450">
             </div>
@@ -119,7 +119,7 @@ export function compareTable(list = devices) {
     .map(
       (p) => `
               <tr>
-                <td><a href="${productUrl(p)}">${esc(p.name)}</a></td>
+                <td><a href="${productUrl(p)}">${esc(p.name)}</a>${p.badge ? ` <span class="pick-tag">${esc(p.badge)}</span>` : ''}</td>
                 <td class="cell-mono">${esc(p.sizeLabel)}&Prime; ${p.formFactor === 'handheld' ? 'handheld' : 'tablet'}</td>
                 <td class="cell-mono">${esc(p.specs.os)}</td>
                 <td class="cell-mono">${esc(p.specs.ip_rating)}</td>

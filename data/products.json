@@ -143,7 +143,7 @@
       },
       "features": ["NFC", "GPS + Galileo + BeiDou + QZSS + NavIC", "Dual-band Wi-Fi", "Dual SIM", "Pogo pin connector", "3.5mm headphone jack", "USB-C"],
       "inBox": ["Tuga A10 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
-      "badge": "Biggest Screen",
+      "badge": "Our pick for Android",
       "positioning": "The site tablet. Blueprints, BIM viewers, full spreadsheets, PDF plans."
     },
     {
@@ -280,7 +280,7 @@
       },
       "features": ["Windows 11 Pro", "Intel N100 processor", "HDMI + RJ45 + USB-C + USB-A", "Removable battery", "NFC (13.56MHz)", "Pogo pin dock connector", "Optional 4G LTE and GPS", "Optional fingerprint reader", "Optional 2D barcode scanner", "Optional UHF RFID reader"],
       "inBox": ["Tuga W10 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
-      "badge": null,
+      "badge": "Our pick for Windows",
       "positioning": "The full desktop experience. Real screen estate, full ports, full Windows."
     },
     {
@@ -457,6 +457,74 @@
       "currency": "GBP",
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
+    }
+  ],
+  "warranty": {
+    "_note": "Paid plans. Prices here MUST match the wty-* entries in src/api.js PRODUCTS. Total Care is quote-only (no checkout SKU). Page copy lives in build/content/warranty.json; Plan Terms in build/content/warranty-terms.json.",
+    "tiers": [
+      {
+        "id": "standard",
+        "name": "Standard warranty",
+        "months": 12,
+        "included": true,
+        "summary": "12 months against defects in materials and workmanship. Included with every device."
+      },
+      {
+        "id": "3yr",
+        "name": "3-Year Warranty",
+        "months": 36,
+        "recommended": true,
+        "summary": "36 months against defects, battery included, and we pay UK carriage both ways on accepted claims.",
+        "prices": {
+          "tuga-a10": 65,
+          "tuga-w10": 79,
+          "tuga-a6": 65
+        },
+        "chooser": "36 months against defects, battery included, carriage paid both ways."
+      },
+      {
+        "id": "care",
+        "name": "Total Care",
+        "months": 36,
+        "quoteOnly": true,
+        "businessOnly": true,
+        "minUnits": 10,
+        "summary": "For business fleets of ten or more A10 and W10 devices. A swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
+        "prices": {
+          "tuga-a10": 279,
+          "tuga-w10": 299
+        },
+        "chooser": "Business fleets of ten or more A10 and W10 devices. Swap unit dispatched the same working day, batteries serviced at month 18, your software image on every device."
+      }
+    ]
+  },
+  "warranties": [
+    {
+      "id": "wty-3yr-tuga-a10",
+      "name": "3-Year Warranty for Tuga A10",
+      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
+      "price": 65,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a10",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-w10",
+      "name": "3-Year Warranty for Tuga W10",
+      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
+      "price": 79,
+      "currency": "GBP",
+      "warrantyFor": "tuga-w10",
+      "tier": "3yr"
+    },
+    {
+      "id": "wty-3yr-tuga-a6",
+      "name": "3-Year Warranty for Tuga A6",
+      "description": "36 months against defects, battery included, carriage paid both ways. One per device.",
+      "price": 65,
+      "currency": "GBP",
+      "warrantyFor": "tuga-a6",
+      "tier": "3yr"
     }
   ]
 }

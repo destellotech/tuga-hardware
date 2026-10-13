@@ -41,7 +41,15 @@ const PRODUCTS = {
   'acc-car-mount':        { name: 'Car Phone Mount',                          price: 1700 },
   'acc-otg-adapter':      { name: 'USB-C to USB-A OTG Adapter',               price: 800 },
   'acc-shoulder-strap':   { name: 'Shoulder Strap',                           price: 1900 },
+  // Warranty add-ons: one per device unit. Never discounted, never a device.
+  // Total Care is sold on a quote and proforma only, so it has no SKU here.
+  'wty-3yr-tuga-a10': { name: "3-Year Warranty for Tuga A10", price: 6500, warrantyFor: 'tuga-a10', tier: '3yr' },
+  'wty-3yr-tuga-w10': { name: "3-Year Warranty for Tuga W10", price: 7900, warrantyFor: 'tuga-w10', tier: '3yr' },
+  'wty-3yr-tuga-a6': { name: "3-Year Warranty for Tuga A6", price: 6500, warrantyFor: 'tuga-a6', tier: '3yr' },
 };
+
+/** Scanner variants carry their base device's warranty. */
+const baseDeviceId = (id) => id.replace(/-scanner$/, '');
 
 /**
  * Normalise a client basket into priced lines.
@@ -52,20 +60,44 @@ const PRODUCTS = {
  *
  * @throws if an id is unknown or a quantity is not a sane integer.
  */
+/** A problem with what the customer sent, shown to them as a 400. */
+class BasketError extends Error {}
+
 function resolveBasket(items) {
   return items.map((item) => {
     const id = item.productId ?? item.id;
     const product = PRODUCTS[id];
-    if (!product) throw new Error(`Unknown product: ${id}`);
+    if (!product) throw new BasketError(`Unknown product: ${id}`);
 
     // A missing quantity means 1; anything else must be a sane integer.
     const quantity = item.quantity === undefined ? 1 : Number(item.quantity);
     if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
-      throw new Error(`Invalid quantity for ${id}`);
+      throw new BasketError(`Invalid quantity for ${id}`);
     }
 
     return { id, product, quantity };
   });
+}
+
+/**
+ * A warranty line is only valid for a device in the same basket, one per
+ * unit. Throws with a message the basket page can show.
+ */
+function validateWarranties(lines) {
+  const deviceUnits = {};
+  for (const line of lines) {
+    if (!line.product.device) continue;
+    const base = baseDeviceId(line.id);
+    deviceUnits[base] = (deviceUnits[base] || 0) + line.quantity;
+  }
+  for (const line of lines) {
+    const w = line.product.warrantyFor;
+    if (!w) continue;
+    const units = deviceUnits[w] || 0;
+    if (line.quantity > units) {
+      throw new BasketError(`${line.product.name} covers one device each: you have ${line.quantity} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
+    }
+  }
 }
 
 /** Bulk tiers are earned on devices only. */
@@ -178,6 +210,7 @@ async function handleStripeCheckout(request, env) {
 
     // Re-price server-side; the discount the client claims is ignored.
     const lines = resolveBasket(items);
+    validateWarranties(lines);
     const discountPercent = getDiscountPercent(countDeviceUnits(lines));
 
     // Build Stripe line items
@@ -238,6 +271,7 @@ async function handleStripeCheckout(request, env) {
 
     return corsResponse({ url: session.url });
   } catch (err) {
+    if (err instanceof BasketError) return corsError(err.message, 400);
     console.error('Stripe checkout handler error:', err);
     return corsError('Internal server error', 500);
   }
@@ -261,6 +295,7 @@ async function handlePayPalOrder(request, env) {
 
     // Validate and recalculate server-side (never trust the client total)
     const lines = resolveBasket(items);
+    validateWarranties(lines);
     const discountPercent = getDiscountPercent(countDeviceUnits(lines));
 
     let subtotalPence = 0;
@@ -331,6 +366,7 @@ async function handlePayPalOrder(request, env) {
 
     return corsResponse({ approvalUrl: approveLink.href, orderId: order.id });
   } catch (err) {
+    if (err instanceof BasketError) return corsError(err.message, 400);
     console.error('PayPal order handler error:', err);
     return corsError('Internal server error', 500);
   }
