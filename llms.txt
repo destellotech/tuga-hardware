@@ -31,11 +31,11 @@ Small UK retailer of rugged Android and Windows tablets and handhelds for trades
 
 ## Guides
 
-- [](https://www.tugahardware.com/blog/why-tradespeople-switching-rugged-tablets): 
-- [](https://www.tugahardware.com/blog/why-rugged-tablets-expensive): 
-- [](https://www.tugahardware.com/blog/rugged-vs-consumer-tablet-cost): 
-- [](https://www.tugahardware.com/blog/ip68-vs-ip67-waterproof-rating): 
-- [](https://www.tugahardware.com/blog/do-you-need-enterprise-rugged-tablet): 
-- [](https://www.tugahardware.com/blog/best-tablets-field-engineers): 
-- [](https://www.tugahardware.com/blog/best-rugged-tablets-construction): 
-- [](https://www.tugahardware.com/blog/best-budget-rugged-tablets-under-400): 
+- [Best Rugged Tablets for Construction Workers in 2026](https://www.tugahardware.com/blog/best-rugged-tablets-construction): The best rugged tablets for construction sites in the UK. What specs matter, why standard tablets fail, and which models survive mud, rain and drops.
+- [IP68 vs IP67: What Waterproof Rating Do You Actually Need?](https://www.tugahardware.com/blog/ip68-vs-ip67-waterproof-rating): IP68 vs IP67 explained simply. What each waterproof rating means for UK tradespeople, real world scenarios, and which Tuga tablets have which rating.
+- [Rugged Tablet vs Consumer Tablet: The True Cost Comparison](https://www.tugahardware.com/blog/rugged-vs-consumer-tablet-cost): Is a rugged tablet worth it? We compare the true cost of rugged vs normal tablets over 3 years, including replacements, downtime and data loss.
+- [Best Tablets for Field Engineers and Service Technicians](https://www.tugahardware.com/blog/best-tablets-field-engineers): The best tablets for field engineers and service technicians in the UK. 4G, GPS, camera, battery life and glove friendly screens that work on the job.
+- [Why Tradespeople Are Switching to Rugged Tablets in 2026](https://www.tugahardware.com/blog/why-tradespeople-switching-rugged-tablets): More UK tradespeople are switching to rugged tablets for paperless site management, BIM compliance, and insurance needs. Find out why 2026 is the year to go digital.
+- [Why Are Rugged Tablets So Expensive? (They Don't Have to Be)](https://www.tugahardware.com/blog/why-rugged-tablets-expensive): Enterprise rugged tablets cost over £2,000. We explain the markup model, why prices are hidden, and how to get the same specs for a fraction of the cost.
+- [Best Budget Rugged Tablets Under £400 in 2026](https://www.tugahardware.com/blog/best-budget-rugged-tablets-under-400): The best rugged tablets under £400 in 2026. Genuine IP68 protection, MIL-STD drop testing, and all day battery without the enterprise price tag.
+- [Do You Really Need an Enterprise Rugged Tablet? Probably Not.](https://www.tugahardware.com/blog/do-you-need-enterprise-rugged-tablet): Enterprise rugged tablets are built for fleet buyers. If you are a sole trader or small team, you are overpaying. Here is what you actually need.
