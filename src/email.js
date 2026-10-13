@@ -71,9 +71,9 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
   // Build line-item rows
   const itemRows = items.map(item => `
     <tr>
-      <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;color:${BRAND.darkText};">${item.name}</td>
-      <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;color:${BRAND.darkText};text-align:center;">${item.quantity}</td>
-      <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;color:${BRAND.darkText};text-align:right;">&pound;${(item.unitPrice / 100).toFixed(2)}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;color:${BRAND.darkText};">${escapeHtml(item.name)}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;color:${BRAND.darkText};text-align:center;">${escapeHtml(item.quantity)}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;color:${BRAND.darkText};text-align:right;">&pound;${escapeHtml((Number(item.unitPrice) / 100).toFixed(2))}</td>
     </tr>
   `).join('');
 
@@ -81,7 +81,7 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
   // amount — the unit prices in the rows above already have it applied.
   const discountRow = Number(discount) > 0 ? `
     <tr>
-      <td colspan="3" style="padding:8px 0;font-size:13px;color:${BRAND.copper};font-weight:600;">Bulk discount of ${Number(discount)}% applied — prices above already include it</td>
+      <td colspan="3" style="padding:8px 0;font-size:13px;color:${BRAND.copper};font-weight:600;">Bulk discount of ${escapeHtml(Number(discount))}% applied — prices above already include it</td>
     </tr>
   ` : '';
 
@@ -89,7 +89,8 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
   // buy an extended warranty must be told of their 45-day cancellation right
   // at purchase (Supply of Extended Warranties on Domestic Electrical Goods
   // Order 2005, article 8).
-  const hasPlan = items.some((item) => /^3-Year Warranty/.test(item.name || ''));
+  const hasPlan = items.some((item) =>
+    String(item.id || '').startsWith('wty-') || /^3-Year Warranty/.test(item.name || ''));
   const planBlock = hasPlan ? `
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Your 3-Year Warranty</h3>
@@ -110,11 +111,11 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
       <h3 style="margin:0 0 12px;font-size:15px;color:${BRAND.green};">Shipping to</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-        ${shippingAddress.name || ''}<br>
-        ${shippingAddress.line1 || ''}<br>
-        ${shippingAddress.line2 ? shippingAddress.line2 + '<br>' : ''}
-        ${shippingAddress.city || ''} ${shippingAddress.postal_code || ''}<br>
-        ${shippingAddress.country || 'GB'}
+        ${escapeHtml(shippingAddress.name || '')}<br>
+        ${escapeHtml(shippingAddress.line1 || '')}<br>
+        ${shippingAddress.line2 ? escapeHtml(shippingAddress.line2) + '<br>' : ''}
+        ${escapeHtml(shippingAddress.city || '')} ${escapeHtml(shippingAddress.postal_code || '')}<br>
+        ${escapeHtml(shippingAddress.country || 'GB')}
       </p>
     </div>
   ` : '';
@@ -124,7 +125,7 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     <p style="margin:0 0 24px;font-size:15px;color:${BRAND.mutedText};">Thanks for your order. Here is your summary.</p>
 
     <p style="margin:0 0 20px;font-size:14px;color:${BRAND.darkText};">
-      <strong>Order:</strong> ${orderId}
+      <strong>Order:</strong> ${escapeHtml(orderId)}
     </p>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -137,7 +138,7 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
       ${discountRow}
       <tr>
         <td colspan="2" style="padding:14px 0 0;font-size:16px;font-weight:700;color:${BRAND.green};">Total</td>
-        <td style="padding:14px 0 0;font-size:16px;font-weight:700;color:${BRAND.green};text-align:right;">&pound;${(total / 100).toFixed(2)}</td>
+        <td style="padding:14px 0 0;font-size:16px;font-weight:700;color:${BRAND.green};text-align:right;">&pound;${escapeHtml((Number(total) / 100).toFixed(2))}</td>
       </tr>
     </table>
 
@@ -172,8 +173,8 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
 // ---------------------------------------------------------------------------
 export async function sendShippingNotification(env, email, trackingNumber, carrier) {
   const trackingUrl = carrier && carrier.toLowerCase().includes('royal mail')
-    ? `https://www.royalmail.com/track-your-item#/tracking-results/${trackingNumber}`
-    : `https://track.aftership.com/${trackingNumber}`;
+    ? `https://www.royalmail.com/track-your-item#/tracking-results/${encodeURIComponent(trackingNumber)}`
+    : `https://track.aftership.com/${encodeURIComponent(trackingNumber)}`;
 
   const bodyHtml = `
     <h2 style="margin:0 0 8px;font-size:22px;color:${BRAND.green};">Your order has shipped</h2>
@@ -181,9 +182,9 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 
     <div style="padding:24px;background-color:${BRAND.cream};border-radius:6px;text-align:center;">
       <p style="margin:0 0 6px;font-size:13px;color:${BRAND.mutedText};text-transform:uppercase;letter-spacing:1px;">Tracking number</p>
-      <p style="margin:0 0 16px;font-size:20px;font-weight:700;color:${BRAND.green};letter-spacing:1px;">${trackingNumber}</p>
-      ${carrier ? `<p style="margin:0 0 16px;font-size:14px;color:${BRAND.darkText};">Carrier: ${carrier}</p>` : ''}
-      <a href="${trackingUrl}" style="display:inline-block;padding:12px 32px;background-color:${BRAND.copper};color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;border-radius:6px;">Track your order</a>
+      <p style="margin:0 0 16px;font-size:20px;font-weight:700;color:${BRAND.green};letter-spacing:1px;">${escapeHtml(trackingNumber)}</p>
+      ${carrier ? `<p style="margin:0 0 16px;font-size:14px;color:${BRAND.darkText};">Carrier: ${escapeHtml(carrier)}</p>` : ''}
+      <a href="${escapeHtml(trackingUrl)}" style="display:inline-block;padding:12px 32px;background-color:${BRAND.copper};color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;border-radius:6px;">Track your order</a>
     </div>
 
     <div style="margin-top:32px;padding:20px;background-color:${BRAND.cream};border-radius:6px;">
@@ -238,7 +239,8 @@ function escapeHtml(value = '') {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ---------------------------------------------------------------------------

@@ -52,6 +52,13 @@ const PRODUCTS = {
 const baseDeviceId = (id) => id.replace(/-scanner$/, '');
 
 /**
+ * Map a provider line-item name back to our product id. Stripe and PayPal
+ * only echo the name we sent, which is PRODUCTS[id].name.
+ */
+const productIdForName = (name) =>
+  Object.keys(PRODUCTS).find((id) => PRODUCTS[id].name === name) ?? null;
+
+/**
  * Normalise a client basket into priced lines.
  *
  * The client only ever sends ids and quantities — prices come from PRODUCTS
@@ -384,6 +391,19 @@ async function handlePayPalOrder(request, env) {
 // then save and email exactly once per order.
 
 /**
+ * Has our own confirmation (with the order summary and, for a plan, the
+ * 45-day cancellation notice) gone out? Records written before receiptVia
+ * existed marked a Stripe receipt as emailSentAt with emailVia
+ * 'stripe-receipt'; that receipt carries neither, so it does not count.
+ */
+const confirmationSent = (record) =>
+  Boolean(record?.emailSentAt) && record.emailVia !== 'stripe-receipt';
+
+/** Has Stripe already been asked to email its own receipt for this order? */
+const receiptSent = (record) =>
+  Boolean(record?.receiptSentAt) || record?.emailVia === 'stripe-receipt';
+
+/**
  * Save and email an order unless it has already been recorded.
  * Returns the stored record.
  */
@@ -391,10 +411,10 @@ async function recordOrder(env, orderDetails) {
   let record = null;
   if (env.ORDERS) {
     record = await getOrder(env.ORDERS, orderDetails.orderId);
-    // Recorded and emailed already: nothing to do. Recorded but never
-    // emailed (e.g. the email service was down): fall through and retry
-    // the email only.
-    if (record?.emailSentAt) return record;
+    // Recorded and confirmed by email already: nothing to do. Recorded but
+    // never confirmed (the email service was down, even if Stripe sent its
+    // receipt): fall through and retry our own confirmation only.
+    if (confirmationSent(record)) return record;
   }
 
   if (!record) {
@@ -408,12 +428,12 @@ async function recordOrder(env, orderDetails) {
   if (!orderDetails.customerEmail) {
     console.error('Order has no customer email, confirmation not sent:', orderDetails.orderId);
   } else {
-    let emailVia = null;
+    let updates = null;
 
     if (env.RESEND_API_KEY) {
       try {
         await sendOrderConfirmation(env, orderDetails.customerEmail, orderDetails);
-        emailVia = 'resend';
+        updates = { emailSentAt: new Date().toISOString(), emailVia: 'resend' };
       } catch (emailErr) {
         // Log but do not fail: the payment is already taken.
         console.error('Email send failed:', emailErr);
@@ -426,19 +446,28 @@ async function recordOrder(env, orderDetails) {
     // receipt_email on a live payment sends one regardless of dashboard
     // settings, including on a payment that has already succeeded.
     // (PayPal always emails its own receipt to the payer.)
-    if (!emailVia && orderDetails.provider === 'stripe' && orderDetails.paymentIntent) {
+    // The receipt is NOT our confirmation: it has no plan notice, so it is
+    // tracked separately (receiptVia) and the next confirm-order or webhook
+    // call retries the Resend confirmation. Ask Stripe only once.
+    if (!updates && orderDetails.provider === 'stripe' && orderDetails.paymentIntent && !receiptSent(record)) {
       try {
         await sendStripeReceipt(orderDetails.paymentIntent, orderDetails.customerEmail, env);
-        emailVia = 'stripe-receipt';
+        updates = { receiptSentAt: new Date().toISOString(), receiptVia: 'stripe-receipt' };
       } catch (err) {
         console.error('Stripe receipt fallback failed:', err);
       }
     }
 
-    if (emailVia) {
-      record = { ...record, emailSentAt: new Date().toISOString(), emailVia };
+    if (updates) {
+      // A legacy record that counted the receipt as the confirmation keeps
+      // that fact under the new fields.
+      if (record.emailVia === 'stripe-receipt' && updates.emailVia === 'resend') {
+        updates.receiptSentAt = record.receiptSentAt || record.emailSentAt;
+        updates.receiptVia = 'stripe-receipt';
+      }
+      record = { ...record, ...updates };
       if (env.ORDERS) {
-        await updateOrder(env.ORDERS, orderDetails.orderId, { emailSentAt: record.emailSentAt, emailVia })
+        await updateOrder(env.ORDERS, orderDetails.orderId, updates)
           .catch((err) => console.error('Could not mark email sent:', err));
       }
     }
@@ -456,6 +485,9 @@ async function recordStripeOrder(sessionId, env) {
   if (session.error) throw new Error(`Stripe session lookup failed: ${session.error.message}`);
   if (session.payment_status !== 'paid') return { paid: false };
 
+  // Listed separately: an expanded session carries at most 10 line items.
+  const lineItems = await fetchStripeLineItems(sessionId, env);
+
   // Newer Stripe API versions moved shipping under collected_information.
   const shipping = session.collected_information?.shipping_details || session.shipping_details;
 
@@ -467,12 +499,13 @@ async function recordStripeOrder(sessionId, env) {
     shippingAddress: shipping?.address
       ? { name: shipping.name, ...shipping.address }
       : null,
-    items: session.line_items?.data?.map(li => ({
+    items: lineItems.map(li => ({
+      id: productIdForName(li.description),
       name: li.description,
       quantity: li.quantity,
       unitPrice: li.price?.unit_amount || li.amount_total / li.quantity,
       total: li.amount_total,
-    })) || [],
+    })),
     subtotal: session.amount_subtotal,
     total: session.amount_total,
     discount: session.metadata?.discount_percent || 0,
@@ -533,6 +566,7 @@ async function recordPayPalOrder(orderId, env) {
         }
       : null,
     items: purchaseUnit.items?.map(item => ({
+      id: productIdForName(item.name),
       name: item.name,
       quantity: parseInt(item.quantity, 10),
       unitPrice: Math.round(parseFloat(item.unit_amount?.value || '0') * 100),
@@ -575,13 +609,19 @@ async function handleConfirmOrder(request, env) {
 
     // Only what the confirmation page shows: no address or email.
     const { order } = result;
+    // emailSent is true only for our own confirmation; a Stripe receipt is
+    // reported through emailVia so the page can say what actually arrived.
+    const emailSent = confirmationSent(order);
     return corsResponse({
       status: 'confirmed',
+      orderId: order.orderId,
       provider: order.provider,
       total: order.total,
       currency: order.currency,
-      emailSent: Boolean(order.emailSentAt),
-      emailVia: order.emailVia ?? null,
+      emailSent,
+      emailVia: emailSent ? 'resend' : receiptSent(order) ? 'stripe-receipt' : null,
+      hasPlan: (order.items || []).some((item) =>
+        String(item.id || productIdForName(item.name) || '').startsWith('wty-')),
     });
   } catch (err) {
     console.error('Confirm order error:', err);
@@ -668,7 +708,7 @@ async function handleContact(request, env) {
     const { name, email, company, topic, message, website } = await request.json();
 
     // Honeypot: real users never fill a hidden field.
-    if (website) return corsResponse({ ok: true });
+    if (website) return corsResponse({ ok: true, emailed: true });
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return corsError('A valid email address is required', 422);
@@ -702,15 +742,13 @@ async function handleContact(request, env) {
       }
     }
 
-    try {
-      await sendEnquiry(env, enquiry);
-    } catch (mailErr) {
-      console.error('Enquiry email failed:', mailErr);
-      // Only fail the request if the message is now nowhere at all.
-      if (!stored) return corsError('Could not send the message', 500);
-    }
+    const emailed = await deliverEnquiry(env, enquiry);
+    // Only fail the request if the message is now nowhere at all.
+    if (!emailed && !stored) return corsError('Could not send the message', 500);
 
-    return corsResponse({ ok: true });
+    // emailed: false tells the page the message is kept but support has not
+    // been notified yet, so it can say so rather than promise a quick reply.
+    return corsResponse({ ok: true, emailed });
   } catch (err) {
     console.error('Contact form error:', err);
     return corsError('Could not send the message', 500);
@@ -808,27 +846,66 @@ async function handleStripeCheck(env) {
 }
 
 /**
- * Buyer's-guide signup. Stored in KV so there is a list to export later;
- * the send itself is handled manually for now.
+ * Send an enquiry to support. Returns whether the email went out; a failure
+ * is logged, never thrown, because the caller has usually stored it already.
+ */
+async function deliverEnquiry(env, enquiry) {
+  try {
+    await sendEnquiry(env, enquiry);
+    return true;
+  } catch (mailErr) {
+    console.error('Enquiry email failed:', mailErr);
+    return false;
+  }
+}
+
+/**
+ * "Not sure which size?" form: a request for personal size advice. Stored in
+ * KV as before and sent to support through the enquiry email so someone
+ * replies. Same contract as /api/contact: { ok, emailed }.
  */
 async function handleSubscribe(request, env) {
   try {
-    const { email } = await request.json();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const { email, website, message, page } = await request.json();
+
+    // Honeypot: real users never fill a hidden field.
+    if (website) return corsResponse({ ok: true, emailed: true });
+
+    if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return corsError('A valid email address is required', 422);
     }
 
+    const advice = {
+      email: email.slice(0, 160),
+      topic: 'Size advice request',
+      message: [
+        'Please send personal advice on which tablet size suits this customer.',
+        message ? `Note: ${String(message).slice(0, 2000)}` : '',
+        page ? `Sent from: ${String(page).slice(0, 200)}` : '',
+      ].filter(Boolean).join('\n'),
+      createdAt: new Date().toISOString(),
+    };
+
+    let stored = false;
     if (env.ORDERS) {
-      await env.ORDERS.put(
-        `subscriber:${email.toLowerCase()}`,
-        JSON.stringify({ email, createdAt: new Date().toISOString() })
-      );
+      try {
+        await env.ORDERS.put(
+          `subscriber:${advice.email.toLowerCase()}`,
+          JSON.stringify({ email: advice.email, topic: advice.topic, createdAt: advice.createdAt })
+        );
+        stored = true;
+      } catch (kvErr) {
+        console.error('Could not store size advice request:', kvErr);
+      }
     }
 
-    return corsResponse({ ok: true });
+    const emailed = await deliverEnquiry(env, advice);
+    if (!emailed && !stored) return corsError('Could not send the request', 500);
+
+    return corsResponse({ ok: true, emailed });
   } catch (err) {
     console.error('Subscribe error:', err);
-    return corsError('Could not subscribe', 500);
+    return corsError('Could not send the request', 500);
   }
 }
 
@@ -977,7 +1054,7 @@ function timingSafeEqual(a, b) {
 }
 
 /**
- * Fetch a Stripe Checkout Session with expanded line items.
+ * Ask Stripe to email its own receipt for a payment.
  */
 async function sendStripeReceipt(paymentIntentId, email, env) {
   const res = await fetch(`https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentIntentId)}`, {
@@ -1004,14 +1081,43 @@ async function findStripeSessionByPaymentIntent(paymentIntentId, env) {
   return data.data?.[0]?.id ?? null;
 }
 
+/**
+ * Fetch a Stripe Checkout Session (line items come from fetchStripeLineItems).
+ */
 async function fetchStripeSession(sessionId, env) {
   const res = await fetch(
-    `https://api.stripe.com/v1/checkout/sessions/${sessionId}?expand[]=line_items`,
+    `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
     {
       headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` },
     }
   );
   return res.json();
+}
+
+/**
+ * Every line item of a Checkout Session. `expand[]=line_items` stops at 10,
+ * which a team order with plans and accessories can pass, so page through
+ * the list endpoint instead.
+ */
+async function fetchStripeLineItems(sessionId, env) {
+  const items = [];
+  let startingAfter = null;
+  // A basket holds at most a few dozen lines; the cap only guards a loop.
+  for (let page = 0; page < 20; page++) {
+    const params = new URLSearchParams({ limit: '100' });
+    if (startingAfter) params.set('starting_after', startingAfter);
+    const res = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}/line_items?${params}`,
+      { headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` } }
+    );
+    const data = await res.json();
+    if (!res.ok) throw new Error(`Stripe line items lookup failed: ${data.error?.message || res.status}`);
+    const pageItems = data.data || [];
+    items.push(...pageItems);
+    if (!data.has_more || pageItems.length === 0) break;
+    startingAfter = pageItems[pageItems.length - 1].id;
+  }
+  return items;
 }
 
 // ---------------------------------------------------------------------------

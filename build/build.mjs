@@ -1145,6 +1145,34 @@ write(
 );
 
 /* ==========================================================================
+   404 — src/worker.js serves this with status 404 for any unknown path
+   ========================================================================== */
+
+write(
+  '404.html',
+  page({
+    title: 'Page Not Found | Tuga Hardware',
+    description: 'We could not find that page. Browse the range, see which apps the tablets run, or get in touch.',
+    path: '/404',
+    noindex: true,
+    schema: [],
+    body: `
+    <section class="section">
+      <div class="container-narrow" style="text-align:center">
+        <h1 class="title-lg">We could not find that page</h1>
+        <p class="lede" style="margin-inline:auto">The link may be old, or the address mistyped. These will get you back on track.</p>
+        <div style="margin-top:2.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap">
+          <a class="btn btn-primary" href="/products/">Browse the range</a>
+          <a class="btn btn-outline" href="/works-with/">Works with your apps</a>
+          <a class="btn btn-outline" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </section>
+`,
+  })
+);
+
+/* ==========================================================================
    LEGAL / POLICY PAGES — content lifted from the previous build
    ========================================================================== */
 
@@ -1988,8 +2016,6 @@ write(
   'robots.txt',
   `User-agent: *
 Allow: /
-Disallow: /cart
-Disallow: /order-confirmation
 Disallow: /api/
 
 # AI crawlers are welcome. Being cited is how a small store gets found.
