@@ -443,6 +443,38 @@
       </div>`;
   }
 
+  /* Under a device with no (or not enough) 3-Year Warranty in the basket,
+     offer it once with a single button. Scanner variants share the base
+     device's warranty, so the offer sits under whichever line comes first. */
+  function warrantyOffer(line, lines, products) {
+    const p = line.product;
+    if (/^(acc|wty)-/.test(p.id)) return '';
+    const base = p.id.replace(/-scanner$/, '');
+    const wty = products.find((x) => x.warrantyFor === base);
+    if (!wty) return '';
+    const firstForBase = lines.find((l) => l.product.id.replace(/-scanner$/, '') === base);
+    if (firstForBase !== line) return '';
+
+    const units = lines
+      .filter((l) => !/^(acc|wty)-/.test(l.product.id) && l.product.id.replace(/-scanner$/, '') === base)
+      .reduce((n, l) => n + l.quantity, 0);
+    const covered = lines.find((l) => l.product.id === wty.id)?.quantity || 0;
+    const missing = units - covered;
+    if (missing <= 0) return '';
+
+    const device = findItem(products, base)?.name || p.name;
+    return `
+      <div class="cart-offer">
+        <div class="cart-offer-text">
+          <p class="cart-offer-title">Cover ${missing === 1 ? 'it' : `all ${missing}`} for 3 years <span class="pick-tag">Recommended</span></p>
+          <p class="cart-offer-meta">36 months against defects on your ${device}, battery included, carriage paid both ways. <a href="/warranty">How it works</a></p>
+        </div>
+        <button type="button" class="btn btn-outline cart-offer-btn" data-add-warranty="${wty.id}" data-qty="${missing}">
+          Add for ${money(wty.price * missing)}
+        </button>
+      </div>`;
+  }
+
   function cartSummary(totals) {
     const d = totals.deviceUnits;
     const nextTier =
@@ -513,7 +545,9 @@
     emptyEl.hidden = true;
     layout.hidden = false;
 
-    $('[data-cart-items]').innerHTML = totals.lines.map(cartItemRow).join('');
+    $('[data-cart-items]').innerHTML = totals.lines
+      .map((line) => cartItemRow(line) + warrantyOffer(line, totals.lines, products))
+      .join('');
     $('[data-cart-summary]').innerHTML = cartSummary(totals);
   }
 
@@ -525,6 +559,13 @@
     document.addEventListener('cart:change', renderCart);
 
     layout.addEventListener('click', (e) => {
+      const offer = e.target.closest('[data-add-warranty]');
+      if (offer) {
+        Cart.add(offer.dataset.addWarranty, Number(offer.dataset.qty) || 1);
+        toast('3-Year Warranty added');
+        return;
+      }
+
       const row = e.target.closest('[data-line]');
       if (!row) return;
       const id = row.dataset.line;
