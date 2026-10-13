@@ -1,0 +1,38 @@
+name: Deploy
+
+# Every push to main (including a merged PR) builds the site and deploys the
+# Worker to Cloudflare. Needs two repository secrets:
+#   CLOUDFLARE_API_TOKEN  - token with the "Edit Cloudflare Workers" template
+#   CLOUDFLARE_ACCOUNT_ID - from the Cloudflare dashboard sidebar
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
