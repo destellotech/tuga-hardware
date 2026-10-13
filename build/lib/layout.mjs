@@ -55,9 +55,25 @@ export const SITE = {
   origin: 'https://www.tugahardware.com',
   tagline: 'Hard Shell. Long Life.',
   email: 'support@tugahardware.com',
+  // GA4 Measurement ID (G-XXXXXXXXXX) from Admin > Data streams. The Google
+  // tag is only emitted when this is set.
+  gaId: '',
   description:
     'Rugged tablets and handhelds built for UK tradespeople. IP68 waterproof, MIL-STD-810H drop tested. Free UK delivery.',
 };
+
+/** Google tag (gtag.js), placed as high in <head> as Google recommends. */
+function googleTag() {
+  if (!SITE.gaId) return '';
+  return `  <script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${SITE.gaId}');
+  </script>
+`;
+}
 
 export const data = JSON.parse(
   readFileSync(join(ROOT, 'data', 'products.json'), 'utf8')
@@ -395,7 +411,7 @@ export function page({
   <link rel="canonical" href="${canonical}">
   <meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}">
   <meta name="theme-color" content="#052e16">
-
+${googleTag()}
   <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="${esc(SITE.name)}">
   <meta property="og:locale" content="en_GB">
