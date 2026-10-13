@@ -610,21 +610,39 @@ p { text-wrap: pretty; }
   .nav-toggle { display: grid; }
 
   .primary-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    top: var(--header-offset, 4.5rem);
+    /* The sticky header is the containing block, so the drawer hangs off its
+       bottom edge and moves with it. No measured offset needed. */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-s) var(--gutter) var(--space-m);
-    transform: translateY(-115%);
-    transition: transform var(--base);
+    /* Closed: faded out and hidden from the tab order. The old fixed drawer
+       was translated up by 115% of its own height, which left its bottom
+       showing whenever the header was taller than 15% of the drawer. */
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--base), transform var(--base), visibility 0s linear var(--base);
     box-shadow: 0 18px 40px rgba(5, 46, 22, 0.09);
   }
 
-  .primary-nav.is-open { transform: translateY(0); }
+  .primary-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity var(--base), transform var(--base), visibility 0s;
+  }
+
+  /* Keep the announcement bar to one line on phones. */
+  .announce-more { display: none; }
 
   .primary-nav a {
     padding-block: 0.95rem;
