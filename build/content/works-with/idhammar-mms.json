@@ -116,10 +116,7 @@
     "https://www.idhammarsystems.com/services/",
     "https://www.idhammarsystems.com/?s=NFC",
     "https://play.google.com/store/apps/details?id=com.idhammar.connect&hl=en_GB&gl=GB",
-    "https://find-and-update.company-information.service.gov.uk/company/01912489",
-    "https://itunes.apple.com/search?term=idhammar&entity=software&country=gb&limit=200",
-    "https://itunes.apple.com/search?term=idhammar+connect&entity=software&country=us&limit=200",
-    "https://storeedgefd.dsx.mp.microsoft.com/v9.0/pages/searchResults?query=idhammar&market=GB&locale=en-GB&deviceFamily=Windows.Desktop"
+    "https://find-and-update.company-information.service.gov.uk/company/01912489"
   ],
   "not_recommended_note": "Idhammar Connect is published as an Android app. We found no iOS app and no Windows app or Microsoft Store listing, and Idhammar Systems publishes no Windows or browser requirements for the desktop system, so we do not recommend the Windows-based Tuga W10 for this app. The vendor also says that some features might still be exclusive to the desktop version, so technicians may still need a PC for some tasks. The vendor does not say how barcode and QR scanning is done; the Tuga A10 and A6 have no dedicated scan engine and the vendor publishes no supported-scanner list, so plan on camera-based scanning. NFC and RFID are not published Idhammar Connect features, so do not buy either device for that purpose."
 }
