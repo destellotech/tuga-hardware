@@ -20,6 +20,8 @@ SITE_URL = "https://www.tugahardware.com"
 # cart hides the PayPal button entirely and card checkout is the only option.
 PAYPAL_LIVE = "true"
 SITE_NAME = "Tuga Hardware"
+# New-order alerts go to support@tugahardware.com. To send them elsewhere:
+# ORDER_ALERT_EMAIL = "you@example.com"
 
 # KV namespace for order storage
 [[kv_namespaces]]

@@ -4,7 +4,7 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation, sendEnquiry } from './email.js';
+import { sendOrderConfirmation, sendNewOrderAlert, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
 
@@ -414,17 +414,26 @@ async function recordOrder(env, orderDetails) {
     record = await getOrder(env.ORDERS, orderDetails.orderId);
     // Recorded and confirmed by email already: nothing to do. Recorded but
     // never confirmed (the email service was down, even if Stripe sent its
-    // receipt): fall through and retry our own confirmation only.
-    if (confirmationSent(record)) return record;
+    // receipt): fall through and retry our own confirmation only. The same
+    // goes for the new-order alert to the shop.
+    if (confirmationSent(record) && !record.alertPending) return record;
   }
 
   if (!record) {
     console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
-    record = orderDetails;
+    record = { ...orderDetails, alertPending: true };
     if (env.ORDERS) {
-      record = await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
+      record = await saveOrder(env.ORDERS, orderDetails.orderId, record);
     }
   }
+
+  // Tell the shop what was bought. Only orders recorded since this alert
+  // existed carry alertPending, so older orders never trigger one.
+  if (record.alertPending) {
+    record = await alertShop(env, record);
+  }
+
+  if (confirmationSent(record)) return record;
 
   if (!orderDetails.customerEmail) {
     console.error('Order has no customer email, confirmation not sent:', orderDetails.orderId);
@@ -478,6 +487,29 @@ async function recordOrder(env, orderDetails) {
 }
 
 /**
+ * Email the shop a new-order alert, then clear alertPending. A failure
+ * leaves the flag set so the next webhook or confirmation call retries.
+ */
+async function alertShop(env, record) {
+  if (!env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set, new-order alert not sent:', record.orderId);
+    return record;
+  }
+  try {
+    await sendNewOrderAlert(env, record);
+  } catch (err) {
+    console.error('New-order alert failed:', err);
+    return record;
+  }
+  const updates = { alertPending: false, alertSentAt: new Date().toISOString() };
+  if (env.ORDERS) {
+    await updateOrder(env.ORDERS, record.orderId, updates)
+      .catch((err) => console.error('Could not mark alert sent:', err));
+  }
+  return { ...record, ...updates };
+}
+
+/**
  * Verify a Stripe Checkout Session is paid, then record it.
  * Returns { paid: false } for a session that has not been paid.
  */
@@ -497,6 +529,8 @@ async function recordStripeOrder(sessionId, env) {
     provider: 'stripe',
     paymentIntent: session.payment_intent,
     customerEmail: session.customer_details?.email,
+    customerName: session.customer_details?.name || shipping?.name || null,
+    customerPhone: session.customer_details?.phone || null,
     shippingAddress: shipping?.address
       ? { name: shipping.name, ...shipping.address }
       : null,
@@ -556,6 +590,9 @@ async function recordPayPalOrder(orderId, env) {
     provider: 'paypal',
     captureId: purchaseUnit.payments?.captures?.[0]?.id,
     customerEmail: order.payer?.email_address,
+    customerName: [order.payer?.name?.given_name, order.payer?.name?.surname].filter(Boolean).join(' ')
+      || shipping.name?.full_name || null,
+    customerPhone: order.payer?.phone?.phone_number?.national_number || null,
     shippingAddress: shipping.address
       ? {
           name: shipping.name?.full_name,
