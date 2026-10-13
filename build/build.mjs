@@ -1948,6 +1948,11 @@ const BLOG_IMAGES = {
   'why-rugged-tablets-expensive': 'blog-expensive.webp',
   'best-budget-rugged-tablets-under-400': 'blog-budget.webp',
   'do-you-need-enterprise-rugged-tablet': 'blog-enterprise.webp',
+  // Placeholders reusing existing heroes until dedicated photos are sourced.
+  'mil-std-810h-explained': 'blog-construction.webp',
+  'android-vs-windows-rugged-tablet': 'blog-field-engineer.webp',
+  'rugged-tablet-barcode-scanner': 'blog-enterprise.webp',
+  'rugged-tablet-cold-weather-battery': 'blog-waterproof.webp',
 };
 
 /** Read a blog fragment from build/content/blog/. */
