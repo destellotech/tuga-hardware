@@ -541,6 +541,15 @@ async function recordStripeOrder(sessionId, env) {
     // A completed session that is still unpaid is a delayed method (a bank
     // debit): the money is on its way, and async_payment_succeeded records it.
     const processing = session.status === 'complete' && session.payment_status === 'unpaid';
+    // Remember it so the daily cron can record the order once the money
+    // clears, even if the async_payment_succeeded webhook is not set up.
+    if (processing && env.ORDERS) {
+      try {
+        await env.ORDERS.put(`processing:${sessionId}`, new Date().toISOString(), { expirationTtl: 21 * 24 * 60 * 60 });
+      } catch (err) {
+        console.error('Could not note processing payment', sessionId, err);
+      }
+    }
     return { paid: false, reason: processing ? 'processing' : undefined };
   }
 
@@ -1564,4 +1573,33 @@ async function verifyPayPalWebhook(request, rawBody, env) {
     console.error('PayPal webhook verification error:', err);
     return false;
   }
+}
+
+/**
+ * Daily cron: record Stripe orders paid by a delayed method (bank debit)
+ * that have since cleared. Covers stores where the async_payment_succeeded
+ * webhook event is not subscribed. recordOrder never duplicates an order.
+ */
+export async function recheckProcessingPayments(env) {
+  if (!env.ORDERS || !env.STRIPE_SECRET_KEY) return { recorded: 0 };
+  let recorded = 0;
+  let cursor;
+  do {
+    const page = await env.ORDERS.list({ prefix: 'processing:', cursor });
+    cursor = page.list_complete ? undefined : page.cursor;
+    for (const { name } of page.keys) {
+      const sessionId = name.slice('processing:'.length);
+      try {
+        const result = await recordStripeOrder(sessionId, env);
+        if (result.paid) {
+          await env.ORDERS.delete(name);
+          recorded++;
+        }
+      } catch (err) {
+        console.error('Recheck failed for', sessionId, err);
+      }
+    }
+  } while (cursor);
+  if (recorded) console.log(`Recorded ${recorded} cleared delayed payment(s)`);
+  return { recorded };
 }

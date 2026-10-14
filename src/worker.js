@@ -9,7 +9,7 @@
      4. Anything else: the generated 404 page with a real 404 status
    ============================================ */
 
-import { handleRequest } from './api.js';
+import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
@@ -191,5 +191,6 @@ export default {
   // Daily cron (see [triggers] in wrangler.toml).
   async scheduled(event, env, ctx) {
     ctx.waitUntil(sendReviewRequests(env));
+    ctx.waitUntil(recheckProcessingPayments(env));
   },
 };
