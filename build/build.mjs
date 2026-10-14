@@ -593,7 +593,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, most models drop tested to MIL-STD-810H or 810G. From £299 with free UK delivery.',
+      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, most models drop tested to MIL-STD-810H or 810G. From £349 with free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),

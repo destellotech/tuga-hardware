@@ -19,7 +19,7 @@ import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-
 // unlock 10% off a £449 tablet.
 const PRODUCTS = {
   // Devices — Android
-  'tuga-a6':            { name: 'Tuga A6',                        price: 29900, device: true },
+  'tuga-a6':            { name: 'Tuga A6',                        price: 34900, device: true },
   'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
   'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
   // Devices — Windows
