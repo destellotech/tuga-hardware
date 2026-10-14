@@ -1,0 +1,4 @@
+{
+  "_note": "Verified-buyer reviews. Fill with `npm run reviews` (see build/pull-reviews.mjs). Only status \"published\" is shown. Remove a review only if it is unlawful, abusive, not about the product or not from a real buyer, and give the reason: hiding genuine negative reviews is banned under the DMCC Act 2024.",
+  "reviews": []
+}

@@ -667,6 +667,56 @@ ${ctaBanner({
    PRODUCT DETAIL PAGES
    ========================================================================== */
 
+/* ==========================================================================
+   VERIFIED REVIEWS — data/reviews.json (filled by build/pull-reviews.mjs)
+
+   Only reviews with status "published" are shown. A review counts for every
+   device in its order; scanner variants count for their base device.
+   ========================================================================== */
+
+const reviewData = JSON.parse(readFileSync(join(ROOT, 'data', 'reviews.json'), 'utf8'));
+
+const baseIdForName = (name) => {
+  const p = data.products.find((x) => x.name === name);
+  if (!p) return null;
+  return p.isVariant ? p.variantOf : p.id;
+};
+
+const reviewsFor = (p) =>
+  reviewData.reviews.filter(
+    (r) => r.status === 'published' && (r.items || []).some((n) => baseIdForName(n) === p.id)
+  );
+
+const stars = (n) =>
+  `<span class="review-stars" role="img" aria-label="${n} out of 5 stars">${'★'.repeat(n)}<span aria-hidden="true">${'★'.repeat(5 - n)}</span></span>`;
+
+const reviewMonth = (iso) =>
+  new Date(iso).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+function reviewSection(p, list) {
+  if (!list.length) return '';
+  const avg = list.reduce((t, r) => t + r.rating, 0) / list.length;
+  return `
+      <section class="pdp-section" id="reviews">
+        ${eyebrow('Verified buyers')}
+        <h2 class="title-sm" style="margin-bottom:1rem">What buyers say about the ${esc(p.name)}</h2>
+        <p class="review-summary">${stars(Math.round(avg))} <strong>${avg.toFixed(1)} out of 5</strong> from ${list.length} verified ${list.length === 1 ? 'review' : 'reviews'}. We publish every genuine review, good or bad.</p>
+        <div class="review-list">
+          ${list
+            .map(
+              (r) => `
+          <article class="review-card">
+            ${stars(r.rating)}
+            ${r.title ? `<h3>${esc(r.title)}</h3>` : ''}
+            ${r.body ? `<p>${esc(r.body)}</p>` : ''}
+            <p class="review-meta">${esc(r.displayName)}${r.trade ? `, ${esc(r.trade)}` : ''} / ${reviewMonth(r.createdAt)}${r.verifiedPurchase ? ' / Verified purchase' : ''}</p>
+          </article>`
+            )
+            .join('')}
+        </div>
+      </section>`;
+}
+
 function productPage(p) {
   const trail = [
     { label: 'Home', href: '/' },
@@ -677,6 +727,7 @@ function productPage(p) {
   const variants = variantsOf(p.id);
   const related = devices.filter((d) => d.id !== p.id).slice(0, 3);
   const compatible = accessories.filter((a) => a.compatibleWith.includes(p.id));
+  const reviews = reviewsFor(p);
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -720,6 +771,25 @@ function productPage(p) {
         returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
       },
     },
+    ...(reviews.length
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: (reviews.reduce((t, r) => t + r.rating, 0) / reviews.length).toFixed(1),
+            reviewCount: reviews.length,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          review: reviews.slice(0, 10).map((r) => ({
+            '@type': 'Review',
+            reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+            author: { '@type': 'Person', name: r.displayName },
+            datePublished: (r.createdAt || '').slice(0, 10),
+            ...(r.title ? { name: r.title } : {}),
+            ...(r.body ? { reviewBody: r.body } : {}),
+          })),
+        }
+      : {}),
     additionalProperty: Object.entries(p.specs).map(([k, v]) => ({
       '@type': 'PropertyValue',
       name: k.replace(/_/g, ' '),
@@ -886,6 +956,8 @@ ${specSheet(p)}
       </section>`
           : ''
       }
+
+${reviewSection(p, reviews)}
 
       <section class="pdp-section">
         ${eyebrow('Compare')}
