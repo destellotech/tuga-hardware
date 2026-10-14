@@ -1,0 +1,51 @@
+{
+  "a": "tuga-wh6",
+  "b": "tuga-w8",
+  "group": "windows",
+  "title": "Tuga WH6 vs Tuga W8: Windows Handheld or 8 Inch Tablet?",
+  "description": "Tuga WH6 (Windows handheld, £699) or Tuga W8 (8 inch Windows tablet, £629)? Same Celeron N5100 and 8GB, £70 apart. Which to buy, and when the cheaper W8 wins.",
+  "summary": "Same Celeron N5100 and 8GB, £70 apart: the WH6 is a 470g handheld with a removable battery, the W8 an 8 inch tablet with a brighter screen, HDMI and a fingerprint sensor.",
+  "lede": "For anyone who needs Windows on site and is torn between a handheld and an 8 inch tablet. The short answer: buy the Tuga W8 and keep £70 if the work happens on the screen, and pay the extra for the Tuga WH6 only if the device has to live in a holster or a pocket all day.",
+  "verdict": [
+    "Shape decides this one, not power. The Tuga WH6 costs £699 and the Tuga W8 costs £629, so the handheld is £70 more, and both run the same Intel Celeron N5100 with 8GB of RAM and 128GB of storage, with 4G LTE, NFC, GPS + GLONASS, and USB-C and USB-A ports. The extra £70 does not buy a different processor, more RAM or more built-in storage. It buys a 6.5 inch device at 470g that fits a belt holster, a removable 4000mAh battery and a microSD slot for cards up to 512GB. On paper it also lists MIL-STD-810H against the W8's MIL-STD-810G (our guide explains why the letter alone settles little), a 1.5 metre drop spec the W8 does not list, and an operating range of -20°C to 60°C against -10°C to 50°C. If you spend the day on your feet, working one-handed, that is what you are paying for.",
+    "If the work happens on the screen, the W8 is the better buy as well as the cheaper one. Its 8 inch 1280 x 800 display is the bigger and brighter of the two at 700 nits, against 400 nits on the WH6's 6.5 inch 720 x 1600 screen. That gives you more room for a form, a drawing or a spreadsheet. It is rated IP67 (immersion) rather than the WH6's IP65 (water jets), it has HDMI output for a monitor or a screen on site, and it has a fingerprint sensor. The cost is bulk: 750g against 470g, carried in a hand strap or a bag rather than a pocket. Its 5000mAh battery is the larger of the two but is not listed as removable, so plan to charge it rather than swap it.",
+    "Two things to know before you order either. The WH6 runs Windows 11 IoT and the W8 Windows 11 Pro, so if a software provider specifies an edition, ask them which they support, and in both cases check that the programs you rely on run on the device rather than assuming they will. Both have scanner versions: the WH6 with Barcode Scanner is £779, £80 over the standard WH6, and the W8 with 2D Scanner is £699, £70 over the standard W8. For delivery and warehouse work, the <a href=\"/for/logistics\">logistics page</a> covers why a handheld suits the job; for engineers whose diagnostic software only runs on Windows, the <a href=\"/for/field-service\">field service page</a> covers the W8."
+  ],
+  "chooseA": [
+    "The device lives in a holster or a pocket between tasks: the WH6 is a 6.5 inch handheld at 470g, 280g lighter than the W8.",
+    "You work one-handed all day, walking a site or scanning (a built-in scan engine needs the £779 scanner version), and you would rather not carry an 8 inch tablet on a hand strap.",
+    "You want the option to swap the battery: the WH6's 4000mAh battery is removable and the W8's 5000mAh battery is not listed as removable (spare batteries are not listed with the accessories, so ask us first).",
+    "You work in the cold or the heat: the WH6 is rated for -20°C to 60°C against the W8's -10°C to 50°C.",
+    "You need more than 128GB: the WH6 lists a microSD slot for cards up to 512GB, and the W8 lists no expandable storage."
+  ],
+  "chooseB": [
+    "The work happens on the screen: forms, drawings and desktop software are easier on 8 inches at 1280 x 800 than on 6.5 inches, and you keep £70.",
+    "You read it outdoors: the W8 is listed as sunlight readable at 700 nits against 400, and its IP67 rating covers accidental immersion where the WH6's IP65 covers water jets (our IP guide explains the difference).",
+    "You plug into a screen: the W8 has HDMI output alongside the USB-C and USB-A ports both devices have.",
+    "You want a fingerprint sensor, which the W8 lists and the WH6 does not.",
+    "You want a locking vehicle mount or a tablet dock: the W8 fits the Vehicle Mounting Dock (£109) and the Charging Dock (£49.99), where the WH6 has the Car Phone Mount (£17) and the Charging Cradle (£79)."
+  ],
+  "faq": [
+    {
+      "q": "Is the Tuga WH6 worth £70 more than the Tuga W8?",
+      "a": "Only if you need the shape. The WH6 costs £699 and the W8 £629, and they share the same Intel Celeron N5100, 8GB of RAM, 128GB of storage, 4G LTE and NFC, so the £70 buys a smaller, lighter device with a removable battery and a microSD slot, not more memory or built-in storage. If the device spends its day in your hands while you read, or on a tablet dock or a vehicle mounting dock, the <a href=\"/products/tuga-w8\">Tuga W8</a> gives you a bigger, brighter screen, IP67, HDMI and a fingerprint sensor for less. If it spends its day in a holster, the <a href=\"/products/tuga-wh6\">Tuga WH6</a> earns the difference. Both come with the same 12 month warranty, and the paid 3-Year Warranty is not offered on either model. Both prices have no VAT to add, and delivery is free to UK addresses in 7 to 10 working days."
+    },
+    {
+      "q": "Which one should I buy for barcode scanning?",
+      "a": "The Tuga WH6 with Barcode Scanner if scanning is the main job, the Tuga W8 with 2D Scanner if it is one part of a bigger task. Both come in a scanner version sold from the same product page as the standard model: the WH6 version is £779, £80 over the standard WH6, and the W8 version is £699, £70 over the standard W8, so the two are £80 apart. For scanning as the main job, parcels, stock or assets all day, the handheld is the natural shape: the standard WH6 weighs 470g and has a Belt Holster (£22) listed for it, though the scanner version's weight is not listed. For scanning as part of a bigger task, a stock count that also needs a bigger screen, say, the W8 version does the scanning and gives you the screen for the rest. Our guide to <a href=\"/blog/rugged-tablet-barcode-scanner\">built-in barcode scanners</a> covers when the extra cost pays off at all."
+    },
+    {
+      "q": "How do the batteries and charging compare?",
+      "a": "The W8 carries a 5000mAh battery and the WH6 4000mAh, so the tablet starts the day with more capacity. The WH6's battery is removable, so it can be swapped rather than charged in place, while the W8's is not listed as removable; spare batteries are not listed with the accessories, so check with <a href=\"/contact\">us</a> before you count on swapping one. For charging in place, the WH6 Charging Cradle is £79 and the Charging Dock for the W8 is £49.99, and the 12V DC Car Charger (£26) fits either (see <a href=\"/accessories\">accessories</a>). The WH6 also has the wider listed operating range, -20°C to 60°C against the W8's -10°C to 50°C. Our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in winter</a> explains what the cold does to either battery."
+    },
+    {
+      "q": "Do they run the same Windows software?",
+      "a": "Both run Windows 11 on the same Intel Celeron N5100 and 8GB of RAM, but the edition differs: Windows 11 IoT on the WH6, Windows 11 Pro on the W8. Storage is 128GB in both, an SSD in the W8 and eMMC plus a microSD slot in the WH6. If your software provider says which Windows editions they support, ask them about the one you are considering, and check that the specific programs you rely on run on the device before you order."
+    }
+  ],
+  "guides": [
+    "/blog/rugged-tablet-barcode-scanner",
+    "/blog/ip68-vs-ip67-waterproof-rating",
+    "/blog/mil-std-810h-explained"
+  ]
+}

@@ -11,7 +11,7 @@
    every product. Everything below ships as real HTML.
    ========================================================================== */
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import {
@@ -32,6 +32,7 @@ import {
   responsive,
   versioned,
   productUrl,
+  specLabel,
   page,
 } from './lib/layout.mjs';
 
@@ -176,6 +177,123 @@ const breadcrumbSchema = (trail) => ({
     ...(c.href ? { item: `${SITE.origin}${c.href}` } : {}),
   })),
 });
+
+/* ==========================================================================
+   COMPARE PAIRS — build/content/compare/<a>-vs-<b>.json
+
+   One file per head-to-head page (/compare/<a>-vs-<b>). Every fact on those
+   pages is generated from data/products.json; the JSON holds only the
+   opinion: verdict, when to choose which, FAQ, which guides to read next.
+   The list is read here, before the product pages, because each product
+   page links to every pair it appears in. The pages themselves are written
+   further down, after the blog, because "Read next" needs the posts.
+   ========================================================================== */
+
+const COMPARE_DIR = join(ROOT, 'build', 'content', 'compare');
+const COMPARE_GROUPS = ['size', 'android', 'windows'];
+
+/** Device name without the brand: "Tuga A8" -> "A8". */
+const shortName = (p) => p.name.replace(/^Tuga\s+/, '');
+
+/** Strip tags from a prose field, for places that take plain text. */
+const plainText = (html) => String(html).replace(/<[^>]+>/g, '');
+
+/**
+ * Escape a prose field from a compare JSON, then let <strong> and
+ * <a href="/..."> (or https://...) back through. Any other tag, or an <a>
+ * with extra attributes, is a mistake in the content file, so throw rather
+ * than ship it as visible angle brackets.
+ */
+function prose(text, where) {
+  const out = esc(text)
+    .replace(/&lt;(\/?)strong&gt;/g, '<$1strong>')
+    .replace(/&lt;a href=&quot;((?:\/|https:\/\/)[^&\s]*?)&quot;&gt;/g, '<a href="$1">')
+    .replace(/&lt;\/a&gt;/g, '</a>');
+  const stray = out.match(/&lt;\/?[a-zA-Z][^&]*&gt;/);
+  if (stray) {
+    const tag = stray[0].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+    throw new Error(`${where}: only <strong> and <a href="/..."> are allowed in prose, found ${tag}`);
+  }
+  return out;
+}
+
+/** Read and validate one pair file. Throws with the file name and the fault. */
+function readComparePair(file) {
+  const where = `build/content/compare/${file}`;
+  const fail = (msg) => {
+    throw new Error(`${where}: ${msg}`);
+  };
+
+  let json;
+  try {
+    json = JSON.parse(readFileSync(join(COMPARE_DIR, file), 'utf8'));
+  } catch (e) {
+    fail(`not valid JSON (${e.message})`);
+  }
+
+  const known = devices.map((d) => d.slug).join(', ');
+  const a = devices.find((d) => d.slug === json.a);
+  const b = devices.find((d) => d.slug === json.b);
+  if (!a) fail(`"a" must be a base device slug (${known}), got ${JSON.stringify(json.a)}`);
+  if (!b) fail(`"b" must be a base device slug (${known}), got ${JSON.stringify(json.b)}`);
+  if (a === b) fail(`"a" and "b" are both ${a.slug}`);
+  if (a.order > b.order) {
+    fail(
+      `"a" must come before "b" in catalogue order, but ${a.slug} is ${a.order} and ${b.slug} is ${b.order}. ` +
+        `Swap a and b, swap chooseA and chooseB, and rename the file ${b.slug}-vs-${a.slug}.json`
+    );
+  }
+  const expected = `${a.slug}-vs-${b.slug}.json`;
+  if (file !== expected) fail(`file name must match a and b: rename it ${expected}`);
+  if (!COMPARE_GROUPS.includes(json.group)) {
+    fail(`"group" must be one of ${COMPARE_GROUPS.join(', ')}, got ${JSON.stringify(json.group)}`);
+  }
+
+  for (const key of ['title', 'description', 'summary', 'lede']) {
+    if (typeof json[key] !== 'string' || !json[key].trim()) fail(`"${key}" must be a non-empty string`);
+  }
+  for (const key of ['verdict', 'chooseA', 'chooseB', 'faq', 'guides']) {
+    if (!Array.isArray(json[key]) || !json[key].length) fail(`"${key}" must be a non-empty array`);
+  }
+  for (const key of ['verdict', 'chooseA', 'chooseB', 'guides']) {
+    if (!json[key].every((x) => typeof x === 'string' && x.trim())) fail(`every item in "${key}" must be a non-empty string`);
+  }
+  json.faq.forEach((f, i) => {
+    if (!f || typeof f.q !== 'string' || !f.q.trim() || typeof f.a !== 'string' || !f.a.trim()) {
+      fail(`faq[${i}] needs "q" and "a" strings`);
+    }
+  });
+  json.guides.forEach((g) => {
+    if (!/^\/blog\/[a-z0-9-]+$/.test(g)) fail(`"guides" must be /blog/<slug> paths, got ${JSON.stringify(g)}`);
+  });
+
+  if (json.title.length > 65) console.warn(`${where}: title is ${json.title.length} characters; keep it under about 65`);
+  if (json.description.length < 140 || json.description.length > 160) {
+    console.warn(`${where}: description is ${json.description.length} characters; aim for 140 to 160`);
+  }
+
+  const slug = `${a.slug}-vs-${b.slug}`;
+  return { ...json, a, b, slug, path: `/compare/${slug}`, where, label: `${shortName(a)} vs ${shortName(b)}` };
+}
+
+const comparePairs = (existsSync(COMPARE_DIR) ? readdirSync(COMPARE_DIR) : [])
+  .filter((f) => f.endsWith('.json') && !f.startsWith('_'))
+  .map(readComparePair)
+  // Neighbouring sizes first (A6 vs A8 before A6 vs A10), then catalogue order.
+  .sort((x, y) => x.b.order - x.a.order - (y.b.order - y.a.order) || x.a.order - y.a.order);
+
+/** Every pair a device appears in, for the "Head to head" line on its page. */
+const pairsFor = (p) => comparePairs.filter((c) => c.a.id === p.id || c.b.id === p.id);
+
+/** "Head to head: A8 vs A10 · A6 vs A8", or nothing when no pair exists yet. */
+const compareLinks = (p) => {
+  const pairs = pairsFor(p);
+  if (!pairs.length) return '';
+  return `
+        <p class="compare-links">Head to head: ${pairs
+          .map((c) => `<a href="${c.path}">${esc(c.label)}</a>`)
+          .join(' &middot; ')}</p>`;
+};
 
 /* ==========================================================================
    HOME
@@ -526,6 +644,7 @@ ${sectionHead({
   lede: 'The specifications that actually differ between devices, in one table.',
 })}
 ${compareTable()}
+        <p class="compare-links" style="margin-top:var(--space-m)">Comparing two? <a href="/compare/">See the head to head pages</a>: a verdict, every specification side by side and the price gap.</p>
       </div>
     </section>
 
@@ -767,7 +886,7 @@ ${specSheet(p)}
 
       <section class="pdp-section">
         ${eyebrow('Compare')}
-        <h2 class="title-sm" style="margin-bottom:2rem">How it sits in the range</h2>
+        <h2 class="title-sm" style="margin-bottom:2rem">How it sits in the range</h2>${compareLinks(p)}
 ${compareTable()}
       </section>
 
@@ -2148,6 +2267,488 @@ ${ctaBanner()}
 );
 
 /* ==========================================================================
+   COMPARE — /compare/ and one head-to-head page per pair
+
+   The pair list (comparePairs) is read and validated near the top of this
+   file. Everything factual below is computed from data/products.json: the
+   difference bullets, the spec table, the scanner variants and the
+   accessories. Only the verdict, the choose lists, the FAQ and the guide
+   picks come from the JSON.
+   ========================================================================== */
+
+const compareTrail = [{ label: 'Home', href: '/' }, { label: 'Compare', href: '/compare/' }];
+
+const compareCta = () =>
+  ctaBanner({
+    title: 'Still torn?',
+    text: 'Tell us what you do and we will say which one we would buy for it, including if that is the cheaper one.',
+    primary: { href: '/which-tuga', label: 'Answer four questions' },
+    secondary: { href: '/contact', label: 'Ask us' },
+  });
+
+/** First number in a spec string: "10600mAh" -> 10600, "1,197g" -> 1197. */
+const specNumber = (s) => {
+  const m = String(s ?? '').replace(/,/g, '').match(/\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : null;
+};
+
+/** "1920 x 1200" -> 2304000, to say which screen is sharper. */
+const pixels = (s) => {
+  const m = String(s ?? '').match(/(\d+)\s*[x×]\s*(\d+)/i);
+  return m ? Number(m[1]) * Number(m[2]) : null;
+};
+
+/** "IP rating" stays as is mid-sentence; "Memory" becomes "memory". */
+const lowerLabel = (label) => (/^[A-Z]{2}/.test(label) ? label : label.charAt(0).toLowerCase() + label.slice(1));
+
+/**
+ * The headline differences in plain English, one sentence each, computed
+ * from the two spec sheets. A value missing on either side is reported as
+ * missing rather than guessed. Returns plain text; the caller escapes it.
+ */
+function compareDiffs(a, b) {
+  const A = shortName(a);
+  const B = shortName(b);
+  const lines = [];
+
+  const notListed = (label, va, vb) =>
+    !va && !vb
+      ? `${label} is not listed for the ${A} or the ${B}.`
+      : va
+        ? `${label} is not listed for the ${B}; the ${A} lists ${va}.`
+        : `${label} is not listed for the ${A}; the ${B} lists ${vb}.`;
+
+  /** A spec both sides state as a number: say which side has more (or less). */
+  const numeric = (key, { parse = specNumber, higherWins, equal, wins }) => {
+    const va = a.specs[key];
+    const vb = b.specs[key];
+    if (!va || !vb) return lines.push(notListed(specLabel(key), va, vb));
+    const na = parse(va);
+    const nb = parse(vb);
+    if (na === null || nb === null) return lines.push(`${specLabel(key)}: ${va} on the ${A} vs ${vb} on the ${B}.`);
+    if (na === nb) return lines.push(equal(va));
+    const aWins = higherWins ? na > nb : na < nb;
+    const [w, wv, l, lv] = aWins ? [A, va, B, vb] : [B, vb, A, va];
+    return lines.push(wins(w, wv, l, lv, Math.abs(na - nb)));
+  };
+
+  /** A spec compared as text: the same, or both values stated. */
+  const text = (key, { equal, differ }) => {
+    const va = a.specs[key];
+    const vb = b.specs[key];
+    if (!va || !vb) return lines.push(notListed(specLabel(key), va, vb));
+    return lines.push(va === vb ? equal(va) : differ(va, vb));
+  };
+
+  if (a.price === b.price) lines.push(`Both cost ${money(a.price)}.`);
+  else {
+    const [dear, cheap] = a.price > b.price ? [a, b] : [b, a];
+    lines.push(
+      `The ${shortName(dear)} costs ${money(dear.price - cheap.price)} more: ${money(dear.price)} against ${money(cheap.price)} for the ${shortName(cheap)}.`
+    );
+  }
+
+  numeric('weight', {
+    higherWins: false,
+    equal: (v) => `Both weigh ${v}.`,
+    wins: (w, wv, l, lv, gap) => `The ${w} is lighter by ${gap}g: ${wv} against ${lv} for the ${l}.`,
+  });
+
+  const sa = Number(a.sizeLabel);
+  const sb = Number(b.sizeLabel);
+  if (sa === sb) lines.push(`The screens are the same size: ${a.sizeLabel} inch on both.`);
+  else {
+    const [big, small] = sa > sb ? [a, b] : [b, a];
+    lines.push(`The ${shortName(big)} has the bigger screen: ${big.sizeLabel} inch against ${small.sizeLabel} inch on the ${shortName(small)}.`);
+  }
+
+  numeric('resolution', {
+    parse: pixels,
+    higherWins: true,
+    equal: (v) => `Both run at ${v}.`,
+    wins: (w, wv, l, lv) => `The ${w} has the higher resolution: ${wv} against ${lv} on the ${l}.`,
+  });
+
+  numeric('display_brightness', {
+    higherWins: true,
+    equal: (v) => `Both are rated at ${v}.`,
+    wins: (w, wv, l, lv) => `The ${w} is brighter: ${wv} against ${lv} on the ${l}.`,
+  });
+
+  numeric('battery', {
+    higherWins: true,
+    equal: (v) => `Both have a ${v} battery.`,
+    wins: (w, wv, l, lv) => `The ${w} has the bigger battery: ${wv} against ${lv} on the ${l}.`,
+  });
+
+  text('ip_rating', {
+    equal: (v) => `Both are sealed to ${v}.`,
+    differ: (va, vb) => `The ${A} is sealed to ${va} and the ${B} to ${vb}.`,
+  });
+
+  text('mil_std', {
+    equal: (v) => `Both are drop tested to ${v}.`,
+    differ: (va, vb) => `The ${A} is drop tested to ${va} and the ${B} to ${vb}.`,
+  });
+
+  text('os', {
+    equal: (v) => `Both run ${v}.`,
+    differ: (va, vb) => `The ${A} runs ${va}; the ${B} runs ${vb}.`,
+  });
+
+  text('connectivity', {
+    equal: (v) => `Both have the same connectivity: ${v}.`,
+    differ: (va, vb) => `Connectivity: ${va} on the ${A} vs ${vb} on the ${B}.`,
+  });
+
+  return lines;
+}
+
+/** The union of both spec sheets: a's keys in order, then anything only b has. */
+const specKeys = (a, b) => [...Object.keys(a.specs), ...Object.keys(b.specs).filter((k) => !(k in a.specs))];
+
+/** Three-column spec table: label, device A, device B. Differing rows are marked. */
+function vsTable(a, b, keys) {
+  const cell = (v) => (v ? esc(v) : '<span class="vs-missing">Not listed</span>');
+  const rows = keys
+    .map(
+      (k) => `
+              <tr${a.specs[k] === b.specs[k] ? '' : ' class="is-diff"'}>
+                <th scope="row">${esc(specLabel(k))}</th>
+                <td>${cell(a.specs[k])}</td>
+                <td>${cell(b.specs[k])}</td>
+              </tr>`
+    )
+    .join('');
+
+  return `
+        <div class="compare-wrap reveal">
+          <table class="spec-table vs-table">
+            <caption class="sr-only">Full specification of the ${esc(a.name)} and the ${esc(b.name)}, side by side</caption>
+            <thead>
+              <tr>
+                <th scope="col">Specification</th>
+                <th scope="col">${esc(a.name)}</th>
+                <th scope="col">${esc(b.name)}</th>
+              </tr>
+            </thead>
+            <tbody>${rows}
+            </tbody>
+          </table>
+        </div>
+        <p class="compare-scroll-hint">Scroll the table sideways to see every column &rarr;</p>`;
+}
+
+/** A "Read next" card: the same markup as the blog's "More guides" cards. */
+const guideCard = (p) => `
+          <a class="post-card reveal" href="/blog/${p.slug}">
+            <div class="post-card-media"><img src="${versioned(p.image)}"${responsive(p.image, '(max-width: 700px) 92vw, 400px')} alt="" loading="lazy" width="620" height="388"></div>
+            <div class="post-card-body">
+              <p class="post-card-date">${formatDate(p.date)}</p>
+              <h3>${p.title}</h3>
+              <p>${esc(p.description)}</p>
+              <span class="product-card-cta">Read ${icons.arrowRight(14)}</span>
+            </div>
+          </a>`;
+
+const checkItem = (html) => `<li>${icons.check(16)}<span>${html}</span></li>`;
+
+comparePairs.forEach((c) => {
+  const { a, b } = c;
+  const A = shortName(a);
+  const B = shortName(b);
+  const trail = [...compareTrail, { label: c.label }];
+
+  const keys = specKeys(a, b);
+  const same = keys.filter((k) => a.specs[k] && a.specs[k] === b.specs[k]);
+  const sameText = same.length
+    ? `Identical on both: ${same.map((k) => `${lowerLabel(specLabel(k))} (${a.specs[k]})`).join(', ')}.`
+    : 'Nothing on the two specification sheets is identical.';
+
+  // Scanner variants, each priced against its own base device.
+  const variants = [...variantsOf(a.id).map((v) => [v, a]), ...variantsOf(b.id).map((v) => [v, b])];
+  const noVariant = [a, b].filter((p) => !variantsOf(p.id).length);
+
+  // Accessories: fits both, only A, only B. Empty lists are left out.
+  const fitsA = accessories.filter((x) => x.compatibleWith.includes(a.id));
+  const fitsB = accessories.filter((x) => x.compatibleWith.includes(b.id));
+  const accessoryLists = [
+    { title: 'Fits both', items: fitsA.filter((x) => fitsB.includes(x)) },
+    { title: `Fits only the ${A}`, items: fitsA.filter((x) => !fitsB.includes(x)) },
+    { title: `Fits only the ${B}`, items: fitsB.filter((x) => !fitsA.includes(x)) },
+  ].filter((l) => l.items.length);
+
+  // Read next: every guide must be a real post.
+  const guides = c.guides.map((g) => {
+    const slug = g.replace(/^\/blog\//, '');
+    const post = posts.find((p) => p.slug === slug);
+    if (!post) {
+      throw new Error(`${c.where}: guide ${g} matches no post in build/content/blog/ (have: ${posts.map((p) => `/blog/${p.slug}`).join(', ')})`);
+    }
+    return post;
+  });
+
+  // The FAQ schema wants plain text, so it is built from the raw strings;
+  // the HTML from the escaped ones.
+  const faqOpts = { heading: `Questions about the ${A} and ${B}`, tag: 'FAQ' };
+  const faqHtml = faq(c.faq.map((f) => ({ q: f.q, a: prose(f.a, c.where) })), faqOpts).html;
+  const faqSchema = faq(c.faq, faqOpts).schema;
+
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${a.name} vs ${b.name}`,
+    itemListElement: [a, b].map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE.origin}${productUrl(p)}`,
+      name: p.name,
+    })),
+  };
+
+  const body = `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(trail)}
+        ${eyebrow('Compare')}
+        <h1>${esc(a.name)} vs ${esc(b.name)}</h1>
+        <p class="lede">${prose(c.lede, c.where)}</p>
+      </div>
+    </section>
+
+${trustStrip()}
+
+    <section class="section">
+      <div class="container">
+${sectionHead({ tag: 'Side by side', title: 'The two devices' })}
+        <div class="compare-pair">
+${productCard(a)}
+${productCard(b)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container">
+${sectionHead({ tag: 'Verdict', title: 'The short answer' })}
+        <div class="prose">
+          ${c.verdict.map((p) => `<p>${prose(p, c.where)}</p>`).join('\n          ')}
+        </div>
+        <div class="choose-grid">
+          <div class="choose-card reveal">
+            <h3>Choose the ${esc(a.name)} if</h3>
+            <ul class="check-list">
+              ${c.chooseA.map((x) => checkItem(prose(x, c.where))).join('\n              ')}
+            </ul>
+          </div>
+          <div class="choose-card reveal">
+            <h3>Choose the ${esc(b.name)} if</h3>
+            <ul class="check-list">
+              ${c.chooseB.map((x) => checkItem(prose(x, c.where))).join('\n              ')}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+${sectionHead({
+  tag: 'Specification',
+  title: 'What is different',
+  lede: `Every line comes from the two specification sheets, the same figures as the product pages. Rows where the ${esc(A)} and ${esc(B)} differ are tinted.`,
+})}
+        <ul class="check-list vs-diff-list">
+          ${compareDiffs(a, b).map((line) => checkItem(esc(line))).join('\n          ')}
+        </ul>
+        <p class="vs-same">${esc(sameText)}</p>
+${vsTable(a, b, keys)}
+      </div>
+    </section>
+
+    ${
+      variants.length
+        ? `<section class="section section-tint">
+      <div class="container">
+${sectionHead({ tag: 'Variants', title: 'Scanner versions', lede: 'Sold from the base product page, with the price gap over the standard device.' })}
+        <div class="prose">
+          ${variants
+            .map(
+              ([v, base]) =>
+                `<p><strong>${esc(v.name)}</strong>, ${money(v.price)}: ${money(v.price - base.price)} more than the standard <a href="${productUrl(base)}">${esc(base.name)}</a> at ${money(base.price)}. ${esc(v.description)}</p>`
+            )
+            .join('\n          ')}
+          ${noVariant.map((p) => `<p>There is no scanner version of the ${esc(p.name)}.</p>`).join('\n          ')}
+        </div>
+      </div>
+    </section>`
+        : ''
+    }
+
+    ${
+      accessoryLists.length
+        ? `<section class="section${variants.length ? '' : ' section-tint'}">
+      <div class="container">
+${sectionHead({ tag: 'Accessories', title: 'What fits which', lede: 'Every accessory is matched to specific models. These are the ones that fit each of the two.' })}
+        <div class="pdp-columns">
+          ${accessoryLists
+            .map(
+              (l) => `<div>
+            <h3 class="title-xs" style="margin-bottom:1rem">${esc(l.title)}</h3>
+            <ul class="check-list">
+              ${l.items.map((x) => checkItem(`<a href="/accessories">${esc(x.name)} (${money(x.price)})</a>`)).join('\n              ')}
+            </ul>
+          </div>`
+            )
+            .join('\n          ')}
+        </div>
+      </div>
+    </section>`
+        : ''
+    }
+
+${faqHtml}
+
+    <section class="section section-deep">
+      <div class="container">
+${sectionHead({ tag: 'Guides', title: 'Read next' })}
+        <div class="post-grid">
+          ${guides.map(guideCard).join('')}
+        </div>
+      </div>
+    </section>
+
+${compareCta()}
+`;
+
+  write(
+    `compare/${c.slug}.html`,
+    page({
+      title: `${c.title} | Tuga Hardware`,
+      description: c.description,
+      path: c.path,
+      active: 'products',
+      ogImage: imgPath(a, 1),
+      schema: [orgSchema, breadcrumbSchema(trail), faqSchema, itemList],
+      body,
+    })
+  );
+});
+
+/* The index: three groups of cards, then the whole range in one table. */
+
+const COMPARE_SECTIONS = [
+  {
+    group: 'size',
+    tag: 'Same size, different system',
+    title: 'Android or Windows at each size',
+    lede: 'Each size comes in an Android and a Windows version. These pages set the price gap against what the software actually needs.',
+  },
+  {
+    group: 'android',
+    tag: 'The Android range',
+    title: 'Pick a size on Android',
+    lede: 'Three Android devices, one per size. Screen space against pocketability, and what the extra money buys.',
+  },
+  {
+    group: 'windows',
+    tag: 'The Windows range',
+    title: 'Pick a size on Windows',
+    lede: 'Three Windows 11 devices, one per size. Ports, screen and weight against the price.',
+  },
+];
+
+const compareCard = (c) => `
+          <a class="compare-card reveal" href="${c.path}">
+            <div class="compare-card-media">
+              <img src="${imgPath(c.a, 1)}"${responsive(imgPath(c.a, 1), '120px')} alt="${esc(c.a.name)} rugged ${c.a.formFactor}" loading="lazy" width="120" height="90">
+              <span class="compare-card-vs" aria-hidden="true">vs</span>
+              <img src="${imgPath(c.b, 1)}"${responsive(imgPath(c.b, 1), '120px')} alt="${esc(c.b.name)} rugged ${c.b.formFactor}" loading="lazy" width="120" height="90">
+            </div>
+            <h3>${esc(c.a.name)} vs ${esc(c.b.name)}</h3>
+            <p>${esc(plainText(c.summary))}</p>
+            <div class="compare-card-foot">
+              <p class="compare-card-prices"><span>${esc(shortName(c.a))} ${money(c.a.price)}</span><span>${esc(shortName(c.b))} ${money(c.b.price)}</span></p>
+              <span class="product-card-cta">Compare ${icons.arrowRight(14)}</span>
+            </div>
+          </a>`;
+
+const compareSections = COMPARE_SECTIONS.map((s) => ({ ...s, pairs: comparePairs.filter((c) => c.group === s.group) })).filter(
+  (s) => s.pairs.length
+);
+
+write(
+  'compare/index.html',
+  page({
+    title: 'Compare Tuga Rugged Tablets Head to Head | Tuga Hardware',
+    description:
+      'Side by side comparisons of the Tuga rugged tablet range: 8 inch against 10 inch, Android against Windows, with a verdict, every spec and the price gap.',
+    path: '/compare/',
+    active: 'products',
+    schema: [
+      breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Compare' }]),
+      ...(comparePairs.length
+        ? [
+            {
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: 'Tuga Hardware head to head comparisons',
+              itemListElement: comparePairs.map((c, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                url: `${SITE.origin}${c.path}`,
+                name: `${c.a.name} vs ${c.b.name}`,
+              })),
+            },
+          ]
+        : []),
+    ],
+    body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Compare' }])}
+        ${eyebrow('Compare')}
+        <h1>Which Tuga is right for you? Compare two at a time</h1>
+        <p class="lede">Pick two and get a straight answer: which one to buy, when the other is the better choice, every specification side by side with the differences marked, and the price gap. The figures are the same ones on the product pages.</p>
+      </div>
+    </section>
+
+${
+  compareSections.length
+    ? compareSections
+        .map(
+          (s, i) => `
+    <section class="section${i % 2 ? ' section-tint' : ''}">
+      <div class="container">
+${sectionHead({ tag: s.tag, title: s.title, lede: s.lede })}
+        <div class="compare-list">
+          ${s.pairs.map(compareCard).join('\n')}
+        </div>
+      </div>
+    </section>`
+        )
+        .join('\n')
+    : `
+    <section class="section">
+      <div class="container-narrow">
+        <p class="lede">The head to head pages are being written. Until they are up, the table below puts every device side by side, and <a href="/which-tuga">the picker</a> narrows it to one.</p>
+      </div>
+    </section>`
+}
+
+    <section class="section section-deep">
+      <div class="container">
+${sectionHead({ tag: 'Everything', title: 'All six, one table' })}
+${compareTable()}
+      </div>
+    </section>
+
+${compareCta()}
+`,
+  })
+);
+
+/* ==========================================================================
    TRADE LANDING PAGES — /for/<trade>, prose in build/content/trades/
    ========================================================================== */
 
@@ -2282,6 +2883,11 @@ ${devices
 
 - [Which Tuga? picker](${SITE.origin}/which-tuga): four questions to a recommendation
 ${trades.map((t) => `- [${t.h1}](${SITE.origin}/for/${t.slug}): ${t.description}`).join('\n')}
+
+## Compare
+
+- [Compare two devices head to head](${SITE.origin}/compare/): a verdict, every specification side by side and the price gap
+${comparePairs.map((c) => `- [${c.a.name} vs ${c.b.name}](${SITE.origin}${c.path}): ${plainText(c.summary)}`).join('\n')}
 
 ## Buying
 
@@ -2616,6 +3222,8 @@ const urls = [
     freq: 'weekly',
   })),
   { loc: '/which-tuga', priority: '0.8', freq: 'monthly' },
+  { loc: '/compare/', priority: '0.8', freq: 'monthly' },
+  ...comparePairs.map((c) => ({ loc: c.path, priority: '0.7', freq: 'monthly' })),
   ...trades.map((t) => ({ loc: `/for/${t.slug}`, priority: '0.7', freq: 'monthly' })),
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
   { loc: '/trade', priority: '0.6', freq: 'monthly' },
