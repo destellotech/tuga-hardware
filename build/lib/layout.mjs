@@ -55,6 +55,8 @@ export const SITE = {
   origin: 'https://www.tugahardware.com',
   tagline: 'Hard Shell. Long Life.',
   email: 'support@tugahardware.com',
+  phone: '01279 912065',
+  phoneHref: 'tel:+441279912065',
   description:
     'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery.',
 };
@@ -324,6 +326,7 @@ const footer = () => `
             <a href="/bulk">Bulk orders</a>
             <a href="/trade">Trade accounts</a>
             <a href="/which-tuga">Which Tuga?</a>
+            <a href="/compare/">Compare devices</a>
             <a href="/contact">Contact</a>
           </nav>
         </div>
@@ -336,6 +339,7 @@ const footer = () => `
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>
             <a href="mailto:${SITE.email}">${SITE.email}</a>
+            <a href="${SITE.phoneHref}">${SITE.phone}</a>
           </nav>
         </div>
       </div>
@@ -353,13 +357,14 @@ const footer = () => `
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie notice" hidden>
+    <p>No cookies here. Your basket is kept in your browser&#39;s own storage, and visits are counted without cookies or anything that identifies you. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
+      <button class="btn btn-sm btn-inverse" data-cookie-accept>OK</button>
     </div>
-  </div>`;
+  </div>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>`;
 
 /* --- the page shell ----------------------------------------------------- */
 
@@ -383,7 +388,7 @@ export function page({
   path,
   active,
   ogType = 'website',
-  ogImage = '/img/products/t8-1.webp',
+  ogImage = versioned('/img/products/t8-1.webp'),
   schema = [],
   bodyClass = '',
   noindex = false,
@@ -417,9 +422,8 @@ export function page({
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${absImage}">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css?v=${CSS_V}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 

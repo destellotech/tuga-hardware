@@ -1,0 +1,51 @@
+{
+  "a": "tuga-a10",
+  "b": "tuga-w10",
+  "group": "size",
+  "title": "Tuga A10 vs Tuga W10: 10 Inch Android or Windows Rugged Tablet?",
+  "description": "Tuga A10 (Android, £449) or Tuga W10 (Windows 11 Pro, £649)? Same 10.1 inch screen, £200 apart. Who should pay for Ethernet and Windows, and who should not.",
+  "summary": "The A10 is £200 cheaper, sharper, 517g lighter and rated IP68 and MIL-STD-810H; the W10 adds Windows 11 Pro, RJ45 Ethernet, HDMI and a removable battery for engineers who plug into panels and plant.",
+  "lede": "For anyone set on a 10.1 inch rugged tablet and choosing between our Android pick and our Windows pick. The short answer: buy the Tuga A10 at £449 unless you plug into panels, plant or network gear with a cable, or rely on a program that only installs on a Windows PC, in which case the Tuga W10 at £649 is the one.",
+  "verdict": [
+    "The Tuga A10 is the better buy unless you need the W10's ports or Windows, and it is £200 cheaper: £449 against £649 for the W10. The two share a 10.1 inch screen, 8GB of RAM, 128GB of storage, a microSD slot, NFC, dual-band Wi-Fi 5 and Bluetooth 5.2, and the same accessories fit both. On the hardware you notice all day, the A10 is ahead: a sharper 1920 x 1200 Full HD screen against 1280 x 800, an 8000mAh battery against 5000mAh, 680g against 1197g, IP68 and MIL-STD-810H where the W10 is IP65 with no MIL-STD rating listed, dual SIM 4G built in where the W10 lists 4G LTE as an option, and a 13MP rear camera against 5MP. If your drawings, forms, BIM viewer and job management run as Android apps or in a browser, the extra £200 buys nothing you need.",
+    "Pay the £200 if the job involves a cable. The W10 has an RJ45 Ethernet port and HDMI alongside USB-C and USB-A, so it plugs straight into panels, plant and network gear that has never seen Wi-Fi. It runs Windows 11 Pro on an Intel N100 (up to 3.4GHz), so Windows-only software is at least a candidate for it. That is the case for the W10, and for that engineer the A10 is not an option: Android cannot run the program, and the A10 lists USB-C, a pogo pin dock connector and a headphone jack, with no Ethernet or HDMI. The W10's 5000mAh battery is removable, which the A10 does not list, and the <a href=\"/products/tuga-w10\">W10 with 2D Scanner</a> is £729, £80 over the standard W10. Check that your specific program runs on the W10 before you order; if one program is the sticking point, <a href=\"/contact\">tell us what it is</a> and we will say whether it needs Windows.",
+    "The A10's screen is 350 nits, against 800 on the <a href=\"/products/tuga-a8\">Tuga A8</a>, which is listed as sunlight readable, so in direct summer sun the A10 is harder to read. The A8 is also £70 cheaper at £379 if an 8 inch screen is enough for you. The W10 does not list a brightness figure, so there is no like for like number to compare. The A10 is also rated to work from -20°C to 60°C and the W10 lists no operating temperature range, so if the tablet lives in an unheated van through winter, the A10 is the one with a figure on paper. For site managers and supervisors reading drawings all day, the <a href=\"/for/construction\">construction page</a> goes through the A10 in more detail; for the engineer's case, our guide to <a href=\"/blog/best-tablets-field-engineers\">tablets for field engineers</a> covers the W10 and where it sits against the W8."
+  ],
+  "chooseA": [
+    "Your drawings, forms and job management run as Android apps or in a browser (check your own apps on the device first), so Windows would be £200 spent on nothing you need.",
+    "You read PDF plans and drawings all day: 1920 x 1200 Full HD against the W10's 1280 x 800 on the same 10.1 inch screen.",
+    "You carry it rather than dock it: 680g against 1197g, and 14.5mm thick against 22mm.",
+    "It gets dropped in water or left out in it: IP68, which covers immersion, and MIL-STD-810H, against IP65, which covers dust and water jets but not immersion, and no MIL-STD rating listed.",
+    "You work where one network is patchy: dual SIM 4G and GPS are built in, where the W10 lists 4G LTE and GPS as options and does not list dual SIM."
+  ],
+  "chooseB": [
+    "You plug into panels, plant or network gear with a cable: the W10 has RJ45 Ethernet and HDMI as well as USB-C and USB-A.",
+    "A program you rely on only installs on a Windows PC: the W10 runs Windows 11 Pro on an Intel N100, and the A10 cannot run it.",
+    "You want to take the battery out yourself: the W10's 5000mAh battery is removable and the A10 does not list a removable battery. Ask us about spare batteries before you order, as none is listed on the accessories page.",
+    "You scan barcodes all day: the W10 with 2D Scanner is £729, £80 over the standard W10, and there is no scanner version of the A10.",
+    "You need a fingerprint reader or a UHF RFID reader: the W10 lists both as options and the A10 lists neither."
+  ],
+  "faq": [
+    {
+      "q": "Is the Tuga W10 worth £200 more than the Tuga A10?",
+      "a": "Only if you need the ports or Windows. The W10 costs £649 and the A10 £449. They share a 10.1 inch screen, 8GB of RAM and 128GB of storage, and the A10 has the sharper screen, the bigger battery, the higher IP rating and a little over half the weight. The £200 buys Windows 11 Pro on an Intel N100, an RJ45 Ethernet port, HDMI, a removable battery, and the option of a 2D scanner, a fingerprint reader and a UHF RFID reader. If none of those is on your list, buy the <a href=\"/products/tuga-a10\">Tuga A10</a>."
+    },
+    {
+      "q": "Which is tougher, the Tuga A10 or the Tuga W10?",
+      "a": "On paper, the A10. It is sealed to IP68, which covers immersion, tested to MIL-STD-810H, and rated to work from -20°C to 60°C. The W10 is rated IP65, which covers dust and water jets but not immersion, and it lists no MIL-STD rating and no operating temperature range. Neither sheet gives a drop height. Our <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explains what the rating does and does not tell you, and the <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what the IP numbers mean and where IP65 and IP68 sit."
+    },
+    {
+      "q": "Does the Tuga W10 have 4G?",
+      "a": "As an option, not as standard. The W10's listed connectivity is dual-band Wi-Fi 5, Bluetooth 5.2, NFC and 100Mbps Ethernet, with 4G LTE and GPS listed as options, so the standard W10 is a Wi-Fi tablet; <a href=\"/contact\">ask us before you order</a> if you need either. The A10 has 4G with dual SIM built in, so two networks can be fitted for rural sites where one is patchy, and its GPS (with Galileo, BeiDou, QZSS and NavIC) is standard. If the tablet needs its own mobile connection and a position fix in the van, the A10 has both built in and the W10 has to be specified with them."
+    },
+    {
+      "q": "How do the Tuga A10 and Tuga W10 batteries compare?",
+      "a": "The A10 carries 8000mAh and the W10 5000mAh. Neither sheet lists a battery life figure, so capacity is the only like for like number. The W10's battery is removable, where the A10 does not list a removable battery. Both tablets fit the same chargers: the 12V DC Car Charger (£26), the Charging Dock (£49.99) and the Vehicle Mounting Dock (£109), which keeps either tablet charged on the road, all on the <a href=\"/accessories\">accessories page</a>. Our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in winter</a> explains what the cold does to either battery."
+    }
+  ],
+  "guides": [
+    "/blog/android-vs-windows-rugged-tablet",
+    "/blog/mil-std-810h-explained",
+    "/blog/best-tablets-field-engineers"
+  ]
+}

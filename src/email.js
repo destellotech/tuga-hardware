@@ -96,7 +96,7 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
       <h3 style="margin:0 0 8px;font-size:15px;color:${BRAND.green};">Your 3-Year Warranty</h3>
       <p style="margin:0;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
         The plan is registered to each device's serial number when it is dispatched,
-        and the dispatch email will list the serial, the plan and its end date.
+        and you can ask us at any time for the serial, plan and end date we hold.
         The Plan Terms are at
         <a href="https://www.tugahardware.com/warranty-terms" style="color:${BRAND.copper};">tugahardware.com/warranty-terms</a>.
         If you bought as a consumer, you may cancel the plan within 45 days of
@@ -164,8 +164,9 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
         you within 14 days of getting the goods back, or of your proof that you
         have sent them. Unless the item is faulty or we sent the wrong item, you
         pay the cost of returning it, and we may deduct for handling beyond what
-        is needed to check the device works. Business buyers may return an unused
-        device in its original condition within 30 days of delivery. A faulty
+        is needed to check the device works. On top of that legal right, everyone,
+        consumer or business, can return an unused device in its original
+        condition and packaging within 30 days of delivery for a full refund. A faulty
         device can be rejected for a full refund within 30 days of delivery.
         Your statutory rights are not affected.
       </p>
@@ -193,6 +194,10 @@ export async function sendOrderConfirmation(env, email, orderDetails) {
     to: email,
     subject: `Order confirmed — ${orderId}`,
     html,
+    replyTo: SUPPORT_EMAIL,
+    // Resend drops a repeat send with the same key for 24 hours, so the
+    // webhook and the confirmation page racing cannot email twice.
+    idempotencyKey: `order-confirmation:${orderId}`,
   });
 }
 
@@ -235,6 +240,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
     to: email,
     subject: `Your Tuga Hardware order has shipped — ${trackingNumber}`,
     html,
+    replyTo: SUPPORT_EMAIL,
   });
 }
 
@@ -249,7 +255,7 @@ export async function sendReviewRequest(env, email, { items, reviewUrl }) {
     <p style="margin:0 0 24px;font-size:15px;color:${BRAND.mutedText};line-height:1.6;">
       You have had your ${names} for a few weeks now. We are a small UK operation and
       honest reviews from people who actually use the kit are how other tradespeople
-      decide whether to trust us. Good or bad, we publish what you write.
+      decide whether to trust us. We read every review, good or bad.
     </p>
 
     <div style="text-align:center;margin:32px 0;">
@@ -310,12 +316,13 @@ function escapeHtml(value = '') {
 // ---------------------------------------------------------------------------
 // Low-level Resend API call
 // ---------------------------------------------------------------------------
-async function sendEmail(env, { to, subject, html, replyTo }) {
+async function sendEmail(env, { to, subject, html, replyTo, idempotencyKey }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${env.RESEND_API_KEY}`,
       'Content-Type': 'application/json',
+      ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}),
     },
     body: JSON.stringify({
       from: FROM_EMAIL,

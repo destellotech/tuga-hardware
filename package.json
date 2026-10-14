@@ -7,7 +7,8 @@
     "build": "node build/build.mjs",
     "preview": "python -m http.server 4321",
     "deploy": "npm run build && wrangler deploy",
-    "images": "node build/optimise-images.mjs"
+    "images": "node build/optimise-images.mjs",
+    "reviews": "node build/pull-reviews.mjs"
   },
   "devDependencies": {
     "sharp": "^0.35.3"

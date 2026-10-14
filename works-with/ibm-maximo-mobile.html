@@ -23,10 +23,9 @@
   <meta name="twitter:description" content="IBM Maximo Mobile needs Android 11+ or Windows 10/11 and 3 GB memory. Which Tuga rugged tablet meets that, with offline, NFC and camera scanning.">
   <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t10-1.webp?v=b8bca22565">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=55a44bb864">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=15894d85a9">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -37,6 +36,7 @@
   "legalName": "Destello Tech Ltd",
   "url": "https://www.tugahardware.com",
   "email": "support@tugahardware.com",
+  "telephone": "+44 1279 912065",
   "description": "Rugged tablets and handhelds built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery.",
   "address": {
     "@type": "PostalAddress",
@@ -55,6 +55,7 @@
     "@type": "ContactPoint",
     "contactType": "customer service",
     "email": "support@tugahardware.com",
+    "telephone": "+44 1279 912065",
     "areaServed": "GB",
     "availableLanguage": "English"
   }
@@ -558,6 +559,7 @@
             <a href="/bulk">Bulk orders</a>
             <a href="/trade">Trade accounts</a>
             <a href="/which-tuga">Which Tuga?</a>
+            <a href="/compare/">Compare devices</a>
             <a href="/contact">Contact</a>
           </nav>
         </div>
@@ -570,6 +572,7 @@
             <a href="/privacy">Privacy policy</a>
             <a href="/terms">Terms &amp; conditions</a>
             <a href="mailto:support@tugahardware.com">support@tugahardware.com</a>
+            <a href="tel:+441279912065">01279 912065</a>
           </nav>
         </div>
       </div>
@@ -585,15 +588,16 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie notice" hidden>
+    <p>No cookies here. Your basket is kept in your browser&#39;s own storage, and visits are counted without cookies or anything that identifies you. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
+      <button class="btn btn-sm btn-inverse" data-cookie-accept>OK</button>
     </div>
   </div>
 
-  <script src="/js/app.js?v=121fe22f99" defer></script>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="/js/app.js?v=5889fc1a94" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
