@@ -328,7 +328,7 @@ const HOME_FAQ = [
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'Four of the six are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The A6 is rated by its maker for 1.5 metre drops but has no MIL-STD rating, and the W10 has none either, so treat them with more care if they live on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'Three of the six, the A10, WH6 and W8, are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The A6 is rated by its maker for 1.5 metre drops, and the A8 and W10 list no drop standard, so treat those with more care if they live on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
@@ -423,11 +423,11 @@ const hero = () => {
               <span class="hero-spec-label">Every model sealed</span>
             </div>
             <div class="hero-spec">
-              <span class="hero-spec-value">810H</span>
-              <span class="hero-spec-label">Most models drop tested</span>
+              <span class="hero-spec-value">1,000<span style="font-size:0.5em">nits</span></span>
+              <span class="hero-spec-label">Brightest screen</span>
             </div>
             <div class="hero-spec">
-              <span class="hero-spec-value">10,000<span style="font-size:0.5em">mAh</span></span>
+              <span class="hero-spec-value">8,000<span style="font-size:0.5em">mAh</span></span>
               <span class="hero-spec-label">Max battery</span>
             </div>
             <div class="hero-spec">
@@ -437,7 +437,7 @@ const hero = () => {
           </div>
         </div>
         <figure class="hero-drawing">
-          <img src="${imgPath(lead, 2)}" alt="Dimensioned drawing of the Tuga A8 showing ports, buttons and case dimensions" width="800" height="288" fetchpriority="high">
+          <img src="${imgPath(lead, 1)}" alt="Tuga A8 rugged tablet, front and back" width="1200" height="900" fetchpriority="high">
           <figcaption>
             <span><strong>${esc(lead.name)}</strong></span>
             <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
@@ -509,8 +509,8 @@ ${sectionHead({
             <p>Every device is rated at least IP65: fully dust tight and protected against water jets from any direction. Most go further. An IP67 or IP68 rating means the housing survives immersion, not just a light shower, which is the difference between a tablet that survives a downpour and one that survives being dropped in a puddle. None is rated IP69K for high pressure jet washing, so wipe them down rather than hose them.</p>
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
-              <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Android models rated from &minus;20&deg;C, so they start on a frosty morning</li>
+              <li>Removable batteries on the A6, A8 and WH6, so a charged spare takes over mid shift</li>
+              <li>Most models rated from &minus;20&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -520,8 +520,8 @@ ${sectionHead({
             <img src="${versioned('/img/blog/blog-construction.webp')}"${responsive('/img/blog/blog-construction.webp', '(max-width: 820px) 92vw, 556px')} alt="Rugged tablet in use on a construction site" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
-            <h3>Drop tested to a real standard</h3>
-            <p>Four of the six devices carry a MIL-STD-810H or 810G rating; the A6 and the W10 do not, though the A6 is rated by its maker for 1.5 metre drops. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
+            <h3>Built to be dropped</h3>
+            <p>Three of the six devices, the A10, WH6 and W8, carry a MIL-STD-810H or 810G rating. The A6 is rated by its maker for 1.5 metre drops; the A8 and W10 list no drop standard. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
             <p>In practice that comes from reinforced corners, a rubberised over-mould and a screen recessed behind a raised bezel, so the glass does not take the first hit when it lands face down.</p>
           </div>
         </article>
@@ -532,8 +532,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits, so you are not cupping a hand over the screen to read a job number. The A10 is 350 nits, which suits drawings indoors and in the van more than bright sun. Each product page lists the maker's figure.</p>
-            <p>The A8 and A10 tablets carry 8,000mAh to 10,000mAh, against roughly 5,000mAh in a typical phone. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell. The A6 handheld is phone sized at 5,050mAh, but its battery is removable, so a charged spare takes over mid shift. Real run time depends on screen brightness and signal, so treat the capacity as a comparison, not a promise of hours.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 1000 nits, so you are not cupping a hand over the screen to read a job number. The A10 is 350 nits, which suits drawings indoors and in the van more than bright sun. Each product page lists the maker's figure.</p>
+            <p>The A8 and A10 tablets carry 8,000mAh, against roughly 5,000mAh in a typical phone, and the A8's battery is removable. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell. The A6 handheld is phone sized at 5,050mAh, but its battery is removable, so a charged spare takes over mid shift. Real run time depends on screen brightness and signal, so treat the capacity as a comparison, not a promise of hours.</p>
           </div>
         </article>
       </div>
@@ -593,7 +593,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, most models drop tested to MIL-STD-810H or 810G. From £349 with free UK delivery.',
+      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. From £349 with free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -613,7 +613,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP68 sealed, most drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -636,7 +636,7 @@ write(
 ${breadcrumbs(productsTrail)}
         ${eyebrow('The range')}
         <h1>Rugged tablets &amp; handhelds</h1>
-        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the A6 and W10 are drop tested to MIL-STD-810H or 810G. Not sure which? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
+        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and the A10, WH6 and W8 are drop tested to MIL-STD-810H or 810G. Not sure which? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
       </div>
     </section>
 
@@ -2271,7 +2271,7 @@ ${post.body}
 
         <div class="prose-cta">
           <h3>Rugged tablets from ${money(Math.min(...devices.map((d) => d.price)))}</h3>
-          <p>IP65 to IP68 sealed, most models MIL-STD drop tested. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
+          <p>IP65 to IP68 sealed, with 1000 nit screens and removable batteries where they matter. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
           <a class="link-arrow" href="/products/">Browse the range</a>
         </div>
       </article>
