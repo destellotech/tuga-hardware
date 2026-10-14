@@ -16,17 +16,16 @@
   <meta property="og:title" content="Which Rugged Tablet Should I Buy? | Tuga Hardware">
   <meta property="og:description" content="Four questions, one answer. Find the right rugged tablet or handheld for your trade: Android or Windows, 6, 8 or 10 inch, with or without a scanner.">
   <meta property="og:url" content="https://www.tugahardware.com/which-tuga">
-  <meta property="og:image" content="https://www.tugahardware.com/img/products/t8-1.webp">
+  <meta property="og:image" content="https://www.tugahardware.com/img/products/t8-1.webp?v=16130bd1b0">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Which Rugged Tablet Should I Buy? | Tuga Hardware">
   <meta name="twitter:description" content="Four questions, one answer. Find the right rugged tablet or handheld for your trade: Android or Windows, 6, 8 or 10 inch, with or without a scanner.">
-  <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t8-1.webp">
+  <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t8-1.webp?v=16130bd1b0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=3bf4cbdbd5">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=649ca4a35b">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -121,7 +120,10 @@
                 <span class="picker-option-text">We will assume apps. You can always ask us before buying.</span>
               </label>
             </div>
-            
+            <div class="picker-nav">
+              <button type="button" class="btn btn-primary btn-sm" data-picker-next disabled>Next</button>
+              
+            </div>
           </fieldset>
 
           <fieldset class="picker-step" data-picker-step="2" hidden>
@@ -148,7 +150,10 @@
                 <span class="picker-option-text">Plans, PDFs and spreadsheets at full size, read for long stretches.</span>
               </label>
             </div>
-            <button type="button" class="picker-back" data-picker-back>&larr; Back</button>
+            <div class="picker-nav">
+              <button type="button" class="btn btn-primary btn-sm" data-picker-next disabled>Next</button>
+              <button type="button" class="picker-back" data-picker-back>&larr; Back</button>
+            </div>
           </fieldset>
 
           <fieldset class="picker-step" data-picker-step="3" hidden>
@@ -175,7 +180,10 @@
                 <span class="picker-option-text">Not part of the work.</span>
               </label>
             </div>
-            <button type="button" class="picker-back" data-picker-back>&larr; Back</button>
+            <div class="picker-nav">
+              <button type="button" class="btn btn-primary btn-sm" data-picker-next disabled>Next</button>
+              <button type="button" class="picker-back" data-picker-back>&larr; Back</button>
+            </div>
           </fieldset>
 
           <fieldset class="picker-step" data-picker-step="4" hidden>
@@ -207,7 +215,10 @@
                 <span class="picker-option-text">10 or more, 10% off.</span>
               </label>
             </div>
-            <button type="button" class="picker-back" data-picker-back>&larr; Back</button>
+            <div class="picker-nav">
+              <button type="button" class="btn btn-primary btn-sm" data-picker-next disabled>See my pick</button>
+              <button type="button" class="picker-back" data-picker-back>&larr; Back</button>
+            </div>
           </fieldset>
         </form>
 
@@ -262,6 +273,7 @@
             <a href="/bulk">Bulk orders</a>
             <a href="/trade">Trade accounts</a>
             <a href="/which-tuga">Which Tuga?</a>
+            <a href="/compare/">Compare devices</a>
             <a href="/contact">Contact</a>
           </nav>
         </div>
@@ -290,15 +302,16 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie notice" hidden>
+    <p>No cookies here. Your basket is kept in your browser&#39;s own storage, and visits are counted without cookies or anything that identifies you. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
+      <button class="btn btn-sm btn-inverse" data-cookie-accept>OK</button>
     </div>
   </div>
 
-  <script src="/js/app.js?v=121fe22f99" defer></script>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="/js/app.js?v=5889fc1a94" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
