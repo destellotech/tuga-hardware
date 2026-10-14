@@ -1949,6 +1949,19 @@ const BLOG_IMAGES = {
   'android-vs-windows-rugged-tablet': 'blog-field-engineer.webp',
   'rugged-tablet-barcode-scanner': 'blog-enterprise.webp',
   'rugged-tablet-cold-weather-battery': 'blog-waterproof.webp',
+  'best-rugged-tablets-electricians': 'blog-tradespeople.webp',
+  'best-rugged-tablets-plumbers-heating-engineers': 'blog-tradespeople.webp',
+  'rugged-phone-or-rugged-tablet': 'blog-field-engineer.webp',
+  '8-inch-or-10-inch-rugged-tablet': 'blog-construction.webp',
+  'screen-brightness-nits-explained': 'blog-construction.webp',
+  'mounting-a-tablet-in-a-van': 'blog-field-engineer.webp',
+  '4g-5g-or-wifi-only-site-connectivity': 'blog-field-engineer.webp',
+  'protect-customer-data-work-tablet': 'blog-enterprise.webp',
+  'best-rugged-tablets-delivery-drivers-couriers': 'blog-tradespeople.webp',
+  'how-long-should-a-rugged-tablet-last': 'blog-cost.webp',
+  'best-rugged-tablets-landscapers-gardeners': 'blog-waterproof.webp',
+  'going-paperless-tradesperson-guide': 'blog-tradespeople.webp',
+  'buying-rugged-tablets-small-team': 'blog-enterprise.webp',
 };
 
 /** Read a blog fragment from build/content/blog/. */
