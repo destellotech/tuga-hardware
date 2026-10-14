@@ -374,9 +374,59 @@
         const input = btn.closest('.qty')?.querySelector('input');
         if (!input) return;
         const step = Number(btn.dataset.qtyStep);
-        const next = Math.max(1, Math.min(99, (parseInt(input.value, 10) || 1) + step));
+        // The minimum moves: Total Care raises it to the fleet minimum.
+        const min = Math.max(1, parseInt(input.min, 10) || 1);
+        const next = Math.max(min, Math.min(99, (parseInt(input.value, 10) || min) + step));
         input.value = next;
       });
+    });
+  }
+
+  /* ---------------------------------------------------------- cover chooser */
+
+  /* On a product page every cover option is a radio. A quote-only tier
+     (Total Care) turns the main buy button into a quote request: it raises
+     the quantity to the fleet minimum, shows the price bands next to the
+     stepper and adds nothing to the basket. Switching back restores Add to
+     basket and lifts the minimum without forcing the quantity down. */
+  function initCoverChooser() {
+    $$('[data-buy-box]').forEach((box) => {
+      const chooser = $('[data-warranty-chooser]', box);
+      const btn = $('[data-add-to-cart][data-qty-source]', box);
+      if (!chooser || !btn) return;
+      const label = $('[data-buy-label]', btn);
+      const input = document.getElementById(btn.dataset.qtySource);
+      const note = $('[data-cover-note]', box);
+
+      const update = () => {
+        const checked = $('[data-warranty-choice]:checked', chooser);
+        const tier = checked?.dataset.quoteTier;
+        if (tier) {
+          const min = Math.max(1, Number(checked.dataset.quoteMin) || 1);
+          btn.dataset.quoteMode = '';
+          if (label) label.textContent = `Get a ${tier} quote`;
+          if (input) {
+            input.min = String(min);
+            if ((parseInt(input.value, 10) || 0) < min) input.value = min;
+          }
+          if (note) note.textContent = checked.dataset.quoteNote || '';
+        } else {
+          delete btn.dataset.quoteMode;
+          if (label) label.textContent = 'Add to basket';
+          if (input) input.min = '1';
+          if (note) note.textContent = '';
+        }
+      };
+
+      chooser.addEventListener('change', update);
+      // Back from the quote form can restore the checked radio from the page
+      // cache without firing change, so re-read it whenever the page is shown.
+      window.addEventListener('pageshow', update);
+      input?.addEventListener('change', () => {
+        const min = Math.max(1, parseInt(input.min, 10) || 1);
+        if ((parseInt(input.value, 10) || 0) < min) input.value = min;
+      });
+      update();
     });
   }
 
@@ -406,6 +456,15 @@
       const box = btn.closest('[data-buy-box]');
       const chooser = box ? box.querySelector('[data-warranty-choice]:checked') : null;
       let warrantySku = chooser?.value || '';
+
+      // A quote-only tier (Total Care): the main button asks for a quote with
+      // the device, quantity and plan prefilled, and adds nothing to the basket.
+      if (chooser?.dataset.quoteTier && btn.dataset.qtySource) {
+        qty = Math.max(Number(chooser.dataset.quoteMin) || 1, qty);
+        const device = btn.dataset.deviceName || id;
+        window.location.href = `/contact?quote=${encodeURIComponent(`${device} x${qty} with ${chooser.dataset.quoteTier}`)}#enquiry`;
+        return;
+      }
 
       let products = null;
       try {
@@ -735,7 +794,7 @@
         const p = findItem(products, i.id);
         if (!p || !p.warrantyFor) continue;
         if (i.quantity > (units[p.warrantyFor] || 0)) {
-          setStatus(`${p.name} covers one device each. Reduce it to match the number of ${p.warrantyFor.replace('tuga-', 'Tuga ').toUpperCase()} units in the basket.`);
+          setStatus(`${p.name} covers one device each. Reduce it to match the number of Tuga ${p.warrantyFor.replace('tuga-', '').toUpperCase()} units in the basket.`);
           return;
         }
       }
@@ -793,10 +852,12 @@
         const topic = $('#topic', contact);
         if (topic && topic.options.length) topic.selectedIndex = 0;
         const product = params.get('quote');
+        // "Tuga A10 x7 with Total Care" carries the quantity from the product page.
+        const qty = (product.match(/\sx(\d+)\b/) || [])[1] || '';
         const message = $('#message', contact);
         if (message && !message.value) {
           message.value = product
-            ? `Quote request: ${product}\nQuantity: \nDelivery postcode: \n`
+            ? `Quote request: ${product}\nQuantity: ${qty}\nDelivery postcode: \n`
             : 'Quote request\nDevices and quantities: \nDelivery postcode: \n';
         }
       }
@@ -1386,6 +1447,7 @@
     initReveal();
     initCookies();
     initQty();
+    initCoverChooser();
     initAddToCart();
     initGallery();
     initFilters();
