@@ -136,6 +136,7 @@ const orgSchema = {
   legalName: TRADER.legalName,
   url: SITE.origin,
   email: SITE.email,
+  telephone: '+44 1279 912065',
   description: SITE.description,
   // Country only: the registered office appears on the legal pages, not in
   // structured data.
@@ -153,6 +154,7 @@ const orgSchema = {
     '@type': 'ContactPoint',
     contactType: 'customer service',
     email: SITE.email,
+    telephone: '+44 1279 912065',
     areaServed: 'GB',
     availableLanguage: 'English',
   },
@@ -1619,6 +1621,8 @@ ${breadcrumbs(contactTrail)}
             <p style="margin-top:0.75rem"><a class="link-arrow" href="mailto:${SITE.email}">${SITE.email}</a></p>
             <p style="margin-top:1.5rem">We answer within one working day, usually much sooner. For order questions, include your order number and we will pull it up.</p>
 
+            <h2 class="title-xs" style="margin-top:2.5rem">Or call us</h2>
+            <p style="margin-top:0.75rem"><a class="link-arrow" href="${SITE.phoneHref}">${SITE.phone}</a></p>
             <h2 class="title-xs" style="margin-top:2.5rem">Who you are dealing with</h2>
             <p style="margin-top:0.75rem">${esc(TRADER.tradingName)} is a trading name of ${esc(TRADER.legalName)}, registered in ${esc(TRADER.registeredIn)}, company number ${esc(TRADER.companyNumber)}.</p>
             <p>Registered office: ${esc(TRADER_ADDRESS_LINE)}.</p>
