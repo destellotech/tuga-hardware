@@ -3,44 +3,44 @@
   "b": "tuga-wh6",
   "group": "size",
   "title": "Tuga A6 vs Tuga WH6: Android or Windows Rugged Handheld?",
-  "description": "Two pocket-size rugged handhelds, £400 apart. Buy the Android A6 unless a Windows desktop program or network drive is non-negotiable, then it is the WH6.",
-  "summary": "The Android A6 is £400 cheaper, better sealed and has a battery more than twice the size; the Windows WH6 earns its extra cost when you need a desktop program or a network drive in the field.",
-  "lede": "For anyone who wants a rugged device that fits a pocket or belt holster and is torn between Android and Windows. The short answer: buy the Tuga A6 at £299 unless a Windows-only program or a network drive is on your must-have list, in which case the Tuga WH6 at £699 is the one to buy.",
+  "description": "Two pocket-size rugged handhelds with barcode scanners, from £349 and £779. Buy the Android A6 unless a Windows desktop program or network drive is non-negotiable.",
+  "summary": "The Android A6 is £350 cheaper, better sealed, lighter and has a Zebra 2D scan engine built in; the Windows WH6 earns its extra cost when you need a desktop program or a network drive in the field.",
+  "lede": "For anyone who wants a rugged device that fits a pocket or belt holster and is torn between Android and Windows. The short answer: buy the Tuga A6 at £349 unless a Windows-only program or a network drive is on your must-have list, in which case the Tuga WH6 at £699 is the one to buy.",
   "verdict": [
-    "The Tuga A6 is the better buy unless you need Windows. It costs £299 against £699 for the WH6, a gap of £400, and on the things a pocket device is judged on it is ahead: sealed to IP68 and IP69K against the WH6's IP65, a 10600mAh battery against 4000mAh, 5G against 4G LTE, a brighter screen at 560 nits against 400, and a 64MP night vision camera for lofts, voids and under floors. It is also a little lighter at 441g against 470g. If your work runs on apps and the web (job sheets, photos, proof of delivery, messaging), there is little reason to pay the extra.",
-    "Pay the £400 when one thing is non-negotiable: a Windows desktop program or a network drive that you need in the field. The WH6 runs Windows 11 IoT on an Intel Celeron N5100 with 8GB of RAM and 128GB of storage, so it can run Windows desktop software, and it has a USB-A port for connecting instruments and peripherals directly. Before you order, check that your specific program runs on it and is usable on a 6.5 inch screen. If one program is the sticking point, <a href=\"/contact\">tell us what it is</a> and we will point you to the right device.",
-    "Two smaller points. The WH6's 4000mAh battery is removable, so a charged spare can take over mid shift (we do not list a spare battery, so ask us first), and the <a href=\"/products/tuga-wh6\">WH6 with Barcode Scanner</a> at £779, £80 more than the standard WH6, is the only pocket-size device in the range with an integrated 2D barcode scanner. On warranty, both include 12 months, and the paid <a href=\"/warranty\">3-Year Warranty</a> is £65 on the A6 and £89 on the WH6. Delivery is free to UK addresses in 7 to 10 working days on either, with no VAT to add. For the wider question, read our <a href=\"/blog/android-vs-windows-rugged-tablet\">Android vs Windows guide</a>; for drivers and pickers, the <a href=\"/for/logistics\">logistics page</a> goes through both devices."
+    "The Tuga A6 is the better buy unless you need Windows. It costs £349 against £699 for the WH6, a gap of £350, and on the things a pocket device is judged on it holds its own or leads: sealed to IP67 against the WH6's IP65, a 5050mAh battery against 4000mAh, both removable, 277g against 470g, and a Zebra 2D scan engine built in as standard. Both are rated for 1.5 metre drops and both have 4G LTE, dual-band Wi-Fi 5 and NFC. If your work runs on apps and the web (scanning, job sheets, photos, proof of delivery, messaging), there is little reason to pay the extra.",
+    "Pay the £350 when one thing is non-negotiable: a Windows desktop program or a network drive that you need in the field. The WH6 runs Windows 11 IoT on an Intel Celeron N5100 with 8GB of RAM and 128GB of storage, against 4GB and 64GB on the A6, so it can run Windows desktop software, and it has a USB-A port for connecting instruments and peripherals directly. It also lists MIL-STD-810H, which the A6 does not, a -20°C to 60°C rating against -20°C to 50°C, and an 8MP autofocus rear camera against 13MP on the A6. Before you order, check that your specific program runs on it and is usable on a 6.5 inch screen. If one program is the sticking point, <a href=\"/contact\">tell us what it is</a> and we will point you to the right device.",
+    "On scanning, the gap widens. The A6 has an integrated Zebra 2D scan engine with two side scan keys at £349. To get a scan engine on the WH6 you need the <a href=\"/products/tuga-wh6\">WH6 with Barcode Scanner</a> at £779, £80 more than the standard WH6 and £430 more than the A6. On warranty, both include 12 months, and the paid <a href=\"/warranty\">3-Year Warranty</a> is £65 on the A6 and £89 on the WH6. Delivery is free to UK addresses in 7 to 10 working days on either, with no VAT to add. For the wider question, read our <a href=\"/blog/android-vs-windows-rugged-tablet\">Android vs Windows guide</a>; for drivers and pickers, the <a href=\"/for/logistics\">logistics page</a> goes through both devices."
   ],
   "chooseA": [
-    "Every program you use runs as an app or in a browser, and you would rather keep £400.",
-    "The device gets rained on, dropped in water or jet washed: IP68 plus IP69K against IP65.",
-    "You want a bigger battery so you do not need to carry a spare: 10600mAh against 4000mAh, with 33W fast charging.",
-    "You photograph work in lofts, voids and under floors, where the 64MP night vision camera earns its keep.",
-    "You upload photos and job sheets from site and want 5G rather than 4G LTE."
+    "Every program you use runs as an app or in a browser, and you would rather keep £350.",
+    "You scan barcodes and want the scanner built in: the A6 has an integrated Zebra 2D scan engine at £349, against £779 for the WH6 with Barcode Scanner.",
+    "The device gets rained on or dropped in water: IP67, which covers immersion, against IP65, which covers water jets.",
+    "You carry it all day and want the lighter device: 277g against 470g.",
+    "You want the bigger battery of the two, still removable: 5050mAh against 4000mAh, with dual SIM 4G for patchy coverage."
   ],
   "chooseB": [
     "You need a Windows desktop program or a network drive on site, and you have checked it runs on the WH6.",
     "You plug into instruments or peripherals over USB-A and do not want an £8 OTG adapter.",
-    "You scan barcodes all day and want an integrated 2D scan engine: the WH6 with Barcode Scanner is £779.",
-    "You want a removable battery so a charged spare can swap in (ask us about spares), and a desk cradle (£79) to drop it into.",
+    "You want more memory and storage: 8GB of RAM and 128GB, expandable to 512GB, against 4GB and 64GB, expandable to 256GB, on the A6.",
+    "You want a desk cradle to drop it into: the WH6 Charging Cradle (£79) is listed for the WH6, and no dock or cradle is listed for the A6.",
     "Your team already works in Windows and you want a Windows 11 handheld alongside the office PCs, once you have checked your software on it."
   ],
   "faq": [
     {
-      "q": "Is the WH6 worth £400 more than the A6?",
-      "a": "Only if you need Windows. The WH6 runs Windows 11 IoT, so it can run Windows desktop software and access network drives. The A6 runs Android 14, so a Windows desktop program will not install on it. If your software has an Android app or runs in a browser, the <a href=\"/products/tuga-a6\">A6</a> is the cheaper place to start, with better sealing, a battery more than twice the size and 5G, but check your own apps on it first. Do not assume a program that runs on an office PC will suit a 6.5 inch handheld: check it on the device, or <a href=\"/contact\">tell us what it is</a>."
+      "q": "Is the WH6 worth £350 more than the A6?",
+      "a": "Only if you need Windows. The WH6 runs Windows 11 IoT, so it can run Windows desktop software and access network drives, and it has twice the RAM and storage. The A6 runs Android 15, so a Windows desktop program will not install on it. If your software has an Android app or runs in a browser, the <a href=\"/products/tuga-a6\">A6</a> is the cheaper place to start, with better sealing, a larger removable battery, less weight and a barcode scanner built in, but check your own apps on it first. Do not assume a program that runs on an office PC will suit a 6.5 inch handheld: check it on the device, or <a href=\"/contact\">tell us what it is</a>."
     },
     {
       "q": "Which is tougher, the A6 or the WH6?",
-      "a": "The A6 is better sealed. Both are rated MIL-STD-810H, but the A6 is IP68 and IP69K, which covers immersion and high pressure jet washing, while the WH6 is IP65, which covers dust and water jets but not immersion. The WH6 does list a 1.5 metre drop specification; the A6 does not list a drop height, only the MIL-STD-810H rating. Both are rated to work from -20°C to 60°C. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what each number is tested for."
+      "a": "The A6 is better sealed; the WH6 lists more beyond that. The A6 is IP67, which covers dust and immersion, while the WH6 is IP65, which covers dust and water jets but not immersion. Both list a 1.5 metre drop rating. The WH6 also lists MIL-STD-810H, which the A6 does not, and is rated from -20°C to 60°C against -20°C to 50°C on the A6, so for a van cab in summer the WH6 has the higher listed figure. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what each number is tested for."
     },
     {
-      "q": "How do you get through a shift on the WH6's 4000mAh battery?",
-      "a": "The WH6 battery is removable, so a charged spare can swap in without waiting on a cable, but we do not list a spare battery as an accessory, so <a href=\"/contact\">ask us</a> before you plan around one. For charging, the <a href=\"/accessories\">WH6 Charging Cradle</a> (£79) and the 12V DC Car Charger (£26) both fit it. The A6's 10600mAh battery is more than twice the WH6's 4000mAh, with 33W fast charging, so it is the one to pick if you cannot stop to charge."
+      "q": "How do the batteries compare?",
+      "a": "Both are removable, so a charged spare can swap in without waiting on a cable. The A6 has 5050mAh and the WH6 4000mAh, so the A6 starts the day with about a quarter more capacity. Spare batteries are not listed as an accessory for either, so <a href=\"/contact\">ask us</a> before you plan around one. For charging, the <a href=\"/accessories\">WH6 Charging Cradle</a> (£79) fits the WH6, and the 12V DC Car Charger (£26) fits both. The A6 has charging contacts on the body, but no dock or cradle is listed for it, so it charges over USB-C."
     },
     {
       "q": "Do I need the barcode scanner version of the WH6?",
-      "a": "Only for regular scanning. The <a href=\"/products/tuga-wh6\">WH6 with Barcode Scanner</a> has an integrated 2D scan engine and costs £779, £80 more than the standard WH6, and it is the only pocket-size device in the range with one. No scan engine is listed for the A6, so scanning there means the camera and an app of your choice; for a handful of scans a day that can be enough, but check it with the codes you actually read. For scuffed labels, poor light and all-day picking, a scan engine is the better tool. Our guide to <a href=\"/blog/rugged-tablet-barcode-scanner\">built-in barcode scanners</a> covers when the extra cost pays."
+      "a": "Only if you need Windows as well as scanning. The <a href=\"/products/tuga-wh6\">WH6 with Barcode Scanner</a> has an integrated 2D scan engine and costs £779, £80 more than the standard WH6. The <a href=\"/products/tuga-a6\">A6</a> has a Zebra 2D scan engine and two side scan keys as standard at £349, £430 less. If your scanning app runs on Android, start with the A6 and test it with the labels you actually read, scuffed and in poor light. If scans have to go straight into a Windows program, the WH6 with Barcode Scanner is the one. Our guide to <a href=\"/blog/rugged-tablet-barcode-scanner\">built-in barcode scanners</a> covers when a scan engine pays over a camera app."
     }
   ],
   "guides": [

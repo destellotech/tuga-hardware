@@ -2,45 +2,45 @@
   "a": "tuga-a6",
   "b": "tuga-a8",
   "group": "android",
-  "title": "Tuga A6 vs Tuga A8: Pocket Handheld or 8 Inch Rugged Tablet?",
-  "description": "Tuga A6 handheld or Tuga A8 tablet, £80 apart. Pay more for the 8 inch screen and van mount, or keep the £80 for 5G, IP69K and a night vision camera.",
-  "summary": "The A6 is £80 cheaper, pocketable, better sealed and has 5G; the A8 is the one if you fill in forms or read drawings on site, or want a tablet on the van dashboard.",
-  "lede": "Buy the Tuga A6 at £299 for photos, job sheets and sign-off from a pocket; pay £80 more for the Tuga A8 at £379 if you fill in forms, read drawings or want a van mount. Both are rugged Android devices for sole traders and small firms.",
+  "title": "Tuga A6 vs Tuga A8: Pocket Scanner or 8 Inch Rugged Tablet?",
+  "description": "Tuga A6 handheld or Tuga A8 tablet, £30 apart. The A8 has the screen, battery and van mount; the A6 has a Zebra 2D scan engine and fits a pocket.",
+  "summary": "Only £30 apart: the A8 has the 8 inch sunlight readable screen, twice the battery and IP68; the A6 has a built-in Zebra 2D scan engine, a removable battery and fits a pocket.",
+  "lede": "Buy the Tuga A8 at £379 if you fill in forms, read drawings or want a van mount; buy the Tuga A6 at £349 if you scan barcodes or want the device in a pocket. Both are rugged Android devices for sole traders and small firms, and £30 is too small a gap to decide on.",
   "verdict": [
-    "The A6 costs £299 and the A8 £379, a gap of £80, and what that £80 buys is size. Both run Android 14, both are sealed to IP68 and drop tested to MIL-STD-810H, both have glove mode, NFC and GPS, and both are rated to work from -20°C to 60°C. The decision comes down to two things: how much screen your work needs, and whether you want to carry a tablet at all.",
-    "Pay the £80 for the screen. The A8 is 8 inches against 6.78, which helps with test schedules, long checklists and PDF drawings without pinching and zooming. It is 800 nits against 560, and the A8 is the one listed as sunlight readable for a bright roof. It also has USB-A, a hand strap in the box and the £109 Vehicle Mounting Dock, which is listed for the A8 and not the A6. The cost is weight: at 680g against 441g, it suits a bag or a van door pocket better than a trouser pocket.",
-    "Keep the £80 if a phone-sized screen will do. The A6 has 5G, IP69K, a larger battery with 33W fast charging, 12GB of RAM and 256GB of storage, and a 64MP night vision camera for lofts, voids and under floors. A fingerprint sensor and face unlock are listed for the A6, not listed for the A8. Both include 12 months, and both can take the paid <a href=\"/warranty\">3-Year Warranty</a> at £65. See the <a href=\"/for/electricians\">electricians page</a> and the <a href=\"/for/field-service\">field service page</a>, or <a href=\"/contact\">tell us what you fill in on site</a> and we will say which we would buy."
+    "The A6 costs £349 and the A8 £379, a gap of £30, so price does not settle this one. They are different shapes of device for different work. Both are rugged Android devices with 4G, NFC and GPS. The decision comes down to two things: whether you scan barcodes, and whether you want to carry a tablet at all.",
+    "If you do not scan and do not need a pocket device, the A8 is the better specified of the two for £30 more. Its 8 inch screen against 6 helps with test schedules, long checklists and PDF drawings, and it is listed as sunlight readable at 800 nits, where the A6 lists no brightness figure. It has a 10000mAh battery against 5050mAh with 18W fast charging listed, 8GB of RAM and 128GB of storage against 4GB and 64GB, IP68 against IP67, MIL-STD-810H, glove mode and a -20°C to 60°C rating against -20°C to 50°C. It also has USB-A and the £109 Vehicle Mounting Dock, which is listed for the A8 and not the A6. The cost is weight: at 680g against 277g, it suits a bag or a van door pocket better than a trouser pocket.",
+    "Buy the A6 if you scan or work from a pocket. It has a Zebra 2D scan engine with two side scan keys, which the A8 does not have, a removable battery so a charged spare can take over mid shift, a 1.5 metre drop rating, dual SIM 4G and Android 15 against Android 14. Both include 12 months, and both can take the paid <a href=\"/warranty\">3-Year Warranty</a> at £65. See the <a href=\"/for/electricians\">electricians page</a> and the <a href=\"/for/field-service\">field service page</a>, or <a href=\"/contact\">tell us what you fill in on site</a> and we will say which we would buy."
   ],
   "chooseA": [
-    "You want one device that goes in a pocket or a Belt Holster (£22) rather than a tablet in a bag: 441g against 680g.",
-    "Your day is photos, job sheets, proof of delivery and sign-off, and a 6.78 inch screen at 2460 x 1080 is enough for that.",
-    "The device gets jet washed along with your kit: IP68 plus IP69K against IP68 alone on the A8.",
-    "You photograph lofts, voids and under floors, where the 64MP night vision camera is meant to earn its keep.",
-    "You upload from site and want 5G rather than 4G LTE, with 33W fast charging to top up between jobs."
+    "You scan parcels, stock or asset tags: the A6 has a Zebra 2D scan engine with two side scan keys, and the A8 has no scanner.",
+    "You want one device that goes in a pocket or a Belt Holster (£22) rather than a tablet in a bag: 277g against 680g.",
+    "Your day is photos, job sheets, proof of delivery and sign-off, and a 6 inch screen at 2160 x 1080 is enough for that.",
+    "You want to swap batteries rather than stop to charge: the A6's 5050mAh battery is removable, which the A8 does not list (spare batteries are not listed with the accessories, so ask us first).",
+    "You work where one network is patchy and want dual SIM 4G, which the A6 lists and the A8 does not."
   ],
   "chooseB": [
-    "You fill in forms, test schedules or long checklists on site and want 8 inches of screen rather than pinching and zooming on 6.78.",
-    "You read drawings, PDFs or route maps on the device, where screen area matters more than pixel count.",
+    "You fill in forms, test schedules or long checklists on site and want 8 inches of screen rather than pinching and zooming on 6.",
+    "You work on bright roofs and open sites: the A8 is listed as sunlight readable at 800 nits, and the A6 lists no brightness figure.",
+    "You cannot stop to charge: 10000mAh with 18W fast charging against 5050mAh on the A6.",
     "You want it on the dashboard: the A8 is vehicle mountable and the Vehicle Mounting Dock (£109) is listed for it, the A6 is not.",
-    "You work on bright roofs and open sites and want the 800 nit screen against 560 nits.",
-    "You plug in USB-A peripherals without an adapter: the A8 has USB-C and USB-A ports, the A6 has USB-C OTG."
+    "You want the higher sealing and wider heat rating: IP68 and MIL-STD-810H against IP67, and -20°C to 60°C against -20°C to 50°C."
   ],
   "faq": [
     {
-      "q": "Is the Tuga A8 worth £80 more than the A6?",
-      "a": "Mostly for the screen. If you fill in forms, test schedules or checklists on site, or read drawings and PDFs, the 8 inch screen is worth £80 on its own, and the vehicle mount option and 800 nit brightness come with it. If your work is photos, short job sheets, proof of delivery and messaging, the <a href=\"/products/tuga-a6\">A6</a> at £299 is the better buy, and it fits in a pocket. The <a href=\"/products/tuga-a8\">A8</a> is the bigger device, and for forms and drawings bigger is what you are paying for."
+      "q": "Is the Tuga A8 worth £30 more than the A6?",
+      "a": "If you do not scan, yes. For £30 more the A8 has the 8 inch sunlight readable screen, twice the battery, twice the RAM and storage, IP68 and the vehicle mount option, so for forms, test schedules, checklists, drawings and PDFs it is the better buy. If your work is scanning parcels, stock or asset tags, or you want the device in a pocket, the <a href=\"/products/tuga-a6\">A6</a> at £349 is the one: it has the Zebra 2D scan engine the <a href=\"/products/tuga-a8\">A8</a> lacks, a removable battery, and it weighs 277g against 680g."
     },
     {
       "q": "Can I do forms on the A6 instead of buying a tablet?",
-      "a": "Short ones should be fine, but check your own app first. The A6 screen is 6.78 inches at 2460 x 1080, a phone-sized screen suited to short job sheets and signatures. Long forms and drawings mean a lot of scrolling, pinching and zooming, which is where the A8 starts to pay for itself. Check your own app on the device rather than assuming: open the longest form you fill in on a typical day and see whether you can work through it one-handed. The Capacitive Stylus (£14.99) is listed for the A8 but not for the A6, which matters if you want a stylus for customer signatures."
+      "a": "Short ones should be fine, but check your own app first. The A6 screen is 6 inches at 2160 x 1080, a pocket-sized screen suited to short job sheets, scans and signatures. Long forms and drawings mean a lot of scrolling, pinching and zooming, which is where the A8 starts to pay for itself, and the A6's 4GB of RAM is half the A8's 8GB, so try your heaviest app. Open the longest form you fill in on a typical day and see whether you can work through it one-handed. The Capacitive Stylus (£14.99) is listed for the A8 but not for the A6, which matters if you want a stylus for customer signatures."
     },
     {
       "q": "Which is tougher, the A6 or the A8?",
-      "a": "They are close, and the A6 edges it on sealing. Both are IP68, both are drop tested to MIL-STD-810H and both are rated to work from -20°C to 60°C. The A6 adds IP69K, listed as surviving jet washing, not just rain, and lists Gorilla Glass 5, which is not listed for the A8. Neither lists a drop height. If the device will be jet washed, the A6 is the one rated for it. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> and <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explain what each rating does and does not test."
+      "a": "On the ratings listed, the A8. It is sealed to IP68 against IP67 on the A6, lists MIL-STD-810H, which the A6 does not, and is rated from -20°C to 60°C against -20°C to 50°C. The A6 lists a 1.5 metre drop rating, and the A8 lists no drop height. IP67 still covers dust and short immersion, so both are sealed against rain and a drop in a puddle. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> and <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explain what each rating does and does not test."
     },
     {
       "q": "Can I mount the A6 in the van like the A8?",
-      "a": "Not with the same dock. The A8 is vehicle mountable and the Vehicle Mounting Dock (£109), a locking VESA mount with DC power input, is listed for the A8, A10, W8 and W10. It is not listed for the A6. What fits the A6 is the Car Phone Mount (£17), a heavy duty suction cup mount for rugged handhelds, and the 12V DC Car Charger (£26) fits both. So the A6 can sit in a suction cup mount and charge from the 12V socket, but if you want a locked-in dashboard unit that comes out as the site tablet, that is the A8. Everything is on the <a href=\"/accessories\">accessories page</a>."
+      "a": "Not with the same dock. The A8 is vehicle mountable and the Vehicle Mounting Dock (£109), a locking VESA mount with DC power input, is listed for the A8, A10, W8 and W10. It is not listed for the A6. What fits the A6 is the Car Phone Mount (£17), a heavy duty suction cup mount for rugged handhelds, and the 12V DC Car Charger (£26) fits both. The A6 has charging contacts on the body, but no dock or cradle is listed for it. So the A6 can sit in a suction cup mount and charge from the 12V socket, but if you want a locked-in dashboard unit that comes out as the site tablet, that is the A8. Everything is on the <a href=\"/accessories\">accessories page</a>."
     }
   ],
   "guides": [
