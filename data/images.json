@@ -92,11 +92,8 @@
   ],
   "/img/products/w8-2.webp": [
     400,
-    800
-  ],
-  "/img/products/w8-3.webp": [
-    400,
-    800
+    800,
+    1200
   ],
   "/img/products/wh6-1.webp": [
     400,
@@ -143,6 +140,11 @@
   ],
   "/img/blog/blog-waterproof.webp": [
     640,
+    1200
+  ],
+  "/img/products/wh6-4.webp": [
+    400,
+    800,
     1200
   ]
 }
