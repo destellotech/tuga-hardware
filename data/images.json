@@ -1,4 +1,16 @@
 {
+  "/img/products/t86x-3.webp": [
+    400,
+    800
+  ],
+  "/img/products/t86x-2.webp": [
+    400,
+    800
+  ],
+  "/img/products/t86x-1.webp": [
+    400,
+    800
+  ],
   "/img/products/t10-4.webp": [
     400,
     800
@@ -33,11 +45,6 @@
   "/img/products/m602-2.webp": [
     400,
     800
-  ],
-  "/img/products/t85s-1.webp": [
-    400,
-    800,
-    1200
   ],
   "/img/products/t10-1.webp": [
     400,
