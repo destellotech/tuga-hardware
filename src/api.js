@@ -20,7 +20,7 @@ import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-
 const PRODUCTS = {
   // Devices — Android
   'tuga-a6':            { name: 'Tuga A6',                        price: 34900, device: true },
-  'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
+  'tuga-a8':            { name: 'Tuga A8',                        price: 39900, device: true },
   'tuga-a10':           { name: 'Tuga A10',                       price: 44900, device: true },
   // Devices — Windows
   'tuga-wh6':           { name: 'Tuga WH6',                       price: 69900, device: true },

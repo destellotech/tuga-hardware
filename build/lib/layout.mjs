@@ -58,7 +58,7 @@ export const SITE = {
   phone: '01279 912065',
   phoneHref: 'tel:+441279912065',
   description:
-    'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free UK delivery.',
+    'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, most models drop tested to MIL-STD-810H. Free UK delivery.',
 };
 
 export const data = JSON.parse(

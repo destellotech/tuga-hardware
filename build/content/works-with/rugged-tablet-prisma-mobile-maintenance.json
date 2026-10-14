@@ -10,7 +10,7 @@
   "intro": [
     "Prisma is the computerised maintenance management system (CMMS, or GMAO in Spanish) made by Sisteplant, S.L., headquartered in Derio, Spain. Planners and coordinators work in the Prisma web front end, while technicians use the companion app, published on Google Play as Prisma Mobile Maintenance, to receive and report work orders, identify assets and spare parts by QR code, barcode or NFC tag, attach photos and documents, and keep working where there is no signal. Sisteplant lists four sectors for Prisma: services, estate (buildings), infrastructures and industry.",
     "A technician's tablet spends its day on plant floors, in hangars and plant rooms, in the rain and on vehicle dashboards. A consumer tablet usually has no ingress protection rating or drop rating, often has no NFC or SIM slot, and is built for indoor use. Consumer models also change frequently, which is awkward for a fleet that has to be imaged and managed together.",
-    "This page sets out what Sisteplant publishes about the devices Prisma Mobile Maintenance runs on, which Tuga tablets meet those published requirements, how to get the app running, and what to think about before a fleet order. One of our customers, an industrial asset-management firm, bought a Tuga A10 for maintenance technicians at an aerospace manufacturer to run this app."
+    "This page sets out what Sisteplant publishes about the devices Prisma Mobile Maintenance runs on, which Tuga tablets meet those published requirements, how to get the app running, and what to think about before a fleet order."
   ],
   "requirements": [
     {
@@ -53,7 +53,7 @@
     {
       "device_id": "tuga-a10",
       "role": "primary",
-      "why": "The Tuga A10 (£449) is our primary pick for Prisma Mobile Maintenance because the technician app is an Android app and the A10 runs Android 14, which is above the Android 8.0 minimum published on Google Play. Its 10.1 inch 1920 x 1200 screen gives room for work-order detail, checklists and attached drawings, the 13MP rear camera with flash is what the app's camera-based QR and barcode reading will use, and the built-in NFC reader covers the NFC tag identification Sisteplant describes. IP68 and MIL-STD-810H ratings, an 8000mAh battery and 4G dual SIM suit plant and hangar work where Wi-Fi is patchy and the app's offline mode is doing the work. This is the model an industrial asset-management customer of ours bought for technicians at an aerospace manufacturer to run this app.",
+      "why": "The Tuga A10 (£449) is our primary pick for Prisma Mobile Maintenance because the technician app is an Android app and the A10 runs Android 14, which is above the Android 8.0 minimum published on Google Play. Its 10.1 inch 1920 x 1200 screen gives room for work-order detail, checklists and attached drawings, the 13MP rear camera with flash is what the app's camera-based QR and barcode reading will use, and the built-in NFC reader covers the NFC tag identification Sisteplant describes. IP68 and MIL-STD-810H ratings, an 8000mAh battery and 4G dual SIM suit plant and hangar work where Wi-Fi is patchy and the app's offline mode is doing the work.",
       "fit": [
         "Android 8.0 or later required by Google Play: the A10 runs Android 14.",
         "QR and barcode reading through the camera: 13MP rear camera with flash (scanning is handled by the app; the A10 has no dedicated scan engine).",
