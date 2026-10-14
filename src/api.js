@@ -121,7 +121,7 @@ const TWELVE_MONTHS = 365 * 24 * 60 * 60;
 
 const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/warranty-register', '/api/review'];
 
-const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check'];
+const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check', '/api/reviews-export'];
 
 // Bulk discount tiers: { minQty: discountPercent }
 const DISCOUNT_TIERS = [
@@ -226,6 +226,9 @@ export async function handleRequest(request, env) {
     !isAdmin(request, env)
   ) {
     return new Response('Not Found', { status: 404 });
+  }
+  if (request.method === 'GET' && path === '/api/reviews-export') {
+    return handleReviewsExport(env);
   }
   if (request.method === 'GET' && path === '/api/paypal-check') {
     return handlePayPalCheck(request, env);
@@ -1213,6 +1216,42 @@ async function handleReviewLookup(url, env) {
     items: (order.items || []).map((i) => i.name),
     alreadyReviewed: Boolean(existing),
   });
+}
+
+/**
+ * Every stored review, for build/pull-reviews.mjs (ADMIN_TOKEN only, via
+ * DIAGNOSTIC_PATHS). The order id is replaced by a one-way hash and no
+ * email or address is included, so the export is safe to commit.
+ */
+async function handleReviewsExport(env) {
+  if (!env.ORDERS) return corsError('No store bound', 500);
+  const reviews = [];
+  let cursor;
+  do {
+    const page = await env.ORDERS.list({ prefix: 'review:', cursor });
+    cursor = page.list_complete ? undefined : page.cursor;
+    for (const { name } of page.keys) {
+      const raw = await env.ORDERS.get(name);
+      if (!raw) continue;
+      const r = JSON.parse(raw);
+      const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(r.orderId || name));
+      const id = [...new Uint8Array(digest)].slice(0, 8).map((b) => b.toString(16).padStart(2, '0')).join('');
+      reviews.push({
+        id,
+        items: r.items || [],
+        rating: r.rating,
+        title: r.title || '',
+        body: r.body || '',
+        displayName: r.displayName || 'Verified buyer',
+        trade: r.trade || '',
+        verifiedPurchase: Boolean(r.verifiedPurchase),
+        createdAt: r.createdAt,
+      });
+    }
+  } while (cursor);
+  const res = corsResponse({ reviews });
+  res.headers.set('Cache-Control', 'no-store');
+  return res;
 }
 
 /**
