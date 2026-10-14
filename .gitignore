@@ -5,5 +5,7 @@ Thumbs.db
 .env
 config.env
 .dev.vars
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/founder/
 .wrangler/
