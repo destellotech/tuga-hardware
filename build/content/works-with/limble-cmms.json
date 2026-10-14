@@ -60,13 +60,13 @@
     {
       "device_id": "tuga-a6",
       "role": "alternative",
-      "why": "For technicians who want a handheld that fits in a pocket or a belt holster, the Tuga A6 is a 6.78 inch Android 14 device at £299. It meets the same Android 7.0 minimum and Limble's processor and RAM recommendations, with 12GB RAM and 256GB storage. The 560 nit screen is brighter than the A10's 350 nits for outdoor reading, the 50MP main camera handles QR codes, and 5G gives faster syncing where coverage exists. The trade-off is screen size: Limble publishes no tablet layout guidance, so check whether your technicians prefer reading task instructions and task lists on a 6.78 inch screen or a 10.1 inch one.",
+      "why": "For technicians who want a handheld that fits in a pocket or a belt holster, the Tuga A6 is a 6 inch Android 15 device at £349, weighing 277g. It meets the same Android 7.0 minimum, and its MediaTek Helio P35 octa-core (up to 2.3GHz) with 4GB RAM meets Limble's recommended 2GHz, four cores and 4GB RAM, though with no margin on memory, so the A10's 8GB is the safer choice for heavy use. Storage is 64GB with microSD up to 256GB. The 13MP rear camera with flash handles Limble's camera-based QR scanning. It also has a Zebra 2D scan engine, but Limble documents camera scanning, so treat the scan keys as untested with the app. The 5050mAh battery is removable, so a spare keeps a technician going through a long shift. The trade-off is screen size: Limble publishes no tablet layout guidance, so check whether your technicians prefer reading task instructions and task lists on a 6 inch screen or a 10.1 inch one.",
       "fit": [
-        "Requires Android 7.0 and up: the A6 runs Android 14",
-        "Recommended 4GB RAM and 2GHz quad-core: MediaTek Dimensity 6300 with 12GB RAM",
-        "Camera-based QR code scanning: 50MP main camera and 64MP night-vision camera",
-        "Fast syncing before offline work: 5G plus Wi-Fi 5",
-        "Harsh environments: IP68 and IP69K, MIL-STD-810H, Gorilla Glass 5, glove mode, 10600mAh battery with 33W fast charge"
+        "Requires Android 7.0 and up: the A6 runs Android 15",
+        "Recommended 4GB RAM and 2GHz quad-core: MediaTek Helio P35 octa-core up to 2.3GHz with 4GB RAM, which meets the recommendation exactly",
+        "Camera-based QR code scanning: 13MP rear camera with flash (the Zebra 2D scan engine is not documented by Limble)",
+        "Syncing before offline work: 4G LTE dual SIM plus dual-band Wi-Fi 5",
+        "Harsh environments: IP67, 1.5 metre drop rating, removable 5050mAh battery, -20 to 50C"
       ]
     },
     {
@@ -100,11 +100,11 @@
   "faq": [
     {
       "q": "Will the Tuga A10 run the Limble mobile app?",
-      "a": "The Google Play listing for the new Limble app states it requires Android 7.0 and up, and the legacy Limble CMMS app requires Android 6.0 and up. The Tuga A10 and Tuga A6 both run Android 14, so they meet the published minimum. Limble's device article recommends at least 2GB RAM (4GB recommended), a 2GHz processor with four cores and a camera; the A10 has 8GB RAM, an octa-core 2.2GHz processor and a 13MP rear camera. Tuga Hardware is independent of Limble and these devices are not tested or approved by Limble."
+      "a": "The Google Play listing for the new Limble app states it requires Android 7.0 and up, and the legacy Limble CMMS app requires Android 6.0 and up. The Tuga A10 runs Android 14 and the Tuga A6 runs Android 15, so both meet the published minimum. Limble's device article recommends at least 2GB RAM (4GB recommended), a 2GHz processor with four cores and a camera; the A10 has 8GB RAM, an octa-core 2.2GHz processor and a 13MP rear camera, and the A6 has 4GB RAM, an octa-core processor up to 2.3GHz and a 13MP rear camera. Tuga Hardware is independent of Limble and these devices are not tested or approved by Limble."
     },
     {
       "q": "Does Limble work offline on a rugged tablet?",
-      "a": "Partly, and it depends on your Limble plan. Limble's pricing page lists Mobile App Offline Mode under Premium+ and Enterprise, not Standard. In the new app you can open the app, scan QR codes and work on bookmarked tasks that have been fully downloaded, but you cannot create tasks, add parts to tasks or edit asset data offline, and Limble warns not to close the app while working offline or you may lose in-progress work. The 4G in the A10 and the 5G in the A6 help technicians sync before heading somewhere without Wi-Fi."
+      "a": "Partly, and it depends on your Limble plan. Limble's pricing page lists Mobile App Offline Mode under Premium+ and Enterprise, not Standard. In the new app you can open the app, scan QR codes and work on bookmarked tasks that have been fully downloaded, but you cannot create tasks, add parts to tasks or edit asset data offline, and Limble warns not to close the app while working offline or you may lose in-progress work. The 4G in the A10 and A6 helps technicians sync before heading somewhere without Wi-Fi."
     },
     {
       "q": "Can we trial one unit before buying for the whole team?",
@@ -115,8 +115,8 @@
       "a": "Yes. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd) is not VAT registered, so the prices shown have no VAT to add. We deliver to UK addresses only."
     },
     {
-      "q": "Should technicians have the 10.1 inch A10 or the 6.78 inch A6?",
-      "a": "Limble publishes no screen size or tablet layout guidance, so this is a workflow decision. The A10's 10.1 inch 1920 x 1200 screen gives more room for task instructions, task lists and photos, and it comes with a hand strap in the box. The A6 is a 441g handheld with a brighter 560 nit screen, 5G, a higher resolution camera and IP69K in addition to IP68, and it fits in a belt holster. Trialling one of each is a reasonable way to decide."
+      "q": "Should technicians have the 10.1 inch A10 or the 6 inch A6?",
+      "a": "Limble publishes no screen size or tablet layout guidance, so this is a workflow decision. The A10's 10.1 inch 1920 x 1200 screen gives more room for task instructions, task lists and photos, and it comes with a hand strap in the box. The A6 is a 277g handheld with a Zebra 2D scan engine, a removable 5050mAh battery and IP67, and it fits in a belt holster. It has 4GB RAM against the A10's 8GB, which meets Limble's recommendation but leaves less headroom. Trialling one of each is a reasonable way to decide."
     }
   ],
   "disclaimer": "Limble CMMS is a product of Limble Solutions, Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Limble Solutions, Inc.",
