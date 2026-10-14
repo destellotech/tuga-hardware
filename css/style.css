@@ -730,35 +730,32 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 
 .hero-content { max-width: 40ch; }
 
-/* The lead device's product photo, on a paper-white plate. */
+/* The lead device, cut out and set against a building site. */
 .hero-drawing {
   position: relative;
-  background: var(--white);
-  padding: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 .hero-drawing img {
+  display: block;
   width: 100%;
   height: auto;
-  mix-blend-mode: multiply;
+  border: 1px solid rgba(247, 244, 239, 0.12);
 }
 
 .hero-drawing figcaption {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem 1rem;
-  margin-top: clamp(0.75rem, 2vw, 1.25rem);
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--rule);
+  margin-top: 0.75rem;
   font-family: var(--font-mono);
   font-size: var(--step--2);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-light);
+  color: var(--ink-inverse-mid);
 }
 
 .hero-drawing figcaption strong {
-  color: var(--copper-text);
+  color: var(--copper-light);
   font-weight: 500;
 }
 

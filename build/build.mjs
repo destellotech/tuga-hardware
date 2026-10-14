@@ -437,7 +437,7 @@ const hero = () => {
           </div>
         </div>
         <figure class="hero-drawing">
-          <img src="${imgPath(lead, 1)}" alt="Tuga A8 rugged tablet, front and back" width="1200" height="900" fetchpriority="high">
+          <img src="${versioned('/img/hero/a8-on-site.webp')}" srcset="${versioned('/img/hero/a8-on-site-800.webp')} 800w, ${versioned('/img/hero/a8-on-site.webp')} 1200w" sizes="(max-width: 860px) 92vw, 600px" alt="Tuga A8 rugged tablet, front and back, in front of a building site" width="1200" height="900" fetchpriority="high">
           <figcaption>
             <span><strong>${esc(lead.name)}</strong></span>
             <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
