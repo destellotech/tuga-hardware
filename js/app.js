@@ -203,6 +203,11 @@
       return;
     }
     if (!stored || stored === '[]') return;
+    // Once per tab session is enough to drop renamed or retired items; the
+    // basket page and add-to-basket fetch the catalogue anyway.
+    try {
+      if (sessionStorage.getItem('tuga-pruned') === stored) return;
+    } catch {}
     try {
       await getCatalogue();
     } catch {
@@ -210,6 +215,9 @@
     }
     const cleaned = Cart.read();
     if (JSON.stringify(cleaned) !== stored) Cart.write(cleaned);
+    try {
+      sessionStorage.setItem('tuga-pruned', localStorage.getItem(Cart.KEY) || '');
+    } catch {}
   }
 
   function paintCount() {
@@ -218,6 +226,9 @@
       el.textContent = n;
       el.classList.toggle('hidden', n === 0);
     });
+    $$('.cart-link').forEach((a) =>
+      a.setAttribute('aria-label', n ? `Basket, ${n} ${n === 1 ? 'item' : 'items'}` : 'Basket, empty')
+    );
   }
 
   /* ------------------------------------------------------------------- toast */
@@ -265,6 +276,8 @@
     if (!toggle || !nav) return;
 
     const close = () => {
+      if (!nav.classList.contains('is-open')) return;
+      if (nav.contains(document.activeElement)) toggle.focus();
       nav.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Open menu');
@@ -334,17 +347,23 @@
   function initCookies() {
     const banner = $('#cookie-banner');
     if (!banner) return;
-    if (localStorage.getItem('tuga-cookies')) return;
+    try {
+      if (localStorage.getItem('tuga-cookies')) return;
+    } catch {
+      return;
+    }
 
+    banner.hidden = false;
     setTimeout(() => banner.classList.add('is-visible'), 900);
 
     const dismiss = (choice) => () => {
       localStorage.setItem('tuga-cookies', choice);
       banner.classList.remove('is-visible');
+      // Out of the tab order and the accessibility tree once dismissed.
+      setTimeout(() => { banner.hidden = true; }, 400);
     };
 
     $('[data-cookie-accept]', banner)?.addEventListener('click', dismiss('accepted'));
-    $('[data-cookie-decline]', banner)?.addEventListener('click', dismiss('declined'));
   }
 
   /* --------------------------------------------------------------- quantity */
@@ -478,9 +497,13 @@
 
     thumbs.forEach((thumb) => {
       thumb.addEventListener('click', () => {
+        // Swap srcset too, or the browser keeps showing the first photo.
+        main.srcset = thumb.dataset.gallerySrcset || '';
         main.src = thumb.dataset.gallerySrc;
-        thumbs.forEach((t) => t.classList.remove('is-active'));
-        thumb.classList.add('is-active');
+        thumbs.forEach((t) => {
+          t.classList.toggle('is-active', t === thumb);
+          t.setAttribute('aria-pressed', String(t === thumb));
+        });
       });
     });
   }
@@ -507,8 +530,10 @@
 
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        buttons.forEach((b) => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
+        buttons.forEach((b) => {
+          b.classList.toggle('is-active', b === btn);
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
         apply(btn.dataset.filter);
 
         const url = new URL(window.location);
@@ -542,7 +567,7 @@
   function cartItemRow(line) {
     const p = line.product;
     const image = p.imageBase
-      ? `<img src="/img/products/${p.imageBase}-1.webp" alt="" width="120" height="120" loading="lazy">`
+      ? `<img src="/img/products/${p.imageBase}-1-400.webp" alt="" width="120" height="90" loading="lazy">`
       : p.warrantyFor
         ? '<span class="cart-item-glyph" aria-hidden="true">✓</span>'
         : '<span aria-hidden="true">◧</span>';
@@ -670,10 +695,28 @@
     emptyEl.hidden = true;
     layout.hidden = false;
 
+    // Re-rendering replaces the controls, so remember which one had focus
+    // and put keyboard users back on it.
+    const active = document.activeElement;
+    const lineId = active?.closest?.('[data-line]')?.dataset.line;
+    const control = active?.matches?.('[data-line-step="1"]')
+      ? '[data-line-step="1"]'
+      : active?.matches?.('[data-line-step="-1"]')
+        ? '[data-line-step="-1"]'
+        : active?.matches?.('[data-line-qty]')
+          ? '[data-line-qty]'
+          : null;
+
     $('[data-cart-items]').innerHTML = totals.lines
       .map((line) => cartItemRow(line) + warrantyOffer(line, totals.lines, products))
       .join('');
     $('[data-cart-summary]').innerHTML = cartSummary(totals);
+
+    if (lineId && control) {
+      const row = $(`[data-line="${CSS.escape(lineId)}"]`);
+      const target = (row && $(control, row)) || $('[data-line-qty]');
+      target?.focus();
+    }
   }
 
   function initCartPage() {
@@ -972,9 +1015,9 @@
             if (data.emailSent === true && data.emailVia !== 'stripe-receipt') {
               text = 'A confirmation email with your order number and delivery details is on its way.';
             } else if (data.emailVia === 'stripe-receipt') {
-              text = `Stripe has emailed your payment receipt. ${keep} We will email your order confirmation from support@tugahardware.com.`;
+              text = `Stripe has emailed your payment receipt. ${keep} We will email your order confirmation from orders@tugahardware.com. Replies go to support@tugahardware.com.`;
             } else {
-              text = `${keep} We will email your confirmation from support@tugahardware.com within one working day.`;
+              text = `${keep} We will email your confirmation from orders@tugahardware.com within one working day.`;
             }
 
             // Mirrors the plan block in the confirmation email (src/email.js)
@@ -997,6 +1040,12 @@
               'We deliver to the UK only',
               'Your PayPal delivery address is outside the UK, so we have not taken payment and nothing has been charged. If you have a UK delivery address, change it in PayPal and try again.',
               '<p class="mono"><a href="/cart">Back to basket</a></p>'
+            );
+          } else if (ok && data.status === 'processing') {
+            show(
+              'Payment processing',
+              'Your bank is still processing the payment. We will email your order confirmation as soon as it clears. Please do not pay again.',
+              '<p class="mono">Questions? Email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a></p>'
             );
           } else if (ok && data.status === 'unpaid') {
             show(
@@ -1180,19 +1229,32 @@
       result.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
+    const next = () => (current < steps.length - 1 ? go(current + 1) : render());
+
+    // Arrow keys move between radios and fire change, so only a pointer pick
+    // auto-advances; keyboard users press Next when they have chosen.
+    let byKeyboard = false;
+    form.addEventListener('keydown', () => { byKeyboard = true; });
+    form.addEventListener('pointerdown', () => { byKeyboard = false; });
+
     form.addEventListener('change', (e) => {
       if (e.target.type !== 'radio') return;
+      const nextBtn = $('[data-picker-next]', e.target.closest('[data-picker-step]'));
+      if (nextBtn) nextBtn.disabled = false;
+      if (byKeyboard) return;
       // A short pause so the selected state registers before moving on.
-      setTimeout(() => (current < steps.length - 1 ? go(current + 1) : render()), 180);
+      setTimeout(next, 180);
     });
 
     form.addEventListener('click', (e) => {
+      if (e.target.closest('[data-picker-next]')) next();
       if (e.target.closest('[data-picker-back]')) go(Math.max(0, current - 1));
     });
 
     result.addEventListener('click', (e) => {
       if (e.target.closest('[data-picker-restart]')) {
         form.reset();
+        $$('[data-picker-next]', form).forEach((b) => { b.disabled = true; });
         go(0);
       }
     });
@@ -1366,7 +1428,7 @@
         const data = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(data.error || 'That did not save');
         form.hidden = true;
-        lede.textContent = 'Thank you. Your review will appear on the site once we have checked it is about the product.';
+        lede.textContent = 'Thank you. We read every review, and we may publish yours on the site, marked as a verified purchase.';
       } catch (err) {
         status.className = 'form-status form-status-err';
         status.textContent = `${err.message}. Please try again.`;

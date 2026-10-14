@@ -18,6 +18,10 @@ const REVIEW_MAX_AGE_DAYS = 90;
 // Keep one run well inside the Worker's subrequest limit.
 const MAX_PER_RUN = 25;
 
+// Cap record reads per run so a large store never exhausts the Worker's
+// KV operation limit. Keys with metadata are skipped without a read.
+const MAX_READS_PER_RUN = 400;
+
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 export async function sendReviewRequests(env) {
@@ -28,18 +32,45 @@ export async function sendReviewRequests(env) {
 
   const now = Date.now();
   let sent = 0;
+  let reads = 0;
   let cursor;
 
   do {
     const page = await env.ORDERS.list({ prefix: 'order:', cursor });
     cursor = page.list_complete ? undefined : page.cursor;
 
-    for (const { name } of page.keys) {
-      if (sent >= MAX_PER_RUN) return { sent };
+    for (const { name, metadata } of page.keys) {
+      if (sent >= MAX_PER_RUN || reads >= MAX_READS_PER_RUN) return { sent };
 
+      // Orders saved since metadata was added can be ruled out from the list
+      // alone. Older keys have none and are read once, then rewritten with it
+      // when their review request is sent.
+      if (metadata) {
+        if (metadata.reviewRequestedAt || !metadata.paidAt) continue;
+        if (metadata.status === 'refunded' || metadata.status === 'cancelled') continue;
+        const metaAge = now - Date.parse(metadata.paidAt);
+        if (!(metaAge >= REVIEW_DELAY_DAYS * DAY_MS && metaAge <= REVIEW_MAX_AGE_DAYS * DAY_MS)) continue;
+      }
+
+      reads++;
       const raw = await env.ORDERS.get(name);
       if (!raw) continue;
       const order = JSON.parse(raw);
+
+      // Backfill metadata on legacy keys once, so later runs skip them unread.
+      if (!metadata) {
+        try {
+          await env.ORDERS.put(name, raw, {
+            metadata: {
+              paidAt: order.paidAt || order.createdAt || null,
+              reviewRequestedAt: order.reviewRequestedAt || null,
+              status: order.status || null,
+            },
+          });
+        } catch (err) {
+          console.error('Could not backfill metadata for', name, err);
+        }
+      }
 
       if (order.reviewRequestedAt || !order.customerEmail || !order.paidAt) continue;
       if (order.status === 'refunded' || order.status === 'cancelled') continue;

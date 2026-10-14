@@ -8,6 +8,16 @@
 const PREFIX = 'order:';
 
 /**
+ * Small facts stored as KV key metadata, so the daily review cron can skip
+ * orders from a list() call without reading each record.
+ */
+const orderMeta = (r) => ({
+  paidAt: r.paidAt || r.createdAt || null,
+  reviewRequestedAt: r.reviewRequestedAt || null,
+  status: r.status || null,
+});
+
+/**
  * Save an order to KV.
  * Also adds the order ID to a pending-orders index for quick listing.
  *
@@ -24,7 +34,7 @@ export async function saveOrder(kv, orderId, orderData) {
   };
 
   // Store the order itself (expire after 90 days if desired)
-  await kv.put(`${PREFIX}${orderId}`, JSON.stringify(record));
+  await kv.put(`${PREFIX}${orderId}`, JSON.stringify(record), { metadata: orderMeta(record) });
 
   // Maintain a simple pending-orders index.
   // Workers KV does not support queries, so we keep a list of pending IDs.
@@ -52,7 +62,7 @@ export async function updateOrder(kv, orderId, updates) {
   if (!existing) throw new Error(`Order not found: ${orderId}`);
 
   const updated = { ...existing, ...updates, updatedAt: new Date().toISOString() };
-  await kv.put(`${PREFIX}${orderId}`, JSON.stringify(updated));
+  await kv.put(`${PREFIX}${orderId}`, JSON.stringify(updated), { metadata: orderMeta(updated) });
 
   // If status changed away from pending, remove from the pending index
   if (existing.status === 'pending' && updated.status !== 'pending') {
