@@ -4,7 +4,7 @@
   "vendor": "IFS Ultimo B.V.",
   "vendor_url": "https://www.ultimo.com/",
   "title": "Rugged tablet for IFS Ultimo (Ultimo Go+ app)",
-  "meta_description": "Rugged Android tablets for the Ultimo Go+ app (Android 8.0 and up, offline, camera scanning). Tuga A10 and A6 run Android 14. UK business seller.",
+  "meta_description": "Rugged Android tablets for the Ultimo Go+ app (Android 8.0 and up, offline, camera scanning). Tuga A10 and A6 run Android 14 and 15. UK business seller.",
   "target_query": "rugged tablet for IFS Ultimo",
   "h1": "Rugged tablet for IFS Ultimo",
   "intro": [
@@ -15,7 +15,7 @@
   "requirements": [
     {
       "requirement": "Android 8.0 and up for the Ultimo Go+ app",
-      "detail": "The Google Play listing for Ultimo Go+ (package com.ultimo.UltimoGoPlus, developer IFS Ultimo B.V.) requires Android 8.0 and up. The Tuga A10 and Tuga A6 run Android 14, which meets this requirement.",
+      "detail": "The Google Play listing for Ultimo Go+ (package com.ultimo.UltimoGoPlus, developer IFS Ultimo B.V.) requires Android 8.0 and up. The Tuga A10 runs Android 14 and the Tuga A6 runs Android 15, which both meet this requirement.",
       "source_url": "https://play.google.com/store/apps/details?id=com.ultimo.UltimoGoPlus"
     },
     {
@@ -65,13 +65,13 @@
     {
       "device_id": "tuga-a6",
       "role": "alternative",
-      "why": "The Tuga A6 also runs Android 14 and therefore meets the Android 8.0 and up requirement for Ultimo Go+. It is the choice where technicians want a pocketable handheld rather than a tablet, where 5G matters, or where the 64MP night-vision camera and 50MP main camera are wanted for photo evidence and label scanning. The 6.78 inch screen is smaller than the A10's 10.1 inch display, so long inspection forms and asset hierarchies involve more scrolling. IP68 plus IP69K and MIL-STD-810H ratings, glove mode and a 10600mAh battery suit wash-down areas and long shifts.",
+      "why": "The Tuga A6 runs Android 15 and therefore meets the Android 8.0 and up requirement for Ultimo Go+. It is the choice where technicians want a pocketable handheld rather than a tablet, at 277g, and where a lot of asset labels are scanned: it has a Zebra 2D scan engine with two side scan keys as well as a 13MP rear camera with flash. The vendor documents camera scanning, so test whether Ultimo Go+ accepts input from the scan engine before relying on it. The 6 inch screen is smaller than the A10's 10.1 inch display, so long inspection forms and asset hierarchies involve more scrolling, and it has 4GB RAM and 64GB storage against the A10's 8GB and 128GB. IP67, a 1.5 metre drop rating and a removable 5050mAh battery suit long shifts, though IP67 is not a wash-down rating.",
       "fit": [
-        "Android 8.0 and up required: the A6 runs Android 14.",
-        "Camera-based QR and barcode scanning and photo linking: 64MP night-vision camera and 50MP main camera.",
-        "GPS integration: GPS + GLONASS + BeiDou receiver.",
-        "Offline working with fast reconnection: 5G, Wi-Fi 5, 10600mAh battery with 33W fast charge, 256GB storage with microSD up to 2TB.",
-        "Handheld use on site: 441g, Gorilla Glass 5, glove mode, IP68 + IP69K, MIL-STD-810H, -20 to 60C."
+        "Android 8.0 and up required: the A6 runs Android 15.",
+        "QR and barcode scanning and photo linking: 13MP rear camera with flash, plus a Zebra 2D scan engine (support for scan engine input is not documented by the vendor).",
+        "GPS integration: GPS + GLONASS + BeiDou + Galileo receiver.",
+        "Offline working and reconnection: 4G LTE dual SIM, dual-band Wi-Fi 5, removable 5050mAh battery, 64GB storage with microSD up to 256GB.",
+        "Handheld use on site: 277g, IP67, 1.5 metre drop rating, -20 to 50C."
       ]
     },
     {
@@ -88,7 +88,7 @@
   ],
   "setup_steps": [
     "Confirm with your IFS Ultimo administrator that your edition and user licences cover the technicians who will use Ultimo Go+, and that mobile access is enabled for their accounts.",
-    "On the Tuga A10 or A6, sign in to a Google account, open Google Play, search for Ultimo Go+ (publisher IFS Ultimo B.V.) and install it. Android 14 on both devices meets the app's Android 8.0 and up requirement.",
+    "On the Tuga A10 or A6, sign in to a Google account, open Google Play, search for Ultimo Go+ (publisher IFS Ultimo B.V.) and install it. Android 14 on the A10 and Android 15 on the A6 both meet the app's Android 8.0 and up requirement.",
     "Open the app and sign in with the credentials and environment details your administrator provides.",
     "Before the first shift, open the app on Wi-Fi and let it download its data, then test it with Wi-Fi and mobile data switched off to confirm the offline working described by the vendor behaves as you expect for your data volume.",
     "Grant camera and location permissions when the app asks, then test a QR or barcode scan on an existing asset label and a photo attachment on a test activity.",
@@ -103,11 +103,11 @@
   "faq": [
     {
       "q": "Will Ultimo Go+ run on the Tuga A10 and A6?",
-      "a": "The Google Play listing for Ultimo Go+ requires Android 8.0 and up. The Tuga A10 and Tuga A6 both run Android 14, which meets that requirement. IFS Ultimo does not publish a list of recommended or supported devices, so we state the published requirement and the device's operating system, nothing more. We welcome a single trial unit so you can confirm the app on your own Ultimo environment before ordering more."
+      "a": "The Google Play listing for Ultimo Go+ requires Android 8.0 and up. The Tuga A10 runs Android 14 and the Tuga A6 runs Android 15, which both meet that requirement. IFS Ultimo does not publish a list of recommended or supported devices, so we state the published requirement and the device's operating system, nothing more. We welcome a single trial unit so you can confirm the app on your own Ultimo environment before ordering more."
     },
     {
       "q": "Does Ultimo Go+ work offline on a rugged tablet?",
-      "a": "Yes, according to the vendor. The Play and App Store listings state that if you are temporarily disconnected you can continue working, and list working without an internet connection as a feature. The vendor does not publish how much data is cached or how conflicts are resolved on sync, so test this with your own data before rollout. The A10 has 4G dual SIM and the A6 has 5G for reconnecting between sites."
+      "a": "Yes, according to the vendor. The Play and App Store listings state that if you are temporarily disconnected you can continue working, and list working without an internet connection as a feature. The vendor does not publish how much data is cached or how conflicts are resolved on sync, so test this with your own data before rollout. The A10 and A6 both have 4G dual SIM for reconnecting between sites."
     },
     {
       "q": "Can we run IFS Ultimo on the Tuga W10 Windows tablet?",
@@ -118,11 +118,11 @@
       "a": "Yes to both. Business buyers can request a quote and pay by bank transfer on a proforma invoice, and a single trial unit before a fleet order is welcome. Tuga Hardware is not VAT registered, so there is no VAT to add to the listed prices. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more. Delivery is free within the UK in 7 to 10 working days, with 30-day returns and a 12-month warranty. We deliver to the UK only."
     },
     {
-      "q": "Should we choose the 10.1 inch A10 or the 6.78 inch A6?",
-      "a": "IFS Ultimo publishes no screen-size guidance, so this is a workflow choice. The A10's 10.1 inch 1920 x 1200 screen suits long inspection forms, asset hierarchies and photo review, and it is the primary pick at £449. The A6 at £299 is a 441g handheld with a 6.78 inch FHD+ screen, 5G, a 10600mAh battery and IP68 plus IP69K, which suits technicians who need a pocketable device, wash-down areas or the 64MP night-vision camera. Both run Android 14 and both have NFC as a hardware feature, though the current Ultimo Go+ store descriptions do not list NFC or RFID among the app's features."
+      "q": "Should we choose the 10.1 inch A10 or the 6 inch A6?",
+      "a": "IFS Ultimo publishes no screen-size guidance, so this is a workflow choice. The A10's 10.1 inch 1920 x 1200 screen suits long inspection forms, asset hierarchies and photo review, and it is the primary pick at £449. The A6 at £349 is a 277g handheld with a 6 inch FHD+ screen, a Zebra 2D scan engine, a removable 5050mAh battery and IP67, which suits technicians who need a pocketable device or scan a lot of labels, though it has 4GB RAM against the A10's 8GB. The A10 runs Android 14 and the A6 Android 15, and both have NFC as a hardware feature, though the current Ultimo Go+ store descriptions do not list NFC or RFID among the app's features."
     }
   ],
-  "not_recommended_note": "The vendor publishes Ultimo Go+ for Android and iOS only, so the Tuga W10 cannot run the field app; it is suitable only for the browser-based desktop client, and IFS Ultimo publishes no supported-browser list or PC requirements. The W10's optional 2D barcode scanner and optional UHF RFID reader do not help with Ultimo Go+ because the app does not run on Windows. The current store descriptions and the public vendor pages we checked do not list NFC or RFID among Ultimo Go+ features, so do not buy on the basis of tag reading without confirming it with IFS Ultimo; the NFC in the A10 and A6 is a hardware feature only. Scanning in Ultimo Go+ is through the camera. The A10 and A6 both have rear cameras, but neither has a dedicated scan engine, so scanning depends on the app's camera support. The vendor publishes no recommended devices, so none of the devices on this page is tested, approved or certified by IFS Ultimo.",
+  "not_recommended_note": "The vendor publishes Ultimo Go+ for Android and iOS only, so the Tuga W10 cannot run the field app; it is suitable only for the browser-based desktop client, and IFS Ultimo publishes no supported-browser list or PC requirements. The W10's optional 2D barcode scanner and optional UHF RFID reader do not help with Ultimo Go+ because the app does not run on Windows. The current store descriptions and the public vendor pages we checked do not list NFC or RFID among Ultimo Go+ features, so do not buy on the basis of tag reading without confirming it with IFS Ultimo; the NFC in the A10 and A6 is a hardware feature only. Scanning in Ultimo Go+ is through the camera. The A10 and A6 both have rear cameras. The A10 has no dedicated scan engine, and the A6's Zebra 2D scan engine is not documented by the vendor as supported, so scanning depends on the app's camera support. The vendor publishes no recommended devices, so none of the devices on this page is tested, approved or certified by IFS Ultimo.",
   "disclaimer": "IFS Ultimo and the Ultimo Go+ app are products of IFS Ultimo B.V. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by IFS Ultimo B.V.",
   "sources": [
     "https://www.ultimo.com/",

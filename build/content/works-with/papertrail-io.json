@@ -70,13 +70,13 @@
     {
       "device_id": "tuga-a6",
       "role": "alternative",
-      "why": "The Tuga A6 is the alternative for rope access technicians, arborists and inspectors who want a pocketable handheld rather than a tablet. It also runs Android 14 (the same operating system note as the A10 applies), has built-in NFC, and a 50MP main camera for the app's camera-based barcode and QR scanning. Its IP68 plus IP69K rating and glove mode suit wet, dirty work at height, it has 5G for sync where coverage exists, and at 441g it hangs from a belt holster without getting in the way. The trade-off is the 6.78 inch screen, which is fine for scanning and ticking checklists but smaller for reviewing reports.",
+      "why": "The Tuga A6 is the alternative for rope access technicians, arborists and inspectors who want a pocketable handheld rather than a tablet. It runs Android 15, which sits inside Papertrail's supported window of the current major release and two previous releases at the time of writing, has built-in NFC for Papertrail's listed tags, and a 13MP rear camera with flash for the app's camera-based barcode and QR scanning. It also has a built-in Zebra 2D scan engine with two side scan keys; Papertrail documents camera scanning in the mobile app, so test whether the app accepts input from the scanner before relying on it. It is sealed to IP67, rated for 1.5 metre drops and has 4G for sync where coverage exists, and at 277g it hangs from a belt holster without getting in the way. The removable 5050mAh battery means a spare can be swapped in on a long day. The trade-offs are the 6 inch screen, which is fine for scanning and ticking checklists but smaller for reviewing reports, and 4GB RAM, which is modest; Papertrail publishes no RAM figure.",
       "fit": [
-        "Android mobile app: runs Android 14, the same operating system note as the A10 applies.",
+        "Android mobile app: runs Android 15, inside Papertrail's current-plus-two-previous support window at the time of writing.",
         "NFC tag scanning: NFC built in.",
-        "Camera barcode and QR scanning: 50MP main camera plus 64MP night-vision camera (scanning is handled by the app).",
-        "Sync in the field: 5G, Wi-Fi 5 and a 10600mAh battery with 33W fast charge.",
-        "Handheld use at height and in the wet: IP68 + IP69K, MIL-STD-810H, Gorilla Glass 5, glove mode, 441g."
+        "Camera barcode and QR scanning: 13MP rear camera with flash (scanning is handled by the app), plus a built-in Zebra 2D scan engine to test with the app.",
+        "Sync in the field: 4G dual SIM, dual-band Wi-Fi 5 and a removable 5050mAh battery.",
+        "Handheld use at height and in the wet: IP67, 1.5 metre drop rating, 277g."
       ]
     },
     {
@@ -91,7 +91,7 @@
       ]
     }
   ],
-  "not_recommended_note": "Papertrail's mobile app, including its offline mode and camera scanning, is published for Android and iOS only. On the Tuga W10 you get the browser web app, which has no published offline mode and relies on an external or built-in barcode or RFID reader rather than the camera, so it is not the right device for technicians working out of signal. On the Android side, the Google Play listing does not display a minimum Android version. Papertrail supports the current major Android release plus two previous releases; Android 17 was released in 2026, so Android 14, which the A10 and A6 run, sits outside that window at the time of writing. Papertrail's position is that the app usually works on older versions but not all features are routinely tested. We cannot say the Tuga devices are tested or approved by Papertrail, and we suggest trialling one unit before a fleet order.",
+  "not_recommended_note": "Papertrail's mobile app, including its offline mode and camera scanning, is published for Android and iOS only. On the Tuga W10 you get the browser web app, which has no published offline mode and relies on an external or built-in barcode or RFID reader rather than the camera, so it is not the right device for technicians working out of signal. On the Android side, the Google Play listing does not display a minimum Android version. Papertrail supports the current major Android release plus two previous releases; Android 17 was released in 2026, so Android 14, which the A10 runs, sits outside that window at the time of writing, while Android 15 on the A6 sits inside it. Papertrail's position is that the app usually works on older versions but not all features are routinely tested. We cannot say the Tuga devices are tested or approved by Papertrail, and we suggest trialling one unit before a fleet order.",
   "setup_steps": [
     "Use your existing Papertrail account, or start a free trial on papertrail.io (Papertrail states no credit card is required).",
     "On the Tuga A10 or A6, open Google Play, search for Papertrail.io (developer Papertrail.io, package com.papertrail.app) and install it. On the Tuga W10, open Edge, or install Chrome, and go to app.papertrail.io.",
@@ -111,7 +111,7 @@
     },
     {
       "q": "Should we choose the A10 or the smaller A6?",
-      "a": "Both run Android 14 and have NFC and a camera. The A10 has a 10.1 inch 1920 x 1200 screen, 8000mAh battery, 4G and weighs 680g, which suits checklist-heavy inspections and reviewing certificates on site. The A6 has a 6.78 inch screen, 10600mAh battery, 5G, a 50MP main camera, IP69K on top of IP68, and weighs 441g, so it suits technicians scanning tags at height or on the move who want something that fits a belt holster."
+      "a": "Both have NFC and a camera. The A10 runs Android 14 and has a 10.1 inch 1920 x 1200 screen, 8GB RAM, an 8000mAh battery, 4G and IP68, and weighs 680g, which suits checklist-heavy inspections and reviewing certificates on site. The A6 runs Android 15, inside Papertrail's support window, and has a 6 inch screen, 4GB RAM, a removable 5050mAh battery, 4G, a built-in Zebra 2D scan engine and IP67 with a 1.5 metre drop rating, and weighs 277g, so it suits technicians scanning tags at height or on the move who want something that fits a belt holster."
     },
     {
       "q": "Can we trial a single unit and pay by invoice?",

@@ -65,23 +65,23 @@
     {
       "device_id": "tuga-a6",
       "role": "alternative",
-      "why": "The Tuga A6 is the alternative for teams who want a pocketable handheld rather than a tablet. It also runs Android 14 and has NFC, so it meets the same published requirements for PEMAC Assets Mobile. The 6.78 inch screen is smaller, but the device weighs 441g, has glove mode, IP68 and IP69K sealing, a 10600mAh battery with 33W fast charge and 5G for syncing. It suits operations staff who mainly raise requests and tap NFC tags, and roaming technicians who do not want to carry a 10 inch tablet between plant rooms.",
+      "why": "The Tuga A6 is the alternative for teams who want a pocketable handheld rather than a tablet. It runs Android 15 and has NFC, so it meets the same published requirements for PEMAC Assets Mobile. It also has a built-in Zebra 2D scan engine with two side scan keys, so the barcode and QR codes on assets, spares and meters can be read by a dedicated scan engine rather than only the camera, provided the app accepts the scanner's input, which you should test. The 6 inch screen is smaller, but the device weighs 277g, is sealed to IP67, rated for 1.5 metre drops, has a removable 5050mAh battery and 4G for syncing. It suits operations staff who mainly raise requests, tap NFC tags and scan asset labels, and roaming technicians who do not want to carry a 10 inch tablet between plant rooms.",
       "fit": [
-        "Requires Android 7.0 or later: the Tuga A6 runs Android 14.",
+        "Requires Android 7.0 or later: the Tuga A6 runs Android 15.",
         "NFC tag identification: the Tuga A6 has NFC.",
-        "Barcode and QR scanning with the device: the Tuga A6 has a 50MP main camera and a 64MP night-vision camera. Scanning through the camera is app-dependent and there is no dedicated scan engine.",
-        "Offline functionality with later sync: the Tuga A6 has 5G, Wi-Fi 5 and 256GB storage with microSD up to 2TB.",
-        "Handheld use in gloves and washdown areas: 441g, glove mode, Gorilla Glass 5, IP68 and IP69K, MIL-STD-810H, operating temperature -20 to 60C."
+        "Barcode and QR scanning with the device: the Tuga A6 has a built-in Zebra 2D scan engine with two side scan keys, plus a 13MP rear camera with flash. Whether the app takes input from the scan engine or only the camera is app-dependent, so test it.",
+        "Offline functionality with later sync: the Tuga A6 has 4G dual SIM, dual-band Wi-Fi 5 and 64GB storage with microSD up to 256GB.",
+        "Handheld use on the plant floor: 277g, side scan keys that work with gloves on, IP67, 1.5 metre drop rating, operating temperature -20 to 50C."
       ]
     }
   ],
-  "not_recommended_note": "We do not recommend the Tuga W10 for PEMAC Assets Mobile. The vendor describes the mobile app as Android and iOS only, a Microsoft Store search returns no PEMAC products, and the vendor does not publish supported browsers for the desktop CMMS, so we cannot confirm that it runs in a Windows browser. Two further honest caveats: the vendor publishes no screen-size, rugged-device or scanner guidance, so our device picks rest on the Android version, NFC, camera scanning and offline facts only; and the Tuga A10 and A6 scan barcodes through the camera, which depends on the app, with no dedicated scan engine. The Google Play listing also shows only 10+ downloads for the current 4.4 package, so confirm with your Pemac administrator that the app version matches your server before buying devices.",
+  "not_recommended_note": "We do not recommend the Tuga W10 for PEMAC Assets Mobile. The vendor describes the mobile app as Android and iOS only, a Microsoft Store search returns no PEMAC products, and the vendor does not publish supported browsers for the desktop CMMS, so we cannot confirm that it runs in a Windows browser. Two further honest caveats: the vendor publishes no screen-size, rugged-device or scanner guidance, so our device picks rest on the Android version, NFC, scanning and offline facts only; and the Tuga A10 scans barcodes through the camera, which depends on the app, while the A6's built-in Zebra 2D scan engine also needs testing with the app before you rely on it. The Google Play listing also shows only 10+ downloads for the current 4.4 package, so confirm with your Pemac administrator that the app version matches your server before buying devices.",
   "setup_steps": [
     "Confirm with your Pemac administrator or Eleco contact which CMMS server version your site runs. The app is published per server version (currently PEMAC Assets Mobile (4.4)), and the vendor says mobile access is offered as part of the standard Pemac software subscription at no additional cost.",
     "On the Tuga A10 or A6, connect to Wi-Fi or insert a SIM, sign in with a Google account and install PEMAC Assets Mobile (4.4) from Google Play (package com.pemac.pemacapp44).",
     "Open the app and sign in with the Pemac user credentials your administrator has set up for the technician.",
     "Ask your Pemac contact how offline functionality behaves for your modules before relying on it in no-signal areas. The vendor states offline functioning is included but does not publish which screens work offline or how sync is handled.",
-    "Test the workflow on one asset: tap its NFC tag with the device and, since camera scanning is app-dependent, confirm that scanning its barcode or QR code with the rear camera identifies the asset and shows its outstanding jobs.",
+    "Test the workflow on one asset: tap its NFC tag with the device and confirm that scanning its barcode or QR code identifies the asset and shows its outstanding jobs. On the A10 that means the rear camera; on the A6, try the built-in scanner's side keys as well as the camera, since scanning is app-dependent.",
     "Add a charging dock for end-of-shift charging in the workshop, or a vehicle mounting dock for technicians who cover multiple sites, before rolling out to the rest of the team."
   ],
   "accessories": [
@@ -108,8 +108,8 @@
       "a": "Yes. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd, company 16595781) is not VAT registered, so the listed prices have no VAT to add. Delivery is to UK addresses only."
     },
     {
-      "q": "Should we choose the 10.1 inch A10 or the 6.78 inch A6?",
-      "a": "The vendor publishes no screen-size guidance, so this is a workflow choice. The A10 (£449) has a 10.1 inch 1920 x 1200 screen and weighs 680g, which suits technicians working through job details and checklists at the asset. The A6 (£299) has a 6.78 inch screen, weighs 441g, has glove mode, 5G and IP69K sealing, and fits operations staff who mainly raise requests and tap NFC tags. Both run Android 14 and have NFC."
+      "q": "Should we choose the 10.1 inch A10 or the 6 inch A6?",
+      "a": "The vendor publishes no screen-size guidance, so this is a workflow choice. The A10 (£449) has a 10.1 inch 1920 x 1200 screen, IP68 sealing and weighs 680g, which suits technicians working through job details and checklists at the asset. The A6 (£349) has a 6 inch screen, weighs 277g, is rated IP67, has 4G, a removable battery and a built-in Zebra 2D scan engine, and fits operations staff who mainly raise requests, tap NFC tags and scan asset labels. The A10 runs Android 14 and the A6 Android 15, and both have NFC."
     }
   ],
   "disclaimer": "PEMAC Assets Mobile is a product of PMI Software Limited t/a Eleco Ireland (Eleco plc). Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Eleco.",
