@@ -1142,13 +1142,15 @@
     );
 
     let pick = base;
-    if (answers.scan === 'lots') {
+    if (answers.scan !== 'none' && base.scanner) {
+      reasons.push('A 2D scanner engine is built in, so barcodes read in a fraction of a second without opening the camera.');
+    } else if (answers.scan === 'lots') {
       const scanner = list.find((p) => p.variantOf === base.id);
       if (scanner) {
         pick = scanner;
         reasons.push('A built-in scanner engine reads barcodes far faster than a camera when scanning is the job.');
       } else {
-        reasons.push('Android devices scan with the camera, which is fine for occasional use. For all-day scanning the Windows models are available with a dedicated scanner engine.');
+        reasons.push('This size scans with the camera, which is fine for occasional use. For all-day scanning on Android the 6 inch A6 has a scanner engine built in, and the Windows models are available with one.');
       }
     } else if (answers.scan === 'some') {
       reasons.push('The camera handles the odd barcode or serial number with a free scanning app.');
@@ -1167,7 +1169,7 @@
       if (alt) alt = { ...alt, why: `If you fill in long forms, the ${alt.name} gives you a lot more screen for ${money(alt.price - pick.price)} more.` };
     } else if (os === 'android' && size === '8') {
       alt = list.find((p) => p.id === 'tuga-a6');
-      if (alt) alt = { ...alt, why: `Mostly photos and calls? The ${alt.name} fits a pocket and saves ${money(pick.price - alt.price)}.` };
+      if (alt) alt = { ...alt, why: `Mostly photos, calls and scanning? The ${alt.name} fits a pocket, has a barcode scanner built in and saves ${money(pick.price - alt.price)}.` };
     }
 
     return { pick, reasons, alt };

@@ -320,15 +320,15 @@ const compareLinks = (p) => {
 const HOME_FAQ = [
   {
     q: 'Which size should I get: 6, 8 or 10 inch?',
-    a: 'Six inch goes in a pocket and is right if you mostly take photos, log jobs and stay in touch. Eight inch is the middle ground: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 10.1 inch A10 is our pick for Android apps.',
+    a: 'Six inch goes in a pocket and is right if you mostly scan barcodes, take photos, log jobs and stay in touch. Eight inch is the middle ground: big enough to fill in a form or follow a drawing, small enough for one hand and a van door pocket. Ten inch is for people who genuinely read drawings all day: blueprints, BIM viewers, full spreadsheets. If you are unsure, the 10.1 inch A10 is our pick for Android apps.',
   },
   {
     q: 'What is the difference between IP67, IP68 and IP69K?',
-    a: 'All three mean fully dust tight. The second digit is water: IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. For most UK trades IP67 is genuinely enough; IP68 and IP69K are the margin you want if the device lives outdoors.',
+    a: 'All three mean fully dust tight. The second digit is water: IP67 survives 1 metre of immersion for 30 minutes, IP68 goes deeper and longer, and IP69K adds resistance to high pressure, high temperature jets, which matters if your kit gets jet washed rather than just rained on. For most UK trades IP67 is genuinely enough; IP68 is the margin you want if the device lives outdoors. None of our devices is rated IP69K, so do not jet wash them.',
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'Five of the six are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The W10 has no MIL-STD rating, so treat it with more care if it lives on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'Four of the six are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The A6 is rated by its maker for 1.5 metre drops but has no MIL-STD rating, and the W10 has none either, so treat them with more care if they live on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
@@ -427,7 +427,7 @@ const hero = () => {
               <span class="hero-spec-label">Most models drop tested</span>
             </div>
             <div class="hero-spec">
-              <span class="hero-spec-value">10,600<span style="font-size:0.5em">mAh</span></span>
+              <span class="hero-spec-value">10,000<span style="font-size:0.5em">mAh</span></span>
               <span class="hero-spec-label">Max battery</span>
             </div>
             <div class="hero-spec">
@@ -506,11 +506,11 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Sealed against dust and water</h3>
-            <p>Every device is rated at least IP65: fully dust tight and protected against water jets from any direction. Most go further. An IP67 or IP68 rating means the housing survives immersion, not just a light shower, and the devices with IP69K on top are rated for high pressure, high temperature jets, which is the difference between a tablet that survives rain and one that survives being hosed down at the end of the day.</p>
+            <p>Every device is rated at least IP65: fully dust tight and protected against water jets from any direction. Most go further. An IP67 or IP68 rating means the housing survives immersion, not just a light shower, which is the difference between a tablet that survives a downpour and one that survives being dropped in a puddle. None is rated IP69K for high pressure jet washing, so wipe them down rather than hose them.</p>
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
               <li>Touchscreen calibrated to work with wet fingers and gloves</li>
-              <li>Android models rated from &minus;20&deg;C to 60&deg;C, so they start on a frosty morning</li>
+              <li>Android models rated from &minus;20&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -521,7 +521,7 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Drop tested to a real standard</h3>
-            <p>Five of the six devices carry a MIL-STD-810H or 810G rating; the W10 does not. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
+            <p>Four of the six devices carry a MIL-STD-810H or 810G rating; the A6 and the W10 do not, though the A6 is rated by its maker for 1.5 metre drops. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
             <p>In practice that comes from reinforced corners, a rubberised over-mould and a screen recessed behind a raised bezel, so the glass does not take the first hit when it lands face down.</p>
           </div>
         </article>
@@ -532,8 +532,8 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
-            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits and the A6 560, so you are not cupping a hand over the screen to read a job number. The A10 is 350 nits, which suits drawings indoors and in the van more than bright sun. Each product page lists the maker's figure.</p>
-            <p>Batteries on the Android range run from 8,000mAh to 10,600mAh, against roughly 5,000mAh in a typical phone. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell. Real run time depends on screen brightness and signal, so treat the capacity as a comparison, not a promise of hours.</p>
+            <p>A standard tablet runs about 400 nits, which washes out the moment you step outdoors. The A8 runs 800 nits, so you are not cupping a hand over the screen to read a job number. The A10 is 350 nits, which suits drawings indoors and in the van more than bright sun. Each product page lists the maker's figure.</p>
+            <p>The A8 and A10 tablets carry 8,000mAh to 10,000mAh, against roughly 5,000mAh in a typical phone. There is nothing clever about it; there is simply room inside a rugged body for a much larger cell. The A6 handheld is phone sized at 5,050mAh, but its battery is removable, so a charged spare takes over mid shift. Real run time depends on screen brightness and signal, so treat the capacity as a comparison, not a promise of hours.</p>
           </div>
         </article>
       </div>
@@ -593,7 +593,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. From £299 with free UK delivery.',
+      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, most models drop tested to MIL-STD-810H or 810G. From £299 with free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -613,7 +613,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP69K sealed, most drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP68 sealed, most drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -636,7 +636,7 @@ write(
 ${breadcrumbs(productsTrail)}
         ${eyebrow('The range')}
         <h1>Rugged tablets &amp; handhelds</h1>
-        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the W10 are drop tested to MIL-STD-810H or 810G. Not sure which? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
+        <p class="lede">Six devices across three sizes. Android for app-based work, Windows where desktop software forces it. Every one is sealed to at least IP65 and delivered free, and all but the A6 and W10 are drop tested to MIL-STD-810H or 810G. Not sure which? <a class="link-arrow" href="/which-tuga">Answer four questions</a></p>
       </div>
     </section>
 
@@ -1212,7 +1212,7 @@ ${sectionHead({
 ${sectionHead({
   tag: 'The range',
   title: 'What to put in the basket',
-  lede: 'Our pick for most teams is the 10.1 inch Android A10, with the W10 for anyone whose software only runs on Windows. The 6.8 inch A6 suits people who need a device in a pocket more than a screen for drawings.',
+  lede: 'Our pick for most teams is the 10.1 inch Android A10, with the W10 for anyone whose software only runs on Windows. The 6 inch A6, with its built-in barcode scanner, suits people who need a device in a pocket more than a screen for drawings.',
 })}
 ${compareTable()}
       </div>
@@ -1251,6 +1251,7 @@ const pickerData = data.products.map((p) => {
     ip: base.specs.ip_rating,
     battery: base.specs.battery,
     weight: base.specs.weight,
+    scanner: Boolean(base.specs.scanner),
   };
 });
 
@@ -1309,7 +1310,7 @@ ${pickerStep(1, 'os', 'What does it need to run?', 'If every tool you use has an
   { value: 'unsure', title: 'Not sure', text: 'We will assume apps. You can always ask us before buying.' },
 ])}
 ${pickerStep(2, 'size', 'Where does it live during the day?', null, [
-  { value: '6', title: 'Pocket or belt', text: 'Photos, sign-off, comms. Out of the way until you need it.' },
+  { value: '6', title: 'Pocket or belt', text: 'Scanning, photos, sign-off, comms. Out of the way until you need it.' },
   { value: '8', title: 'One hand, van door pocket', text: 'Forms and drawings at a readable size, still small enough for one hand.' },
   { value: '10', title: 'On the bonnet or a trestle', text: 'Plans, PDFs and spreadsheets at full size, read for long stretches.' },
 ])}
@@ -2270,7 +2271,7 @@ ${post.body}
 
         <div class="prose-cta">
           <h3>Rugged tablets from ${money(Math.min(...devices.map((d) => d.price)))}</h3>
-          <p>IP65 to IP69K sealed, most models MIL-STD drop tested. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
+          <p>IP65 to IP68 sealed, most models MIL-STD drop tested. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
           <a class="link-arrow" href="/products/">Browse the range</a>
         </div>
       </article>
@@ -2384,7 +2385,7 @@ const compareCta = () =>
     secondary: { href: '/contact', label: 'Ask us' },
   });
 
-/** First number in a spec string: "10600mAh" -> 10600, "1,197g" -> 1197. */
+/** First number in a spec string: "10000mAh" -> 10000, "1,197g" -> 1197. */
 const specNumber = (s) => {
   const m = String(s ?? '').replace(/,/g, '').match(/\d+(?:\.\d+)?/);
   return m ? Number(m[0]) : null;
