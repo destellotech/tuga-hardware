@@ -27,13 +27,14 @@ const LEGACY_PATHS = {
   '/products': '/products/',
   '/blog': '/blog/',
   '/works-with': '/works-with/',
+  '/compare': '/compare/',
 };
 
 /**
  * Paths that are real directory indexes (a folder with an index.html). These
  * keep their trailing slash; every other path loses it.
  */
-const DIRECTORY_INDEXES = new Set(['/', '/products/', '/blog/', '/works-with/']);
+const DIRECTORY_INDEXES = new Set(['/', '/products/', '/blog/', '/works-with/', '/compare/']);
 
 /** Headers for every HTML page. No CSP: Stripe and PayPal load their own scripts. */
 const SECURITY_HEADERS = {
@@ -149,7 +150,20 @@ export default {
     if (env.ASSETS && url.pathname !== '/404') {
       const response = await env.ASSETS.fetch(request);
 
-      if (response.status === 404) return notFound(request, env);
+      if (response.status === 404) {
+        // A head-to-head page typed the wrong way round (/compare/b-vs-a)
+        // 301s to the page that exists. Slugs contain hyphens, so split on
+        // the literal '-vs-' rather than on '-'.
+        const pair = url.pathname.startsWith('/compare/')
+          ? url.pathname.slice('/compare/'.length).split('-vs-')
+          : [];
+        if (pair.length === 2 && pair.every((s) => s && !s.includes('/'))) {
+          const swapped = new URL(`/compare/${pair[1]}-vs-${pair[0]}${url.search}`, url);
+          const probe = await env.ASSETS.fetch(new Request(swapped, { method: 'GET' }));
+          if (probe.ok) return redirect(swapped);
+        }
+        return notFound(request, env);
+      }
 
       // Long-cache immutable assets; let HTML revalidate so deploys land.
       if (response.ok && /\.(?:css|js|webp|svg|woff2?)$/.test(url.pathname)) {

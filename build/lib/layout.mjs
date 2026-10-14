@@ -324,6 +324,7 @@ const footer = () => `
             <a href="/bulk">Bulk orders</a>
             <a href="/trade">Trade accounts</a>
             <a href="/which-tuga">Which Tuga?</a>
+            <a href="/compare/">Compare devices</a>
             <a href="/contact">Contact</a>
           </nav>
         </div>

@@ -21,6 +21,19 @@ Small UK retailer of rugged Android and Windows tablets and handhelds for trades
 - [Rugged tablets for field service engineers](https://www.tugahardware.com/for/field-service): Rugged tablets for UK field service engineers. Job sheets, parts lookups and customer sign-off on a device that lives in the van and survives plant rooms.
 - [Rugged devices for logistics and delivery](https://www.tugahardware.com/for/logistics): Rugged handhelds for UK delivery drivers and logistics teams. Proof of delivery, scanning and navigation on devices built for cab vibration and cold mornings.
 
+## Compare
+
+- [Compare two devices head to head](https://www.tugahardware.com/compare/): a verdict, every specification side by side and the price gap
+- [Tuga A6 vs Tuga A8](https://www.tugahardware.com/compare/tuga-a6-vs-tuga-a8): The A6 is £80 cheaper, pocketable, better sealed and has 5G; the A8 is the one if you fill in forms or read drawings on site, or want a tablet on the van dashboard.
+- [Tuga A8 vs Tuga A10](https://www.tugahardware.com/compare/tuga-a8-vs-tuga-a10): Both 680g and £70 apart: the A8 is brighter at 800 nits with a 10000mAh battery and glove mode, the A10 has the 10.1 inch 1920 x 1200 screen for drawings and spreadsheets but is dimmer at 350 nits.
+- [Tuga WH6 vs Tuga W8](https://www.tugahardware.com/compare/tuga-wh6-vs-tuga-w8): Same Celeron N5100 and 8GB, £70 apart: the WH6 is a 470g handheld with a removable battery, the W8 an 8 inch tablet with a brighter screen, HDMI and a fingerprint sensor.
+- [Tuga W8 vs Tuga W10](https://www.tugahardware.com/compare/tuga-w8-vs-tuga-w10): £20 apart and both on Windows 11 Pro: the W8 is 447g lighter with IP67, MIL-STD-810G, 4G and GPS built in; the W10 adds a 10.1 inch screen, RJ45 Ethernet, a removable battery and a UHF RFID option.
+- [Tuga A6 vs Tuga A10](https://www.tugahardware.com/compare/tuga-a6-vs-tuga-a10): The A6 is £150 cheaper, pocketable, better sealed and has 5G; the A10 has the 10.1 inch Full HD screen for drawings, plans and spreadsheets.
+- [Tuga WH6 vs Tuga W10](https://www.tugahardware.com/compare/tuga-wh6-vs-tuga-w10): £50 apart and the bigger one is cheaper: the W10 is a 10.1 inch Windows 11 Pro tablet with Ethernet and HDMI, the WH6 a 470g Windows 11 handheld with 4G LTE.
+- [Tuga A6 vs Tuga WH6](https://www.tugahardware.com/compare/tuga-a6-vs-tuga-wh6): The Android A6 is £400 cheaper, better sealed and has a battery more than twice the size; the Windows WH6 earns its extra cost when you need a desktop program or a network drive in the field.
+- [Tuga A8 vs Tuga W8](https://www.tugahardware.com/compare/tuga-a8-vs-tuga-w8): Same 8 inch size, £250 apart: the A8 has the brighter screen, twice the battery capacity and a higher IP rating; the W8 adds full Windows 11 Pro, HDMI output and a fingerprint sensor.
+- [Tuga A10 vs Tuga W10](https://www.tugahardware.com/compare/tuga-a10-vs-tuga-w10): The A10 is £200 cheaper, sharper, 517g lighter and rated IP68 and MIL-STD-810H; the W10 adds Windows 11 Pro, RJ45 Ethernet, HDMI and a removable battery for engineers who plug into panels and plant.
+
 ## Buying
 
 - [Bulk orders and calculator](https://www.tugahardware.com/bulk): automatic team discounts
