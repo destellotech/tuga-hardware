@@ -116,6 +116,13 @@ function countDeviceUnits(lines) {
   );
 }
 
+/** Contact enquiries, sign ups and trade applications: see privacy policy section 7. */
+const TWELVE_MONTHS = 365 * 24 * 60 * 60;
+
+const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/warranty-register', '/api/review'];
+
+const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check'];
+
 // Bulk discount tiers: { minQty: discountPercent }
 const DISCOUNT_TIERS = [
   { min: 10, percent: 10 },
@@ -176,6 +183,19 @@ export async function handleRequest(request, env) {
   if (request.method === 'POST' && path === '/api/confirm-order') {
     return handleConfirmOrder(request, env);
   }
+  // Public forms share the Resend quota with order emails, so cap them per
+  // IP when the FORM_LIMITER binding exists (see wrangler.toml). Without the
+  // binding nothing changes.
+  if (request.method === 'POST' && FORM_PATHS.includes(path) && env.FORM_LIMITER) {
+    try {
+      const { success } = await env.FORM_LIMITER.limit({ key: request.headers.get('cf-connecting-ip') || 'unknown' });
+      if (!success) return corsError('Too many submissions. Please wait a minute and try again.', 429);
+    } catch (err) {
+      // A limiter fault must never cost us an enquiry.
+      console.error('Rate limiter error:', err);
+    }
+  }
+
   if (request.method === 'POST' && path === '/api/contact') {
     return handleContact(request, env);
   }
@@ -196,6 +216,16 @@ export async function handleRequest(request, env) {
   }
   if (request.method === 'GET' && path === '/api/payment-methods') {
     return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
+  }
+  // Diagnostics reveal payment configuration and spend provider API calls,
+  // so they answer only with the ADMIN_TOKEN secret (wrangler secret put
+  // ADMIN_TOKEN) and look like any unknown path otherwise.
+  if (
+    request.method === 'GET' &&
+    DIAGNOSTIC_PATHS.includes(path) &&
+    !isAdmin(request, env)
+  ) {
+    return new Response('Not Found', { status: 404 });
   }
   if (request.method === 'GET' && path === '/api/paypal-check') {
     return handlePayPalCheck(request, env);
@@ -354,6 +384,9 @@ async function handlePayPalOrder(request, env) {
           },
         },
         items: paypalItems,
+        // Read back by recordPayPalOrder so the email shows the same bulk
+        // discount line as a Stripe order.
+        custom_id: String(discountPercent),
       }],
       application_context: {
         brand_name: 'Tuga Hardware',
@@ -498,7 +531,12 @@ async function recordOrder(env, orderDetails) {
 async function recordStripeOrder(sessionId, env) {
   const session = await fetchStripeSession(sessionId, env);
   if (session.error) throw new Error(`Stripe session lookup failed: ${session.error.message}`);
-  if (session.payment_status !== 'paid') return { paid: false };
+  if (session.payment_status !== 'paid') {
+    // A completed session that is still unpaid is a delayed method (a bank
+    // debit): the money is on its way, and async_payment_succeeded records it.
+    const processing = session.status === 'complete' && session.payment_status === 'unpaid';
+    return { paid: false, reason: processing ? 'processing' : undefined };
+  }
 
   // Listed separately: an expanded session carries at most 10 line items.
   const lineItems = await fetchStripeLineItems(sessionId, env);
@@ -587,7 +625,9 @@ async function recordPayPalOrder(orderId, env) {
       unitPrice: Math.round(parseFloat(item.unit_amount?.value || '0') * 100),
       total: Math.round(parseFloat(item.unit_amount?.value || '0') * 100) * parseInt(item.quantity, 10),
     })) || [],
+    subtotal: Math.round(parseFloat(purchaseUnit.amount?.value || '0') * 100),
     total: Math.round(parseFloat(purchaseUnit.amount?.value || '0') * 100),
+    discount: Number(purchaseUnit.custom_id) || 0,
     currency: purchaseUnit.amount?.currency_code || 'GBP',
     status: 'pending',
     paidAt: new Date().toISOString(),
@@ -619,7 +659,9 @@ async function handleConfirmOrder(request, env) {
     }
 
     if (!result.paid) {
-      return corsResponse({ status: result.reason === 'country' ? 'unsupported_country' : 'unpaid' });
+      const status =
+        result.reason === 'country' ? 'unsupported_country' : result.reason === 'processing' ? 'processing' : 'unpaid';
+      return corsResponse({ status });
     }
 
     // Only what the confirmation page shows: no address or email.
@@ -663,7 +705,15 @@ async function handleStripeWebhook(request, env) {
 
   const event = JSON.parse(rawBody);
 
-  if (event.type === 'checkout.session.completed') {
+  if (event.type === 'checkout.session.async_payment_failed') {
+    console.error(`Delayed payment failed for Stripe session ${event.data.object.id}; no order recorded`);
+  }
+
+  // async_payment_succeeded is the paid moment for delayed methods.
+  if (
+    event.type === 'checkout.session.completed' ||
+    event.type === 'checkout.session.async_payment_succeeded'
+  ) {
     try {
       await recordStripeOrder(event.data.object.id, env);
     } catch (err) {
@@ -749,7 +799,8 @@ async function handleContact(request, env) {
       try {
         await env.ORDERS.put(
           `enquiry:${enquiry.receivedAt}:${enquiry.email}`,
-          JSON.stringify(enquiry)
+          JSON.stringify(enquiry),
+          { expirationTtl: TWELVE_MONTHS }
         );
         stored = true;
       } catch (kvErr) {
@@ -906,7 +957,8 @@ async function handleSubscribe(request, env) {
       try {
         await env.ORDERS.put(
           `subscriber:${advice.email.toLowerCase()}`,
-          JSON.stringify({ email: advice.email, topic: advice.topic, createdAt: advice.createdAt })
+          JSON.stringify({ email: advice.email, topic: advice.topic, createdAt: advice.createdAt }),
+          { expirationTtl: TWELVE_MONTHS }
         );
         stored = true;
       } catch (kvErr) {
@@ -1009,11 +1061,11 @@ const clip = (value, max) => String(value ?? '').trim().slice(0, max);
  * Store a submission and email support about it.
  * Returns a Response: ok if either the store or the email succeeded.
  */
-async function storeAndNotify(env, key, record, enquiry) {
+async function storeAndNotify(env, key, record, enquiry, putOptions) {
   let stored = false;
   if (env.ORDERS) {
     try {
-      await env.ORDERS.put(key, JSON.stringify(record));
+      await env.ORDERS.put(key, JSON.stringify(record), putOptions);
       stored = true;
     } catch (kvErr) {
       console.error(`Could not store ${key}:`, kvErr);
@@ -1079,7 +1131,8 @@ async function handleTradeApply(request, env) {
         email: application.email,
         topic: 'Trade account application',
         message: lines.join('\n'),
-      }
+      },
+      { expirationTtl: TWELVE_MONTHS }
     );
   } catch (err) {
     console.error('Trade application error:', err);
@@ -1280,6 +1333,13 @@ async function verifyStripeSignature(rawBody, signatureHeader, secret) {
 /**
  * Constant-time string comparison to prevent timing attacks.
  */
+/** True when the request carries the ADMIN_TOKEN secret as a bearer token. */
+function isAdmin(request, env) {
+  if (!env.ADMIN_TOKEN) return false;
+  const header = request.headers.get('Authorization') || '';
+  return timingSafeEqual(header, `Bearer ${env.ADMIN_TOKEN}`);
+}
+
 function timingSafeEqual(a, b) {
   if (a.length !== b.length) return false;
   let result = 0;

@@ -31,6 +31,16 @@ crons = ["0 9 * * *"]
 binding = "ORDERS"
 id = "dc341cf8ff2b4a2fb6f82c4be084bb7a"
 
+# Rate limit for the public forms (src/api.js FORM_PATHS): 5 per minute per
+# IP. Needs wrangler 4.36 or later; uncomment to switch it on. The code skips
+# the check while the binding is absent.
+# [[ratelimits]]
+# name = "FORM_LIMITER"
+# namespace_id = "1001"
+#   [ratelimits.simple]
+#   limit = 5
+#   period = 60
+
 # Secrets (set via CLI, never commit these):
 #   wrangler secret put STRIPE_SECRET_KEY
 #   wrangler secret put STRIPE_WEBHOOK_SECRET
@@ -38,3 +48,4 @@ id = "dc341cf8ff2b4a2fb6f82c4be084bb7a"
 #   wrangler secret put PAYPAL_CLIENT_SECRET
 #   wrangler secret put PAYPAL_WEBHOOK_ID   (ID of the webhook for /webhooks/paypal in the PayPal developer dashboard)
 #   wrangler secret put RESEND_API_KEY
+#   wrangler secret put ADMIN_TOKEN        (unlocks /api/*-check diagnostics)

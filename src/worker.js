@@ -165,14 +165,23 @@ export default {
         return notFound(request, env);
       }
 
-      // Long-cache immutable assets; let HTML revalidate so deploys land.
+      // Long-cache assets only when the URL carries a content hash (?v=), so a
+      // file replaced in place can never be pinned for a year; bare URLs get a
+      // day. Let HTML revalidate so deploys land.
       if (response.ok && /\.(?:css|js|webp|svg|woff2?)$/.test(url.pathname)) {
         const headers = new Headers(response.headers);
-        headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+        headers.set(
+          'Cache-Control',
+          url.searchParams.has('v') ? 'public, max-age=31536000, immutable' : 'public, max-age=86400, must-revalidate'
+        );
         return new Response(response.body, { status: response.status, headers });
       }
 
-      return withHtmlHeaders(response);
+      const page = withHtmlHeaders(response);
+      // The workers.dev host serves a full copy of the site for previews; keep
+      // it out of search results so it cannot compete with www.
+      if (url.hostname.endsWith('.workers.dev')) page.headers.set('X-Robots-Tag', 'noindex, nofollow');
+      return page;
     }
 
     // --- 4. Not found ------------------------------------------------------

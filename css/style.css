@@ -8,6 +8,33 @@
    design object rather than something to hide in a tab.
    ========================================================================== */
 
+/* Fonts, self-hosted (SIL Open Font License): no third-party request and
+   nothing to disclose. Latin subset only, which covers English and £. */
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/fonts/archivo-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "DM Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-mono-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "DM Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/dm-mono-500-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* --------------------------------------------------------------------------
    1. TOKENS
    -------------------------------------------------------------------------- */
@@ -23,6 +50,9 @@
   --copper: #c4856c;
   --copper-light: #d4a088;
   --copper-dark: #a66b54;
+  /* Text and small-label copper: 5.3:1 on cream, so it passes WCAG AA.
+     --copper-dark stays for focus outlines, where 3:1 is the bar. */
+  --copper-text: #8f5a45;
 
   /* Surfaces */
   --cream: #faf7f2;
@@ -33,12 +63,12 @@
   /* Ink */
   --ink: #1a1a18;
   --ink-mid: #4a4a45;
-  --ink-light: #8a8a82;
+  --ink-light: #6b6b64;
 
   /* On-dark ink */
   --ink-inverse: #f7f4ef;
   --ink-inverse-mid: rgba(247, 244, 239, 0.72);
-  --ink-inverse-light: rgba(247, 244, 239, 0.5);
+  --ink-inverse-light: rgba(247, 244, 239, 0.56);
 
   /* Lines */
   --rule: rgba(5, 46, 22, 0.12);
@@ -232,6 +262,12 @@ p { text-wrap: pretty; }
 .skip-link:focus { top: 0.5rem; }
 
 .hidden { display: none !important; }
+/* Author display rules otherwise beat the hidden attribute (filters, cart
+   summary, review form). */
+[hidden] { display: none !important; }
+
+/* Keep focused controls clear of the sticky header. */
+a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6rem 1rem; }
 
 /* --------------------------------------------------------------------------
    4. TYPE UTILITIES
@@ -246,7 +282,7 @@ p { text-wrap: pretty; }
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: var(--space-s);
 }
 
@@ -356,9 +392,9 @@ p { text-wrap: pretty; }
 }
 
 .btn-copper {
-  background: var(--copper-dark);
+  background: var(--copper-text);
   color: var(--cream);
-  border-color: var(--copper-dark);
+  border-color: var(--copper-text);
 }
 
 .btn-copper:hover {
@@ -425,7 +461,7 @@ p { text-wrap: pretty; }
 }
 
 .link-arrow:hover {
-  color: var(--copper-dark);
+  color: var(--copper-text);
   border-color: var(--copper);
   gap: 0.85em;
 }
@@ -512,7 +548,7 @@ p { text-wrap: pretty; }
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   line-height: 1;
 }
 
@@ -586,7 +622,7 @@ p { text-wrap: pretty; }
   padding-inline: 0.3rem;
   display: grid;
   place-items: center;
-  background: var(--copper-dark);
+  background: var(--copper-text);
   color: var(--white);
   font-family: var(--font-mono);
   font-size: 0.64rem;
@@ -724,7 +760,7 @@ p { text-wrap: pretty; }
 }
 
 .hero-drawing figcaption strong {
-  color: var(--copper-dark);
+  color: var(--copper-text);
   font-weight: 500;
 }
 
@@ -790,34 +826,9 @@ p { text-wrap: pretty; }
   color: var(--ink-inverse-light);
 }
 
-/* Hero image with Field-Notes-style annotation callouts */
-.hero-visual {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 320px;
-}
-
 /* A plain white plate. The product photography has a white background, so
    any other ground leaves a visible rectangle floating on the page. */
-.hero-image-frame {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 1 / 1;
-  background: var(--white);
-  overflow: hidden;
-}
 
-.hero-image-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: clamp(1.25rem, 3vw, 2.5rem);
-  mix-blend-mode: multiply;
-}
 
 @media (max-width: 980px) {
   .hero-inner { grid-template-columns: 1fr; }
@@ -852,7 +863,7 @@ p { text-wrap: pretty; }
 }
 
 .trust-item svg {
-  color: var(--copper-dark);
+  color: var(--copper-text);
   flex-shrink: 0;
 }
 
@@ -925,7 +936,7 @@ p { text-wrap: pretty; }
   font-size: 0.42em;
   font-weight: 500;
   vertical-align: super;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   letter-spacing: 0;
   margin-left: 0.15em;
 }
@@ -935,7 +946,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-block: 0.5rem 0.75rem;
 }
 
@@ -1056,7 +1067,7 @@ p { text-wrap: pretty; }
   border-radius: 999px;
 }
 
-.product-badge-copper { background: var(--copper-dark); }
+.product-badge-copper { background: var(--copper-text); }
 
 .product-card-body {
   display: flex;
@@ -1070,7 +1081,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: 0.5rem;
 }
 
@@ -1147,7 +1158,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   transition: gap var(--fast);
 }
 
@@ -1369,7 +1380,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
 }
 
 .compare-card h3 {
@@ -1420,7 +1431,7 @@ p { text-wrap: pretty; }
   transition: color var(--fast), border-color var(--fast);
 }
 
-.compare-links a:hover { color: var(--copper-dark); border-color: var(--copper); }
+.compare-links a:hover { color: var(--copper-text); border-color: var(--copper); }
 
 @media (max-width: 900px) {
   .compare-list { grid-template-columns: repeat(2, 1fr); }
@@ -1472,7 +1483,8 @@ p { text-wrap: pretty; }
 
 .editorial:nth-child(even) .editorial-media { order: 2; }
 
-.editorial-body h3 { font-size: var(--step-3); margin-bottom: var(--space-s); }
+.editorial-body h3,
+.editorial-body h2.title-xs { font-size: var(--step-3); margin-bottom: var(--space-s); }
 
 .editorial-body p {
   color: var(--ink-mid);
@@ -1522,35 +1534,19 @@ p { text-wrap: pretty; }
   gap: clamp(1rem, 2vw, 1.5rem);
 }
 
-.feature-card {
-  padding-top: var(--space-m);
-  border-top: 1px solid var(--rule);
-}
 
-.section-dark .feature-card { border-top-color: var(--rule-inverse); }
 
 /* Icons sit inline at text size rather than inside a rounded tile. */
 .feature-icon {
   display: block;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: var(--space-s);
 }
 
 .section-dark .feature-icon { color: var(--copper-light); }
 
-.feature-title {
-  font-size: var(--step-1);
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-}
 
-.feature-desc {
-  font-size: var(--step--1);
-  color: var(--ink-mid);
-  line-height: 1.6;
-}
 
-.section-dark .feature-desc { color: var(--ink-inverse-mid); }
 
 /* Trade picker — recommendation cards that link into the catalogue */
 .trade-card {
@@ -1563,13 +1559,6 @@ p { text-wrap: pretty; }
 
 .trade-card:hover { border-top-color: var(--copper); }
 
-.trade-card-num {
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  letter-spacing: 0.14em;
-  color: var(--copper-dark);
-  margin-bottom: var(--space-s);
-}
 
 .trade-card h3 { font-size: var(--step-1); margin-bottom: 0.4rem; }
 
@@ -1594,7 +1583,7 @@ p { text-wrap: pretty; }
   color: var(--green-700);
 }
 
-.trade-pick strong { color: var(--copper-dark); font-weight: 500; }
+.trade-pick strong { color: var(--copper-text); font-weight: 500; }
 
 /* --------------------------------------------------------------------------
    14. STATS
@@ -1700,7 +1689,7 @@ p { text-wrap: pretty; }
   transition: color var(--fast);
 }
 
-.faq-q:hover { color: var(--copper-dark); }
+.faq-q:hover { color: var(--copper-text); }
 
 .faq-icon {
   flex-shrink: 0;
@@ -1714,7 +1703,7 @@ p { text-wrap: pretty; }
 .faq-icon::after {
   content: '';
   position: absolute;
-  background: var(--copper-dark);
+  background: var(--copper-text);
   transition: transform var(--base), opacity var(--base);
 }
 
@@ -1742,6 +1731,9 @@ p { text-wrap: pretty; }
 }
 
 .faq-a > div { overflow: hidden; }
+/* Closed answers leave the tab order and the accessibility tree. The delay
+   keeps them visible while the row collapses. */
+.faq-item:not(.is-open) .faq-a > div { visibility: hidden; transition: visibility 0s linear var(--base); }
 
 .faq-item.is-open .faq-a { grid-template-rows: 1fr; }
 
@@ -1784,7 +1776,7 @@ p { text-wrap: pretty; }
   min-width: 0;
   padding: 0.95rem 1.1rem;
   background: rgba(247, 244, 239, 0.07);
-  border: 1px solid var(--rule-inverse);
+  border: 1px solid rgba(247, 244, 239, 0.45);
   border-radius: var(--radius);
   color: var(--ink-inverse);
   font-size: var(--step--1);
@@ -1793,7 +1785,8 @@ p { text-wrap: pretty; }
 .capture-form input::placeholder { color: var(--ink-inverse-light); }
 
 .capture-form input:focus {
-  outline: none;
+  outline: 2px solid var(--cream);
+  outline-offset: 1px;
   border-color: var(--copper);
   background: rgba(247, 244, 239, 0.1);
 }
@@ -1870,7 +1863,7 @@ p { text-wrap: pretty; }
 }
 
 .breadcrumbs a { transition: color var(--fast); }
-.breadcrumbs a:hover { color: var(--copper-dark); }
+.breadcrumbs a:hover { color: var(--copper-text); }
 .breadcrumbs .sep { opacity: 0.5; }
 .breadcrumbs [aria-current] { color: var(--ink-mid); }
 
@@ -1944,7 +1937,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: 0.6rem;
 }
 
@@ -2063,7 +2056,7 @@ p { text-wrap: pretty; }
 }
 
 .protect-text a {
-  color: var(--copper-dark);
+  color: var(--copper-text);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -2096,7 +2089,7 @@ p { text-wrap: pretty; }
   display: inline-block;
   margin-top: 0.7rem;
   font-size: var(--step--1);
-  color: var(--copper-dark);
+  color: var(--copper-text);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -2167,6 +2160,8 @@ p { text-wrap: pretty; }
 }
 
 .qty input:focus { outline: none; }
+/* Inset so the ring is not clipped by .qty { overflow: hidden }. */
+.qty input:focus-visible { outline: 2px solid var(--copper-dark); outline-offset: -2px; }
 
 .buy-row .btn { flex: 1 1 200px; }
 
@@ -2191,7 +2186,7 @@ p { text-wrap: pretty; }
   color: var(--ink-mid);
 }
 
-.pdp-assurance svg { color: var(--copper-dark); flex-shrink: 0; }
+.pdp-assurance svg { color: var(--copper-text); flex-shrink: 0; }
 
 .bulk-nudge {
   display: flex;
@@ -2340,7 +2335,7 @@ p { text-wrap: pretty; }
 
 .accessory-icon {
   display: block;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: var(--space-s);
 }
 
@@ -2568,7 +2563,7 @@ p { text-wrap: pretty; }
   transition: color var(--fast), border-color var(--fast);
 }
 
-.prose a:hover { color: var(--copper-dark); border-color: var(--copper); }
+.prose a:hover { color: var(--copper-text); border-color: var(--copper); }
 
 .prose strong { color: var(--ink); font-weight: 600; }
 
@@ -2609,7 +2604,7 @@ p { text-wrap: pretty; }
   flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: var(--step--1);
-  color: var(--copper-dark);
+  color: var(--copper-text);
 }
 
 .prose blockquote {
@@ -2712,7 +2707,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: 0.6rem;
 }
 
@@ -2783,7 +2778,8 @@ p { text-wrap: pretty; }
 .field textarea {
   padding: 0.9rem 1rem;
   background: var(--surface);
-  border: 1px solid var(--rule-strong);
+  /* 3.6:1 against the surface, so the field edge is visible (WCAG 1.4.11). */
+  border: 1px solid rgba(5, 46, 22, 0.55);
   border-radius: var(--radius);
   font-size: var(--step--1);
   color: var(--ink);
@@ -2795,9 +2791,10 @@ p { text-wrap: pretty; }
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  outline: none;
-  border-color: var(--copper);
-  box-shadow: 0 0 0 3px rgba(196, 133, 108, 0.16);
+  outline: 2px solid var(--copper-dark);
+  outline-offset: 1px;
+  border-color: var(--copper-dark);
+  box-shadow: none;
 }
 
 .form-status {
@@ -2947,19 +2944,19 @@ p { text-wrap: pretty; }
    28. SCROLL REVEAL
    -------------------------------------------------------------------------- */
 
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity var(--slow), transform var(--slow);
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; }
 }
 
 /* --------------------------------------------------------------------------
@@ -2970,7 +2967,7 @@ p { text-wrap: pretty; }
   .site-header, .site-footer, .cookie-banner, .toast,
   .announce, .buy-row, .capture { display: none !important; }
   body { background: #fff; color: #000; }
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; }
 }
 
 /* Orders paused (src/store-config.js SALES_PAUSED) */
@@ -3018,7 +3015,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   text-decoration: none;
 }
 .req-source:hover { text-decoration: underline; }
@@ -3032,7 +3029,7 @@ p { text-wrap: pretty; }
 }
 .pick-card .product-card { height: auto; }
 .pick-body h3 { font-size: var(--step-3); letter-spacing: -0.02em; margin: 0.75rem 0 0.75rem; }
-.pick-price { font-family: var(--font-mono); font-weight: 400; font-size: var(--step-1); color: var(--copper-dark); margin-left: 0.5rem; }
+.pick-price { font-family: var(--font-mono); font-weight: 400; font-size: var(--step-1); color: var(--copper-text); margin-left: 0.5rem; }
 .pick-body > p { color: var(--ink-mid); line-height: 1.7; max-width: var(--measure); margin-bottom: 1rem; }
 .pick-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
 @media (max-width: 760px) { .pick { grid-template-columns: 1fr; } }
@@ -3051,7 +3048,7 @@ p { text-wrap: pretty; }
 @media (max-width: 700px) { .setup-grid { grid-template-columns: 1fr; } }
 .step-list { margin: var(--space-m) 0 0; padding-left: 1.4rem; color: var(--ink-mid); line-height: 1.65; }
 .step-list li { margin-bottom: 0.75rem; }
-.step-list li::marker { font-family: var(--font-mono); color: var(--copper-dark); }
+.step-list li::marker { font-family: var(--font-mono); color: var(--copper-text); }
 
 .disclaimer { font-size: var(--step--1); color: var(--ink-light); line-height: 1.6; max-width: var(--measure); }
 .sources { margin-top: var(--space-m); font-size: var(--step--1); color: var(--ink-light); }
@@ -3076,7 +3073,7 @@ p { text-wrap: pretty; }
 .works-card:hover { transform: translateY(-2px); box-shadow: var(--lift); }
 .works-card h2 { font-size: var(--step-2); letter-spacing: -0.02em; }
 .works-card > p { color: var(--ink-mid); line-height: 1.6; flex: 1; }
-.works-pick { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em; text-transform: uppercase; color: var(--copper-dark); }
+.works-pick { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em; text-transform: uppercase; color: var(--copper-text); }
 
 /* --------------------------------------------------------------------------
    WARRANTY — plan cards, claim steps, plan terms
@@ -3114,7 +3111,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
   margin-bottom: 0.75rem;
 }
 
@@ -3367,7 +3364,7 @@ p { text-wrap: pretty; }
   font-family: var(--font-mono);
   font-size: var(--step--1);
   font-weight: 500;
-  color: var(--copper-dark);
+  color: var(--copper-text);
 }
 
 .clauses > p:target {
@@ -3419,7 +3416,7 @@ p { text-wrap: pretty; }
   color: var(--ink-mid);
 }
 
-.cart-offer-meta a { color: var(--copper-dark); text-decoration: underline; text-underline-offset: 0.2em; }
+.cart-offer-meta a { color: var(--copper-text); text-decoration: underline; text-underline-offset: 0.2em; }
 
 .cart-offer-btn { flex: 0 0 auto; }
 
@@ -3465,7 +3462,6 @@ p { text-wrap: pretty; }
 .order-plan-note a,
 .capture-note a { text-decoration: underline; text-underline-offset: 0.2em; }
 
-}
 
 /* --------------------------------------------------------------------------
    TOOLS: picker, bulk calculator, lightbox, trade pick, forms extras
@@ -3483,7 +3479,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--2);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper-dark);
+  color: var(--copper-text);
 }
 
 .picker-question {
@@ -3530,6 +3526,9 @@ p { text-wrap: pretty; }
 .picker-option-title { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); color: var(--ink); }
 
 .picker-option-text { font-size: var(--step--1); color: var(--ink-mid); }
+
+.picker-nav { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-s); margin-top: var(--space-m); }
+.picker-nav .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .picker-back {
   margin-top: var(--space-m);

@@ -360,7 +360,7 @@
       "description": "Desktop charging dock with a pogo pin connection. Drop the tablet in and it charges. No fiddling with cables in the dark.",
       "price": 49.99,
       "currency": "GBP",
-      "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
+      "compatibleWith": ["tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     },
     {

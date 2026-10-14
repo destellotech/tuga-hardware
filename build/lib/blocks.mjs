@@ -91,7 +91,7 @@ export function sizeLadder(range) {
             <a class="ladder-item reveal" href="${productUrl(p)}" data-size="${p.sizeClass}">
               <div class="ladder-stage">
                 <div class="ladder-device">
-                  <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 860px) 60vw, 280px')} alt="${esc(p.name)}, ${esc(p.sizeLabel)} inch" loading="lazy" width="400" height="400">
+                  <img src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 860px) 60vw, 280px')} alt="${esc(p.name)}, ${esc(p.sizeLabel)} inch" loading="lazy" width="400" height="300">
                 </div>
               </div>
               <span class="ladder-size">${esc(p.sizeLabel)}<sup>in</sup></span>
