@@ -452,7 +452,7 @@ ${sizeLadder(androidRange)}
 ${sectionHead({
   tag: 'Windows range',
   title: 'The same three sizes, running full Windows 11',
-  lede: 'Buy these only if a specific piece of desktop software forces your hand: diagnostic tools, legacy databases, GIS, CAD viewers or a network drive. They cost roughly twice the Android equivalents, and for most trades Android does the job.',
+  lede: 'Buy these only if a specific piece of desktop software forces your hand: diagnostic tools, legacy databases, GIS, CAD viewers or a network drive. They cost noticeably more than the Android models, and for most trades Android does the job.',
   wide: true,
 })}
 ${productGrid(windowsRange)}
@@ -1539,7 +1539,7 @@ write(
       <div class="container">
 ${breadcrumbs(aboutTrail)}
         ${eyebrow('About')}
-        <h1>The gap between a £1,800 Toughbook and a cracked iPad</h1>
+        <h1>The gap between a four-figure enterprise tablet and a cracked consumer one</h1>
         <p class="lede">That gap is where we sit, and it is why the company exists.</p>
       </div>
     </section>
@@ -1561,7 +1561,7 @@ ${breadcrumbs(aboutTrail)}
 
           <p>We do not publish invented durability scores or made-up review counts. Every claim on this site is a specification you can check against the manufacturer's own documentation, and where a device is rated IP67 rather than IP68 we say so rather than rounding up.</p>
 
-          <p>We also will not sell you the expensive one by default. Windows devices cost roughly twice what the Android equivalents do, and most trades genuinely do not need them. If you email us and the honest answer is the cheapest device in the range, that is the answer you will get.</p>
+          <p>We also will not sell you the expensive one by default. Windows devices cost noticeably more than the Android ones, and most trades genuinely do not need them. If you email us and the honest answer is the cheapest device in the range, that is the answer you will get.</p>
 
           <h2>Based in the UK</h2>
 
@@ -1885,7 +1885,7 @@ ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 
             </tbody>
           </table>
         </div>
-        ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more A10 and W10 devices. It can also be paid monthly with the devices through our lease funder for limited companies, LLPs and public bodies, subject to the funder's quotation.</p>` : ''}
+        ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more A10 and W10 devices.</p>` : ''}
       </div>
     </section>
 

@@ -119,6 +119,8 @@ function countDeviceUnits(lines) {
 /** Contact enquiries, sign ups and trade applications: see privacy policy section 7. */
 const TWELVE_MONTHS = 365 * 24 * 60 * 60;
 
+const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/warranty-register', '/api/review'];
+
 const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check'];
 
 // Bulk discount tiers: { minQty: discountPercent }
@@ -181,6 +183,19 @@ export async function handleRequest(request, env) {
   if (request.method === 'POST' && path === '/api/confirm-order') {
     return handleConfirmOrder(request, env);
   }
+  // Public forms share the Resend quota with order emails, so cap them per
+  // IP when the FORM_LIMITER binding exists (see wrangler.toml). Without the
+  // binding nothing changes.
+  if (request.method === 'POST' && FORM_PATHS.includes(path) && env.FORM_LIMITER) {
+    try {
+      const { success } = await env.FORM_LIMITER.limit({ key: request.headers.get('cf-connecting-ip') || 'unknown' });
+      if (!success) return corsError('Too many submissions. Please wait a minute and try again.', 429);
+    } catch (err) {
+      // A limiter fault must never cost us an enquiry.
+      console.error('Rate limiter error:', err);
+    }
+  }
+
   if (request.method === 'POST' && path === '/api/contact') {
     return handleContact(request, env);
   }
@@ -369,6 +384,9 @@ async function handlePayPalOrder(request, env) {
           },
         },
         items: paypalItems,
+        // Read back by recordPayPalOrder so the email shows the same bulk
+        // discount line as a Stripe order.
+        custom_id: String(discountPercent),
       }],
       application_context: {
         brand_name: 'Tuga Hardware',
@@ -607,7 +625,9 @@ async function recordPayPalOrder(orderId, env) {
       unitPrice: Math.round(parseFloat(item.unit_amount?.value || '0') * 100),
       total: Math.round(parseFloat(item.unit_amount?.value || '0') * 100) * parseInt(item.quantity, 10),
     })) || [],
+    subtotal: Math.round(parseFloat(purchaseUnit.amount?.value || '0') * 100),
     total: Math.round(parseFloat(purchaseUnit.amount?.value || '0') * 100),
+    discount: Number(purchaseUnit.custom_id) || 0,
     currency: purchaseUnit.amount?.currency_code || 'GBP',
     status: 'pending',
     paidAt: new Date().toISOString(),
