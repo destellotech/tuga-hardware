@@ -23,10 +23,11 @@
   <meta name="twitter:description" content="IBM Maximo Mobile needs Android 11+ or Windows 10/11 and 3 GB memory. Which Tuga rugged tablet meets that, with offline, NFC and camera scanning.">
   <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t10-1.webp?v=79059015ff">
 
+  <script>document.documentElement.classList.add('js')</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=386ffdbf9f">
+  <link rel="stylesheet" href="/css/style.css?v=ba35a7d2b3">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <script type="application/ld+json">{
@@ -276,7 +277,7 @@
           <a class="product-card reveal" href="/products/tuga-a10" data-category="android">
             <span class="product-badge product-badge-copper">Our pick for Android</span>
             <div class="product-card-media">
-              <img src="/img/products/t10-1.webp?v=79059015ff" srcset="/img/products/t10-1-400.webp?v=340ae702bd 400w, /img/products/t10-1.webp?v=79059015ff 800w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga A10 rugged tablet" loading="lazy" width="600" height="450">
+              <img src="/img/products/t10-1.webp?v=79059015ff" srcset="/img/products/t10-1-400.webp?v=340ae702bd 400w, /img/products/t10-1-800.webp?v=399d6bde5e 800w, /img/products/t10-1.webp?v=79059015ff 1200w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga A10 rugged tablet" loading="lazy" width="600" height="450">
             </div>
             <div class="product-card-body">
               <p class="product-card-kicker">Tablet / 10.1&Prime; / Android</p>
@@ -316,7 +317,7 @@
           <a class="product-card reveal" href="/products/tuga-w10" data-category="windows">
             <span class="product-badge product-badge-copper">Our pick for Windows</span>
             <div class="product-card-media">
-              <img src="/img/products/w10-1.webp?v=c6f3d725a3" srcset="/img/products/w10-1-400.webp?v=5565f76879 400w, /img/products/w10-1.webp?v=c6f3d725a3 800w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga W10 rugged tablet" loading="lazy" width="600" height="450">
+              <img src="/img/products/w10-1.webp?v=c6f3d725a3" srcset="/img/products/w10-1-400.webp?v=5565f76879 400w, /img/products/w10-1-800.webp?v=d957b40978 800w, /img/products/w10-1.webp?v=c6f3d725a3 1200w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 380px" alt="Tuga W10 rugged tablet" loading="lazy" width="600" height="450">
             </div>
             <div class="product-card-body">
               <p class="product-card-kicker">Tablet / 10.1&Prime; / Windows</p>
@@ -586,15 +587,16 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie notice" hidden>
+    <p>No cookies here. Your basket is kept in your browser&#39;s own storage, and visits are counted without cookies or anything that identifies you. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
+      <button class="btn btn-sm btn-inverse" data-cookie-accept>OK</button>
     </div>
   </div>
 
-  <script src="/js/app.js?v=fb12d579cf" defer></script>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="/js/app.js?v=5889fc1a94" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->

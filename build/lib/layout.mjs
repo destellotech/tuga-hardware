@@ -354,13 +354,14 @@ const footer = () => `
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">
-    <p>We use one cookie to remember your basket, plus cookieless visit counts that cannot identify you. Nothing is sold or shared. <a href="/privacy">Privacy policy</a>.</p>
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie notice" hidden>
+    <p>No cookies here. Your basket is kept in your browser&#39;s own storage, and visits are counted without cookies or anything that identifies you. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
-      <button class="btn btn-sm btn-outline-light" data-cookie-decline>Decline</button>
+      <button class="btn btn-sm btn-inverse" data-cookie-accept>OK</button>
     </div>
-  </div>`;
+  </div>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>`;
 
 /* --- the page shell ----------------------------------------------------- */
 
@@ -384,7 +385,7 @@ export function page({
   path,
   active,
   ogType = 'website',
-  ogImage = '/img/products/t8-1.webp',
+  ogImage = versioned('/img/products/t8-1.webp'),
   schema = [],
   bodyClass = '',
   noindex = false,
@@ -418,6 +419,7 @@ export function page({
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${absImage}">
 
+  <script>document.documentElement.classList.add('js')</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">

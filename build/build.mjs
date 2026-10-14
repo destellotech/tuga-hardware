@@ -358,7 +358,7 @@ const TRADES = [
     icon: icons.truck(24),
     name: 'Logistics & delivery',
     page: '/for/logistics',
-    copy: 'Proof of delivery, route tracking and barcode scanning from the cab. Vehicle mountable and charging while you drive.',
+    copy: 'Proof of delivery, route tracking and barcode scanning from the cab. A dash mount and a 12V car charger between drops.',
     pick: 'tuga-a6',
   },
   {
@@ -419,7 +419,7 @@ const hero = () => {
           </div>
         </div>
         <figure class="hero-drawing">
-          <img src="${imgPath(lead, 2)}" alt="Dimensioned drawing of the Tuga A8 showing ports, buttons and case dimensions" width="800" height="291" fetchpriority="high">
+          <img src="${imgPath(lead, 2)}" alt="Dimensioned drawing of the Tuga A8 showing ports, buttons and case dimensions" width="800" height="288" fetchpriority="high">
           <figcaption>
             <span><strong>${esc(lead.name)}</strong></span>
             <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
@@ -484,7 +484,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="${versioned('/img/blog/blog-waterproof.webp')}" alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-waterproof.webp')}"${responsive('/img/blog/blog-waterproof.webp', '(max-width: 820px) 92vw, 556px')} alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Sealed against dust and water</h3>
@@ -499,7 +499,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="${versioned('/img/blog/blog-construction.webp')}" alt="Rugged tablet in use on a construction site" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-construction.webp')}"${responsive('/img/blog/blog-construction.webp', '(max-width: 820px) 92vw, 556px')} alt="Rugged tablet in use on a construction site" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Drop tested to a real standard</h3>
@@ -510,7 +510,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="${versioned('/img/blog/blog-field-engineer.webp')}" alt="Field engineer using a rugged tablet outdoors" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-field-engineer.webp')}"${responsive('/img/blog/blog-field-engineer.webp', '(max-width: 820px) 92vw, 556px')} alt="Field engineer using a rugged tablet outdoors" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Screens you can read outside, batteries that last the shift</h3>
@@ -627,10 +627,11 @@ ${trustStrip()}
     <section class="section">
       <div class="container">
         <div class="filters" role="group" aria-label="Filter by operating system">
-          <button class="filter-btn is-active" data-filter="all">All devices</button>
-          <button class="filter-btn" data-filter="android">Android</button>
-          <button class="filter-btn" data-filter="windows">Windows</button>
+          <button class="filter-btn is-active" data-filter="all" aria-pressed="true">All devices</button>
+          <button class="filter-btn" data-filter="android" aria-pressed="false">Android</button>
+          <button class="filter-btn" data-filter="windows" aria-pressed="false">Windows</button>
         </div>
+        <h2 class="sr-only">All devices</h2>
 ${productGrid(devices)}
         <p class="lede" data-empty-state hidden>No devices match that filter.</p>
       </div>
@@ -734,13 +735,13 @@ ${breadcrumbs(trail)}
         <div class="pdp-gallery">
           <div class="gallery-main">
             <button type="button" class="gallery-zoom" data-zoom aria-label="Enlarge image">${icons.zoom(18)}</button>
-            <img id="gallery-image" src="${imgPath(p, 1)}" alt="${esc(p.name)} rugged ${p.formFactor}" width="800" height="800" fetchpriority="high">
+            <img id="gallery-image" src="${imgPath(p, 1)}"${responsive(imgPath(p, 1), '(max-width: 820px) 92vw, 560px')} alt="${esc(p.name)} rugged ${p.formFactor}" width="1200" height="900" fetchpriority="high">
           </div>
           <div class="gallery-thumbs" role="group" aria-label="Product images">
             ${p.images
               .map(
                 (_, i) => `
-            <button type="button" class="gallery-thumb${i === 0 ? ' is-active' : ''}" data-gallery-src="${imgPath(p, i + 1)}" aria-label="View image ${i + 1}">
+            <button type="button" class="gallery-thumb${i === 0 ? ' is-active' : ''}" aria-pressed="${i === 0}" data-gallery-src="${imgPath(p, i + 1)}" data-gallery-srcset="${(responsive(imgPath(p, i + 1), 'x').match(/srcset="([^"]*)"/) || [])[1] || ''}" aria-label="View image ${i + 1}">
               <img src="${imgPath(p, i + 1)}"${responsive(imgPath(p, i + 1), '74px')} alt="" width="150" height="150" loading="lazy">
             </button>`
               )
@@ -946,6 +947,7 @@ ${breadcrumbs(accTrail)}
 
     <section class="section">
       <div class="container">
+        <h2 class="sr-only">All accessories</h2>
         <div class="card-grid">
           ${accessories.map(accessoryCard).join('\n')}
         </div>
@@ -1094,7 +1096,7 @@ ${sectionHead({
       <div class="container">
         <div class="editorial">
           <div class="editorial-media editorial-media-contain">
-            <img src="${imgPath(devices.find((d) => d.id === 'tuga-a10'), 1)}" alt="Tuga A10 rugged tablet" loading="lazy" width="800" height="600">
+            <img src="${imgPath(devices.find((d) => d.id === 'tuga-a10'), 1)}"${responsive(imgPath(devices.find((d) => d.id === 'tuga-a10'), 1), '(max-width: 820px) 92vw, 556px')} alt="Tuga A10 rugged tablet" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             ${eyebrow('How it works')}
@@ -1180,7 +1182,10 @@ const pickerStep = (n, name, question, hint, options) => `
                 )
                 .join('')}
             </div>
-            ${n > 1 ? '<button type="button" class="picker-back" data-picker-back>&larr; Back</button>' : ''}
+            <div class="picker-nav">
+              <button type="button" class="btn btn-primary btn-sm" data-picker-next disabled>${n === 4 ? 'See my pick' : 'Next'}</button>
+              ${n > 1 ? '<button type="button" class="picker-back" data-picker-back>&larr; Back</button>' : ''}
+            </div>
           </fieldset>`;
 
 const pickerTrail = [{ label: 'Home', href: '/' }, { label: 'Which Tuga?' }];
@@ -1504,7 +1509,7 @@ write(
               <input type="text" id="trade" name="trade" maxlength="60" placeholder="e.g. Electrician">
             </div>
           </div>
-          <p class="form-note">We publish every genuine review, good or bad, marked as a verified purchase. We only remove reviews that are abusive or not about the product.</p>
+          <p class="form-note">We read every review. We may publish it on the site, good or bad, marked as a verified purchase, and we never publish reviews that are abusive or not about the product.</p>
           <button class="btn btn-primary btn-lg" type="submit">Submit review</button>
           <p class="form-status hidden" data-form-status role="status"></p>
         </form>
@@ -1610,16 +1615,16 @@ ${breadcrumbs(contactTrail)}
       <div class="container">
         <div class="editorial" style="align-items:start">
           <div class="editorial-body">
-            <h3 class="title-xs">Email us directly</h3>
+            <h2 class="title-xs">Email us directly</h2>
             <p style="margin-top:0.75rem"><a class="link-arrow" href="mailto:${SITE.email}">${SITE.email}</a></p>
             <p style="margin-top:1.5rem">We answer within one working day, usually much sooner. For order questions, include your order number and we will pull it up.</p>
 
-            <h3 class="title-xs" style="margin-top:2.5rem">Who you are dealing with</h3>
+            <h2 class="title-xs" style="margin-top:2.5rem">Who you are dealing with</h2>
             <p style="margin-top:0.75rem">${esc(TRADER.tradingName)} is a trading name of ${esc(TRADER.legalName)}, registered in ${esc(TRADER.registeredIn)}, company number ${esc(TRADER.companyNumber)}.</p>
             <p>Registered office: ${esc(TRADER_ADDRESS_LINE)}.</p>
             <p>${esc(TRADER.legalName)} is not VAT registered, so no VAT is charged.</p>
 
-            <h3 class="title-xs" style="margin-top:2.5rem">What we can help with</h3>
+            <h2 class="title-xs" style="margin-top:2.5rem">What we can help with</h2>
             <ul class="editorial-list">
               <li>Which of the three sizes suits your trade</li>
               <li>Whether you genuinely need Windows or Android will do</li>
@@ -2164,7 +2169,7 @@ ${breadcrumbs(trail)}
 
     <div class="container-narrow">
       <div class="post-hero">
-        <img src="${versioned(post.image)}"${responsive(post.image, '(max-width: 820px) 94vw, 780px')} alt="" loading="eager" width="1200" height="514">
+        <img src="${versioned(post.image)}"${responsive(post.image, '(max-width: 820px) 94vw, 780px')} alt="" loading="eager" fetchpriority="high" width="1200" height="514">
       </div>
 
       <article class="prose">

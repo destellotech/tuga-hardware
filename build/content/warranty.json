@@ -130,7 +130,7 @@
     },
     {
       "label": "Available on",
-      "standard": "A10, W10, A6",
+      "standard": "Every Tuga device",
       "three_year": "A10, W10, A6, any quantity",
       "total_care": "A10 and W10, business fleets of ten or more"
     },
@@ -160,7 +160,7 @@
     }
   ],
   "claim_steps": [
-    "1. Check the register. Every device dispatched with a paid plan is recorded by serial number on our warranty register at dispatch, with the plan, dispatch date and end date. Your confirmation email carries the serial, plan, end date and a PDF of the Terms. A claim is accepted only for a serial on the register.",
+    "1. Check the register. Every device dispatched with a paid plan is recorded by serial number on our warranty register at dispatch, with the plan, dispatch date and end date. Ask us at any time for the serial, plan and end date we hold for your device. The Terms are at tugahardware.com/warranty-terms. A claim is accepted only for a serial on the register.",
     "2. Tell us. Email support@tugahardware.com or call us on a working day (08:30 to 17:30) with the serial number (on the back of the device and on your invoice), what the device is doing, what you have tried, and where possible a photo, a short video or a diagnostic report (Windows battery report on the W10; our diagnostic app or the battery statistics screen on the A10 and A6). We log the time and give you a claim reference. Under Total Care the nominated site contact logs the claim and gives the delivery address for the swap unit, which must be one listed in your fleet schedule or confirmed by us in writing.",
     "3. We reply. 3-Year Warranty: within one working day. Total Care: acknowledgement within two working hours and triage started within four working hours. We work through a published checklist of no more than 20 minutes of your time: power and charger check, forced restart, known-good charger, battery reading, visible damage check. If the fault clears, we close the claim with a note on the register. If the photos show excluded damage (cracked glass, liquid indicators, crushing) we say so now and offer a fixed-price repair quote instead of a warranty claim. This step removes most no-fault-found returns and keeps carriage free for everyone.",
     "4. Acceptance. We confirm acceptance by email with the claim number. 3-Year Warranty: this triggers the prepaid Royal Mail Tracked 24 label (bought pay-as-you-go through Click and Drop and emailed to you) the same working day and, if you ask, a box. Total Care: this starts the dispatch clock. If accepted by 14:00 on a working day, the pre-imaged swap unit is booked on the next-working-day courier account with declared value and leaves the same day, with the prepaid return label in the box. A claim accepted after 14:00 counts as accepted at 08:30 the next working day. Log by 12:00 with the checklist completed and you have our decision by 14:00.",
