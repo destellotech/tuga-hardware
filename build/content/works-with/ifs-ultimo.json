@@ -53,7 +53,7 @@
     {
       "device_id": "tuga-a10",
       "role": "primary",
-      "why": "Ultimo Go+ is an Android app with a published minimum of Android 8.0 and up, and the Tuga A10 runs Android 14, so it meets that requirement. The A10 gives technicians a 10.1 inch FHD screen for work orders, inspection checklists and equipment records, a 13MP rear camera with flash for the app's camera-based QR and barcode scanning and photo linking, GPS for the app's GPS integration, and 4G dual SIM for connectivity between sites, with the app's own offline mode covering gaps in coverage. IP68 and MIL-STD-810H ratings and an operating range of -20 to 60C suit plant rooms, yards and outdoor assets. An industrial asset-management firm has already bought a Tuga A10 for maintenance technicians running a different mobile maintenance app at an aerospace manufacturer.",
+      "why": "Ultimo Go+ is an Android app with a published minimum of Android 8.0 and up, and the Tuga A10 runs Android 14, so it meets that requirement. The A10 gives technicians a 10.1 inch FHD screen for work orders, inspection checklists and equipment records, a 13MP rear camera with flash for the app's camera-based QR and barcode scanning and photo linking, GPS for the app's GPS integration, and 4G dual SIM for connectivity between sites, with the app's own offline mode covering gaps in coverage. IP68 and MIL-STD-810H ratings and an operating range of -20 to 60C suit plant rooms, yards and outdoor assets.",
       "fit": [
         "Android 8.0 and up required: the A10 runs Android 14.",
         "Camera-based QR and barcode scanning and photo linking: 13MP rear camera with flash, 5MP front camera. There is no dedicated scan engine, so scanning depends on the app's camera support, which the vendor lists.",
