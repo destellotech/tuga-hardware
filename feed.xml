@@ -3,21 +3,21 @@
   <channel>
     <title>Tuga Hardware</title>
     <link>https://www.tugahardware.com</link>
-    <description>Rugged tablets and handhelds built for UK tradespeople. IP65 to IP69K sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery.</description>
+    <description>Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, most models drop tested to MIL-STD-810H or 810G. Free UK delivery.</description>
     <item>
       <g:id>tuga-a6</g:id>
-      <g:title>Tuga A6 6.8 inch Rugged Android Handheld</g:title>
-      <g:description>A 6.8 inch rugged Android handheld for tradespeople who need a tough device in their pocket. IP68 and IP69K rated, drop tested to MIL-STD-810H, with a 10600mAh battery and 5G.</g:description>
+      <g:title>Tuga A6 6 inch Rugged Android Handheld</g:title>
+      <g:description>A 6 inch rugged Android 15 handheld with a built-in 2D barcode scanner. IP67 sealed, rated for 1.5 metre drops, with 4G, NFC and a removable 5050mAh battery.</g:description>
       <g:link>https://www.tugahardware.com/products/tuga-a6</g:link>
-      <g:image_link>https://www.tugahardware.com/img/products/h6-1.webp?v=27d15b3d4a</g:image_link>
-
+      <g:image_link>https://www.tugahardware.com/img/products/m602-1.webp?v=d4394bfcd5</g:image_link>
+      <g:additional_image_link>https://www.tugahardware.com/img/products/m602-2.webp?v=bad386a9e7</g:additional_image_link>
       <g:availability>in_stock</g:availability>
-      <g:price>299.00 GBP</g:price>
+      <g:price>349.00 GBP</g:price>
       <g:brand>Tuga Hardware</g:brand>
       <g:mpn>TUGA-A6</g:mpn>
       <g:condition>new</g:condition>
       <g:google_product_category>267</g:google_product_category>
-      <g:product_type>Rugged Devices &gt; Android &gt; 6.8 inch</g:product_type>
+      <g:product_type>Rugged Devices &gt; Android &gt; 6 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
         <g:service>Free UK delivery</g:service>
