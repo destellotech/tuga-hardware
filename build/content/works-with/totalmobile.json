@@ -87,7 +87,7 @@
         "Windows app requirement of Windows 10 version 14393.0 or higher on x86, x64 or Arm: the W10 runs Windows 11 Pro on an Intel N100 up to 3.4GHz (x64), with 8GB RAM and 128GB storage.",
         "Browser-based back office: a full desktop browser on a 10.1 inch 1280 x 800 multi-touch IPS screen, with HDMI for an external monitor.",
         "Photographs: 5MP rear camera and 2MP front camera for the webcam permission the store listing declares.",
-        "NFC permission declared by the Windows app: the W10 includes NFC hardware. What the app does with NFC is not documented by the vendor.",
+        "NFC permission declared by the Windows app: NFC is an option on the W10, not standard, so specify it when ordering if you need it. What the app does with NFC is not documented by the vendor.",
         "Depot and vehicle use: 100Mbps RJ45 Ethernet, USB-C, USB-A, pogo pin dock connector, optional 4G LTE and GPS, removable 5000mAh battery, IP65, 1197g."
       ]
     }

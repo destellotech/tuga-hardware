@@ -45,7 +45,7 @@
     },
     {
       "requirement": "NFC and RFID: not documented",
-      "detail": "No eMaint vendor page, store listing or public knowledge base article we reviewed mentions NFC or RFID tag reading for eMaint X5. The Tuga devices include NFC hardware, but we do not present that as an eMaint feature. If NFC or RFID asset tagging matters to you, ask the vendor directly before relying on it.",
+      "detail": "No eMaint vendor page, store listing or public knowledge base article we reviewed mentions NFC or RFID tag reading for eMaint X5. The Tuga A10 and A6 include NFC hardware (it is an option on the W10), but we do not present that as an eMaint feature. If NFC or RFID asset tagging matters to you, ask the vendor directly before relying on it.",
       "source_url": "https://www.emaint.com/mobile-maintenance"
     }
   ],
