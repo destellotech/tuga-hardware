@@ -53,10 +53,13 @@ const PRODUCTS = {
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
 };
 
-/** Device models the stock admin can receive: product id → name. */
-const DEVICE_MODELS = Object.fromEntries(
-  Object.entries(PRODUCTS).filter(([, p]) => p.device).map(([id, p]) => [id, p.name])
-);
+/** What the back office needs from the catalogue: stockable models and every sellable line. */
+const ADMIN_CATALOGUE = {
+  models: Object.fromEntries(Object.entries(PRODUCTS).filter(([, p]) => p.device).map(([id, p]) => [id, p.name])),
+  catalogue: Object.fromEntries(
+    Object.entries(PRODUCTS).map(([id, p]) => [id, { name: p.name, price: p.price, device: Boolean(p.device) }])
+  ),
+};
 
 /** Scanner variants carry their base device's warranty. */
 const baseDeviceId = (id) => id.replace(/-scanner$/, '');
@@ -233,7 +236,7 @@ export async function handleRequest(request, env) {
   // it is indistinguishable from an unknown path.
   if (path.startsWith('/api/admin/')) {
     if (!isAdmin(request, env)) return new Response('Not Found', { status: 404 });
-    return handleAdmin(request, env, DEVICE_MODELS);
+    return handleAdmin(request, env, ADMIN_CATALOGUE);
   }
   if (
     request.method === 'GET' &&

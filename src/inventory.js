@@ -27,6 +27,8 @@ const deviceMeta = (d) => ({
   status: d.status,
   assignedTo: (d.assignedTo || '').slice(0, 80),
   orderId: (d.orderId || '').slice(0, 80),
+  customerId: d.customerId || '',
+  poId: d.poId || '',
   imei1: d.imei1 || '',
   receivedAt: d.receivedAt,
 });
@@ -84,11 +86,16 @@ export async function receiveDevice(kv, fields, by) {
   return device;
 }
 
+/** Fields a flow may set on a device besides the ones a person edits. */
+const LINK_FIELDS = ['poId', 'supplierId', 'supplier', 'unitCost', 'customerId', 'saleId', 'soldPrice'];
+
 /**
  * Merge changes into a device and log what moved in its history. Serial and
  * IMEIs are fixed once received: a wrong one means delete and re-receive.
+ * `event` names the change for the history when a flow (dispatch, return)
+ * made it; otherwise the changed fields are listed.
  */
-export async function updateDevice(kv, serial, changes, by) {
+export async function updateDevice(kv, serial, changes, by, event) {
   const device = await getDevice(kv, serial);
   if (!device) return null;
 
@@ -100,10 +107,20 @@ export async function updateDevice(kv, serial, changes, by) {
       device[field] = changes[field];
     }
   }
-  if (!moved.length) return device;
+  let linked = false;
+  for (const field of LINK_FIELDS) {
+    if (field in changes && changes[field] !== device[field]) {
+      device[field] = changes[field];
+      linked = true;
+    }
+  }
+  if (!moved.length && !linked) return device;
 
   device.updatedAt = new Date().toISOString();
-  device.history = [...(device.history || []), { at: device.updatedAt, by, event: moved.join(' · '), status: device.status }];
+  device.history = [
+    ...(device.history || []),
+    { at: device.updatedAt, by, event: event || moved.join(' · ') || 'Links updated', status: device.status },
+  ];
   await putDevice(kv, device);
   return device;
 }
