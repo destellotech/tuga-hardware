@@ -100,7 +100,7 @@ export function sizeLadder(range) {
               <div class="ladder-meta">
                 <span class="chip">${esc(p.specs.ip_rating)}</span>
                 <span class="chip">${esc(p.specs.battery)}</span>
-                <span class="chip">${esc(p.specs.weight)}</span>
+                ${p.specs.weight ? `<span class="chip">${esc(p.specs.weight)}</span>` : ''}
               </div>
               <div class="ladder-foot">
                 <span class="ladder-price"><small>From</small>${money(p.price)}</span>
@@ -124,7 +124,7 @@ export function compareTable(list = devices) {
                 <td class="cell-mono">${esc(p.specs.os)}</td>
                 <td class="cell-mono">${esc(p.specs.ip_rating)}</td>
                 <td class="cell-mono">${esc(p.specs.battery)}</td>
-                <td class="cell-mono">${esc(p.specs.weight)}</td>
+                <td class="cell-mono">${p.specs.weight ? esc(p.specs.weight) : 'Not listed'}</td>
                 <td class="cell-price">${money(p.price)}</td>
               </tr>`
     )

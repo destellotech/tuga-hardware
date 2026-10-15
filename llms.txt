@@ -1,17 +1,45 @@
 # Tuga Hardware
 
-> Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free UK delivery. No VAT to add. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
+> Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free UK delivery. No VAT to add. 30-day returns and a 12-month warranty on every device. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
 
 Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work and costs noticeably less; Windows only when desktop software requires it.
 
 ## Devices
 
 - [Tuga A6](https://www.tugahardware.com/products/tuga-a6): £349. 6 inch handheld, Android 15, IP67, 5050mAh removable, 277g. Barcode scanning, photos, job sheets and sign-off, on a handheld that survives the site.
-- [Tuga A8](https://www.tugahardware.com/products/tuga-a8): £379. 8 inch tablet, Android 12, IP67, 8000mAh removable, undefined. Forms, maps, site photos and quotes, readable in full sun.
+- [Tuga A8](https://www.tugahardware.com/products/tuga-a8): £379. 8 inch tablet, Android 12, IP67, 8000mAh removable. Forms, maps, site photos and quotes, readable in full sun.
 - [Tuga A10](https://www.tugahardware.com/products/tuga-a10): £449. 10.1 inch tablet, Android 14, IP68, MIL-STD-810H, 8000mAh, 680g. Blueprints, BIM viewers, full spreadsheets and PDF plans.
 - [Tuga WH6](https://www.tugahardware.com/products/tuga-wh6): £699. 6.5 inch handheld, Windows 11 IoT, IP65, MIL-STD-810H, 4000mAh, 470g. Legacy Windows software and network drives, in a holster.
 - [Tuga W8](https://www.tugahardware.com/products/tuga-w8): £629. 8 inch tablet, Windows 11 Pro, IP67, MIL-STD-810G, 5000mAh, 750g. Windows software in the field, with real ports.
 - [Tuga W10](https://www.tugahardware.com/products/tuga-w10): £649. 10.1 inch tablet, Windows 11 Pro, IP65, 5000mAh, 1197g. Engineers and surveyors who need Ethernet, HDMI and a full screen.
+
+Scanner versions: Tuga WH6 with Barcode Scanner £779; Tuga W8 with 2D Scanner £699; Tuga W10 with 2D Scanner £729. Each is sold from its base model's page.
+
+## Warranty
+
+- [Warranty and paid plans](https://www.tugahardware.com/warranty): 12 months included on every device. 3-Year Warranty per device: A10 £65, W10 £79, A6 £65, A8 £65, W8 £79, WH6 £89. Total Care for business fleets of 5 or more devices on any model, on a quote.
+- [Plan Terms](https://www.tugahardware.com/warranty-terms)
+
+## Works with your software
+
+- [Rugged tablets for maintenance and field service apps](https://www.tugahardware.com/works-with/)
+- [Agility CMMS/EAM and the AgilityMobile app](https://www.tugahardware.com/works-with/agility-cmms-ssg-insight): Which Tuga rugged Android tablet fits SSG Insight's AgilityMobile app for maintenance engineers, with offline working and in-app QR scanning.
+- [eMaint X5](https://www.tugahardware.com/works-with/emaint-x5): eMaint X5 needs Android 8.1 or later. The Tuga A10 runs Android 14, is IP68 rated and has a 13MP camera for in-app QR scanning. Free UK delivery.
+- [Fiix CMMS](https://www.tugahardware.com/works-with/fiix-cmms): Fiix CMMS needs Android 11 or later. The Tuga A10 (Android 14) and A6 (Android 15) meet it, with offline mode and camera scanning. The W10 covers the web app.
+- [HxGN EAM, now Octave Attune EAM (formerly Infor EAM)](https://www.tugahardware.com/works-with/hxgn-eam): HxGN EAM (now Octave Attune EAM) on a rugged tablet: published Android, Windows, NFC and offline requirements matched to the Tuga A10, W10 and A6.
+- [IBM Maximo Mobile](https://www.tugahardware.com/works-with/ibm-maximo-mobile): IBM Maximo Mobile needs Android 11+ or Windows 10/11 and 3 GB memory. Which Tuga rugged tablet meets that, with offline, NFC and camera scanning.
+- [Idhammar MMS (with the Idhammar Connect mobile app)](https://www.tugahardware.com/works-with/idhammar-mms): Rugged Android tablets for the Idhammar Connect app (Idhammar MMS): the Android 5.0 minimum, offline sync, camera scanning, and the Tuga A10 and A6.
+- [IFS Ultimo (Ultimo Go+ mobile app)](https://www.tugahardware.com/works-with/ifs-ultimo): Rugged Android tablets for the Ultimo Go+ app (Android 8.0 and up, offline, camera scanning). Tuga A10 and A6 run Android 14 and 15. UK business seller.
+- [Limble CMMS](https://www.tugahardware.com/works-with/limble-cmms): Rugged Android and Windows tablets for Limble CMMS. Limble's Android app needs Android 7.0 or later; the Tuga A10 runs Android 14. Free UK delivery.
+- [MaintainX](https://www.tugahardware.com/works-with/maintainx): MaintainX publishes Android 7.0 or later, 6GB RAM recommended. The Tuga A10 (Android 14, 8GB RAM, IP68) meets both and runs the Android app.
+- [Micad FM](https://www.tugahardware.com/works-with/micad-fm): Micad FM app needs Android 5.0 or later. Tuga A10 runs Android 14, the A6 Android 15. Rugged devices with GPS, camera, 12-month warranty, free UK delivery.
+- [Papertrail.io](https://www.tugahardware.com/works-with/papertrail-io): Rugged Android tablets and a Windows option for Papertrail.io: built-in NFC, camera barcode and QR scanning, offline sync, IP68, UK delivery.
+- [PEMAC Assets Mobile (Pemac Mobile CMMS)](https://www.tugahardware.com/works-with/pemac-assets-mobile): Rugged Android tablet for PEMAC Assets Mobile (needs Android 7.0+). Tuga A10 runs Android 14 with NFC and camera scanning. Free UK delivery.
+- [Prisma Mobile Maintenance (Prisma CMMS)](https://www.tugahardware.com/works-with/rugged-tablet-prisma-mobile-maintenance): Rugged tablets for Sisteplant Prisma Mobile Maintenance: Android 8.0 requirement, offline work orders, QR, barcode and NFC reading. UK delivery.
+- [SafetyCulture (now Mitti by SafetyCulture, formerly iAuditor)](https://www.tugahardware.com/works-with/safetyculture): Which Tuga rugged Android tablet runs the Mitti (by SafetyCulture) app: Android 10 minimum, offline inspections, in-app QR scanning, UK pricing.
+- [SAP Service and Asset Manager](https://www.tugahardware.com/works-with/sap-service-and-asset-manager): Rugged Android and Windows tablets for SAP Service and Asset Manager: SAP's published requirements, offline sync, scanning, and which Tuga fits.
+- [Totalmobile (Field First platform and the Totalmobile Mobile Working app, also called Mobilise)](https://www.tugahardware.com/works-with/totalmobile): Rugged Android and Windows tablets for the Totalmobile app: published OS requirements, offline working, Tuga device specs and UK business invoicing.
+- [UpKeep](https://www.tugahardware.com/works-with/upkeep): Tuga A10, W10 and A6 rugged tablets for UpKeep: Android 8.0 requirement, offline mode plan limits, camera scanning and setup steps for UK teams.
 
 ## Choosing
 
@@ -19,7 +47,7 @@ Small UK retailer of rugged Android and Windows tablets and handhelds for trades
 - [Rugged tablets for construction sites](https://www.tugahardware.com/for/construction): Rugged tablets for UK construction sites. Big enough to read drawings, sealed against dust and rain, with honest advice on which size suits managers and trades.
 - [Rugged tablets for electricians](https://www.tugahardware.com/for/electricians): Rugged Android tablets and handhelds for UK electricians. Sealed against plaster dust and damp, readable in lofts, and priced for a sole trader or a small firm.
 - [Rugged tablets for field service engineers](https://www.tugahardware.com/for/field-service): Rugged tablets for UK field service engineers. Job sheets, parts lookups and customer sign-off on a device that lives in the van and survives plant rooms.
-- [Rugged devices for logistics and delivery](https://www.tugahardware.com/for/logistics): Rugged handhelds for UK delivery drivers and logistics teams. Proof of delivery, scanning and navigation on devices built for cab vibration and cold mornings.
+- [Rugged devices for logistics and delivery](https://www.tugahardware.com/for/logistics): Rugged handhelds for UK delivery drivers and logistics teams. Proof of delivery, scanning and navigation on IP67 handhelds with removable batteries, from £349.
 
 ## Compare
 
@@ -52,20 +80,20 @@ Small UK retailer of rugged Android and Windows tablets and handhelds for trades
 - [Going Paperless in the New Year: A Tradesperson's Guide](https://www.tugahardware.com/blog/going-paperless-tradesperson-guide): How to move job sheets, quotes, invoices, photos and signatures off paper before January. What to set up, in what order, what it saves and which device fits.
 - [Buying Rugged Tablets for a Small Team](https://www.tugahardware.com/blog/buying-rugged-tablets-small-team): How to kit out a team of two to ten with rugged tablets: pick one model, trial it first, budget for accessories and a spare, and use the volume discounts.
 - [Best Rugged Tablets for Plumbers and Heating Engineers](https://www.tugahardware.com/blog/best-rugged-tablets-plumbers-heating-engineers): Rugged tablets for plumbers and heating engineers compared on specs: wet work, boiler diagnostic software, flue gas analyser apps and photos in dark cupboards.
-- [Best Rugged Tablets for Landscapers and Gardeners](https://www.tugahardware.com/blog/best-rugged-tablets-landscapers-gardeners): Mud, rain, full sun and the pressure washer. Which rugged tablet suits landscaping and garden work, why no IP rating covers the pressure washer, and when a handheld beats a tablet.
+- [Best Rugged Tablets for Landscapers and Gardeners](https://www.tugahardware.com/blog/best-rugged-tablets-landscapers-gardeners): Mud, rain and full sun: which rugged tablet suits landscaping and garden work, why none of ours should be pressure washed, and when a handheld beats a tablet.
 - [Best Rugged Tablets for Electricians](https://www.tugahardware.com/blog/best-rugged-tablets-electricians): Which rugged tablet suits an electrician? How tester apps, install photos, glove mode and loft work shape the choice between the Tuga A8, A6 and the rest.
 - [Best Rugged Tablets for Delivery Drivers and Couriers](https://www.tugahardware.com/blog/best-rugged-tablets-delivery-drivers-couriers): Which rugged device suits a delivery driver or courier? Proof of delivery photos, signatures, scanning, pocket size and battery across the Tuga A6, WH6 and A8.
 - [8 Inch or 10 Inch? Choosing a Rugged Tablet Screen Size](https://www.tugahardware.com/blog/8-inch-or-10-inch-rugged-tablet): How to choose between an 8 inch and a 10.1 inch rugged tablet, using the listed resolutions, brightness and prices of the Tuga A8, A10, W8 and W10.
 - [4G, 5G or Wi-Fi Only? Connectivity for Site Work](https://www.tugahardware.com/blog/4g-5g-or-wifi-only-site-connectivity): When a rugged tablet needs its own SIM, when hotspotting from your phone is enough, what dual SIM does on rural jobs, and which Tuga devices have 4G built in.
-- [Using a Rugged Tablet in Winter: Cold, Battery Life and Charging](https://www.tugahardware.com/blog/rugged-tablet-cold-weather-battery): Why tablet batteries die early in the cold, why you should never charge a frozen device, and practical tips for keeping a rugged tablet working through a UK winter.
-- [Do You Need a Rugged Tablet with a Built-in Barcode Scanner?](https://www.tugahardware.com/blog/rugged-tablet-barcode-scanner): Phone camera, Bluetooth scanner or built-in scan engine? How each barcode scanning option compares for stock, deliveries and asset tracking, and when the extra cost pays off.
-- [MIL-STD-810H Explained: What a Rugged Drop Rating Really Tells You](https://www.tugahardware.com/blog/mil-std-810h-explained): MIL-STD-810H in plain English. What the drop test involves, why it is not a certification, 810G vs 810H, and the questions to ask before you trust a rugged claim.
-- [Android or Windows Rugged Tablet? How to Choose for Trade Work](https://www.tugahardware.com/blog/android-vs-windows-rugged-tablet): Android vs Windows rugged tablets for UK trades. Which software needs Windows, where Android wins on price and battery, and a simple test to decide in five minutes.
-- [Best Rugged Tablets for Construction Workers in 2026](https://www.tugahardware.com/blog/best-rugged-tablets-construction): The best rugged tablets for construction sites in the UK. What specs matter, why standard tablets fail, and which models survive mud, rain and drops.
+- [Using a Rugged Tablet in Winter: Cold, Battery Life and Charging](https://www.tugahardware.com/blog/rugged-tablet-cold-weather-battery): Why tablet batteries die early in the cold, why you should never charge a frozen device, and how to keep a rugged tablet working through a UK winter.
+- [Do You Need a Rugged Tablet with a Built-in Barcode Scanner?](https://www.tugahardware.com/blog/rugged-tablet-barcode-scanner): Phone camera, Bluetooth scanner or built-in scan engine? How each barcode option compares for stock, deliveries and asset tracking, and when it pays off.
+- [MIL-STD-810H Explained: What a Rugged Drop Rating Really Tells You](https://www.tugahardware.com/blog/mil-std-810h-explained): MIL-STD-810H in plain English: what the drop test involves, why it is not a certification, 810G vs 810H, and what to ask before you trust a rugged claim.
+- [Android or Windows Rugged Tablet? How to Choose for Trade Work](https://www.tugahardware.com/blog/android-vs-windows-rugged-tablet): Android vs Windows rugged tablets for UK trades: which software needs Windows, where Android wins on price and battery, and a five minute test to decide.
+- [Best Rugged Tablets for Construction Workers](https://www.tugahardware.com/blog/best-rugged-tablets-construction): The best rugged tablets for construction sites in the UK. What specs matter, why standard tablets fail, and which models survive mud, rain and drops.
 - [IP68 vs IP67: What Waterproof Rating Do You Actually Need?](https://www.tugahardware.com/blog/ip68-vs-ip67-waterproof-rating): IP68 vs IP67 explained simply. What each waterproof rating means for UK tradespeople, real world scenarios, and which Tuga tablets have which rating.
 - [Rugged Tablet vs Consumer Tablet: The True Cost Comparison](https://www.tugahardware.com/blog/rugged-vs-consumer-tablet-cost): Is a rugged tablet worth it? We compare the true cost of rugged vs normal tablets over 3 years, including replacements, downtime and data loss.
-- [Best Tablets for Field Engineers and Service Technicians](https://www.tugahardware.com/blog/best-tablets-field-engineers): The best tablets for field engineers and service technicians in the UK. 4G, GPS, camera, battery life and glove friendly screens that work on the job.
-- [Why Tradespeople Are Switching to Rugged Tablets in 2026](https://www.tugahardware.com/blog/why-tradespeople-switching-rugged-tablets): More UK tradespeople are switching to rugged tablets for paperless site management, BIM compliance, and insurance needs. Find out why 2026 is the year to go digital.
+- [Best Tablets for Field Engineers and Service Technicians](https://www.tugahardware.com/blog/best-tablets-field-engineers): The best tablets for field engineers and service technicians in the UK. 4G, GPS, camera, battery life and screens you can read on the job.
+- [Why Tradespeople Are Switching to Rugged Tablets](https://www.tugahardware.com/blog/why-tradespeople-switching-rugged-tablets): Why a rugged tablet makes sense for paperless site work: job sheets, photos, drawings and sign-off on a device that survives the site, and what to look for.
 - [Why Are Rugged Tablets So Expensive? (They Don't Have to Be)](https://www.tugahardware.com/blog/why-rugged-tablets-expensive): Enterprise rugged tablets cost over £2,000. We explain the markup model, why prices are hidden, and what a small business actually needs to pay for.
-- [Best Budget Rugged Tablets Under £400 in 2026](https://www.tugahardware.com/blog/best-budget-rugged-tablets-under-400): The best rugged tablets under £400 in 2026. What to check (IP rating, drop testing, battery, brightness) and where our two options fall short.
+- [Best Budget Rugged Tablets Under £400](https://www.tugahardware.com/blog/best-budget-rugged-tablets-under-400): The best rugged tablets under £400. What to check (IP rating, drop testing, battery, brightness) and where our two options fall short.
 - [Do You Really Need an Enterprise Rugged Tablet? Probably Not.](https://www.tugahardware.com/blog/do-you-need-enterprise-rugged-tablet): Enterprise rugged tablets are built for fleet buyers. If you are a sole trader or small team, you are overpaying. Here is what you actually need.

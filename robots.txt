@@ -4,12 +4,9 @@ Disallow: /api/
 
 # AI crawlers are welcome. Being cited is how a small store gets found.
 User-agent: GPTBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
 
 Sitemap: https://www.tugahardware.com/sitemap.xml

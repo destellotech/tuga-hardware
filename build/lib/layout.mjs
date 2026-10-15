@@ -154,7 +154,7 @@ export const jsonLd = (blocks) =>
     .filter(Boolean)
     .map(
       (b) =>
-        `<script type="application/ld+json">${JSON.stringify(b, null, 2)}</script>`
+        `<script type="application/ld+json">${JSON.stringify(b, null, 2).replace(/</g, '\\u003c')}</script>`
     )
     .join('\n  ');
 
@@ -388,7 +388,7 @@ export function page({
   path,
   active,
   ogType = 'website',
-  ogImage = versioned('/img/products/t8-1.webp'),
+  ogImage = versioned('/img/products/t85s-1.webp'),
   schema = [],
   bodyClass = '',
   noindex = false,

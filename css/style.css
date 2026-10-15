@@ -1721,16 +1721,17 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 
 .faq-a {
   display: grid;
-  grid-template-rows: 0fr;
+  grid-template-rows: 1fr;
   transition: grid-template-rows var(--base);
 }
 
 .faq-a > div { overflow: hidden; }
 /* Closed answers leave the tab order and the accessibility tree. The delay
    keeps them visible while the row collapses. */
-.faq-item:not(.is-open) .faq-a > div { visibility: hidden; transition: visibility 0s linear var(--base); }
+.js .faq-a { grid-template-rows: 0fr; }
+.js .faq-item:not(.is-open) .faq-a > div { visibility: hidden; transition: visibility 0s linear var(--base); }
 
-.faq-item.is-open .faq-a { grid-template-rows: 1fr; }
+.js .faq-item.is-open .faq-a { grid-template-rows: 1fr; }
 
 .faq-a p {
   padding-bottom: var(--space-m);
@@ -2576,15 +2577,18 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   padding-left: 0;
 }
 
-.prose ul li {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
+.prose ul li,
+.prose ol li {
+  display: block;
+  position: relative;
+  padding-left: 1.4rem;
 }
 
 .prose ul li::before {
   content: '';
-  flex-shrink: 0;
+  position: absolute;
+  left: 0.2rem;
+  top: 0;
   width: 6px;
   height: 6px;
   margin-top: 0.7em;
@@ -2595,16 +2599,12 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 
 .prose ol { counter-reset: li; }
 
-.prose ol li {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
-}
-
 .prose ol li::before {
   counter-increment: li;
   content: counter(li) '.';
-  flex-shrink: 0;
+  position: absolute;
+  left: 0;
+  top: 0.15em;
   font-family: var(--font-mono);
   font-size: var(--step--1);
   color: var(--copper-text);
@@ -3596,6 +3596,14 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 .calc-quote-head { display: none; }
 
 .calc-table td { vertical-align: middle; }
+/* The calculator must fit a phone: no 780px table minimum, and the unit
+   price column (also shown in each line total) gives way first. */
+.compare-table.calc-table { min-width: 0; }
+@media (max-width: 600px) {
+  .calc-table th:nth-child(2),
+  .calc-table td:nth-child(2) { display: none; }
+  .calc-table th, .calc-table td { padding: 0.6rem 0.5rem; }
+}
 
 .calc-table tr.is-selected { background: rgba(196, 133, 108, 0.08); }
 
