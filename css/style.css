@@ -702,9 +702,8 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 }
 
 /* A muted loop of a worker on a tablet fills the whole hero. A still of its
-   first frame sits underneath and is all anyone sees until the clip is
-   actually playing: no JS, reduced motion, Save-Data, iOS Low Power Mode
-   (which refuses autoplay) or a failed download all leave the still. */
+   first frame sits underneath and shows until the clip is actually playing,
+   so a slow or failed download, no JS or reduced motion all leave the still. */
 .hero-still,
 .hero-still img,
 .hero-video {
