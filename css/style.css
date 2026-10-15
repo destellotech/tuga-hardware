@@ -701,17 +701,30 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   isolation: isolate;
 }
 
-/* A muted loop of a worker on a tablet fills the whole hero. The poster frame
-   stands in until app.js starts playback, and stays put for reduced motion. */
+/* A muted loop of a worker on a tablet fills the whole hero. A still of its
+   first frame sits underneath and is all anyone sees until the clip is
+   actually playing: no JS, reduced motion, Save-Data, iOS Low Power Mode
+   (which refuses autoplay) or a failed download all leave the still. */
+.hero-still,
+.hero-still img,
 .hero-video {
   position: absolute;
   inset: 0;
-  z-index: -2;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 30% 75%;
 }
+
+.hero-still { z-index: -3; }
+
+.hero-video {
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.hero-video.is-playing { opacity: 1; }
 
 /* Brand green, solid behind the copy and thinning out to the right so the
    worker shows through. */
@@ -811,6 +824,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 @media (max-width: 980px) {
   .hero-inner { min-height: 0; }
   .hero-content { max-width: 100%; }
+  .hero-still img,
   .hero-video { object-position: 50% center; }
   .hero::before {
     background: linear-gradient(180deg, rgba(5, 46, 22, 0.58) 0%, rgba(5, 46, 22, 0.88) 55%, rgba(5, 46, 22, 0.96) 100%);

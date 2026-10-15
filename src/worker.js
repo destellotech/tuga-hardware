@@ -168,7 +168,7 @@ export default {
       // Long-cache assets only when the URL carries a content hash (?v=), so a
       // file replaced in place can never be pinned for a year; bare URLs get a
       // day. Let HTML revalidate so deploys land.
-      if (response.ok && /\.(?:css|js|webp|svg|woff2?|mp4|webm)$/.test(url.pathname)) {
+      if (response.ok && /\.(?:css|js|webp|jpe?g|svg|woff2?|mp4|webm)$/.test(url.pathname)) {
         const headers = new Headers(response.headers);
         headers.set(
           'Cache-Control',
