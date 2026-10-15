@@ -315,13 +315,16 @@
 
   /* ------------------------------------------------------------- hero video */
 
-  // The clip ships without autoplay so the poster is all anyone sees until
-  // this runs: no motion for reduced-motion users, no download on Save-Data.
+  // The clip ships without autoplay and invisible over a still of its first
+  // frame. It fades in only once frames are actually playing, so a refused
+  // or failed play() (reduced motion, Save-Data, iOS Low Power Mode, a bad
+  // download) just leaves the still in place.
   function initHeroVideo() {
     const video = $('.hero-video');
     if (!video) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (navigator.connection && navigator.connection.saveData) return;
+    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
     video.play().catch(() => {});
   }
 
