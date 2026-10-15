@@ -429,9 +429,9 @@ function tradeCard(t) {
 
 const hero = () => `
     <section class="hero">
-      <video class="hero-video" muted loop playsinline preload="metadata" poster="${versioned('/img/hero/plumber-on-site-poster.webp')}" aria-hidden="true">
-        <source src="${versioned('/img/hero/plumber-on-site.webm')}" type="video/webm">
-        <source src="${versioned('/img/hero/plumber-on-site.mp4')}" type="video/mp4">
+      <video class="hero-video" muted loop playsinline preload="metadata" poster="${versioned('/img/hero/tablet-on-site-poster.webp')}" aria-hidden="true">
+        <source src="${versioned('/img/hero/tablet-on-site.webm')}" type="video/webm">
+        <source src="${versioned('/img/hero/tablet-on-site.mp4')}" type="video/mp4">
       </video>
       <div class="container hero-inner">
         <div class="hero-content">

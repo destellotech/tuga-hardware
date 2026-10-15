@@ -701,7 +701,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   isolation: isolate;
 }
 
-/* A muted loop of a tradesman at work fills the whole hero. The poster frame
+/* A muted loop of a worker on a tablet fills the whole hero. The poster frame
    stands in until app.js starts playback, and stays put for reduced motion. */
 .hero-video {
   position: absolute;
@@ -710,7 +710,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 75% center;
+  object-position: right center;
 }
 
 /* Brand green, solid behind the copy and thinning out to the right so the
