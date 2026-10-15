@@ -21,7 +21,7 @@
       "Repair, or replacement with the same or an equivalent Tuga model, at our choice, at no charge",
       "Battery covered against defects for 12 months (normal capacity loss is not a defect)",
       "Carriage: business buyers pay to send the device to us and we pay the return carriage after a valid repair or replacement. If you buy as a consumer and the device is faulty, we pay the postage both ways under the Consumer Rights Act 2015",
-      "Returns: business buyers may return an unused device in original condition within 30 days. Consumers may cancel within 14 days of delivery under the Consumer Contracts Regulations 2013 (we may deduct only for handling beyond what is needed to inspect the device) and have 30 days to reject a faulty device under the Consumer Rights Act 2015",
+      "Returns: any buyer may return a device in its original condition and packaging within 30 days of delivery. Consumers also may cancel within 14 days of delivery under the Consumer Contracts Regulations 2013 (we may deduct only for handling beyond what is needed to inspect the device) and have 30 days to reject a faulty device under the Consumer Rights Act 2015",
       "Email and phone help with set-up on working days, one working day response",
       "Return for recycling under the WEEE Regulations 2013 on request"
     ],
@@ -148,7 +148,7 @@
     },
     {
       "label": "Cancel",
-      "standard": "Business buyers: 30-day returns of unused devices. Consumers: 14 days to cancel a distance purchase, 30 days to reject a faulty device",
+      "standard": "Anyone: 30-day returns in original condition and packaging. Consumers also: 14 days to cancel a distance purchase, 30 days to reject a faulty device",
       "three_year": "30 days full refund if no claim (45 for consumers), then pro rata by full unexpired month",
       "total_care": "30 days full refund if no service used, then fixed 36-month term"
     },

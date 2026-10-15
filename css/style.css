@@ -3596,6 +3596,14 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 .calc-quote-head { display: none; }
 
 .calc-table td { vertical-align: middle; }
+/* The calculator must fit a phone: no 780px table minimum, and the unit
+   price column (also shown in each line total) gives way first. */
+.compare-table.calc-table { min-width: 0; }
+@media (max-width: 600px) {
+  .calc-table th:nth-child(2),
+  .calc-table td:nth-child(2) { display: none; }
+  .calc-table th, .calc-table td { padding: 0.6rem 0.5rem; }
+}
 
 .calc-table tr.is-selected { background: rgba(196, 133, 108, 0.08); }
 

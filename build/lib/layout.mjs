@@ -388,7 +388,7 @@ export function page({
   path,
   active,
   ogType = 'website',
-  ogImage = versioned('/img/products/t8-1.webp'),
+  ogImage = versioned('/img/products/t85s-1.webp'),
   schema = [],
   bodyClass = '',
   noindex = false,

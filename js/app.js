@@ -644,7 +644,7 @@
       </div>
       <div class="summary-row">
         <span>Delivery</span>
-        <span class="summary-free">Free</span>
+        <span class="summary-free">Free, 7 to 10 working days</span>
       </div>
       ${
         totals.discount > 0
@@ -655,6 +655,7 @@
         <span>Total</span>
         <span>${money(totals.total)}</span>
       </div>
+      <p class="summary-note">No VAT to add.</p>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
       ${
         document.body.hasAttribute('data-sales-paused')
@@ -666,7 +667,8 @@
             ? '<button class="btn btn-outline btn-block" data-checkout="paypal">Pay with PayPal</button>'
             : ''
         }
-      </div>`
+      </div>
+      <p class="summary-note">Buying for a business? <a href="/contact?quote=${encodeURIComponent(totals.lines.map((l) => `${l.product.name} x${l.quantity}`).join(', '))}#enquiry">Get a quote and pay by bank transfer</a> instead.</p>`
       }
       <p class="summary-note" data-checkout-status hidden></p>`;
   }
@@ -1169,7 +1171,7 @@
       if (alt) alt = { ...alt, why: `If you fill in long forms, the ${alt.name} gives you a lot more screen for ${money(alt.price - pick.price)} more.` };
     } else if (os === 'android' && size === '8') {
       alt = list.find((p) => p.id === 'tuga-a6');
-      if (alt) alt = { ...alt, why: `Mostly photos, calls and scanning? The ${alt.name} fits a pocket, has a barcode scanner built in and saves ${money(pick.price - alt.price)}.` };
+      if (alt) alt = { ...alt, why: `Mostly photos, messages and scanning? The ${alt.name} fits a pocket, has a barcode scanner built in and saves ${money(pick.price - alt.price)}.` };
     }
 
     return { pick, reasons, alt };
@@ -1208,19 +1210,24 @@
             <h2 class="title-md">${pick.name}</h2>
             <p class="pdp-tagline">${pick.tagline}</p>
             <ul class="check-list picker-reasons">${reasons.map((r) => `<li><span>${r}</span></li>`).join('')}</ul>
-            <p class="mono picker-specs">${pick.ip} / ${pick.battery} / ${pick.weight}</p>
+            <p class="mono picker-specs">${[pick.ip, pick.battery, pick.weight].filter(Boolean).join(' / ')}</p>
             <div class="picker-price">
               <span class="pdp-price">${money(qty > 1 ? unit : pick.price)}</span>
               <span class="pdp-price-note">${
                 qty > 1
-                  ? `each, with ${tier.percent}% off from ${qty} devices. Fine-tune quantities in the basket`
-                  : 'No VAT to add. Free UK delivery'
+                  ? `each, with ${tier.percent}% off from ${qty} devices. No VAT to add. Free UK delivery in 7 to 10 working days`
+                  : 'No VAT to add. Free UK delivery in 7 to 10 working days'
               }</span>
             </div>
             <div class="picker-actions">
               <button class="btn btn-primary btn-lg" data-add-to-cart="${pick.id}" data-picker-qty="${qty}">Add ${qty > 1 ? qty + ' ' : ''}to basket</button>
-              <a class="btn btn-outline btn-lg" href="${pick.url}">See the full spec</a>
+              ${
+                qty >= 5
+                  ? `<a class="btn btn-outline btn-lg" href="/contact?quote=${encodeURIComponent(`${pick.name} x${qty}`)}#enquiry">Get a quote and pay by bank transfer</a>`
+                  : `<a class="btn btn-outline btn-lg" href="${pick.url}">See the full spec</a>`
+              }
             </div>
+            ${qty >= 5 ? `<p class="picker-alt">Five or more devices? Business fleets can add <a href="/warranty">Total Care</a>, with a pre-imaged swap unit dispatched the same working day. <a class="link-arrow" href="${pick.url}">See the full spec</a></p>` : ''}
             ${alt ? `<p class="picker-alt">${alt.why} <a class="link-arrow" href="${alt.url}">View the ${alt.name}</a></p>` : ''}
             <button type="button" class="picker-back" data-picker-restart>&larr; Start again</button>
           </div>

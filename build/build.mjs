@@ -12,6 +12,7 @@
    ========================================================================== */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 
 import {
@@ -65,6 +66,28 @@ import {
 } from './lib/blocks.mjs';
 
 const written = [];
+
+const BUILD_DAY = new Date().toISOString().slice(0, 10);
+
+/**
+ * The date a page's sources last changed, from git: the newest commit date
+ * across the given repo-relative files, or today when any of them has
+ * uncommitted edits or git is unavailable. Used for sitemap lastmod and
+ * BlogPosting dateModified, so they only move when the content does.
+ */
+function sourceDate(files) {
+  try {
+    const dirty = execFileSync('git', ['status', '--porcelain', '--', ...files], { cwd: ROOT, encoding: 'utf8' }).trim();
+    if (dirty) return BUILD_DAY;
+    const d = execFileSync('git', ['log', '-1', '--format=%cs', '--', ...files], { cwd: ROOT, encoding: 'utf8' }).trim();
+    return d || BUILD_DAY;
+  } catch {
+    return BUILD_DAY;
+  }
+}
+
+/** Add the brand to a page title only when it still fits in about 65 characters. */
+const withBrand = (title) => (title.length <= 49 ? `${title} | Tuga Hardware` : title);
 
 function write(relPath, contents) {
   const full = join(ROOT, relPath);
@@ -328,11 +351,11 @@ const HOME_FAQ = [
   },
   {
     q: 'Do these actually survive being dropped?',
-    a: 'Three of the six, the A10, WH6 and W8, are tested to MIL-STD-810H or 810G, which includes repeated 1.2 to 1.5 metre drops onto plywood over concrete. That is a real standard rather than marketing language. The A6 is rated by its maker for 1.5 metre drops, and the A8 and W10 list no drop standard, so treat those with more care if they live on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
+    a: 'Three of the six, the A10, WH6 and W8, are tested to MIL-STD-810H or 810G, which includes repeated 1.22 metre (48 inch) drops onto plywood over concrete. That is a real standard rather than marketing language. The A6 is rated by its maker for 1.5 metre drops, and the A8 and W10 list no drop standard, so treat those with more care if they live on a scaffold. It does not make a device indestructible. It means the housing, corners and screen are engineered for the kind of drop that kills a consumer tablet.',
   },
   {
     q: 'Android or Windows?',
-    a: 'Android if you are using apps: job management, forms, photos, maps, cloud tools. That covers most trades and it is cheaper. Windows only if you need actual desktop software that has no mobile version: diagnostic tools, legacy databases, GIS, CAD viewers or network drives. Windows devices cost roughly twice as much, so do not buy one unless a specific piece of software forces your hand.',
+    a: 'Android if you are using apps: job management, forms, photos, maps, cloud tools. That covers most trades and it is cheaper. Windows only if you need actual desktop software that has no mobile version: diagnostic tools, legacy databases, GIS, CAD viewers or network drives. Windows devices cost £200 to £350 more than the Android model of the same size, so do not buy one unless a specific piece of software forces your hand.',
   },
   {
     q: 'How long does delivery take and what does it cost?',
@@ -509,8 +532,8 @@ ${sectionHead({
             <p>Every device is rated at least IP65: fully dust tight and protected against water jets from any direction. Most go further. An IP67 or IP68 rating means the housing survives immersion, not just a light shower, which is the difference between a tablet that survives a downpour and one that survives being dropped in a puddle. None is rated IP69K for high pressure jet washing, so wipe them down rather than hose them.</p>
             <ul class="editorial-list">
               <li>Gasket-sealed ports and a sealed speaker membrane</li>
-              <li>Removable batteries on the A6, A8 and WH6, so a charged spare takes over mid shift</li>
-              <li>Most models rated from &minus;20&deg;C, so they start on a frosty morning</li>
+              <li>Removable batteries on the A6, A8, WH6 and W10, so a charged spare takes over mid shift</li>
+              <li>The A6, A10 and WH6 are rated from &minus;20&deg;C, so they start on a frosty morning</li>
             </ul>
           </div>
         </article>
@@ -521,7 +544,7 @@ ${sectionHead({
           </div>
           <div class="editorial-body">
             <h3>Built to be dropped</h3>
-            <p>Three of the six devices, the A10, WH6 and W8, carry a MIL-STD-810H or 810G rating. The A6 is rated by its maker for 1.5 metre drops; the A8 and W10 list no drop standard. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.2 to 1.5 metres onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
+            <p>Three of the six devices, the A10, WH6 and W8, carry a MIL-STD-810H or 810G rating. The A6 is rated by its maker for 1.5 metre drops; the A8 and W10 list no drop standard. MIL-STD-810H is a published military test method, not a marketing phrase. The drop procedure means repeated falls from 1.22 metres (48 inches) onto plywood over concrete, across every face and corner, with the device still functioning afterwards.</p>
             <p>In practice that comes from reinforced corners, a rubberised over-mould and a screen recessed behind a raised bezel, so the glass does not take the first hit when it lands face down.</p>
           </div>
         </article>
@@ -1124,6 +1147,9 @@ ${sectionHead({
             <strong>${esc(SITE.name)}: quotation</strong>
             <span>${SITE.origin.replace('https://', '')} / ${SITE.email}</span>
             <span data-calc-date></span>
+            <span>${esc(TRADER_STATEMENT)}</span>
+            <span>${esc(DELIVERY.summary)} ${esc(PRICE_NOTE)} (${esc(TRADER.legalName)} is not VAT registered). 30-day returns.</span>
+            <span>Prices valid for 30 days from the date above. To pay by bank transfer, ask for a proforma invoice at ${SITE.origin.replace('https://', '')}/contact.</span>
           </div>
           <div class="compare-wrap">
             <table class="compare-table calc-table">
@@ -2211,6 +2237,44 @@ const posts = readdirSync(join(ROOT, 'build', 'content', 'blog'))
   .map(readPost)
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
+/* Related guides by topic, not by date: posts that link each other score
+   highest, then posts that discuss the same products or trades. A use count
+   spreads the slots so no guide hogs every "More guides" block and none is
+   left linked only from /blog/. */
+const linksIn = (post) =>
+  new Set([...post.body.matchAll(/href="(\/(?:blog|products|for|compare)\/[^"#?]+)"/g)].map((m) => m[1]));
+const postLinks = new Map(posts.map((p) => [p.slug, linksIn(p)]));
+const relatedUses = new Map(posts.map((p) => [p.slug, 0]));
+function relatedPosts(post, n = 3) {
+  const mine = postLinks.get(post.slug);
+  const scored = posts
+    .filter((p) => p.slug !== post.slug)
+    .map((p) => {
+      const theirs = postLinks.get(p.slug);
+      let score = 0;
+      if (mine.has(`/blog/${p.slug}`)) score += 3;
+      if (theirs.has(`/blog/${post.slug}`)) score += 3;
+      for (const l of mine) if (!l.startsWith('/blog/') && theirs.has(l)) score += 1;
+      return { p, score };
+    })
+    // Cap the score so any clearly related post qualifies, then prefer the
+    // least used one, so links spread across the whole archive.
+    .map((x) => ({ ...x, band: Math.min(x.score, 2) }))
+    .sort((a, b) => b.band - a.band || relatedUses.get(a.p.slug) - relatedUses.get(b.p.slug) || b.score - a.score || (a.p.date < b.p.date ? 1 : -1));
+  const picked = scored.slice(0, n).map((x) => x.p);
+  picked.forEach((p) => relatedUses.set(p.slug, relatedUses.get(p.slug) + 1));
+  return picked;
+}
+
+/* Head to head pages a guide should point at: pairs that list the guide as
+   further reading, and pairs whose two devices the guide links to. */
+function pairsForPost(post) {
+  const mine = postLinks.get(post.slug);
+  const listed = comparePairs.filter((c) => c.guides.includes(`/blog/${post.slug}`));
+  const linked = comparePairs.filter((c) => !listed.includes(c) && mine.has(productUrl(c.a)) && mine.has(productUrl(c.b)));
+  return [...listed, ...linked].slice(0, 3);
+}
+
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -2231,7 +2295,7 @@ posts.forEach((post) => {
     headline: post.title.replace(/<[^>]+>/g, ''),
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: (() => { const d = sourceDate([`build/content/blog/${post.slug}.html`]); return d > post.date ? d : post.date; })(),
     image: `${SITE.origin}${post.image}`,
     mainEntityOfPage: `${SITE.origin}/blog/${post.slug}`,
     author: { '@type': 'Organization', name: SITE.name, url: SITE.origin },
@@ -2241,7 +2305,7 @@ posts.forEach((post) => {
   write(
     `blog/${post.slug}.html`,
     page({
-      title: `${post.title.replace(/<[^>]+>/g, '')} | Tuga Hardware`,
+      title: withBrand(post.title.replace(/<[^>]+>/g, '')),
       description: post.description,
       path: `/blog/${post.slug}`,
       active: 'blog',
@@ -2268,6 +2332,13 @@ ${breadcrumbs(trail)}
 
       <article class="prose">
 ${post.body}
+${(() => {
+  const pairs = pairsForPost(post);
+  return pairs.length
+    ? `
+        <p class="compare-links">Compare head to head: ${pairs.map((c) => `<a href="${c.path}">${esc(c.label)}</a>`).join(' &middot; ')}</p>`
+    : '';
+})()}
 
         <div class="prose-cta">
           <h3>Rugged tablets from ${money(Math.min(...devices.map((d) => d.price)))}</h3>
@@ -2281,9 +2352,7 @@ ${post.body}
       <div class="container">
 ${sectionHead({ tag: 'Keep reading', title: 'More guides' })}
         <div class="post-grid">
-          ${posts
-            .filter((p) => p.slug !== post.slug)
-            .slice(0, 3)
+          ${relatedPosts(post)
             .map(
               (p) => `
           <a class="post-card reveal" href="/blog/${p.slug}">
@@ -2723,7 +2792,7 @@ ${compareCta()}
   write(
     `compare/${c.slug}.html`,
     page({
-      title: `${c.title} | Tuga Hardware`,
+      title: withBrand(c.title),
       description: c.description,
       path: c.path,
       active: 'products',
@@ -2916,7 +2985,7 @@ ${breadcrumbs(trail)}
             ${eyebrow("What we'd buy")}
             <h2 class="title-sm">${esc(t.pick.name)}</h2>
             <p class="pdp-tagline">${esc(t.pick.tagline)}</p>
-            <p class="trade-pick-specs mono">${esc(t.pick.sizeLabel)}&Prime; / ${esc(t.pick.specs.ip_rating)} / ${esc(t.pick.specs.battery)} / ${esc(t.pick.specs.weight)}</p>
+            <p class="trade-pick-specs mono">${[`${t.pick.sizeLabel}″`, t.pick.specs.ip_rating, t.pick.specs.battery, t.pick.specs.weight].filter(Boolean).map(esc).join(' / ')}</p>
             <div class="trade-pick-actions">
               <span class="pdp-price">${money(t.pick.price)}</span>
               <button class="btn btn-primary" data-add-to-cart="${t.pick.id}">${icons.cart(18)} Add to basket</button>
@@ -2965,7 +3034,7 @@ write(
   'llms.txt',
   `# ${SITE.name}
 
-> ${SITE.description} No VAT to add. Free UK delivery, 30-day returns, 12-month warranty. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
+> ${SITE.description} No VAT to add. 30-day returns and a 12-month warranty on every device. Automatic team discounts: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more.
 
 Small UK retailer of rugged Android and Windows tablets and handhelds for tradespeople. Six devices, three sizes (6, 8 and 10 inch). Android suits app-based work and costs noticeably less; Windows only when desktop software requires it.
 
@@ -2974,8 +3043,25 @@ Small UK retailer of rugged Android and Windows tablets and handhelds for trades
 ${devices
   .map(
     (p) =>
-      `- [${p.name}](${SITE.origin}${productUrl(p)}): ${money(p.price)}. ${p.sizeLabel} inch ${p.formFactor}, ${p.specs.os}, ${p.specs.ip_rating}${p.specs.mil_std ? `, ${p.specs.mil_std}` : ''}, ${p.specs.battery}, ${p.specs.weight}. ${p.shortFor}`
+      `- [${p.name}](${SITE.origin}${productUrl(p)}): ${money(p.price)}. ${p.sizeLabel} inch ${p.formFactor}, ${p.specs.os}, ${[p.specs.ip_rating, p.specs.mil_std, p.specs.battery, p.specs.weight].filter(Boolean).join(', ')}. ${p.shortFor}`
   )
+  .join('\n')}
+
+Scanner versions: ${data.products.filter((p) => p.isVariant).map((v) => `${v.name} ${money(v.price)}`).join('; ')}. Each is sold from its base model's page.
+
+## Warranty
+
+- [Warranty and paid plans](${SITE.origin}/warranty): 12 months included on every device. 3-Year Warranty per device: ${Object.entries(warrantyTier('3yr')?.prices || {}).map(([id, price]) => `${devices.find((d) => d.id === id)?.name.replace(/^Tuga /, '')} ${money(price)}`).join(', ')}. Total Care for business fleets of ${warrantyTier('care')?.minUnits} or more devices on any model, on a quote.
+- [Plan Terms](${SITE.origin}/warranty-terms)
+
+## Works with your software
+
+- [Rugged tablets for maintenance and field service apps](${SITE.origin}/works-with/)
+${readdirSync(join(ROOT, 'build', 'content', 'works-with'))
+  .filter((file) => file.endsWith('.json') && !file.startsWith('_'))
+  .map((file) => JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'works-with', file), 'utf8')))
+  .filter((w) => w.slug && w.software)
+  .map((w) => `- [${w.software}](${SITE.origin}/works-with/${w.slug}): ${w.meta_description}`)
   .join('\n')}
 
 ## Choosing
@@ -3154,7 +3240,7 @@ worksWith.forEach((w) => {
   write(
     `works-with/${w.slug}.html`,
     page({
-      title: `${w.title} | Tuga Hardware`,
+      title: withBrand(w.title),
       description: w.meta_description,
       path: `/works-with/${w.slug}`,
       active: 'works-with',
@@ -3310,7 +3396,18 @@ ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
    SITEMAP + ROBOTS
    ========================================================================== */
 
-const today = new Date().toISOString().slice(0, 10);
+/** Which source files feed each URL, for its lastmod. */
+const sourcesFor = (loc) => {
+  let m;
+  if ((m = loc.match(/^\/blog\/([^/]+)$/))) return [`build/content/blog/${m[1]}.html`];
+  if ((m = loc.match(/^\/compare\/([^/]+)$/))) return [`build/content/compare/${m[1]}.json`, 'data/products.json'];
+  if ((m = loc.match(/^\/for\/([^/]+)$/))) return [`build/content/trades/${m[1]}.html`, 'data/products.json'];
+  if ((m = loc.match(/^\/works-with\/([^/]+)$/))) return [`build/content/works-with/${m[1]}.json`];
+  if (loc.startsWith('/products/')) return ['data/products.json'];
+  if (/^\/(privacy|terms|shipping-returns)$/.test(loc)) return [`build/content/legal${loc}.html`];
+  if (/^\/warranty/.test(loc)) return ['build/content/warranty.json', 'build/content/warranty-terms.json', 'data/products.json'];
+  return ['build/build.mjs', 'data/products.json'];
+};
 
 const urls = [
   { loc: '/', priority: '1.0', freq: 'weekly' },
@@ -3357,7 +3454,7 @@ ${urls
   .map(
     (u) => `  <url>
     <loc>${SITE.origin}${u.loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${sourceDate(sourcesFor(u.loc))}</lastmod>
     <changefreq>${u.freq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`
@@ -3375,13 +3472,10 @@ Disallow: /api/
 
 # AI crawlers are welcome. Being cited is how a small store gets found.
 User-agent: GPTBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
 
 Sitemap: ${SITE.origin}/sitemap.xml
 `
