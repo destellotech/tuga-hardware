@@ -63,6 +63,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 (£379) is the middle size, for technicians who want more room for work orders and checklists than the A6 in a smaller body than the A10. It runs Android 12, which meets the Android 8.0 or later requirement, and it has NFC and a 13MP autofocus rear camera with flash for the app's NFC, QR and barcode identification. Its 1000 nit 8 inch screen helps in sunlit yards and outdoor areas, its 8000mAh battery is removable so a spare can take over mid shift, and VESA mount points with a pogo pin connector let it dock in a vehicle. Against the A10, which costs £70 more, the A8 is IP67 rather than IP68, has no MIL-STD rating, runs Android 12 rather than Android 14 and has a lower 1280 x 800 resolution, and it has 6GB RAM against the A10's 8GB; Sisteplant publishes no RAM or storage figure.",
+      "fit": [
+        "Android 8.0 or later required by Google Play: the A8 runs Android 12.",
+        "QR and barcode reading through the camera: 13MP autofocus rear camera with flash (scanning is handled by the app; the A8 has no dedicated scan engine).",
+        "NFC identification of assets and spare parts: NFC built in.",
+        "Offline work-order reporting in areas with no signal, syncing later: 4G LTE dual SIM and Wi-Fi for sync, removable 8000mAh battery, 128GB storage plus a microSD slot.",
+        "Plant, yard and vehicle use: 8 inch IPS 1280 x 800 screen at 1000 nits under AGC glass, IP67, VESA mount points and a pogo pin connector."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "The Tuga A6 (£349) is the alternative for teams that want a handheld that fits in a pocket or belt holster rather than a 10 inch tablet. It runs Android 15, so it meets the same Android 8.0 or later requirement, and it has NFC and a 13MP rear camera with flash for the app's QR, barcode and NFC identification. It also has a built-in Zebra 2D scan engine with two side scan keys for asset, work-order and warehouse labels, which is worth testing with the app because Sisteplant describes camera reading. It has 4G dual SIM, a removable 5050mAh battery so a spare can take over mid shift, IP67 sealing and a 1.5 metre drop rating, at 277g. The trade-offs are the 6 inch screen, which suits scanning, quick reporting and photo capture better than reading long work orders or drawings, and 4GB RAM with 64GB storage, which is modest for large downloads of master data; Sisteplant publishes no RAM or storage figure.",
@@ -77,7 +89,7 @@
     {
       "device_id": "tuga-w10",
       "role": "alternative",
-      "why": "The Tuga W10 (£649) is not for the technician app, because Sisteplant publishes Prisma Mobile Maintenance only for Android and iOS and we found no Windows build. Its role is the Prisma web front end, which Sisteplant says runs in Microsoft Edge or Chrome. Windows 11 Pro on the W10 ships with Edge, so a planner, coordinator or stores supervisor who needs the full web application at a workshop bench, in a stores office or in a vehicle can use it there, with RJ45 Ethernet for a wired connection and HDMI for a larger screen. Consider it only if your planners need Windows on the floor; for technicians, buy the A10 or A6.",
+      "why": "The Tuga W10 (£649) is not for the technician app, because Sisteplant publishes Prisma Mobile Maintenance only for Android and iOS and we found no Windows build. Its role is the Prisma web front end, which Sisteplant says runs in Microsoft Edge or Chrome. Windows 11 Pro on the W10 ships with Edge, so a planner, coordinator or stores supervisor who needs the full web application at a workshop bench, in a stores office or in a vehicle can use it there, with RJ45 Ethernet for a wired connection and HDMI for a larger screen. Consider it only if your planners need Windows on the floor; for technicians, buy the A10, A8 or A6.",
       "fit": [
         "Prisma web front end in Microsoft Edge or Chrome: Windows 11 Pro with the full desktop Edge browser.",
         "Wired connection in plant offices and stores: 100Mbps RJ45 Ethernet, plus dual-band Wi-Fi 5 and optional 4G LTE.",
@@ -89,7 +101,7 @@
   ],
   "setup_steps": [
     "Confirm with your Prisma administrator or Sisteplant that your server version supports the current app (the App Store listing states Prisma 3 V8.2.1.166 or later, and Sisteplant says the store apps are compatible with all Prisma 4 sub-versions) and that it is reachable over https, which the Prisma 4 bulletin says is required for app downloads and camera access.",
-    "On the Tuga A10 or A6, sign in to a Google account (a managed account from your mobile device management system if you use one), open Google Play and install Prisma Mobile Maintenance by Sisteplant.",
+    "On the Tuga A10, A8 or A6, sign in to a Google account (a managed account from your mobile device management system if you use one), open Google Play and install Prisma Mobile Maintenance by Sisteplant.",
     "Open the app and sign in with the server details and user credentials your Prisma administrator provides. Do the first sign-in with a connection, because the vendor states offline login works only with the last credentials used on the device.",
     "Let the app download its master data on first connection, then test a QR code or barcode scan and an NFC tag read on a real asset label before rolling out to the team.",
     "Check an offline cycle: put the tablet in flight mode, report a work order, reconnect and confirm it syncs. Remember that Sisteplant lists asset hierarchy access and start and end labour time logging as online functions.",

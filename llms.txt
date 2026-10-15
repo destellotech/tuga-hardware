@@ -26,9 +26,9 @@ Scanner versions: Tuga WH6 with Barcode Scanner Â£779; Tuga W8 with 2D Scanner Â
 - [Agility CMMS/EAM and the AgilityMobile app](https://www.tugahardware.com/works-with/agility-cmms-ssg-insight): Which Tuga rugged Android tablet fits SSG Insight's AgilityMobile app for maintenance engineers, with offline working and in-app QR scanning.
 - [eMaint X5](https://www.tugahardware.com/works-with/emaint-x5): eMaint X5 needs Android 8.1 or later. The Tuga A10 runs Android 14, is IP68 rated and has a 13MP camera for in-app QR scanning. Free UK delivery.
 - [Fiix CMMS](https://www.tugahardware.com/works-with/fiix-cmms): Fiix CMMS needs Android 11 or later. The Tuga A10 (Android 14) and A6 (Android 15) meet it, with offline mode and camera scanning. The W10 covers the web app.
-- [HxGN EAM, now Octave Attune EAM (formerly Infor EAM)](https://www.tugahardware.com/works-with/hxgn-eam): HxGN EAM (now Octave Attune EAM) on a rugged tablet: published Android, Windows, NFC and offline requirements matched to the Tuga A10, W10 and A6.
+- [HxGN EAM, now Octave Attune EAM (formerly Infor EAM)](https://www.tugahardware.com/works-with/hxgn-eam): HxGN EAM (now Octave Attune EAM) on a rugged tablet: published Android, Windows, NFC and offline requirements matched to the Tuga A10, A8, W10 and A6.
 - [IBM Maximo Mobile](https://www.tugahardware.com/works-with/ibm-maximo-mobile): IBM Maximo Mobile needs Android 11+ or Windows 10/11 and 3 GB memory. Which Tuga rugged tablet meets that, with offline, NFC and camera scanning.
-- [Idhammar MMS (with the Idhammar Connect mobile app)](https://www.tugahardware.com/works-with/idhammar-mms): Rugged Android tablets for the Idhammar Connect app (Idhammar MMS): the Android 5.0 minimum, offline sync, camera scanning, and the Tuga A10 and A6.
+- [Idhammar MMS (with the Idhammar Connect mobile app)](https://www.tugahardware.com/works-with/idhammar-mms): Rugged Android tablets for the Idhammar Connect app (Idhammar MMS): the Android 5.0 minimum, offline sync, camera scanning, and the Tuga A10, A8 and A6.
 - [IFS Ultimo (Ultimo Go+ mobile app)](https://www.tugahardware.com/works-with/ifs-ultimo): Rugged Android tablets for the Ultimo Go+ app (Android 8.0 and up, offline, camera scanning). Tuga A10 and A6 run Android 14 and 15. UK business seller.
 - [Limble CMMS](https://www.tugahardware.com/works-with/limble-cmms): Rugged Android and Windows tablets for Limble CMMS. Limble's Android app needs Android 7.0 or later; the Tuga A10 runs Android 14. Free UK delivery.
 - [MaintainX](https://www.tugahardware.com/works-with/maintainx): MaintainX publishes Android 7.0 or later, 6GB RAM recommended. The Tuga A10 (Android 14, 8GB RAM, IP68) meets both and runs the Android app.
@@ -39,7 +39,7 @@ Scanner versions: Tuga WH6 with Barcode Scanner Â£779; Tuga W8 with 2D Scanner Â
 - [SafetyCulture (now Mitti by SafetyCulture, formerly iAuditor)](https://www.tugahardware.com/works-with/safetyculture): Which Tuga rugged Android tablet runs the Mitti (by SafetyCulture) app: Android 10 minimum, offline inspections, in-app QR scanning, UK pricing.
 - [SAP Service and Asset Manager](https://www.tugahardware.com/works-with/sap-service-and-asset-manager): Rugged Android and Windows tablets for SAP Service and Asset Manager: SAP's published requirements, offline sync, scanning, and which Tuga fits.
 - [Totalmobile (Field First platform and the Totalmobile Mobile Working app, also called Mobilise)](https://www.tugahardware.com/works-with/totalmobile): Rugged Android and Windows tablets for the Totalmobile app: published OS requirements, offline working, Tuga device specs and UK business invoicing.
-- [UpKeep](https://www.tugahardware.com/works-with/upkeep): Tuga A10, W10 and A6 rugged tablets for UpKeep: Android 8.0 requirement, offline mode plan limits, camera scanning and setup steps for UK teams.
+- [UpKeep](https://www.tugahardware.com/works-with/upkeep): Tuga A10, A8, W10 and A6 rugged tablets for UpKeep: Android 8.0 requirement, offline mode plan limits, camera scanning and setup steps for UK teams.
 
 ## Choosing
 

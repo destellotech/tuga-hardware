@@ -124,6 +124,25 @@ const careBandText = (t, base) => {
     : `${money(b.large)} per device.`;
 };
 
+/** Scanner choice in a product's buy box, when the device has a scanner
+    version. Each radio carries the SKU, name and price the main button and
+    price should switch to (js/app.js, initVariantChooser). */
+function variantChooser(p, variants) {
+  if (!variants.length) return '';
+  const opt = (item, label, extra, checked) => `
+            <label class="protect-opt">
+              <input type="radio" name="variant" value="${esc(item.id)}" data-variant-choice data-variant-name="${esc(item.name)}" data-variant-price="${esc(money(item.price))}"${checked ? ' checked' : ''}>
+              <span class="protect-text"><strong>${esc(label)}</strong>${esc(extra)}</span>
+              <span class="protect-price">${money(item.price)}</span>
+            </label>`;
+  return `
+          <fieldset class="protect" data-variant-chooser>
+            <legend>${eyebrow('Version')}</legend>
+            ${opt(p, `${p.name}`, 'Scan with the camera through your app', true)}
+            ${variants.map((v) => opt(v, v.name, `Integrated 2D barcode scanner, ${money(v.price - p.price)} more`, false)).join('')}
+          </fieldset>`;
+}
+
 /** The cover options under a product's buy box. Every tier is a radio: a
     paid checkout plan adds its SKU with the device; a quote-only tier turns
     the main button into a quote request (js/app.js, initCoverChooser). */
@@ -893,7 +912,7 @@ ${breadcrumbs(trail)}
             <p class="pdp-paused" role="status">${esc(SALES_PAUSED_MESSAGE)}</p>
             <a class="btn btn-primary btn-lg" href="${quoteUrl(p.name)}">Ask about availability</a>
           </div>`
-              : `${warrantyChooser(p)}
+              : `${variantChooser(p, variants)}${warrantyChooser(p)}
           <div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
@@ -3158,7 +3177,7 @@ ${feedItems}
    device recommendations may only use the ids in WORKS_WITH_DEVICES.
    ========================================================================== */
 
-const WORKS_WITH_DEVICES = ['tuga-a10', 'tuga-w10', 'tuga-a6'];
+const WORKS_WITH_DEVICES = ['tuga-a10', 'tuga-a8', 'tuga-w10', 'tuga-a6'];
 const deviceById = (id) => devices.find((d) => d.id === id);
 
 const worksWith = readdirSync(join(ROOT, 'build', 'content', 'works-with'))

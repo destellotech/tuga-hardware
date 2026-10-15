@@ -40,7 +40,7 @@
     },
     {
       "requirement": "NFC and RFID: not documented",
-      "detail": "No mention of NFC or RFID reading was found on the vendor site, the help centre, the Google Play listing or the App Store listing. The only asset identification method documented is QR code and barcode scanning through the camera. The NFC radio on the Tuga A10 and A6 and the optional UHF RFID reader on the Tuga W10 should not be treated as MaintainX features.",
+      "detail": "No mention of NFC or RFID reading was found on the vendor site, the help centre, the Google Play listing or the App Store listing. The only asset identification method documented is QR code and barcode scanning through the camera. The NFC radio on the Tuga A10, A8 and A6 and the optional UHF RFID reader on the Tuga W10 should not be treated as MaintainX features.",
       "source_url": "https://help.getmaintainx.com/about-qr-codes-and-barcodes"
     },
     {
@@ -60,6 +60,18 @@
         "Requirement: QR code and barcode scanning through the device camera. Tuga A10: 13MP rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
         "Requirement: a device that keeps working offline through a shift. Tuga A10: 8000mAh battery, IP68, MIL-STD-810H, operating temperature -20 to 60C, and the app's offline cache of work orders stored on the device.",
         "Requirement: readable screen for checklists and inspections. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, 680g."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the middle size, an 8 inch tablet that runs the same MaintainX Android app with more checklist space than the 6 inch A6 and a smaller footprint than the 10.1 inch A10. It runs Android 12 with Google Play, above the Android 7.0 requirement but older than the A10's Android 14, and its 6GB of RAM meets the 6GB or more that MaintainX recommends with no headroom, against the A10's 8GB. Its 1000 nit screen suits outdoor and sunlit work, the 8000mAh battery is removable for long shifts, and VESA mount points and a pogo pin connector suit fleet vehicle docking. Against the A10 it is sealed to IP67 rather than IP68, has no MIL-STD rating and a lower 1280 x 800 resolution, so the A10 remains the better choice for wet areas. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 7.0 or later with Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: 4GB RAM minimum, 6GB or more recommended, 300MB or more storage recommended. Tuga A8: 6GB RAM, which meets the recommendation with no margin, and 128GB storage with a microSD slot.",
+        "Requirement: QR code and barcode scanning through the device camera. Tuga A8: 13MP autofocus rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: a device that keeps working offline through a shift. Tuga A8: removable 8000mAh battery, IP67 with no MIL-STD rating, and the app's offline cache of work orders stored on the device.",
+        "Requirement: readable screen for checklists and inspections. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass."
       ]
     },
     {
@@ -88,7 +100,7 @@
   ],
   "setup_steps": [
     "Create a MaintainX account at getmaintainx.com or ask your administrator to add the technician as a user in your existing organisation. The vendor offers a free Basic plan and Requester accounts are free, so a trial costs nothing on the software side.",
-    "On the Tuga A10 or A6, open Google Play and install MaintainX - CMMS & EAM (package com.commas.client, developer MaintainX Inc.). Enterprise plan customers without Google Play access can distribute the app through an MDM solution instead.",
+    "On the Tuga A10, A8 or A6, open Google Play and install MaintainX - CMMS & EAM (package com.commas.client, developer MaintainX Inc.). Enterprise plan customers without Google Play access can distribute the app through an MDM solution instead.",
     "Sign in on the device with the technician's account. If your organisation uses workstation mode on the Enterprise plan, the shared device is set up once and each user then logs in with a 4 digit PIN; the device must be connected to the internet to log in.",
     "Before the first shift without connectivity, keep the device online long enough for the offline cache to build, then review the Offline Settings in the app (choose how many work orders to cache, whether to cache work orders assigned to you or to you and your teams, and whether the cache updates manually or whenever connected to any network). Offline mode also switches on automatically when the app cannot connect.",
     "On a Tuga W10, open app.getmaintainx.com in Edge or Chrome and sign in. Use it for the web-only Reporting, Purchase Orders and Library modules; it will not scan with the camera or work offline.",
@@ -112,7 +124,7 @@
     },
     {
       "q": "Can we scan asset QR codes and barcodes with the camera, and does NFC help?",
-      "a": "MaintainX documents scanning both QR codes and barcodes through the device camera in the mobile app. The Tuga A10 and A6 both have a 13MP rear camera with flash, and in both cases scanning runs through the camera via the app. The A6 also has a Zebra 2D scan engine, but no dedicated scan engine or external scanner support is documented by the vendor, so do not buy it for that reason. NFC and RFID are not mentioned anywhere in the vendor's documentation, so the NFC radio on the A10 and A6 and the optional UHF RFID reader on the W10 should not be bought for MaintainX."
+      "a": "MaintainX documents scanning both QR codes and barcodes through the device camera in the mobile app. The Tuga A10 and A6 both have a 13MP rear camera with flash, and in both cases scanning runs through the camera via the app. The A6 also has a Zebra 2D scan engine, but no dedicated scan engine or external scanner support is documented by the vendor, so do not buy it for that reason. NFC and RFID are not mentioned anywhere in the vendor's documentation, so the NFC radio on the A10, A8 and A6 and the optional UHF RFID reader on the W10 should not be bought for MaintainX."
     },
     {
       "q": "Can we trial one unit first, and do you invoice businesses?",
@@ -123,7 +135,7 @@
       "a": "The vendor publishes no screen-size guidance and its Google Play listing carries both Phone and Tablet device chips, so both layouts are ones it ships for. The A10's 10.1 inch 1920 x 1200 screen shows more of a checklist, inspection form or procedure at once and suits a vehicle or charging dock. The A6 at 277g fits a pocket or belt holster, has a removable 5050mAh battery, and suits technicians who walk a large estate, but its 4GB RAM is below MaintainX's 6GB recommendation, so the A10 is the safer pick for heavy daily use. Many teams mix the two."
     }
   ],
-  "not_recommended_note": "MaintainX has no native Windows app, so the Tuga W10 only runs the web application in a desktop browser. The vendor documents offline mode, camera QR and barcode scanning, in-app photo capture and the work order timer as mobile-only, so a W10 cannot do any of those; it suits a supervisor, planner or shared Enterprise-plan workstation, not a technician in the field. On the Android side, the only asset identification method the vendor documents is camera scanning, with no dedicated scan engine or external scanner support published, so scanning on the A10 and A6 is through the camera only (the A6's Zebra 2D scan engine is not a documented input). NFC and RFID are not documented by MaintainX, so the NFC on the A10 and A6 and the optional UHF RFID reader on the W10 are not MaintainX features. Reporting, Purchase Orders and the Library are web-only, and the vendor advises against mobile browsers, so an Android-only team will still need a desktop or laptop for those modules. The vendor is US-based, prices in dollars and names no UK customers on its site, although it advertises UK-based EMEA sales roles and publishes a UK Modern Slavery Act statement.",
+  "not_recommended_note": "MaintainX has no native Windows app, so the Tuga W10 only runs the web application in a desktop browser. The vendor documents offline mode, camera QR and barcode scanning, in-app photo capture and the work order timer as mobile-only, so a W10 cannot do any of those; it suits a supervisor, planner or shared Enterprise-plan workstation, not a technician in the field. On the Android side, the only asset identification method the vendor documents is camera scanning, with no dedicated scan engine or external scanner support published, so scanning on the A10 and A6 is through the camera only (the A6's Zebra 2D scan engine is not a documented input). NFC and RFID are not documented by MaintainX, so the NFC on the A10, A8 and A6 and the optional UHF RFID reader on the W10 are not MaintainX features. Reporting, Purchase Orders and the Library are web-only, and the vendor advises against mobile browsers, so an Android-only team will still need a desktop or laptop for those modules. The vendor is US-based, prices in dollars and names no UK customers on its site, although it advertises UK-based EMEA sales roles and publishes a UK Modern Slavery Act statement.",
   "disclaimer": "MaintainX is a product of MaintainX Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by MaintainX Inc.",
   "sources": [
     "https://www.getmaintainx.com/",
