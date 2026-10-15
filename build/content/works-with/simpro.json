@@ -1,0 +1,149 @@
+{
+  "slug": "simpro",
+  "software": "Simpro Mobile",
+  "vendor": "Simpro Software",
+  "vendor_url": "https://www.simprogroup.com/",
+  "title": "Rugged tablet for Simpro Mobile: UK buyer's guide",
+  "meta_description": "Simpro Mobile needs Android 8.0 or later on Google Play. The Tuga A8 runs it on Android 12 with a 1000 nit screen, a removable battery and a van dock.",
+  "target_query": "rugged tablet for Simpro",
+  "h1": "Rugged tablet for Simpro Mobile",
+  "intro": [
+    "Simpro is job management software for trade and service businesses, and its Google Play listing describes it as a complete job management software solution. The office runs Simpro Premium in a web browser for quoting, scheduling, stock and invoicing. Field staff use Simpro Mobile, an Android and iOS app that needs a mobility licence and works with Simpro Premium, to update job details, look up site and asset history, record time, present quotes, take payment and capture signatures.",
+    "Simpro Mobile is built to work away from a signal. The help guide says the first login downloads the entire set of data from Simpro Premium, which is required for the app to operate completely offline, and the FAQs say the app operates predominately offline and records a location Geostamp even with no connection. That means the device spends the day in a van, on a roof, in a plant room or under a sink, and a consumer tablet with a glass back and an unrated case is the part of the kit most likely to fail early.",
+    "This page sets out what Simpro publishes about the devices Simpro Mobile runs on, which Tuga rugged tablets and handhelds meet those published figures, where the Windows option fits, what Simpro leaves unpublished, and how a UK trade business can buy a single trial unit before ordering for the whole team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 8.0 or later from Google Play (the help guide quotes Android 11)",
+      "detail": "The Google Play listing for Simpro Mobile (package com.simpro.mobile, developer Simpro Software, version 17.8.0, updated 6 October 2026) sets a minimum of Android 8.0 (API level 26) and shows device chips for Phone and Tablet. The Simpro Mobile Settings Overview in the help guide states that Simpro Mobile is available for Android 11 and iOS 16 and above. The older FAQ page still quotes Android 6 and above and lists the Samsung Galaxy S7, S8 and S9 and Google Pixel 1 and 2 as tested devices, warning that older devices may perform slowly and become unresponsive. Treat Android 11 as the safer working figure, since it is the higher of the current statements.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.simpro.mobile&hl=en_GB"
+    },
+    {
+      "requirement": "Memory, storage and screen size: not published",
+      "detail": "Simpro does not publish a RAM, storage or screen size requirement for Simpro Mobile in the help guide pages we checked or on the Google Play listing. The help guide says loading time depends on the internet connection and your device specifications, and suggests limiting the Pre-build or Catalogue groups synced to the app and switching off the download of images and supporting materials to reduce data use and loading time.",
+      "source_url": "https://helpguide.simprogroup.com/Content/simPRO-App/simPRO-Mobile-FAQs.htm"
+    },
+    {
+      "requirement": "Offline working after a full first download",
+      "detail": "Logging in for the first time downloads the entire set of data from Simpro Premium, which the help guide says may take some time and is required for the app to operate completely offline. After that you refresh periodically to pull updated information. The FAQs say Simpro Mobile operates predominately offline and works independently of Simpro Premium most of the time. Up to 50 drafts are kept while you stay logged in, but drafts not yet submitted to Simpro Premium are discarded if you log out, so submit quotes and jobs before logging out. The app keeps you logged in unless you tap Logout, uninstall it or clear its cache.",
+      "source_url": "https://helpguide.simprogroup.com/Content/simPRO-App/simPRO-Mobile-Overview.htm"
+    },
+    {
+      "requirement": "Location, photos and signatures in the field",
+      "detail": "The Google Play listing lists offline functionality, high accuracy GPS navigation, recording travel time and time on site, adding notes, photos and other attachments, and capturing staff and customer signatures with a signed job card emailed to any contact. The FAQs say that when you perform an action such as starting work, a Geostamp of your location is created even if you are offline and is submitted to Simpro Premium when you are back online. The listing also mentions taking cash or card payments in the field, with a Square Payments integration available depending on location.",
+      "source_url": "https://helpguide.simprogroup.com/Content/simPRO-App/simPRO-Mobile-FAQs.htm"
+    },
+    {
+      "requirement": "Barcode scanning: in the app for catalogue items and assets, plus a browser-based Barcoding website",
+      "detail": "Simpro's barcoding article says that on a job in the Service Module you select +Catalogue, then the barcode icon in the search bar, and use your device to scan the item barcode. Customer assets with a barcode custom field can also be located by scan in Simpro Mobile. Barcode stocktakes and stock transfers run on a separate Simpro Premium Barcoding website (your Simpro Premium URL with /barcode added), which needs a user licence and a barcode scanner that can connect to your computer or mobile device. The article does not say whether in-app scanning uses the camera or a dedicated scan engine, and it names no supported scanner models.",
+      "source_url": "https://helpguide.simprogroup.com/Content/Service-and-Enterprise/Barcoding.htm"
+    },
+    {
+      "requirement": "Windows: Simpro Premium in a browser, no Windows version of Simpro Mobile",
+      "detail": "Simpro Mobile is published for Google Play and the App Store only. Simpro Premium can be used from any device or internet browser with a stable internet connection; the recommended browser is the most recent or second most recent version of Google Chrome, and Simpro says it is not optimised for other browsers although the latest versions of major browsers can be used. Logging out of Simpro Premium releases the licence for another employee. No offline mode is described for the browser version.",
+      "source_url": "https://helpguide.simprogroup.com/Content/Service-and-Enterprise/Accessing-simPRO.htm"
+    },
+    {
+      "requirement": "NFC and RFID: not documented",
+      "detail": "None of the Simpro pages we checked (the Simpro Mobile overview and FAQs, the barcoding article and the Google Play listing) mention reading NFC or RFID tags. Barcodes are the only identification method documented for catalogue items and assets. The NFC radio on the Tuga A10, A8 and A6 and the optional UHF RFID reader on the Tuga W10 should not be treated as Simpro features.",
+      "source_url": "https://helpguide.simprogroup.com/Content/Service-and-Enterprise/Barcoding.htm"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Simpro's published Android floor is low (Android 8.0 on Google Play, Android 11 in the help guide), so the choice comes down to how a tradesperson actually uses the app: in and out of the van all day, often outdoors, offline for long stretches. The Tuga A8 runs Android 12 with Google Play, above both published figures. Its 8 inch screen gives more room than a phone for job cards, audits and presenting quote options to a customer, while still fitting one hand up a ladder or a van door pocket. The 1000 nit screen stays readable in direct sun, the 8000mAh battery is removable so a charged spare can take over on a long day, and VESA mount points with a pogo pin connector let it lock into the vehicle mounting dock between jobs. Simpro publishes no RAM figure; the A8 has 6GB and 128GB of storage for the full offline data download. The trade-offs against the A10 are real: the A8 is sealed to IP67 rather than IP68, has no MIL-STD rating and a 1280 x 800 screen. At £379 it is £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play (Android 11 in the help guide). Tuga A8: Android 12 with Google Play, above both figures.",
+        "Requirement: room for the full offline data download (no storage figure published). Tuga A8: 6GB RAM, 128GB storage and a microSD slot.",
+        "Requirement: GPS navigation and location Geostamps. Tuga A8: GPS, GLONASS, Galileo and BeiDou.",
+        "Requirement: photos, attachments and in-app barcode scanning. Tuga A8: 13MP autofocus rear camera with flash (there is no dedicated scan engine, so scanning would be through the camera).",
+        "Requirement: a device that lives in the van and works on site. Tuga A8: VESA mount points and pogo pin connector for the vehicle mounting dock, removable 8000mAh battery, 1000 nit 8 inch IPS screen with AGC glass, IP67, dual SIM 4G."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "Choose the Tuga A10 where the work is wetter, rougher or more paperwork-heavy. It is sealed to IP68 rather than the A8's IP67 and is tested to MIL-STD-810H, which the A8 is not. Its 10.1 inch 1920 x 1200 screen shows more of a job card, an audit or a multi-option quote at once, which helps when you turn the screen round to a customer. It runs Android 14 against the A8's Android 12, and carries 8GB of RAM and 128GB of storage with microSD up to 2TB. The trade-offs are a dimmer 350 nit screen, which is harder to read in direct sun than the A8's 1000 nits, and an 8000mAh battery that is not listed as removable, unlike the A8's. It costs £449, £70 more than the A8, and fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play (Android 11 in the help guide). Tuga A10: Android 14 with Google Play.",
+        "Requirement: room for the full offline data download (no storage figure published). Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: GPS navigation and location Geostamps. Tuga A10: GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: photos, attachments and in-app barcode scanning. Tuga A10: 13MP rear camera with flash (no dedicated scan engine).",
+        "Requirement: a device that survives site work. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 10.1 inch FHD screen with tempered glass, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Simpro's own FAQ lists phones (Samsung Galaxy S7, S8 and S9, Google Pixel 1 and 2) as the devices it tested on, and the Google Play listing carries a Phone device chip, so a phone-sized device is a layout Simpro supports. The Tuga A6 is a 6 inch handheld at 277g that goes in a pocket or belt holster, runs Android 15 and has 4GB of RAM and 64GB of storage. It suits engineers who mainly update job cards, record time, take photos and capture signatures. It also has a built-in Zebra 2D scan engine with two side scan keys, but Simpro does not say which scanners its app or its Barcoding website support, so test the scan engine with your own Simpro build before relying on it rather than the camera. The trade-off is screen area for presenting quotes, where the A8 or A10 is the better choice. It is sealed to IP67 and rated for 1.5 metre drops, with a removable 5050mAh battery, at £349.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play (Android 11 in the help guide). Tuga A6: Android 15 with Google Play.",
+        "Requirement: phone or tablet (Google Play lists both). Tuga A6: 6 inch FHD+ IPS handheld, 2160 x 1080, 277g.",
+        "Requirement: in-app barcode scanning and photos. Tuga A6: 13MP rear camera with flash and an integrated Zebra 2D scan engine (not a scanner Simpro documents, so test it first).",
+        "Requirement: GPS navigation and location Geostamps. Tuga A6: GPS, GLONASS, BeiDou and Galileo, 4G LTE dual SIM.",
+        "Requirement: a device that survives outdoor work. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "There is no Windows version of Simpro Mobile, so the Tuga W10 is not a field device for Simpro. It runs Windows 11 Pro, so it can run Simpro Premium in Google Chrome, the browser Simpro recommends, which suits a stores area, workshop or site cabin where someone needs the full office system on a tougher machine than a laptop. It can also open the Simpro Premium Barcoding website for stocktakes and stock transfers. The W10 is available with an optional 2D barcode scanner (£729 rather than £649), but Simpro names no supported scanner models, so trial the scanner with the Barcoding website before ordering more than one. Simpro Premium needs a stable internet connection and has no documented offline mode, and the W10 is IP65 (protected against water jets, not rated for immersion).",
+      "fit": [
+        "Requirement: Simpro Premium in a recent version of Google Chrome with a stable internet connection. Tuga W10: Windows 11 Pro, Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage, dual-band Wi-Fi 5, 100Mbps Ethernet, optional 4G LTE.",
+        "Requirement: a barcode scanner that connects to your computer for the Barcoding website. Tuga W10: optional 2D barcode scanner, plus USB-A and USB-C ports (no supported scanner models are published by Simpro).",
+        "Requirement: a fixed position in a stores area or site cabin. Tuga W10: RJ45 Ethernet, HDMI, pogo pin dock connector, removable 5000mAh battery, IP65, 10.1 inch 1280 x 800 screen, 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Simpro administrator to assign the engineer a mobility licence and the right security group permissions in Simpro Premium. Without a mobility licence you cannot log in to Simpro Mobile.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Simpro Mobile (package com.simpro.mobile, developer Simpro Software).",
+    "On first launch, enter your workspace (the part of your Simpro Premium web address after https:// and before .simpro) and check the domain shown below it, then log in with your Simpro Premium username and password or single sign-on if your company has set it up.",
+    "Stay on a good Wi-Fi or 4G connection while the first login downloads the full data set; this is what lets the app work offline. To shorten it, limit the Pre-build and Catalogue groups under System > Setup > Mobile > Simpro Mobile, and consider switching off the download of images and supporting materials in the app's Settings.",
+    "Submit quotes and jobs back to Simpro Premium before you log out, because unsubmitted drafts are discarded at logout. Refresh periodically when you have signal to pull schedule changes.",
+    "If you use barcodes, test scanning a catalogue item from +Catalogue on a Service Module job, and test the Barcoding website at your Simpro Premium URL with /barcode added, before rolling out.",
+    "Fit the vehicle mounting dock for the A8 or A10 in the van, the charging dock for an A10 or W10 that lives in the office, or the belt holster for the A6. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for working from the van",
+    "Charging dock, £49.99 (Tuga A10 and W10), for devices that return to the office or stores",
+    "12V DC car charger, £26, for topping up between jobs",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for customer signatures on job cards",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Simpro Mobile run on the Tuga A8?",
+      "a": "Simpro Mobile's Google Play listing sets a minimum of Android 8.0, and the Simpro help guide says the app is available for Android 11. The Tuga A8 runs Android 12 with Google Play, so it is above both figures. The A10 (Android 14) and A6 (Android 15) are also above them. Simpro publishes no RAM, storage or screen size requirement. We do not describe any device as certified or tested by Simpro; these are the vendor's published figures set against our device specifications, so check your own Simpro build on a trial unit."
+    },
+    {
+      "q": "Does Simpro Mobile work offline on these devices?",
+      "a": "Yes. Simpro says the app operates predominately offline once the first login has downloaded the full data set from Simpro Premium, and location Geostamps are recorded offline and sent when you reconnect. Keep the device on a good connection for that first download and refresh when you have signal. Do not log out with unsubmitted drafts, because they are discarded. Simpro Premium in a browser, including on a Tuga W10, needs a stable internet connection."
+    },
+    {
+      "q": "Should we choose the 8 inch A8 or the 10.1 inch A10?",
+      "a": "Both run Simpro Mobile above its published Android requirement. The A8 suits engineers who work outdoors and from the van: its 1000 nit screen is easier to read in sun, its battery is removable, and VESA mount points let it sit in the vehicle mounting dock. The A10 suits wetter or rougher work and paperwork-heavy jobs: it is IP68 and MIL-STD-810H tested where the A8 is IP67 with no MIL-STD rating, has a larger 1920 x 1200 screen and 8GB of RAM, but its screen is 350 nits. The A8 is £379 and the A10 £449."
+    },
+    {
+      "q": "Can we scan barcodes, and does the A6's built-in scanner work with Simpro?",
+      "a": "Simpro documents scanning catalogue items and customer assets inside Simpro Mobile from the barcode icon in the search bar, and a separate Barcoding website for stocktakes and transfers that needs a barcode scanner connected to your computer or mobile device. It does not say whether the app uses the camera or a scan engine, and it names no supported scanners. The A8, A10 and A6 have a 13MP rear camera with flash. The A6 also has a Zebra 2D scan engine, but test it with your own Simpro build before buying for that reason. NFC and RFID are not documented by Simpro."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a team order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Simpro Mobile has no Windows version, so the Tuga W10 can only run Simpro Premium and the Barcoding website in a browser, with a stable internet connection and no documented offline mode; it is a stores, workshop or cabin device, not an engineer's field device. Simpro's published Android figures disagree (Android 8.0 on Google Play, Android 11 in the settings overview, Android 6 on an older FAQ page), and it publishes no RAM, storage or screen size requirement, so trial one unit with your own Simpro build and data before ordering for a team. Simpro does not say whether in-app barcode scanning uses the camera or a scan engine and names no supported scanners, so the A6's Zebra 2D scan engine and the W10's optional scanner are not documented Simpro inputs. NFC and RFID are not documented by Simpro, so the NFC on the A10, A8 and A6 and the optional UHF RFID reader on the W10 should not be counted as Simpro features. Simpro Mobile needs a mobility licence assigned in Simpro Premium.",
+  "disclaimer": "Simpro, Simpro Premium and Simpro Mobile are products of Simpro Software. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Simpro Software.",
+  "sources": [
+    "https://play.google.com/store/apps/details?id=com.simpro.mobile&hl=en_GB",
+    "https://helpguide.simprogroup.com/Content/simPRO-App/simPRO-Mobile-Overview.htm",
+    "https://helpguide.simprogroup.com/Content/simPRO-App/simPRO-Mobile-FAQs.htm",
+    "https://helpguide.simprogroup.com/Content/Service-and-Enterprise/Barcoding.htm",
+    "https://helpguide.simprogroup.com/Content/Service-and-Enterprise/Accessing-simPRO.htm"
+  ]
+}

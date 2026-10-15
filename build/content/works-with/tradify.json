@@ -1,0 +1,156 @@
+{
+  "slug": "tradify",
+  "software": "Tradify",
+  "vendor": "Tradify Limited",
+  "vendor_url": "https://www.tradifyhq.com/uk/pricing",
+  "title": "Rugged tablet for Tradify: UK buyer's guide",
+  "meta_description": "Tradify needs Android 9 or later, hardware GPS and Google Play, and has no offline mode. The Tuga A8 runs Android 12 with GPS, dual SIM 4G and Google Play.",
+  "target_query": "best tablet for Tradify",
+  "h1": "Rugged tablet for Tradify",
+  "intro": [
+    "Tradify is job management software for tradespeople. Its Google Play listing describes it as a tool to quote, invoice, manage jobs and create timesheets, aimed at businesses of 1 to 20 people, and lists electricians, plumbers, builders, roofers, HVAC technicians, locksmiths and gardeners among the trades it is built for. The feature list covers quoting, invoicing, job tracking and scheduling, timesheets, job notes with photos and video, job costing reports, electrical and gas safety certificates, and sync with Sage, QuickBooks and Xero. The UK site prices plans in pounds, offers a 14 day free trial and lists a London address.",
+    "Most of the work that matters on site happens in the mobile app. The vendor documents customer sign-off on job sheets, signatures on quotes and signatures in job notes as mobile app only, and the UK gas safety certificate forms are filled in on the mobile app. That means a device that goes up ladders, into lofts and out in the rain, and spends the rest of the day in a van, which is a hard life for a consumer tablet in a thin case.",
+    "This page sets out what Tradify publishes about the devices it runs on, which Tuga rugged Android devices meet those published requirements, why we do not suggest the Windows tablet for it, and how a sole trader or small firm can buy a single unit to try before kitting out a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 9 Pie or later, with the Google Play Store pre-installed",
+      "detail": "The vendor's Recommended Devices and Specs article says the Android app needs a device running Android 9 Pie or later that comes with the Google Play Store pre-installed, and iOS 14 or later on Apple devices. It adds that if you cannot find or download the app in your app store, your device version is probably no longer compatible. The Google Play listing for Tradify - Easy Job Management (package com.tradifyhq.tradifyapp, developer Tradify Limited, version 7.97.1 at the time of checking, minimum API level 28) shows device chips for Phone and Tablet.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360026792973-Tradify-s-Recommended-Devices-Specs"
+    },
+    {
+      "requirement": "Built-in hardware GPS",
+      "detail": "The same article lists in-built hardware GPS as an Android requirement, and notes that not all Android tablets come with hardware GPS. Wi-Fi only tablets without a GPS receiver are the ones to avoid here.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360026792973-Tradify-s-Recommended-Devices-Specs"
+    },
+    {
+      "requirement": "Memory, storage and screen size: not published for mobile",
+      "detail": "Tradify publishes RAM, processor and storage figures for computers running the web version, but none for phones or tablets. It publishes no screen-size guidance. Its version support article says the app is tested against current and pre-release versions of iOS and Android, that it caters for users on older devices, and advises against running beta versions of Android on business devices.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360025594473-iOS-Apple-and-Android-Version-Support"
+    },
+    {
+      "requirement": "No offline mode: a live internet connection is needed",
+      "detail": "The vendor states that Tradify does not work offline, because both the web console and the mobile app depend on a live internet connection to operate. On site, that makes mobile data the thing to plan for: a device with its own SIM keeps working where there is no Wi-Fi, and a second SIM gives a fallback network where one is weak.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360026848353-Does-Tradify-Work-Offline"
+    },
+    {
+      "requirement": "Signatures and job sign-off: mobile app only, signed on the screen",
+      "detail": "The vendor documents three signature flows on the mobile app: signing a job sheet from the job's Options menu, where you hand the customer the device to sign with their finger; collecting a customer signature when accepting a quote, which then appears on the quote when emailed or printed; and capturing a signature in a job note. It states that job sign-off and job note signatures are only available on the mobile app. The job sheet carries no prices or costs, so it can be sent to the customer.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360021667514-How-To-Obtain-Sign-Off-For-Jobs-on-Tradify-Mobile"
+    },
+    {
+      "requirement": "Photos, files and UK certificates on the device",
+      "detail": "Quick Notes in the mobile app can take a photo with the device camera, attach existing photos from the gallery, add a text note or attach files of any type, including PDF and DOCX documents. Gas Safety Certificates are created and edited from the Forms tab of a job in the mobile app; the vendor says these forms are only available in the United Kingdom and that some sections have mandatory fields.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/16501398109849-Add-Note-to-a-Job-Using-Mobile-App"
+    },
+    {
+      "requirement": "Staff location tracking: two accuracy settings",
+      "detail": "Tradify shows staff on its Map using one of two methods. The default sends coordinates when the device comes into range of a new cell tower, which the vendor says preserves battery but lowers accuracy and can take seconds to minutes to update. The second sends coordinates continually while the app runs, updating every few seconds; the vendor says the battery drain is much more substantial and does not recommend it. Tracking stops if the user logs out or closes the app, turns off location for the app or the device, or loses connection, and the device may close Tradify to free memory when several apps are running.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360031145933-Staff-Location-GPS-Settings"
+    },
+    {
+      "requirement": "Barcode, QR and NFC scanning: not documented",
+      "detail": "No barcode, QR or NFC scanning by the device is documented in the Tradify help centre. The only QR code feature found is one Tradify displays: with Tradify Card Payments (UK and Australia only), you open an unpaid invoice in the mobile app, select Take Onsite Payment, and the customer scans the QR code on your screen with their own phone to view and pay. The Zebra 2D scan engine on the Tuga A6 and the NFC radio on the A10, A8 and A6 should not be treated as Tradify features.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/57231935342617-Take-Onsite-Payments-with-Tradify-Card-Payments"
+    },
+    {
+      "requirement": "Windows: web version in a browser, with a desktop-class specification",
+      "detail": "No native Windows app is documented. On a PC, Tradify runs in Chrome, Safari, Firefox or Edge, with Chrome as the general recommendation. The vendor's minimum specification for computers is Windows 10 or later, 8GB RAM minimum with 16GB or more recommended, an Intel Core i5 or equivalent recommended, and a 256GB or larger drive.",
+      "source_url": "https://help.tradifyhq.com/hc/en-us/articles/360026792973-Tradify-s-Recommended-Devices-Specs"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Tradify's on-site work is quotes, invoices, job notes with photos, customer signatures and certificate forms, not large drawings, so the 8 inch A8 gives enough room to fill in a form or let a customer sign without the size and weight of a 10 inch tablet. It runs Android 12 with Google Play against a published requirement of Android 9 Pie or later with Google Play pre-installed, and it has the built-in GPS receiver (GPS, GLONASS, Galileo and BeiDou) that Tradify lists as required. Because Tradify has no offline mode, the dual SIM 4G matters: it keeps the app connected away from Wi-Fi. The 1000 nit screen stays readable in direct sun, the 8000mAh battery is removable so a charged spare can take over if you run location tracking, and VESA mount points and pogo pin contacts let it sit in a vehicle dock in the van and come out on site. It is sealed to IP67 and has no MIL-STD rating, so where drops onto concrete or immersion are the bigger risk, the A10 is the tougher choice. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 9 Pie or later with Google Play pre-installed. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: in-built hardware GPS. Tuga A8: GPS, GLONASS, Galileo and BeiDou.",
+        "Requirement: a live internet connection, because Tradify does not work offline. Tuga A8: 4G LTE with dual SIM, plus Wi-Fi.",
+        "Requirement: on-screen customer signatures, job note photos and certificate forms. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass, 13MP autofocus rear camera with flash, 6GB RAM and 128GB storage with a microSD slot.",
+        "Requirement: a device that lives in the van between jobs. Tuga A8: VESA mount points, pogo pin dock connector, removable 8000mAh battery, IP67."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 is the tougher and larger option. It is sealed to IP68 and tested to MIL-STD-810H, which the A8 is not, so it suits roofers, groundworkers and anyone who works in the wet or drops kit onto hard surfaces. The 10.1 inch 1920 x 1200 screen shows more of a long gas or electrical certificate form, a quote with many line items or a PDF attached to a job at once. It runs Android 14 with Google Play, well above the Android 9 Pie requirement, has built-in GPS (GPS, Galileo, BeiDou, QZSS and NavIC), and dual SIM 4G for Tradify's need for a live connection. The trade-offs against the A8 are a 350 nit screen rather than 1000 nits, a battery that is not listed as removable, and a price of £449, which is £70 more.",
+      "fit": [
+        "Requirement: Android 9 Pie or later with Google Play pre-installed. Tuga A10: Android 14 with Google Play.",
+        "Requirement: in-built hardware GPS. Tuga A10: GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: a live internet connection. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: room for certificates, quotes and attached PDFs. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, 8GB RAM, 128GB storage with microSD up to 2TB, 13MP rear camera with flash.",
+        "Requirement: a device that survives site work. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For a tradesperson who wants the job list, photos and sign-off in a pocket or a belt holster rather than a tablet, the Tuga A6 runs the same Tradify Android app on a 6 inch handheld at 277g. It runs Android 15 with Google Play, has built-in GPS (GPS, GLONASS, BeiDou and Galileo), 4G with dual SIM and a removable 5050mAh battery. Tradify publishes no RAM figure for mobile devices, so its 4GB of RAM cannot be checked against a vendor number; the vendor does say the device may close the app to free memory when several apps are running, so try it with your usual apps open before buying for a team. The trade-off is screen area: customers sign on a 6 inch screen, and long certificate forms need more scrolling than on the A8 or A10. Its Zebra 2D scan engine is not used by Tradify. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 9 Pie or later with Google Play pre-installed. Tuga A6: Android 15 with Google Play.",
+        "Requirement: in-built hardware GPS. Tuga A6: GPS, GLONASS, BeiDou and Galileo.",
+        "Requirement: a live internet connection. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: job note photos and on-screen signatures. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, 13MP rear camera with flash, 4GB RAM, 64GB storage with microSD up to 256GB.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery."
+      ]
+    }
+  ],
+  "not_recommended_note": "We do not suggest the Tuga W10 for Tradify. Tradify has no documented Windows app, and the vendor's minimum specification for computers running the web version asks for a 256GB or larger drive and recommends an Intel Core i5 or equivalent with 16GB RAM; the W10 has 128GB of storage, an Intel N100 and 8GB RAM, so it does not meet the published storage figure. Signatures, job sign-off and the UK gas safety certificate forms are documented on the mobile app, so the Android devices are where the site work happens anyway. Tradify does not work offline on any device, so whichever Tuga device you choose needs a data SIM or Wi-Fi on every job. The vendor documents no barcode, QR or NFC scanning by the device, so the A6's Zebra 2D scan engine and the NFC radio on the A10, A8 and A6 are not Tradify features. Running location tracking in the more accurate mode drains the battery much faster according to the vendor, so plan charging in the van, and note that the A8 and A6 have removable batteries while the A10's is not listed as removable. Tradify does not name Tuga devices, and we do not describe any device as certified or tested by Tradify.",
+  "setup_steps": [
+    "Start a Tradify account at tradifyhq.com, or ask the account owner to add you as a user. The UK site offers a 14 day free trial that includes all features.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Tradify - Easy Job Management (package com.tradifyhq.tradifyapp, developer Tradify Limited), then sign in.",
+    "Fit a data SIM before the first job. Tradify needs a live internet connection on site, and the A8, A10 and A6 all take two SIMs, so a second network can cover areas where the first is weak.",
+    "When the app asks for location access, allow it if your business uses the Map to see where staff are. Location permission for Tradify can be changed later in the device's app settings under Permissions; the exact menu names vary between Android versions.",
+    "In the Tradify app, go to Settings, then Location Tracking. Leave Conserve battery life by using reduced accuracy location tracking switched on unless you need updates every few seconds, which the vendor warns uses much more battery.",
+    "Before you rely on it, try the on-site flows on the device: sign a job sheet, collect a signature on a quote, add a photo note and fill in a certificate form, so you know the layout works for you.",
+    "For the A8 or A10, fit the vehicle mounting dock and a 12V car charger so the device charges between jobs; for the A6, add the belt holster. Fit a tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8 and A10), so the device stays secure and charged in the van",
+    "12V DC car charger, £26, for charging between jobs",
+    "Capacitive stylus, £14.99 (Tuga A8 and A10), for customer signatures when a finger is too clumsy",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8 and A10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Tradify run on the Tuga A8?",
+      "a": "Tradify publishes three Android requirements: Android 9 Pie or later, in-built hardware GPS, and the Google Play Store pre-installed. The Tuga A8 runs Android 12 with Google Play and has a built-in GPS receiver, so it meets each one, and so do the A10 (Android 14) and the A6 (Android 15). Tradify publishes no RAM or storage figure for mobile devices. We do not describe any device as certified or tested by Tradify; these are the vendor's published requirements set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Tradify work offline on these tablets?",
+      "a": "No. The vendor states that Tradify does not work offline, because both the web console and the mobile app need a live internet connection. That is true on any device. The A8, A10 and A6 all have 4G with dual SIM as well as Wi-Fi, so with a data SIM fitted they can stay connected on jobs without Wi-Fi, but in a spot with no signal at all the app will not work."
+    },
+    {
+      "q": "Can customers sign on the tablet, and do I need a stylus?",
+      "a": "Yes. Tradify documents customer signatures on job sheets, on quotes when they are accepted, and in job notes, all in the mobile app, and its own instructions describe the customer signing with a finger. A stylus is optional. We sell a capacitive stylus for the A8 and A10 at £14.99; it is not listed as compatible with the A6."
+    },
+    {
+      "q": "Should I choose the A8 or the A10 for Tradify?",
+      "a": "The A8 suits most Tradify users: quotes, invoices, photo notes, signatures and certificates fit comfortably on its 8 inch 1000 nit screen, the battery is removable, it docks in the van through its VESA mount points, and it costs £379. Choose the A10 at £449 if you work in the wet or expect drops onto hard surfaces, because it is IP68 and MIL-STD-810H where the A8 is IP67 with no MIL-STD rating, or if you want the larger 10.1 inch 1920 x 1200 screen for long certificate forms and attached PDFs."
+    },
+    {
+      "q": "Can I trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before kitting out a team is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10) or £349 (A6) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "disclaimer": "Tradify is a product of Tradify Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Tradify Limited.",
+  "sources": [
+    "https://www.tradifyhq.com/uk/pricing",
+    "https://play.google.com/store/apps/details?id=com.tradifyhq.tradifyapp&hl=en_GB",
+    "https://help.tradifyhq.com/hc/en-us/articles/360026792973-Tradify-s-Recommended-Devices-Specs",
+    "https://help.tradifyhq.com/hc/en-us/articles/360025594473-iOS-Apple-and-Android-Version-Support",
+    "https://help.tradifyhq.com/hc/en-us/articles/360026848353-Does-Tradify-Work-Offline",
+    "https://help.tradifyhq.com/hc/en-us/articles/360021667514-How-To-Obtain-Sign-Off-For-Jobs-on-Tradify-Mobile",
+    "https://help.tradifyhq.com/hc/en-us/articles/360034446233-Collect-Customer-Signatures-on-Quotes-via-Tradify-Mobile",
+    "https://help.tradifyhq.com/hc/en-us/articles/25128998752665-How-to-Record-Signatures-on-Job-Notes-Mobile",
+    "https://help.tradifyhq.com/hc/en-us/articles/16501398109849-Add-Note-to-a-Job-Using-Mobile-App",
+    "https://help.tradifyhq.com/hc/en-us/articles/5340005892505-Understanding-Gas-Safety-Certificates-On-Tradify-Mobile",
+    "https://help.tradifyhq.com/hc/en-us/articles/360031145933-Staff-Location-GPS-Settings",
+    "https://help.tradifyhq.com/hc/en-us/articles/23981403398169-Enable-and-disable-location-map-tracking",
+    "https://help.tradifyhq.com/hc/en-us/articles/57231935342617-Take-Onsite-Payments-with-Tradify-Card-Payments"
+  ]
+}

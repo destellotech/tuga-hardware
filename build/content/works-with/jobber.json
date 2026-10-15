@@ -1,0 +1,162 @@
+{
+  "slug": "jobber",
+  "software": "Jobber",
+  "vendor": "Jobber Software",
+  "vendor_url": "https://www.getjobber.com/",
+  "title": "Rugged tablet for Jobber: UK buyer's guide",
+  "meta_description": "Jobber's app needs Android 8.0 or later and keeps timers, notes and checklists working offline. The Tuga A8 runs Android 12 with 4G and a 1000 nit screen.",
+  "target_query": "best tablet for Jobber",
+  "h1": "Rugged tablet for Jobber",
+  "intro": [
+    "Jobber is field service software for home service businesses. Its Google Play listing describes scheduling, dispatch, quotes, invoicing and payments, and names trades from HVAC, plumbing, electrical and roofing to cleaning, lawn care, landscaping and pool service. The office side runs in a web browser at Jobber.com and the field side runs in the Jobber app on iOS and Android. The vendor's FAQ says it has offices in the US and Canada, serves businesses in over 60 countries and lets you choose British pounds as your currency.",
+    "For the person doing the work, the app is where visits, timers, job notes, photos, checklists and client signatures live. That means a device used in gardens, lofts, plant rooms and building sites, often in the rain or full sun, and carried in and out of a van all day, which is where a consumer tablet in a slim case tends to give up.",
+    "This page sets out what Jobber publishes about the devices and connections it needs, which Tuga rugged devices meet those published requirements, where a Windows tablet fits for the office side, and how a UK trade or service business can buy a single unit to try before buying for the whole team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 8.0 or later, from Google Play",
+      "detail": "The Google Play listing for Jobber: Field Service Software (package com.getjobber.jobber, developer Jobber Software, version 6.98.0 at the time of checking) has a minimum API level of 26, which is Android 8.0, and shows device chips for Phone and Tablet. The vendor's FAQ says Jobber works on iOS and Android and the app is downloaded from Google Play or the Apple App Store. No minimum Android version is stated in the help centre articles we checked, so the Play listing is the published figure.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.getjobber.jobber&hl=en_GB"
+    },
+    {
+      "requirement": "Memory, storage and screen size: not published",
+      "detail": "Jobber publishes no RAM, storage, processor or screen-size requirement for mobile devices. Its troubleshooting article asks you to keep the Jobber app, the device's operating system and your computer's browser up to date, and to check for an update if you see performance issues.",
+      "source_url": "https://help.getjobber.com/hc/en-us/articles/360037203234-Troubleshooting-Tips-How-to-Help-Us-Help-You"
+    },
+    {
+      "requirement": "Offline: timers, notes and checklists keep working, with limits",
+      "detail": "The vendor says timers work in all network conditions, including offline, with timer data stored on the device and synced once a connection returns; historical time entries and weekly totals do not load offline, and geofenced location timers do not work without a connection. Notes and attachments saved offline show Waiting to sync until online and sync when the connection returns and the app is open, but other team members cannot see them until then, and the vendor warns that a note waiting to sync is lost if you log out, delete, force close or update the app. Checklist updates made offline are stored on the device, and a Sync Queue under More shows pending, uploading and failed uploads.",
+      "source_url": "https://help.getjobber.com/en/articles/timers-and-timesheets-in-the-jobber-app/"
+    },
+    {
+      "requirement": "Photos and attachments: device camera and files",
+      "detail": "In the app you can add photos and videos from the camera roll or capture them with the device camera, and they are saved to the camera roll by default. Up to 50 attachments can be added at a time, each up to 750MB, and only the last 15 attachments appear in the app, with all notes and attachments visible on Jobber.com. In checklists you can take up to 10 photos in a row without leaving the camera view, with up to 10 files per form, each under 50MB.",
+      "source_url": "https://help.getjobber.com/en/articles/notes-and-attachments-in-the-jobber-app/"
+    },
+    {
+      "requirement": "Client and team signatures",
+      "detail": "Quotes have a Collect Signature option for when the client is present and a signature is needed to proceed. Checklists can include a signature field for team members to collect a signature. Checklists are available on select plans.",
+      "source_url": "https://help.getjobber.com/en/articles/quote-basics/"
+    },
+    {
+      "requirement": "GPS: waypoints from the app, live tracking needs separate vehicle hardware",
+      "detail": "The vendor's GPS tracking page says GPS Waypoints show a team member's location on a map when they clock in and out, add a note or attachment to a job, or complete a visit. A live map view of the team needs FleetSharp tracking devices installed in your vehicles. Location timers, which use a geofence around a client's property to prompt visit reminders or time tracking, are available on the Grow plan and need an internet connection.",
+      "source_url": "https://www.getjobber.com/features/gps-tracking-app/"
+    },
+    {
+      "requirement": "Tap to Pay: Android 11 or newer, but US and Canada only",
+      "detail": "Tap to Pay in the Jobber app needs Android 11 or newer, app version 6.48 or later, an NFC-capable phone and Jobber Payments enabled. The vendor says it is available only in the US and Canada at this time, so it is not a reason to choose a device for a UK business.",
+      "source_url": "https://help.getjobber.com/hc/en-us/articles/34647042014615-Tap-to-Pay"
+    },
+    {
+      "requirement": "Android 16 Live Updates for timers",
+      "detail": "The timers article says Live Updates is a feature of Android 16 and newer, and that availability depends on your device's Android version and manufacturer. None of the Tuga Android devices lists Android 16 (the A6 runs Android 15, the A10 Android 14 and the A8 Android 12), so this one feature should not be expected on them. Timers themselves are not tied to Android 16.",
+      "source_url": "https://help.getjobber.com/en/articles/timers-and-timesheets-in-the-jobber-app/"
+    },
+    {
+      "requirement": "Windows: web browser only, no published hardware specification",
+      "detail": "No native Windows app is documented. The vendor's FAQ says Jobber is web-based and works in any modern web browser, naming Google Chrome, Firefox, Safari and Edge. No minimum computer specification is published.",
+      "source_url": "https://www.getjobber.com/faq/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Jobber's field work is visits, timers, quotes, invoices, photo notes, checklists and client signatures, not large drawings, so the 8 inch A8 gives a comfortable form and signature area in a tablet that still fits a van door pocket. It runs Android 12 with Google Play against the Play listing's minimum of Android 8.0. Jobber keeps timers, notes and checklists working offline and syncs them later, and the A8's dual SIM 4G helps them sync sooner on rural jobs and keeps GPS Waypoints, location timers and up-to-date schedules working, which need a connection. The 1000 nit screen stays readable outdoors, which suits lawn care, landscaping and roofing, the removable 8000mAh battery lets a charged spare take over on a long day, and VESA mount points with pogo pin contacts let it dock in the van. It is sealed to IP67 and has no MIL-STD rating, so for the wettest or roughest work the A10 is the tougher choice. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: camera capture for photo notes and checklists. Tuga A8: 13MP autofocus rear camera with flash, 128GB storage with a microSD slot, 6GB RAM.",
+        "Requirement: a connection for syncing, waypoints and location timers. Tuga A8: 4G LTE with dual SIM, Wi-Fi, and GPS, GLONASS, Galileo and BeiDou.",
+        "Requirement: client signatures and checklists on site, often outdoors. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass.",
+        "Requirement: a device that moves between the van and the job. Tuga A8: VESA mount points, pogo pin dock connector, removable 8000mAh battery, IP67."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 is the tougher, larger choice. It is sealed to IP68 and tested to MIL-STD-810H, neither of which the A8 has, so it suits teams who work in standing water, pool service, groundworks or anywhere a drop onto concrete is likely. Its 10.1 inch 1920 x 1200 screen shows more of a long checklist, a multi-line quote or an attached PDF at once. It runs Android 14 with Google Play, well above the Android 8.0 minimum, has 8GB of RAM and dual SIM 4G with built-in GPS. Against the A8, the screen is 350 nits rather than 1000, the battery is not listed as removable, and it costs £449, which is £70 more.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: camera capture for photo notes and checklists. Tuga A10: 13MP rear camera with flash, 128GB storage with microSD up to 2TB, 8GB RAM.",
+        "Requirement: a connection for syncing, waypoints and location timers. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: room for long checklists, quotes and attachments. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass.",
+        "Requirement: a device that survives wet and rough sites. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Jobber's Google Play listing carries a Phone device chip as well as Tablet, so the 6 inch Tuga A6 is a fit for anyone who wants Jobber in a pocket or a belt holster at 277g. It runs Android 15 with Google Play, the newest Android version in the Tuga range and well above the Android 8.0 minimum, with 4G dual SIM, built-in GPS and a removable 5050mAh battery. Jobber publishes no RAM figure, so its 4GB of RAM cannot be checked against a vendor number; try it with your usual apps before buying for a team. The trade-off is screen area for checklists and client signatures. Its Zebra 2D scan engine is not a documented Jobber input. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play, Phone layout supported. Tuga A6: Android 15 with Google Play on a 6 inch FHD+ 2160 x 1080 screen.",
+        "Requirement: camera capture for photo notes and checklists. Tuga A6: 13MP rear camera with flash, 4GB RAM, 64GB storage with microSD up to 256GB.",
+        "Requirement: a connection for syncing, waypoints and location timers. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, GPS, GLONASS, BeiDou and Galileo.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Jobber has no native Windows app, but the office side runs in a browser, and the vendor names Chrome, Firefox, Safari and Edge. The Tuga W10 runs Windows 11 Pro, so it can run Jobber.com in Edge or Chrome for scheduling, dispatch, quoting, invoicing and reviewing the notes and attachments the field team syncs. Jobber publishes no hardware specification for computers, so there is no vendor figure to check its Intel N100, 8GB RAM and 128GB storage against. It suits a site cabin, a workshop or a van used as an office, with Ethernet and HDMI for a fixed position. It is not the device for the field team: the offline timers, notes and checklists described by the vendor are features of the Jobber app, not the browser, and the W10's 5MP rear camera is basic next to the 13MP cameras on the Android devices.",
+      "fit": [
+        "Requirement: a modern web browser (Chrome, Firefox, Safari or Edge). Tuga W10: Windows 11 Pro running Edge or Chrome.",
+        "Requirement: office work on Jobber.com. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage with a microSD slot.",
+        "Requirement: a fixed or semi-fixed office position. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery.",
+        "Requirement: dust and splash protection in a workshop or cabin. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 10.1 inch 1280 x 800 multi-touch screen, 1197g."
+      ]
+    }
+  ],
+  "not_recommended_note": "Jobber's offline support covers timers, notes, attachments and checklists in the app, and the vendor warns that a note waiting to sync is lost if you log out, delete, force close or update the app before it syncs, so let devices reconnect before app updates. Geofenced location timers, historical time entries and up-to-date team information need a connection, so fit a data SIM. Live GPS tracking of vehicles needs FleetSharp hardware in the vehicle and is not something any tablet provides. Tap to Pay is available only in the US and Canada, so the NFC radio on the A10, A8, A6 and W10 is not a payment feature for UK users, and no barcode, QR or NFC scanning is documented in the Jobber help articles we checked, so the A6's Zebra 2D scan engine and the W10's optional scanner and UHF RFID reader are not Jobber features. Android 16 Live Updates for timers will not appear on any current Tuga Android device. The Tuga W10 only runs Jobber in a browser, which suits office work, not field work. Jobber does not name Tuga devices, and we do not describe any device as certified or tested by Jobber.",
+  "setup_steps": [
+    "Create a Jobber account at getjobber.com, or ask your account admin to add the technician as a user. New team members receive an email or text invitation.",
+    "On the Tuga A8, A10 or A6, tap the link in the invitation or open Google Play and install Jobber: Field Service Software (package com.getjobber.jobber, developer Jobber Software). Open the app, enter your name and email address and set a password.",
+    "Accept the device prompts for the permissions your team uses, such as location for GPS Waypoints and location timers, and the camera for photo notes.",
+    "Fit a data SIM. Timers, notes and checklists can be completed offline, but syncing, location timers and the latest schedule need a connection. Check the Sync Queue under More after working in a weak signal area, and do not log out of or update the app while notes are waiting to sync.",
+    "Do the office work, such as scheduling and setting up the account, on Jobber.com in a desktop browser. On a Tuga W10, use Edge or Chrome.",
+    "For the A8 or A10, fit the vehicle mounting dock and a 12V car charger so the device charges between jobs; for the A6, add the belt holster. Fit a tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), so the device stays secure and charged in the van",
+    "12V DC car charger, £26, for charging between jobs",
+    "Charging dock, £49.99 (Tuga A10 and W10), for the office or workshop",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for client signatures",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14"
+  ],
+  "faq": [
+    {
+      "q": "Will Jobber run on the Tuga A8?",
+      "a": "Jobber's Google Play listing sets a minimum of Android 8.0. The Tuga A8 runs Android 12 with Google Play, so it meets that figure, as do the A10 (Android 14) and the A6 (Android 15). Jobber publishes no RAM, storage or screen-size requirement. We do not describe any device as certified or tested by Jobber; these are the vendor's published figures set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Jobber work offline on these devices?",
+      "a": "Partly, in the Android app. The vendor says timers work offline and sync later, notes and attachments are saved on the device and sync when the connection returns, and checklist updates are stored on the device until you reconnect. Location timers, historical time entries and the latest team information need a connection, and a note waiting to sync is lost if you log out, delete, force close or update the app first. The browser version on a Tuga W10 is not described as working offline."
+    },
+    {
+      "q": "Can I take card payments by tapping a card on the tablet?",
+      "a": "Not in the UK at present. Jobber's Tap to Pay needs Android 11 or newer and an NFC-capable device, which the A8, A10 and A6 have, but the vendor says Tap to Pay is available only in the US and Canada at this time. Do not buy any device for that feature if you work in the UK."
+    },
+    {
+      "q": "Should I choose the A8 or the A10 for Jobber?",
+      "a": "The A8 suits most Jobber users: visits, quotes, photo notes, checklists and signatures fit its 8 inch 1000 nit screen, the battery is removable, it docks in the van through its VESA mount points, and it costs £379. Choose the A10 at £449 if your team works in the wet or drops kit onto hard ground, because it is IP68 and MIL-STD-810H where the A8 is IP67 with no MIL-STD rating, or if you want the larger 10.1 inch 1920 x 1200 screen for long checklists and attachments."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before buying for the team is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "disclaimer": "Jobber is a product of Jobber Software. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Jobber Software.",
+  "sources": [
+    "https://www.getjobber.com/faq/",
+    "https://play.google.com/store/apps/details?id=com.getjobber.jobber&hl=en_GB",
+    "https://help.getjobber.com/hc/en-us/articles/360037203234-Troubleshooting-Tips-How-to-Help-Us-Help-You",
+    "https://help.getjobber.com/en/articles/timers-and-timesheets-in-the-jobber-app/",
+    "https://help.getjobber.com/en/articles/notes-and-attachments-in-the-jobber-app/",
+    "https://help.getjobber.com/en/articles/checklists/",
+    "https://help.getjobber.com/en/articles/quote-basics/",
+    "https://help.getjobber.com/hc/en-us/articles/34647042014615-Tap-to-Pay",
+    "https://help.getjobber.com/hc/en-us/articles/360059638333",
+    "https://www.getjobber.com/features/gps-tracking-app/"
+  ]
+}
