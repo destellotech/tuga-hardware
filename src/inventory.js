@@ -29,6 +29,10 @@ const deviceMeta = (d) => ({
   orderId: (d.orderId || '').slice(0, 80),
   customerId: d.customerId || '',
   poId: d.poId || '',
+  wPlan: d.warranty?.plan || '',
+  wStart: d.warranty?.start || '',
+  wEnd: d.warranty?.end || '',
+  claimsOpen: (d.claims || []).filter((c) => c.status === 'open').length,
   imei1: d.imei1 || '',
   receivedAt: d.receivedAt,
 });
@@ -87,7 +91,7 @@ export async function receiveDevice(kv, fields, by) {
 }
 
 /** Fields a flow may set on a device besides the ones a person edits. */
-const LINK_FIELDS = ['poId', 'supplierId', 'supplier', 'unitCost', 'customerId', 'saleId', 'soldPrice'];
+const LINK_FIELDS = ['warranty', 'claims', 'registeredTo', 'poId', 'supplierId', 'supplier', 'unitCost', 'customerId', 'saleId', 'soldPrice'];
 
 /**
  * Merge changes into a device and log what moved in its history. Serial and

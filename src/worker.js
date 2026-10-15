@@ -12,6 +12,7 @@
 import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
 import { ADMIN_PAGE } from './admin-page.js';
+import { sendDailyDigest } from './backoffice.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
 
@@ -203,5 +204,6 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(sendReviewRequests(env));
     ctx.waitUntil(recheckProcessingPayments(env));
+    ctx.waitUntil(sendDailyDigest(env));
   },
 };

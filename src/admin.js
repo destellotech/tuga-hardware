@@ -34,6 +34,17 @@ import {
   landedUnitCosts,
 } from './records.js';
 import { getOrder, updateOrder } from './orders.js';
+import {
+  WARRANTY_PLANS,
+  PLAN_WINDOW_DAYS,
+  makeWarranty,
+  allocatePlans,
+  fileWebOrder,
+  buildDigest,
+  listRegistrations,
+  markRegistrationHandled,
+} from './backoffice.js';
+import { sendShippingNotification } from './email.js';
 
 const BY = 'Admin';
 
@@ -72,7 +83,7 @@ export async function handleAdmin(request, env, ctx) {
   if (!env.ORDERS) return fail('The ORDERS KV binding is missing', 500);
   const kv = env.ORDERS;
   const url = new URL(request.url);
-  const [resource, rawId, action] = url.pathname.replace(/^\/api\/admin\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
+  const [resource, rawId, action, sub] = url.pathname.replace(/^\/api\/admin\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const method = request.method;
   const body = method === 'POST' || method === 'PUT' || method === 'PATCH' ? await request.json().catch(() => null) : null;
   if ((method === 'POST' || method === 'PUT' || method === 'PATCH') && !body) return fail('Request body is not valid JSON');
@@ -87,9 +98,21 @@ export async function handleAdmin(request, env, ctx) {
           purchaseStatuses: PURCHASE_STATUSES,
           saleStatuses: SALE_STATUSES,
           moveTypes: MOVE_TYPES,
+          warrantyPlans: WARRANTY_PLANS,
+          planWindowDays: PLAN_WINDOW_DAYS,
         });
+      case 'attention':
+        if (method === 'GET') return json({ sections: await buildDigest(kv) });
+        break;
+      case 'registrations':
+        if (method === 'GET') return json({ registrations: await registrations(kv) });
+        if (method === 'POST' && rawId === 'handle') return await handleRegistration(kv, body);
+        break;
+      case 'sync-web':
+        if (method === 'POST') return await syncWebOrders(kv, ctx);
+        break;
       case 'devices':
-        return await devices(kv, method, rawId, action, body, ctx);
+        return await devices(kv, method, rawId, action, sub, body, ctx);
       case 'customers':
         return await customers(kv, method, rawId, body);
       case 'suppliers':
@@ -97,7 +120,7 @@ export async function handleAdmin(request, env, ctx) {
       case 'purchases':
         return await purchases(kv, method, rawId, action, body, ctx);
       case 'sales':
-        return await sales(kv, method, rawId, action, body, ctx);
+        return await sales(kv, method, rawId, action, body, ctx, env);
       case 'orders':
         return await webOrders(kv, method, rawId, action, body);
       case 'moves':
@@ -118,7 +141,7 @@ export async function handleAdmin(request, env, ctx) {
 // ---------------------------------------------------------------------------
 // Devices (stock units)
 // ---------------------------------------------------------------------------
-async function devices(kv, method, rawId, action, body, ctx) {
+async function devices(kv, method, rawId, action, sub, body, ctx) {
   if (!rawId && method === 'GET') return json({ devices: await listDevices(kv) });
   if (!rawId && method === 'POST') {
     const device = await receiveUnit(kv, body, ctx, {});
@@ -131,8 +154,8 @@ async function devices(kv, method, rawId, action, body, ctx) {
     const moves = (await listMoves(kv)).filter((m) => m.serial === serial);
     return json({ device, moves });
   }
-  if (method === 'PATCH') return editDevice(kv, serial, body, ctx);
-  if (method === 'DELETE') {
+  if (method === 'PATCH' && !action) return editDevice(kv, serial, body, ctx);
+  if (method === 'DELETE' && !action) {
     const device = await getDevice(kv, serial);
     if (!device) return fail('No device with that serial', 404);
     await deleteDevice(kv, serial);
@@ -140,6 +163,9 @@ async function devices(kv, method, rawId, action, body, ctx) {
     return json({ ok: true });
   }
   if (method === 'POST' && action === 'return') return bookReturn(kv, serial, body);
+  if (method === 'PUT' && action === 'warranty') return setWarranty(kv, serial, body);
+  if (method === 'POST' && action === 'claims') return addClaim(kv, serial, body);
+  if (method === 'PATCH' && action === 'claims' && sub != null) return updateClaim(kv, serial, Number(sub), body);
   return fail('Not Found', 404);
 }
 
@@ -227,7 +253,8 @@ async function bookReturn(kv, serial, body) {
   const ref = device.saleId || device.orderId || '';
   const party = device.assignedTo || '';
 
-  await updateDevice(kv, serial, { status, assignedTo: '' }, BY, `Returned by ${party || 'customer'}${body.note ? ` · ${clip(body.note, 200)}` : ''}`);
+  // A unit back for a refund leaves its warranty behind; the next sale starts a new one.
+  await updateDevice(kv, serial, { status, assignedTo: '', warranty: null }, BY, `Returned by ${party || 'customer'}${body.note ? ` · ${clip(body.note, 200)}` : ''}`);
   await recordMove(kv, { type: 'return', serial, model: device.model, ref, party, note: clip(body.note, 200), at: moveAt(body.at) });
 
   // A sale whose every unit has come back is a returned sale.
@@ -243,6 +270,111 @@ async function bookReturn(kv, serial, body) {
     }
   }
   return json({ device: await getDevice(kv, serial) });
+}
+
+// ---------------------------------------------------------------------------
+// Warranty register and claims
+// ---------------------------------------------------------------------------
+async function setWarranty(kv, serial, body) {
+  const device = await getDevice(kv, serial);
+  if (!device) return fail('No device with that serial', 404);
+  if (!WARRANTY_PLANS[body.plan]) return fail('Unknown plan', 422);
+  const start = isoDate(body.start) || device.warranty?.start;
+  if (!start) return fail('Give the start date (the dispatch date)', 422);
+  const warranty = makeWarranty(body.plan, start, {
+    ref: clip(body.ref, 60) || device.warranty?.ref || '',
+    note: clip(body.note, 300),
+    setAt: new Date().toISOString(),
+  });
+  const updated = await updateDevice(kv, serial, { warranty }, BY, `Warranty: ${WARRANTY_PLANS[warranty.plan].name}, ${warranty.start} to ${warranty.end}${warranty.note ? ` · ${warranty.note}` : ''}`);
+  return json({ device: updated });
+}
+
+async function addClaim(kv, serial, body) {
+  const device = await getDevice(kv, serial);
+  if (!device) return fail('No device with that serial', 404);
+  const fault = clip(body.fault, 1000);
+  if (!fault) return fail('Describe the fault', 422);
+  const claim = { openedAt: isoDate(body.at) || todayIso(), fault, status: 'open', outcome: '', notes: '', closedAt: '' };
+  const claims = [...(device.claims || []), claim];
+  const updated = await updateDevice(kv, serial, { claims }, BY, `Warranty claim opened: ${fault.slice(0, 120)}`);
+  return json({ device: updated });
+}
+
+const CLAIM_OUTCOMES = ['repaired', 'replaced', 'refunded', 'declined', 'no fault found'];
+
+async function updateClaim(kv, serial, index, body) {
+  const device = await getDevice(kv, serial);
+  if (!device) return fail('No device with that serial', 404);
+  const claims = [...(device.claims || [])];
+  if (!claims[index]) return fail('No such claim', 404);
+  const c = { ...claims[index] };
+  if ('notes' in body) c.notes = clip(body.notes, 2000);
+  if (body.status === 'closed') {
+    if (!CLAIM_OUTCOMES.includes(body.outcome)) return fail('Pick an outcome', 422);
+    c.status = 'closed';
+    c.outcome = body.outcome;
+    c.closedAt = isoDate(body.closedAt) || todayIso();
+  } else if (body.status === 'open') {
+    c.status = 'open';
+    c.outcome = '';
+    c.closedAt = '';
+  }
+  claims[index] = c;
+  const event = c.status === 'closed' ? `Warranty claim closed: ${c.outcome}` : 'Warranty claim updated';
+  return json({ device: await updateDevice(kv, serial, { claims }, BY, event) });
+}
+
+/** Website registrations, each matched to the unit it names if we hold it. */
+async function registrations(kv) {
+  const regs = await listRegistrations(kv);
+  const bySerial = new Map((await listDevices(kv)).map((d) => [d.serial, d]));
+  return regs.map((r) => {
+    const d = bySerial.get(normaliseSerial(r.serial));
+    return { ...r, matched: Boolean(d), deviceStatus: d?.status || '', holder: d?.assignedTo || '' };
+  });
+}
+
+/** Mark a registration dealt with; when it names a unit we hold, record who registered it. */
+async function handleRegistration(kv, body) {
+  const key = String(body.key || '');
+  if (!key.startsWith('warranty:')) return fail('Unknown registration', 404);
+  const reg = await markRegistrationHandled(kv, key, clip(body.note, 300));
+  if (!reg) return fail('Unknown registration', 404);
+  const serial = normaliseSerial(reg.serial);
+  if (body.link && (await getDevice(kv, serial))) {
+    await updateDevice(
+      kv,
+      serial,
+      { registeredTo: { name: reg.name, email: reg.email, orderRef: reg.orderRef, at: reg.receivedAt } },
+      BY,
+      `Registered on the website by ${reg.name || reg.email}`
+    );
+  }
+  return json({ registration: reg });
+}
+
+/** File any web orders that predate auto-filing as sales orders. */
+async function syncWebOrders(kv, ctx) {
+  let filed = 0;
+  let cursor;
+  do {
+    const page = await kv.list({ prefix: 'order:', cursor });
+    for (const k of page.keys) {
+      const order = await getOrder(kv, k.name.slice('order:'.length));
+      if (order && !order.saleId) {
+        const saleId = await fileWebOrder(kv, order, ctx.catalogue);
+        // An order already dispatched from the old screen: carry that over.
+        if (order.dispatch) {
+          const sale = await getRecord(kv, 'sales', saleId);
+          await putRecord(kv, 'sales', { ...sale, status: 'dispatched', dispatch: order.dispatch });
+        }
+        filed++;
+      }
+    }
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+  return json({ filed });
 }
 
 // ---------------------------------------------------------------------------
@@ -459,6 +591,7 @@ async function cleanSale(kv, body, id, ctx, existing) {
   const subtotal = lines.reduce((s, l) => s + l.unitPrice * l.qty, 0);
   const shippingCharge = pence(body.shippingCharge);
   const vat = pence(body.vat);
+  const discount = Math.min(pence(body.discount), subtotal);
   const status = SALE_STATUSES[body.status] ? body.status : existing?.status || 'awaiting_payment';
   return {
     ...(existing || {}),
@@ -469,9 +602,10 @@ async function cleanSale(kv, body, id, ctx, existing) {
     orderedAt: isoDate(body.orderedAt) || todayIso(),
     lines,
     subtotal,
+    discount,
     shippingCharge,
     vat,
-    total: subtotal + shippingCharge + vat,
+    total: subtotal - discount + shippingCharge + vat,
     units: deviceUnits(lines, ctx),
     paymentMethod: clip(body.paymentMethod, 40),
     paymentRef: clip(body.paymentRef, 60),
@@ -483,7 +617,7 @@ async function cleanSale(kv, body, id, ctx, existing) {
   };
 }
 
-async function sales(kv, method, rawId, action, body, ctx) {
+async function sales(kv, method, rawId, action, body, ctx, env) {
   if (!rawId && method === 'GET') {
     return json({ sales: await listRecords(kv, 'sales') });
   }
@@ -521,16 +655,20 @@ async function sales(kv, method, rawId, action, body, ctx) {
     if (sale.dispatch) return fail('Already dispatched', 409);
     const serials = await checkUnitsFree(kv, body.serials, id);
     const at = moveAt(body.at);
+    const day = at.slice(0, 10);
     // Spread the order's device revenue over the units, for margin per unit.
     const deviceRevenue = sale.lines.reduce((s, l) => s + (ctx.catalogue[l.productId]?.device ? l.unitPrice * l.qty : 0), 0);
     const perUnit = serials.length ? Math.round(deviceRevenue / Math.max(serials.length, sale.units || 1)) : 0;
+    const units = await Promise.all(serials.map((serial) => getDevice(kv, serial)));
+    const plans = allocatePlans(units, sale.lines, body.plans || {});
     for (const serial of serials) {
+      const warranty = makeWarranty(plans[serial], day, { ref: id, setAt: new Date().toISOString() });
       const d = await updateDevice(
         kv,
         serial,
-        { status: 'sold', orderId: id, saleId: id, customerId: sale.customerId, assignedTo: sale.customerName, soldPrice: perUnit },
+        { status: 'sold', orderId: id, saleId: id, customerId: sale.customerId, assignedTo: sale.customerName, soldPrice: perUnit, warranty },
         BY,
-        `Dispatched on ${id} to ${sale.customerName}`
+        `Dispatched on ${id} to ${sale.customerName} · ${WARRANTY_PLANS[warranty.plan].name} until ${warranty.end}`
       );
       await recordMove(kv, { type: 'out', serial, model: d.model, ref: id, party: sale.customerName, price: perUnit, cost: d.unitCost, at });
     }
@@ -541,10 +679,39 @@ async function sales(kv, method, rawId, action, body, ctx) {
       serials,
     };
     sale.status = 'dispatched';
+
+    // Keep the web order in step, and email the customer their tracking.
+    if (sale.webOrderId) {
+      await updateOrder(kv, sale.webOrderId, { status: 'dispatched', dispatch: sale.dispatch }).catch((err) => console.error('Could not update web order:', err));
+    }
+    if (body.notifyCustomer && sale.dispatch.tracking) {
+      const email = await customerEmail(kv, sale);
+      if (!email) {
+        sale.dispatch.notified = 'no email on file';
+      } else if (!env.RESEND_API_KEY) {
+        sale.dispatch.notified = 'email not configured';
+      } else {
+        try {
+          await sendShippingNotification(env, email, sale.dispatch.tracking, sale.dispatch.courier);
+          sale.dispatch.notified = email;
+        } catch (err) {
+          console.error('Shipping email failed:', err);
+          sale.dispatch.notified = 'sending failed';
+        }
+      }
+    }
     await putRecord(kv, 'sales', sale);
     return json({ sale });
   }
   return fail('Not Found', 404);
+}
+
+/** The email of the order's named contact, else the customer's first one. */
+async function customerEmail(kv, sale) {
+  const c = await getRecord(kv, 'customers', sale.customerId);
+  const contacts = c?.contacts || [];
+  const named = contacts.find((p) => p.email && p.name && p.name === sale.contactName);
+  return (named || contacts.find((p) => p.email))?.email || '';
 }
 
 /** Normalise a list of serials and check each is a unit we hold and can send. */
@@ -585,6 +752,7 @@ async function webOrders(kv, method, id, action, body) {
           currency: o.currency,
           paidAt: o.paidAt || o.createdAt,
           dispatch: o.dispatch || null,
+          saleId: o.saleId || '',
         }))
         .sort((a, b) => (b.paidAt || '').localeCompare(a.paidAt || '')),
     });
@@ -596,8 +764,11 @@ async function webOrders(kv, method, id, action, body) {
     const serials = await checkUnitsFree(kv, body.serials, id);
     const customer = order.shippingAddress?.name || order.customerEmail || '';
     const at = moveAt(body.at);
+    const units = await Promise.all(serials.map((serial) => getDevice(kv, serial)));
+    const plans = allocatePlans(units, (order.items || []).map((i) => ({ productId: i.id, qty: i.quantity })), body.plans || {});
     for (const serial of serials) {
-      const d = await updateDevice(kv, serial, { status: 'sold', orderId: id, assignedTo: customer }, BY, `Dispatched on web order to ${customer}`);
+      const warranty = makeWarranty(plans[serial], at.slice(0, 10), { ref: id, setAt: new Date().toISOString() });
+      const d = await updateDevice(kv, serial, { status: 'sold', orderId: id, assignedTo: customer, warranty }, BY, `Dispatched on web order to ${customer} · ${WARRANTY_PLANS[warranty.plan].name} until ${warranty.end}`);
       await recordMove(kv, { type: 'out', serial, model: d.model, ref: id, party: customer, cost: d.unitCost, at });
     }
     const updated = await updateOrder(kv, id, {
@@ -669,6 +840,9 @@ async function importRecords(kv, body, ctx) {
       for (const f of ['unitCost', 'soldPrice']) if (f in d) changes[f] = d[f] == null ? null : pence(d[f]);
       if (changes.status && !DEVICE_STATUSES[changes.status]) throw new Invalid(`Unknown status for ${serial}`);
       if ('supplier' in d) changes.supplier = clip(d.supplier, 80);
+      if (d.warranty && WARRANTY_PLANS[d.warranty.plan] && isoDate(d.warranty.start)) {
+        changes.warranty = makeWarranty(d.warranty.plan, isoDate(d.warranty.start), { ref: clip(d.warranty.ref, 60) });
+      }
       await updateDevice(kv, serial, changes, BY, d.event ? clip(d.event, 200) : 'Imported details');
     }
     await backfillMoves(kv, serial);

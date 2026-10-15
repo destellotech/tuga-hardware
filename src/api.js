@@ -8,6 +8,7 @@ import { sendOrderConfirmation, sendNewOrderAlert, sendEnquiry } from './email.j
 import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
 import { handleAdmin } from './admin.js';
+import { fileWebOrder } from './backoffice.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -484,7 +485,7 @@ async function recordOrder(env, orderDetails) {
     // never confirmed (the email service was down, even if Stripe sent its
     // receipt): fall through and retry our own confirmation only. The same
     // goes for the new-order alert to the shop.
-    if (confirmationSent(record) && !record.alertPending) return record;
+    if (confirmationSent(record) && !record.alertPending && record.saleId) return record;
   }
 
   if (!record) {
@@ -492,6 +493,16 @@ async function recordOrder(env, orderDetails) {
     record = { ...orderDetails, alertPending: true };
     if (env.ORDERS) {
       record = await saveOrder(env.ORDERS, orderDetails.orderId, record);
+    }
+  }
+
+  // File it in the back office (customer + sales order) before the alert,
+  // so the alert can link to it. Never let this cost a confirmation.
+  if (env.ORDERS && !record.saleId) {
+    try {
+      record = { ...record, saleId: await fileWebOrder(env.ORDERS, record, ADMIN_CATALOGUE.catalogue) };
+    } catch (err) {
+      console.error('Could not file web order in the back office:', err);
     }
   }
 

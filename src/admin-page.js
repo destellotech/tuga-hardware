@@ -121,6 +121,12 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
   .unit-ed { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
   .pick { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 14.5px; }
   .login { max-width: 380px; margin: 12vh auto 0; }
+  .pick-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); padding: 4px 0; }
+  .pick-row select { width: auto; padding: 6px 8px; font-size: 14px; }
+  .attn { border-color: var(--warn); background: var(--warn-soft); margin-top: 14px; }
+  .attn a { color: var(--ink); }
+  .claim { border-top: 1px solid var(--rule); padding: 10px 0; }
+  .claim:first-child { border-top: none; }
   .x { background: none; border: none; color: var(--ink-light); font-size: 20px; cursor: pointer; padding: 6px 8px; }
   .margin-ok { color: var(--ok); font-weight: 700; }
   @media (max-width: 560px) {
@@ -162,7 +168,17 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     var d = new Date(iso);
     return isNaN(d) ? (iso || '') : d.toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   }
-  function money(p) { return p == null || p === '' ? '—' : '£' + (p / 100).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function money(p) { return p == null || p === '' ? '—' : (p < 0 ? '−' : '') + '£' + (Math.abs(p) / 100).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function daysFrom(a, b) { return Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000); }
+  function plusDays(a, n) { return new Date(Date.parse(a + 'T00:00:00Z') + n * 86400000).toISOString().slice(0, 10); }
+  /* Where a unit's cover stands today, in words and a pill class. */
+  function coverState(w) {
+    if (!w) return { label: 'No warranty yet', cls: 'quote', left: null };
+    var left = daysFrom(today(), w.end);
+    if (left < 0) return { label: 'Expired ' + fmtDate(w.end), cls: 'cancelled', left: left };
+    if (left <= 30) return { label: left + ' days left', cls: 'returned', left: left };
+    return { label: 'Active until ' + fmtDate(w.end), cls: 'in_stock', left: left };
+  }
   function toPence(v) { var n = parseFloat(String(v).replace(/[£,\s]/g, '')); return isNaN(n) ? 0 : Math.round(n * 100); }
   function toPounds(p) { return p ? (p / 100).toFixed(2) : ''; }
   function today() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
@@ -224,7 +240,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     });
   }
 
-  var TABS = [['stock', 'Stock'], ['in', 'Goods in'], ['sales', 'Sales'], ['customers', 'Customers'], ['suppliers', 'Suppliers'], ['moves', 'Movements']];
+  var TABS = [['stock', 'Stock'], ['in', 'Goods in'], ['sales', 'Sales'], ['customers', 'Customers'], ['suppliers', 'Suppliers'], ['warranty', 'Warranty'], ['moves', 'Movements']];
   function shell() {
     root.innerHTML =
       '<header><div class="bar"><div class="brand">Tuga <span>Back Office</span></div>' +
@@ -249,6 +265,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     if (p0 === 'customers') return !p1 ? customerList() : p1 === 'new' ? customerForm() : p2 === 'edit' ? customerForm(p1) : customerView(p1);
     if (p0 === 'suppliers') return !p1 ? supplierList() : p1 === 'new' ? supplierForm() : p2 === 'edit' ? supplierForm(p1) : supplierView(p1);
     if (p0 === 'moves') return moveList();
+    if (p0 === 'warranty') return warrantyView();
     if (p0 === 'import') return importView();
     stockList();
   }
@@ -284,6 +301,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
       main().innerHTML =
         '<div class="head"><h2>Stock</h2><div class="actions"><a class="btn ghost sm" href="#/in/quick">Quick receive</a></div></div>' +
         '<p class="muted">' + onHand + ' unit' + (onHand === 1 ? '' : 's') + ' on the shelf · ' + devs.length + ' recorded in total</p>' +
+        '<div id="attn"></div>' +
         '<div class="grid-sum">' + Object.keys(models).filter(function (id) { return byModel[id]; }).map(function (id) {
           return '<div class="sum"><div class="n">' + byModel[id].in + '</div><div class="l">' + esc(models[id]) + ' in stock<br>' + byModel[id].total + ' recorded</div></div>';
         }).join('') + '</div>' +
@@ -292,11 +310,24 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
           return '<button class="chip' + (UI.stockFilter === p[0] ? ' on' : '') + '" data-f="' + p[0] + '">' + esc(p[1]) + '</button>';
         }).join('') + '</div><div class="list" id="stockRows"></div>';
       draw();
+      loadAttention();
       $('#q').oninput = function () { UI.stockQ = this.value; draw(); };
       $$('[data-f]').forEach(function (b) {
         b.onclick = function () { UI.stockFilter = b.getAttribute('data-f'); $$('[data-f]').forEach(function (x) { x.classList.toggle('on', x === b); }); draw(); };
       });
     }).catch(function (e) { errBox('#main', e); });
+  }
+
+  /* The same list the morning email sends, so nothing is a surprise. */
+  function loadAttention() {
+    api('GET', 'attention').then(function (r) {
+      var box = $('#attn');
+      if (!box || !r.sections.length) return;
+      box.innerHTML = '<div class="card attn"><div class="lbl" style="margin-bottom:8px">Needs attention</div>' + r.sections.map(function (sec) {
+        return '<div style="margin-bottom:10px"><a href="' + esc(sec.link) + '"><strong>' + esc(sec.title) + '</strong></a> <span class="muted">(' + sec.lines.length + ')</span>' +
+          '<div class="muted">' + sec.lines.slice(0, 3).map(esc).join('<br>') + (sec.lines.length > 3 ? '<br>…' : '') + '</div></div>';
+      }).join('') + '</div>';
+    }).catch(function () {});
   }
 
   function deviceView(serial) {
@@ -322,6 +353,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         (d.customerId ? '<dt>Customer</dt><dd><a href="#/customers/' + esc(d.customerId) + '">' + esc(d.assignedTo || d.customerId) + '</a></dd>' : '') +
         (d.soldPrice != null ? '<dt>Sold for</dt><dd class="num">' + money(d.soldPrice) + (margin != null ? ' · <span class="margin-ok">margin ' + money(margin) + '</span>' : '') + '</dd>' : '') +
         '</dl></div>' +
+        warrantyCard(d) +
         (canReturn ? '<div class="card"><h3 style="margin-top:0">Book a return</h3><form id="ret"><div class="three">' +
           field('Comes back as', 'rtStatus', '<select id="rtStatus"><option value="returned">Returned (check it over)</option><option value="in_stock">Straight back in stock</option><option value="faulty">Faulty</option></select>') +
           field('Date', 'rtAt', input('rtAt', today(), { type: 'date' })) +
@@ -336,6 +368,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         '<div id="eMsg"></div><div class="actions"><button class="btn" type="submit">Save</button>' +
         '<button class="btn danger" type="button" id="eDel" style="margin-left:auto">Delete unit</button></div></form>' +
         '<h3>History</h3><div class="hist">' + (hist || '<span class="muted">No history.</span>') + '</div>';
+      bindWarranty(d);
       if (canReturn) $('#ret').onsubmit = function (e) {
         e.preventDefault();
         api('POST', 'devices/' + encodeURIComponent(d.serial) + '/return', { status: val('#rtStatus'), at: val('#rtAt'), note: val('#rtNote') })
@@ -352,6 +385,116 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         if (!confirm('Delete ' + d.serial + ' from stock records? An adjustment is logged in movements.')) return;
         api('DELETE', 'devices/' + encodeURIComponent(d.serial)).then(function () { go('#/stock'); }).catch(function (err) { errBox('#eMsg', err); });
       };
+    }).catch(function (e) { errBox('#main', e); });
+  }
+
+  /* ---------------- warranty on a unit ---------------- */
+  function warrantyCard(d) {
+    var w = d.warranty, P = META.warrantyPlans, st = coverState(w);
+    var html = '<h3>Warranty</h3><div class="card"><div class="head"><strong>' + (w ? esc(P[w.plan].name) : 'Not started') + '</strong><span class="pill st-' + st.cls + '">' + esc(st.label) + '</span></div>';
+    if (w) {
+      html += '<dl style="margin-top:10px"><dt>Cover</dt><dd>' + esc(fmtDate(w.start)) + ' to ' + esc(fmtDate(w.end)) + '</dd>' +
+        (w.ref ? '<dt>From</dt><dd>' + esc(w.ref) + '</dd>' : '') + (w.note ? '<dt>Note</dt><dd>' + esc(w.note) + '</dd>' : '') +
+        (d.registeredTo ? '<dt>Registered by</dt><dd>' + esc(d.registeredTo.name || '') + ' ' + esc(d.registeredTo.email || '') + '</dd>' : '') + '</dl>';
+      if (w.plan === 'standard') {
+        var since = daysFrom(w.start, today());
+        html += '<p class="muted" style="margin-bottom:0">' + (since <= META.planWindowDays
+          ? '3-Year Warranty can be added at the published price until ' + esc(fmtDate(plusDays(w.start, META.planWindowDays))) + ' (' + (META.planWindowDays - since) + ' days left).'
+          : since <= 365 ? '30-day plan window has passed: a 3-Year Warranty now needs a remote diagnostic check first.' : 'Paid plans can no longer be added.') + '</p>';
+      }
+    } else {
+      html += '<p class="muted" style="margin-bottom:0">Cover starts on the dispatch date, set automatically when the unit goes out on an order.</p>';
+    }
+    html += '<details style="margin-top:10px"><summary class="muted">Change plan or dates</summary><form id="wF" style="margin-top:10px"><div class="three">' +
+      field('Plan', 'wPlan', '<select id="wPlan">' + opts(Object.keys(P).reduce(function (m, k) { m[k] = P[k].name; return m; }, {}), w ? w.plan : 'standard') + '</select>') +
+      field('Starts (dispatch date)', 'wStart', input('wStart', w ? w.start : today(), { type: 'date' })) +
+      field('Note', 'wNote', input('wNote', '', { extra: ' placeholder="e.g. plan bought by phone"' })) +
+      '</div><div id="wMsg"></div><button class="btn ghost sm" type="submit">Save warranty</button></form></details></div>';
+
+    var claims = d.claims || [];
+    html += '<h3>Warranty claims</h3><div class="card">' + (claims.length ? claims.map(function (c, i) {
+      return '<div class="claim"><div class="head"><strong>' + esc(fmtDate(c.openedAt)) + '</strong>' + pill(c.status === 'open' ? 'reserved' : 'sold', { reserved: 'Open', sold: 'Closed: ' + c.outcome }) + '</div>' +
+        '<div style="white-space:pre-line">' + esc(c.fault) + '</div>' + (c.notes ? '<div class="muted" style="white-space:pre-line">' + esc(c.notes) + '</div>' : '') +
+        (c.status === 'open' ? '<form class="closeClaim" data-i="' + i + '" style="margin-top:8px"><div class="three">' +
+          '<select class="cOut"><option value="">Outcome…</option>' + ['repaired', 'replaced', 'refunded', 'declined', 'no fault found'].map(function (o) { return '<option>' + o + '</option>'; }).join('') + '</select>' +
+          '<input type="text" class="cNotes" placeholder="Notes (what was done)">' +
+          '<button class="btn ghost sm" type="submit">Close claim</button></div></form>' : (c.closedAt ? '<div class="muted">Closed ' + esc(fmtDate(c.closedAt)) + '</div>' : '')) + '</div>';
+    }).join('') : '<p class="muted" style="margin-top:0">No claims.</p>') +
+      '<details><summary class="muted">Log a new claim</summary><form id="clF" style="margin-top:10px">' +
+      field('Fault reported', 'clFault', area('clFault', '', 'What the customer says is wrong')) +
+      '<div class="two">' + field('Reported on', 'clAt', input('clAt', today(), { type: 'date' })) + '<div></div></div>' +
+      '<div id="clMsg"></div><button class="btn ghost sm" type="submit">Open claim</button></form></details></div>';
+    return html;
+  }
+
+  function bindWarranty(d) {
+    var enc = encodeURIComponent(d.serial);
+    $('#wF').onsubmit = function (e) {
+      e.preventDefault();
+      api('PUT', 'devices/' + enc + '/warranty', { plan: val('#wPlan'), start: val('#wStart'), note: val('#wNote') })
+        .then(function () { deviceView(d.serial); }).catch(function (err) { errBox('#wMsg', err); });
+    };
+    $('#clF').onsubmit = function (e) {
+      e.preventDefault();
+      api('POST', 'devices/' + enc + '/claims', { fault: val('#clFault'), at: val('#clAt') })
+        .then(function () { deviceView(d.serial); }).catch(function (err) { errBox('#clMsg', err); });
+    };
+    $$('form.closeClaim').forEach(function (f) {
+      f.onsubmit = function (e) {
+        e.preventDefault();
+        api('PATCH', 'devices/' + enc + '/claims/' + f.getAttribute('data-i'), { status: 'closed', outcome: f.querySelector('.cOut').value, notes: f.querySelector('.cNotes').value })
+          .then(function () { deviceView(d.serial); }).catch(function (err) { alert(err.message); });
+      };
+    });
+  }
+
+  /* ================= WARRANTY REGISTER ================= */
+  function warrantyView() {
+    loading();
+    Promise.all([api('GET', 'devices'), api('GET', 'registrations')]).then(function (res) {
+      var devs = res[0].devices, regs = res[1].registrations, P = META.warrantyPlans, now = today();
+      var covered = devs.filter(function (d) { return d.wPlan; });
+      var active = covered.filter(function (d) { return daysFrom(now, d.wEnd) >= 0; });
+      var count = function (plan) { return active.filter(function (d) { return d.wPlan === plan; }).length; };
+      var windowOpen = active.filter(function (d) { return d.wPlan === 'standard' && daysFrom(d.wStart, now) <= META.planWindowDays && d.status === 'sold'; });
+      var claims = devs.filter(function (d) { return d.claimsOpen > 0; });
+      var todo = regs.filter(function (r) { return !r.handledAt; });
+      function unitRow(d, extra) {
+        var st = coverState({ plan: d.wPlan, start: d.wStart, end: d.wEnd });
+        return '<a class="row" href="#/device/' + encodeURIComponent(d.serial) + '"><div><div class="t">' + esc(META.models[d.model]) + ' · <span class="mono">' + esc(d.serial) + '</span></div>' +
+          '<div class="s">' + esc(d.assignedTo || '') + (d.wPlan ? ' · ' + esc(P[d.wPlan].name) : '') + '</div>' + (extra ? '<div class="s">' + extra + '</div>' : '') + '</div>' +
+          '<div class="r"><span class="pill st-' + st.cls + '">' + esc(st.label) + '</span></div></a>';
+      }
+      main().innerHTML =
+        '<h2>Warranty</h2><p class="muted">The warranty register. Cover for each unit runs from its dispatch date. Standard is 12 months; the 3-Year Warranty and Total Care run 36 months.</p>' +
+        '<div class="grid-sum">' +
+        [[count('standard'), 'Standard, active'], [count('3yr'), '3-Year, active'], [count('care'), 'Total Care, active'], [claims.length, 'Units with open claims'], [todo.length, 'Registrations to check']]
+          .map(function (x) { return '<div class="sum"><div class="n">' + x[0] + '</div><div class="l">' + esc(x[1]) + '</div></div>'; }).join('') + '</div>' +
+        (claims.length ? '<h3>Open claims</h3><div class="list">' + claims.map(function (d) { return unitRow(d, d.claimsOpen + ' open claim' + (d.claimsOpen === 1 ? '' : 's')); }).join('') + '</div>' : '') +
+        (windowOpen.length ? '<h3>Can still add a 3-Year Warranty</h3><p class="muted">Within ' + META.planWindowDays + ' days of dispatch the plan can be added at the published price. Worth a nudge.</p><div class="list">' +
+          windowOpen.map(function (d) { var left = META.planWindowDays - daysFrom(d.wStart, now); return unitRow(d, left + ' day' + (left === 1 ? '' : 's') + ' left to add, until ' + fmtDate(plusDays(d.wStart, META.planWindowDays))); }).join('') + '</div>' : '') +
+        '<h3>Registrations from the website</h3><div class="list">' + (regs.length ? regs.map(function (r) {
+          return '<div class="row"><div><div class="t"><span class="mono">' + esc(r.serial) + '</span> · ' + esc(META.models[r.model] || r.model) + '</div>' +
+            '<div class="s">' + esc(r.name) + ' · ' + esc(r.email) + (r.orderRef ? ' · order ' + esc(r.orderRef) : '') + (r.purchaseDate ? ' · bought ' + esc(fmtDate(r.purchaseDate)) : '') + '</div>' +
+            '<div class="s">' + (r.matched ? 'Matches our unit, held by ' + esc(r.holder || '—') + ' · <a href="#/device/' + encodeURIComponent(r.serial) + '">open unit</a>' : '<span style="color:var(--bad)">No unit with this serial in our records: check it with the customer</span>') + '</div></div>' +
+            '<div class="r">' + (r.handledAt ? '<span class="pill st-sold">Done</span>' : '<button class="btn sm" data-reg="' + esc(r.key) + '" data-link="' + (r.matched ? 1 : 0) + '">' + (r.matched ? 'Record on unit' : 'Mark checked') + '</button>') +
+            '<span class="muted">' + esc(fmtDate(r.receivedAt)) + '</span></div></div>';
+        }).join('') : '<div class="empty">No registrations yet.</div>') + '</div>' +
+        '<h3>Register</h3><div class="tools"><input type="search" id="wq" placeholder="Search serial or customer"></div><div class="list" id="wRows"></div>';
+      function draw(q) {
+        var list = covered.filter(function (d) { return !q || [d.serial, d.assignedTo, d.imei1].join(' ').toLowerCase().indexOf(q) > -1; })
+          .sort(function (a, b) { return (a.wEnd || '').localeCompare(b.wEnd || ''); });
+        $('#wRows').innerHTML = list.length ? list.map(function (d) { return unitRow(d, fmtDate(d.wStart) + ' to ' + fmtDate(d.wEnd)); }).join('') : '<div class="empty">No units under warranty yet. Cover starts when a unit is dispatched.</div>';
+      }
+      draw('');
+      $('#wq').oninput = function () { draw(this.value.toLowerCase()); };
+      $$('[data-reg]').forEach(function (b) {
+        b.onclick = function () {
+          busy(b, true);
+          api('POST', 'registrations/handle', { key: b.getAttribute('data-reg'), link: b.getAttribute('data-link') === '1' })
+            .then(function () { warrantyView(); }).catch(function (err) { busy(b, false); alert(err.message); });
+        };
+      });
     }).catch(function (e) { errBox('#main', e); });
   }
 
@@ -583,7 +726,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     Promise.all([api('GET', 'sales'), api('GET', 'orders')]).then(function (res) {
       var rows = res[0].sales.map(function (s) {
         return { href: '#/sales/' + encodeURIComponent(s.id), title: s.id + ' · ' + s.customerName, date: s.orderedAt, status: s.status, total: s.total, sub: (s.units || 0) + ' unit' + (s.units === 1 ? '' : 's'), open: ['quote', 'awaiting_payment', 'paid'].indexOf(s.status) > -1 };
-      }).concat(res[1].orders.map(function (o) {
+      }).concat(res[1].orders.filter(function (o) { return !o.saleId; }).map(function (o) {
         var name = (o.shippingAddress && o.shippingAddress.name) || o.customerEmail || 'Web customer';
         return { href: '#/web/' + encodeURIComponent(o.orderId), title: 'Web · ' + name, date: (o.paidAt || '').slice(0, 10), status: o.status || 'pending', total: o.total, sub: o.items.map(function (i) { return i.quantity + ' × ' + i.name; }).join(', '), open: !o.dispatch };
       })).sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
@@ -596,11 +739,17 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
       }
       main().innerHTML =
         '<div class="head"><h2>Sales</h2><a class="btn sm" href="#/sales/new">New sales order</a></div>' +
-        '<p class="muted">Sales orders you raise (quotes, invoices, BACS) and orders from the website.</p>' +
+        '<p class="muted">Every sale in one place. Website orders are filed here automatically, with the customer added to Customers.</p>' +
+        (res[1].orders.some(function (o) { return !o.saleId; }) ? '<div class="card">Some website orders came in before automatic filing. <button class="btn sm" id="syncWeb">File them as sales orders</button><div id="syncMsg"></div></div>' : '') +
         '<div class="chips" style="margin-top:12px">' + [['open', 'To do'], ['done', 'Done'], ['all', 'All']].map(function (p) {
           return '<button class="chip' + (UI.saleFilter === p[0] ? ' on' : '') + '" data-sf="' + p[0] + '">' + p[1] + '</button>';
         }).join('') + '</div><div class="list" id="saleRows"></div>';
       draw();
+      var sync = $('#syncWeb');
+      if (sync) sync.onclick = function () {
+        busy(sync, true);
+        api('POST', 'sync-web', {}).then(function () { saleList(); }).catch(function (err) { busy(sync, false); errBox('#syncMsg', err); });
+      };
       $$('[data-sf]').forEach(function (b) {
         b.onclick = function () { UI.saleFilter = b.getAttribute('data-sf'); $$('[data-sf]').forEach(function (x) { x.classList.toggle('on', x === b); }); draw(); };
       });
@@ -627,7 +776,8 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         field('Order date', 'sOrd', input('sOrd', s.orderedAt, { type: 'date' })) +
         field('Status', 'sStatus', '<select id="sStatus">' + opts(META.saleStatuses, s.status) + '</select>') + '</div>' +
         '<div class="lbl">Lines</div>' + le.html +
-        '<div class="two" style="margin-top:14px">' +
+        '<div class="three" style="margin-top:14px">' +
+        field('Discount (£)', 'sDisc', input('sDisc', toPounds(s.discount), { extra: ' inputmode="decimal"' })) +
         field('Delivery charge (£)', 'sShip', input('sShip', toPounds(s.shippingCharge), { extra: ' inputmode="decimal"' })) +
         field('VAT (£)', 'sVat', input('sVat', toPounds(s.vat), { extra: ' inputmode="decimal" placeholder="0 while not VAT registered"' })) + '</div>' +
         '<div class="three">' +
@@ -645,7 +795,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         var btn = $('#sGo'); busy(btn, true);
         var body = {
           customerId: val('#sCust'), contactName: val('#sContact'), orderedAt: val('#sOrd'), status: val('#sStatus'),
-          lines: le.read(), shippingCharge: toPence(val('#sShip')), vat: toPence(val('#sVat')),
+          lines: le.read(), discount: toPence(val('#sDisc')), shippingCharge: toPence(val('#sShip')), vat: toPence(val('#sVat')),
           paymentMethod: val('#sPay'), paymentRef: val('#sPayRef'), paidAt: val('#sPaid'), invoiceNumber: val('#sInv'),
           deliveryAddress: val('#sAddr'), notes: val('#sNotes'),
         };
@@ -667,6 +817,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     Promise.all([api('GET', 'sales/' + encodeURIComponent(id)), api('GET', 'devices')]).then(function (res) {
       var s = res[0].sale, units = res[0].devices, cost = res[0].cost, all = res[1].devices, cat = META.catalogue;
       var extras = [['Subtotal', s.subtotal]];
+      if (s.discount) extras.push(['Discount', -s.discount]);
       if (s.shippingCharge) extras.push(['Delivery', s.shippingCharge]);
       extras.push(['VAT', s.vat || 0]);
       extras.push(['Total', s.total, true]);
@@ -679,7 +830,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         '<a class="back" href="#/sales">← Sales</a>' +
         '<div class="head"><h2>' + esc(s.id) + '</h2><div class="actions">' + pill(s.status, META.saleStatuses) + '<a class="btn ghost sm" href="#/sales/' + esc(s.id) + '/edit">Edit</a></div></div>' +
         '<div class="card"><dl><dt>Customer</dt><dd><a href="#/customers/' + esc(s.customerId) + '">' + esc(s.customerName) + '</a>' + (s.contactName ? ' · ' + esc(s.contactName) : '') + '</dd>' +
-        '<dt>Ordered</dt><dd>' + esc(fmtDate(s.orderedAt)) + '</dd>' +
+        '<dt>Ordered</dt><dd>' + esc(fmtDate(s.orderedAt)) + (s.channel === 'web' ? ' · on the website' : '') + '</dd>' +
         '<dt>Payment</dt><dd>' + esc(s.paymentMethod || '') + (s.paymentRef ? ' · <span class="mono">' + esc(s.paymentRef) + '</span>' : '') + (s.paidAt ? ' · paid ' + esc(fmtDate(s.paidAt)) : ' · not paid yet') + '</dd>' +
         (s.invoiceNumber ? '<dt>Invoice</dt><dd class="mono">' + esc(s.invoiceNumber) + '</dd>' : '') +
         (s.deliveryAddress ? '<dt>Deliver to</dt><dd>' + esc(s.deliveryAddress) + '</dd>' : '') +
@@ -690,17 +841,24 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         (s.dispatch
           ? '<h3>Dispatched</h3><div class="card"><dl><dt>When</dt><dd>' + esc(fmtWhen(s.dispatch.at)) + '</dd>' +
             (s.dispatch.courier ? '<dt>Courier</dt><dd>' + esc(s.dispatch.courier) + '</dd>' : '') +
-            (s.dispatch.tracking ? '<dt>Tracking</dt><dd class="mono">' + trackLink(s.dispatch.courier, s.dispatch.tracking) + '</dd>' : '') + '</dl>' +
+            (s.dispatch.tracking ? '<dt>Tracking</dt><dd class="mono">' + trackLink(s.dispatch.courier, s.dispatch.tracking) + '</dd>' : '') +
+            (s.dispatch.notified ? '<dt>Customer emailed</dt><dd>' + esc(s.dispatch.notified) + '</dd>' : '') + '</dl>' +
             (cost != null ? '<p style="margin-bottom:0">Cost of units ' + money(cost) + ' · device revenue ' + money(deviceRevenue) + ' · <span class="margin-ok">gross margin ' + money(deviceRevenue - cost) + '</span></p>' : '') + '</div>' +
             '<h3>Units sent</h3><div class="list">' + (units.length ? units.map(function (d) {
-              return '<a class="row" href="#/device/' + encodeURIComponent(d.serial) + '"><div><div class="t">' + esc(META.models[d.model]) + '</div><div class="s mono">' + esc(d.serial) + '</div></div><div class="r">' + pill(d.status, META.deviceStatuses) + '<span class="num">cost ' + money(d.unitCost) + '</span></div></a>';
+              return '<a class="row" href="#/device/' + encodeURIComponent(d.serial) + '"><div><div class="t">' + esc(META.models[d.model]) + '</div><div class="s mono">' + esc(d.serial) + '</div>' +
+                (d.warranty ? '<div class="s">' + esc(META.warrantyPlans[d.warranty.plan].name) + ' until ' + esc(fmtDate(d.warranty.end)) + '</div>' : '') +
+                '</div><div class="r">' + pill(d.status, META.deviceStatuses) + '<span class="num">cost ' + money(d.unitCost) + '</span></div></a>';
             }).join('') : '<div class="empty">No serials recorded.</div>') + '</div>'
           : (s.status !== 'cancelled' ? '<h3>Dispatch</h3><form id="dsp" class="card"><div class="lbl">Units going out</div>' +
             (avail.length ? avail.map(function (d) {
-              return '<label class="pick"><input type="checkbox" value="' + esc(d.serial) + '"> ' + esc(META.models[d.model]) + ' · <span class="mono">' + esc(d.serial) + '</span> ' + pill(d.status, META.deviceStatuses) + '</label>';
-            }).join('') : '<p class="muted">No matching units in stock. Book them in from <a href="#/in">Goods in</a> first.</p>') +
+              return '<div class="pick-row"><label class="pick"><input type="checkbox" value="' + esc(d.serial) + '"> ' + esc(META.models[d.model]) + ' · <span class="mono">' + esc(d.serial) + '</span> ' + pill(d.status, META.deviceStatuses) + '</label>' +
+                '<select class="plan" data-serial="' + esc(d.serial) + '" aria-label="Warranty for ' + esc(d.serial) + '"><option value="">Warranty: from the order</option>' +
+                Object.keys(META.warrantyPlans).map(function (k) { return '<option value="' + k + '">' + esc(META.warrantyPlans[k].name) + '</option>'; }).join('') + '</select></div>';
+            }).join('') + '<p class="muted">Warranty starts on the dispatch date. "From the order" gives the 3-Year Warranty to as many units as the order paid for, and the standard 12 months to the rest.</p>'
+              : '<p class="muted">No matching units in stock. Book them in from <a href="#/in">Goods in</a> first.</p>') +
             '<div class="three" style="margin-top:12px">' + field('Courier', 'dCour', input('dCour', 'Royal Mail')) + field('Tracking number', 'dTrack', input('dTrack', '', { extra: ' class="mono"' })) +
             field('Dispatched on', 'dAt', input('dAt', today(), { type: 'date' })) + '</div>' +
+            '<label class="pick"><input type="checkbox" id="dNotify" checked> Email the tracking number to the customer</label>' +
             '<div id="dMsg"></div><button class="btn" type="submit" id="dGo">Dispatch</button></form>' : ''));
       if (canPay) $('#payF').onsubmit = function (e) {
         e.preventDefault();
@@ -710,10 +868,12 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
       var dsp = $('#dsp');
       if (dsp) dsp.onsubmit = function (e) {
         e.preventDefault();
-        var serials = $$('#dsp .pick input:checked').map(function (c) { return c.value; });
+        var serials = $$('#dsp .pick-row input:checked').map(function (c) { return c.value; });
         if (s.units && serials.length !== s.units && !confirm('The order has ' + s.units + ' unit(s) and you picked ' + serials.length + '. Dispatch anyway?')) return;
         var btn = $('#dGo'); busy(btn, true);
-        api('POST', 'sales/' + encodeURIComponent(s.id) + '/dispatch', { serials: serials, courier: val('#dCour'), tracking: val('#dTrack'), at: val('#dAt') })
+        var plans = {};
+        $$('#dsp select.plan').forEach(function (sel) { if (sel.value) plans[sel.getAttribute('data-serial')] = sel.value; });
+        api('POST', 'sales/' + encodeURIComponent(s.id) + '/dispatch', { serials: serials, courier: val('#dCour'), tracking: val('#dTrack'), at: val('#dAt'), plans: plans, notifyCustomer: $('#dNotify').checked })
           .then(function () { saleView(s.id); }).catch(function (err) { busy(btn, false); errBox('#dMsg', err); });
       };
     }).catch(function (e) { errBox('#main', e); });
@@ -729,6 +889,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     Promise.all([api('GET', 'orders'), api('GET', 'devices')]).then(function (res) {
       var o = res[0].orders.filter(function (x) { return x.orderId === id; })[0];
       if (!o) { main().innerHTML = '<a class="back" href="#/sales">← Sales</a><div class="msg bad">Order not found.</div>'; return; }
+      if (o.saleId) { location.replace('#/sales/' + encodeURIComponent(o.saleId)); return; }
       var a = o.shippingAddress || {};
       var addr = [a.name, a.line1, a.line2, a.city, a.postal_code].filter(Boolean).map(esc).join('\n');
       var ids = {};
