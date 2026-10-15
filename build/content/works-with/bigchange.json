@@ -1,0 +1,134 @@
+{
+  "slug": "bigchange",
+  "software": "BigChange",
+  "vendor": "BigChange Limited",
+  "vendor_url": "https://www.bigchange.com/",
+  "title": "Rugged tablet for BigChange JobWatch: UK buyer's guide",
+  "meta_description": "BigChange JobWatch needs Android 9 or later. The Tuga A8 (Android 12, 6GB RAM, 1000 nit screen, removable battery) meets it and docks in the van.",
+  "target_query": "best tablet for BigChange",
+  "h1": "Rugged tablet for BigChange JobWatch",
+  "intro": [
+    "BigChange describes itself as job management software built for UK field service teams, combining job handling, scheduling, vehicle tracking, customer service and billing in one system. The sectors on its site include plumbing, heating and HVAC, industrial doors, fire and security, facilities management, electrical contracting, equipment rental and hire, drainage, waste and environmental, and building maintenance. The office signs in to the BigChange system through a web login; engineers and drivers work from the JobWatch by BigChange mobile app.",
+    "The mobile app is where the work in the field is recorded. The vendor's field resource management page says the app works offline and can collect signatures without connectivity, that engineers capture and annotate photos, follow custom worksheets and workflows step by step, and that the worksheets handle data capture, photo capture and barcode scanning. It also says engineers can see the last 10 jobs done on a site and up to 90 previous photos. Much of that happens between the van and the customer's door, in the rain, in a cold yard or in a cab in full sun, which is where a consumer tablet tends to crack, fog or become unreadable.",
+    "This page sets out what BigChange publishes about the devices JobWatch runs on, what it does not publish, which Tuga rugged devices meet the published requirement, and how a UK field service business can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 9 or later, from Google Play, on phones and tablets",
+      "detail": "The Android app is published on Google Play as JobWatch by BigChange (package bigchangeapps.com.jobwatch, developer BigChange Limited). When checked on 15 October 2026 the listing showed version 5.38.0, updated 6 October 2026, with a minimum API level of 28 (Android 9), and device chips for Phone and Tablet. The vendor's field resource management page says the app is for both Android and iOS tablets and phones.",
+      "source_url": "https://play.google.com/store/apps/details?id=bigchangeapps.com.jobwatch&hl=en_GB"
+    },
+    {
+      "requirement": "RAM, storage and screen size: not published",
+      "detail": "No minimum or recommended RAM, storage or screen size for JobWatch was found on the vendor's site, its Google Play listing or the pages of its help guide that could be read. The vendor's help guide at support.bigchange.com loads its articles with JavaScript, so if your BigChange account manager or the help guide gives a device specification, check it against the figures below before you buy.",
+      "source_url": "https://www.bigchange.com/platform/field-resource-management/"
+    },
+    {
+      "requirement": "Offline working, including signatures",
+      "detail": "The vendor's field resource management page states that the field service app works offline and lets engineers collect signatures without connectivity. A vendor blog post from October 2023 adds that engineers can access job details even without a data connection. The vendor does not publish how much is cached on the device, how sync works when signal returns, or whether the device has to be online at the start of a shift.",
+      "source_url": "https://www.bigchange.com/platform/field-resource-management/"
+    },
+    {
+      "requirement": "Worksheets, photos and barcode scanning in the app",
+      "detail": "The same page describes custom worksheets and workflows that take engineers through a job step by step, with data capture, photo capture and barcode scanning, and says engineers can capture and annotate photos on site and view up to 90 previous photos and the last 10 jobs done at a site. The October 2023 blog post mentions scanning barcodes and QR codes. The vendor does not say whether scanning uses the camera or supports a dedicated scan engine, so plan on the camera.",
+      "source_url": "https://www.bigchange.com/platform/field-resource-management/"
+    },
+    {
+      "requirement": "Vehicle tracking uses a separate tracker, not the tablet",
+      "detail": "The vendor's vehicle tracking page says BigChange provides hard-wired vehicle tracking as standard, with a plug and go option that connects to the vehicle's OBD-II port and an optional CANbus and tacho connection for HGVs. Customers can be sent a tracking link showing their engineer's current location. The vendor does not say whether the JobWatch app uses the device's own GPS for this, so the GNSS receiver in a Tuga device should not be treated as a replacement for a BigChange tracker.",
+      "source_url": "https://bigchange.com/features/vehicle-tracking-software"
+    },
+    {
+      "requirement": "Windows: no Windows app, office login in a web browser",
+      "detail": "The vendor names Android and iOS for the mobile app and publishes no Windows app. The Login link on the vendor's home page goes to clients.bigchange.com, a web sign-in for the office system. No list of supported browsers or browser versions was found on the vendor's site.",
+      "source_url": "https://clients.bigchange.com/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "BigChange is built around the van: vehicle tracking, scheduling across a fleet and a step-by-step job flow that starts in the cab and finishes at the customer's door. The Tuga A8 runs Android 12 with Google Play, which meets the published Android 9 requirement, and it is built for that pattern. VESA mount points and a pogo pin connector mean it locks into the vehicle mounting dock on the road and comes out as a site tablet, the 1000 nit screen stays readable through a windscreen or on a doorstep in sun, and the 8000mAh battery is removable, so a charged spare can take over on a long day. Its 8 inch screen is large enough for worksheets and a signature and small enough to hold in one hand. BigChange publishes no RAM figure; the A8 has 6GB. At £379 it costs £70 less than the A10. Be clear on the trade-offs: it is sealed to IP67 rather than IP68, has no MIL-STD rating, and does not fit the charging dock.",
+      "fit": [
+        "Requirement: Android 9 or later from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: RAM and storage not published by the vendor. Tuga A8: 6GB RAM and 128GB storage with a microSD slot.",
+        "Requirement: photo capture and barcode scanning in worksheets. Tuga A8: 13MP autofocus rear camera with flash (scanning through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: a device that moves between van and site. Tuga A8: VESA mount points, pogo pin dock connector, fits the vehicle mounting dock, 8 inch IPS 1280 x 800 at 1000 nits with AGC glass.",
+        "Requirement: offline working on long days away from a charger. Tuga A8: removable 8000mAh battery, IP67 with no MIL-STD rating, dual SIM 4G for patchy coverage."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "Choose the Tuga A10 where the work is wetter or harder on kit, or where worksheets are long. It runs Android 14, five major versions above the Android 9 minimum against the A8's three, which gives more room if the vendor raises its minimum in future. It has 8GB of RAM against the A8's 6GB, a sharper 10.1 inch 1920 x 1200 screen, and IP68 and MIL-STD-810H ratings, which the A8 does not have, for drainage, waste and environmental work, roofs and yards. It fits both the vehicle mounting dock and the charging dock. The trade-offs against the A8 are a dimmer 350 nit screen, a larger 680g body and a price of £449.",
+      "fit": [
+        "Requirement: Android 9 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: RAM and storage not published by the vendor. Tuga A10: 8GB RAM and 128GB storage, with microSD up to 2TB.",
+        "Requirement: photo capture, annotation and barcode scanning. Tuga A10: 13MP rear camera with flash (scanning through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: long worksheets and signatures on screen. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: a device that survives wet, dirty sites. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For engineers who carry the device all day rather than mount it, the Tuga A6 runs JobWatch on a 6 inch handheld at 277g that fits a pocket or a belt holster. The Google Play listing carries a Phone device chip, so a phone-sized layout is one the vendor publishes for. It runs Android 15, well above the Android 9 minimum. BigChange publishes no RAM figure, and the A6 has 4GB against the A8's 6GB and the A10's 8GB, so run a trial unit through a full day of worksheets and photos before a fleet order. It has a Zebra 2D scan engine, but the vendor does not document scan engine support, so plan on the 13MP rear camera. A 6 inch screen shows less of a long worksheet than the tablets.",
+      "fit": [
+        "Requirement: Android 9 or later from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: RAM and storage not published by the vendor. Tuga A6: 4GB RAM, 64GB storage, microSD up to 256GB.",
+        "Requirement: photo capture and barcode scanning. Tuga A6: 13MP rear camera with flash (scanning through the camera via the app; the Zebra 2D scan engine is not a documented BigChange input).",
+        "Requirement: a device that survives outdoor work and drops. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g.",
+        "Requirement: connectivity for real-time updates. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, removable 5050mAh battery."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your BigChange administrator to set the engineer or driver up as a mobile user and confirm which worksheets and workflows they will use.",
+    "On the Tuga A8, A10 or A6, open Google Play and install JobWatch by BigChange (package bigchangeapps.com.jobwatch, developer BigChange Limited), then sign in with the user's details.",
+    "Allow camera access for photos and barcode scanning, and allow notifications so new jobs arrive.",
+    "Before the first shift without signal, open the app while connected and check that the day's jobs have come through. The vendor states the app works offline but does not publish how its offline cache fills, so test a job with the device in flight mode, including photos and a signature, then reconnect and check it reaches the office.",
+    "If you use BigChange vehicle tracking, keep the hard-wired or plug and go tracker in the vehicle. The vendor does not say the app replaces it.",
+    "Fit the vehicle mounting dock for the A8 or A10, add the 12V DC car charger, or the car phone mount and belt holster for the A6. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8 and A10), for engineers and drivers working from a van",
+    "12V DC car charger, £26",
+    "Charging dock, £49.99 (Tuga A10; it does not fit the A8 or A6)",
+    "Capacitive stylus, £14.99 (Tuga A8 and A10), for customer signatures on screen",
+    "Car phone mount, £17, and belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8 and A10)"
+  ],
+  "faq": [
+    {
+      "q": "Will BigChange JobWatch run on the Tuga A8?",
+      "a": "The Google Play listing for JobWatch by BigChange gives a minimum API level of 28, which is Android 9. The Tuga A8 runs Android 12 with Google Play, so it meets that published requirement, as do the Tuga A10 (Android 14) and Tuga A6 (Android 15). BigChange does not publish a RAM, storage or screen size requirement, so there is nothing further to check against. We do not describe any device as certified or tested by BigChange; this is the vendor's published requirement set against the device specifications."
+    },
+    {
+      "q": "Does JobWatch work offline on these tablets?",
+      "a": "The vendor states that the field service app works offline and that engineers can collect signatures without connectivity. It does not publish how much is stored on the device or how sync works, so test a job in flight mode on a trial unit before relying on it. The A8, A10 and A6 all run the Google Play app."
+    },
+    {
+      "q": "Can the tablet replace our BigChange vehicle tracker?",
+      "a": "Do not plan on it. BigChange describes hard-wired tracking as standard, with a plug and go unit for the OBD-II port as an option, and it does not say the JobWatch app uses the device's own GPS for tracking. All three Android devices have GNSS receivers, but treat that as a feature of the device, not of BigChange."
+    },
+    {
+      "q": "Should engineers have the 8 inch A8 or the 10.1 inch A10?",
+      "a": "Both meet the published Android 9 requirement. The A8 has a 1000 nit screen against the A10's 350 nits, a removable battery, VESA mount points and costs £379 against £449, which suits a van-based workflow. The A10 has 8GB of RAM against 6GB, a sharper 1920 x 1200 screen, IP68 against IP67 and a MIL-STD-810H rating the A8 does not have, which suits wetter, dirtier work and longer worksheets. Both fit the vehicle mounting dock."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10) or £349 (A6) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "BigChange publishes no Windows app and no list of supported browsers, so the Tuga W10 is not recommended here: it would only reach the office system through a browser sign-in, and the engineer features (worksheets, photos, signatures, barcode scanning and offline working) are in the Android and iOS app. BigChange publishes no RAM, storage or screen size requirement, so the A6's 4GB of RAM cannot be checked against a vendor figure; trial one first. The vendor does not say whether barcode scanning uses the camera or a scan engine, so the A6's Zebra 2D scan engine should not be bought for BigChange on that basis. Vehicle tracking uses BigChange's own hard-wired or plug and go trackers, and NFC is not mentioned by the vendor, so the GNSS and NFC on the A8, A10 and A6 are device features, not BigChange features.",
+  "disclaimer": "BigChange and JobWatch are products of BigChange Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by BigChange Limited.",
+  "sources": [
+    "https://www.bigchange.com/",
+    "https://www.bigchange.com/platform/field-resource-management/",
+    "https://www.bigchange.com/blog/job-sheets-with-integrated-mobile-apps",
+    "https://bigchange.com/features/vehicle-tracking-software",
+    "https://clients.bigchange.com/",
+    "https://play.google.com/store/apps/details?id=bigchangeapps.com.jobwatch&hl=en_GB"
+  ]
+}
