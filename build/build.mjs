@@ -730,7 +730,7 @@ const stars = (n) =>
   `<span class="review-stars" role="img" aria-label="${n} out of 5 stars">${'★'.repeat(n)}<span aria-hidden="true">${'★'.repeat(5 - n)}</span></span>`;
 
 const reviewMonth = (iso) =>
-  new Date(iso).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  new Date(iso).toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 
 function reviewSection(p, list) {
   if (!list.length) return '';
@@ -2280,6 +2280,7 @@ const formatDate = (iso) =>
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    timeZone: 'UTC',
   });
 
 posts.forEach((post) => {

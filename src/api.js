@@ -1092,9 +1092,11 @@ async function storeAndNotify(env, key, record, enquiry, putOptions) {
   } catch (mailErr) {
     console.error(`Notification email failed for ${key}:`, mailErr);
     if (!stored) return corsError('Could not send the form', 500);
+    // Stored where nobody looks unless told: let the page ask for an email.
+    return corsResponse({ ok: true, emailed: false });
   }
 
-  return corsResponse({ ok: true });
+  return corsResponse({ ok: true, emailed: true });
 }
 
 /**

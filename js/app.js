@@ -14,6 +14,13 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  /** A network failure reads as "Failed to fetch"; say what happened instead. */
+  const friendlyError = (err) => {
+    const msg = err instanceof TypeError ? 'We could not reach our server.' : String(err?.message || 'That did not send.');
+    return /[.!?]$/.test(msg) ? msg : msg + '.';
+  };
+  const escapeText = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
   const money = (n) =>
     '£' +
     Number(n).toLocaleString('en-GB', {
@@ -104,7 +111,12 @@
     },
 
     write(items) {
-      localStorage.setItem(this.KEY, JSON.stringify(items));
+      try {
+        localStorage.setItem(this.KEY, JSON.stringify(items));
+      } catch {
+        toast('Your browser is blocking site storage, so the basket cannot be saved. Email support@tugahardware.com to order.');
+        return false;
+      }
       paintCount();
       document.dispatchEvent(new CustomEvent('cart:change'));
     },
@@ -114,7 +126,7 @@
       const existing = items.find((i) => i.id === id);
       if (existing) existing.quantity += qty;
       else items.push({ id, quantity: qty });
-      this.write(items);
+      return this.write(items) !== false;
     },
 
     setQty(id, qty) {
@@ -287,6 +299,7 @@
       const open = nav.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) $('a', nav)?.focus();
     });
 
     $$('a', nav).forEach((a) => a.addEventListener('click', close));
@@ -480,7 +493,7 @@
         if (/^(acc|wty)-/.test(id) || !covers) warrantySku = '';
       }
 
-      Cart.add(id, qty);
+      if (!Cart.add(id, qty)) return;
       if (warrantySku) Cart.add(warrantySku, qty);
 
       const product = products ? findItem(products, id) : null;
@@ -682,7 +695,11 @@
     try {
       [products] = await Promise.all([getCatalogue(), loadPaymentMethods()]);
     } catch {
-      emptyEl.hidden = false;
+      catalogue = null;
+      emptyEl.hidden = true;
+      layout.hidden = false;
+      $('[data-cart-items]').innerHTML = '<p class="form-status form-status-err" role="alert">We could not load prices just now, but your basket is saved. <button type="button" class="btn btn-sm btn-outline" data-cart-retry>Try again</button> or email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a>.</p>';
+      $('[data-cart-retry]')?.addEventListener('click', renderCart);
       return;
     }
 
@@ -833,7 +850,7 @@
       btn.disabled = false;
       btn.textContent = original;
       setStatus(
-        `${err.message}. Email ${'support@tugahardware.com'} and we will take the order manually.`
+        `${friendlyError(err)} Email support@tugahardware.com and we will take the order manually.`
       );
     }
   }
@@ -1005,7 +1022,7 @@
         .then(({ ok, data }) => {
           if (ok && data.status === 'confirmed') {
             // The basket has served its purpose once the order is placed.
-            localStorage.removeItem(Cart.KEY);
+            try { localStorage.removeItem(Cart.KEY); } catch {}
             paintCount();
             const paidBy = data.provider === 'paypal' ? 'PayPal' : 'card';
             const ref = data.orderId ? String(data.orderId) : '';
@@ -1291,6 +1308,8 @@
 
       rows.forEach((row) => {
         const qty = qtyOf(row);
+        const input = $('[data-calc-qty]', row);
+        if (input.value !== '' && Number(input.value) !== qty) input.value = qty;
         const unitPence = Math.round(Number(row.dataset.price) * 100);
         // Same per-unit rounding as the server (src/api.js).
         const chargedPence = Math.round(unitPence * (1 - tier.percent / 100));
@@ -1333,6 +1352,8 @@
     addBtn.addEventListener('click', () => {
       rows.forEach((row) => {
         const qty = qtyOf(row);
+        const input = $('[data-calc-qty]', row);
+        if (input.value !== '' && Number(input.value) !== qty) input.value = qty;
         if (qty) Cart.add(row.dataset.calcRow, qty);
       });
       toast('Added to basket');
@@ -1376,12 +1397,17 @@
           const data = await res.json().catch(() => ({}));
           if (!res.ok) throw new Error(data.error || 'That did not send');
 
+          if (data.emailed === false) {
+            status.className = 'form-status form-status-err';
+            status.innerHTML = 'Saved, but our email system did not confirm it. Please also email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a> so we see it today.';
+            return;
+          }
           form.reset();
           status.className = 'form-status form-status-ok';
           status.textContent = form.dataset.success;
         } catch (err) {
           status.className = 'form-status form-status-err';
-          status.innerHTML = `${err.message}. You can also email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a>.`;
+          status.innerHTML = `${escapeText(friendlyError(err))} You can also email <a href="mailto:support@tugahardware.com">support@tugahardware.com</a>.`;
         } finally {
           status.hidden = false;
           btn.disabled = false;
@@ -1440,7 +1466,7 @@
         lede.textContent = 'Thank you. We read every review, and we may publish yours on the site, marked as a verified purchase.';
       } catch (err) {
         status.className = 'form-status form-status-err';
-        status.textContent = `${err.message}. Please try again.`;
+        status.textContent = `${friendlyError(err)} Please try again.`;
         status.hidden = false;
         btn.disabled = false;
       }
