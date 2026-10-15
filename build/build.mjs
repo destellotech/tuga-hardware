@@ -429,6 +429,10 @@ function tradeCard(t) {
 
 const hero = () => `
     <section class="hero">
+      <video class="hero-video" muted loop playsinline preload="metadata" poster="${versioned('/img/hero/plumber-on-site-poster.webp')}" aria-hidden="true">
+        <source src="${versioned('/img/hero/plumber-on-site.webm')}" type="video/webm">
+        <source src="${versioned('/img/hero/plumber-on-site.mp4')}" type="video/mp4">
+      </video>
       <div class="container hero-inner">
         <div class="hero-content">
           ${eyebrow('Rugged Android & Windows tablets')}
@@ -457,12 +461,6 @@ const hero = () => `
             </div>
           </div>
         </div>
-        <figure class="hero-drawing">
-          <video class="hero-video" muted loop playsinline preload="metadata" poster="${versioned('/img/hero/plumber-on-site-poster.webp')}" width="960" height="720" aria-label="A plumber in a hard hat fitting pipework on a building site">
-            <source src="${versioned('/img/hero/plumber-on-site.webm')}" type="video/webm">
-            <source src="${versioned('/img/hero/plumber-on-site.mp4')}" type="video/mp4">
-          </video>
-        </figure>
       </div>
     </section>`;
 
