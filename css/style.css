@@ -730,15 +730,19 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 
 .hero-content { max-width: 40ch; }
 
-/* The lead device, cut out and set against a building site. */
+/* A muted, looping clip of a tradesman at work. The poster frame stands in
+   until app.js starts playback, and stays put for reduced motion. */
 .hero-drawing {
   position: relative;
 }
 
-.hero-drawing img {
+.hero-video {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--green-900);
   border: 1px solid rgba(247, 244, 239, 0.12);
 }
 

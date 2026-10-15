@@ -313,6 +313,18 @@
     });
   }
 
+  /* ------------------------------------------------------------- hero video */
+
+  // The clip ships without autoplay so the poster is all anyone sees until
+  // this runs: no motion for reduced-motion users, no download on Save-Data.
+  function initHeroVideo() {
+    const video = $('.hero-video');
+    if (!video) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (navigator.connection && navigator.connection.saveData) return;
+    video.play().catch(() => {});
+  }
+
   /* ----------------------------------------------------------------- reveal */
 
   function initReveal() {
@@ -1480,6 +1492,7 @@
     pruneCart();
     initNav();
     initReveal();
+    initHeroVideo();
     initCookies();
     initQty();
     initCoverChooser();
