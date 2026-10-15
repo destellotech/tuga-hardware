@@ -45,7 +45,7 @@
     },
     {
       "requirement": "NFC and RFID: not documented",
-      "detail": "Fiix's help centre, Play listing and App Store listing describe barcode and QR scanning only. No NFC or RFID feature is documented. The NFC on the Tuga A10 and A6 and the optional UHF RFID reader on the Tuga W10 should not be treated as Fiix features.",
+      "detail": "Fiix's help centre, Play listing and App Store listing describe barcode and QR scanning only. No NFC or RFID feature is documented. The NFC on the Tuga A10, A8 and A6 and the optional UHF RFID reader on the Tuga W10 should not be treated as Fiix features.",
       "source_url": "https://helpdesk.fiixsoftware.com/hc/en-us/articles/4413567981076-About-the-mobile-app"
     }
   ],
@@ -60,6 +60,18 @@
         "Fiix offline mode stores attachments locally: 128GB storage plus microSD up to 2TB, 8GB RAM.",
         "Fiix camera-based barcode and QR scanner: 13MP rear camera with flash. Scanning is handled by the app through the camera; the A10 has no dedicated scan engine, so test your sample labels as Fiix advises.",
         "Fiix asks for a device charged for the shift and a connection to sync: 8000mAh battery, 4G dual SIM, dual-band Wi-Fi 5. IP68 and MIL-STD-810H, operating temperature -20 to 60C."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the middle size, an 8 inch tablet that is easier to hold in one hand than the A10 while still giving Fiix's tablet landscape layout more room than a handheld. It runs Android 12 with Google Play, which meets Fiix's Android 11 or later requirement with less margin than the A10, and Fiix has raised its minimum before, so watch its release notes. Its 1000 nit screen suits outdoor assets and sunlit yards, the 8000mAh battery is removable so a charged spare covers the full shift Fiix's sync checklist asks for, and VESA mount points with a pogo pin connector suit vehicle docking. The trade-offs against the A10 are IP67 sealing rather than IP68, no MIL-STD rating, a lower 1280 x 800 resolution and 6GB RAM against 8GB, with the same 128GB storage plus a microSD slot for offline attachments. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Fiix requires Android 11 or later: the A8 runs Android 12 with Google Play, so it meets that requirement.",
+        "Fiix landscape mode on tablets: 8 inch IPS 1280 x 800 screen, 1000 nits, AGC glass.",
+        "Fiix offline mode stores attachments locally: 128GB storage plus a microSD slot, 6GB RAM.",
+        "Fiix camera-based barcode and QR scanner: 13MP autofocus rear camera with flash. The A8 has no dedicated scan engine, so test your sample labels as Fiix advises.",
+        "Fiix asks for a device charged for the shift and a connection to sync: removable 8000mAh battery, 4G LTE dual SIM, Wi-Fi. IP67, with no MIL-STD rating."
       ]
     },
     {
@@ -88,7 +100,7 @@
   ],
   "setup_steps": [
     "Create a Fiix account at fiixsoftware.com or use your organisation's existing one. Fiix's published plans are the Free plan ($0, limited users, up to 25 active preventive maintenance tasks, mobile app included), Basic at $45 per user per month, Professional at $75 per user per month and Enterprise at custom pricing. Plans are month-to-month or annual. Prices are published in dollars; there is no GBP price list.",
-    "Connect the Tuga A10 or A6 to Wi-Fi or fit a SIM, sign in to a Google account, and install Fiix CMMS from the Google Play Store (developer Fiix by Rockwell Automation, package fiix.cmms.mobile). Do not side-load the APK or root the device, as Fiix does not support either. If your fleet is managed by MDM software, note that Fiix's technical requirements say EMM solutions are not supported while its FAQ says the app can be used with MDM software with integration issues handled by the MDM vendor, so confirm your setup with Fiix first.",
+    "Connect the Tuga A10, A8 or A6 to Wi-Fi or fit a SIM, sign in to a Google account, and install Fiix CMMS from the Google Play Store (developer Fiix by Rockwell Automation, package fiix.cmms.mobile). Do not side-load the APK or root the device, as Fiix does not support either. If your fleet is managed by MDM software, note that Fiix's technical requirements say EMM solutions are not supported while its FAQ says the app can be used with MDM software with integration issues handled by the MDM vendor, so confirm your setup with Fiix first.",
     "Open the app and sign in with your Fiix user credentials. The A10 runs Android 14 and the A6 Android 15, both of which meet Fiix's Android 11 or later requirement.",
     "Before taking the tablet into a low-signal area, open the app while connected so the data syncs. Fiix says most features work in offline mode. The Android app syncs automatically every 15 minutes when connected, and a manual sync is available under More. Sync before logging out, because unsynced changes are lost on logout.",
     "Print a few sample asset labels and test them with the in-app camera scanner before tagging the whole site, as Fiix's barcode FAQ advises (it recommends labels of at least 22 mm and a matte finish). Fiix documents no Bluetooth or dedicated scanner for the mobile app, so there is nothing to pair.",
@@ -123,7 +135,7 @@
     }
   ],
   "disclaimer": "Fiix CMMS is a product of Fiix by Rockwell Automation. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Fiix by Rockwell Automation.",
-  "not_recommended_note": "Fiix has no native Windows app, so the Tuga W10 can only run the browser web app, for which Fiix documents no offline mode; it is not a device for technicians working out of signal. Fiix's scanner uses the device camera, and the Tuga A10 has no dedicated scan engine (the A6 has an integrated 2D scanner, but Fiix does not document support for one), so scanning speed on small, damaged or glossy labels depends on the app and the label. Fiix recommends testing sample tags, and the W10's optional 2D barcode scanner is not documented as working with the Fiix web app. Fiix does not document NFC or RFID, so the NFC on the A10 and A6 and the optional UHF RFID reader on the W10 are not Fiix features. Fiix's technical requirements article says it does not support enterprise mobile management (EMM) solutions, while its mobile app FAQ says the app can be used with MDM software with integration issues to be resolved through the MDM software, so fleets that must be MDM-enrolled should confirm with Fiix before buying. Rooted devices are blocked. The mobile app's store ratings were modest when checked on 12 October 2026 (3.2 from 325 ratings on the UK Google Play listing, 2.8 from 18 on the US App Store); a rugged tablet does not change the app's behaviour.",
+  "not_recommended_note": "Fiix has no native Windows app, so the Tuga W10 can only run the browser web app, for which Fiix documents no offline mode; it is not a device for technicians working out of signal. Fiix's scanner uses the device camera, and the Tuga A10 has no dedicated scan engine (the A6 has an integrated 2D scanner, but Fiix does not document support for one), so scanning speed on small, damaged or glossy labels depends on the app and the label. Fiix recommends testing sample tags, and the W10's optional 2D barcode scanner is not documented as working with the Fiix web app. Fiix does not document NFC or RFID, so the NFC on the A10, A8 and A6 and the optional UHF RFID reader on the W10 are not Fiix features. Fiix's technical requirements article says it does not support enterprise mobile management (EMM) solutions, while its mobile app FAQ says the app can be used with MDM software with integration issues to be resolved through the MDM software, so fleets that must be MDM-enrolled should confirm with Fiix before buying. Rooted devices are blocked. The mobile app's store ratings were modest when checked on 12 October 2026 (3.2 from 325 ratings on the UK Google Play listing, 2.8 from 18 on the US App Store); a rugged tablet does not change the app's behaviour.",
   "sources": [
     "https://fiixsoftware.com/",
     "https://fiixsoftware.com/cmms/industry-solutions/",

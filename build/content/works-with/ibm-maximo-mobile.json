@@ -53,13 +53,25 @@
     {
       "device_id": "tuga-a10",
       "role": "primary",
-      "why": "IBM publishes Maximo Mobile for Android, iOS and Windows, so there are two Tuga routes: Android on the A10 or A6, and Windows on the W10. For most technician teams the Tuga A10 is the sensible first unit. It runs Android 14, which is above IBM's Android 11 floor, and has 8GB of RAM against IBM's 3 GB minimum, so inspection forms and map views with many records have headroom. The 10.1 inch 1920 x 1200 screen gives room for work order detail and inspection forms, the 13MP rear camera handles IBM's camera-based bar code and QR scanning (which is controlled by the app, not a dedicated scan engine), and NFC is on board for the asset and location tag feature IBM documents for Android. IP68 and MIL-STD-810H ratings, a -20 to 60C operating range and an 8000mAh battery suit plant rooms, yards and substations. At £449 with no VAT to add it costs less than the W10 for a trial unit before a fleet order.",
+      "why": "IBM publishes Maximo Mobile for Android, iOS and Windows, so there are two Tuga routes: Android on the A10, A8 or A6, and Windows on the W10. For most technician teams the Tuga A10 is the sensible first unit. It runs Android 14, which is above IBM's Android 11 floor, and has 8GB of RAM against IBM's 3 GB minimum, so inspection forms and map views with many records have headroom. The 10.1 inch 1920 x 1200 screen gives room for work order detail and inspection forms, the 13MP rear camera handles IBM's camera-based bar code and QR scanning (which is controlled by the app, not a dedicated scan engine), and NFC is on board for the asset and location tag feature IBM documents for Android. IP68 and MIL-STD-810H ratings, a -20 to 60C operating range and an 8000mAh battery suit plant rooms, yards and substations. At £449 with no VAT to add it costs less than the W10 for a trial unit before a fleet order.",
       "fit": [
         "IBM requires Android 11 or higher: the Tuga A10 runs Android 14, so it meets that requirement.",
         "IBM's minimum memory is 3 GB, with more advised for long inspection forms and maps: the A10 has 8GB RAM and 128GB storage, plus microSD up to 2TB for offline data and attachments.",
         "IBM documents bar code and QR scanning through the device camera: the A10 has a 13MP rear camera with flash (scanning is app-dependent, there is no dedicated scan engine).",
         "IBM documents NFC asset and location tag scanning on Android: the A10 has NFC.",
         "IBM documents offline working with automatic sync when connectivity returns: the A10 has 4G dual SIM and dual-band Wi-Fi 5 for sync, an 8000mAh battery, and IP68 and MIL-STD-810H ratings for the sites where signal drops out."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 (£379, £70 less than the A10) sits between the A10 and the pocketable A6, with an 8 inch 1280 x 800 IPS screen that gives inspection forms more room than a handheld and a 1000 nit panel for outdoor and sunlit work in yards and substations. It runs Android 12, above IBM's Android 11 floor, has 6GB RAM against IBM's 3 GB minimum, and has NFC for the asset and location tag feature IBM documents on Android. The 8000mAh battery is removable, so a charged spare covers a long shift, and VESA mount points and a pogo pin connector suit mounting or docking in a vehicle. The trade-offs against the A10 are IP67 rather than IP68, no MIL-STD rating, Android 12 rather than Android 14, a lower screen resolution and 6GB RAM against 8GB, which still leaves headroom above IBM's minimum for long inspection forms and maps.",
+      "fit": [
+        "IBM requires Android 11 or higher: the Tuga A8 runs Android 12, so it meets that requirement.",
+        "IBM's minimum memory is 3 GB, with more advised for long inspection forms and maps: the A8 has 6GB RAM and 128GB storage, plus a microSD slot for offline data and attachments.",
+        "IBM documents bar code and QR scanning through the device camera: the A8 has a 13MP autofocus rear camera with flash (scanning is app-dependent, there is no dedicated scan engine).",
+        "IBM documents NFC asset and location tag scanning on Android: the A8 has NFC.",
+        "IBM documents offline working with automatic sync when connectivity returns: the A8 has 4G LTE dual SIM and Wi-Fi for sync, a removable 8000mAh battery and an IP67 rating (no MIL-STD rating is listed)."
       ]
     },
     {
@@ -89,7 +101,7 @@
   ],
   "setup_steps": [
     "Confirm with your Maximo administrator or IBM partner that your organisation has IBM Maximo Application Suite with Maximo Manage and that your technicians have user accounts with the right role-based apps assigned. Maximo Mobile is the client for that deployment, not standalone software.",
-    "On a Tuga A10 or A6, install IBM Maximo Mobile from Google Play (package com.ibm.iot.maximo.mobile, published by International Business Machines Corp.). Do not install the separate app called IBM Maximo Mobile for EAM, whose Play listing says it is for a Maximo Asset Management 7.6.1.3 system. On a Tuga W10, install IBM Maximo Mobile from the Microsoft Store, or from the IBM portal if your administrator directs you there, and confirm the WebView2 Runtime is present as IBM requires.",
+    "On a Tuga A10, A8 or A6, install IBM Maximo Mobile from Google Play (package com.ibm.iot.maximo.mobile, published by International Business Machines Corp.). Do not install the separate app called IBM Maximo Mobile for EAM, whose Play listing says it is for a Maximo Asset Management 7.6.1.3 system. On a Tuga W10, install IBM Maximo Mobile from the Microsoft Store, or from the IBM portal if your administrator directs you there, and confirm the WebView2 Runtime is present as IBM requires.",
     "Set a device PIN or other screen lock on the tablet before first use. IBM states that users are prompted for their device's security credentials so the app can access the encrypted local data store, and that shared devices must have PIN and biometrics available for authentication.",
     "Connect the device to Wi-Fi or mobile data for first login, since IBM states the first login requires network connectivity, then sign in with your Maximo credentials and allow the initial data download to complete.",
     "Test offline working the way IBM describes it: put the device in flight mode (airplane mode in IBM's wording), open a work order, record an update, then restore connectivity and confirm the change synchronises. Also test camera scanning on an asset bar code and, on the Android devices, an NFC tag if your site uses them.",
@@ -104,7 +116,7 @@
   "faq": [
     {
       "q": "Will IBM Maximo Mobile run on a Tuga tablet?",
-      "a": "IBM publishes Maximo Mobile for Android 11 or higher, iOS 14.3 or higher, and Windows 10 version 10.0.17763.0 or better or Windows 11, with a 3 GB minimum memory. The Tuga A10 runs Android 14 with 8GB RAM, the Tuga A6 runs Android 15 with 4GB RAM, and the Tuga W10 runs Windows 11 Pro on an Intel N100 (x64) with 8GB RAM, so all three meet the published requirements, although the A6 has the least headroom above IBM's 3 GB minimum. IBM does not publish a list of supported device models, and Tuga Hardware has no relationship with IBM, so this match is based on IBM's published requirements only. You still need a Maximo Application Suite deployment with Maximo Manage and user licensing from IBM or your partner for the app to work."
+      "a": "IBM publishes Maximo Mobile for Android 11 or higher, iOS 14.3 or higher, and Windows 10 version 10.0.17763.0 or better or Windows 11, with a 3 GB minimum memory. The Tuga A10 runs Android 14 with 8GB RAM, the Tuga A8 runs Android 12 with 6GB RAM, the Tuga A6 runs Android 15 with 4GB RAM, and the Tuga W10 runs Windows 11 Pro on an Intel N100 (x64) with 8GB RAM, so all four meet the published requirements, although the A6 has the least headroom above IBM's 3 GB minimum. IBM does not publish a list of supported device models, and Tuga Hardware has no relationship with IBM, so this match is based on IBM's published requirements only. You still need a Maximo Application Suite deployment with Maximo Manage and user licensing from IBM or your partner for the app to work."
     },
     {
       "q": "Does Maximo Mobile work offline on the tablet?",

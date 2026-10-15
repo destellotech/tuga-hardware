@@ -10,7 +10,7 @@
   "intro": [
     "Micad FM is the helpdesk and maintenance module of Micad's estates and facilities software, made by Micad Systems (UK) Limited of Altrincham. Micad says its software is used by more than 180 of approximately 240 NHS trusts, and its case studies name Birmingham Community Healthcare NHS Foundation Trust, South London and Maudsley NHS Trust, Brunel University and the universities of Bristol and Bath. Since K1 Investment Management combined Micad with SINGU in July 2025, Micad has marketed its current CAFM platform as SINGU FM, but the Micad FM mobile app remains on Google Play and the App Store.",
     "Micad describes the app as used by maintenance operatives for the Micad FM Helpdesk system. On site they work through a customisable jobs list, time jobs with a stopwatch, pause them or send them back to a supervisor, record stock parts, upload photos, raise remedial works against assets and capture signatures. The app uses one PDA licence from the customer's Micad FM system, needs Location Services on to send GPS data, and can create jobs and upload images while out of signal, synchronising when a connection returns. That is a day of corridors, plant rooms, roof spaces and van cabs, where a consumer tablet with a glass back and no ingress rating is at a disadvantage.",
-    "This page sets out what Micad publishes about the app's device requirements, which of the three Tuga rugged devices meet them, where Micad has published nothing (barcode scanning, NFC, screen size), and how to get a unit running. Tuga Hardware is independent of Micad, so everything about the software below is taken from Micad's own site, its Google Play and App Store listings and its G-Cloud listing."
+    "This page sets out what Micad publishes about the app's device requirements, which Tuga rugged devices meet them, where Micad has published nothing (barcode scanning, NFC, screen size), and how to get a unit running. Tuga Hardware is independent of Micad, so everything about the software below is taken from Micad's own site, its Google Play and App Store listings and its G-Cloud listing."
   ],
   "requirements": [
     {
@@ -68,6 +68,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the middle size, for technicians who want more room for a jobs list and a signature box than the A6 gives without carrying a 10 inch tablet. It runs Android 12, so it meets Micad's Android 5.0 or later requirement, and it has GPS, GLONASS, Galileo and BeiDou for the Location Services requirement and 4G dual SIM for push notifications away from Wi-Fi. Its 1000 nit 8 inch screen helps on external works in bright light, its 8000mAh battery is removable, and VESA mount points with a pogo pin connector let it dock in the van. It costs £379, £70 less than the A10, but it is IP67 rather than IP68, has no MIL-STD rating, runs Android 12 rather than Android 14 (the version Micad's release note names), has a lower 1280 x 800 resolution and has 6GB RAM against the A10's 8GB, so trial it with your own system first.",
+      "fit": [
+        "Requires Android 5.0 or later: the A8 runs Android 12.",
+        "Location Services must be on to send GPS data: the A8 has GPS, GLONASS, Galileo and BeiDou positioning.",
+        "Push notifications and job sync need a data connection: the A8 has 4G LTE dual SIM and Wi-Fi.",
+        "Photo upload and signature capture: 13MP autofocus rear camera with flash and an 8 inch IPS 1280 x 800 touchscreen at 1000 nits under AGC glass.",
+        "Site and van use: removable 8000mAh battery, IP67, VESA mount points and a pogo pin connector."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "The Tuga A6 is the alternative for teams that want a pocketable handheld rather than a tablet. It runs Android 15, so it meets Micad's Android 5.0 or later requirement, and it has 4G with dual SIM, dual-band Wi-Fi, GPS with GLONASS, BeiDou and Galileo for the Location Services requirement, and a 13MP rear camera with flash for photos in dark risers and plant rooms. At 277g it sits on a belt, it is sealed to IP67 and rated for 1.5 metre drops, and its 5050mAh battery is removable, so a charged spare can take over mid shift. Its built-in Zebra 2D scan engine is spare capacity here, as Micad publishes no scanning feature for Micad FM. The trade-off is a 6 inch screen, which is closer to the PDA form factor Micad's licensing language implies but gives less room for a jobs list than the A10.",
@@ -91,12 +103,12 @@
       ]
     }
   ],
-  "not_recommended_note": "Micad publishes no barcode, QR, NFC or RFID feature for the Micad FM app, so none of these devices should be bought for Micad FM on the expectation of scanning or tag reading. The A10 and A6 have NFC hardware and cameras, and the A6 also has a built-in Zebra 2D scan engine, but whether Micad FM can use any of them is down to the app, and Micad does not say it can. The W10 cannot run the Micad FM mobile app, which Micad publishes for Android and iOS only; it suits browser-based use of the main platform. Buyers should also note that the Android app was last updated on 23 October 2024, carries a 2.0 star rating from 6 reviews on Google Play, and that reviews report freezing, being logged off and problems out of signal. Offline support is limited to creating jobs and uploading images, so a 4G SIM is advisable. Micad now markets its current CAFM platform as SINGU FM, so check with Micad that Micad FM remains the app your contract supports before ordering a fleet.",
+  "not_recommended_note": "Micad publishes no barcode, QR, NFC or RFID feature for the Micad FM app, so none of these devices should be bought for Micad FM on the expectation of scanning or tag reading. The A10, A8 and A6 have NFC hardware and cameras, and the A6 also has a built-in Zebra 2D scan engine, but whether Micad FM can use any of them is down to the app, and Micad does not say it can. The W10 cannot run the Micad FM mobile app, which Micad publishes for Android and iOS only; it suits browser-based use of the main platform. Buyers should also note that the Android app was last updated on 23 October 2024, carries a 2.0 star rating from 6 reviews on Google Play, and that reviews report freezing, being logged off and problems out of signal. Offline support is limited to creating jobs and uploading images, so a 4G SIM is advisable. Micad now markets its current CAFM platform as SINGU FM, so check with Micad that Micad FM remains the app your contract supports before ordering a fleet.",
   "setup_steps": [
     "Confirm with your Micad account team or helpdesk administrator that a PDA licence from your Micad FM system is available for each device, since the app uses one PDA licence per handheld.",
-    "On the Tuga A10 or A6, sign in to a Google account (a managed work account if your organisation uses one) and install Micad FM from Google Play, developer Micad Systems (UK), package uk.co.micad.fm.",
+    "On the Tuga A10, A8 or A6, sign in to a Google account (a managed work account if your organisation uses one) and install Micad FM from Google Play, developer Micad Systems (UK), package uk.co.micad.fm.",
     "Open the app and sign in with the credentials your Micad administrator issues. Allow Location Services and Notifications when prompted, as Micad states both must be on for GPS data and push notifications.",
-    "Insert a 4G SIM in the A10 or A6 so that jobs and notifications reach the technician away from Wi-Fi, and note from the Micad FM listing that jobs and images created offline synchronise once a connection returns.",
+    "Insert a 4G SIM in the A10, A8 or A6 so that jobs and notifications reach the technician away from Wi-Fi, and note from the Micad FM listing that jobs and images created offline synchronise once a connection returns.",
     "For a W10 used by helpdesk or workshop staff, open the Micad web platform in Microsoft Edge or Chrome, sign in, and connect Ethernet or Wi-Fi for the required internet connection.",
     "Fit the hand strap (supplied with the A10) or belt holster (A6), and add a vehicle mounting dock or charging dock where the device lives in a van or returns to a workshop at the end of each shift."
   ],

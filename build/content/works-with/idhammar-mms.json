@@ -4,13 +4,13 @@
   "vendor": "Idhammar Systems Limited",
   "vendor_url": "https://www.idhammarsystems.com/",
   "title": "Rugged tablet for Idhammar MMS",
-  "meta_description": "Rugged Android tablets for the Idhammar Connect app (Idhammar MMS): the Android 5.0 minimum, offline sync, camera scanning, and the Tuga A10 and A6.",
+  "meta_description": "Rugged Android tablets for the Idhammar Connect app (Idhammar MMS): the Android 5.0 minimum, offline sync, camera scanning, and the Tuga A10, A8 and A6.",
   "target_query": "Idhammar Connect Android tablet",
   "h1": "Rugged tablet for Idhammar MMS",
   "intro": [
     "Idhammar MMS is the maintenance management system (CMMS) and OEE platform from Idhammar Systems Limited, a UK software company based in London SW19 which says it has supplied CMMS and OEE systems since 1971. Its customer list is heavy on UK food and drink manufacturing (the vendor names Unilever, Premier Foods, Hovis, 2 Sisters, Aunt Bessies, Aspall and Chivers Brothers), and a sector edition called Idhammar Response is sold to emergency services, including fire and rescue. The mobile side is Idhammar Connect, an Android app released on Google Play on 3 October 2023 that lets technicians, stores staff and station personnel handle work orders, inspections, defect reports and inventory checks away from a desk.",
     "On the plant floor or in a fire station workshop that means carrying a device between lines, plant rooms and stores, often with gloves on, near wash-down areas and sometimes where Wi-Fi is poor. A consumer tablet usually has no ingress or drop rating, so it needs a case and careful handling in those conditions. A rugged Android tablet is the usual answer, provided it meets the app's published requirements.",
-    "This page sets out what Idhammar Systems publishes about running Idhammar Connect, matches those requirements to the Tuga A10 and Tuga A6, and covers setup, accessories and the questions buyers usually ask. Where the vendor publishes nothing (screen size, NFC, Windows), we say so rather than guess."
+    "This page sets out what Idhammar Systems publishes about running Idhammar Connect, matches those requirements to the Tuga A10, Tuga A8 and Tuga A6, and covers setup, accessories and the questions buyers usually ask. Where the vendor publishes nothing (screen size, NFC, Windows), we say so rather than guess."
   ],
   "requirements": [
     {
@@ -58,6 +58,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the middle size, an 8 inch tablet that runs Android 12 with Google Play, so it meets the Android 5.0 minimum with a wide margin. It suits technicians and firefighters who want more room for forms than the 6 inch A6 but a smaller tablet than the 10.1 inch A10, and its 1000 nit screen stays readable on a sunlit station forecourt or yard. The 8000mAh battery is removable, so a charged spare can take over mid shift, and VESA mount points and a pogo pin connector suit vehicle docking. Against the A10 it is sealed to IP67 rather than IP68, has no MIL-STD rating, runs an older Android version (12 against 14), has a lower 1280 x 800 resolution and 6GB RAM against 8GB, although Idhammar Systems publishes no memory guidance. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "App requires Android 5.0 or later: the A8 runs Android 12.",
+        "Camera-based barcode and QR scanning: 13MP autofocus rear camera with flash (scanning is handled by the app through the camera; there is no dedicated scan engine).",
+        "Offline capture with sync when back online: 128GB storage plus a microSD slot, 4G LTE dual SIM and Wi-Fi for syncing wherever signal is available.",
+        "Forecourt and outdoor work: 8 inch 1000 nit IPS screen with AGC glass, IP67 (no MIL-STD rating).",
+        "Long shifts and vehicle use: removable 8000mAh battery, VESA mount points and a pogo pin connector."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "The Tuga A6 is a 6 inch handheld that runs Android 15, so it meets the same Android 5.0 minimum. It suits technicians, stores staff and firefighters who need a device carried in one hand or in a belt holster rather than a tablet carried in two, and at 277g it is light enough to carry all shift. It has a Zebra 2D scan engine with two side scan keys, which suits the part and asset scanning the vendor describes, although the vendor does not say whether the app takes input from a scan engine, so test it; the 13MP rear camera with flash covers camera scanning and defect photos either way. The 5050mAh battery is removable, so a charged spare can take over mid shift. The trade-offs are screen size, since a 6 inch display shows less of a work order or inspection form at once than the 10.1 inch A10, and memory, with 4GB RAM and 64GB storage against the A10's 8GB and 128GB. The vendor publishes no screen-size or memory guidance, so trial both if you are unsure.",
@@ -72,7 +84,7 @@
   ],
   "setup_steps": [
     "Idhammar Connect is the vendor's mobile app for the Idhammar MMS system, so arrange user accounts for your technicians with Idhammar Systems or your Idhammar administrator before the devices arrive.",
-    "On the Tuga A10 or A6, sign in to Google Play and install Idhammar Connect (package com.idhammar.connect, developer shown as Idhammar MMS).",
+    "On the Tuga A10, A8 or A6, sign in to Google Play and install Idhammar Connect (package com.idhammar.connect, developer shown as Idhammar MMS).",
     "Open the app and sign in with the credentials your Idhammar administrator provides.",
     "Before taking devices to areas with poor signal, confirm with your administrator how offline working and automatic sync are configured for your system, and test a sync on return to Wi-Fi or mobile signal.",
     "Grant the app camera and storage permissions when prompted so that barcode or QR scanning and photo attachments work.",

@@ -10,7 +10,7 @@
   "intro": [
     "Agility is a cloud-based CMMS and EAM platform from SSG Insight, a maintenance software company with its UK office in Wakefield. SSG Insight says it has worked in asset maintenance software since 1983 and it joined Aptean on 21 August 2024. Its named UK customers include Bakkavor (13 sites, about 2,300 work orders a week), boohoo, West Midlands Metro, Keolis Amey Metrolink, NHS Borders and The Sheffield College. The main system runs in a browser. AgilityMobile is the companion app for engineers and technicians, and it requires a connection to an Agility 9 system, so this page is for teams that already run Agility and now need devices for the people doing the work.",
     "On the floor, technicians use AgilityMobile to accept, suspend and complete work orders, fill in compliance checklists, capture fault codes, attach photos and documents, raise reactive requests, book out spare parts and scan asset QR codes to pull up work orders. That work happens in plant rooms, depots, food factories and tram sheds, where a consumer tablet with an exposed glass front, no 4G and a small battery is the wrong tool.",
-    "This page sets out what SSG Insight publishes about the app's requirements, which of the three Tuga devices fits those requirements and why, how to get the app running, and what we cannot confirm from the vendor's published material. We sell the hardware only. Agility licensing and configuration come from SSG Insight."
+    "This page sets out what SSG Insight publishes about the app's requirements, which Tuga devices fit those requirements and why, how to get the app running, and what we cannot confirm from the vendor's published material. We sell the hardware only. Agility licensing and configuration come from SSG Insight."
   ],
   "requirements": [
     {
@@ -63,6 +63,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 (£379, no VAT to add) is the middle size, for technicians who find a 10 inch tablet too big but want more room for work orders, checklists and diagrams than a 6 inch handheld gives. Its 8 inch screen is rated at 1000 nits, which helps when reading a job outdoors or in a sunlit yard, and its 8000mAh battery is removable, so a charged spare can take over mid shift. VESA mount points and a pogo pin connector let it sit in a vehicle dock between sites and come out as a site tablet on arrival. Against the A10, which costs £70 more, the A8 is IP67 rather than IP68, has no MIL-STD rating, runs Android 12 rather than Android 14 and has a lower 1280 x 800 resolution, and it has 6GB RAM against the A10's 8GB; SSG Insight publishes no minimum Android version or RAM figure we could confirm, so check the Google Play listing on a trial unit first.",
+      "fit": [
+        "AgilityMobile is an Android app on Google Play: the A8 runs Android 12 with Google Play on a MediaTek Helio P35 octa-core up to 2.3GHz, with 6GB RAM. Confirm the listing's minimum Android version on the device before a fleet order, since it could not be verified from the listing page.",
+        "In-app QR code and barcode scanning: 13MP autofocus rear camera with flash. There is no dedicated scan engine, so scanning works through the camera and depends on the app.",
+        "Attaching images and documents, viewing manuals and diagrams: 8 inch IPS 1280 x 800 display at 1000 nits under AGC glass, 128GB storage with a microSD slot.",
+        "Cloud-hosted system and push notifications: 4G LTE dual SIM, Wi-Fi and Bluetooth, with NFC and GPS, GLONASS, Galileo and BeiDou.",
+        "Plant rooms, depots and outdoor areas: IP67, a removable 8000mAh battery, and VESA mount points with a pogo pin connector for vehicle docking. IP67 is not a wash-down rating, so keep it away from jet washing."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "Some Agility customers run the app on phones rather than tablets. Guernsey Water staff use it on their smartphones instead of carrying iPads and laptops as well. The Tuga A6 is a 6 inch rugged Android 15 handheld at £349 that weighs 277g and fits a pocket or the £22 belt holster, so it suits engineers who walk sites all day, climb ladders or work with one hand. It trades screen area for a Zebra 2D scan engine, a removable 5050mAh battery so a charged spare can take over mid shift, and NFC. It has 4GB RAM and 64GB storage, which is modest, so trial it with your own Agility system first.",
@@ -85,10 +97,10 @@
       ]
     }
   ],
-  "not_recommended_note": "Three honest caveats. First, the Google Play listing's minimum Android version could not be verified when this page was written, so we do not quote one; check 'Requires Android' in About this app on Google Play before ordering. The Tuga A10 runs Android 14 and the A6 runs Android 15. Second, SSG Insight publishes nothing about NFC or RFID tag reading in AgilityMobile, so we make no claim that the NFC on the A10, A6 or W10, or the optional UHF RFID reader on the W10, does anything with Agility. Third, there is no Windows version of AgilityMobile that we could find, so the W10 only gives browser access to the main Agility system and does not get the app's offline working; if your technicians need offline mode, buy the A10 or A6. SSG Insight also publishes no recommended devices or screen-size guidance, and the scanning described on its site is in-app, with no dedicated scanner requirement, so the A10 having no scan engine is not a known gap. The A6 does have a Zebra 2D scan engine, but we cannot confirm that AgilityMobile accepts its input, so treat it as a bonus to test rather than a reason to buy.",
+  "not_recommended_note": "Three honest caveats. First, the Google Play listing's minimum Android version could not be verified when this page was written, so we do not quote one; check 'Requires Android' in About this app on Google Play before ordering. The Tuga A10 runs Android 14 and the A6 runs Android 15. Second, SSG Insight publishes nothing about NFC or RFID tag reading in AgilityMobile, so we make no claim that the NFC on the A10, A8, A6 or W10, or the optional UHF RFID reader on the W10, does anything with Agility. Third, there is no Windows version of AgilityMobile that we could find, so the W10 only gives browser access to the main Agility system and does not get the app's offline working; if your technicians need offline mode, buy the A10, A8 or A6. SSG Insight also publishes no recommended devices or screen-size guidance, and the scanning described on its site is in-app, with no dedicated scanner requirement, so the A10 having no scan engine is not a known gap. The A6 does have a Zebra 2D scan engine, but we cannot confirm that AgilityMobile accepts its input, so treat it as a bonus to test rather than a reason to buy.",
   "setup_steps": [
     "Confirm with your Agility administrator or SSG Insight that your organisation runs an Agility 9 system with mobile licensing, and that each technician has a user account. The app requires a connection to an Agility 9 system and does nothing without one.",
-    "On the Tuga A10 or A6, sign in to Google Play with your organisation's Google account or a managed device account, search for 'Agility' by SSG Insight Ltd and install it. While on the listing, check the 'Requires Android' figure under About this app; the A10 runs Android 14 and the A6 Android 15.",
+    "On the Tuga A10, A8 or A6, sign in to Google Play with your organisation's Google account or a managed device account, search for 'Agility' by SSG Insight Ltd and install it. While on the listing, check the 'Requires Android' figure under About this app; the A10 runs Android 14 and the A6 Android 15.",
     "Open the app and sign in with the system details and user account your Agility administrator gives you. Grant the camera permission when Android asks so in-app QR code scanning and photo attachments work.",
     "Ask your Agility administrator or SSG Insight how offline working is configured on your system, then test it on one unit by completing a job with Wi-Fi and mobile data switched off and reconnecting afterwards, before you issue devices to the team.",
     "Fit the hand strap supplied in the A10 box, apply a tempered glass screen protector, and if the device lives in a van or on a maintenance cart, fit the vehicle mounting dock. For shared devices, add a charging dock at the workshop or handover point.",
@@ -107,7 +119,7 @@
     },
     {
       "q": "Does Agility work offline on a Tuga tablet?",
-      "a": "SSG Insight's App Store listing for the same app (bundle com.ssginsight.agility, version 2.2.3) lists 'Process jobs and raise new ones while offline', and its light rail page refers to gathering passenger feedback on mobile devices whether on or offline. The Google Play description does not repeat this, so test it on your own system during a trial. The offline statement applies to the app, which runs on Android, so it concerns the A10 and A6. The W10 runs the browser-based main system only and does not get the app's offline mode."
+      "a": "SSG Insight's App Store listing for the same app (bundle com.ssginsight.agility, version 2.2.3) lists 'Process jobs and raise new ones while offline', and its light rail page refers to gathering passenger feedback on mobile devices whether on or offline. The Google Play description does not repeat this, so test it on your own system during a trial. The offline statement applies to the app, which runs on Android, so it concerns the A10, A8 and A6. The W10 runs the browser-based main system only and does not get the app's offline mode."
     },
     {
       "q": "Can we trial one unit before ordering for the whole team, and do you invoice businesses?",
