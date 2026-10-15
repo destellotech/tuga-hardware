@@ -4,7 +4,7 @@
   "vendor": "Octave (Octave Intelligence plc)",
   "vendor_url": "https://www.octave.com/products/asset-performance-management/attune/eam",
   "title": "Rugged tablet for HxGN EAM (Octave Attune EAM)",
-  "meta_description": "HxGN EAM (now Octave Attune EAM) on a rugged tablet: published Android, Windows, NFC and offline requirements matched to the Tuga A10, W10 and A6.",
+  "meta_description": "HxGN EAM (now Octave Attune EAM) on a rugged tablet: published Android, Windows, NFC and offline requirements matched to the Tuga A10, A8, W10 and A6.",
   "target_query": "HxGN EAM mobile rugged tablet",
   "h1": "Rugged tablet for HxGN EAM (now Octave Attune EAM)",
   "intro": [
@@ -63,6 +63,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 (£379, no VAT to add) is the middle size for the Android apps, with more room for work order detail and inspection checklists than the A6 and less bulk than the A10. It runs Android 12, which is inside the vendor's published Android 10 to 16 range, has NFC for the tag scanning Octave documents in Mobile Offline (12.3.1) and Digital Work, and its 1000 nit 8 inch screen helps outdoors or in sunlit yards. Its 8000mAh battery is removable, so a shared device can take a charged spare between crews, and VESA mount points with a pogo pin connector let it dock in a vehicle. Against the A10, which costs £70 more, the A8 is IP67 rather than IP68, has no MIL-STD rating, runs Android 12 rather than Android 14 and has a lower 1280 x 800 resolution, and it has 6GB RAM against the A10's 8GB. Like the A10 it has no dedicated scan engine, so the wedge-only Attune EAM Mobile apps need a Bluetooth scanner that works as a keyboard wedge.",
+      "fit": [
+        "Android 10 to 16 supported for Digital Work, Mobile Offline and the Tablet Connected and Disconnected apps: the A8 runs Android 12 with Google Play.",
+        "NFC tag scanning in Mobile Offline (12.3.1 onwards) and Digital Work is only available on devices that support NFC: the A8 has NFC.",
+        "Digital Work scans barcodes and QR codes with the device camera: the A8 has a 13MP autofocus rear camera with flash (scanning through the camera is app-dependent, and there is no dedicated scan engine).",
+        "Offline work needs an initial sync and a resync when back in coverage: the A8 has 128GB storage with a microSD slot, 6GB RAM, 4G LTE dual SIM and Wi-Fi.",
+        "Shared devices passed between crews and vehicles: the A8 is IP67 rated (no MIL-STD rating is listed), has a removable 8000mAh battery, and has VESA mount points and a pogo pin connector for vehicle docking."
+      ]
+    },
+    {
       "device_id": "tuga-w10",
       "role": "alternative",
       "why": "Choose the Tuga W10 if your team uses the Windows versions of the Attune EAM Mobile Connected or Disconnected tablet apps from the Microsoft Store, or if you need a device that also runs other Windows software, plugs into wired Ethernet or drives an external display over HDMI. The vendor lists Windows 10 or 11 with a 1024 x 768 minimum screen for these apps; the W10 runs Windows 11 Pro on a 1280 x 800 screen, so it meets that requirement. Three limits to be clear about: Digital Work is not listed for Windows, so the W10 only runs the Connected, Disconnected and Maintenance Kiosk family; its 1280 x 800 screen is below the 1600 x 900 minimum Octave publishes for the full desktop web client; and although the W10 has NFC, Octave documents NFC tag scanning for Mobile Offline and Digital Work only, not for the Windows apps. It is also IP65 rather than IP68, so it is protected against dust and water jets but is not rated for immersion.",
@@ -90,7 +102,7 @@
   "setup_steps": [
     "Confirm with your Attune EAM administrator which apps your organisation uses (Digital Work, Offline, Connected or Disconnected), that your server version meets the version stated in the app's store listing, and that any required database script has been applied. The vendor urges contacting its Support organisation before upgrading mobile versions.",
     "Have the administrator create a device record in Attune EAM (the help describes this under Setting up mobile devices) with the matching Type, for example Android Tablet for the A10, Android Phone for the A6 or PC/Laptop for the W10.",
-    "On a Tuga A10 or A6, install the app from Google Play (publisher: Intergraph Corporation, an Octave Company). On a Tuga W10, install Octave Attune EAM Mobile Connected or Mobile Disconnected from the Microsoft Store.",
+    "On a Tuga A10, A8 or A6, install the app from Google Play (publisher: Intergraph Corporation, an Octave Company). On a Tuga W10, install Octave Attune EAM Mobile Connected or Mobile Disconnected from the Microsoft Store.",
     "Sign in with the Attune EAM user account and connection details your administrator provides. Attune EAM Mobile is licensed by device, so one tablet can be shared by several technicians.",
     "If you use the Offline or Disconnected app, run the initial sync on Wi-Fi before the device leaves the depot or plant, and sync again when it returns to coverage. The Mobile Offline documentation describes Full Sync and Upload Only options and an auto-sync interval of no less than 300 seconds.",
     "If your team uses the Attune EAM Mobile apps and needs barcodes, test the A6's integrated scanner or the W10's optional 2D scanner, or pair a Bluetooth wedge scanner, then fit the charging dock or vehicle mounting dock where the device will live between shifts."
@@ -115,8 +127,8 @@
       "a": "Yes to both. A single trial unit before a fleet order is welcome, with 30-day returns and a 12-month warranty. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd) is not VAT registered, so the prices shown have no VAT to add. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more. Delivery is free within the UK and takes 7 to 10 working days; we deliver to the UK only."
     },
     {
-      "q": "Should we choose the A10, the A6 or the W10?",
-      "a": "The A10 (10.1 inch, 1920 x 1200, £449) is the best fit for most Android use: work order lists and inspection forms show more at once than on a handheld. The A6 (6 inch, 277g, £349) suits technicians who need something pocketable or a built-in 2D barcode scanner for the wedge-only Mobile apps, and the phone-oriented Mobile Phone and RapidRequest apps, though it has 4GB RAM against the A10's 8GB. The W10 (10.1 inch, 1280 x 800, £649) is only the right choice if you use the Windows Connected or Disconnected apps or need Ethernet, HDMI or other Windows software; Digital Work is not listed for Windows, and the W10's screen is below the 1600 x 900 minimum Octave publishes for the desktop web client."
+      "q": "Should we choose the A10, the A8, the A6 or the W10?",
+      "a": "The A10 (10.1 inch, 1920 x 1200, £449) is the best fit for most Android use: work order lists and inspection forms show more at once than on a handheld. The A8 (8 inch, 1280 x 800, 1000 nits, £379) is the middle size, with a removable battery and VESA mount points for vehicle use, though it runs Android 12, has 6GB RAM, and is IP67 with no MIL-STD rating. The A6 (6 inch, 277g, £349) suits technicians who need something pocketable or a built-in 2D barcode scanner for the wedge-only Mobile apps, and the phone-oriented Mobile Phone and RapidRequest apps, though it has 4GB RAM against the A10's 8GB. The W10 (10.1 inch, 1280 x 800, £649) is only the right choice if you use the Windows Connected or Disconnected apps or need Ethernet, HDMI or other Windows software; Digital Work is not listed for Windows, and the W10's screen is below the 1600 x 900 minimum Octave publishes for the desktop web client."
     }
   ],
   "disclaimer": "Octave Attune EAM (formerly HxGN EAM and Infor EAM) is a product of Octave. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Octave.",

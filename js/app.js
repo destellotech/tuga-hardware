@@ -465,6 +465,30 @@
     });
   }
 
+  /* -------------------------------------------------------- variant chooser */
+
+  /* A device with a scanner version offers both as radios in the buy box.
+     Picking one points the main button and the price at that SKU; the
+     cover chooser already maps a scanner SKU to its base device's plans. */
+  function initVariantChooser() {
+    $$('[data-buy-box]').forEach((box) => {
+      const chooser = $('[data-variant-chooser]', box);
+      const btn = $('[data-add-to-cart][data-qty-source]', box);
+      if (!chooser || !btn) return;
+      const price = $('.pdp-price', box);
+      const update = () => {
+        const checked = $('[data-variant-choice]:checked', chooser);
+        if (!checked) return;
+        btn.dataset.addToCart = checked.value;
+        btn.dataset.deviceName = checked.dataset.variantName;
+        if (price) price.textContent = checked.dataset.variantPrice;
+      };
+      chooser.addEventListener('change', update);
+      window.addEventListener('pageshow', update);
+      update();
+    });
+  }
+
   /* ------------------------------------------------------------ add to cart */
 
   function initAddToCart() {
@@ -728,8 +752,10 @@
     const totals = Cart.totals(products);
 
     if (!totals.lines.length) {
+      const hadFocus = layout.contains(document.activeElement);
       emptyEl.hidden = false;
       layout.hidden = true;
+      if (hadFocus) $('a, button', emptyEl)?.focus();
       return;
     }
 
@@ -747,6 +773,11 @@
         : active?.matches?.('[data-line-qty]')
           ? '[data-line-qty]'
           : null;
+    // Remove and Add warranty take their own button away, so work out where
+    // focus should land instead of dropping it back to the page.
+    const rowIds = [...document.querySelectorAll('[data-cart-items] [data-line]')].map((r) => r.dataset.line);
+    const removedIndex = active?.matches?.('[data-line-remove]') ? rowIds.indexOf(lineId) : -1;
+    const addedWarranty = active?.matches?.('[data-add-warranty]') ? active.dataset.addWarranty : null;
 
     $('[data-cart-items]').innerHTML = totals.lines
       .map((line) => cartItemRow(line) + warrantyOffer(line, totals.lines, products))
@@ -757,6 +788,12 @@
       const row = $(`[data-line="${CSS.escape(lineId)}"]`);
       const target = (row && $(control, row)) || $('[data-line-qty]');
       target?.focus();
+    } else if (addedWarranty) {
+      $(`[data-line="${CSS.escape(addedWarranty)}"] [data-line-qty]`)?.focus();
+    } else if (removedIndex >= 0) {
+      const rows = document.querySelectorAll('[data-cart-items] [data-line]');
+      const next = rows[Math.min(removedIndex, rows.length - 1)];
+      ($('[data-line-remove]', next || document) || $('[data-cart-summary] a, [data-cart-summary] button'))?.focus();
     }
   }
 
@@ -1506,6 +1543,7 @@
     initCookies();
     initQty();
     initCoverChooser();
+    initVariantChooser();
     initAddToCart();
     initGallery();
     initFilters();

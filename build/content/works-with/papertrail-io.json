@@ -68,6 +68,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 (£379, £70 less than the A10) is the middle size for inspectors who want more screen than the A6 handheld for checklists and certificates, with an 8 inch 1280 x 800 IPS display and a 1000 nit panel that stays readable on outdoor sites. It has built-in NFC for the tags Papertrail lists as compatible, a 13MP autofocus rear camera with flash for the app's camera-based barcode and QR scanning, and 4G LTE dual SIM so pending inspections sync once back in signal. The 8000mAh battery is removable, and VESA mount points plus a pogo pin connector suit mounting or docking in a vehicle. The trade-offs against the A10 are IP67 rather than IP68, no MIL-STD rating, a lower screen resolution and 6GB RAM against 8GB, although Papertrail publishes no RAM figure. It runs Android 12, which is further outside Papertrail's current-plus-two-previous support window than the A10's Android 14, so the vendor's note that not every feature is routinely tested on older versions applies, and trialling one unit is the sensible first step.",
+      "fit": [
+        "Android mobile app: the A8 runs Android 12. This is outside Papertrail's current-plus-two-previous support window, and Papertrail says the app usually works on older versions but does not routinely test all features.",
+        "NFC tag scanning with inbuilt NFC: the A8 has NFC built in.",
+        "Camera barcode and QR scanning: 13MP autofocus rear camera with flash (scanning is handled by the app; the A8 has no dedicated scan engine).",
+        "Sync over mobile data when back in signal: 4G LTE dual SIM plus Wi-Fi.",
+        "Field conditions: IP67 (no MIL-STD rating listed), removable 8000mAh battery, 1000 nit screen, AGC glass."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "The Tuga A6 is the alternative for rope access technicians, arborists and inspectors who want a pocketable handheld rather than a tablet. It runs Android 15, which sits inside Papertrail's supported window of the current major release and two previous releases at the time of writing, has built-in NFC for Papertrail's listed tags, and a 13MP rear camera with flash for the app's camera-based barcode and QR scanning. It also has a built-in Zebra 2D scan engine with two side scan keys; Papertrail documents camera scanning in the mobile app, so test whether the app accepts input from the scanner before relying on it. It is sealed to IP67, rated for 1.5 metre drops and has 4G for sync where coverage exists, and at 277g it hangs from a belt holster without getting in the way. The removable 5050mAh battery means a spare can be swapped in on a long day. The trade-offs are the 6 inch screen, which is fine for scanning and ticking checklists but smaller for reviewing reports, and 4GB RAM, which is modest; Papertrail publishes no RAM figure.",
@@ -91,10 +103,10 @@
       ]
     }
   ],
-  "not_recommended_note": "Papertrail's mobile app, including its offline mode and camera scanning, is published for Android and iOS only. On the Tuga W10 you get the browser web app, which has no published offline mode and relies on an external or built-in barcode or RFID reader rather than the camera, so it is not the right device for technicians working out of signal. On the Android side, the Google Play listing does not display a minimum Android version. Papertrail supports the current major Android release plus two previous releases; Android 17 was released in 2026, so Android 14, which the A10 runs, sits outside that window at the time of writing, while Android 15 on the A6 sits inside it. Papertrail's position is that the app usually works on older versions but not all features are routinely tested. We cannot say the Tuga devices are tested or approved by Papertrail, and we suggest trialling one unit before a fleet order.",
+  "not_recommended_note": "Papertrail's mobile app, including its offline mode and camera scanning, is published for Android and iOS only. On the Tuga W10 you get the browser web app, which has no published offline mode and relies on an external or built-in barcode or RFID reader rather than the camera, so it is not the right device for technicians working out of signal. On the Android side, the Google Play listing does not display a minimum Android version. Papertrail supports the current major Android release plus two previous releases; Android 17 was released in 2026, so Android 14, which the A10 runs, sits outside that window at the time of writing, as does Android 12 on the A8, while Android 15 on the A6 sits inside it. Papertrail's position is that the app usually works on older versions but not all features are routinely tested. We cannot say the Tuga devices are tested or approved by Papertrail, and we suggest trialling one unit before a fleet order.",
   "setup_steps": [
     "Use your existing Papertrail account, or start a free trial on papertrail.io (Papertrail states no credit card is required).",
-    "On the Tuga A10 or A6, open Google Play, search for Papertrail.io (developer Papertrail.io, package com.papertrail.app) and install it. On the Tuga W10, open Edge, or install Chrome, and go to app.papertrail.io.",
+    "On the Tuga A10, A8 or A6, open Google Play, search for Papertrail.io (developer Papertrail.io, package com.papertrail.app) and install it. On the Tuga W10, open Edge, or install Chrome, and go to app.papertrail.io.",
     "Sign in with your Papertrail login. The app is free to download and needs a login to reach your subscription.",
     "Make sure NFC is switched on in Android settings, then tap the Search icon in the app and the NFC button to open the scanning pop-up and scan a tag. Camera barcode and QR scanning uses the rear camera, so keep the lens clean and make sure there is enough light.",
     "If you use a Bluetooth reader such as the DMM iD 1.0 (which Papertrail says is seen as a keyboard by any Bluetooth device) or the Saveo C300 sold in the Papertrail Shop, pair it in Bluetooth settings.",
@@ -107,7 +119,7 @@
     },
     {
       "q": "Does Papertrail work offline on a rugged tablet?",
-      "a": "The mobile app does. Papertrail states that inspections recorded without 3G, 4G or Wi-Fi sit under Pending Updates and sync automatically once the device comes into signal, and that a single synced account can be searched offline. This applies to the Android and iOS app, so to the A10 and A6. Nothing is published about offline use of the web app, which is what the Windows W10 would run."
+      "a": "The mobile app does. Papertrail states that inspections recorded without 3G, 4G or Wi-Fi sit under Pending Updates and sync automatically once the device comes into signal, and that a single synced account can be searched offline. This applies to the Android and iOS app, so to the A10, A8 and A6. Nothing is published about offline use of the web app, which is what the Windows W10 would run."
     },
     {
       "q": "Should we choose the A10 or the smaller A6?",

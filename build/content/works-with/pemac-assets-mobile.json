@@ -63,6 +63,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the middle size, an 8 inch tablet for technicians who want more room for job details than the A6 offers but something smaller than the 10.1 inch A10. It runs Android 12, which meets the Play listing's Android 7.0 or later requirement, and it has the NFC radio the app's tag-tapping workflow depends on. Its 1000 nit screen suits outdoor and sunlit areas, the 8000mAh battery is removable so a spare can take over on a long shift, and VESA mount points and a pogo pin connector suit vehicle docking. Against the A10 it is sealed to IP67 rather than IP68, has no MIL-STD rating, runs an older Android version (12 against 14), and has a lower 1280 x 800 resolution and 6GB RAM against 8GB; like the A10 it has no dedicated scan engine, so barcode and QR scanning would run through the 13MP rear camera. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requires Android 7.0 or later: the Tuga A8 runs Android 12.",
+        "NFC tag identification of assets, spares and meters: the Tuga A8 has NFC.",
+        "Barcode and QR scanning with the device: the Tuga A8 has a 13MP autofocus rear camera with flash. Scanning through the camera is app-dependent and there is no dedicated scan engine.",
+        "Offline functionality for low- or no-bandwidth areas: the Tuga A8 has 4G LTE dual SIM and Wi-Fi for syncing when back in coverage, and 128GB storage plus a microSD slot.",
+        "Plant floor and outdoor use: IP67 (no MIL-STD rating), 8 inch 1000 nit IPS screen with AGC glass, removable 8000mAh battery."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "The Tuga A6 is the alternative for teams who want a pocketable handheld rather than a tablet. It runs Android 15 and has NFC, so it meets the same published requirements for PEMAC Assets Mobile. It also has a built-in Zebra 2D scan engine with two side scan keys, so the barcode and QR codes on assets, spares and meters can be read by a dedicated scan engine rather than only the camera, provided the app accepts the scanner's input, which you should test. The 6 inch screen is smaller, but the device weighs 277g, is sealed to IP67, rated for 1.5 metre drops, has a removable 5050mAh battery and 4G for syncing. It suits operations staff who mainly raise requests, tap NFC tags and scan asset labels, and roaming technicians who do not want to carry a 10 inch tablet between plant rooms.",
@@ -78,7 +90,7 @@
   "not_recommended_note": "We do not recommend the Tuga W10 for PEMAC Assets Mobile. The vendor describes the mobile app as Android and iOS only, a Microsoft Store search returns no PEMAC products, and the vendor does not publish supported browsers for the desktop CMMS, so we cannot confirm that it runs in a Windows browser. Two further honest caveats: the vendor publishes no screen-size, rugged-device or scanner guidance, so our device picks rest on the Android version, NFC, scanning and offline facts only; and the Tuga A10 scans barcodes through the camera, which depends on the app, while the A6's built-in Zebra 2D scan engine also needs testing with the app before you rely on it. The Google Play listing also shows only 10+ downloads for the current 4.4 package, so confirm with your Pemac administrator that the app version matches your server before buying devices.",
   "setup_steps": [
     "Confirm with your Pemac administrator or Eleco contact which CMMS server version your site runs. The app is published per server version (currently PEMAC Assets Mobile (4.4)), and the vendor says mobile access is offered as part of the standard Pemac software subscription at no additional cost.",
-    "On the Tuga A10 or A6, connect to Wi-Fi or insert a SIM, sign in with a Google account and install PEMAC Assets Mobile (4.4) from Google Play (package com.pemac.pemacapp44).",
+    "On the Tuga A10, A8 or A6, connect to Wi-Fi or insert a SIM, sign in with a Google account and install PEMAC Assets Mobile (4.4) from Google Play (package com.pemac.pemacapp44).",
     "Open the app and sign in with the Pemac user credentials your administrator has set up for the technician.",
     "Ask your Pemac contact how offline functionality behaves for your modules before relying on it in no-signal areas. The vendor states offline functioning is included but does not publish which screens work offline or how sync is handled.",
     "Test the workflow on one asset: tap its NFC tag with the device and confirm that scanning its barcode or QR code identifies the asset and shows its outstanding jobs. On the A10 that means the rear camera; on the A6, try the built-in scanner's side keys as well as the camera, since scanning is app-dependent.",

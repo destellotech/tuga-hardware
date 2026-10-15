@@ -4,13 +4,13 @@
   "vendor": "UpKeep Technologies, Inc.",
   "vendor_url": "https://upkeep.com/",
   "title": "Rugged tablet for UpKeep CMMS",
-  "meta_description": "Tuga A10, W10 and A6 rugged tablets for UpKeep: Android 8.0 requirement, offline mode plan limits, camera scanning and setup steps for UK teams.",
+  "meta_description": "Tuga A10, A8, W10 and A6 rugged tablets for UpKeep: Android 8.0 requirement, offline mode plan limits, camera scanning and setup steps for UK teams.",
   "target_query": "rugged tablet for UpKeep",
   "h1": "Rugged tablet for UpKeep",
   "intro": [
     "UpKeep is a cloud CMMS and asset operations platform that its vendor describes as trusted by more than 4,000 companies for work orders, compliance and preventive maintenance. Its industry pages cover manufacturing plants, facility management, food and beverage, healthcare, property management, hospitality, data centres, energy and utilities, schools and government and public works. The Google Play listing positions the mobile app as a replacement for pen and paper, spreadsheets and outdated desktop-based software.",
     "On the floor, technicians use the Android or iOS app to open and close work orders, work through inspection checklists, add notes and photos, look up asset history and parts, and scan asset barcodes or QR codes with the camera. UpKeep's own technical requirements article says tablets are ideal for technicians because large screens make work orders, inspections and checklists easy to navigate. Its primary tablet recommendations are consumer models (iPad, Samsung Galaxy Tab A9, Lenovo Tab P12), and for harsh sites it suggests rugged devices from Panasonic, Zebra and Samsung. It does not name Tuga devices, and we do not claim it does. A plant room, a washdown area, a cold store or a van exposes a tablet to drops, dust, water and low temperatures, which is the case for a rugged alternative.",
-    "This page sets out what UpKeep publishes about devices (platform, offline mode, scanning, connectivity), which of the three Tuga rugged devices meets each requirement and how, where the gaps are (offline mode plan limits, browser-only Windows access, undocumented NFC and RFID), and the steps to get a unit running. Prices are in pounds, delivery is UK only and a single trial unit is welcome before a fleet order."
+    "This page sets out what UpKeep publishes about devices (platform, offline mode, scanning, connectivity), which of the four Tuga rugged devices meets each requirement and how, where the gaps are (offline mode plan limits, browser-only Windows access, undocumented NFC and RFID), and the steps to get a unit running. Prices are in pounds, delivery is UK only and a single trial unit is welcome before a fleet order."
   ],
   "requirements": [
     {
@@ -63,6 +63,18 @@
       ]
     },
     {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 (£379, £70 less than the A10) is the middle size for teams that want a tablet screen for checklists and work orders but find the 10.1 inch A10 more than they need. It runs Android 12, which meets the published Android 8.0 and up requirement, and its 8 inch 1280 x 800 IPS display is rated at 1000 nits for outdoor and sunlit work, against the A10's 350 nits. The 8000mAh battery is removable, so a charged spare can take over mid shift, and VESA mount points and a pogo pin connector suit mounting or docking in a vehicle. The 13MP autofocus rear camera handles the in-app scan feature; there is no dedicated scan engine. The trade-offs against the A10 are IP67 rather than IP68, no MIL-STD rating, an older Android version, a lower screen resolution and 6GB RAM against 8GB, although UpKeep publishes no RAM figure.",
+      "fit": [
+        "Requirement: Android 8.0 and up. The A8 runs Android 12, so it meets the published minimum.",
+        "Requirement: scanning through the camera using the UpKeep scan feature. The A8 has a 13MP autofocus rear camera with flash; scanning is app-dependent and there is no dedicated scan engine.",
+        "Requirement: a large screen for work orders, inspections and checklists. The A8 has an 8 inch IPS display at 1280 x 800 and 1000 nits with AGC glass, smaller than the A10's 10.1 inch screen.",
+        "Requirement: Wi-Fi 5 or 6 access points, or an LTE data plan, for real-time sync. The A8 has 4G LTE dual SIM and Wi-Fi; our specification does not list the Wi-Fi standard.",
+        "Site conditions: IP67, no MIL-STD rating listed, removable 8000mAh battery, VESA mount points and pogo pin connector."
+      ]
+    },
+    {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "The Tuga A6 (£349) is the alternative for technicians who want a handheld that fits a pocket or belt holster rather than a tablet, or who scan a lot of asset and parts labels. It runs Android 15, meeting the Android 8.0 and up requirement for the same UpKeep app. Its 6 inch FHD+ screen is smaller than the tablets the vendor recommends, so checklists and work orders will show less at once. UpKeep's scan feature uses the camera, and the A6 has a 13MP rear camera with flash for that; it also has a built-in Zebra 2D scan engine with two side scan keys, but that is not one of the scanners UpKeep documents, so test whether the app accepts its input before relying on it. IP67 sealing, a 1.5 metre drop rating and a removable 5050mAh battery that can be swapped for a charged spare suit long shifts. At 277g it is lighter than the A10 (680g) and the W10 (1197g).",
@@ -86,11 +98,11 @@
       ]
     }
   ],
-  "not_recommended_note": "UpKeep is not iOS-only, so both Android devices run the native app. Four caveats matter before you buy. First, offline mode is only on the Professional and Enterprise plans, and Professional caches at most 5 work orders with 2 drafts and 5 task images, so an Essential or Premium account gets no offline working on any device. Second, the Tuga W10 can only run the browser-based web app, which the vendor lists as requiring a Wi-Fi or cellular connection, and its optional 2D barcode scanner and optional UHF RFID reader are not among the scanners UpKeep documents (Zebra DS2200, Honeywell Voyager, Socket Mobile S700). Third, UpKeep documents scanning through the camera with its in-app scan feature; the A10 has no dedicated scan engine, and the A6's built-in Zebra 2D scan engine is not among the scanners UpKeep documents, so test it with the app first. NFC or RFID reading is not documented by UpKeep for any device, so the NFC on all three Tuga devices should not be counted as an UpKeep feature. Fourth, UpKeep's own suggestions for harsh sites are Panasonic Toughbook, Zebra ET-series tablets and Samsung Galaxy XCover; it does not name Tuga devices, it says hardware recommendations are guidelines, and it advises verifying OS compatibility with your UpKeep representative.",
+  "not_recommended_note": "UpKeep is not iOS-only, so all three Android devices run the native app. Four caveats matter before you buy. First, offline mode is only on the Professional and Enterprise plans, and Professional caches at most 5 work orders with 2 drafts and 5 task images, so an Essential or Premium account gets no offline working on any device. Second, the Tuga W10 can only run the browser-based web app, which the vendor lists as requiring a Wi-Fi or cellular connection, and its optional 2D barcode scanner and optional UHF RFID reader are not among the scanners UpKeep documents (Zebra DS2200, Honeywell Voyager, Socket Mobile S700). Third, UpKeep documents scanning through the camera with its in-app scan feature; the A10 and A8 have no dedicated scan engine, and the A6's built-in Zebra 2D scan engine is not among the scanners UpKeep documents, so test it with the app first. NFC or RFID reading is not documented by UpKeep for any device, so the NFC on all four Tuga devices should not be counted as an UpKeep feature. Fourth, UpKeep's own suggestions for harsh sites are Panasonic Toughbook, Zebra ET-series tablets and Samsung Galaxy XCover; it does not name Tuga devices, it says hardware recommendations are guidelines, and it advises verifying OS compatibility with your UpKeep representative.",
   "setup_steps": [
     "Use your existing UpKeep account or start a free trial on upkeep.com (the vendor states no credit card is required). Confirm which plan you are on, because offline mode is a Professional and Enterprise feature.",
-    "On a Tuga A10 or A6, open Google Play and install UpKeep Maintenance Management by UpKeep Technologies, Inc. (Android 8.0 and up; the A10 runs Android 14 and the A6 Android 15). On a Tuga W10, open Edge or Chrome and sign in to the UpKeep web application instead; there is no Windows app to install.",
-    "Sign in with each technician's UpKeep user credentials. Connect to your site Wi-Fi or fit a SIM (4G on the A10 and A6, optional 4G LTE on the W10) so the app can sync.",
+    "On a Tuga A10, A8 or A6, open Google Play and install UpKeep Maintenance Management by UpKeep Technologies, Inc. (Android 8.0 and up; the A10 runs Android 14, the A8 Android 12 and the A6 Android 15). On a Tuga W10, open Edge or Chrome and sign in to the UpKeep web application instead; there is no Windows app to install.",
+    "Sign in with each technician's UpKeep user credentials. Connect to your site Wi-Fi or fit a SIM (4G on the A10, A8 and A6, optional 4G LTE on the W10) so the app can sync.",
     "If you are on Professional or Enterprise, read the vendor's offline article: work orders assigned to the technician, non-operational asset work orders and those due within the working week are cached automatically, others can be bookmarked in advance, and the app should be kept open after reconnecting so background sync finishes.",
     "Test scanning on an asset or parts QR code using the scan feature inside the UpKeep app, not a generic camera app. On the A6, also try the side scan keys with the app open. If you use one of the Bluetooth scanners UpKeep lists, pair it through the device's Bluetooth settings.",
     "Fit the hand strap (included with the A10) or a case, apply a screen protector, and connect the charging dock or vehicle mounting dock to the pogo pin connector on the A10 or W10."
@@ -102,7 +114,7 @@
     },
     {
       "q": "Does UpKeep work offline on these devices?",
-      "a": "On the A10 and A6, offline mode is available if your organisation is on the Professional or Enterprise plan. Professional caches up to 5 work orders with 2 drafts and 5 task image uploads; Enterprise caches between 5 and 100 work orders with unlimited drafts and image uploads. Changes sync automatically on reconnection. The W10 runs the web app, which the vendor lists as requiring a Wi-Fi or cellular connection, with offline mode available on the mobile apps."
+      "a": "On the A10, A8 and A6, offline mode is available if your organisation is on the Professional or Enterprise plan. Professional caches up to 5 work orders with 2 drafts and 5 task image uploads; Enterprise caches between 5 and 100 work orders with unlimited drafts and image uploads. Changes sync automatically on reconnection. The W10 runs the web app, which the vendor lists as requiring a Wi-Fi or cellular connection, with offline mode available on the mobile apps."
     },
     {
       "q": "Can we trial one unit and pay by invoice?",
