@@ -427,10 +427,12 @@ function tradeCard(t) {
           </a>`;
 }
 
-const hero = () => {
-  const lead = devices.find((d) => d.id === 'tuga-a8');
-  return `
+const hero = () => `
     <section class="hero">
+      <video class="hero-video" muted loop playsinline preload="metadata" poster="${versioned('/img/hero/tablet-on-site-poster.webp')}" aria-hidden="true">
+        <source src="${versioned('/img/hero/tablet-on-site.webm')}" type="video/webm">
+        <source src="${versioned('/img/hero/tablet-on-site.mp4')}" type="video/mp4">
+      </video>
       <div class="container hero-inner">
         <div class="hero-content">
           ${eyebrow('Rugged Android & Windows tablets')}
@@ -459,18 +461,8 @@ const hero = () => {
             </div>
           </div>
         </div>
-        <figure class="hero-drawing">
-          <img src="${versioned('/img/hero/a8-on-site.webp')}" srcset="${versioned('/img/hero/a8-on-site-800.webp')} 800w, ${versioned('/img/hero/a8-on-site.webp')} 1200w" sizes="(max-width: 860px) 92vw, 600px" alt="Tuga A8 rugged tablet, front and back, in front of a building site" width="1200" height="900" fetchpriority="high">
-          <figcaption>
-            <span><strong>${esc(lead.name)}</strong></span>
-            <span>${esc(lead.sizeLabel)}&Prime; ${esc(lead.specs.ip_rating)}</span>
-            <span>${esc(lead.specs.battery)}</span>
-            <span>${money(lead.price)}</span>
-          </figcaption>
-        </figure>
       </div>
     </section>`;
-};
 
 const homeBody = `
 ${hero()}
