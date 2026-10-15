@@ -7,6 +7,7 @@
 import { sendOrderConfirmation, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
+import { handleAdmin } from './admin.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -51,6 +52,11 @@ const PRODUCTS = {
   'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
 };
+
+/** Device models the stock admin can receive: product id → name. */
+const DEVICE_MODELS = Object.fromEntries(
+  Object.entries(PRODUCTS).filter(([, p]) => p.device).map(([id, p]) => [id, p.name])
+);
 
 /** Scanner variants carry their base device's warranty. */
 const baseDeviceId = (id) => id.replace(/-scanner$/, '');
@@ -223,6 +229,12 @@ export async function handleRequest(request, env) {
   // Diagnostics reveal payment configuration and spend provider API calls,
   // so they answer only with the ADMIN_TOKEN secret (wrangler secret put
   // ADMIN_TOKEN) and look like any unknown path otherwise.
+  // Stock admin (/admin page). Same rule as diagnostics: without the token
+  // it is indistinguishable from an unknown path.
+  if (path.startsWith('/api/admin/')) {
+    if (!isAdmin(request, env)) return new Response('Not Found', { status: 404 });
+    return handleAdmin(request, env, DEVICE_MODELS);
+  }
   if (
     request.method === 'GET' &&
     DIAGNOSTIC_PATHS.includes(path) &&
