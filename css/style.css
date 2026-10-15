@@ -752,6 +752,15 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 
 .hero-content { max-width: 40ch; }
 
+/* The copy sits over moving footage, so it gets the light copper, firmer
+   greys and a soft shadow: light patches in the clip (a white hard hat, sky)
+   must never wash the text out. */
+.hero-content { text-shadow: 0 1px 12px rgba(5, 46, 22, 0.55); }
+.hero .eyebrow { color: #e4b8a3; }
+.hero .hero-sub { color: rgba(247, 244, 239, 0.9); }
+.hero .hero-spec-label { color: rgba(247, 244, 239, 0.78); }
+.hero .btn { text-shadow: none; }
+
 .hero-title {
   font-size: var(--step-6);
   letter-spacing: -0.04em;
@@ -826,7 +835,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   .hero-still img,
   .hero-video { object-position: 50% center; }
   .hero::before {
-    background: linear-gradient(180deg, rgba(5, 46, 22, 0.58) 0%, rgba(5, 46, 22, 0.88) 55%, rgba(5, 46, 22, 0.96) 100%);
+    background: linear-gradient(180deg, rgba(5, 46, 22, 0.84) 0%, rgba(5, 46, 22, 0.9) 55%, rgba(5, 46, 22, 0.96) 100%);
   }
 }
 
