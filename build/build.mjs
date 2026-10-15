@@ -3358,9 +3358,9 @@ if (worksWith.length) {
   write(
     'works-with/index.html',
     page({
-      title: 'Rugged tablets for maintenance and field software | Tuga Hardware',
+      title: 'Rugged tablets for job management and field apps | Tuga Hardware',
       description:
-        'Which Tuga rugged tablet runs your CMMS, EAM or inspection software. Published requirements checked against each device, with a trial unit and business quotes available.',
+        'Which Tuga rugged tablet runs your job management, CMMS or inspection app. Published requirements checked against each device, with trial units available.',
       path: '/works-with/',
       active: 'works-with',
       schema: [orgSchema, breadcrumbSchema(worksWithTrail)],
@@ -3370,7 +3370,7 @@ if (worksWith.length) {
 ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
         ${eyebrow('Works with')}
         <h1>Rugged tablets for the software your team already runs</h1>
-        <p class="lede">Maintenance, asset management and inspection apps publish what they need from a device. We check those requirements against each Tuga tablet and say plainly which one fits, and where it does not.</p>
+        <p class="lede">Job management, maintenance and inspection apps publish what they need from a device. We check those requirements against each Tuga tablet and say plainly which one fits, and where it does not.</p>
       </div>
     </section>
 
