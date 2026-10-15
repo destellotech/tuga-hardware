@@ -1,0 +1,144 @@
+{
+  "slug": "commusoft",
+  "software": "Commusoft",
+  "vendor": "Commusoft Ltd",
+  "vendor_url": "https://www.commusoft.com/en-gb/",
+  "title": "Rugged tablet for Commusoft: UK buyer's guide",
+  "meta_description": "Commusoft needs Android 12, 3GB RAM, 32GB and a 5.5 inch screen. The Tuga A10 (Android 14, 8GB RAM, IP68) clears each one; the A8 meets Android 12 exactly.",
+  "target_query": "best tablet for Commusoft",
+  "h1": "Rugged tablet for Commusoft",
+  "intro": [
+    "Commusoft is job management software for field service businesses, made by Commusoft Ltd. Its UK site leads with plumbing and heating, gas engineering, electrical contracting and renewable energy, and its Google Play listing adds fire and security, HVAC and roofing. The office runs the Commusoft web app on a computer; engineers use the Commusoft mobile app on an Android or iOS phone or tablet to view and update their diary, complete forms and certificates, capture customer signatures, add site photos, raise invoices and take payment.",
+    "The mobile app is designed for offline access and background syncing, so engineers keep working in lofts, basements and rural properties with no signal, and their changes sync when the connection returns. That means a device carried from the van into customers' homes all day, put down on boiler housings and wet floors, and left in a cold van overnight, which is where a consumer tablet tends to crack or die early.",
+    "This page sets out what Commusoft publishes about the devices its apps run on, which Tuga rugged tablets and handhelds meet each published figure and by how much, why the Windows tablet is not on the list, and how a UK heating, electrical or service business can buy a single trial unit before ordering for its engineers."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 12 or above",
+      "detail": "Commusoft's system requirements article (last updated 17 August 2026) gives Android OS 12 or above for all three of its Android apps: the main Commusoft app, Tracker and Stockroom. It also notes that Tracker and Stockroom updates stop for devices on Android 11 or below. The Google Play listing for Commusoft (package com.commusoft.v4, developer Commusoft, version 4.784, updated 8 October 2026) sets a minimum of Android 12 (API level 31) and shows device chips for Phone and Tablet; the Commusoft Vehicle Tracking listing (commusoft.com.tracker) also sets Android 12. Jailbroken or rooted devices are not supported.",
+      "source_url": "https://help.commusoft.com/en/articles/216601-commusoft-system-requirements"
+    },
+    {
+      "requirement": "Hardware: 3GB RAM, 32GB storage, 4G or faster, 5.5 inch screen or larger",
+      "detail": "For Android phones and tablets the same article lists 3GB of RAM, 32GB of internal storage, an internet connection of 4G or higher and a display of 5.5 inches or larger. It says a stable 4G connection is enough for data syncing and a stronger connection speeds up photo uploads and syncing. Commusoft's usage tips add that your hardware must meet the minimum requirements for the app to function and that the app performs best on devices that exceed them.",
+      "source_url": "https://help.commusoft.com/en/articles/216601-commusoft-system-requirements"
+    },
+    {
+      "requirement": "Offline working, with some features needing a connection",
+      "detail": "Commusoft says the app works offline but some features are limited without a connection. Search, home screen widgets, property history, notes and communications, assets (dynamic fields), parts, the Parts Arena integration, My Van, the standalone Stockroom app, purchase orders, deferred payments, SumUp, Tap to Pay and Fleet Management arrive and leave status updates need a strong mobile data or Wi-Fi connection. It advises opening the app each morning on a good connection so everything syncs before the first appointment, keeping the screen on during the first database download, and never uninstalling while offline, because local data not yet synced is permanently lost.",
+      "source_url": "https://help.commusoft.com/en/articles/285319-usage-tips-for-the-mobile-apps"
+    },
+    {
+      "requirement": "Camera, location and signatures",
+      "detail": "The getting started article says the app needs permission to take pictures and record video, without which you cannot add photos to job reports, records, forms or assets, and photos can be location stamped. Precise location is required for the timecard, which confirms your location when you clock in and out, and is also used for travel and arrive timestamps. The Google Play listing describes digital certificates and custom forms with e-signature capture, and invoicing with a SumUp integration. Commusoft's mobile workforce page says the app integrates with its Fleet+ vehicle tracking and that geofencing can update job statuses when an engineer arrives at or leaves a site.",
+      "source_url": "https://help.commusoft.com/en/articles/288401-get-started-with-the-commusoft-mobile-app"
+    },
+    {
+      "requirement": "Barcode scanning: Stockroom app only, not documented in the main app",
+      "detail": "No barcode or QR scanning is described for the main Commusoft engineer app on its Google Play listing or in the help articles we checked. The separate Commusoft Stockroom app, for stockroom staff managing parts, picking lists and stock, says on its App Store listing that you can check in parts, scan barcodes and create pick lists from your smartphone. The system requirements article lists Android 12 or above for Stockroom, but we did not find a Stockroom listing on Google Play UK when checking, so confirm Android availability with Commusoft before buying for stock work.",
+      "source_url": "https://apps.apple.com/gb/app/id1447124644"
+    },
+    {
+      "requirement": "Web app: computers only, not tablets",
+      "detail": "Commusoft states that iPads and Android tablets are treated as mobile devices and cannot access the Commusoft web app in a browser. For Windows or macOS computers it lists an Intel Core i5 or equivalent processor, 8GB of RAM, an operating system with a valid licence supported by its provider, a display resolution of 1280 x 768 or higher, and the latest version of Google Chrome (recommended) or Safari, with Firefox and Edge able to work but not the focus of testing.",
+      "source_url": "https://help.commusoft.com/en/articles/216601-commusoft-system-requirements"
+    },
+    {
+      "requirement": "Tap to Pay needs working NFC and Stripe's device requirements",
+      "detail": "The system requirements article says Tap to Pay requires a device that meets the listed specifications, functional NFC hardware and Stripe's own device requirements, and warns that Android tablets and iPads often lack the NFC functionality Tap to Pay needs. The usage tips list Tap to Pay among the features that need a strong connection. No NFC or RFID tag reading for assets or jobs is documented.",
+      "source_url": "https://help.commusoft.com/en/articles/216601-commusoft-system-requirements"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Commusoft sets a firm Android 12 floor across all three of its Android apps, and has already stopped Tracker and Stockroom updates for Android 11 and below, so headroom above that floor matters for a device you expect to keep for years. The Tuga A10 runs Android 14 with Google Play, two major versions above the requirement, and carries 8GB of RAM against the 3GB minimum and 128GB of storage against 32GB, which fits Commusoft's advice that the app performs best on devices that exceed the minimum. Its 10.1 inch 1920 x 1200 screen gives room for gas and electrical certificates, multi-option estimates and customer signatures. It is sealed to IP68 and tested to MIL-STD-810H, which suits wet plant rooms, lofts and van floors. It has NFC, but check Stripe's device requirements before relying on it for Tap to Pay. The trade-off is a 350 nit screen, dimmer than the A8's 1000 nits for outdoor work. It costs £449.",
+      "fit": [
+        "Requirement: Android 12 or above, not rooted. Tuga A10: Android 14 with Google Play.",
+        "Requirement: 3GB RAM and 32GB internal storage. Tuga A10: 8GB RAM and 128GB storage, with microSD up to 2TB.",
+        "Requirement: 5.5 inch screen or larger. Tuga A10: 10.1 inch FHD IPS, 1920 x 1200, tempered glass.",
+        "Requirement: 4G or faster connection. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, Bluetooth 5.2.",
+        "Requirement: camera for job photos and precise location for the timecard and arrive timestamps. Tuga A10: 13MP rear camera with flash; GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: functional NFC for Tap to Pay (plus Stripe's device requirements). Tuga A10: NFC (Stripe's requirements not checked)."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 meets every figure Commusoft publishes, but with no margin on the one that matters most: it runs Android 12, exactly the minimum for the Commusoft, Tracker and Stockroom apps. It works today, and if Commusoft raises its floor in future the A8 would be the first Tuga Android device affected. With that understood, it is a practical van tablet for heating and electrical engineers. The 8 inch screen is comfortable for forms and certificates while still fitting one hand, the 1000 nit display stays readable in direct sun, the 8000mAh battery is removable so a charged spare can take over on a long day, and VESA mount points with a pogo pin connector let it lock into the vehicle mounting dock. It has 6GB of RAM against the 3GB minimum and 128GB of storage. Against the A10 it is IP67 rather than IP68, has no MIL-STD rating and a 1280 x 800 screen. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 12 or above, not rooted. Tuga A8: Android 12 with Google Play, which meets the minimum exactly.",
+        "Requirement: 3GB RAM and 32GB internal storage. Tuga A8: 6GB RAM and 128GB storage, with a microSD slot.",
+        "Requirement: 5.5 inch screen or larger. Tuga A8: 8 inch IPS, 1280 x 800, 1000 nits, AGC glass.",
+        "Requirement: 4G or faster connection. Tuga A8: 4G LTE dual SIM, Wi-Fi, Bluetooth.",
+        "Requirement: camera for job photos and precise location. Tuga A8: 13MP autofocus rear camera with flash; GPS, GLONASS, Galileo and BeiDou.",
+        "Requirement: a device that lives in the van. Tuga A8: VESA mount points and pogo pin connector for the vehicle mounting dock, removable 8000mAh battery, IP67."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Commusoft's Google Play listing says the app is available on both smartphones and tablets so engineers can choose, and its minimum screen size is 5.5 inches, so the 6 inch Tuga A6 is within what Commusoft supports. It runs Android 15, three major versions above the Android 12 floor, with 4GB of RAM against the 3GB minimum and 64GB of storage against 32GB. At 277g it goes in a pocket or belt holster, which suits engineers who move between the van and the property all day and mainly update the diary, take photos and capture signatures. It has NFC, but check Stripe's device requirements before relying on it for Tap to Pay. Its Zebra 2D scan engine is not a documented Commusoft input, and barcode scanning is only described for the separate Stockroom app. The trade-off is screen space for long certificates and estimates, where the A10 or A8 is easier to work on. It is IP67 and rated for 1.5 metre drops, at £349.",
+      "fit": [
+        "Requirement: Android 12 or above, not rooted. Tuga A6: Android 15 with Google Play.",
+        "Requirement: 3GB RAM and 32GB internal storage. Tuga A6: 4GB RAM and 64GB storage, with microSD up to 256GB.",
+        "Requirement: 5.5 inch screen or larger. Tuga A6: 6 inch FHD+ IPS, 2160 x 1080.",
+        "Requirement: 4G or faster connection. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: camera for job photos and precise location. Tuga A6: 13MP rear camera with flash; GPS, GLONASS, BeiDou and Galileo.",
+        "Requirement: a device that survives being carried all day. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g, removable 5050mAh battery."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Commusoft administrator for the engineer's username and password and your company's Client ID, which is the same for all users on the account.",
+    "On the Tuga A10, A8 or A6, open Google Play, search for Commusoft and install the official app (package com.commusoft.v4, developer Commusoft).",
+    "Open the app, enter the Client ID, username and password, and allow the camera and precise location permissions when asked. Without camera permission you cannot add photos, and without precise location the timecard cannot confirm clock in and clock out.",
+    "Stay on a good Wi-Fi or 4G connection with the screen on until the first database download finishes and the grey Downloading information bar disappears. If the device sleeps, the download may stop and you will need to close and reopen the app.",
+    "Stay signed in so the app can sync in the background and work offline. Open it on a good connection each morning before the first job, and never uninstall it while offline or with unsynced work.",
+    "Fit the vehicle mounting dock for the A10 or A8 in the van, or the belt holster for the A6. Fit the tempered glass screen protector before the device goes out, and add a stylus for certificate signatures on the A10 or A8."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8 and A10), for working from the van",
+    "Charging dock, £49.99 (Tuga A10), for devices that return to the office overnight",
+    "12V DC car charger, £26, for topping up between jobs",
+    "Capacitive stylus, £14.99 (Tuga A8 and A10), for customer signatures on certificates and job sheets",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8 and A10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Commusoft run on the Tuga A10 and A8?",
+      "a": "Commusoft publishes Android 12 or above, 3GB RAM, 32GB internal storage, a 4G or faster connection and a 5.5 inch screen or larger for Android phones and tablets. The Tuga A10 (Android 14, 8GB RAM, 128GB, 10.1 inch) and A6 (Android 15, 4GB RAM, 64GB, 6 inch) clear every figure. The Tuga A8 (Android 12, 6GB RAM, 128GB, 8 inch) meets them too, but its Android version is exactly the minimum. We do not describe any device as certified or tested by Commusoft; these are the vendor's published figures set against our device specifications."
+    },
+    {
+      "q": "Does Commusoft work offline on these tablets?",
+      "a": "Yes, with limits. Commusoft says the mobile app works offline and syncs when the connection returns, but search, property history, notes and communications, parts, My Van, purchase orders, SumUp, Tap to Pay and some other features need a strong connection. Open the app on a good connection each morning, and do not uninstall it while offline, as unsynced data is lost. Every Tuga Android device here has dual SIM 4G, which helps in areas where one network is weak."
+    },
+    {
+      "q": "Can we use the Tuga W10 Windows tablet for Commusoft?",
+      "a": "We do not recommend it. Commusoft's mobile app is published for Android and iOS, and the web app is for computers. Commusoft lists an Intel Core i5 or equivalent processor and 8GB of RAM for a computer; the W10 has 8GB of RAM and an Intel N100, and Commusoft does not say whether it counts the N100 as equivalent. For engineers in the field, the Android app on the A10, A8 or A6 is the documented route, and office staff are better served by an ordinary desktop or laptop."
+    },
+    {
+      "q": "Will Tap to Pay work on these devices?",
+      "a": "Commusoft says Tap to Pay needs functional NFC hardware and a device that meets Stripe's own device requirements, and warns that Android tablets often lack the NFC it needs. The Tuga A10, A8 and A6 all have NFC, but we have not checked them against Stripe's requirements, so do not buy for Tap to Pay without confirming it with Commusoft or on a trial unit. Commusoft also lists a SumUp integration for taking payment."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before ordering for your engineers is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £379 (A8) or £349 (A6) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "The Tuga W10 is not recommended for Commusoft. Commusoft's apps are published for Android and iOS, its web app is meant for Windows or macOS computers, and its computer requirement is an Intel Core i5 or equivalent with 8GB of RAM; the W10 has 8GB of RAM but an Intel N100, and Commusoft does not say whether that counts as equivalent, so an ordinary office desktop or laptop is the safer choice for the web app. Note also that Commusoft says iPads and Android tablets cannot use the web app in a browser, so office work has to happen on a computer. The Tuga A8 runs Android 12, exactly Commusoft's minimum, so it has no headroom if that minimum rises. Barcode scanning is only described for the separate Stockroom app, so the A6's Zebra 2D scan engine is not a documented Commusoft feature. The A10, A8 and A6 have NFC, but Tap to Pay also depends on Stripe's device requirements, which we have not checked, and NFC or RFID tag reading for assets is not documented.",
+  "disclaimer": "Commusoft is a product of Commusoft Ltd. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Commusoft Ltd.",
+  "sources": [
+    "https://www.commusoft.com/en-gb/",
+    "https://www.commusoft.com/en-gb/features/mobile-workforce-management-software/",
+    "https://help.commusoft.com/en/articles/216601-commusoft-system-requirements",
+    "https://help.commusoft.com/en/articles/285319-usage-tips-for-the-mobile-apps",
+    "https://help.commusoft.com/en/articles/288401-get-started-with-the-commusoft-mobile-app",
+    "https://play.google.com/store/apps/details?id=com.commusoft.v4&hl=en_GB",
+    "https://play.google.com/store/apps/details?id=commusoft.com.tracker&hl=en_GB",
+    "https://apps.apple.com/gb/app/id1447124644"
+  ]
+}
