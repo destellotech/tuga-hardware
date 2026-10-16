@@ -135,29 +135,32 @@
   </footer>
 
   <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie notice" hidden>
-    <p>No cookies here. Your basket is kept in your browser&#39;s own storage, and visits are counted without cookies or anything that identifies you. <a href="/privacy">Privacy policy</a>.</p>
+    <p>We use Google Analytics cookies to count visits and see which pages help. They are off unless you accept, and never used for advertising. Your basket is kept in your browser&#39;s own storage. <a href="/privacy">Privacy policy</a>.</p>
     <div class="cookie-actions">
-      <button class="btn btn-sm btn-inverse" data-cookie-accept>OK</button>
+      <button class="btn btn-sm btn-inverse" data-cookie-accept>Accept</button>
+      <button class="btn btn-sm" data-cookie-decline>Decline</button>
     </div>
   </div>
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 
-  <script src="/js/app.js?v=b2cb83c7e7" defer></script>
+  <script src="/js/app.js?v=38e6df32af" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4, run cookieless: consent is denied by default and
-       client_storage is off, so no cookies are set and no ad features are on.
-       Kept accurate in the privacy policy. -->
+  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
+       (no cookies, cookieless pings only) until the visitor accepts in the
+       cookie banner, which is remembered in localStorage. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
     gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { client_storage: 'none', allow_google_signals: false, allow_ad_personalization_signals: false });
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
   </script>
 </body>
 </html>

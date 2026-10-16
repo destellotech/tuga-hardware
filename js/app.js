@@ -383,7 +383,7 @@
     const banner = $('#cookie-banner');
     if (!banner) return;
     try {
-      if (localStorage.getItem('tuga-cookies')) return;
+      if (localStorage.getItem('tuga-consent')) return;
     } catch {
       return;
     }
@@ -392,13 +392,17 @@
     setTimeout(() => banner.classList.add('is-visible'), 900);
 
     const dismiss = (choice) => () => {
-      localStorage.setItem('tuga-cookies', choice);
+      localStorage.setItem('tuga-consent', choice);
+      if (choice === 'granted' && typeof gtag === 'function') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
       banner.classList.remove('is-visible');
       // Out of the tab order and the accessibility tree once dismissed.
       setTimeout(() => { banner.hidden = true; }, 400);
     };
 
-    $('[data-cookie-accept]', banner)?.addEventListener('click', dismiss('accepted'));
+    $('[data-cookie-accept]', banner)?.addEventListener('click', dismiss('granted'));
+    $('[data-cookie-decline]', banner)?.addEventListener('click', dismiss('denied'));
   }
 
   /* --------------------------------------------------------------- quantity */
