@@ -721,6 +721,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   z-index: -2;
   opacity: 0;
   transition: opacity 0.6s ease;
+  filter: contrast(1.08) saturate(0.85);
 }
 
 .hero-video.is-playing { opacity: 1; }
@@ -739,6 +740,19 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
     rgba(5, 46, 22, 0.25) 56%,
     rgba(5, 46, 22, 0.1) 100%
   );
+}
+
+/* A brand-green grade over the footage and the still: the `color` blend pushes
+   the whole frame toward green while keeping its luminance. Sits above the
+   copy gradient, below the text. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(21, 128, 61, 0.5);
+  mix-blend-mode: color;
 }
 
 .hero-inner {
