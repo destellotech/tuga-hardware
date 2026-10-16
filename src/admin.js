@@ -45,6 +45,7 @@ import {
   markRegistrationHandled,
 } from './backoffice.js';
 import { sendShippingNotification } from './email.js';
+import { routedStore } from './store.js';
 
 const BY = 'Admin';
 
@@ -81,7 +82,7 @@ const moveAt = (day) => (isoDate(day) && isoDate(day) !== todayIso() ? `${isoDat
  */
 export async function handleAdmin(request, env, ctx) {
   if (!env.ORDERS) return fail('The ORDERS KV binding is missing', 500);
-  const kv = env.ORDERS;
+  const kv = routedStore(env);
   const url = new URL(request.url);
   const [resource, rawId, action, sub] = url.pathname.replace(/^\/api\/admin\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
   const method = request.method;

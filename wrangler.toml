@@ -33,6 +33,14 @@ crons = ["0 9 * * *"]
 binding = "ORDERS"
 id = "dc341cf8ff2b4a2fb6f82c4be084bb7a"
 
+# D1 database for the back-office records (customers, suppliers, purchases,
+# sales, devices, movements). One table, `records`, keyed like KV; see
+# src/store.js. Web orders and form submissions stay in the ORDERS KV above.
+[[d1_databases]]
+binding = "DB"
+database_name = "tuga-backoffice"
+database_id = "2487b310-f5b9-47c8-b552-dc982347133f"
+
 # Rate limit for the public forms (src/api.js FORM_PATHS): 5 per minute per
 # IP. Needs wrangler 4.36 or later; uncomment to switch it on. The code skips
 # the check while the binding is absent.
