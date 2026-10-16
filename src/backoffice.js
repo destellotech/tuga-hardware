@@ -12,6 +12,7 @@ import { getRecord, putRecord, listRecords, nextId } from './records.js';
 import { listDevices } from './inventory.js';
 import { updateOrder } from './orders.js';
 import { sendDigest } from './email.js';
+import { routedStore } from './store.js';
 
 // ---------------------------------------------------------------------------
 // Warranty plans. Months match data/products.json warranty.tiers.
@@ -205,7 +206,7 @@ export async function buildDigest(kv) {
 export async function sendDailyDigest(env) {
   if (!env.ORDERS || !env.RESEND_API_KEY) return;
   try {
-    const sections = await buildDigest(env.ORDERS);
+    const sections = await buildDigest(routedStore(env));
     if (sections.length) await sendDigest(env, sections);
   } catch (err) {
     console.error('Daily digest failed:', err);

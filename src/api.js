@@ -9,6 +9,7 @@ import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
 import { handleAdmin } from './admin.js';
 import { fileWebOrder } from './backoffice.js';
+import { routedStore } from './store.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -500,7 +501,7 @@ async function recordOrder(env, orderDetails) {
   // so the alert can link to it. Never let this cost a confirmation.
   if (env.ORDERS && !record.saleId) {
     try {
-      record = { ...record, saleId: await fileWebOrder(env.ORDERS, record, ADMIN_CATALOGUE.catalogue) };
+      record = { ...record, saleId: await fileWebOrder(routedStore(env), record, ADMIN_CATALOGUE.catalogue) };
     } catch (err) {
       console.error('Could not file web order in the back office:', err);
     }
