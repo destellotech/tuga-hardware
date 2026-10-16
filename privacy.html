@@ -137,7 +137,7 @@
     <ul>
       <li><strong>Your basket:</strong> the items you have added, so your basket is still there when you come back.</li>
       <li><strong>This notice:</strong> a note that you have seen the cookie and storage notice, so it is not shown again.</li>
-      <li><strong>Analytics:</strong> we use Cloudflare Web Analytics to count page views and visits. It sets no cookies, does not fingerprint your device or browser, and cannot identify you individually.</li>
+      <li><strong>Analytics:</strong> we use Cloudflare Web Analytics and Google Analytics 4 to count page views and visits. Both are configured without cookies: Google Analytics runs with storage and advertising features switched off, so it sets no cookies and builds no advertising profile. Google may still receive your IP address and browser details when the page loads, to produce aggregate reports.</li>
     </ul>
     <p>You can clear local storage at any time through your browser settings. Your basket will then be emptied. The payment pages run by Stripe and PayPal set their own cookies under their own policies.</p>
 
@@ -149,7 +149,7 @@
       <li><strong>Cloudflare:</strong> hosts this website and stores orders, enquiries, trade applications, warranty registrations and reviews on our behalf.</li>
       <li><strong>Resend:</strong> sends our order, enquiry and review emails, so it receives the name, email address and order details in them.</li>
       <li><strong>Shipping providers:</strong> we share your name and delivery address with our logistics partners to fulfil your order.</li>
-      <li><strong>Analytics providers:</strong> Cloudflare Web Analytics processes aggregate page view data on our behalf. No personal data is shared with it and no cookies are set.</li>
+      <li><strong>Analytics providers:</strong> Cloudflare Web Analytics and Google Analytics 4 process aggregate page view data on our behalf. No cookies are set by either.</li>
     </ul>
     <p>We do not sell your personal data to any third party.</p>
 
@@ -263,5 +263,16 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
+  <!-- Google Analytics 4, run cookieless: consent is denied by default and
+       client_storage is off, so no cookies are set and no ad features are on.
+       Kept accurate in the privacy policy. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { client_storage: 'none', allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
 </body>
 </html>
