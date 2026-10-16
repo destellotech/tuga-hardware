@@ -265,5 +265,16 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
+  <!-- Google Analytics 4, run cookieless: consent is denied by default and
+       client_storage is off, so no cookies are set and no ad features are on.
+       Kept accurate in the privacy policy. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { client_storage: 'none', allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
 </body>
 </html>
