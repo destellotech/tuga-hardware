@@ -4,9 +4,11 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation, sendEnquiry } from './email.js';
+import { sendOrderConfirmation, sendNewOrderAlert, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
+import { handleAdmin } from './admin.js';
+import { fileWebOrder } from './backoffice.js';
 
 // ---------------------------------------------------------------------------
 // Product catalogue (prices in pence / GBP)
@@ -50,6 +52,14 @@ const PRODUCTS = {
   'wty-3yr-tuga-a8': { name: "3-Year Warranty for Tuga A8", price: 6500, warrantyFor: 'tuga-a8', tier: '3yr' },
   'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
+};
+
+/** What the back office needs from the catalogue: stockable models and every sellable line. */
+const ADMIN_CATALOGUE = {
+  models: Object.fromEntries(Object.entries(PRODUCTS).filter(([, p]) => p.device).map(([id, p]) => [id, p.name])),
+  catalogue: Object.fromEntries(
+    Object.entries(PRODUCTS).map(([id, p]) => [id, { name: p.name, price: p.price, device: Boolean(p.device) }])
+  ),
 };
 
 /** Scanner variants carry their base device's warranty. */
@@ -223,6 +233,12 @@ export async function handleRequest(request, env) {
   // Diagnostics reveal payment configuration and spend provider API calls,
   // so they answer only with the ADMIN_TOKEN secret (wrangler secret put
   // ADMIN_TOKEN) and look like any unknown path otherwise.
+  // Stock admin (/admin page). Same rule as diagnostics: without the token
+  // it is indistinguishable from an unknown path.
+  if (path.startsWith('/api/admin/')) {
+    if (!isAdmin(request, env)) return new Response('Not Found', { status: 404 });
+    return handleAdmin(request, env, ADMIN_CATALOGUE);
+  }
   if (
     request.method === 'GET' &&
     DIAGNOSTIC_PATHS.includes(path) &&
@@ -467,17 +483,36 @@ async function recordOrder(env, orderDetails) {
     record = await getOrder(env.ORDERS, orderDetails.orderId);
     // Recorded and confirmed by email already: nothing to do. Recorded but
     // never confirmed (the email service was down, even if Stripe sent its
-    // receipt): fall through and retry our own confirmation only.
-    if (confirmationSent(record)) return record;
+    // receipt): fall through and retry our own confirmation only. The same
+    // goes for the new-order alert to the shop.
+    if (confirmationSent(record) && !record.alertPending && record.saleId) return record;
   }
 
   if (!record) {
     console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
-    record = orderDetails;
+    record = { ...orderDetails, alertPending: true };
     if (env.ORDERS) {
-      record = await saveOrder(env.ORDERS, orderDetails.orderId, orderDetails);
+      record = await saveOrder(env.ORDERS, orderDetails.orderId, record);
     }
   }
+
+  // File it in the back office (customer + sales order) before the alert,
+  // so the alert can link to it. Never let this cost a confirmation.
+  if (env.ORDERS && !record.saleId) {
+    try {
+      record = { ...record, saleId: await fileWebOrder(env.ORDERS, record, ADMIN_CATALOGUE.catalogue) };
+    } catch (err) {
+      console.error('Could not file web order in the back office:', err);
+    }
+  }
+
+  // Tell the shop what was bought. Only orders recorded since this alert
+  // existed carry alertPending, so older orders never trigger one.
+  if (record.alertPending) {
+    record = await alertShop(env, record);
+  }
+
+  if (confirmationSent(record)) return record;
 
   if (!orderDetails.customerEmail) {
     console.error('Order has no customer email, confirmation not sent:', orderDetails.orderId);
@@ -531,6 +566,29 @@ async function recordOrder(env, orderDetails) {
 }
 
 /**
+ * Email the shop a new-order alert, then clear alertPending. A failure
+ * leaves the flag set so the next webhook or confirmation call retries.
+ */
+async function alertShop(env, record) {
+  if (!env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set, new-order alert not sent:', record.orderId);
+    return record;
+  }
+  try {
+    await sendNewOrderAlert(env, record);
+  } catch (err) {
+    console.error('New-order alert failed:', err);
+    return record;
+  }
+  const updates = { alertPending: false, alertSentAt: new Date().toISOString() };
+  if (env.ORDERS) {
+    await updateOrder(env.ORDERS, record.orderId, updates)
+      .catch((err) => console.error('Could not mark alert sent:', err));
+  }
+  return { ...record, ...updates };
+}
+
+/**
  * Verify a Stripe Checkout Session is paid, then record it.
  * Returns { paid: false } for a session that has not been paid.
  */
@@ -564,6 +622,8 @@ async function recordStripeOrder(sessionId, env) {
     provider: 'stripe',
     paymentIntent: session.payment_intent,
     customerEmail: session.customer_details?.email,
+    customerName: session.customer_details?.name || shipping?.name || null,
+    customerPhone: session.customer_details?.phone || null,
     shippingAddress: shipping?.address
       ? { name: shipping.name, ...shipping.address }
       : null,
@@ -623,6 +683,9 @@ async function recordPayPalOrder(orderId, env) {
     provider: 'paypal',
     captureId: purchaseUnit.payments?.captures?.[0]?.id,
     customerEmail: order.payer?.email_address,
+    customerName: [order.payer?.name?.given_name, order.payer?.name?.surname].filter(Boolean).join(' ')
+      || shipping.name?.full_name || null,
+    customerPhone: order.payer?.phone?.phone_number?.national_number || null,
     shippingAddress: shipping.address
       ? {
           name: shipping.name?.full_name,

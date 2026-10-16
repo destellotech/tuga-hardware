@@ -11,6 +11,8 @@
 
 import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
+import { ADMIN_PAGE } from './admin-page.js';
+import { sendDailyDigest } from './backoffice.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
 
@@ -145,6 +147,16 @@ export default {
       return redirect(target);
     }
 
+    // --- 2b. Stock admin page ---------------------------------------------
+    // The page itself holds no data; everything it shows comes from
+    // /api/admin/*, which needs ADMIN_TOKEN.
+    if (url.pathname === '/admin') {
+      const page = withHtmlHeaders(new Response(ADMIN_PAGE, { headers: { 'Content-Type': 'text/html; charset=utf-8' } }));
+      page.headers.set('Cache-Control', 'no-store');
+      page.headers.set('X-Robots-Tag', 'noindex, nofollow');
+      return page;
+    }
+
     // --- 3. Static assets --------------------------------------------------
     // /404 is the not-found page itself; never serve it as a 200.
     if (env.ASSETS && url.pathname !== '/404') {
@@ -192,5 +204,6 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(sendReviewRequests(env));
     ctx.waitUntil(recheckProcessingPayments(env));
+    ctx.waitUntil(sendDailyDigest(env));
   },
 };

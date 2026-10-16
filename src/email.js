@@ -281,8 +281,113 @@ export async function sendReviewRequest(env, email, { items, reviewUrl }) {
 }
 
 // ---------------------------------------------------------------------------
+// New-order alert to the shop
+// ---------------------------------------------------------------------------
+/**
+ * Tell the shop what was bought, who by and where it goes. Sent to
+ * ORDER_ALERT_EMAIL if set (a [vars] entry in wrangler.toml), otherwise to
+ * support@. Reply-to is the customer, so answering the alert reaches them.
+ */
+export async function sendNewOrderAlert(env, order) {
+  const {
+    orderId, provider, paymentIntent, captureId, customerEmail, customerName,
+    customerPhone, shippingAddress, items = [], discount, total,
+  } = order;
+  const money = (pence) => `£${(Number(pence) / 100).toFixed(2)}`;
+  const row = (label, value) =>
+    `<tr><td style="padding:6px 12px 6px 0;font:500 13px monospace;color:#8a8a82;vertical-align:top">${escapeHtml(label)}</td><td style="padding:6px 0;font:14px sans-serif;color:#1a1a18">${value}</td></tr>`;
+
+  const itemRows = items.map((item) => `
+    <tr>
+      <td style="padding:8px 0;border-bottom:1px solid #eee;font-size:14px">${escapeHtml(item.name)}</td>
+      <td style="padding:8px 0;border-bottom:1px solid #eee;font-size:14px;text-align:center">${escapeHtml(item.quantity)}</td>
+      <td style="padding:8px 0;border-bottom:1px solid #eee;font-size:14px;text-align:right">${money(item.total ?? item.unitPrice * item.quantity)}</td>
+    </tr>`).join('');
+
+  const a = shippingAddress || {};
+  const address = shippingAddress
+    ? [a.name, a.line1, a.line2, a.city, a.state, a.postal_code, a.country]
+        .filter(Boolean).map(escapeHtml).join('<br>')
+    : '—';
+
+  const paymentUrl = provider === 'stripe' && paymentIntent
+    ? `https://dashboard.stripe.com/payments/${encodeURIComponent(paymentIntent)}`
+    : provider === 'paypal' && captureId
+      ? `https://www.paypal.com/activity/payment/${encodeURIComponent(captureId)}`
+      : null;
+  const paymentLabel = provider === 'paypal' ? 'PayPal' : 'Card (Stripe)';
+  const payment = paymentUrl
+    ? `${paymentLabel} &middot; <a href="${escapeHtml(paymentUrl)}" style="color:${BRAND.copper}">view payment</a>`
+    : paymentLabel;
+
+  const summary = items
+    .map((item) => `${item.name}${item.quantity > 1 ? ` ×${item.quantity}` : ''}`)
+    .join(', ');
+
+  return sendEmail(env, {
+    to: env.ORDER_ALERT_EMAIL || SUPPORT_EMAIL,
+    replyTo: customerEmail || undefined,
+    subject: `New order ${money(total)}: ${summary || 'see details'}`,
+    html: `<div style="font-family:sans-serif;max-width:640px;color:#1a1a18">
+      <h2 style="font-size:20px;color:${BRAND.green};margin:0 0 4px">New order: ${money(total)}</h2>
+      <p style="margin:0 0 20px;font-size:13px;color:#8a8a82">Paid and confirmed. Reference ${escapeHtml(orderId)}</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+        <tr>
+          <td style="padding:8px 0;font-size:12px;font-weight:600;text-transform:uppercase;color:${BRAND.green}">Item</td>
+          <td style="padding:8px 0;font-size:12px;font-weight:600;text-transform:uppercase;color:${BRAND.green};text-align:center">Qty</td>
+          <td style="padding:8px 0;font-size:12px;font-weight:600;text-transform:uppercase;color:${BRAND.green};text-align:right">Total</td>
+        </tr>
+        ${itemRows}
+        ${Number(discount) > 0 ? `<tr><td colspan="3" style="padding:8px 0;font-size:13px;color:${BRAND.copper}">Bulk discount of ${escapeHtml(Number(discount))}% already applied</td></tr>` : ''}
+        <tr>
+          <td colspan="2" style="padding:12px 0 0;font-size:16px;font-weight:700">Total paid</td>
+          <td style="padding:12px 0 0;font-size:16px;font-weight:700;text-align:right">${money(total)}</td>
+        </tr>
+      </table>
+      <table style="border-collapse:collapse;margin:24px 0 0">
+        ${row('Customer', escapeHtml(customerName || '—'))}
+        ${row('Email', customerEmail ? `<a href="mailto:${escapeHtml(customerEmail)}" style="color:${BRAND.copper}">${escapeHtml(customerEmail)}</a>` : '—')}
+        ${customerPhone ? row('Phone', escapeHtml(customerPhone)) : ''}
+        ${row('Ship to', address)}
+        ${row('Payment', payment)}
+        ${order.saleId ? row('Back office', `<a href="${escapeHtml(`${env.SITE_URL || ''}/admin#/sales/${encodeURIComponent(order.saleId)}`)}" style="color:${BRAND.copper}">${escapeHtml(order.saleId)}: dispatch, serials, warranty</a>`) : ''}
+      </table>
+      <p style="margin:24px 0 0;font-size:13px;color:#8a8a82">Reply to this email to reach the customer. Delivery promised: ${escapeHtml(DELIVERY.days)}.</p>
+    </div>`,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Enquiry from the contact form / a buyer's-guide signup
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Daily "needs attention" digest to the shop (src/backoffice.js decides
+// what goes in; nothing is sent on a quiet day)
+// ---------------------------------------------------------------------------
+/**
+ * @param {{title: string, lines: string[], link: string}[]} sections
+ */
+export async function sendDigest(env, sections) {
+  const base = `${env.SITE_URL || ''}/admin`;
+  const count = sections.reduce((n, s) => n + s.lines.length, 0);
+  const blocks = sections.map((s) => `
+    <h3 style="margin:24px 0 8px;font-size:15px;color:${BRAND.green}">${escapeHtml(s.title)} (${s.lines.length})</h3>
+    <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.6">${s.lines.slice(0, 20).map((l) => `<li>${escapeHtml(l)}</li>`).join('')}</ul>
+    ${s.lines.length > 20 ? `<p style="font-size:13px;color:#8a8a82">and ${s.lines.length - 20} more</p>` : ''}
+    <p style="margin:6px 0 0;font-size:13px"><a href="${escapeHtml(base + s.link)}" style="color:${BRAND.copper}">Open in the back office</a></p>`).join('');
+
+  return sendEmail(env, {
+    to: env.ORDER_ALERT_EMAIL || SUPPORT_EMAIL,
+    subject: `Tuga: ${count} thing${count === 1 ? '' : 's'} need${count === 1 ? 's' : ''} attention`,
+    idempotencyKey: `digest-${new Date().toISOString().slice(0, 10)}`,
+    html: `<div style="font-family:sans-serif;max-width:640px;color:#1a1a18">
+      <h2 style="font-size:20px;color:${BRAND.green};margin:0 0 4px">Today in the back office</h2>
+      <p style="margin:0;font-size:13px;color:#8a8a82">Sent each morning when something needs you.</p>
+      ${blocks}
+    </div>`,
+  });
+}
+
 export async function sendEnquiry(env, { name, email, company, topic, message }) {
   const row = (label, value) =>
     `<tr><td style="padding:6px 12px;font:500 13px monospace;color:#8a8a82">${escapeHtml(label)}</td><td style="padding:6px 12px;font:14px sans-serif;color:#1a1a18">${escapeHtml(value)}</td></tr>`;

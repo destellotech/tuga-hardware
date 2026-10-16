@@ -3485,6 +3485,7 @@ write(
   `User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin
 
 # AI crawlers are welcome. Being cited is how a small store gets found.
 User-agent: GPTBot
@@ -3492,6 +3493,7 @@ User-agent: ClaudeBot
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
+Disallow: /admin
 
 Sitemap: ${SITE.origin}/sitemap.xml
 `
