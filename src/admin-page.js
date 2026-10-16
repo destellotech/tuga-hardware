@@ -267,6 +267,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     if (p0 === 'moves') return moveList();
     if (p0 === 'warranty') return warrantyView();
     if (p0 === 'import') return importView();
+    if (p0 === 'load') return loadView(p1);
     stockList();
   }
   window.addEventListener('hashchange', route);
@@ -1104,6 +1105,50 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         b.onclick = function () { UI.moveFilter = b.getAttribute('data-mf'); $$('[data-mf]').forEach(function (x) { x.classList.toggle('on', x === b); }); draw(); };
       });
     }).catch(function (e) { errBox('#main', e); });
+  }
+
+  /* ================= ONE-TAP LOAD =================
+     A link like /admin#/load/<data> carries an import in its fragment (the
+     part after # is never sent to a server). It asks before importing, so a
+     link someone else sends cannot change anything on its own. */
+  function b64urlToBytes(str) {
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (str.length % 4) str += '=';
+    var bin = atob(str), out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  function decodePayload(enc) {
+    var zipped = enc.indexOf('z.') === 0;
+    var bytes = b64urlToBytes(zipped ? enc.slice(2) : enc);
+    if (!zipped) return Promise.resolve(new TextDecoder().decode(bytes));
+    var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+    return new Response(stream).text();
+  }
+  function loadView(enc) {
+    main().innerHTML = '<p class="muted" style="margin-top:24px">Reading link…</p>';
+    decodePayload(enc || '').then(function (text) {
+      var data = JSON.parse(text);
+      var counts = ['customers', 'suppliers', 'purchases', 'sales', 'devices', 'moves'].filter(function (k) { return (data[k] || []).length; })
+        .map(function (k) { return data[k].length + ' ' + k; });
+      if (!counts.length) throw new Error('empty');
+      var names = (data.customers || []).map(function (c) { return c.company || (c.contacts && c.contacts[0] && c.contacts[0].name); }).filter(Boolean);
+      main().innerHTML = '<h2>Import from link</h2><div class="card"><p style="margin-top:0">This link will add or update: <strong>' + esc(counts.join(', ')) + '</strong>' +
+        (names.length ? ' (customer: ' + esc(names.join(', ')) + ')' : '') + '.</p><p class="muted">Records that already exist are updated, not duplicated. Only continue if you made this link or asked for it.</p>' +
+        '<div id="ldMsg"></div><div class="actions"><button class="btn" id="ldGo">Import now</button><a class="btn ghost" href="#/stock">Cancel</a></div></div>';
+      $('#ldGo').onclick = function () {
+        var btn = this; busy(btn, true);
+        api('POST', 'import', data).then(function () {
+          // Drop the data from the address bar so a reload cannot import it again.
+          history.replaceState(null, '', '#/loaded');
+          $('#ldMsg').innerHTML = '<div class="msg ok">Done. Imported ' + esc(counts.join(', ')) + '.</div>';
+          btn.style.display = 'none';
+          $$('.actions a').forEach(function (a) { a.textContent = 'See stock'; a.className = 'btn'; });
+        }).catch(function (err) { busy(btn, false); errBox('#ldMsg', err); });
+      };
+    }).catch(function () {
+      main().innerHTML = '<h2>Import from link</h2><div class="msg bad">That link is damaged or incomplete, so nothing was imported.</div><a class="btn ghost" href="#/stock">Back to stock</a>';
+    });
   }
 
   /* ================= IMPORT ================= */
