@@ -395,6 +395,9 @@
       localStorage.setItem('tuga-consent', choice);
       if (choice === 'granted' && typeof gtag === 'function') {
         gtag('consent', 'update', { analytics_storage: 'granted' });
+        // The load-time page_view went out as a cookieless ping, which GA
+        // doesn't report; count this page now that consent is granted.
+        gtag('event', 'page_view');
       }
       banner.classList.remove('is-visible');
       // Out of the tab order and the accessibility tree once dismissed.
