@@ -1,0 +1,131 @@
+{
+  "slug": "procore",
+  "software": "Procore",
+  "vendor": "Procore Technologies",
+  "vendor_url": "https://www.procore.com/",
+  "title": "Rugged tablet for Procore: UK buyer's guide",
+  "meta_description": "Procore's Android app needs Android 13 or later from Google Play. The Tuga A10 runs Android 14 with a 10.1 inch screen for drawings; the Tuga A8 runs Android 12.",
+  "target_query": "best tablet for Procore",
+  "h1": "Rugged tablet for Procore",
+  "intro": [
+    "Procore is construction management software. Its support documentation covers a Procore app for Android with tools such as Drawings, Inspections, Photos, Purchase Orders and Subcontracts, alongside the web application used in an office. On site, the app is where drawings are read, photos are attached and inspection items are signed, which means a device used on scaffolds, in muddy groundworks and in site cabins, carried all day and often put down wet.",
+    "This page sets out what Procore publishes about the Android versions and Windows versions it supports, which Tuga rugged devices meet those published requirements, and which one does not. The important point is that Procore's Android app currently requires Android 13 or later, which rules out some devices that would run other field apps.",
+    "A UK construction or contracting business can buy a single unit to try before buying for the whole team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 13 or later, installed from Google Play",
+      "detail": "Procore's Android requirements article says the Procore Android app currently requires Android 13 or later, and that earlier versions of Android stopped being supported in February 2026. A device on an older version can keep using an installed copy until one year after support was removed for that Android version. The article says the app should only be installed from Google Play and that Procore does not support issues arising from installations outside it.",
+      "source_url": "https://support.procore.com/faq/android-requirements"
+    },
+    {
+      "requirement": "Memory, storage, screen size and processor: not published",
+      "detail": "The Android requirements article gives no RAM, storage, screen-size or processor figure, and lists no supported device models. Procore does recommend using the most recent Android version available for your device.",
+      "source_url": "https://support.procore.com/faq/android-requirements"
+    },
+    {
+      "requirement": "Offline: items viewed and cached earlier can be viewed or edited offline",
+      "detail": "The Drawings permissions article for Android says many items can be viewed or edited in offline mode provided the item was previously viewed and cached on your mobile device. Some linking actions are marked as able to be performed offline, and the article says tasks performed offline are synced with Procore once a network connection has been reestablished. That means open the drawings and items you need while you have a connection, before you go to a site with poor signal. We found no published list of every tool that works offline.",
+      "source_url": "https://support.procore.com/procore-mobile-android/user-guide/drawings-android/permissions"
+    },
+    {
+      "requirement": "Photos: device camera, device library or the project Photos tool",
+      "detail": "The Android guide to adding photos to a drawing lists three sources: Choose from Procore, which selects an existing photo from the project's Photos tool; Choose from Library, which selects a photo file from the device's photo library; and Camera, which takes a new photo with the device camera. The page does not state a file size or photo count limit.",
+      "source_url": "https://support.procore.com/procore-mobile-android/user-guide/drawings-android/tutorials/add-photos-to-a-drawing-android"
+    },
+    {
+      "requirement": "Signatures: drawn on the touchscreen when added as a signer",
+      "detail": "In the Android app, a user who has been added as a signer opens the project's Inspections tool, taps the inspection, taps the signature icon beside their name in the Signatures section, draws the signature and submits it. The article does not mention offline signing, so do not assume it works without a connection.",
+      "source_url": "https://support.procore.com/procore-mobile-android/user-guide/inspections-android/tutorials/sign-an-inspection-item-android"
+    },
+    {
+      "requirement": "Windows: Procore Drive needs Windows 10 or newer, no hardware specification published",
+      "detail": "Procore's setup guide for Procore Drive, its desktop file tool, says it can only be installed on a system running Microsoft Windows 10 or newer. The page lists no processor, memory or storage requirement. We did not fetch a Procore article listing supported web browsers, so this page makes no claim about which browsers Procore supports, and no native Windows version of the field app is documented in the pages we checked.",
+      "source_url": "https://v2.support.procore.com/en-gb/product-manuals/procore-drive/tutorials/procore-drive-setup-guide"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "The Tuga A10 is the device in the range that suits Procore best on the published figures. It runs Android 14 with Google Play against Procore's minimum of Android 13, so it meets the requirement with a version to spare. Its 10.1 inch 1920 x 1200 screen gives drawings and inspection forms room without constant pinching and zooming. It is sealed to IP68 and tested to MIL-STD-810H, with an operating temperature of -20 to 60C, which suits site cabins, scaffolds and wet groundworks. Procore publishes no RAM or storage figure, so the A10's 8GB of RAM and 128GB of storage, expandable by microSD up to 2TB, cannot be checked against a vendor number; storage matters because drawings need to be viewed and cached before going offline. Dual SIM 4G helps the app sync when a connection returns. The screen is 350 nits, so for the brightest outdoor work a sun shade or a shaded working position helps. It costs £449.",
+      "fit": [
+        "Requirement: Android 13 or later from Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met.",
+        "Requirement: room to read drawings and fill in inspections. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass.",
+        "Requirement: camera capture for photos. Tuga A10: 13MP rear camera with flash, 8GB RAM, 128GB storage with microSD up to 2TB.",
+        "Requirement: a connection to sync offline work. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: a device that survives wet and rough sites. Tuga A10: IP68, MIL-STD-810H, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The 6 inch Tuga A6 runs Android 15 with Google Play, the newest Android version in the Tuga range and above Procore's Android 13 minimum. At 277g it suits a site manager or foreman who wants photos, inspections and quick lookups in a pocket or belt holster rather than a tablet. Procore publishes no RAM, storage or screen-size requirement, so its 4GB of RAM and 64GB of storage cannot be checked against a vendor figure; try it with your usual projects before buying for a team. The trade-off is screen area: full-size drawings and signature fields are cramped at 6 inches, so it is a companion to a tablet more than a replacement. Its Zebra 2D scan engine is not a feature we found documented in the Procore pages we checked. It is sealed to IP67, is rated for 1.5 metre drops and costs £349, which is £100 less than the A10.",
+      "fit": [
+        "Requirement: Android 13 or later from Google Play. Tuga A6: Android 15 with Google Play, so the published requirement is met.",
+        "Requirement: camera capture for photos. Tuga A6: 13MP rear camera with flash, 4GB RAM, 64GB storage with microSD up to 256GB.",
+        "Requirement: a connection to sync offline work. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, GPS, GLONASS, BeiDou and Galileo.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "The Tuga W10 runs Windows 11 Pro, which meets Procore's published requirement of Windows 10 or newer for Procore Drive, the desktop file tool. It suits a site cabin or office where documents and drawings are managed from a desktop, with Ethernet and HDMI for a fixed position. Procore publishes no hardware specification for Windows, so there is no vendor figure to check its Intel N100, 8GB RAM and 128GB storage against. Procore's Android app is the documented field tool for offline drawings and signatures, so the W10 is not the device for the field team, and its 5MP rear camera is basic next to the 13MP cameras on the Android devices. It costs £649.",
+      "fit": [
+        "Requirement: Windows 10 or newer for Procore Drive. Tuga W10: Windows 11 Pro.",
+        "Requirement: office work with documents and drawings. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage with a microSD slot.",
+        "Requirement: a fixed or semi-fixed office position. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery.",
+        "Requirement: dust and splash protection in a cabin. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 10.1 inch 1280 x 800 multi-touch screen, 1197g."
+      ]
+    }
+  ],
+  "not_recommended_note": "The Tuga A8 runs Android 12, and Procore's Android app currently requires Android 13 or later, so the A8 does not meet the published requirement and we do not recommend it for Procore. Procore's Android article says devices on older versions stopped being supported in February 2026 and can only keep using an installed copy for one year after that, so do not buy a device on an older Android version for Procore. Offline use depends on items having been viewed and cached while connected, and we found no published statement that signatures can be captured offline, so fit a data SIM and open the drawings you need before going to a site with poor signal. Procore publishes no RAM, storage or screen-size requirement, so no figure on this page is a vendor minimum. Procore does not name Tuga devices, and we do not describe any device as certified or tested by Procore.",
+  "setup_steps": [
+    "Ask your Procore account administrator to add the user to the project, with the permission level needed for the tools they will use, and as a signer on any inspection they will sign.",
+    "On the Tuga A10 or A6, open Google Play and install the Procore app (package com.procore.activities, developer Procore Technologies). Procore says the app should only be installed from Google Play.",
+    "Check the Android version under Settings, About tablet. It should be Android 13 or later, which the A10 (Android 14) and A6 (Android 15) are.",
+    "Fit a data SIM. Before going to a site with weak signal, open the drawings and items you will need so they are cached on the device.",
+    "Accept the device prompts for the camera and photo library so photos can be taken or chosen from the library.",
+    "On a Tuga W10 in the office, install Procore Drive if you use it, which needs Windows 10 or newer.",
+    "For the A10, fit the vehicle mounting dock and a 12V car charger; for the A6, add the belt holster. Fit a tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A10 and W10), so the device stays secure and charged in the vehicle",
+    "12V DC car charger, £26, for charging between jobs",
+    "Charging dock, £49.99 (Tuga A10 and W10), for the site office",
+    "Capacitive stylus, £14.99 (Tuga A10 and W10), for drawing signatures",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14"
+  ],
+  "faq": [
+    {
+      "q": "Will Procore run on the Tuga A10?",
+      "a": "Procore's Android requirements article says the app currently requires Android 13 or later. The Tuga A10 runs Android 14 with Google Play and the A6 runs Android 15, so both meet that figure. Procore publishes no RAM, storage or screen-size requirement. We do not describe any device as certified or tested by Procore; these are the vendor's published figures set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does the Tuga A8 work with Procore?",
+      "a": "Not on the published requirement. The Tuga A8 runs Android 12, and Procore's Android app currently requires Android 13 or later. For Procore, choose the A10 or the A6."
+    },
+    {
+      "q": "Does Procore work offline on these devices?",
+      "a": "In part, in the Android app. Procore's Drawings permissions article says many items can be viewed or edited offline provided they were previously viewed and cached on the device, and that tasks performed offline sync once a network connection is reestablished. We found no published list of every tool that works offline and no statement that signatures can be captured offline, so open what you need while connected."
+    },
+    {
+      "q": "Should I choose the A10 or the A6 for Procore?",
+      "a": "The A10 at £449 suits most Procore users: its 10.1 inch 1920 x 1200 screen shows drawings and inspection forms with more room, and it is IP68 and MIL-STD-810H. Choose the A6 at £349, which is £100 less, if you want a 277g pocket device for photos and quick lookups alongside a tablet."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before buying for the team is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "disclaimer": "Procore is a product of Procore Technologies. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Procore Technologies.",
+  "sources": [
+    "https://support.procore.com/faq/android-requirements",
+    "https://support.procore.com/procore-mobile-android/user-guide/drawings-android/permissions",
+    "https://support.procore.com/procore-mobile-android/user-guide/drawings-android/tutorials/add-photos-to-a-drawing-android",
+    "https://support.procore.com/procore-mobile-android/user-guide/inspections-android/tutorials/sign-an-inspection-item-android",
+    "https://v2.support.procore.com/en-gb/product-manuals/procore-drive/tutorials/procore-drive-setup-guide"
+  ]
+}
