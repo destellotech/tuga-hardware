@@ -5,7 +5,8 @@
      1. API / webhook routes
      2. One redirect to the final URL: https, canonical host, pretty path,
         legacy product URLs
-     3. Static assets, with security headers on HTML
+     3. Static assets, with security headers on HTML; page views are
+        counted here (src/pageviews.js)
      4. Anything else: the generated 404 page with a real 404 status
    ============================================ */
 
@@ -13,6 +14,7 @@ import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
 import { ADMIN_PAGE } from './admin-page.js';
 import { sendDailyDigest } from './backoffice.js';
+import { countPageView } from './pageviews.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
 
@@ -193,6 +195,8 @@ export default {
       // The workers.dev host serves a full copy of the site for previews; keep
       // it out of search results so it cannot compete with www.
       if (url.hostname.endsWith('.workers.dev')) page.headers.set('X-Robots-Tag', 'noindex, nofollow');
+      // Count real visits on the live site only, not previews or local runs.
+      if (!isLocal) countPageView(request, page, env, ctx);
       return page;
     }
 

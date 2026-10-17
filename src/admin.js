@@ -46,6 +46,7 @@ import {
 } from './backoffice.js';
 import { sendShippingNotification } from './email.js';
 import { routedStore } from './store.js';
+import { pageviewStats } from './pageviews.js';
 
 const BY = 'Admin';
 
@@ -129,6 +130,12 @@ export async function handleAdmin(request, env, ctx) {
         break;
       case 'import':
         if (method === 'POST') return await importRecords(kv, body, ctx);
+        break;
+      case 'visits':
+        if (method === 'GET') {
+          const days = Math.min(Math.max(parseInt(url.searchParams.get('days'), 10) || 30, 1), 365);
+          return json(await pageviewStats(env, days));
+        }
         break;
     }
   } catch (err) {

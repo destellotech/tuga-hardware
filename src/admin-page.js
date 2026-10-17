@@ -93,6 +93,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
   .st-assigned, .st-dispatched, .st-out { background: var(--info-soft); color: var(--info); }
   .st-sold, .st-quote, .st-cancelled, .st-adjust { background: var(--mute-soft); color: var(--ink-mid); }
   .st-faulty { background: var(--bad-soft); color: var(--bad); }
+  .vbar { display: block; height: 8px; border-radius: 4px; background: var(--accent); margin: 6px 0 0; min-width: 2px; }
   .card { background: var(--raised); border: 1px solid var(--rule); border-radius: 12px; padding: 14px; margin-top: 12px; }
   form .f { margin-bottom: 12px; }
   form label, .lbl { display: block; font-size: 13px; font-weight: 700; color: var(--ink-mid); margin-bottom: 5px; }
@@ -147,7 +148,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
   try { token = localStorage.getItem(TOKEN_KEY) || ''; } catch (e) {}
 
   var META = null;
-  var UI = { stockFilter: 'all', stockQ: '', moveFilter: 'all', saleFilter: 'open' };
+  var UI = { stockFilter: 'all', stockQ: '', moveFilter: 'all', saleFilter: 'open', visitDays: 30 };
   var root = document.getElementById('root');
 
   /* ---------------- helpers ---------------- */
@@ -240,7 +241,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     });
   }
 
-  var TABS = [['stock', 'Stock'], ['in', 'Goods in'], ['sales', 'Sales'], ['customers', 'Customers'], ['suppliers', 'Suppliers'], ['warranty', 'Warranty'], ['moves', 'Movements']];
+  var TABS = [['stock', 'Stock'], ['in', 'Goods in'], ['sales', 'Sales'], ['customers', 'Customers'], ['suppliers', 'Suppliers'], ['warranty', 'Warranty'], ['moves', 'Movements'], ['visits', 'Visits']];
   function shell() {
     root.innerHTML =
       '<header><div class="bar"><div class="brand">Tuga <span>Back Office</span></div>' +
@@ -265,6 +266,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     if (p0 === 'customers') return !p1 ? customerList() : p1 === 'new' ? customerForm() : p2 === 'edit' ? customerForm(p1) : customerView(p1);
     if (p0 === 'suppliers') return !p1 ? supplierList() : p1 === 'new' ? supplierForm() : p2 === 'edit' ? supplierForm(p1) : supplierView(p1);
     if (p0 === 'moves') return moveList();
+    if (p0 === 'visits') return visitsView();
     if (p0 === 'warranty') return warrantyView();
     if (p0 === 'import') return importView();
     if (p0 === 'load') return loadView(p1);
@@ -1103,6 +1105,41 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
       draw();
       $$('[data-mf]').forEach(function (b) {
         b.onclick = function () { UI.moveFilter = b.getAttribute('data-mf'); $$('[data-mf]').forEach(function (x) { x.classList.toggle('on', x === b); }); draw(); };
+      });
+    }).catch(function (e) { errBox('#main', e); });
+  }
+
+  /* ================= VISITS =================
+     Counted by the worker on every page request (src/pageviews.js), so
+     visitors who block Google Analytics or decline cookies are included. */
+  function visitsView() {
+    loading();
+    api('GET', 'visits?days=' + UI.visitDays).then(function (r) {
+      function table(title, rows, key, label) {
+        var max = rows.reduce(function (m, x) { return Math.max(m, x.views); }, 0) || 1;
+        return '<div class="lbl" style="margin-top:18px">' + esc(title) + '</div><div class="list">' + (rows.length ? rows.map(function (x) {
+          return '<div class="row"><div><div class="t' + (key === 'path' ? ' mono' : '') + '">' + esc(label ? label(x[key]) : x[key]) + '</div>' +
+            '<div class="vbar" style="width:' + Math.round(100 * x.views / max) + '%"></div></div><div class="r num">' + x.views + '</div></div>';
+        }).join('') : '<div class="empty">Nothing yet.</div>') + '</div>';
+      }
+      var today = r.byDay.length && r.byDay[r.byDay.length - 1].day === new Date().toISOString().slice(0, 10) ? r.byDay[r.byDay.length - 1].views : 0;
+      var mobile = (r.devices.filter(function (d) { return d.device === 'mobile'; })[0] || { views: 0 }).views;
+      main().innerHTML =
+        '<h2>Visits</h2><p class="muted">Page views counted on the server, including visitors who block Google Analytics. No cookies, nothing that identifies anyone. Known bots are left out.</p>' +
+        '<div class="chips" style="margin-top:14px">' + [[7, '7 days'], [30, '30 days'], [90, '90 days']].map(function (p) {
+          return '<button class="chip' + (UI.visitDays === p[0] ? ' on' : '') + '" data-vd="' + p[0] + '">' + p[1] + '</button>';
+        }).join('') + '</div>' +
+        '<div class="grid-sum">' +
+          '<div class="sum"><div class="n">' + r.total + '</div><div class="l">Page views, last ' + r.days + ' days</div></div>' +
+          '<div class="sum"><div class="n">' + today + '</div><div class="l">Today (UTC)</div></div>' +
+          '<div class="sum"><div class="n">' + (r.total ? Math.round(100 * mobile / r.total) : 0) + '%</div><div class="l">On mobile</div></div>' +
+        '</div>' +
+        table('By day', r.byDay.slice().reverse(), 'day', fmtDate) +
+        table('Top pages', r.pages, 'path') +
+        table('Referring sites', r.referrers, 'referrer') +
+        table('Countries', r.countries, 'country', function (c) { return c || 'Unknown'; });
+      $$('[data-vd]').forEach(function (b) {
+        b.onclick = function () { UI.visitDays = +b.getAttribute('data-vd'); visitsView(); };
       });
     }).catch(function (e) { errBox('#main', e); });
   }
