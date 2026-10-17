@@ -1,0 +1,148 @@
+{
+  "slug": "dynamics-365-field-service",
+  "software": "Microsoft Dynamics 365 Field Service",
+  "vendor": "Microsoft",
+  "vendor_url": "https://dynamics.microsoft.com/en-us/field-service/overview/",
+  "title": "Rugged tablet for Dynamics 365 Field Service: UK buyer's guide",
+  "meta_description": "Microsoft publishes minimum Android specs for the Field Service mobile app: 4GB RAM, 64GB storage. The Tuga A10 has 8GB RAM, 128GB storage and Android 14.",
+  "target_query": "best tablet for Dynamics 365 Field Service",
+  "h1": "Rugged tablet for Dynamics 365 Field Service",
+  "intro": [
+    "Dynamics 365 Field Service is Microsoft's field service management product. Its Field Service mobile app is for technicians: Microsoft's documentation says it helps them manage assigned work, get directions to job sites, complete service tasks and record work from a mobile device. The app is available for iOS, Android and Windows 10 or later, and Microsoft says it is included in a Field Service licence at no extra charge. It is built on Microsoft Power Platform as a model-driven app, so each organisation can customise what its technicians see.",
+    "That makes the device choice more specific than for most field apps, because Microsoft publishes real hardware figures for it: minimum and recommended RAM, storage and operating system for Android and Windows. It also means a technician's day involves bookings, work orders, notes with photos, inspections, time entries and barcode scans, often in a van, a plant room or on a roof, which is hard going for a consumer tablet.",
+    "This page sets out what Microsoft publishes about the devices the mobile app needs, which Tuga rugged devices can be compared against those figures, where a Windows tablet fits, and how a UK business can buy a single unit to try before buying for the whole team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android: minimum is the previous three Android versions, 4GB RAM, 64GB storage",
+      "detail": "Microsoft's download page gives a table for Android. Recommended is the latest Android version, a Geekbench CPU benchmark score of 900 or more, 8GB RAM and 64GB or more of storage. Minimum is the previous three versions, a benchmark score of 400 or more, 4GB RAM and 64GB storage. Microsoft states these as relative versions, not as a fixed Android number, and adds that storage needs vary with your mobile offline profile. It advises modern devices with high Geekbench scores. The app is installed from Google Play.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/download-mobile-app"
+    },
+    {
+      "requirement": "Windows: minimum is Windows 10 version 17763.0, 6GB RAM, 64GB storage",
+      "detail": "For Windows, Microsoft lists the latest version, 8GB RAM and 128GB storage as recommended, and Windows 10 version 17763.0, 6GB RAM and 64GB storage as the minimum. The Windows app comes from the Microsoft Store, and an administrator can instead download a package and distribute it with Microsoft Intune. No Windows CPU benchmark figure is listed.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/download-mobile-app"
+    },
+    {
+      "requirement": "Screen size and processor model: not published",
+      "detail": "Microsoft publishes no minimum screen size and names no processor model. The only processor guidance is a Geekbench CPU benchmark score (400 or more on Android at the minimum), which the Tuga product data does not list, so the Tuga CPUs cannot be checked against it from our specifications. The page says system requirements are the same as for the Power Apps mobile app.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/download-mobile-app"
+    },
+    {
+      "requirement": "Offline: needs an administrator to configure an offline profile",
+      "detail": "Microsoft says the app downloads important information to the device so technicians can work without internet access, and that data syncs when the device reconnects. An administrator has to configure the offline profile before technicians can download data, choosing which data is available offline and how often the app checks for server changes. The first sync can take some time. Microsoft also notes that the new (refreshed) mobile experience does not support working offline.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/work-offline"
+    },
+    {
+      "requirement": "Barcode scanning: uses the device camera, with platform limits",
+      "detail": "Technicians can scan a barcode to search for records or fill in a field, and an administrator adds a barcode field to a form using the BarcodeScannerControl, shown on Mobile and Tablet. Inspections can include a barcode question that fills the field by scanning a barcode with the device's camera. Microsoft says global search with barcode scanning is not available on the tablet and Windows versions of the app. Searching by barcode, UPC or QR code is described, and Dataverse search needs an active internet connection. The documentation does not mention external or built-in hardware scan engines.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/scan-barcode"
+    },
+    {
+      "requirement": "Photos, audio, video and files",
+      "detail": "On the Notes tab, technicians can add text, image, audio and video notes linked to the booking, and images use image optimisation to save storage. Notes are available only on the Bookable Resource Booking form. In inspections, a File question lets technicians upload a file, take a picture or choose several pictures from the camera roll, and file attachments are limited to 3MB per file unless an administrator changes the limit.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/inspections"
+    },
+    {
+      "requirement": "Customer signatures: not published in the pages we checked",
+      "detail": "The mobile app overview, work-with-the-app, inspections and barcode articles we read do not describe a signature capture feature or a signature question type. Service reports are mentioned as a way to review and share completed work, but we found no statement about collecting a customer signature on the device. Ask your Field Service administrator or Microsoft partner whether your configuration captures signatures, and test it on a unit.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/overview"
+    },
+    {
+      "requirement": "Location tracking: needs GPS permissions and is not available in the Windows app",
+      "detail": "An administrator enables location tracking, and technicians allow location sharing in the app. On Android, Microsoft says to choose Precise Location and Allow all the time, and to set Battery optimization to Don't optimize. Location events are sent at a set refresh interval and the device operating system may send them less often. Microsoft states that location tracking is not currently available in the Windows app from the Microsoft Store.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/track-technician-location"
+    },
+    {
+      "requirement": "Bookings, directions and time entries",
+      "detail": "The first screen is a calendar of scheduled work orders, with a map view of daily bookings. The Customer tab shows the work order location and turn-by-turn directions. Technicians record services, products and service tasks, create time entries and raise follow-up work orders. Viewing functional locations and customer asset hierarchies needs an internet connection.",
+      "source_url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/get-work-done-mobile-app"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "The Tuga A10 is the closest match to Microsoft's published Android figures. It has 8GB of RAM, which equals the recommended Android RAM, and 128GB of storage against a recommended 64GB or more, with microSD up to 2TB if your offline profile is large. It runs Android 14 with Google Play. Microsoft defines the minimum Android version as the previous three versions without naming a number, so we cannot confirm from the vendor's page that Android 14 meets it today; check the current Android release against that rule before buying. The Geekbench score Microsoft asks for is not in our product data, so run the app on one unit first. The 10.1 inch 1920 x 1200 screen suits inspections, work order forms and the schedule map, and IP68 with MIL-STD-810H suits wet or rough sites. Its screen is 350 nits, so it is less bright in direct sun than the A8, and at £449 it costs £100 more than the A6.",
+      "fit": [
+        "Requirement: Android with 4GB RAM minimum and 8GB recommended. Tuga A10: Android 14 with Google Play and 8GB RAM.",
+        "Requirement: 64GB storage minimum, more depending on the offline profile. Tuga A10: 128GB with microSD up to 2TB.",
+        "Requirement: camera for photo notes, file uploads and barcode scanning. Tuga A10: 13MP rear camera with flash and 5MP front camera.",
+        "Requirement: a connection for sync and location. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, and GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: a device that survives site work. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 meets the stated Android minimums for RAM and storage exactly: 4GB RAM and 64GB storage, expandable by microSD up to 256GB. It runs Android 15 with Google Play, the newest Android version in the Tuga range. It is a handheld at 277g with a 6 inch 2160 x 1080 screen, so it suits technicians who mostly view bookings, scan and add photo notes, and less so long inspections. Its Zebra 2D scan engine is not described in Microsoft's barcode documentation, which refers to the device camera, so treat it as a hardware extra, not a Field Service feature. Its 4GB of RAM sits at the minimum, not the recommended 8GB, and Microsoft advises high benchmark scores, so test an offline-heavy profile on one unit first. At £349 it is £100 less than the A10.",
+      "fit": [
+        "Requirement: Android with 4GB RAM minimum. Tuga A6: Android 15 with Google Play and 4GB RAM, which meets the minimum but not the recommended 8GB.",
+        "Requirement: 64GB storage minimum. Tuga A6: 64GB with microSD up to 256GB.",
+        "Requirement: camera for photo notes, file uploads and barcode scanning. Tuga A6: 13MP rear camera with flash and 5MP front camera.",
+        "Requirement: a connection for sync and location. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, GPS, GLONASS, BeiDou and Galileo.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Microsoft lists a Windows app for the Field Service mobile app, from the Microsoft Store. The Tuga W10 runs Windows 11 Pro with 8GB RAM and 128GB storage, which equals the recommended Windows RAM and storage, and Windows 11 is newer than the stated minimum of Windows 10 version 17763.0. It suits an office, depot or van used as a desk, with Ethernet and HDMI. It is not the device for tracked field work: Microsoft says location tracking is not available in the Windows app, and global search with barcode scanning is not available on the Windows version. Microsoft does not say whether offline working is supported in the Windows app, so check that before you rely on it. The W10 has a 5MP rear camera, basic next to the 13MP cameras on the Android devices, and at £649 it is £200 more than the A10.",
+      "fit": [
+        "Requirement: Windows 10 version 17763.0 or later, 6GB RAM minimum and 8GB recommended. Tuga W10: Windows 11 Pro with 8GB RAM.",
+        "Requirement: 64GB storage minimum and 128GB recommended. Tuga W10: 128GB with a microSD slot.",
+        "Requirement: a fixed or semi-fixed position for office or depot work. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-C, pogo pin dock connector, 5000mAh battery.",
+        "Requirement: dust and splash protection in a workshop or cabin. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 10.1 inch 1280 x 800 multi-touch screen, 1197g."
+      ]
+    }
+  ],
+  "not_recommended_note": "Microsoft defines the minimum Android version as the previous three versions and gives no fixed number, so we do not claim any Tuga Android device meets it; check the current Android release against the rule and try the app on one unit. The Tuga A8 runs Android 12, the oldest Android version in the Tuga range, so we have not recommended it for this app. Microsoft also asks for a Geekbench CPU benchmark score that our product data does not list, so processor fit cannot be confirmed on paper. No screen-size requirement is published. Offline working depends on your administrator configuring an offline profile, and the refreshed mobile experience does not support offline. Barcode scanning is described using the device camera; the Zebra 2D scan engine on the A6 and the optional scanner and UHF RFID reader on the W10 are not documented Field Service inputs. We found no published signature capture feature in the pages we checked, so confirm it with your administrator before buying a stylus for that purpose. Location tracking and global barcode search are not available in the Windows app. Microsoft does not name Tuga devices, and we do not describe any device as certified or tested by Microsoft.",
+  "setup_steps": [
+    "Ask your Field Service administrator to set up the mobile app, user profiles and security roles, and to configure an offline profile if technicians will work without signal.",
+    "On the Tuga A10 or A6, open Google Play and install the Field Service app (package com.microsoft.crm.crmphone.fieldServices). Sign in with your organisational account.",
+    "Accept the prompts for location and the camera. For location tracking on Android, choose Precise Location and Allow all the time, and set Battery optimization to Don't optimize for the app.",
+    "Fit a data SIM. Let the first offline sync finish on Wi-Fi before going on site, as Microsoft notes the first download can take some time.",
+    "Check barcode scanning against your own forms, as an administrator has to add the barcode field. On a Tuga W10, install the app from the Microsoft Store, or ask your administrator to distribute it with Microsoft Intune.",
+    "For the A10, fit the vehicle mounting dock and a 12V car charger so the device charges between jobs; for the A6, add the belt holster. Fit a tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A10 and W10), so the device stays secure and charged in the van",
+    "12V DC car charger, £26, for charging between jobs",
+    "Charging dock, £49.99 (Tuga A10 and W10), for the office or depot",
+    "Capacitive stylus, £14.99 (Tuga A10 and W10), for forms and detail work",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14"
+  ],
+  "faq": [
+    {
+      "q": "Will the Field Service mobile app run on the Tuga A10?",
+      "a": "Microsoft's minimum for Android is the previous three Android versions, 4GB RAM and 64GB storage, with 8GB RAM and 64GB or more recommended. The Tuga A10 has 8GB RAM and 128GB storage and runs Android 14, but Microsoft gives no fixed Android number and a Geekbench score we cannot check from our data. We do not describe any device as certified or tested by Microsoft, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Field Service work offline on these devices?",
+      "a": "Yes, if your administrator configures an offline profile. Microsoft says the app downloads data to the device and syncs when it reconnects. The refreshed mobile experience does not currently support offline working, and some views, such as functional locations and asset hierarchies, need an internet connection."
+    },
+    {
+      "q": "Can I scan barcodes with the Tuga A6 scanner?",
+      "a": "Microsoft describes barcode scanning with the device's camera, set up by an administrator on the relevant forms. It does not document external or built-in scan engines, so the A6's Zebra 2D engine is a hardware extra and we cannot say it works in the app. Test it on your own forms."
+    },
+    {
+      "q": "Does the app capture customer signatures?",
+      "a": "Not published in the pages we checked. We found no signature feature in Microsoft's mobile app, inspections or barcode articles, so ask your administrator or Microsoft partner and test it on a unit."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before buying for the team is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "disclaimer": "Microsoft Dynamics 365 Field Service is a product of Microsoft. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Microsoft.",
+  "sources": [
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/overview",
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/download-mobile-app",
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/work-offline",
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/scan-barcode",
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/get-work-done-mobile-app",
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/inspections",
+    "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/track-technician-location"
+  ]
+}
