@@ -1,0 +1,157 @@
+{
+  "slug": "fieldwire",
+  "software": "Fieldwire",
+  "vendor": "Hilti Fieldwire, Inc.",
+  "vendor_url": "https://www.fieldwire.com/",
+  "title": "Rugged tablet for Fieldwire: UK buyer's guide",
+  "meta_description": "Fieldwire's help centre lists Android 9.0 or later and recommends over 30GB of storage. The Tuga A10 runs Android 14 with a 10.1 inch 1920 x 1200 screen for plans.",
+  "target_query": "best tablet for Fieldwire",
+  "h1": "Rugged tablet for Fieldwire",
+  "intro": [
+    "Fieldwire is construction field management software. Its App Store listing describes plan viewing that works offline, markups and annotations, progress photos, tasks, inspections and punch lists, forms and RFIs. The Google Play developer is listed as Hilti Fieldwire, Inc., and the vendor's own pages describe a web, tablet and smartphone platform with iOS and Android apps.",
+    "For the person on site, the app is where plans, tasks, punch items and photos live. That means a device used in half-finished buildings, on scaffolds and in plant rooms, often in dust, rain or direct sun, and one that has to hold large drawing sheets in readable form, which is where a consumer tablet in a slim case tends to give up.",
+    "This page sets out what Fieldwire publishes about the devices and connections it needs, which Tuga rugged devices meet those published requirements, where a Windows tablet fits, and how a UK construction or fit-out business can buy a single unit to try before buying for the whole team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 9.0 or later",
+      "detail": "The vendor's help centre article on operating system versions lists Android devices at version 9.0 or higher and Apple devices at 18.0 or higher, and says it updates the article with the latest information. The same article says certain Huawei phones and tablets that ship with HarmonyOS 2.0 are not currently supported, and that an older app version can leave projects Blocked until the app is updated. The Google Play listing (package net.fieldwire.app, developer Hilti Fieldwire, Inc.) did not show a minimum Android version in the page we retrieved, so the help centre is the published figure.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/360000568966-Am-I-using-the-latest-operating-system-and-Fieldwire-app-version-for-mobile"
+    },
+    {
+      "requirement": "Storage: more than 30GB recommended, 64GB generally enough",
+      "detail": "The vendor says an average plan file uses about 6MB of storage, typically 2MB to 10MB, so 1000 sheets can fill around 6GB. It recommends devices with more than 30GB of storage and says 64GB is generally enough even for several projects with thousands of sheets, and that at least 3GB to 6GB should be available for optimal syncing. Selective syncing lets you choose which projects and plan revisions are stored on the device. Fieldwire publishes no RAM, processor or screen-size requirement.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/360000567343-Does-my-mobile-device-have-enough-storage-space-for-Fieldwire"
+    },
+    {
+      "requirement": "Connection: Wi-Fi of 20 Mbps or faster recommended for syncing",
+      "detail": "The vendor recommends an upload connection of 20 Mbps or faster, says cellular data is significantly less reliable than Wi-Fi for syncing, and recommends Wi-Fi when syncing project data. It also says high-resolution plans are downloaded only when the device is connected to the internet. Smart Sync, on by default, limits full syncing to Wi-Fi to save data, and with it enabled on cellular only low-resolution plans download.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/360000568946-Q-A-Is-my-mobile-device-s-internet-speed-fast-enough-for-Fieldwire"
+    },
+    {
+      "requirement": "Offline: downloaded project content works, new content syncs later",
+      "detail": "The vendor says the Android and iOS apps work online or offline. You can view project content that has already been downloaded and add new content, which syncs the next time the device is connected and the app is open. You must be logged in before going offline, because the apps cannot log in without a connection. Tasks created offline have no automatic task numbers until the device reconnects.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/202631944-Q-A-Can-I-use-Fieldwire-while-offline"
+    },
+    {
+      "requirement": "Plan markup: view, mark up and carry markups to new versions",
+      "detail": "Markups on plans are shared with everyone on the project through the web and mobile apps, and are carried over automatically to new plan versions when they are uploaded. Project Admins and Members can create public and private markups, and Followers can only create private ones. The vendor's mobile page says you can calibrate the scale on the markup toolbar. Fieldwire publishes no minimum screen size for plans.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/360049713811-Introduction-to-the-Plan-View-and-Markup-Tools-Mobile"
+    },
+    {
+      "requirement": "Photos: device camera, attached to a task, plan or form",
+      "detail": "Photos can be marked up only when they are associated with a task, plan or form, and the vendor says the easiest way is to take the photo inside a task on the mobile app. Photos uploaded straight to the Photos tab cannot be marked up. Fieldwire optimises photos and saves them at 1200 x 1200 pixels for performance and memory reasons. The vendor's mobile page says you can attach photos or videos to a point on a plan with the camera icon.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/360000217443-How-to-add-Markups-to-Photos-on-Mobile-and-Web"
+    },
+    {
+      "requirement": "Windows: web browser recommended, beta app has no offline mode",
+      "detail": "The vendor says Fieldwire works on all web browsers, including recent versions of Chrome (which it recommends), Firefox, Safari and Microsoft Edge. Its Windows app from the Microsoft Store is in beta, lacks an offline mode and access to the device's back camera, and the vendor recommends the web version at app.fieldwire.com instead. Offline functionality is not available on the Windows app.",
+      "source_url": "https://help.fieldwire.com/hc/en-us/articles/360000568966-Am-I-using-the-latest-operating-system-and-Fieldwire-app-version-for-mobile"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Fieldwire is built around plans, and the app's value is highest when a drawing sheet is readable without constant pinching and zooming. The 10.1 inch Tuga A10 has a 1920 x 1200 screen, the largest Android screen in the Tuga range, for plan sheets, markups and task pins. It runs Android 14 with Google Play against the vendor's published Android 9.0 minimum, has 128GB of storage against the vendor's recommendation of more than 30GB, and takes microSD up to 2TB for projects with many sheets. Dual SIM 4G helps on sites with no Wi-Fi, though the vendor recommends Wi-Fi for syncing. It is sealed to IP68 and tested to MIL-STD-810H, and the 13MP rear camera takes the photos that get attached to tasks and plans. The screen is 350 nits, so for a bright roof or an open site the A8's 1000 nit screen is more readable. It costs £449, which is £70 more than the A8.",
+      "fit": [
+        "Requirement: Android 9.0 or later. Tuga A10: Android 14 with Google Play, so the published requirement is met.",
+        "Requirement: more than 30GB of storage recommended. Tuga A10: 128GB storage with microSD up to 2TB, 8GB RAM.",
+        "Requirement: room for large plan sheets and markups. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass.",
+        "Requirement: camera capture for task, plan and form photos. Tuga A10: 13MP rear camera with flash.",
+        "Requirement: a connection for syncing, with Wi-Fi recommended. Tuga A10: dual-band Wi-Fi 5 and 4G dual SIM.",
+        "Requirement: a device that survives a building site. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The 8 inch Tuga A8 suits teams that work mostly from tasks, punch items and photos, and look at plans in short bursts. It runs Android 12 with Google Play against the Android 9.0 minimum and has 128GB of storage with a microSD slot. Its 1000 nit screen stays readable outdoors, the 8000mAh battery is removable so a charged spare can take over, and VESA mount points with pogo pin contacts let it dock in a vehicle. A drawing sheet shows smaller than on the A10's 10.1 inch 1920 x 1200 screen, because the A8's screen is 1280 x 800. It is sealed to IP67 with no MIL-STD rating listed. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 9.0 or later. Tuga A8: Android 12 with Google Play.",
+        "Requirement: more than 30GB of storage recommended. Tuga A8: 128GB storage with a microSD slot, 6GB RAM.",
+        "Requirement: camera capture for task, plan and form photos. Tuga A8: 13MP autofocus rear camera with flash.",
+        "Requirement: a connection for syncing. Tuga A8: Wi-Fi and 4G LTE with dual SIM.",
+        "Requirement: a screen readable outdoors. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass.",
+        "Requirement: a device that moves between the vehicle and the site. Tuga A8: VESA mount points, pogo pin dock connector, removable 8000mAh battery, IP67."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The 6 inch Tuga A6 is for anyone who wants Fieldwire in a pocket or belt holster for raising tasks and taking photos, not for reading drawings. It runs Android 15 with Google Play, the newest Android in the Tuga range, against the Android 9.0 minimum. It has 64GB of storage with microSD up to 256GB, which is above the vendor's recommendation of more than 30GB and at the 64GB level the vendor calls generally enough, so use selective syncing to keep only the projects you need. Fieldwire publishes no RAM figure, so its 4GB of RAM cannot be checked against a vendor number; try it with your own projects before buying for a team. Plan sheets are small on a 6 inch screen, and its Zebra 2D scan engine is not a feature we found in the Fieldwire pages we read. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 9.0 or later. Tuga A6: Android 15 with Google Play on a 6 inch FHD+ 2160 x 1080 screen.",
+        "Requirement: more than 30GB of storage recommended. Tuga A6: 64GB storage with microSD up to 256GB, 4GB RAM.",
+        "Requirement: camera capture for task and plan photos. Tuga A6: 13MP rear camera with flash.",
+        "Requirement: a connection for syncing. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Fieldwire's Windows app is in beta, has no offline mode and cannot use the back camera, and the vendor recommends the web version instead. The Tuga W10 runs Windows 11 Pro, so it can run app.fieldwire.com in Edge or Chrome for the office side: uploading plan sets, reviewing tasks and reports and checking what the field team has synced. Fieldwire publishes no hardware specification for computers, so there is no vendor figure to check its Intel N100, 8GB RAM and 128GB storage against. It suits a site cabin or office with Ethernet and HDMI. It is not the device for field work: offline use is a feature of the Android and iOS apps, not the browser, and the W10's 5MP rear camera is basic next to the 13MP cameras on the Android devices. It costs £649, which is £200 more than the A10.",
+      "fit": [
+        "Requirement: a modern web browser (Chrome recommended, also Firefox, Safari or Edge). Tuga W10: Windows 11 Pro running Edge or Chrome.",
+        "Requirement: office work on the web version. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage with a microSD slot.",
+        "Requirement: a fixed or semi-fixed position. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery.",
+        "Requirement: dust and splash protection in a cabin. Tuga W10: IP65, 10.1 inch 1280 x 800 multi-touch screen, 1197g."
+      ]
+    }
+  ],
+  "not_recommended_note": "Fieldwire's offline support covers content already downloaded to the device plus new content you add, and the vendor says you must be logged in before going offline and that high-resolution plans download only while connected, so sync the projects you need on Wi-Fi before leaving for site. The vendor recommends Wi-Fi of 20 Mbps or faster for syncing and says cellular is less reliable, so a data SIM is a back-up, not a replacement for site Wi-Fi. The Windows beta app has no offline mode, so the Tuga W10 only suits Fieldwire in a browser, which is office work, not field work. Fieldwire publishes no RAM, processor or screen-size requirement, so we cannot say a device meets any such figure. No barcode, NFC or RFID scanning is documented in the Fieldwire pages we read, so the A6's Zebra 2D scan engine and the W10's optional scanner and UHF RFID reader are not Fieldwire features. Fieldwire does not name Tuga devices, and we do not describe any device as certified or tested by Fieldwire or Hilti.",
+  "setup_steps": [
+    "Create a Fieldwire account at fieldwire.com, or ask your project admin to add the user to the project with the right permission level.",
+    "On the Tuga A10, A8 or A6, open Google Play and install Fieldwire - Construction App (package net.fieldwire.app, developer Hilti Fieldwire, Inc.). Log in while the device is online, because the app cannot log in offline.",
+    "Accept the device prompts for the permissions your team uses, such as the camera for task and plan photos.",
+    "Connect the device to reliable Wi-Fi and enable the projects you will work on offline, so the plans and files download in high resolution. Use selective syncing to keep only the projects and revisions you need on the device.",
+    "Take photos from inside a task, plan or form, so they can be marked up. After working offline, reconnect to Wi-Fi or cellular data and open the app so new content syncs.",
+    "Do the office work, such as uploading plan sets, on app.fieldwire.com in a desktop browser. On a Tuga W10, use Edge or Chrome.",
+    "For the A10 or A8, fit the vehicle mounting dock and a 12V car charger so the device charges between sites; for the A6, add the belt holster. Fit a tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), so the device stays secure and charged in the vehicle",
+    "12V DC car charger, £26, for charging between sites",
+    "Charging dock, £49.99 (Tuga A10 and W10), for the site cabin or office",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for precise plan markups",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14"
+  ],
+  "faq": [
+    {
+      "q": "Will Fieldwire run on the Tuga A10?",
+      "a": "Fieldwire's help centre lists Android 9.0 or higher for Android devices. The Tuga A10 runs Android 14 with Google Play, so it meets that figure, as do the A8 (Android 12) and the A6 (Android 15). Fieldwire publishes no RAM or screen-size requirement, and recommends more than 30GB of storage, which all three have. We do not describe any device as certified or tested by Fieldwire or Hilti; these are the vendor's published figures set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Fieldwire work offline on these devices?",
+      "a": "Yes in the Android app, within limits. The vendor says the apps work online or offline, you can view downloaded project content and add new content, and it syncs when the device reconnects and the app is open. You must be logged in before going offline, and high-resolution plans download only when connected, so sync your projects on Wi-Fi first. The Windows beta app has no offline mode, so a Tuga W10 is not an offline device for Fieldwire."
+    },
+    {
+      "q": "Should I choose the A10 or the A8 for Fieldwire?",
+      "a": "Choose the A10 at £449 if you read plan sheets and markups all day: its 10.1 inch 1920 x 1200 screen is larger and sharper than the A8's 8 inch 1280 x 800, and it is IP68 and MIL-STD-810H. Choose the A8 at £379 if you mostly raise tasks and take photos, or work in bright sun, because its screen is 1000 nits against 350 nits on the A10, its battery is removable and it is £70 cheaper."
+    },
+    {
+      "q": "How much storage do I need for Fieldwire plans?",
+      "a": "The vendor says an average plan file uses about 6MB, so 1000 sheets can fill about 6GB, and it recommends more than 30GB of storage, with 64GB generally enough. The A10 and A8 have 128GB with a microSD slot (up to 2TB on the A10), and the A6 has 64GB with microSD up to 256GB. Selective syncing lets you keep only the projects you need on the device."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before buying for the team is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £379 (A8), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "disclaimer": "Fieldwire is a product of Hilti Fieldwire, Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Hilti Fieldwire, Inc. or Hilti.",
+  "sources": [
+    "https://help.fieldwire.com/hc/en-us/articles/360000568966-Am-I-using-the-latest-operating-system-and-Fieldwire-app-version-for-mobile",
+    "https://help.fieldwire.com/hc/en-us/articles/360000567343-Does-my-mobile-device-have-enough-storage-space-for-Fieldwire",
+    "https://help.fieldwire.com/hc/en-us/articles/360000568946-Q-A-Is-my-mobile-device-s-internet-speed-fast-enough-for-Fieldwire",
+    "https://help.fieldwire.com/hc/en-us/articles/202631944-Q-A-Can-I-use-Fieldwire-while-offline",
+    "https://help.fieldwire.com/hc/en-us/articles/115005841383-Introduction-to-Smart-Syncing",
+    "https://help.fieldwire.com/hc/en-us/articles/360049713811-Introduction-to-the-Plan-View-and-Markup-Tools-Mobile",
+    "https://help.fieldwire.com/hc/en-us/articles/360000217443-How-to-add-Markups-to-Photos-on-Mobile-and-Web",
+    "https://www.fieldwire.com/support/fieldwire-on-mobile",
+    "https://www.fieldwire.com/construction-apps/android/",
+    "https://apps.apple.com/us/app/fieldwire-construction-app/id780165517",
+    "https://play.google.com/store/apps/details?id=net.fieldwire.app&hl=en_GB"
+  ]
+}
