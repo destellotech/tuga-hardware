@@ -8,7 +8,7 @@
    - The daily "needs attention" email.
    ============================================ */
 
-import { getRecord, putRecord, listRecords, nextId } from './records.js';
+import { getRecord, createRecord, listRecords } from './records.js';
 import { listDevices } from './inventory.js';
 import { updateOrder } from './orders.js';
 import { sendDigest } from './email.js';
@@ -104,8 +104,7 @@ async function customerForOrder(kv, order) {
   }
   const name = order.customerName || order.shippingAddress?.name || email || 'Web customer';
   const address = addressText(order.shippingAddress);
-  return putRecord(kv, 'customers', {
-    id: await nextId(kv, 'customers'),
+  return createRecord(kv, 'customers', {
     company: '',
     vatNumber: '',
     contacts: [{ name, email: order.customerEmail || '', phone: order.customerPhone || '', role: '' }],
@@ -134,8 +133,7 @@ export async function fileWebOrder(kv, order, catalogue) {
   }));
   const subtotal = lines.reduce((s, l) => s + l.unitPrice * l.qty, 0);
   const total = order.total ?? subtotal;
-  const sale = await putRecord(kv, 'sales', {
-    id: await nextId(kv, 'sales'),
+  const sale = await createRecord(kv, 'sales', {
     channel: 'web',
     webOrderId: order.orderId,
     customerId: customer.id,
