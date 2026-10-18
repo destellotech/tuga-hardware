@@ -367,6 +367,53 @@ export async function sendNewOrderAlert(env, order) {
 /**
  * @param {{title: string, lines: string[], link: string}[]} sections
  */
+/**
+ * Tell the shop a paid order has been refunded or disputed, so nobody ships
+ * it. `status` is the order's new status ('refunded' or 'disputed'), or null
+ * when only a note was added (a partial refund).
+ */
+export async function sendOrderFlagAlert(env, order, { status, reason }) {
+  const { orderId, provider, paymentIntent, captureId, customerEmail, items = [], total, saleId, dispatch } = order;
+  const money = (pence) => `£${(Number(pence) / 100).toFixed(2)}`;
+  const summary = items
+    .map((item) => `${item.name}${item.quantity > 1 ? ` ×${item.quantity}` : ''}`)
+    .join(', ');
+  const paymentUrl = provider === 'stripe' && paymentIntent
+    ? `https://dashboard.stripe.com/payments/${encodeURIComponent(paymentIntent)}`
+    : provider === 'paypal' && captureId
+      ? `https://www.paypal.com/activity/payment/${encodeURIComponent(captureId)}`
+      : null;
+  const headline = status === 'disputed'
+    ? 'Payment disputed: do not ship this order'
+    : status === 'refunded'
+      ? 'Order refunded: do not ship it'
+      : 'Order partly refunded';
+  const shipped = dispatch
+    ? `<p style="margin:0 0 16px;font-size:14px;color:${BRAND.darkText};"><strong>Already dispatched</strong> on ${escapeHtml((dispatch.at || '').slice(0, 10))}${dispatch.tracking ? `, tracking ${escapeHtml(dispatch.tracking)}` : ''}. Arrange the return.</p>`
+    : `<p style="margin:0 0 16px;font-size:14px;color:${BRAND.darkText};">Not dispatched yet. ${status === 'disputed' ? 'Hold it until the dispute is settled.' : 'The sale has been cancelled in the back office.'}</p>`;
+  const row = (label, value) =>
+    `<tr><td style="padding:6px 12px 6px 0;font:500 13px monospace;color:#8a8a82;vertical-align:top">${escapeHtml(label)}</td><td style="padding:6px 0;font:14px sans-serif;color:#1a1a18">${value}</td></tr>`;
+
+  return sendEmail(env, {
+    to: env.ORDER_ALERT_EMAIL || SUPPORT_EMAIL,
+    subject: `${headline}: ${summary || orderId} (${money(total)})`,
+    idempotencyKey: `flag-${orderId}-${status || 'note'}-${reason}`.slice(0, 256),
+    html: emailWrapper(headline, `
+      <h2 style="margin:0 0 8px;font-size:22px;color:${BRAND.green};">${headline}</h2>
+      <p style="margin:0 0 16px;font-size:15px;color:${BRAND.darkText};">${escapeHtml(reason)}</p>
+      ${shipped}
+      <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+        ${row('Order', escapeHtml(orderId))}
+        ${saleId ? row('Sale', escapeHtml(saleId)) : ''}
+        ${row('Items', escapeHtml(summary || '—'))}
+        ${row('Total', money(total))}
+        ${row('Customer', escapeHtml(customerEmail || '—'))}
+        ${row('Payment', paymentUrl ? `<a href="${escapeHtml(paymentUrl)}" style="color:${BRAND.copper}">${provider === 'paypal' ? 'View in PayPal' : 'View in Stripe'}</a>` : provider)}
+      </table>
+    `),
+  });
+}
+
 export async function sendDigest(env, sections) {
   const base = `${env.SITE_URL || ''}/admin`;
   const count = sections.reduce((n, s) => n + s.lines.length, 0);

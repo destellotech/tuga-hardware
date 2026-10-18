@@ -49,6 +49,8 @@ import { routedStore } from './store.js';
 import { pageviewStats } from './pageviews.js';
 
 const BY = 'Admin';
+// Web order statuses that mean the money has gone back or is in question.
+const FLAGGED = ['refunded', 'disputed'];
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -661,6 +663,11 @@ async function sales(kv, method, rawId, action, body, ctx, env) {
   }
   if (method === 'POST' && action === 'dispatch') {
     if (sale.dispatch) return fail('Already dispatched', 409);
+    if (sale.status === 'cancelled') return fail('This sale is cancelled', 409);
+    if (sale.webOrderId) {
+      const web = await getOrder(kv, sale.webOrderId);
+      if (web && FLAGGED.includes(web.status)) return fail(`The web payment is ${web.status}; do not ship it`, 409);
+    }
     const serials = await checkUnitsFree(kv, body.serials, id);
     const at = moveAt(body.at);
     const day = at.slice(0, 10);
@@ -769,6 +776,7 @@ async function webOrders(kv, method, id, action, body) {
     const order = await getOrder(kv, id);
     if (!order) return fail('No order with that id', 404);
     if (order.dispatch) return fail('Already dispatched', 409);
+    if (FLAGGED.includes(order.status)) return fail(`The payment is ${order.status}; do not ship it`, 409);
     const serials = await checkUnitsFree(kv, body.serials, id);
     const customer = order.shippingAddress?.name || order.customerEmail || '';
     const at = moveAt(body.at);
