@@ -49,8 +49,6 @@ import { routedStore } from './store.js';
 import { pageviewStats } from './pageviews.js';
 
 const BY = 'Admin';
-/** Device statuses a dispatch may take a unit from. */
-const SHIPPABLE = ['in_stock', 'reserved', 'returned'];
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -747,6 +745,8 @@ async function customerEmail(kv, sale) {
   return (named || contacts.find((p) => p.email))?.email || '';
 }
 
+/** Device statuses a dispatch may take a unit from. */
+const SHIPPABLE = ['in_stock', 'reserved', 'returned'];
 /** Normalise a list of serials and check each is a unit we hold and can send. */
 async function checkUnitsFree(kv, list, ref) {
   const serials = [...new Set((list || []).map(normaliseSerial).filter(Boolean))];
