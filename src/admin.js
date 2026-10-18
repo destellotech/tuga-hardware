@@ -49,6 +49,8 @@ import { routedStore } from './store.js';
 import { pageviewStats } from './pageviews.js';
 
 const BY = 'Admin';
+/** Device statuses a dispatch may take a unit from. */
+const SHIPPABLE = ['in_stock', 'reserved', 'returned'];
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -74,6 +76,16 @@ const pence = (v) => {
 const isoDate = (v) => (/^\d{4}-\d{2}-\d{2}/.test(v || '') ? String(v).slice(0, 10) : '');
 const todayIso = () => new Date().toISOString().slice(0, 10);
 /** A movement timestamp from a YYYY-MM-DD the user picked, else now. */
+/**
+ * An imported timestamp: now when empty, an error when unparseable (it
+ * becomes part of the movement key and the sort order), else normalised.
+ */
+const importedAt = (value, what) => {
+  if (value == null || value === '') return new Date().toISOString();
+  const t = Date.parse(value);
+  if (Number.isNaN(t)) throw new Invalid(`${what}: "${value}" is not a date`);
+  return new Date(t).toISOString();
+};
 const moveAt = (day) => (isoDate(day) && isoDate(day) !== todayIso() ? `${isoDate(day)}T12:00:00.000Z` : new Date().toISOString());
 
 /**
@@ -168,6 +180,19 @@ async function devices(kv, method, rawId, action, sub, body, ctx) {
     if (!device) return fail('No device with that serial', 404);
     await deleteDevice(kv, serial);
     await recordMove(kv, { type: 'adjust', serial, model: device.model, note: 'Deleted from stock records' });
+    // The unit was counted as received on its purchase order (a mistyped
+    // serial is the usual reason for a delete). Count it back out, or the
+    // order reads as over-received and can never be deleted.
+    if (device.poId) {
+      const po = await getRecord(kv, 'purchases', device.poId);
+      if (po && po.received > 0) {
+        po.received -= 1;
+        if (po.status === 'received' || po.status === 'part_received') {
+          po.status = po.received === 0 ? 'ordered' : po.received >= po.units ? 'received' : 'part_received';
+        }
+        await putRecord(kv, 'purchases', po);
+      }
+    }
     return json({ ok: true });
   }
   if (method === 'POST' && action === 'return') return bookReturn(kv, serial, body);
@@ -729,6 +754,10 @@ async function checkUnitsFree(kv, list, ref) {
     const device = await getDevice(kv, serial);
     if (!device) throw new Invalid(`Serial ${serial} is not in stock records — receive it first`);
     if (device.status === 'sold' && device.orderId !== ref) throw new Invalid(`Serial ${serial} is already sold on ${device.orderId}`, 409);
+    // The admin screen hides these, but the API is what actually ships.
+    if (!SHIPPABLE.includes(device.status) && device.status !== 'sold') {
+      throw new Invalid(`Serial ${serial} is ${DEVICE_STATUSES[device.status] || device.status}, not available to ship`, 409);
+    }
   }
   return serials;
 }
@@ -825,7 +854,7 @@ async function importRecords(kv, body, ctx) {
     const r = await cleanSale(kv, s, sid, ctx, existing);
     if (s.dispatch) {
       r.dispatch = {
-        at: s.dispatch.at || new Date().toISOString(),
+        at: importedAt(s.dispatch.at, `Dispatch date on ${sid}`),
         courier: clip(s.dispatch.courier, 60),
         tracking: clip(s.dispatch.tracking, 80),
         serials: (s.dispatch.serials || []).map(normaliseSerial),
@@ -867,7 +896,7 @@ async function importRecords(kv, body, ctx) {
       note: clip(m.note, 200),
       cost: m.cost == null ? undefined : pence(m.cost),
       price: m.price == null ? undefined : pence(m.price),
-      at: m.at,
+      at: importedAt(m.at, `Movement date for ${m.serial || m.type}`),
     });
     done.moves++;
   }
