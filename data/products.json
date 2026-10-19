@@ -19,10 +19,7 @@
       "price": 349,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "m602-1.webp",
-        "m602-2.webp"
-      ],
+      "images": ["m602-1.webp", "m602-2.webp"],
       "highlights": [
         "Built-in 2D barcode scanner with two side scan keys",
         "277g and 6 inches, so it lives in a pocket or holster",
@@ -48,25 +45,8 @@
         "dimensions": "164 x 77.6 x 16mm",
         "operating_temp": "-20°C to 50°C"
       },
-      "features": [
-        "Zebra 2D barcode scanner",
-        "Two side scan keys",
-        "Removable battery",
-        "NFC",
-        "GPS + GLONASS + BeiDou + Galileo",
-        "Dual SIM 4G",
-        "Dual-band Wi-Fi",
-        "USB-C",
-        "Charging contacts for a dock"
-      ],
-      "inBox": [
-        "Tuga A6 handheld",
-        "Removable battery",
-        "USB-C cable",
-        "UK power adapter",
-        "Hand strap",
-        "Quick start guide"
-      ],
+      "features": ["Zebra 2D barcode scanner", "Two side scan keys", "Removable battery", "NFC", "GPS + GLONASS + BeiDou + Galileo", "Dual SIM 4G", "Dual-band Wi-Fi", "USB-C", "Charging contacts for a dock"],
+      "inBox": ["Tuga A6 handheld", "Removable battery", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": null,
       "positioning": "The pocket option. Barcode scanning, proof of delivery, quick photos, comms."
     },
@@ -88,9 +68,7 @@
       "price": 379,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "t85s-1.webp"
-      ],
+      "images": ["t85s-1.webp"],
       "highlights": [
         "1000 nit screen you can read on a bright roof",
         "Removable 8000mAh battery, so a spare doubles your shift",
@@ -112,22 +90,8 @@
         "ports": "USB-C, DC in, dual SIM, microSD, pogo pin",
         "camera": "13MP autofocus rear with flash + 5MP front"
       },
-      "features": [
-        "1000 nit sunlight readable display",
-        "Removable battery",
-        "VESA mount points",
-        "Pogo pin dock connector",
-        "Dual SIM 4G",
-        "NFC",
-        "GPS + GLONASS + Galileo + BeiDou"
-      ],
-      "inBox": [
-        "Tuga A8 tablet",
-        "Removable battery",
-        "USB-C cable",
-        "UK power adapter",
-        "Quick start guide"
-      ],
+      "features": ["1000 nit sunlight readable display", "Removable battery", "VESA mount points", "Pogo pin dock connector", "Dual SIM 4G", "NFC", "GPS + GLONASS + Galileo + BeiDou"],
+      "inBox": ["Tuga A8 tablet", "Removable battery", "USB-C cable", "UK power adapter", "Quick start guide"],
       "badge": null,
       "positioning": "The all-rounder. The sweet spot between portability and screen space."
     },
@@ -149,11 +113,7 @@
       "price": 449,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "t10-1.webp",
-        "t10-2.webp",
-        "t10-3.webp"
-      ],
+      "images": ["t10-1.webp", "t10-2.webp", "t10-3.webp"],
       "highlights": [
         "10.1 inch Full HD screen, so you can read a drawing without pinching and zooming",
         "IP68 and MIL-STD-810H in a slim 14.5mm, 680g body",
@@ -180,22 +140,8 @@
         "dimensions": "250 x 167 x 14.5mm",
         "operating_temp": "-20°C to 60°C"
       },
-      "features": [
-        "NFC",
-        "GPS + Galileo + BeiDou + QZSS + NavIC",
-        "Dual-band Wi-Fi",
-        "Dual SIM",
-        "Pogo pin connector",
-        "3.5mm headphone jack",
-        "USB-C"
-      ],
-      "inBox": [
-        "Tuga A10 tablet",
-        "USB-C cable",
-        "UK power adapter",
-        "Hand strap",
-        "Quick start guide"
-      ],
+      "features": ["NFC", "GPS + Galileo + BeiDou + QZSS + NavIC", "Dual-band Wi-Fi", "Dual SIM", "Pogo pin connector", "3.5mm headphone jack", "USB-C"],
+      "inBox": ["Tuga A10 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": "Our pick for Android",
       "positioning": "The site tablet. Blueprints, BIM viewers, full spreadsheets, PDF plans."
     },
@@ -216,11 +162,7 @@
       "price": 699,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "wh6-1.webp",
-        "wh6-2.webp",
-        "wh6-3.webp"
-      ],
+      "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
       "highlights": [
         "Full Windows 11, not a mobile OS pretending",
         "Intel Celeron N5100, 8GB RAM, 128GB storage",
@@ -249,26 +191,8 @@
         "dimensions": "183.1 x 88.6 x 24.1mm",
         "operating_temp": "-20°C to 60°C"
       },
-      "features": [
-        "Windows 11",
-        "Intel Celeron N5100",
-        "8GB RAM",
-        "128GB storage + microSD",
-        "Removable battery",
-        "4G LTE",
-        "GPS + GLONASS",
-        "NFC",
-        "USB-C + USB-A",
-        "Pogo pin dock connector",
-        "Barcode scanner optional"
-      ],
-      "inBox": [
-        "Tuga WH6 handheld",
-        "Removable battery",
-        "USB-C cable",
-        "UK power adapter",
-        "Quick start guide"
-      ],
+      "features": ["Windows 11", "Intel Celeron N5100", "8GB RAM", "128GB storage + microSD", "Removable battery", "4G LTE", "GPS + GLONASS", "NFC", "USB-C + USB-A", "Pogo pin dock connector", "Barcode scanner optional"],
+      "inBox": ["Tuga WH6 handheld", "Removable battery", "USB-C cable", "UK power adapter", "Quick start guide"],
       "badge": null,
       "positioning": "Windows in your pocket for professionals who need desktop software on the move."
     },
@@ -289,9 +213,7 @@
       "price": 629,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "w8-1.webp"
-      ],
+      "images": ["w8-1.webp"],
       "highlights": [
         "Full Windows 11 Pro in an 8 inch rugged body",
         "USB-C, USB-A and HDMI, so no adapter bag",
@@ -316,23 +238,8 @@
         "weight": "750g",
         "operating_temp": "-10°C to 50°C"
       },
-      "features": [
-        "Windows 11 Pro",
-        "Sunlight readable",
-        "GPS + GLONASS",
-        "USB-C + USB-A + HDMI",
-        "Pogo pin dock connector",
-        "NFC",
-        "Fingerprint sensor",
-        "Barcode scanner optional"
-      ],
-      "inBox": [
-        "Tuga W8 tablet",
-        "USB-C cable",
-        "UK power adapter",
-        "Hand strap",
-        "Quick start guide"
-      ],
+      "features": ["Windows 11 Pro", "Sunlight readable", "GPS + GLONASS", "USB-C + USB-A + HDMI", "Pogo pin dock connector", "NFC", "Fingerprint sensor", "Barcode scanner optional"],
+      "inBox": ["Tuga W8 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": null,
       "positioning": "The 8 inch Windows tablet for professionals who need real software in the field."
     },
@@ -353,11 +260,7 @@
       "price": 649,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "w10-1.webp",
-        "w10-2.webp",
-        "w10-3.webp"
-      ],
+      "images": ["w10-1.webp", "w10-2.webp", "w10-3.webp"],
       "highlights": [
         "RJ45 Ethernet, so you can plug straight into panels and plant",
         "10.1 inch IPS touchscreen, full Windows 11 Pro on an Intel N100",
@@ -381,25 +284,8 @@
         "weight": "1197g",
         "dimensions": "280 x 198 x 22mm"
       },
-      "features": [
-        "Windows 11 Pro",
-        "Intel N100 processor",
-        "HDMI + RJ45 + USB-C + USB-A",
-        "Removable battery",
-        "NFC (13.56MHz)",
-        "Pogo pin dock connector",
-        "Optional 4G LTE and GPS",
-        "Optional fingerprint reader",
-        "Optional 2D barcode scanner",
-        "Optional UHF RFID reader"
-      ],
-      "inBox": [
-        "Tuga W10 tablet",
-        "USB-C cable",
-        "UK power adapter",
-        "Hand strap",
-        "Quick start guide"
-      ],
+      "features": ["Windows 11 Pro", "Intel N100 processor", "HDMI + RJ45 + USB-C + USB-A", "Removable battery", "NFC (13.56MHz)", "Pogo pin dock connector", "Optional 4G LTE and GPS", "Optional fingerprint reader", "Optional 2D barcode scanner", "Optional UHF RFID reader"],
+      "inBox": ["Tuga W10 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": "Our pick for Windows",
       "positioning": "The full desktop experience. Real screen estate, full ports, full Windows."
     },
@@ -417,23 +303,10 @@
       "price": 779,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "wh6-1.webp",
-        "wh6-2.webp",
-        "wh6-3.webp"
-      ],
+      "images": ["wh6-1.webp", "wh6-2.webp", "wh6-3.webp"],
       "specs": {},
-      "features": [
-        "Everything in the standard WH6",
-        "Integrated 2D barcode scanner",
-        "Reads all major barcode formats"
-      ],
-      "inBox": [
-        "Tuga WH6 with scanner",
-        "USB-C cable",
-        "UK power adapter",
-        "Quick start guide"
-      ],
+      "features": ["Everything in the standard WH6", "Integrated 2D barcode scanner", "Reads all major barcode formats"],
+      "inBox": ["Tuga WH6 with scanner", "USB-C cable", "UK power adapter", "Quick start guide"],
       "badge": null,
       "positioning": "WH6 with integrated barcode scanner for warehouse and logistics."
     },
@@ -451,22 +324,10 @@
       "price": 699,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "w8-1.webp"
-      ],
+      "images": ["w8-1.webp"],
       "specs": {},
-      "features": [
-        "Everything in the standard W8",
-        "Integrated 2D barcode scanner",
-        "Reads all major barcode formats"
-      ],
-      "inBox": [
-        "Tuga W8 with scanner",
-        "USB-C cable",
-        "UK power adapter",
-        "Hand strap",
-        "Quick start guide"
-      ],
+      "features": ["Everything in the standard W8", "Integrated 2D barcode scanner", "Reads all major barcode formats"],
+      "inBox": ["Tuga W8 with scanner", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": null,
       "positioning": "W8 with integrated 2D scanner for warehouse and inventory work."
     },
@@ -484,25 +345,10 @@
       "price": 729,
       "compareAtPrice": null,
       "currency": "GBP",
-      "images": [
-        "w10-1.webp",
-        "w10-2.webp",
-        "w10-3.webp"
-      ],
+      "images": ["w10-1.webp", "w10-2.webp", "w10-3.webp"],
       "specs": {},
-      "features": [
-        "Everything in the standard W10",
-        "Integrated Newland 2D scan engine",
-        "Optional UHF RFID reader",
-        "Reads 1D barcodes plus QR, PDF417, Aztec and MaxiCode"
-      ],
-      "inBox": [
-        "Tuga W10 with scanner",
-        "USB-C cable",
-        "UK power adapter",
-        "Hand strap",
-        "Quick start guide"
-      ],
+      "features": ["Everything in the standard W10", "Integrated Newland 2D scan engine", "Optional UHF RFID reader", "Reads 1D barcodes plus QR, PDF417, Aztec and MaxiCode"],
+      "inBox": ["Tuga W10 with scanner", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": null,
       "positioning": "W10 with integrated 2D scanner for warehouse and logistics."
     }
@@ -515,11 +361,7 @@
       "description": "Desktop charging dock with a pogo pin connection. Drop the tablet in and it charges. No fiddling with cables in the dark.",
       "price": 49.99,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a10",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     },
     {
@@ -529,12 +371,7 @@
       "description": "Locking VESA mount with DC power input. Bolts to a dashboard or windscreen and keeps the tablet secure and charged on the road.",
       "price": 109,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     },
     {
@@ -544,12 +381,7 @@
       "description": "Adjustable hand strap with 360 degree rotation. A secure grip for one handed use on a ladder or in a riser.",
       "price": 24,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     },
     {
@@ -559,13 +391,7 @@
       "description": "Precision capacitive stylus for signatures and detail work when the gloves are off. Includes a clip for a pocket or case.",
       "price": 14.99,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-w8",
-        "tuga-w10",
-        "tuga-wh6"
-      ],
+      "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10", "tuga-wh6"],
       "category": "universal"
     },
     {
@@ -575,14 +401,7 @@
       "description": "9H tempered glass protectors. An extra layer of scratch and impact resistance. Two in the pack because you work on site, not in an office.",
       "price": 14,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a6",
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-wh6",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a6", "tuga-a8", "tuga-a10", "tuga-wh6", "tuga-w8", "tuga-w10"],
       "category": "universal"
     },
     {
@@ -592,14 +411,7 @@
       "description": "12V charger with USB-C output and a 2 metre cable. Fast charging between jobs without unplugging the sat nav.",
       "price": 26,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a6",
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-wh6",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a6", "tuga-a8", "tuga-a10", "tuga-wh6", "tuga-w8", "tuga-w10"],
       "category": "universal"
     },
     {
@@ -609,12 +421,7 @@
       "description": "Padded carry case with a shoulder strap and belt loop. Fits tablets up to 10.1 inches, with pockets for cables, charger and stylus.",
       "price": 34,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     },
     {
@@ -624,9 +431,7 @@
       "description": "Desktop charging cradle for the Tuga WH6, with a pogo pin connection. Drop the handheld in and it charges, ready for the next shift.",
       "price": 79,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-wh6"
-      ],
+      "compatibleWith": ["tuga-wh6"],
       "category": "handheld"
     },
     {
@@ -636,10 +441,7 @@
       "description": "MOLLE compatible belt holster for rugged handhelds. Quick draw design with a magnetic closure. Fits devices up to 6.8 inches.",
       "price": 22,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a6",
-        "tuga-wh6"
-      ],
+      "compatibleWith": ["tuga-a6", "tuga-wh6"],
       "category": "handheld"
     },
     {
@@ -649,10 +451,7 @@
       "description": "Heavy duty suction cup mount for rugged handhelds. Holds devices up to 7 inches, one handed operation with gloves on.",
       "price": 17,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a6",
-        "tuga-wh6"
-      ],
+      "compatibleWith": ["tuga-a6", "tuga-wh6"],
       "category": "handheld"
     },
     {
@@ -662,14 +461,7 @@
       "description": "Plug in USB drives, keyboards, barcode scanners and other USB-A peripherals. Compact aluminium body, built to survive a toolbox.",
       "price": 8,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a6",
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-wh6",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a6", "tuga-a8", "tuga-a10", "tuga-wh6", "tuga-w8", "tuga-w10"],
       "category": "universal"
     },
     {
@@ -679,12 +471,7 @@
       "description": "Adjustable padded shoulder strap with quick release clips. Keeps the tablet hands free while you move around site.",
       "price": 19,
       "currency": "GBP",
-      "compatibleWith": [
-        "tuga-a8",
-        "tuga-a10",
-        "tuga-w8",
-        "tuga-w10"
-      ],
+      "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
     }
   ],
