@@ -1,0 +1,168 @@
+{
+  "slug": "gas-engineer-software",
+  "software": "Gas Engineer Software",
+  "vendor": "Software Works for You Ltd (trading as Gas Engineer Software)",
+  "vendor_url": "https://gasengineersoftware.co.uk/",
+  "title": "Rugged tablet for Gas Engineer Software: UK buyer's guide",
+  "meta_description": "Gas Engineer Software publishes Android 11 or higher for its app. The Tuga A10 (Android 14, 10.1 inch, IP68) meets it for certificates, photos and signatures.",
+  "target_query": "best tablet for Gas Engineer Software",
+  "h1": "Rugged tablet for Gas Engineer Software",
+  "intro": [
+    "Gas Engineer Software, often shortened to GES, is job management and certificate software for UK heating and plumbing businesses. It is built and sold by Software Works for You Ltd, a UK company whose site says it has offices in Sevenoaks and London; Companies House lists Software Works For You Limited, company number 08306248, incorporated in 2012. The vendor describes the product as digital records and certificates, job sheets, scheduling, quotes, invoices, payments and automatic service reminders, with a web portal for the office and native iOS and Android apps for engineers that share the same data.",
+    "The app is where the site work happens. The vendor's help centre says the app is more commonly used to create certificates in the field, and its Google Play listing describes gas, oil and heat pump certificates signed on site and sent, photos added to records, readings pulled from a Bluetooth flue gas analyser straight into a certificate, and full offline access on the mobile apps with syncing when next online. That is a device that goes into airing cupboards, lofts, plant rooms and cellars, rides in a van between jobs and gets handed to a customer to sign, which is where a consumer tablet with no sealing or drop rating tends to have a short life. This page does not cover what any certificate or record must contain; the software produces digital certificates, and you should check the records your business needs on the device before you rely on it.",
+    "This page sets out what Gas Engineer Software publishes about the devices its app runs on, which Tuga rugged tablets meet those published requirements, where the Windows option fits and where it does not, and how a sole trader or small firm can buy a single unit to try before kitting out a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 11 or higher, on tablets and phones",
+      "detail": "The vendor's help centre article Which devices does Gas Engineer Software support (dated 17 July 2026) states that Android tablets and phones are supported through the app and the website and require OS version 11 or higher. For Apple devices it gives iOS 13 or higher, though the App Store listing itself currently says iOS 15.0 or later. It lists Huawei and Honor mobile devices as unsupported. No RAM, storage, processor or screen-size figure is published for any mobile device.",
+      "source_url": "https://help.gasengineersoftware.co.uk/en/articles/3678858-which-devices-does-gas-engineer-software-support"
+    },
+    {
+      "requirement": "Android app from Google Play, for phones and tablets",
+      "detail": "The Android app is published on Google Play as Gas Engineer Software - GES (package com.gasengineerapp, developer Software Works for You Ltd). When checked on 19 October 2026 the listing showed version 6.93, updated 15 October 2026, with a minimum API level of 30 (Android 11), which matches the help centre figure, and device chips for Phone and Tablet. The listing describes the app as working on your phone or back at the office, and the vendor's site links to Google Play for the Android download.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.gasengineerapp&hl=en_GB"
+    },
+    {
+      "requirement": "Offline working once logged in, with periodic syncing on the apps",
+      "detail": "The devices article says you can use the apps without an internet connection once you are logged in, and that without a connection anything you do will be unable to sync to other devices. The Google Play listing describes full offline access on the mobile apps, syncing when next online, and the vendor's records page says offline drafts auto-save to the device and sync when back online. The sync article says the web portal syncs constantly in the background while the mobile apps sync periodically because they are designed to operate offline and online, and that a Sync Data Now button on the home page forces a sync. The vendor does not publish how much data is held on the device.",
+      "source_url": "https://help.gasengineersoftware.co.uk/en/articles/3678887-how-can-i-sync-the-software"
+    },
+    {
+      "requirement": "Photos from the camera or library, attached to records, jobs and emails",
+      "detail": "The help centre's photos article (dated 17 July 2026) says that on the mobile app you can add a photo while creating a record by tapping the camera icon, taking a new photo with the camera or choosing one from the library. Photos saved against a job are attached automatically when a record or certificate is emailed unless marked for your own reference, and a paperclip icon on the email screen adds further attachments. The vendor says not every image format is supported and recommends a standard format such as JPEG or PNG. On the web portal, photos are uploaded to a job through a Photos button.",
+      "source_url": "https://help.gasengineersoftware.co.uk/en/articles/3678762-uploading-emailing-photos-for-jobs"
+    },
+    {
+      "requirement": "Certificates signed on screen in the app",
+      "detail": "The help centre's certificate article says you fill out a record until you reach the signature screen, where you can Save it, return Home or Approve it; saved records stay in the app and approved records can still be edited later. The vendor's records page says you get the customer's signature on your phone, tap approve, and the customer receives the certificate by email, with a Sign below to approve prompt on the signing screen. All certificates can also be created on the web portal. The vendor publishes no stylus or screen-size requirement for signing.",
+      "source_url": "https://help.gasengineersoftware.co.uk/en/articles/10111278-how-to-create-a-certificate-or-record"
+    },
+    {
+      "requirement": "Bluetooth for flue gas analyser readings, in the app only",
+      "detail": "The help centre's flue gas analyser article (dated 17 July 2026) says the integration works with Bluetooth-enabled analysers and pulls readings directly into the app, that Bluetooth must be enabled on the mobile device, and that older analyser models may not have Bluetooth. It lists Anton Sprint Pro3 and above, Kane KANE258, KANE358, KANE458 and KANE458s, and TPI DC710 and DC711. The integration is described in the app only; the article does not mention the web portal. The only scanning the vendor mentions is a line on its records page about scanning serial numbers, with no method published; no barcode or QR code scanning by the device, dedicated scan engine, external scanner or NFC is documented. The QR codes the vendor describes are payment codes on invoices that the customer scans with their own phone.",
+      "source_url": "https://help.gasengineersoftware.co.uk/en/articles/9866987-using-your-flue-gas-analyser-with-gas-engineer-software"
+    },
+    {
+      "requirement": "Windows: no Windows app, website access in a browser",
+      "detail": "The devices article lists Windows desktops and laptops as supported for website access only, and macOS 11 or higher for website access. No native Windows app is published, and the vendor does not publish a browser list or browser version numbers. Help centre articles refer to the web portal in Chrome and Safari in passing (a black screen when viewing a PDF in Chrome, and exported files not displaying in Safari), but neither is stated as a requirement. The offline working, signature screen, camera photos and flue gas analyser integration the vendor documents are features of the mobile app.",
+      "source_url": "https://help.gasengineersoftware.co.uk/en/articles/3678858-which-devices-does-gas-engineer-software-support"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Gas Engineer Software's engineer features (certificates with a signature screen, camera photos on records, Bluetooth flue gas analyser readings and offline working) live in the Android app, so the device an engineer carries needs to run that app well rather than a browser. The Tuga A10 runs Android 14 against a published requirement of Android 11 or higher, and carries Google Play, which is where the vendor's Android app is published. The vendor publishes no RAM or storage figure, so the A10's 8GB RAM and 128GB storage cannot be checked against a vendor number, but they are the most of any device on this page. The 10.1 inch 1920 x 1200 screen shows more of a multi-page record at once than the 8 or 6 inch options and gives a customer a large area to sign in. The IP68 and MIL-STD-810H ratings cover a wet cellar, a dusty loft and a drop from a ladder, the 13MP rear camera with flash is the photo path the app documents, Bluetooth 5.2 is on board for the analyser link, and it fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 11 or higher from Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met.",
+        "Requirement: no RAM or storage figure published. Tuga A10: 8GB RAM and 128GB storage, with microSD up to 2TB.",
+        "Requirement: photos taken with the camera while creating a record. Tuga A10: 13MP rear camera with flash and 5MP front camera.",
+        "Requirement: certificates signed on screen. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: Bluetooth enabled on the mobile device for flue gas analyser readings. Tuga A10: Bluetooth 5.2.",
+        "Requirement: offline working between syncs, in the van and at remote properties. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, dual SIM 4G, dual-band Wi-Fi 5 and GPS + Galileo + BeiDou + QZSS + NavIC."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the closer call for a heating engineer. It runs the same Gas Engineer Software Android app on an 8 inch screen that is big enough for a record and a signature box without the size of the A10, and small enough to hold in one hand in an airing cupboard or up a loft ladder. It runs Android 12 with Google Play, above the Android 11 requirement, and has 6GB of RAM and 128GB of storage against no published vendor figure. Its 1000 nit screen suits engineers who read the tablet outside at the meter or the oil tank, the 8000mAh battery is removable for long days, and VESA mount points and a pogo pin connector suit a van fit. Bluetooth is on board for the analyser link. Against the A10 it is sealed to IP67 rather than IP68, has no MIL-STD rating, a lower 1280 x 800 resolution, and does not fit the charging dock. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 11 or higher from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: no RAM or storage figure published. Tuga A8: 6GB RAM and 128GB storage with a microSD slot.",
+        "Requirement: camera photos on records and jobs. Tuga A8: 13MP autofocus rear camera with flash and 5MP front camera.",
+        "Requirement: certificates signed on screen, readable outdoors. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass; the capacitive stylus accessory fits it.",
+        "Requirement: Bluetooth enabled for flue gas analyser readings. Tuga A8: Bluetooth, with 4G LTE, Wi-Fi and NFC.",
+        "Requirement: a device for long days between van and site. Tuga A8: removable 8000mAh battery, IP67 with no MIL-STD rating, VESA mount points, pogo pin dock connector, dual SIM 4G and GPS + GLONASS + Galileo + BeiDou."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For an engineer who wants the job list, photos and sign-off in a pocket or a belt holster at 277g, the Tuga A6 runs the same Gas Engineer Software Android app on a 6 inch handheld, and the Google Play listing carries a Phone device chip, so a phone-sized layout is one the vendor publishes for. The vendor's own records page talks about getting the customer's signature on your phone. It runs Android 15, well above the Android 11 requirement, has Bluetooth 5.1 for the analyser link and a 13MP rear camera with flash for photos. The vendor publishes no RAM figure, so its 4GB cannot be checked against a vendor number; try it on one unit before buying for a team. It has a Zebra 2D scan engine, but the vendor documents no barcode or QR scanning by the device, so do not buy it for that. The trade-off is screen area: a 6 inch display shows less of a long record and gives a customer a smaller box to sign in than the tablets.",
+      "fit": [
+        "Requirement: Android 11 or higher from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: no RAM or storage figure published. Tuga A6: 4GB RAM and 64GB storage with microSD up to 256GB.",
+        "Requirement: camera photos on records. Tuga A6: 13MP rear camera with flash and 5MP front camera (the Zebra 2D scan engine is not a documented Gas Engineer Software input).",
+        "Requirement: Bluetooth enabled for flue gas analyser readings. Tuga A6: Bluetooth 5.1, with 4G LTE dual SIM, dual-band Wi-Fi 5 and NFC.",
+        "Requirement: a device that survives a day of site work and drops. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Gas Engineer Software has no Windows app; the vendor lists Windows desktops and laptops for website access only. The Tuga W10 runs Windows 11 Pro, so it can run the web portal in a current desktop browser, which the vendor says syncs constantly in the background. That makes it a fit for the person who schedules jobs, chases invoices and runs service reminders from a desk, a site office or a workshop counter, and it has Ethernet and HDMI for a fixed position. It is not the device for an engineer: the offline working, signature screen, camera photos on records and Bluetooth analyser integration the vendor documents are in the mobile app, which does not run on Windows, and the W10 is IP65 rather than IP68, so it is protected against water jets but not rated for immersion.",
+      "fit": [
+        "Requirement: website access from a Windows desktop or laptop. Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: office scheduling, invoicing and reminders in the web portal. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage, 10.1 inch 1280 x 800 multi-touch screen.",
+        "Requirement: a fixed position in a site office or workshop. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Start a Gas Engineer Software account at gasengineersoftware.co.uk, or ask the account owner to add the engineer as a user. The vendor offers a 14 day free trial with no card required.",
+    "On the Tuga A10, A8 or A6, open Google Play and install Gas Engineer Software - GES (package com.gasengineerapp, developer Software Works for You Ltd), then sign in with the engineer's email address and password.",
+    "While the device is online, tap Sync Data Now on the app's home page so customers, job addresses and records are on the device before the first job without signal. The vendor says you can use the app without a connection once logged in, but nothing done offline reaches other devices until the next sync.",
+    "Allow camera access when the app asks, so the camera icon on a record can take a photo without leaving the screen. Keep photos in a standard format such as JPEG or PNG, as the vendor recommends.",
+    "If you use an Anton, Kane or TPI flue gas analyser from the vendor's compatible list, switch on Bluetooth on the tablet and pair the analyser following the vendor's flue gas analyser article, then check readings land in a test record.",
+    "Complete a test record end to end on the device: fill it in, reach the signature screen, sign and tap Approve, and check the emailed PDF and attached photos look right, before rolling out to the team.",
+    "On a Tuga W10, open the web portal in Edge or Chrome and keep the browser updated. Use it for office work; it will not run the mobile app, and the vendor documents offline working on the apps only.",
+    "For the A10 and A8, fit the vehicle mounting dock in the van; for the A10 and W10, add the charging dock where devices live overnight; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for engineers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for customer signatures on screen",
+    "Hand strap, £24 (Tuga A8, A10 and W10), for one handed use on a loft ladder",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Gas Engineer Software run on the Tuga A10?",
+      "a": "Gas Engineer Software publishes a requirement of Android 11 or higher for tablets and phones, and its Google Play listing gives a minimum API level of 30 (Android 11). The Tuga A10 runs Android 14 with Google Play, so it meets the published figure, as do the Tuga A8 (Android 12) and the Tuga A6 (Android 15). The vendor publishes no RAM or storage figure for mobile devices and lists only Huawei and Honor devices as unsupported. We do not describe any device as certified or tested by Gas Engineer Software; these are the vendor's published requirements set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Gas Engineer Software work without signal on these tablets?",
+      "a": "The vendor says you can use the apps without an internet connection once you are logged in, that offline drafts auto-save to the device and sync when back online, and that the mobile apps sync periodically with a Sync Data Now button to force one. Anything done offline cannot reach other devices until the next sync, so sync before leaving a property with no signal if the office needs to see the record straight away. The A10, A8 and A6 all run the Google Play app. A Tuga W10 can only use the web portal in a browser, and the vendor does not document offline working there."
+    },
+    {
+      "q": "Can customers sign certificates on the tablet, and do I need a stylus?",
+      "a": "Yes. The vendor's certificate article describes filling out a record until you reach the signature screen, then saving or approving it, and its records page says you get the customer's signature on your phone and tap approve to email the certificate. The vendor publishes no stylus requirement, so a finger is fine. We sell a capacitive stylus for the A8, A10 and W10 at £14.99; it is not listed as compatible with the A6. The software produces the digital certificate; check the records your business uses on the device rather than relying on this page for what they contain."
+    },
+    {
+      "q": "Will my flue gas analyser connect, and does the A6's scanner help?",
+      "a": "The vendor's integration works over Bluetooth with the analysers on its compatible list (Anton Sprint Pro3 and above, Kane KANE258, KANE358, KANE458 and KANE458s, and TPI DC710 and DC711), in the app only, with Bluetooth switched on at the device. The A10 (Bluetooth 5.2), A8 (Bluetooth) and A6 (Bluetooth 5.1) all have it. The vendor documents no barcode or QR scanning by the device, so the A6's Zebra 2D scan engine is not a Gas Engineer Software input, and the only scanning the vendor mentions is a line about scanning serial numbers with no method published."
+    },
+    {
+      "q": "Should engineers have the 10.1 inch A10 or the 8 inch A8?",
+      "a": "Both meet the published Android 11 requirement. The A10 has more RAM (8GB against 6GB), a sharper 1920 x 1200 screen for long records and a larger signature box, IP68 against IP67, and MIL-STD-810H, which the A8 does not have. The A8 has a 1000 nit screen against the A10's 350 nits, a removable battery, VESA mount points, and costs £379 against £449. Engineers who read the screen outside at the meter or the oil tank, or who want one-handed use in tight spaces, may prefer the A8; those filling in long records in wetter or harder conditions are better served by the A10."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a team order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £379 (A8), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Gas Engineer Software has no Windows app; the vendor lists Windows desktops and laptops for website access only, so the Tuga W10 only runs the web portal in a browser. The engineer features the vendor documents (offline working, the signature screen, camera photos on records and the Bluetooth flue gas analyser integration) are in the mobile app, so a W10 suits an office or workshop desk, not an engineer on site. On the Android side, the vendor documents no barcode or QR scanning by the device, no dedicated scan engine or external scanner support, and no NFC use, so the A6's Zebra 2D scan engine and the NFC radio on the A10, A8 and A6 should not be treated as Gas Engineer Software features. The vendor publishes no RAM, storage, processor or screen-size figure for mobile devices, no browser list for the web portal, and no figure for how much data the app holds offline, so a trial unit with your own records is the way to check. This page says nothing about what any certificate or record must contain; the software produces digital certificates, and you should check the records your business needs on the device.",
+  "disclaimer": "Gas Engineer Software is a product of Software Works for You Ltd (Companies House: Software Works For You Limited, company number 08306248). Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Gas Engineer Software or Software Works for You Ltd.",
+  "sources": [
+    "https://gasengineersoftware.co.uk/",
+    "https://gasengineersoftware.co.uk/about/",
+    "https://gasengineersoftware.co.uk/llm-info/",
+    "https://gasengineersoftware.co.uk/software/records-certificates/",
+    "https://gasengineersoftware.co.uk/how-gas-engineers-use-ges/",
+    "https://help.gasengineersoftware.co.uk/en/articles/3678858-which-devices-does-gas-engineer-software-support",
+    "https://help.gasengineersoftware.co.uk/en/articles/3678887-how-can-i-sync-the-software",
+    "https://help.gasengineersoftware.co.uk/en/articles/3678762-uploading-emailing-photos-for-jobs",
+    "https://help.gasengineersoftware.co.uk/en/articles/10111278-how-to-create-a-certificate-or-record",
+    "https://help.gasengineersoftware.co.uk/en/articles/9866987-using-your-flue-gas-analyser-with-gas-engineer-software",
+    "https://help.gasengineersoftware.co.uk/en/articles/5335489-how-to-use-gas-engineer-software-as-a-sole-trader",
+    "https://help.gasengineersoftware.co.uk/en/articles/7338574-integrating-with-crezco-link-qr-code-payments",
+    "https://play.google.com/store/apps/details?id=com.gasengineerapp&hl=en_GB",
+    "https://apps.apple.com/gb/app/gas-engineer-software-ges/id771853285",
+    "https://find-and-update.company-information.service.gov.uk/company/08306248"
+  ]
+}

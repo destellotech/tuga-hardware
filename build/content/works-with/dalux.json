@@ -1,0 +1,178 @@
+{
+  "slug": "dalux",
+  "software": "Dalux",
+  "vendor": "Dalux ApS",
+  "vendor_url": "https://www.dalux.com/products/dalux-field/",
+  "title": "Rugged tablet for Dalux Field: UK buyer's guide",
+  "meta_description": "Dalux publishes Android 11.0 or higher for its mobile app, with no RAM figure. The Tuga A10 (Android 14, 8GB RAM, 10.1 inch FHD, IP68) meets it for BIM on site.",
+  "target_query": "best tablet for Dalux Field",
+  "h1": "Rugged tablet for Dalux Field",
+  "intro": [
+    "Dalux is construction software from Dalux ApS of Copenhagen. The vendor's site lists offices in London, Leeds, Birmingham, Glasgow and Belfast, and its UK company lists the product on the government's G-Cloud framework. The range splits into Dalux Field (on-site quality, health and safety and compliance, with a free Field Basic snagging tier), Dalux Box (a common data environment for documents and models) and a free BIM Viewer. All of it reaches site through one app, called simply Dalux on Google Play and the App Store, which the help centre refers to as Dalux Mobile.",
+    "The vendor describes Dalux Field as bringing drawings, models, quality and safety together on site, with site teams able to capture issues, do inspections and document offline without an internet connection, and sync automatically afterwards. Its help centre documents a locations view with 2D drawings and a split-screen 3D BIM viewer, measurement on both, registrations placed on drawings or on a map with GPS coordinates, checklists, inspection plans and test plans, photos, a reusable signature, and a Scan QR code function that opens a zone, room or 3D object from a printed code. That is a device that spends its day in basements, risers and unfinished floors, which is where a consumer tablet tends to get cracked or drowned.",
+    "This page sets out what Dalux publishes about the devices its app runs on, which Tuga rugged tablets meet those published requirements, where the Windows option genuinely fits because Dalux has a native Windows desktop app, and how a UK contractor or consultant can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 11.0 or higher (iOS 16.0 or later on Apple devices)",
+      "detail": "The vendor's Dalux Mobile article in its help centre (updated 16 October 2026) states under Technical information that the Dalux mobile app is supported on iOS 16.0 and Android 11.0 or higher, and the How to use the Dalux mobile app article (updated 17 October 2026) repeats the same line. The vendor's two UK G-Cloud listings, for Box Pro and InfraField Pro, give the same figures: iOS 16.0 or later and Android 11.0 or higher. No RAM, storage, processor or screen-size figure is published for phones or tablets.",
+      "source_url": "https://support.dalux.com/hc/en-us/articles/18358635138204-Dalux-Mobile"
+    },
+    {
+      "requirement": "Android app from Google Play, for phones and tablets",
+      "detail": "The Android app is published on Google Play as Dalux (package air.dk.dalux.daluxqa, developer Dalux Aps). When checked on 19 October 2026 the listing showed version 2026.6.3, updated 8 October 2026, 100,000+ downloads, a first release date of 25 November 2011, and device chips for Phone and Tablet. The listing data gave a minimum API level of 30, which is Android 11, matching the help centre. The vendor's Build release notes 2026.6 say the mobile update was released on Android and iOS and ask users to keep the app updated to avoid interruptions. A review on the listing from October 2024 refers to the minimum then being Android 9, so the published minimum has risen over time.",
+      "source_url": "https://play.google.com/store/apps/details?id=air.dk.dalux.daluxqa&hl=en_GB"
+    },
+    {
+      "requirement": "Memory, storage and screen size: not published; BIM models and drawings can be stored on the device",
+      "detail": "Dalux publishes no RAM, storage or screen-size figure for mobile devices. Its Field Basic page says the tool is mobile friendly and needs no specialist hardware, and that the Dalux Viewer engine can handle a project with 1, 2 or 600 BIM models on any device. The only memory figures it publishes are for Windows (4GB minimum, 8GB recommended, with 4GB of video memory recommended). What the vendor does document is that the app can download drawings for selected buildings and, with the Offline 3D option, the model files for buildings that contain 3D models, and that users should clear downloaded data regularly to save space on the device. On a tablet that means local storage, and the memory to open large models, matter more than the absence of a published figure suggests.",
+      "source_url": "https://www.dalux.com/products/dalux-field-basic/"
+    },
+    {
+      "requirement": "Offline working, prepared in advance, with automatic sync through an Outbox",
+      "detail": "The vendor's offline mode article (updated 28 September 2026) says to prepare Dalux for offline mode before work to prevent unexpected data loss, because low connection can otherwise stop the app opening the project. The route is More, then Download for offline: task folders (Inbox is pre-selected and recommended as a minimum), checklists, inspection plans and test plans, buildings for drawings, and Offline 3D for model files. The Prepare for offline button does not download anything by itself; Download now does, and can be pressed again later to refresh. Registrations and messages created offline sit in an Outbox folder and send automatically when a stable connection returns, after which the Outbox disappears. At least one Field registration type must be downloaded to create new registrations offline. Box folders can also be downloaded for offline use from the Box tab.",
+      "source_url": "https://support.dalux.com/hc/en-us/articles/28263982197276-Use-Dalux-mobile-app-in-offline-mode"
+    },
+    {
+      "requirement": "QR code scanning for zones, rooms and 3D objects, through the app's own Scan QR code function",
+      "detail": "The help centre documents a Scan QR code option in the app's More menu that opens the matching location or object and shows its registrations: a zone code opens the zone, a room code opens the room, and a 3D object code opens the model and locates the object. The codes are generated and printed as a PDF by a project or Field administrator from Settings, Locations, QR codes, and every user on the project can scan them. The release notes also say newer public safety QR codes can be scanned outside the Dalux app. No dedicated hardware scan engine, external scanner, barcode (other than QR) or NFC input is documented anywhere in the help centre, so on any device the scan path is the app reading the code through the camera.",
+      "source_url": "https://support.dalux.com/hc/en-us/articles/10238784116252-QR-codes-for-Locations"
+    },
+    {
+      "requirement": "Drawings, 3D BIM viewer, measurement, photos, signatures and GPS-located registrations in the app",
+      "detail": "The Navigate in Locations on mobile article documents pinch-to-zoom drawings, 2D length and area measurement, and a 3D button on any drawing mapped to a BIM model that opens the Dalux BIM Viewer in a split view, with BIM properties, filters, cuts and measurements on objects. Registrations are created by pressing a drawing or 3D object, choosing a type, filling in the information and taking a picture. The Maps article says registrations made on the map save GPS coordinates, and the Google Play description says notes are located on drawings with GPS and user input. Build release notes 2026.6 add a signature saved in personal settings for reuse in registrations and daily logs. No location accuracy figure is published; an external antenna (GPS Connector, currently the Emlid Reach RX2 only) is an InfraField Pro feature, not a Field one.",
+      "source_url": "https://support.dalux.com/hc/en-us/articles/360010386193-Navigate-in-Locations-on-mobile"
+    },
+    {
+      "requirement": "Windows: a native Dalux Desktop app for Windows 10 and 11, plus the web product in a browser",
+      "detail": "Unlike most site software, Dalux publishes a Windows app. The help centre's Downloading the Dalux desktop app article (updated 19 October 2026) describes Dalux Desktop as the desktop app version of Dalux, with all the known features of the web browser and better performance, designed to use the computer's resources better, especially 3D graphics. It installs from the Microsoft Store (which may need a Microsoft login) or by sideloading an appxbundle through the Windows App Installer (always enabled from Windows 10 2004), with an MSI as a non-recommended fallback. The Microsoft Store listing is an x64 package with a minimum of Windows 10 version 17134.0; the G-Cloud listings give the same Windows figure, 4GB RAM minimum and 8GB recommended, 4GB video memory recommended, and list Edge, Firefox, Chrome, Safari and Opera as supported browsers for the web product at build.dalux.com. Offline mode and QR scanning are documented for the mobile app only.",
+      "source_url": "https://support.dalux.com/hc/en-us/articles/12133416957084-Downloading-the-Dalux-desktop-app"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Dalux's site work is drawings and BIM models as much as it is task forms, and that is what separates it from a typical job sheet app. The 10.1 inch 1920 x 1200 screen on the Tuga A10 shows a drawing with its coloured registration dots, or the split view of drawing above and 3D model below, at a size you can read without constant pinching, which the 8 and 6 inch options cannot match. It runs Android 14 against a published requirement of Android 11.0 or higher, so it has three versions of headroom above a minimum that the vendor has raised before. Dalux publishes no RAM figure, but it does document downloading drawings and Offline 3D model files to the device, and the A10's 8GB of RAM, 128GB of storage and microSD slot up to 2TB give it the most room in the range for that. The IP68 and MIL-STD-810H ratings cover wet basements, dusty slabs and drops from a scaffold, and the 13MP rear camera with flash is the path for task photos and the Scan QR code function. It fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 11.0 or higher from Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met with headroom.",
+        "Requirement: no RAM or storage figure published, but drawings and Offline 3D model files download to the device. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: drawings, split-view 3D BIM viewer, 2D and 3D measurement on screen. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: QR code scanning through the app and photos on registrations. Tuga A10: 13MP rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: GPS-located registrations on the map, and a connection to sync the Outbox. Tuga A10: GPS + Galileo + BeiDou + QZSS + NavIC, dual SIM 4G, dual-band Wi-Fi 5.",
+        "Requirement: a device that lives on site, offline, in the wet and dust. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, 680g."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 runs the same Dalux Android app on an 8 inch screen, which is big enough for snagging on a drawing and filling in a checklist, and small enough to hold in one hand on a ladder or drop into a van door pocket. Its 1000 nit screen is the one to pick for external works, roofing or groundworks where the A10's 350 nits struggles in direct sun, the 8000mAh battery is removable for long days, and VESA mount points and a pogo pin connector suit a van fit. Be clear on two things. First, it runs Android 12, which meets the published Android 11.0 minimum but with only one version of headroom; Dalux has raised its minimum before, so the A10 (Android 14) or A6 (Android 15) have a longer runway. Second, its 1280 x 800 screen shows less detail in a drawing or a 3D model than the A10's 1920 x 1200. It is sealed to IP67 rather than IP68, has no MIL-STD rating, and does not fit the charging dock. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 11.0 or higher from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met, one version above the minimum.",
+        "Requirement: no RAM or storage figure published, with drawings and Offline 3D models stored on the device. Tuga A8: 6GB RAM and 128GB storage with a microSD slot.",
+        "Requirement: drawings, 3D BIM viewer and checklists readable outdoors. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass.",
+        "Requirement: QR code scanning through the app and photos on registrations. Tuga A8: 13MP autofocus rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: GPS-located registrations and a connection to sync. Tuga A8: GPS + GLONASS + Galileo + BeiDou, dual SIM 4G, Wi-Fi.",
+        "Requirement: a device for long days between van and site. Tuga A8: removable 8000mAh battery, IP67 with no MIL-STD rating, VESA mount points, pogo pin dock connector."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For a site manager or subcontractor who wants the task inbox, photos and QR scanning in a pocket or belt holster at 277g, the Tuga A6 runs the same Dalux app on a 6 inch handheld, and the Google Play listing carries a Phone device chip, so a phone-sized layout is one the vendor publishes for. It runs Android 15, the highest in the range and well above the Android 11.0 minimum. Dalux publishes no RAM figure, so its 4GB of RAM cannot be checked against a vendor number; the vendor does say the viewer engine can handle large models on any device, but a 6 inch 2160 x 1080 screen is a small window on a drawing or a 3D model, and 64GB of storage is the least in the range for Offline 3D downloads, so a trial unit is worth running before buying several. It has a Zebra 2D scan engine, but Dalux documents in-app QR scanning only, so plan on the 13MP rear camera.",
+      "fit": [
+        "Requirement: Android 11.0 or higher from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: no RAM or storage figure published, with drawings and Offline 3D models stored on the device. Tuga A6: 4GB RAM and 64GB storage with microSD up to 256GB, the least room in the range.",
+        "Requirement: QR code scanning through the app and photos on registrations. Tuga A6: 13MP rear camera with flash (scanning through the camera via the app; the Zebra 2D scan engine is not a documented Dalux input).",
+        "Requirement: drawings and 3D viewer on screen. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, sharp but small for drawings.",
+        "Requirement: a device that survives site use and drops. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g, removable 5050mAh battery.",
+        "Requirement: GPS-located registrations and a connection to sync. Tuga A6: GPS + GLONASS + BeiDou + Galileo, 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Dalux is unusual in having a real Windows app, so the Tuga W10 is more than a browser box here. Dalux Desktop installs on Windows 10 and 11 from the Microsoft Store or by sideloading, and the vendor says it gives all the features of the web product with better performance, especially 3D graphics. The W10 runs Windows 11 Pro on an Intel N100 with 8GB of RAM, which meets the vendor's recommended 8GB (4GB minimum) for Windows, and it has Ethernet and HDMI for a site office or a desk where models are uploaded and administered. Two cautions. The vendor recommends 4GB of video memory for Windows; the W10 has integrated graphics and no video memory figure is listed, so that recommendation cannot be confirmed as met. And the on-site features this page is about, offline mode and QR scanning, are documented for the mobile app only, 4G and GPS are optional on the W10 rather than standard, and it is IP65 rather than IP68, so it is a site office device, not the one in a basement.",
+      "fit": [
+        "Requirement: Windows 10 version 17134.0 or higher for Dalux Desktop. Tuga W10: Windows 11 Pro.",
+        "Requirement: 4GB RAM minimum, 8GB recommended for Windows. Tuga W10: 8GB RAM, 128GB storage, microSD slot; Intel N100 up to 3.4GHz with integrated graphics (no video memory figure listed, so the 4GB video memory recommendation is unverified).",
+        "Requirement: Edge, Chrome, Firefox or another listed browser for build.dalux.com. Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: a fixed position for uploads, admin and model review. Tuga W10: 10.1 inch 1280 x 800 multi-touch screen, 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock and vehicle mounting dock.",
+        "Requirement: dust and splash protection in a site office. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g, 4G LTE and GPS optional."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Get invited to the Dalux project by its project administrator or your company contact, and accept the invitation from the email to create your account. The vendor says a new freemium project (Field Basic or BIM Viewer) has to be created on a PC; signing up from the mobile app only gives access to the demo project and projects you already belong to.",
+    "On the Tuga A10, A8 or A6, open Google Play and install Dalux (package air.dk.dalux.daluxqa, developer Dalux Aps), then log in with the same email address that received the invitation. The app keeps you logged in between uses.",
+    "When Android asks, allow camera and location access, which the Scan QR code function and GPS-located registrations on the map rely on. Fit a data SIM if the device will be syncing away from site Wi-Fi; the A10, A8 and A6 all take two.",
+    "Before the first day in a basement or on a site with poor coverage, go to More, then Download for offline. Keep Inbox selected, add the checklists, inspection plans and test plans you need, use Change selection under Buildings to pick the drawings, and tick Offline 3D if you want the model files. Then press Download now; the vendor warns that Prepare for offline on its own downloads nothing.",
+    "Work as normal offline. Registrations and messages collect in the Outbox folder under More and send automatically when the connection returns; the folder disappears once everything has gone. Clear offline data from time to time to free space, and download the Inbox again straight afterwards so you can still create registrations offline.",
+    "On the trial unit, open a drawing that is mapped to a model, press the 3D button and try the split view, measure a length, scan a printed zone or room QR code, create a task with a photo, and save your signature under your personal settings, before rolling out to the team.",
+    "For a site office, install Dalux Desktop on a Tuga W10 from the Microsoft Store, or ask IT to allow the App Installer (sideloaded) version, which the vendor prefers over the MSI. Use it for model and drawing uploads, administration and 3D review, and use build.dalux.com in Edge or Chrome where the app cannot be installed.",
+    "Fit the vehicle mounting dock for the A8, A10 or W10 in the van; add the charging dock where A10 or W10 units live overnight; add the belt holster for the A6. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for teams working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for markups, measurement points and signatures on screen",
+    "Hand strap, £24 (Tuga A8, A10 and W10), for one-handed use on a ladder or in a riser",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Dalux Field run on the Tuga A10?",
+      "a": "Dalux publishes a requirement of Android 11.0 or higher for its mobile app, and its Google Play listing data gives a minimum API level of 30, which is Android 11. The Tuga A10 runs Android 14 with Google Play and has 8GB RAM and 128GB storage, so it meets the published requirement. The Tuga A8 (Android 12, 6GB RAM) and Tuga A6 (Android 15, 4GB RAM) also meet it. Dalux publishes no RAM, storage or screen-size figure for mobile devices. We do not describe any device as certified or tested by Dalux; these are the vendor's published requirements set against the device specifications."
+    },
+    {
+      "q": "Does Dalux work offline on these tablets, and do the BIM models come with it?",
+      "a": "Yes, if you prepare it first. The vendor's offline article says to go to More, then Download for offline, choose task folders (at least the Inbox), checklists, inspection plans and test plans, the buildings whose drawings you need and, optionally, Offline 3D for model files, and then press Download now. Anything you create without signal waits in an Outbox and sends itself when the connection returns. This is documented for the mobile app on the A10, A8 and A6. It is not documented for Dalux Desktop or the web product, so a Tuga W10 should be treated as needing a connection."
+    },
+    {
+      "q": "Can I scan Dalux QR codes, and does the A6's scanner help?",
+      "a": "Dalux documents a Scan QR code option in the app's More menu that opens a zone, room or 3D object from a code printed by the project administrator. On the A10, A8 and A6 that runs through the 13MP rear camera via the app. The A6 also has a Zebra 2D scan engine, but the vendor documents no dedicated scan engine, external scanner, barcode or NFC input, so do not buy it for that reason alone, and do not treat the NFC radio on the A10, A8 or A6 as a Dalux feature."
+    },
+    {
+      "q": "Should site staff have the 10.1 inch A10 or the 8 inch A8 for Dalux?",
+      "a": "Both meet Dalux's published Android requirement. The A10 has the sharper 1920 x 1200 screen, which matters more here than for a forms-only app because Dalux puts drawings and a 3D BIM viewer on the screen, plus 8GB RAM against 6GB, microSD up to 2TB for Offline 3D downloads, IP68 against IP67, MIL-STD-810H, and Android 14 against Android 12. The A8 has a 1000 nit screen against 350 nits, a removable battery, VESA mount points, and costs £379 against £449. Teams mostly outdoors in bright light, or using Dalux mainly for snagging and checklists, may prefer the A8; teams reviewing models and drawings on site, or working in wet and hard conditions, are better served by the A10."
+    },
+    {
+      "q": "Can the Tuga W10 run Dalux?",
+      "a": "Yes. Dalux publishes a native Windows app, Dalux Desktop, for Windows 10 version 17134.0 or higher, installed from the Microsoft Store or by sideloading, and the W10 runs Windows 11 Pro with 8GB RAM, which meets the vendor's recommended 8GB for Windows. The vendor also recommends 4GB of video memory; the W10 has integrated graphics and no video memory figure is listed, so we cannot say that recommendation is met. The web product at build.dalux.com also runs in a desktop browser. Offline mode and QR scanning are documented for the mobile app only, and 4G and GPS are optional on the W10, so it suits a site office or model review desk rather than the person walking the floors."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £379 (A8), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Dalux has a native Windows app, so the Tuga W10 is a genuine option for a site office, but the features that make Dalux useful on the floor, offline mode with Offline 3D downloads and QR scanning, are documented for the mobile app only, 4G and GPS are optional on the W10, its integrated graphics cannot be checked against the vendor's recommended 4GB of video memory, and it is IP65 rather than IP68. On the Android side, the only scan method the vendor documents is QR codes through the app, with no dedicated scan engine, external scanner, barcode or NFC support published, so the A6's Zebra 2D scan engine and the NFC radio on the A10, A8 and A6 are not Dalux features. Dalux publishes no RAM, storage or screen-size figure for mobile devices, so the A6's 4GB of RAM and 64GB of storage cannot be checked against a vendor number; its 6 inch screen is a small window on a drawing. The A8's Android 12 meets the Android 11.0 minimum with one version of headroom, and the vendor has raised that minimum before. The vendor's GPS Connector for an external antenna is an InfraField Pro feature supporting one antenna model, not a Field feature, and no location accuracy requirement is published. Dalux does not name Tuga devices, and we do not describe any device as certified or tested by Dalux.",
+  "disclaimer": "Dalux, Dalux Field, Dalux Box and the Dalux BIM Viewer are products of Dalux ApS, company registration number 28509839, Lyngbyvej 2, 2100 Copenhagen, Denmark. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Dalux ApS or Dalux Limited.",
+  "sources": [
+    "https://www.dalux.com/products/dalux-field/",
+    "https://www.dalux.com/products/dalux-field-basic/",
+    "https://www.dalux.com/products/dalux-box/",
+    "https://www.dalux.com/about/",
+    "https://www.dalux.com/privacy-policy/",
+    "https://www.dalux.com/dalux-build-windows-app/",
+    "https://support.dalux.com/hc/en-us/articles/18358635138204-Dalux-Mobile",
+    "https://support.dalux.com/hc/en-us/articles/4405944987026-How-to-use-the-Dalux-mobile-app",
+    "https://support.dalux.com/hc/en-us/articles/28263982197276-Use-Dalux-mobile-app-in-offline-mode",
+    "https://support.dalux.com/hc/en-us/articles/10238784116252-QR-codes-for-Locations",
+    "https://support.dalux.com/hc/en-us/articles/14101695854364-Navigate-the-site-using-QR-codes",
+    "https://support.dalux.com/hc/en-us/articles/360010386193-Navigate-in-Locations-on-mobile",
+    "https://support.dalux.com/hc/en-us/articles/13238088202012-How-to-use-Maps",
+    "https://support.dalux.com/hc/en-us/articles/25866973192220-GPS-Connector",
+    "https://support.dalux.com/hc/en-us/articles/12133416957084-Downloading-the-Dalux-desktop-app",
+    "https://support.dalux.com/hc/en-us/articles/10923308125084-How-to-create-a-profile-and-log-in-to-Dalux",
+    "https://support.dalux.com/hc/en-us/articles/28947845918876-Build-release-notes-2026-6",
+    "https://support.dalux.com/hc/en-us/articles/27881639911452-Recommended-equipment-for-SiteWalk",
+    "https://play.google.com/store/apps/details?id=air.dk.dalux.daluxqa&hl=en_GB",
+    "https://apps.apple.com/us/app/dalux-field/id504561520",
+    "https://apps.microsoft.com/store/detail/dalux/9NV4LJ6W1WN4",
+    "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/878783968162363",
+    "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/396483272063304"
+  ]
+}

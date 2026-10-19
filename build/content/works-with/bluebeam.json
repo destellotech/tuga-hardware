@@ -1,0 +1,157 @@
+{
+  "slug": "bluebeam",
+  "software": "Bluebeam Revu and Bluebeam Cloud",
+  "vendor": "Bluebeam LLC (Nemetschek Group)",
+  "vendor_url": "https://www.bluebeam.com/",
+  "title": "Rugged tablet for Bluebeam Revu: UK buyer's guide",
+  "meta_description": "Bluebeam Revu 21 needs 64-bit Windows, 8GB RAM, 5GB free space and a 1024 x 768 display. The Tuga W10 (Windows 11 Pro, 8GB RAM, 1280 x 800) meets each minimum.",
+  "target_query": "rugged tablet for Bluebeam Revu",
+  "h1": "Rugged tablet for Bluebeam Revu",
+  "intro": [
+    "Bluebeam Revu is PDF markup, measurement and collaboration software for construction, built by Bluebeam LLC of Pasadena, California, a Nemetschek Group company. Revu itself is Windows desktop software: the vendor's pricing page says every plan (Basics, Core, Complete and Max) includes Bluebeam Revu for Windows desktop together with Bluebeam on web and mobile, and its system requirements page lists only Windows 11 and Windows 10, both 64-bit. Studio Sessions and Studio Projects, the shared review and document control parts of the product, run from Bluebeam's cloud and are reached from Revu, from the web app in a browser, and from the mobile apps.",
+    "The mobile side has changed. The vendor's Revu for iPad app stopped being available for purchase or download after 31 December 2025, and its replacement is a newer app called Bluebeam (previously listed as Bluebeam Cloud) for iOS and Android. The Android version does exist: the vendor's compatibility page lists an Android app alongside the iOS and web apps, its mobile guide tells Android users to install Bluebeam from the Play Store, and the Google Play listing is published by Bluebeam Inc. The vendor is open that Android is behind iOS, and marks several features on its mobile page as coming later on Android, so what an Android tablet can do with Bluebeam is narrower than what a Windows tablet running full Revu can do.",
+    "This page sets out what Bluebeam publishes about the devices Revu and the mobile app run on, which Tuga device meets the Revu figures and where it sits on the margins, what the Android tablets can and cannot do with the Bluebeam app on the vendor's own documentation, and how a UK firm can buy a single trial unit before committing to more."
+  ],
+  "requirements": [
+    {
+      "requirement": "Revu 21: Windows 11 or Windows 10, 64-bit only",
+      "detail": "The vendor's Revu 21 System Requirements page lists Windows 11 (64-bit) and Windows 10 (64-bit) as the supported operating systems, and notes that Microsoft ended support for Windows 10 on 14 October 2025. Revu 21.6 adds full support for ARM processors. The page makes no statement about Mac or Linux. The older Revu 20 page still lists 32-bit Windows, and says support for Revu 20 reaches end of life on 31 December 2026, so a new purchase should be planned around Revu 21 on 64-bit Windows.",
+      "source_url": "https://support.bluebeam.com/articles/compatibility-system-requirements"
+    },
+    {
+      "requirement": "Revu 21: 8GB RAM minimum, a 1 GHz processor for desktops and laptops, an Intel i3 or equivalent for tablets",
+      "detail": "The same page gives 8GB RAM as the minimum. The processor line is split: a 1 GHz processor or equivalent for desktops and laptops, and an Intel i3 processor or equivalent for tablets. For large drawing sets it recommends an Intel i5 Dual Core or better and at least 8GB of RAM. The vendor does not define what counts as equivalent to an i3, and publishes no separate figure for ARM. Treat the tablet line as the one that applies to a tablet, and the large drawing set recommendation as the one that applies to full-size plan sets.",
+      "source_url": "https://support.bluebeam.com/articles/compatibility-system-requirements"
+    },
+    {
+      "requirement": "Revu 21: 5GB of free storage, a 1024 x 768 display and an OpenGL 3.2 capable display driver",
+      "detail": "The page says at least 5GB of available space may be required, that the minimum display resolution is 1024 x 768, and that the display driver must support OpenGL 3.2 or above or OpenGL ES 3.0 or above, with OpenGL 3.0 or above required for 360 degree photos. Microsoft .NET Framework 4.8 is installed by the Revu installer if it is not already present. No screen size, touch or pen hardware figure is published on the requirements page.",
+      "source_url": "https://support.bluebeam.com/articles/compatibility-system-requirements"
+    },
+    {
+      "requirement": "Revu on tablets: touch, optional stylus, Full Screen mode and camera photos",
+      "detail": "The Revu 21 help guide has a Revu on Tablets page that describes Revu as compatible with touch-screen tablet PCs. When it detects a stylus, touch handles targeting, panning, zooming and selection while the stylus drives the other tools; without a stylus, touch controls everything, and Tablet Preferences can change this. Full Screen mode from the Window menu gives a floating toolbar with Shift and Escape buttons for devices without a keyboard. Pressure sensitivity for the Pen and Highlight tools can be enabled in Tablet Preferences. A photo from the tablet's built-in camera can be inserted as an Image markup from Tools, Markup, Image, From Camera.",
+      "source_url": "https://support.bluebeam.com/online-help/revu21/Content/RevuHelp/Unsorted/Tablet-Mode--V.htm"
+    },
+    {
+      "requirement": "Offline working in Revu: Studio files cached first, reauthentication after 14 days offline",
+      "detail": "Revu opens and marks up local PDFs as a desktop application. For Studio, the vendor's Work offline in Studio article (Revu 21 and Revu 20) says Sessions files must be opened while connected so Revu caches them, after which markups made offline show a Pending Upload icon and sync when the connection returns, and that Projects files must be marked Set to Sync and checked out before going offline. It also says a Revu 21 subscription does not allow indefinite offline use: you must log in to reauthenticate after 14 consecutive days offline.",
+      "source_url": "https://support.bluebeam.com/articles/revu-work-offline-in-studio/"
+    },
+    {
+      "requirement": "Bluebeam on mobile and web: Android 13 or above on 64-bit devices, iOS 18.0 or above, Chrome, Edge or Safari",
+      "detail": "The vendor's Bluebeam on web and mobile compatibility page lists three access points, an iOS app, an Android app and a web app. It requires iOS 18.0 and above, and Android 13 and above on 64-bit devices only. The web app is listed for Google Chrome, Microsoft Edge (Chromium-based) and Safari, with no browser version numbers, and says devices running Chrome OS are not supported at this time. No RAM, storage or screen size figure is published for mobile devices.",
+      "source_url": "https://support.bluebeam.com/bluebeam-cloud/resources/compatibility-and-integrations.html"
+    },
+    {
+      "requirement": "Android app from Google Play, with a narrower feature set than Revu or iOS",
+      "detail": "The Android app is published on Google Play as Bluebeam (package com.bluebeam.cloud, developer Bluebeam Inc.). When checked on 19 October 2026 the listing showed version 1.20.1, updated 15 September 2026, over 100,000 downloads, and device chips for Phone and Tablet, and a minimum API level of 33 (Android 13), which matches the vendor's compatibility page. The listing describes opening files on the device, in Studio Projects or in Studio Sessions, checking Project files out and in, working offline by syncing Project files ahead of time, and 13 markup tools. The vendor's Android markup guide lists Stamp, Arc, Hatch, Snapshot, Dimension, Typewriter, Note, Sequences, Volume and photo, video and 360 photo capture as unsupported on Android, and the Cloud release notes show no measurement tools for Android. No barcode, QR, NFC or GPS feature is documented for the Android app, the iOS app or Revu.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.bluebeam.cloud&hl=en_GB"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-w10",
+      "role": "primary",
+      "why": "Revu is Windows software, so the device that runs the full product is a Windows tablet, and the Tuga W10 is the one that fits. It runs Windows 11 Pro, which is 64-bit and on the vendor's supported list; it has 8GB of RAM against a published minimum of 8GB, so it meets the figure exactly with no headroom; 128GB of storage against 5GB; and a 10.1 inch 1280 x 800 screen against a 1024 x 768 minimum. Be honest about the processor: the W10's Intel N100 (up to 3.4GHz) is far above the 1 GHz figure Bluebeam gives for desktops and laptops, but Bluebeam's line for tablets asks for an Intel i3 or equivalent, does not say what counts as equivalent, and the N100 is not a Core i3, and for large drawing sets the vendor recommends an Intel i5 Dual Core or better. So the W10 is a device for marking up, measuring and signing off drawings on site, joining Studio Sessions and checking out Studio Project files, not a replacement for the estimator's workstation on a 200 sheet set. Its multi-touch screen suits Revu's Tablet Preferences and Full Screen mode, the capacitive stylus accessory fits it, the 5MP rear camera feeds Revu's From Camera image markup, and the HDMI port means it can drive a larger monitor at a site office desk. It is IP65, protected against dust and water jets, with a removable 5000mAh battery.",
+      "fit": [
+        "Requirement: Windows 11 or Windows 10, 64-bit. Tuga W10: Windows 11 Pro, so the published requirement is met.",
+        "Requirement: 8GB RAM minimum. Tuga W10: 8GB RAM, which meets the minimum exactly, with no margin.",
+        "Requirement: 1 GHz processor for desktops and laptops, Intel i3 or equivalent for tablets, Intel i5 Dual Core or better recommended for large drawing sets. Tuga W10: Intel N100 up to 3.4GHz, which clears the 1 GHz figure; the vendor does not define i3 equivalent, so we do not claim the tablet line is met, and the N100 is below the large drawing set recommendation.",
+        "Requirement: at least 5GB of available storage. Tuga W10: 128GB storage with a microSD (TF) slot.",
+        "Requirement: 1024 x 768 minimum display. Tuga W10: 10.1 inch IPS 16:10 multi-touch at 1280 x 800, plus HDMI for an external monitor. Our specification does not list the graphics driver's OpenGL version, so confirm the OpenGL 3.2 line on a trial unit.",
+        "Requirement: touch-screen tablet PC with optional stylus and built-in camera. Tuga W10: multi-touch screen, the capacitive stylus accessory, and a 5MP autofocus rear camera for From Camera image markups.",
+        "Requirement: a connection for Studio and for reauthentication within 14 days. Tuga W10: dual-band Wi-Fi 5, 100Mbps RJ45 Ethernet and optional 4G LTE."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 does not run Revu, and nothing on this page should be read as saying it does. What it can run is the Bluebeam Android app, and it meets the vendor's Android 13 and above figure with Android 14 and Google Play. On the vendor's documentation that app opens PDFs on the device, joins Studio Sessions, checks Studio Project files out and in, keeps designated Project files offline (Android version 1.15, March 2026), and places 13 markup types including Cloud+, Callout and Vector Pen with colour, line weight, fill and opacity editing added in version 1.20 (August 2026). It does not have measurement tools on Android, and Stamp, Snapshot, Dimension and photo capture are listed as unsupported. For a site engineer who needs to see the current drawing, cloud a problem and comment in a Session, the A10's 10.1 inch 1920 x 1200 screen, 8GB of RAM, IP68 and MIL-STD-810H rating make it the stronger site device; for anyone who needs Revu's measurement, overlay, batch or reporting tools, it is the wrong device. The vendor also requires a 64-bit device; our specification lists the MediaTek MT8781 octa-core processor but does not state that figure, so install the app from Google Play on a trial unit first.",
+      "fit": [
+        "Requirement: Android 13 and above, 64-bit devices only. Tuga A10: Android 14 with Google Play, so the Android version figure is met; the 64-bit figure is not stated in our specification, so check on a trial unit.",
+        "Requirement: the Bluebeam Android app's drawing view, markups, Sessions and Project checkout. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, 8GB RAM, 128GB storage with microSD up to 2TB.",
+        "Requirement: a connection for Sessions and for syncing offline Project files. Tuga A10: 4G dual SIM and dual-band Wi-Fi 5.",
+        "Requirement: a device that survives site use. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, 8000mAh battery with quick charge; fits the charging dock and the vehicle mounting dock.",
+        "Requirement: full Revu. Tuga A10: not met; Revu runs on Windows only."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is a 6 inch handheld, and the Google Play listing carries a Phone chip, so a phone-sized layout is one the vendor publishes for. It runs Android 15 with Google Play, above the Android 13 figure. It is the device for someone who needs to open a drawing from a Studio Project, check a detail and add a cloud or a comment in a Session from a pocket, at 277g with a removable 5050mAh battery. It is not a device for working through drawings: a 6 inch screen shows a small area of a plan sheet at a time, the vendor publishes no RAM figure for mobile so the A6's 4GB cannot be checked against one, and its Zebra 2D scan engine and NFC radio are not Bluebeam features because the vendor documents no scanning or NFC. Like the A10, it cannot run Revu, and the 64-bit figure is not stated in our specification.",
+      "fit": [
+        "Requirement: Android 13 and above, 64-bit devices only. Tuga A6: Android 15 with Google Play, so the Android version figure is met; the 64-bit figure is not stated in our specification, so check on a trial unit.",
+        "Requirement: a phone layout the vendor publishes for. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, 4GB RAM, 64GB storage with microSD up to 256GB; the vendor publishes no mobile RAM or storage figure.",
+        "Requirement: a connection for Sessions and Project sync. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: a device carried all day on site. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g, removable 5050mAh battery.",
+        "Requirement: full Revu. Tuga A6: not met; Revu runs on Windows only."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Buy or assign a Bluebeam subscription (Basics, Core, Complete or Max). The vendor says every plan includes Revu for Windows desktop and Bluebeam on web and mobile, and each user signs in with a Bluebeam ID.",
+    "On the Tuga W10, sign in to Windows 11 Pro, run Windows Update, then download and install Revu 21 from bluebeam.com. The installer adds Microsoft .NET Framework 4.8 if it is not already present. Sign in with the Bluebeam ID when Revu opens.",
+    "In Revu, open Tablet Preferences and decide whether touch controls everything or whether the stylus drives the markup tools, then try Window, Full Screen and add the Shift and Escape buttons to the floating toolbar so you can work without a keyboard.",
+    "Before the first day without signal, open the Studio Sessions files you will need while connected so Revu caches them, and for Studio Projects mark the folders Set to Sync, sync, and check the files out. Remember the 14 day reauthentication limit on a Revu 21 subscription: the device needs to go online and sign in at least that often.",
+    "On a Tuga A10 or A6, open Google Play and install Bluebeam (package com.bluebeam.cloud, developer Bluebeam Inc.), then sign in with the same Bluebeam ID. Google Play shows whether the app is compatible with the device before it installs. Join a Session from an invitation link, open a Project file, and designate the folders you want available offline.",
+    "On the A10 or A6, test the markups your team uses before rolling out. Measurements, Stamp, Snapshot, Dimension and camera capture are not available on Android on the vendor's documentation, so if the site workflow depends on them it needs the W10 running Revu.",
+    "Fit the tempered glass screen protector before the device goes out. For the W10 and A10, add the charging dock where devices live overnight, the vehicle mounting dock for the van, and the capacitive stylus for marking up on the W10; for the A6, add the belt holster.",
+    "If the W10 will spend part of its day on a site office desk, connect a monitor over HDMI and plug in to the network over RJ45 Ethernet, which gives Revu a larger working area than the 10.1 inch screen."
+  ],
+  "accessories": [
+    "Capacitive stylus, £14.99 (Tuga A10 and W10), for Revu's markup tools on the W10 with touch left on pan and zoom",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Vehicle mounting dock, £109 (Tuga A10 and W10), for devices working from a van",
+    "Hand strap, £24 (Tuga A10 and W10), for one-handed use on site",
+    "Shoulder strap, £19 (Tuga A10 and W10)",
+    "Rugged carry case, £34 (Tuga A10 and W10)",
+    "Tempered glass screen protector 2-pack, £14",
+    "12V DC car charger, £26",
+    "USB-C to USB-A OTG adapter, £8, for a USB keyboard or drive on the W10",
+    "Belt holster, £22 (Tuga A6)"
+  ],
+  "faq": [
+    {
+      "q": "Will Bluebeam Revu run on the Tuga W10?",
+      "a": "Bluebeam publishes Windows 11 or Windows 10 (64-bit), 8GB RAM, at least 5GB of free space and a 1024 x 768 display as the Revu 21 minimums. The Tuga W10 runs Windows 11 Pro, has 8GB RAM, 128GB storage and a 1280 x 800 screen, so it meets each of those figures, with the RAM figure met exactly. The processor line is the one to be clear about: Bluebeam asks for a 1 GHz processor on desktops and laptops, which the Intel N100 clears, but an Intel i3 or equivalent on tablets without defining equivalent, and recommends an i5 Dual Core or better for large drawing sets. We do not describe the W10 as certified or tested by Bluebeam; these are the vendor's published requirements set against the device specification, and a single trial unit with your own drawing sets is the sensible first order."
+    },
+    {
+      "q": "Is there a Bluebeam app for Android, and what can the Tuga A10 do with it?",
+      "a": "Yes. The vendor's compatibility page lists an Android app requiring Android 13 and above on 64-bit devices, its mobile guide tells Android users to install Bluebeam from the Play Store, and the Google Play listing (package com.bluebeam.cloud, developer Bluebeam Inc.) was at version 1.20.1 on 19 October 2026. The Tuga A10 runs Android 14 and the A6 Android 15, so both meet the Android version figure. On the vendor's documentation the app opens PDFs on the device, joins Studio Sessions, checks Studio Project files out and in, keeps designated Project files offline and places 13 markup types. It has no measurement tools on Android, and Stamp, Snapshot, Dimension and camera capture are listed as unsupported. It is not Revu; Revu runs on Windows only."
+    },
+    {
+      "q": "Why is the Tuga A8 not listed here?",
+      "a": "The Tuga A8 runs Android 12, and the vendor's compatibility page requires Android 13 and above for the Bluebeam Android app, so the A8 does not meet the published figure. The vendor does not document the web app on a mobile browser either; its browser list is Chrome, Edge and Safari with no mobile note, so we do not suggest the A8 for Bluebeam."
+    },
+    {
+      "q": "Does Bluebeam work offline on these devices?",
+      "a": "Revu on the W10 opens and marks up local PDFs as a desktop application. For Studio, the vendor says Sessions files must be opened while connected so Revu caches them, Projects files must be set to sync and checked out before going offline, and a Revu 21 subscription needs the user to sign in again after 14 consecutive days offline. On the Android app, the vendor's release notes record offline Sessions work (version 1.5, October 2024), editing of locally stored PDFs (1.14, December 2025) and offline Studio Projects with designated folders (1.15, March 2026); the Google Play listing describes working offline by syncing Project files ahead of time or opening PDFs stored on the device. The W10 has Wi-Fi and Ethernet with 4G as an option; the A10 and A6 have 4G with dual SIM built in."
+    },
+    {
+      "q": "Can I use a stylus with Revu on the W10, and does it scan barcodes or QR codes?",
+      "a": "Revu's tablet page says that when a stylus is detected, touch handles pan, zoom and selection while the stylus drives the markup tools, and that this can be changed in Tablet Preferences. The capacitive stylus we sell at £14.99 fits the W10; our specification does not list it as pressure sensitive, so do not count on Revu's pressure sensitivity option with it. Bluebeam documents no barcode, QR code, NFC or GPS feature in Revu or the mobile app, so the W10's optional 2D scanner, the A6's Zebra 2D scan engine and the NFC radios on the A10, A6 and W10 are not Bluebeam features."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a larger order is welcome, and with Bluebeam it is the right first step given the processor and RAM margins described above. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £649 (W10), £449 (A10) or £349 (A6) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Revu runs on Windows only, so the Tuga A10 and A6 cannot run it; what they run is the Bluebeam Android app, which on the vendor's documentation has no measurement tools and does not support Stamp, Arc, Hatch, Snapshot, Dimension, Typewriter, Note, Sequences, Volume or photo, video and 360 photo capture. The vendor's mobile page marks further features as coming later on Android, and its release notes and mobile page do not fully agree on what has shipped, so the dated release notes are the record to check before relying on a feature. The Tuga A8 runs Android 12, below the Android 13 figure the vendor publishes for the app, so it is not suggested. On the W10, the 8GB of RAM meets Revu's 8GB minimum exactly, the Intel N100 clears the 1 GHz desktop figure but cannot be matched against the vendor's undefined Intel i3 or equivalent line for tablets, and the vendor recommends an i5 Dual Core or better for large drawing sets, so the W10 suits site markup and Studio work rather than heavy estimating on large sets. The W10 is IP65, protected against water jets but not rated for immersion. Our specification does not state the OpenGL version of the W10's display driver or the 64-bit figure for the A10 and A6, so confirm both on a trial unit. Bluebeam publishes no screen size, touch, pen or camera hardware figure, no mobile RAM or storage figure, and no barcode, QR, NFC or GPS feature, so none of those device features should be treated as Bluebeam features. Bluebeam does not name Tuga devices, and we do not describe any device as certified or tested by Bluebeam.",
+  "disclaimer": "Bluebeam Revu and Bluebeam Cloud are products of Bluebeam LLC, a Nemetschek Group company. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Bluebeam LLC, Bluebeam Inc. or the Nemetschek Group.",
+  "sources": [
+    "https://www.bluebeam.com/",
+    "https://www.bluebeam.com/pricing/",
+    "https://www.bluebeam.com/revu-ipad-eol/",
+    "https://www.bluebeam.com/legal/eula/",
+    "https://support.bluebeam.com/articles/compatibility-system-requirements",
+    "https://support.bluebeam.com/articles/bluebeam-revu-20-compatibility-system-requirements/",
+    "https://support.bluebeam.com/online-help/revu21/Content/RevuHelp/Unsorted/Tablet-Mode--V.htm",
+    "https://support.bluebeam.com/articles/revu-work-offline-in-studio/",
+    "https://support.bluebeam.com/bluebeam-cloud/resources/compatibility-and-integrations.html",
+    "https://support.bluebeam.com/bluebeam-cloud/how-to/get-started-ios-android.html",
+    "https://support.bluebeam.com/bluebeam-cloud/how-to/create-and-edit-markups-android.html",
+    "https://support.bluebeam.com/articles/bluebeam-cloud-release-notes",
+    "https://play.google.com/store/apps/details?id=com.bluebeam.cloud&hl=en_GB"
+  ]
+}

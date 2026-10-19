@@ -1,0 +1,180 @@
+{
+  "slug": "fergus",
+  "software": "Fergus",
+  "vendor": "Fergus Software Limited",
+  "vendor_url": "https://fergus.com/uk/",
+  "title": "Rugged tablet for Fergus: UK buyer's guide",
+  "meta_description": "Fergus Go on Google Play requires Android 8.0 or later, with no RAM figure published. The Tuga A8 (Android 12, 6GB RAM, 1000 nit screen) meets it.",
+  "target_query": "best tablet for Fergus",
+  "h1": "Rugged tablet for Fergus",
+  "intro": [
+    "Fergus is job management software for trades businesses, built in Auckland by Fergus Software Limited and sold in the UK through Fergus Software Systems (UK) Limited, which gives a Manchester address on the UK site. The vendor describes it as covering quoting, invoicing, scheduling, team management, time tracking, cost control and safety forms, and names plumbers, electricians, HVAC technicians, roofers and builders among the trades it is built for. The UK site prices plans in pounds, offers a 14 day free trial and lists free UK gas, electrical and oil certificates as an add-on. The office runs the business in the web product; the people on the tools use the Fergus Go app on a phone or tablet.",
+    "Fergus Go is where the site work happens. The vendor's help centre documents a timesheet with a start and stop timer, photos and videos taken with the device camera and attached to the job, checklists, forms, hazard and incident logs with photos, UK certificates signed on screen, and a job sign off form where the customer signs on the device. The Google Play listing says engineers can reach customer info, job files, photos, notes and scheduling on a mobile, a tablet or a desktop. That is a device that goes into lofts, plant rooms and boiler cupboards, sits on a van dashboard between jobs and gets handed to a customer at the end, which is a hard life for a consumer tablet in a thin case.",
+    "This page sets out what Fergus publishes about the devices its app runs on, which Tuga rugged devices meet those published requirements, where the Windows tablet fits and where it does not, and how a UK plumber, electrician or heating firm can buy a single unit to try before kitting out a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 8.0 or later, from the Fergus Go listing on Google Play",
+      "detail": "The Android app is published on Google Play as Fergus Go (package com.fergus.app, developer Fergus Software Ltd.). When checked on 19 October 2026 the listing showed version 3.13.1, updated 1 October 2026, more than 10,000 downloads, a minimum API level of 26 (Android 8.0), and device chips for Phone and Tablet. The vendor's help centre does not publish a minimum Android version of its own; the Google Play figure is the only published floor. For context, the App Store listing says Fergus Go needs iOS 15.1 or iPadOS 15.1 or later and supports iPad. No RAM, storage or screen size requirement is published for any platform.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.fergus.app&hl=en_GB"
+    },
+    {
+      "requirement": "Offline working for time entries and photos, with a connection needed for everything else",
+      "detail": "The vendor's Adding Time to Jobs article for Fergus Go says time entries can be created, edited and updated without an internet connection and sync automatically once the device is back online. Its Files, Photos and Videos article (dated 13 August 2026) says photos and files can be added without signal and upload once the device is back online. An older help article titled Using the mobile app offline, which search results summarise as limited offline access with a job opened before losing signal stored on the device, returned a not found error when checked on 19 October 2026. The vendor does not publish how much job data is cached, and the web product needs a connection.",
+      "source_url": "https://help.fergus.com/en/articles/16780074-adding-time-to-jobs-fergus-go"
+    },
+    {
+      "requirement": "Photos and videos through the device camera, with published size limits",
+      "detail": "In a job card, Photos or Videos under Tools, or the Add quick action, lets the user choose the camera or an album, and the photo can go against the job or a job phase. The vendor publishes a 50MB limit per photo or video, a 30 second limit per video and a maximum of three videos per job. Photos and videos taken in the app are saved to the device camera roll by default, which can be switched off under Settings. Uploading file types other than photos and videos is only available on the desktop web product; the app can view files uploaded from the web if a compatible app is installed on the device.",
+      "source_url": "https://help.fergus.com/en/articles/10189656-files-photos-videos-in-fergus-go"
+    },
+    {
+      "requirement": "Timesheets with a timer, splits and uncharged time, including a Timesheet User role",
+      "detail": "The vendor documents adding time from the job card or the Timesheet screen, a blue start button that runs while on site and a Stop timer action, splitting one entry into up to six work types or uncharged reasons such as travel or a break, and uncharged time such as toolbox meetings. Labour rates must be set up on the web product and assigned to the user before they appear in Fergus Go. A cheaper Timesheet User role, priced separately on the UK pricing page, gets the schedule, time entries, and the job card tools for photos, files, notes, forms, hazards and checklists.",
+      "source_url": "https://help.fergus.com/en/articles/11568296-fergus-go-timesheet-user"
+    },
+    {
+      "requirement": "Forms, UK certificates and job sign off, signed on the screen in the app",
+      "detail": "Form templates are built in Settings on the web product and attached to a job phase; assigned users complete them under Forms on the job card in Fergus Go, saving progress and submitting when every required item is filled in, after which a PDF goes to the job's files. Forms are listed on the Professional plan only. Fergus Certificates is a free UK add-on covering gas (including the landlord gas safety record), electrical, oil, FGAS and PAT records; in the app the user taps Tap to sign, draws the signature and taps Done, and Save as Completed creates a PDF in Files and Photos. The Job Sign Off form in Fergus Go records who signs, the site address and completion date, and captures the customer's signature directly on the device. The vendor does not say whether a finger or a stylus is expected. On the web, sign off takes an uploaded image of a signature instead.",
+      "source_url": "https://help.fergus.com/en/articles/8243564-getting-started-with-uk-certificates"
+    },
+    {
+      "requirement": "GPS tracking for the Employee Map, a Professional plan feature switched on in the app",
+      "detail": "The vendor's Setting up GPS tracking article (28 March 2025) says the Employee Map in the web product shows team locations and is a Professional plan feature only. Tracking is turned on in Fergus Go under Settings then Locations, and on Android the device's app permissions for Fergus Go must allow location access; choosing Allow only while using app means the app asks each time it opens. The article gives battery notes for iPhone only and does not say how often locations are sent or what accuracy it needs from the device. Hazards and incidents, with photos, are also in the app, but the vendor says the mobile Health and Safety section is a smaller subset of the web version.",
+      "source_url": "https://help.fergus.com/en/articles/432916-setting-up-gps-tracking"
+    },
+    {
+      "requirement": "Windows: no Windows app, web product in a browser, with no published browser list",
+      "detail": "No native Windows app is published; the UK site says Fergus works from any phone or tablet and that phones, tablets and computers stay in sync, and the Google Play description mentions a desktop alongside mobile and tablet. The help centre has no system requirements or supported browsers article, so the vendor publishes no browser names or versions. Several jobs are documented as web only: building form templates, setting up labour rates, uploading file types other than photos and videos, and editing recurring calendar events. Barcode, QR and NFC scanning are not documented anywhere in the help centre, so the only camera use the vendor describes is photos and videos.",
+      "source_url": "https://fergus.com/uk/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Fergus Go's on-site work is timesheets, photos, checklists, hazard logs, certificates and a customer sign off, not large drawings, so the 8 inch Tuga A8 gives enough room for a gas safety record or a signature box without the size of a 10 inch tablet, and it still goes in a van door pocket. It runs Android 12 with Google Play against the Android 8.0 or later floor on the Google Play listing, and the vendor publishes no RAM figure, so its 6GB and 128GB storage cannot be measured against a vendor number but leave room for the 50MB photos and videos the app allows. Its 1000 nit screen stays readable when filling in a certificate outside, and the removable 8000mAh battery matters if the firm runs GPS tracking for the Employee Map all day. VESA mount points and the pogo pin connector let it live in the vehicle mounting dock between jobs and come out on site. It is sealed to IP67 and has no MIL-STD rating, so where immersion or drops onto concrete are the bigger risk the A10 is the tougher choice. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: no RAM or storage figure is published. Tuga A8: 6GB RAM and 128GB storage with a microSD slot, with room for 50MB photos and videos before they upload.",
+        "Requirement: photos and videos through the device camera. Tuga A8: 13MP autofocus rear camera with flash and a 5MP front camera (there is no dedicated scan engine, and Fergus documents no scanning).",
+        "Requirement: certificates, forms and a customer signature drawn on the screen. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass; the capacitive stylus accessory fits it.",
+        "Requirement: GPS tracking for the Employee Map and a connection for everything beyond time entries and photos. Tuga A8: GPS + GLONASS + Galileo + BeiDou, dual SIM 4G, Wi-Fi, removable 8000mAh battery, VESA mount points and a pogo pin dock connector."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 is the larger and tougher option. The 10.1 inch 1920 x 1200 screen shows more of a multi-page electrical installation certificate, a quote with many lines or a PDF attached to the job at once, and gives a customer a bigger signature box. It runs Android 14 with Google Play, well above the Android 8.0 floor, and has 8GB of RAM and 128GB of storage expandable to 2TB. It is sealed to IP68 and tested to MIL-STD-810H, which the A8 is not, so it suits heating engineers in wet plant rooms and anyone who drops kit onto hard floors. It fits both the charging dock and the vehicle mounting dock. The trade-offs are a 350 nit screen against the A8's 1000 nits, a battery that is not listed as removable, 680g in the hand up a ladder, and £449 against £379.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: no RAM or storage figure is published. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: photos and videos through the device camera. Tuga A10: 13MP rear camera with flash and a 5MP front camera.",
+        "Requirement: multi-page certificates, forms and on-screen signatures. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: GPS tracking and a device that survives site work. Tuga A10: GPS + Galileo + BeiDou + QZSS + NavIC, dual SIM 4G, dual-band Wi-Fi 5, IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For an engineer who wants the timer, photos and sign off in a pocket or belt holster rather than a tablet, the Tuga A6 runs the same Fergus Go app on a 6 inch handheld at 277g, and the Google Play listing carries a Phone device chip, so a phone-sized layout is one the vendor publishes for. It runs Android 15 with Google Play, has GPS, 4G with dual SIM and a removable 5050mAh battery. Fergus publishes no RAM figure, so its 4GB cannot be checked against a vendor number; try it with your usual apps open before buying for a team. It has a Zebra 2D scan engine, but Fergus documents no barcode or QR scanning, so that is not a reason to choose it. The trade-off is screen area: a customer signs on a 6 inch screen, and a long gas or electrical certificate needs more scrolling than on the A8 or A10. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 8.0 or later from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: no RAM or storage figure is published. Tuga A6: 4GB RAM and 64GB storage with microSD up to 256GB.",
+        "Requirement: photos and videos through the device camera. Tuga A6: 13MP rear camera with flash and a 5MP front camera (the Zebra 2D scan engine is not a documented Fergus input).",
+        "Requirement: certificates and a signature drawn on the screen. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, which shows less of a long certificate than the tablets.",
+        "Requirement: GPS tracking and a device carried all day. Tuga A6: GPS + GLONASS + BeiDou + Galileo, 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, 277g, IP67, 1.5 metre drop rating, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Fergus publishes no Windows app, so the Tuga W10 can only run the Fergus web product in a desktop browser on Windows 11 Pro. That makes it a fit for the office jobs the vendor documents as web only: building form templates, setting up labour rates, uploading documents other than photos and videos, editing recurring calendar events and watching the Employee Map. It has Ethernet and HDMI for a fixed position in a site office or workshop. It is not the device for the engineer: the camera photos, offline time entries, on-screen certificate signatures and the customer sign off the vendor documents are in Fergus Go, which does not run on Windows, and on the web a sign off takes an uploaded image of a signature instead. The vendor publishes no browser list or minimum computer specification, so there is no figure to check the W10 against. It is IP65 rather than IP67 or IP68, so it is protected against water jets but not rated for immersion.",
+      "fit": [
+        "Requirement: the Fergus web product in a browser, with no browser list published. Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: office work such as form templates, labour rates, document uploads and the Employee Map. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage with a microSD slot, 10.1 inch 1280 x 800 multi-touch screen.",
+        "Requirement: a fixed position in a site office or workshop. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock and the vehicle mounting dock.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Start a Fergus account at fergus.com/uk, or ask the account owner to add you as a full user or a Timesheet User. The UK site offers a 14 day free trial with no credit card needed.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Fergus Go (package com.fergus.app, developer Fergus Software Ltd.), then sign in with your Fergus login.",
+    "Fit a data SIM before the first job. The vendor documents offline working for time entries and photos only, so opening jobs, quotes, forms and certificates needs a connection; the A8, A10 and A6 all take two SIMs, so a second network can cover areas where the first is weak.",
+    "In the web product, have the office set up labour rates and assign one to each user, publish any form templates, and enable the UK certificates your firm issues under Settings then Certification, because none of these can be created in the app.",
+    "If your firm is on the Professional plan and uses the Employee Map, switch on GPS locations in Fergus Go under Settings then Locations, then allow location access for Fergus Go in the device's app permissions. The vendor says choosing Allow only while using app makes the app ask for permission each time it opens.",
+    "In Fergus Go, go to Menu, Settings, Signature Capture and record the signature that will go on certificates. Then check Camera Settings if you do not want every job photo saved to the device camera roll.",
+    "Before relying on it, run a test job on the device: start and stop the timer, add a photo from the camera, fill in a certificate and tap to sign it, and complete a Job Sign Off with a customer signature, so you know the layout works for you.",
+    "For the A8 or A10, fit the vehicle mounting dock and a 12V car charger so the device charges between jobs; for the A6, add the belt holster. Fit a tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), so the device stays secure and charged in the van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for certificate and sign off signatures when a finger is too clumsy",
+    "Hand strap, £24 (Tuga A8, A10 and W10), for one handed use on a ladder",
+    "12V DC car charger, £26, for charging between jobs",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Fergus run on the Tuga A8?",
+      "a": "The only published device requirement is on the Google Play listing for Fergus Go, which gives a minimum API level of 26, meaning Android 8.0 or later, with device chips for Phone and Tablet. The Tuga A8 runs Android 12 with Google Play, so it meets that, and so do the A10 (Android 14) and the A6 (Android 15). Fergus publishes no RAM, storage or screen size requirement for any platform. We do not describe any device as certified or tested by Fergus; these are the vendor's published requirements set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Fergus work offline on these tablets?",
+      "a": "Partly. The vendor documents two things that work without a connection in Fergus Go: time entries, which can be created, edited and updated offline and sync once the device is back online, and photos and files, which can be added without signal and upload later. It does not document opening jobs, quotes, forms or certificates offline, and the web product needs a connection. The A8, A10 and A6 all have 4G with dual SIM as well as Wi-Fi, so with a data SIM fitted they stay connected on most jobs. A Tuga W10 can only use the web product in a browser, which the vendor does not document working offline."
+    },
+    {
+      "q": "Can customers sign on the tablet, and do I need a stylus?",
+      "a": "Yes. The vendor documents a Job Sign Off form in Fergus Go where the person signing adds their signature on the device, and certificates where the user taps Tap to sign and draws the signature. The vendor does not say whether a finger or a stylus is expected, so treat a stylus as optional. We sell a capacitive stylus for the A8, A10 and W10 at £14.99; it is not listed as compatible with the A6. On the web product, sign off takes an uploaded image of a signature rather than one drawn on screen."
+    },
+    {
+      "q": "Can I scan barcodes or QR codes into Fergus, and does the A6's scanner help?",
+      "a": "The Fergus help centre documents no barcode, QR or NFC scanning. The only camera use it describes is photos and videos on the job card, hazards and incidents. The A6's Zebra 2D scan engine and the NFC radio on the A10, A8 and A6 are therefore not Fergus features, and should not be the reason for choosing one device over another. Stock is added to jobs by searching the price book in the app, according to the vendor's job card articles."
+    },
+    {
+      "q": "Should I choose the A8 or the A10 for Fergus?",
+      "a": "Both meet the published Android 8.0 requirement. The A8 suits most Fergus Go users: timesheets, photos, checklists, certificates and sign off fit on its 8 inch 1000 nit screen, the battery is removable for long days running GPS tracking, it docks in the van through its VESA mount points, and it costs £379. Choose the A10 at £449 if you work in the wet or expect drops onto hard surfaces, because it is IP68 and MIL-STD-810H where the A8 is IP67 with no MIL-STD rating, or if you want the larger 10.1 inch 1920 x 1200 screen and 8GB of RAM for long electrical certificates and attached PDFs."
+    },
+    {
+      "q": "Can I trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before kitting out a team is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Fergus publishes no Windows app, so the Tuga W10 only runs the web product in a browser, and the vendor publishes no browser list or computer specification to check it against. The site features the vendor documents (camera photos and videos, offline time entries, certificates signed on screen, the Job Sign Off form, hazards and incidents) are in Fergus Go, so a W10 suits an office or workshop desk, not an engineer on site. On the Android side, the only published requirement is the Google Play minimum of Android 8.0; Fergus publishes no RAM, storage or screen size figure, so the Tuga A6's 4GB of RAM cannot be checked against a vendor number and a single trial unit is worth running first. The help centre documents no barcode, QR or NFC scanning, so the A6's Zebra 2D scan engine and the NFC radio on the A10, A8 and A6 are not Fergus features. Offline working is documented for time entries and photos only; an older help article on using the app offline returned a not found error when checked on 19 October 2026, and the vendor does not publish how much job data is stored on the device. GPS tracking is described as a Professional plan feature switched on in the app, with no published accuracy requirement, and the vendor's battery notes cover iPhone only. Fergus does not name Tuga devices, and we do not describe any device as certified or tested by Fergus.",
+  "disclaimer": "Fergus and Fergus Go are products of Fergus Software Limited (New Zealand), supplied to UK customers by Fergus Software Systems (UK) Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Fergus, Fergus Software Limited or Fergus Software Systems (UK) Limited.",
+  "sources": [
+    "https://fergus.com/uk/",
+    "https://fergus.com/uk/pricing/",
+    "https://fergus.com/features/on-the-job/",
+    "https://fergus.com/terms-of-service/",
+    "https://play.google.com/store/apps/details?id=com.fergus.app&hl=en_GB",
+    "https://apps.apple.com/app/id1484018778",
+    "https://help.fergus.com/en/articles/10487211-fergus-go-overview",
+    "https://help.fergus.com/en/articles/5620107-fergus-go-cheat-sheet",
+    "https://help.fergus.com/en/articles/11568296-fergus-go-timesheet-user",
+    "https://help.fergus.com/en/articles/16780074-adding-time-to-jobs-fergus-go",
+    "https://help.fergus.com/en/articles/10189656-files-photos-videos-in-fergus-go",
+    "https://help.fergus.com/en/articles/9381195-how-to-upload-files-photos-and-videos-desktop",
+    "https://help.fergus.com/en/articles/10180360-forms-in-fergus-go",
+    "https://help.fergus.com/en/articles/10409277-using-forms-for-health-safety",
+    "https://help.fergus.com/en/articles/8243564-getting-started-with-uk-certificates",
+    "https://help.fergus.com/en/articles/8286236-list-of-uk-certificates-available",
+    "https://help.fergus.com/en/articles/10189539-certificates-in-fergus-go",
+    "https://help.fergus.com/en/articles/10180419-signing-off-work-in-fergus-go",
+    "https://help.fergus.com/en/articles/9678374-signing-off-work-on-fergus",
+    "https://help.fergus.com/en/articles/2873656-how-to-create-a-digital-signature-in-fergus-go",
+    "https://help.fergus.com/en/articles/10180319-health-safety-in-fergus-go",
+    "https://help.fergus.com/en/articles/10366706-hazards-in-fergus-go",
+    "https://help.fergus.com/en/articles/432916-setting-up-gps-tracking",
+    "https://help.fergus.com/en/articles/10180384-checklists-in-fergus-go",
+    "https://help.fergus.com/en/articles/10180496-creating-jobs-in-fergus-go",
+    "https://help.fergus.com/en/articles/10121292-navigating-the-fergus-go-calendar",
+    "https://help.fergus.com/en/collections/2065220-fergus-go-mobile-app",
+    "https://help.fergus.com/en/",
+    "https://find-and-update.company-information.service.gov.uk/company/13288088"
+  ]
+}

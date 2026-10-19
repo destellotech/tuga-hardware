@@ -1,0 +1,175 @@
+{
+  "slug": "payaca",
+  "software": "Payaca",
+  "vendor": "Payaca Ltd",
+  "vendor_url": "https://payaca.com/uk",
+  "title": "Rugged tablet for Payaca: UK buyer's guide",
+  "meta_description": "Payaca's Field Service app lists Android 7.0 or later on Google Play and works offline. The Tuga A8 (Android 12, 1000 nit screen, dual SIM 4G, IP67) meets it.",
+  "target_query": "best tablet for Payaca",
+  "h1": "Rugged tablet for Payaca",
+  "intro": [
+    "Payaca is job management, quoting and invoicing software built and sold from Bristol by Payaca Ltd. The UK site now describes it as a CRM, job management and field service system for clean tech installers, naming solar, heat pump, battery storage and EV charging, and lists proposals with online e-signatures and deposits, map-based scheduling, site surveys, MCS handover documents, DNO applications, job costs, stock, invoicing and Xero and QuickBooks sync. The office runs all of that in the web app; the engineer or installer on site uses the Field Service by Payaca app on a phone or tablet.",
+    "The Field Service app is where the site work happens. The vendor's Google Play listing describes a day's scheduled events, time tracking for travel, work and admin, a materials list for each job, directions and ETA messages to the customer, checklists and forms, photo and file uploads, and an offline mode that syncs when the connection returns. The vendor's own update notes add that documents can be generated and signed by the customer on site without a signal, that materials are stored on the device, and that photos, videos and documents can be attached to custom fields from the app. That is a device that goes on roofs, into plant rooms and lofts, and gets handed to a customer to sign, which is where an unsealed consumer tablet tends to fail early.",
+    "This page sets out what Payaca publishes about the devices its app runs on, which Tuga rugged devices meet those published requirements, where the Windows tablet fits and where it does not, and how a UK installer can buy a single trial unit before committing to a fleet. Where the vendor publishes nothing, we say so rather than guess."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 7.0 or later from Google Play; no RAM or storage figure published",
+      "detail": "Payaca publishes no system requirements page. The only Android figure is in the Google Play listing data for Field Service by Payaca, which gives a minimum API level of 24, which is Android 7.0. For context, the App Store listing says the app needs iOS 16.4 or later on iPhone and iPadOS 16.4 or later on iPad, and is 79.5MB. No RAM, storage or processor figure is published for phones or tablets, and no screen-size guidance. Help centre articles about the app that appear in search results (help.payaca.com) returned a page not found message when checked on 19 October 2026, and the help centre home address redirects to the web app login, so the figures here come from the store listings, the vendor's features page and its updates pages.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.payaca.fieldservice.mobile&hl=en_GB"
+    },
+    {
+      "requirement": "Android app from Google Play: Field Service by Payaca",
+      "detail": "The current Android app is Field Service by Payaca (package com.payaca.fieldservice.mobile, developer shown as Payaca, with PAYACA LIMITED and a Bristol address in the developer details). When checked on 19 October 2026 the listing showed version 1.32.0, updated 15 July 2026, 100+ downloads, a PEGI 3 rating and the interactive elements Users interact, Shares location and In-app purchases. The listing as fetched did not show Phone or Tablet device chips, so we cannot say the vendor publishes a tablet layout; the App Store listing does name iPad. An older app, Payaca mobile app (package com.payaca.mobileapp), is the one the vendor's 2022 update notes link to; its 2025 and 2026 updates refer only to the Field Service app, so that is the one to install.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.payaca.fieldservice.mobile&hl=en_GB"
+    },
+    {
+      "requirement": "Offline working, with the day's events and materials stored on the device",
+      "detail": "The vendor's mobile app page says the app is built offline-first, gives full functionality without internet, and syncs when back online. Its update notes are more specific: on first opening, the app saves that day's and the next day's events and some upcoming tasks to the device, with a refresh button (2 November 2022); the materials available to the user are stored on the device so a materials list can be built offline (1 November 2024); confirming you are on the way, starting work and completing an event now work more reliably without a stable connection and sync later (21 August 2025); work time logs can be started and ended repeatedly while offline (29 September 2025); and generating a document, filling it in and capturing a signature all work without a signal (12 June 2026). The vendor does not publish how much storage the cached data needs.",
+      "source_url": "https://payaca.com/uk/updates/improved-offline-support-in-field-service-app"
+    },
+    {
+      "requirement": "Photos, videos and files uploaded from the app, including large batches",
+      "detail": "The Google Play description lists uploading photos and files for job documentation, and the mobile app page says engineers take photos within a job, annotate them with notes or markups, and that pre-installation, progress and completion photos attach to the project record. The vendor's update notes say uploads of photos, videos and other files were reworked so that large files, or large batches of files, upload more reliably even at low internet speeds (4 March 2025); that an Uploading banner opens a screen showing progress and failed uploads, which can be retried together (31 July 2024); that photos taken in the Field Service app can be mapped to embed automatically in a report (16 September 2025); and that an upload custom field on a scheduled event can hold images, documents and videos added from the app (17 July 2026). No camera resolution requirement is published.",
+      "source_url": "https://payaca.com/uk/updates/improved-field-service-file-upload"
+    },
+    {
+      "requirement": "Forms, documents and customer signatures on site, in the app",
+      "detail": "Forms have been completed natively in the mobile app rather than a browser since July 2022, and field agents can add a form to an event they are assigned to when the office has not set one up (7 August 2024). Forms with a customer signature section have a Customer not present checkbox (16 August 2022). From 12 June 2026, a field agent can open the Files screen on a scheduled event, tap plus, and create a document from any of the account's templates; Payaca fills it with the project's data, and if the template captures a signature the customer signs on the field agent's device. The vendor's forms guide (31 May 2025) says the office can pre-fill known details and that submitted data can pre-populate quotes, invoices and compliance documents.",
+      "source_url": "https://payaca.com/uk/updates/generate-and-sign-documents-on-site"
+    },
+    {
+      "requirement": "Time logs with GPS verification and a location permission",
+      "detail": "The mobile app page says engineers clock in and out with GPS verification and that timesheets are generated automatically for payroll and job costing. The Google Play listing's interactive elements include Shares location. The vendor's 30 September 2026 update says admins can choose which time log types staff can use outside an event, and that the app asks what comes next when an event ends. The vendor does not publish what location accuracy it needs from a device, or how the GPS check behaves when location is unavailable.",
+      "source_url": "https://payaca.com/features/mobile-app"
+    },
+    {
+      "requirement": "Windows: no Windows app, web app in a browser, no browser list published",
+      "detail": "Payaca publishes no native Windows app. The office product is the web app at web.payaca.com, and the vendor's home page structured data lists Web, iOS and Android as its platforms. The only browser guidance we could find was a help centre article about iPad logouts that referred to Safari and Chrome, and that article no longer resolves. No supported browser list, browser version or PC specification is published. The Field Service app features the vendor documents (offline working, on-site documents and signatures, photo and file uploads from the device, GPS time logs) are described for the iOS and Android app, not the browser.",
+      "source_url": "https://payaca.com/uk"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Payaca's site work is a day's events, time logs, a materials list, forms, documents signed on screen and a lot of photos, which fit an 8 inch screen without the bulk of a 10 inch tablet. The Tuga A8 runs Android 12 with Google Play against the Android 7.0 minimum the Google Play listing data gives, so it clears the only published platform figure by five major versions. The vendor's customers are solar, heat pump, battery and EV charger installers, and much of that work is outside: the A8's 1000 nit screen is the brightest in the range, which matters when a customer signs a handover document in daylight or you check a materials list on a roof. The 8000mAh battery is removable, so a charged spare can take over if GPS time logging and photo uploads run all day, and the VESA mount points and pogo pin connector let it sit in a vehicle dock between jobs. It has dual SIM 4G for the uploads the vendor says can be large, and GPS, GLONASS, Galileo and BeiDou for the GPS clock in. It is sealed to IP67 with no MIL-STD rating, so where immersion or drops onto concrete are the bigger risk, the A10 is the tougher choice. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 7.0 or later from Google Play. Tuga A8: Android 12 with Google Play, so the published minimum is met.",
+        "Requirement: offline working with the day's events and materials stored on the device. Tuga A8: 128GB storage with a microSD slot and 6GB RAM; no cache size is published by the vendor.",
+        "Requirement: photo, video and file uploads, including large batches at low speeds. Tuga A8: 13MP autofocus rear camera with flash, dual SIM 4G and Wi-Fi.",
+        "Requirement: forms, documents and customer signatures on screen outdoors. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass; the capacitive stylus accessory fits it.",
+        "Requirement: GPS verified time logs through the day. Tuga A8: GPS + GLONASS + Galileo + BeiDou, removable 8000mAh battery, VESA mount points and pogo pin dock connector, IP67."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 is the larger and tougher option. Its 10.1 inch 1920 x 1200 screen shows more of a commissioning form, a multi-page handover document or a materials list at once than the A8, and gives a customer more room to sign. It runs Android 14 with Google Play, well above the Android 7.0 minimum, and carries 8GB of RAM and 128GB of storage with microSD up to 2TB, which is the most room in the range for the events, materials and photo uploads the vendor says the app stores on the device while offline. It is sealed to IP68 and tested to MIL-STD-810H, which the A8 is not, so it suits wet roofs, plant rooms and drops from a ladder. The trade-offs against the A8 are a 350 nit screen rather than 1000 nits, a battery that is not listed as removable, 680g in the hand, and a price of £449, which is £70 more. It fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 7.0 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: offline storage for events, materials and uploads. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: photo, video and file uploads from the device. Tuga A10: 13MP rear camera with flash, 4G dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: multi-page documents and signatures on screen. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: a device that survives site and van. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, GPS + Galileo + BeiDou + QZSS + NavIC."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For an installer who wants the schedule, time logs, photos and sign-off in a pocket or belt holster rather than a tablet, the Tuga A6 runs the same Field Service by Payaca app on a 6 inch handheld at 277g. It runs Android 15 with Google Play, well above the Android 7.0 minimum, has GPS, GLONASS, BeiDou and Galileo for the GPS clock in, dual SIM 4G and a removable 5050mAh battery. Payaca publishes no RAM or storage figure, so its 4GB of RAM and 64GB of storage cannot be checked against a vendor number; the vendor did release a fix for lag with large materials catalogues in February 2025, so if your catalogue is large, try one unit first. The trade-off is screen area: customers sign on a 6 inch screen, and a long commissioning form needs more scrolling than on the A8 or A10. Its Zebra 2D scan engine is not a documented Payaca input. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 7.0 or later from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: offline storage for events and materials. Tuga A6: 4GB RAM, 64GB storage with microSD up to 256GB; no vendor figure to check against.",
+        "Requirement: photo and file uploads from the device. Tuga A6: 13MP rear camera with flash, 4G LTE dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: forms and signatures on screen. Tuga A6: 6 inch FHD+ IPS 2160 x 1080.",
+        "Requirement: GPS verified time logs on a device carried all day. Tuga A6: GPS + GLONASS + BeiDou + Galileo, removable 5050mAh battery, 277g, IP67, 1.5 metre drop rating."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Payaca has no Windows app. The Tuga W10 runs Windows 11 Pro, so it can run the Payaca web app at web.payaca.com in a current desktop browser, which is the product the office uses for proposals, scheduling, job costs, stock and invoicing. That makes it a fit for a site office, a warehouse counter where stock is booked in, or a scheduler's desk, and it has Ethernet and HDMI for a fixed position. It is not the device for an installer on site: the offline working, on-site documents and signatures, photo and file uploads and GPS time logs the vendor documents are in the iOS and Android Field Service app, which does not run on Windows, and the W10 is IP65 rather than IP67 or IP68, so it is protected against water jets but not rated for immersion. The vendor publishes no browser list, so keep Edge or Chrome updated.",
+      "fit": [
+        "Requirement: the Payaca web app in a browser. Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: office work in the web app. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage, 10.1 inch 1280 x 800 multi-touch screen.",
+        "Requirement: a fixed position in a site office or warehouse. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Payaca account owner to add the installer as a user and assign them the events they will work on. Payaca sells through a demo rather than a free trial, so check which features your plan includes before you buy devices.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Field Service by Payaca (package com.payaca.fieldservice.mobile, developer Payaca), not the older Payaca mobile app, then sign in.",
+    "Allow camera and location access when the app asks. The vendor documents photo and file uploads from the device and GPS verified clock in and out, and the Google Play listing says the app shares location.",
+    "Fit a data SIM. The A8, A10 and A6 all take two SIMs, so a second network covers areas where the first is weak, which matters for the large photo and video uploads the vendor says the app sends.",
+    "Before the first job without signal, open the app while online so it saves that day's and the next day's events, upcoming tasks and the materials catalogue to the device, as the vendor's update notes describe. Use the in-app refresh button after the schedule changes.",
+    "Test the on-site flows on one unit: start and end a work time log, build a materials list, complete a form, take and upload a batch of photos, and generate and sign a document from the Files screen of an event, then check the Uploading screen to confirm nothing failed before rolling out to the team.",
+    "On a Tuga W10, open the Payaca web app at web.payaca.com in Edge or Chrome and keep the browser updated. Use it for office work; it will not run the Field Service app.",
+    "For the A8 and A10, fit the vehicle mounting dock in the van and a 12V car charger; for the A10 and W10, add the charging dock where devices live overnight; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for installers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for customer signatures on screen",
+    "Hand strap, £24 (Tuga A8, A10 and W10), for one-handed use on a ladder",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Payaca run on the Tuga A8?",
+      "a": "Payaca publishes no system requirements page. The Google Play listing data for Field Service by Payaca gives a minimum API level of 24, which is Android 7.0, and the vendor publishes no RAM or storage figure for phones or tablets. The Tuga A8 runs Android 12 with Google Play and has 6GB RAM and 128GB storage, so it meets the only published figure, as do the A10 (Android 14, 8GB RAM) and the A6 (Android 15, 4GB RAM). We do not describe any device as certified or tested by Payaca; these are the vendor's published figures set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Payaca work without signal on these tablets?",
+      "a": "The vendor says the Field Service app is built offline-first and syncs when back online. Its update notes list what that covers: the day's and next day's events and some tasks are saved to the device when you open the app, materials are stored on the device for building lists, confirming you are on the way, starting work and completing an event sync later, work time logs can be started and ended offline, and from June 2026 a document can be generated, filled in and signed without a signal. The A8, A10 and A6 all run that app. The vendor does not publish how much storage the cached data uses, and the web app on a Tuga W10 is not documented as working offline."
+    },
+    {
+      "q": "Can customers sign on the tablet, and do I need a stylus?",
+      "a": "Yes. The vendor's June 2026 update says a field agent can create a document from any of the account's templates on a scheduled event, and if the template captures a signature the customer signs on the field agent's device, offline if needed. Forms with a signature section also have a Customer not present checkbox. The vendor does not say whether a finger or a stylus is expected. We sell a capacitive stylus for the A8, A10 and W10 at £14.99; it is not listed as compatible with the A6."
+    },
+    {
+      "q": "Does Payaca scan barcodes or QR codes, and does the A6's scanner help?",
+      "a": "No barcode, QR code or NFC scanning by the device is documented in the vendor's Google Play listing, features page or update notes. Materials are chosen from a catalogue stored on the device, not scanned. So the Zebra 2D scan engine on the Tuga A6 and the NFC radio on the A8, A10 and A6 should not be treated as Payaca features, and you should not pick the A6 for its scanner on Payaca's account."
+    },
+    {
+      "q": "Should I choose the A8 or the A10 for Payaca?",
+      "a": "Both meet the published Android 7.0 minimum. The A8 has a 1000 nit screen against the A10's 350 nits, a removable battery, VESA mount points, and costs £379. The A10 has a larger, sharper 10.1 inch 1920 x 1200 screen for multi-page handover documents and commissioning forms, 8GB RAM against 6GB, storage expandable to 2TB, IP68 against IP67 and MIL-STD-810H, which the A8 does not have, at £449. Installers who spend the day outdoors and run GPS time logs all day may prefer the A8; those filling in long documents or working in wetter, harder conditions are better served by the A10."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Payaca has no Windows app, so the Tuga W10 only runs the web app in a browser, and the vendor publishes no browser list or PC specification. The installer features the vendor documents (offline working, on-site documents and signatures, photo and file uploads, GPS time logs, materials lists) are in the iOS and Android Field Service app, so a W10 suits an office, warehouse or site cabin desk, not an installer on site. On the Android side, the vendor publishes no RAM, storage, processor or screen-size figure and no tablet layout; the Google Play listing as fetched showed no Phone or Tablet device chips, so run a trial unit. No barcode, QR or NFC scanning is documented, so the A6's Zebra 2D scan engine and the NFC radio on the A8, A10 and A6 are not Payaca features. The vendor's help centre articles that appear in search results no longer resolve, so this page relies on the store listings, the features page and the vendor's dated update notes; check those if a figure matters to you. Payaca does not name Tuga devices, and we do not describe any device as certified or tested by Payaca.",
+  "disclaimer": "Payaca is a product of Payaca Ltd (shown as PAYACA LIMITED on Google Play), Bristol. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Payaca or Payaca Ltd.",
+  "sources": [
+    "https://payaca.com/uk",
+    "https://payaca.com/uk/contact",
+    "https://payaca.com/uk/pricing",
+    "https://payaca.com/features/mobile-app",
+    "https://play.google.com/store/apps/details?id=com.payaca.fieldservice.mobile&hl=en_GB",
+    "https://apps.apple.com/gb/app/id6474736841",
+    "https://payaca.com/uk/updates/android-mobile-20",
+    "https://payaca.com/uk/updates/fill-out-your-forms-offline",
+    "https://payaca.com/uk/updates/forms-are-now-mobile-native",
+    "https://payaca.com/uk/updates/customer-not-present-checkbox-on-all-forms",
+    "https://payaca.com/uk/updates/field-agents-can-create-and-complete-a-form-attached-to-an-assigned-event-in-the-mobile-app",
+    "https://payaca.com/uk/updates/field-agents-can-add-forms-on-the-mobile-app",
+    "https://payaca.com/uk/updates/view-all-mobile-uploads-in-one-place",
+    "https://payaca.com/uk/updates/create-materials-list-tasks-within-field-service-app",
+    "https://payaca.com/uk/updates/field-user-mobile-app-performance-boost",
+    "https://payaca.com/uk/updates/field-service-app-performance-improvements",
+    "https://payaca.com/uk/updates/improved-field-service-file-upload",
+    "https://payaca.com/uk/updates/improved-offline-support-in-field-service-app",
+    "https://payaca.com/uk/updates/easily-add-on-site-images-to-your-reports",
+    "https://payaca.com/uk/updates/field-service-reliable-offline-timelogs",
+    "https://payaca.com/uk/updates/generate-and-sign-documents-on-site",
+    "https://payaca.com/uk/updates/custom-field-document-video-uploads",
+    "https://payaca.com/uk/updates",
+    "https://payaca.com/us/blog/create-easy-forms-for-collecting-on-site-job-info"
+  ]
+}

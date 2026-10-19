@@ -1,0 +1,172 @@
+{
+  "slug": "servicem8",
+  "software": "ServiceM8",
+  "vendor": "ServiceM8 Pty Ltd",
+  "vendor_url": "https://www.servicem8.com/uk/",
+  "title": "Rugged tablet for ServiceM8: UK buyer's guide",
+  "meta_description": "ServiceM8's Android app needs Android 8.0 or higher from Google Play. The Tuga A8 (Android 12, GPS, dual SIM 4G) meets it; the W10 runs the Windows desktop app.",
+  "target_query": "rugged tablet for ServiceM8",
+  "h1": "Rugged tablet for ServiceM8",
+  "intro": [
+    "ServiceM8 is job management software for trades and service contractors, provided by ServiceM8 Pty Ltd, an Australian company whose terms of service put it under Australian law. The UK site describes it as covering the work from the client's first call through scheduling, quoting, job completion, invoicing and payment, names electrical, plumbing, HVAC, cleaning, locksmith, pest control and appliance repair among the trades it serves, and prices plans in pounds from a free tier to £269 a month with a 14 day free trial. The office runs the Dispatch Board in a browser or in a desktop app for PC and Mac; field staff work in the mobile app.",
+    "The device question matters more with ServiceM8 than with most job management software, because the vendor built its mobile app for iPhone and iPad first. A limited Android app called ServiceM8 Lite arrived in 2024 for technicians, subcontractors and temporary workers, and the vendor's marketing page still describes it that way. In August 2026 the vendor announced a rebuilt Android app in beta, and when we checked on 19 October 2026 the help centre and the Google Play listing both described ServiceM8 for Android as having almost all the same functionality as the iOS app, with Android 8.0 or higher as the minimum. The vendor's pages are not yet consistent with each other, so this page sets out what each one says.",
+    "Below is what ServiceM8 publishes about the devices its apps run on, which Tuga rugged Android devices meet the published Android requirement, what the Tuga W10 can do through the Windows desktop app and a browser and what it cannot, and how a UK sole trader or small firm can buy a single unit to try before kitting out a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android app: Android 8.0 or higher, with almost all the same functionality as the iOS app",
+      "detail": "The help centre article About the ServiceM8 Android app says ServiceM8 is available for Android with almost all the same functionality as the iOS app, and gives one minimum requirement: Android 8.0 or higher, with a recommendation to keep the app and the operating system up to date. No RAM, storage, processor or screen-size figure is published for Android. The feature list covers schedules, job cards, creating and scheduling jobs, checklists, Forms, photos with annotation, document scanning, PDF quotes and invoices, payments, Proposals, Asset workflows with local barcode lookup, and Clock On and Off. The published differences from iOS are Room Scan and AR, drawing diagrams, editing or filling PDFs from attachment previews, and full in-camera tagging. The vendor's marketing page still calls the Android app ServiceM8 Lite, released in 2024 for staff who do not need the full power of the iOS app, and an August 2026 update post describes a rebuilt Android app as a beta; the help centre and Google Play are the current, more detailed statements. For context, the vendor's iOS compatibility article (updated November 2025) says the iOS app needs iOS 17 or iPadOS 17 or later, and the App Store listing for version 15 states iOS 18.0 or later; the vendor describes the iOS app as its most feature-rich mobile experience.",
+      "source_url": "https://support.servicem8.com/help-center/app/basics/about-the-servicem8-android-app-servicem8-lite"
+    },
+    {
+      "requirement": "Google Play listing: ServiceM8, developer ServiceM8, minimum API level 26 (Android 8.0)",
+      "detail": "The Android app is published on Google Play as ServiceM8 (package com.servicem8.skip, developer ServiceM8, with an Australian developer address). When checked on 19 October 2026 the listing showed version 15.0.3, updated 18 October 2026, a minimum API level of 26 (Android 8.0), more than 50,000 downloads, and a description that opens with Run your service business from your Android device and says Android and iOS devices can be used together on one account. The listing we checked did not display a Tablet device chip, and neither it nor the help centre says anything about Android tablet layouts. The vendor's install FAQ tells Android users to download ServiceM8 from Google Play.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.servicem8.skip&hl=en_GB"
+    },
+    {
+      "requirement": "Offline working in the mobile app, for data already synced to the device",
+      "detail": "The vendor's FAQ says ServiceM8 does work offline in the mobile app: if job and client details have already synced to the device, staff can view them, update jobs and save notes and photos out of reception, and the changes sync when back in range. Tasks that need a live connection still will not work offline: final PDF quotes, invoices and Forms cannot be produced, and emails and text messages cannot be sent, until the device has coverage again. The FAQ refers to the mobile app without naming iOS or Android, and the vendor publishes no figure for how much data is cached.",
+      "source_url": "https://support.servicem8.com/questions/mobile/does-servicem8-work-offline-without-mobile-coverage-or-internet"
+    },
+    {
+      "requirement": "Barcode scanning through the camera, in Forms, Assets and Services fields",
+      "detail": "The vendor's barcode article says staff can capture barcodes by scanning them into the ServiceM8 app when completing Forms, creating Assets (Asset Management add-on) or answering Service questions. The scan button appears only on Text-type fields whose names contain Barcode, Number, Serial or Model. Tapping it opens the device camera, and the barcode is held inside a green square to scan. The article does not mention QR codes, a dedicated hardware scan engine or an external scanner, and does not name iOS or Android; the Android article lists Asset workflows and local barcode lookup. On any Tuga device the documented scan path is the camera.",
+      "source_url": "https://support.servicem8.com/help-center/tips-trick-more/tips-tricks/how-to-scan-barcodes-in-forms-assets-and-services"
+    },
+    {
+      "requirement": "GPS for the Dispatch Map when staff are Clocked On, and NFC only for Tap to Pay on eligible phones",
+      "detail": "The vendor says it can show live staff location and status on the Dispatch Map when staff are Clocked On and have allowed GPS access; one FAQ names the iOS app and the Shift GPS report for staff using the iOS app, while the staff status article refers to the mobile app generally. No location accuracy requirement is published. On NFC, the Android article says Tap to Pay requires Android 13 or later, NFC and a phone that meets Stripe's supported-device requirements, that activation is not available in the Android app, and that a phone that can run ServiceM8 does not necessarily support Tap to Pay. The NFC radio on the Tuga A8, A10 and A6 should not be assumed to work for Tap to Pay.",
+      "source_url": "https://support.servicem8.com/questions/staff/does-servicem8-support-live-gps-tracking-of-technicians"
+    },
+    {
+      "requirement": "Windows: desktop app for Windows 10 or higher, or the Online Dashboard in a modern browser",
+      "detail": "The vendor publishes a ServiceM8 for Desktop app for PC and Mac, available from servicem8.com/desktop or the Microsoft Store, and says the operating system must be Windows 10 or higher on PC or macOS 10.11 or higher on Mac. It describes the desktop app as the same as using ServiceM8 through Chrome, but faster. The install FAQ says the Online Dashboard needs no installation, only a modern web browser such as Google Chrome or Safari, with no version list. Offline working, camera barcode scanning, Client Signoff and Forms signatures are documented for the mobile app, not for the desktop app or a browser.",
+      "source_url": "https://support.servicem8.com/help-center/desktop/basics/how-to-install-the-servicem8-desktop-app-for-pc-and-mac"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "The published Android requirement is Android 8.0 or higher with the app from Google Play, and the Tuga A8 runs Android 12 with Google Play, so it meets it with a margin. ServiceM8's field work is job cards, checklists, Forms, photos, PDF quotes and invoices and a Client Signoff signature on screen, which fit an 8 inch screen without the size of a 10 inch tablet. The vendor's descriptions of the Android app are phone-shaped (your Android device, an eligible Android phone) and it publishes nothing about tablet layouts, so an 8 inch device that can be held in one hand is the closest tablet to what the vendor describes. The 1000 nit screen stays readable outside, dual SIM 4G keeps the app synced so offline working has something to work from, the built-in GPS puts the engineer on the Dispatch Map when Clocked On, and the 13MP rear camera is the barcode and photo path the vendor documents. VESA mount points and pogo pin contacts let it live in a vehicle dock. It is IP67 with no MIL-STD rating, so where immersion or hard drops are the bigger risk the A10 is the tougher choice. At £379 it is £70 less than the A10. Because the vendor documents no Android tablet layout, run the app on one unit before buying for a team.",
+      "fit": [
+        "Requirement: Android 8.0 or higher with the app from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: GPS access for live location on the Dispatch Map when Clocked On. Tuga A8: GPS, GLONASS, Galileo and BeiDou.",
+        "Requirement: a synced device for offline working, and a connection to send quotes, invoices, emails and texts. Tuga A8: 4G LTE with dual SIM, plus Wi-Fi.",
+        "Requirement: camera barcode scanning in Forms, Assets and Services, and job photos. Tuga A8: 13MP autofocus rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: Forms, PDF quotes and invoices and Client Signoff on screen. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass, 6GB RAM, 128GB storage with a microSD slot; the capacitive stylus accessory fits it.",
+        "Requirement: a device that lives in the van between jobs. Tuga A8: VESA mount points, pogo pin dock connector, removable 8000mAh battery, IP67."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is the Tuga device closest to the phone the vendor built its Android app around. It is a 6 inch handheld at 277g that goes in a pocket or a belt holster, runs Android 15 with Google Play against the Android 8.0 minimum, and has built-in GPS, dual SIM 4G and a removable 5050mAh battery. The vendor publishes no RAM figure for Android, so its 4GB of RAM cannot be set against a vendor number. It has a Zebra 2D scan engine, but ServiceM8 documents camera scanning only, so plan on the 13MP rear camera. The trade-off is screen area: a client signs on a 6 inch screen, and a long Form or a quote with many line items needs more scrolling than on the A8 or A10. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 8.0 or higher with the app from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: GPS access for the Dispatch Map. Tuga A6: GPS, GLONASS, BeiDou and Galileo.",
+        "Requirement: a connection to sync jobs and send quotes, invoices, emails and texts. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: camera barcode scanning and job photos. Tuga A6: 13MP rear camera with flash (scanning through the camera via the app; the Zebra 2D scan engine is not a documented ServiceM8 input).",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery, 4GB RAM and 64GB storage with microSD up to 256GB."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 is the tougher and larger option. It is sealed to IP68 and tested to MIL-STD-810H, which the A8 is not, so it suits roofers, groundworkers and anyone who works in the wet or drops kit onto hard surfaces. The 10.1 inch 1920 x 1200 screen shows more of a long Form, a quote with many lines or a PDF attached to a job, and gives a client more room to sign. It runs Android 14 with Google Play against the Android 8.0 minimum, has built-in GPS and dual SIM 4G, and carries 8GB of RAM and 128GB of storage. The caution is the same as for the A8 but larger: the vendor documents no Android tablet layout, so a trial unit is the way to find out how the app sits on a 10 inch screen. Against the A8 it has a 350 nit screen rather than 1000 nits, a battery not listed as removable, and costs £449, which is £70 more.",
+      "fit": [
+        "Requirement: Android 8.0 or higher with the app from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: GPS access for the Dispatch Map. Tuga A10: GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Requirement: a connection to sync jobs and send documents. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: camera barcode scanning, job photos, Forms and quotes on screen. Tuga A10: 13MP rear camera with flash, 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, 8GB RAM, 128GB storage with microSD up to 2TB.",
+        "Requirement: a device that survives site work. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g, 8000mAh battery with quick charge; fits the charging dock and the vehicle mounting dock."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "ServiceM8 has no Windows mobile app, but it publishes a ServiceM8 for Desktop app for Windows 10 or higher, and the Online Dashboard runs in a modern browser such as Chrome. The Tuga W10 runs Windows 11 Pro, so it can run the desktop app from the Microsoft Store or servicem8.com/desktop, or the Dispatch Board in a browser, which makes it a fit for a scheduler's desk, a site office or a workshop counter, with Ethernet and HDMI for a fixed position. It is not the device for an engineer: offline working, camera barcode scanning, Client Signoff and Forms signatures are documented for the mobile app, which runs on Android and iOS, not Windows. 4G and GPS are optional on the W10 rather than standard, it is IP65 rather than IP67 or IP68, and at 1197g it is not a one-handed device.",
+      "fit": [
+        "Requirement: Windows 10 or higher for the ServiceM8 for Desktop app, or a modern browser such as Chrome. Tuga W10: Windows 11 Pro running the Microsoft Store and standard desktop browsers.",
+        "Requirement: the Dispatch Board and office workflows in the Online Dashboard. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage, 10.1 inch 1280 x 800 multi-touch screen.",
+        "Requirement: a fixed position in a site office or workshop. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock and the vehicle mounting dock.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Start a ServiceM8 account at servicem8.com/uk, or ask the account owner to add you as a staff member. The UK site offers a 14 day free trial with no credit card required, and a free plan for one user with 30 jobs a month.",
+    "On the Tuga A8, A10 or A6, open Google Play and install ServiceM8 (package com.servicem8.skip, developer ServiceM8), then sign in. If a search turns up nothing, the vendor's FAQ says to search for ServiceM8 by name.",
+    "Allow location access when the app asks, and Clock On at the start of the shift, because the vendor says staff appear on the Dispatch Map only when Clocked On with GPS access allowed. Allow camera access so barcode scanning, document scanning and job photos work. Fit a data SIM before the first job: offline working only covers jobs already synced, and PDF quotes, invoices, Forms, emails and texts need a live connection.",
+    "Before relying on it, run the field flows on the device: open a job card, complete a checklist and a Form, take and annotate photos, scan a barcode into a field whose name contains Barcode, Serial, Number or Model, produce a PDF quote, and collect a Client Signoff signature, so you know how the layout sits on an 8 or 10 inch screen.",
+    "Check what your team needs against the vendor's published differences from iOS: Room Scan and AR, drawing diagrams, editing or filling PDFs from attachment previews, full in-camera tagging and Tap to Pay activation are not in the Android app. If one of those is essential, the vendor's answer is its iOS app, not an Android device.",
+    "On a Tuga W10, install ServiceM8 for Desktop from the Microsoft Store or servicem8.com/desktop, or open the Online Dashboard in Chrome or Edge and keep the browser updated. Use it for the Dispatch Board and office work; it will not run the mobile app.",
+    "For the A8 and A10, fit the vehicle mounting dock and a 12V car charger; for the A10 and W10, add the charging dock where devices live overnight; for the A6, add the belt holster or the car phone mount. Fit the tempered glass screen protector before the device goes out on site."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for engineers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for Client Signoff signatures on screen",
+    "12V DC car charger, £26, for charging between jobs",
+    "Hand strap, £24 (Tuga A8, A10 and W10), for one-handed use up a ladder",
+    "Belt holster, £22 (Tuga A6)",
+    "Car phone mount, £17 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Is ServiceM8 still iPhone only, or does it run on Android now?",
+      "a": "It runs on Android, with a history worth knowing. The vendor built its mobile app for iPhone and iPad first, released a limited ServiceM8 Lite app for Android in 2024, and announced a rebuilt Android app in beta in August 2026. When we checked on 19 October 2026, the help centre article About the ServiceM8 Android app and the Google Play listing (version 15.0.3, updated 18 October 2026) both described ServiceM8 for Android as having almost all the same functionality as the iOS app, with Android 8.0 or higher as the minimum. The vendor's marketing page still describes the Lite app, so read the help centre article and its list of differences from iOS before you buy."
+    },
+    {
+      "q": "Will ServiceM8 run on the Tuga A8?",
+      "a": "The vendor publishes one Android requirement: Android 8.0 or higher, with the app installed from Google Play, where the listing gives a minimum API level of 26 (Android 8.0). The Tuga A8 runs Android 12 with Google Play, so it meets it, and so do the A10 (Android 14) and the A6 (Android 15). The vendor publishes no RAM, storage or screen-size figure for Android and nothing about Android tablet layouts. We do not describe any device as certified or tested by ServiceM8; these are the vendor's published requirements set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does ServiceM8 work without signal on these devices?",
+      "a": "Partly. The vendor says the mobile app works offline for job and client details already synced to the device: staff can view them, update jobs and save notes and photos, and changes sync when back in range. Final PDF quotes, invoices and Forms cannot be produced, and emails and texts cannot be sent, until the device has coverage again. The FAQ does not name Android separately. The A8, A10 and A6 all have dual SIM 4G, so a data SIM, or two, keeps the device synced between Wi-Fi networks. A Tuga W10 runs the desktop app or the Online Dashboard, and the vendor does not document offline working there."
+    },
+    {
+      "q": "Can engineers scan barcodes, and does the A6's scanner help?",
+      "a": "ServiceM8 documents barcode scanning through the device camera, in Forms, Asset and Services fields whose names contain Barcode, Number, Serial or Model, and the Android article lists Asset workflows and local barcode lookup. The A8, A10 and A6 all have a 13MP rear camera with flash, and on each of them scanning runs through the camera via the app. The A6 also has a Zebra 2D scan engine, but the vendor documents no dedicated scan engine or external scanner support and does not mention QR codes, so do not buy the A6 for that reason alone."
+    },
+    {
+      "q": "Can customers sign on the device, and will Tap to Pay work?",
+      "a": "Signatures, yes: the vendor documents Client Signoff from the job card, where the client signs on screen and the signature is kept in the job Diary, and a Customer Signature field on Forms that works only in the mobile app; the Android article says separate signature workflows are available on Android. Tap to Pay is different: the vendor says it needs Android 13 or later, NFC and a phone that meets Stripe's supported-device requirements, that activation is not available in the Android app, and that a phone that can run ServiceM8 does not necessarily support Tap to Pay. The A8, A10 and A6 have NFC, but we cannot say they are supported for Tap to Pay, so do not plan on it."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome, and with ServiceM8 it is the sensible route, because the vendor publishes nothing about Android tablet layouts. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "ServiceM8's mobile app runs on Android and iOS, not Windows, so the Tuga W10 can only run the ServiceM8 for Desktop app (Windows 10 or higher) or the Online Dashboard in a browser. Offline working, camera barcode scanning, Client Signoff and Forms signatures are documented for the mobile app, so a W10 suits the Dispatch Board on an office or workshop desk, not an engineer on site. On Android, the vendor's own pages disagree on what the app is: the marketing page describes a 2024 Lite app, an August 2026 post describes a rebuilt app in beta, and the help centre and the Google Play listing we checked on 19 October 2026 describe an app with almost all of the iOS functionality. Room Scan and AR, drawing diagrams, editing or filling PDFs from attachment previews, full in-camera tagging and Tap to Pay activation are published as not available on Android, and the vendor still describes its iOS app as the most feature-rich mobile experience; if your business depends on one of those, no Tuga device is the answer. The vendor publishes no RAM, storage or screen-size figure for Android, nothing about Android tablet layouts, and no QR code, dedicated scan engine or external scanner support, so the A6's Zebra 2D scan engine is not a documented ServiceM8 input. The NFC radio on the A8, A10 and A6 should not be treated as a Tap to Pay feature. ServiceM8 does not name Tuga devices, and we do not describe any device as certified or tested by ServiceM8.",
+  "disclaimer": "ServiceM8 is a product of ServiceM8 Pty Ltd, trading as ServiceM8. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by ServiceM8 or ServiceM8 Pty Ltd.",
+  "sources": [
+    "https://www.servicem8.com/uk/",
+    "https://www.servicem8.com/terms-of-service",
+    "https://www.servicem8.com/android-app",
+    "https://www.servicem8.com/updates/servicem8-lite-for-android",
+    "https://www.servicem8.com/updates/servicem8-lite-for-android-cd0f1",
+    "https://www.servicem8.com/updates/try-the-new-servicem8-app-for-android",
+    "https://support.servicem8.com/help-center/app/basics/about-the-servicem8-android-app-servicem8-lite",
+    "https://support.servicem8.com/help-center/app/basics/how-to-use-servicem8-lite-for-android",
+    "https://support.servicem8.com/help-center/tips-trick-more/more/what-mobile-devices-are-supported",
+    "https://support.servicem8.com/help-center/tips-trick-more/more/servicem8-ios-device-compatibility",
+    "https://support.servicem8.com/help-center/tips-trick-more/more/does-servicem8-support-android-based-devices-yes",
+    "https://support.servicem8.com/help-center/advanced-setup/faq/not-all-my-staff-have-apple-devices-how-can-i-use-servicem8",
+    "https://support.servicem8.com/questions/general/don-t-iphones-ipads-technicians-androids-use-servicem8",
+    "https://support.servicem8.com/questions/mobile/does-servicem8-have-a-native-mobile-app-ios-android",
+    "https://support.servicem8.com/questions/mobile/cant-find-servicem8-app-google-play-android-app-servicem8",
+    "https://support.servicem8.com/questions/mobile/does-servicem8-work-offline-without-mobile-coverage-or-internet",
+    "https://support.servicem8.com/help-center/tips-trick-more/tips-tricks/how-to-scan-barcodes-in-forms-assets-and-services",
+    "https://support.servicem8.com/questions/staff/does-servicem8-support-live-gps-tracking-of-technicians",
+    "https://support.servicem8.com/help-center/desktop/basics/how-to-view-staff-status",
+    "https://support.servicem8.com/help-center/app/basics/collecting-a-customers-signature-for-quote-or-invoice-sign-off",
+    "https://support.servicem8.com/help-center/servicem8-add-ons/forms/how-to-capture-a-clients-signature-on-a-form-after-review",
+    "https://support.servicem8.com/help-center/tips-trick-more/more/how-do-i-install-servicem8",
+    "https://support.servicem8.com/help-center/desktop/basics/how-to-install-the-servicem8-desktop-app-for-pc-and-mac",
+    "https://play.google.com/store/apps/details?id=com.servicem8.skip&hl=en_GB",
+    "https://apps.apple.com/gb/app/servicem8-field-service-app/id378062736"
+  ]
+}
