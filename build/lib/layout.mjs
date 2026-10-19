@@ -274,7 +274,7 @@ const wordmark = () =>
   `<span class="wordmark-tuga">TUGA</span><span class="wordmark-hardware">Hardware</span>`;
 
 const header = (active) => `
-  <div class="announce">
+  <div class="announce" role="region" aria-label="Delivery and offers">
     ${
       SALES_PAUSED
         ? `<strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>`
@@ -311,14 +311,14 @@ const footer = () => `
           <p>Rugged tablets and handhelds for UK trades. We pick the kit, check every spec against the maker's own documents, price it honestly and ship it free. No enterprise contracts, no sales calls.</p>
         </div>
         <div class="footer-col">
-          <h3>Tablets</h3>
+          <h2>Tablets</h2>
           <nav aria-label="Products">
             ${devices.map((p) => `<a href="${productUrl(p)}">${esc(p.name)}</a>`).join('\n            ')}
             <a href="/accessories">Accessories</a>
           </nav>
         </div>
         <div class="footer-col">
-          <h3>Company</h3>
+          <h2>Company</h2>
           <nav aria-label="Company">
             <a href="/about">About</a>
             <a href="/works-with/">Works with your software</a>
@@ -331,7 +331,7 @@ const footer = () => `
           </nav>
         </div>
         <div class="footer-col">
-          <h3>Support</h3>
+          <h2>Support</h2>
           <nav aria-label="Support">
             <a href="/warranty">Warranty</a>
             <a href="/shipping-returns">Shipping &amp; returns</a>

@@ -88,6 +88,31 @@ export async function putRecord(kv, type, record) {
   return record;
 }
 
+/**
+ * Create a record under a fresh id. nextId is read-then-write, so two
+ * requests arriving together (a web order filing while someone types in the
+ * admin, or two web orders at once) can pick the same number; putIfAbsent
+ * refuses the second write and we try the next number. Returns the record
+ * with its final id.
+ */
+export async function createRecord(kv, type, record) {
+  if (typeof kv.putIfAbsent !== 'function') {
+    return putRecord(kv, type, { ...record, id: record.id || (await nextId(kv, type)) });
+  }
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const candidate = { ...record, id: await nextId(kv, type) };
+    candidate.updatedAt = new Date().toISOString();
+    if (!candidate.createdAt) candidate.createdAt = candidate.updatedAt;
+    const written = await kv.putIfAbsent(
+      `${TYPES[type].prefix}${candidate.id}`,
+      JSON.stringify(candidate),
+      { metadata: TYPES[type].meta(candidate) }
+    );
+    if (written) return candidate;
+  }
+  throw new Error(`Could not allocate a free ${type} id after 10 attempts`);
+}
+
 export async function deleteRecord(kv, type, id) {
   await kv.delete(`${TYPES[type].prefix}${id}`);
 }

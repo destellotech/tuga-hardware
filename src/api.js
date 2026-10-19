@@ -4,11 +4,12 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation, sendNewOrderAlert, sendEnquiry } from './email.js';
+import { sendOrderConfirmation, sendNewOrderAlert, sendOrderFlagAlert, sendEnquiry } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
 import { handleAdmin } from './admin.js';
 import { fileWebOrder } from './backoffice.js';
+import { getRecord, putRecord } from './records.js';
 import { routedStore } from './store.js';
 
 // ---------------------------------------------------------------------------
@@ -475,6 +476,24 @@ const receiptSent = (record) =>
   Boolean(record?.receiptSentAt) || record?.emailVia === 'stripe-receipt';
 
 /**
+ * A claim older than this with no order behind it is treated as abandoned
+ * (the holder's request died between claiming and saving). Longer than KV's
+ * worst-case replication delay of about a minute, so a slow read cannot be
+ * mistaken for a dead holder.
+ */
+const ORDER_CLAIM_TTL_MS = 2 * 60 * 1000;
+
+/** Re-read an order a few times while a concurrent request saves it. */
+async function waitForOrder(kv, orderId, attempts = 3, delayMs = 1000) {
+  for (let i = 0; i < attempts; i++) {
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+    const record = await getOrder(kv, orderId);
+    if (record) return record;
+  }
+  return null;
+}
+
+/**
  * Save and email an order unless it has already been recorded.
  * Returns the stored record.
  */
@@ -490,10 +509,30 @@ async function recordOrder(env, orderDetails) {
   }
 
   if (!record) {
-    console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
-    record = { ...orderDetails, alertPending: true };
+    // The provider's webhook and the customer's confirmation page both call
+    // this within seconds of payment, usually from different locations. KV
+    // is eventually consistent, so each can read "no order yet" and both
+    // would save, file, alert and email. D1 is not, so claim the order there
+    // first: one request records it and the other waits for the record.
     if (env.ORDERS) {
-      record = await saveOrder(env.ORDERS, orderDetails.orderId, record);
+      const store = routedStore(env);
+      const claimKey = `claim:order:${orderDetails.orderId}`;
+      if (!(await store.claim(claimKey, ORDER_CLAIM_TTL_MS))) {
+        console.log(`${orderDetails.provider} order ${orderDetails.orderId} is being recorded by a concurrent request`);
+        return (await waitForOrder(env.ORDERS, orderDetails.orderId)) || { ...orderDetails };
+      }
+      console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
+      try {
+        record = await saveOrder(env.ORDERS, orderDetails.orderId, { ...orderDetails, alertPending: true });
+      } catch (err) {
+        // Nothing was saved, so let the next caller (a webhook retry, a page
+        // reload) record it instead of waiting on a claim that leads nowhere.
+        await store.delete(claimKey).catch(() => {});
+        throw err;
+      }
+    } else {
+      console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
+      record = { ...orderDetails, alertPending: true };
     }
   }
 
@@ -679,6 +718,16 @@ async function recordPayPalOrder(orderId, env) {
   const purchaseUnit = order.purchase_units?.[0] || {};
   const shipping = purchaseUnit.shipping || {};
 
+  // A COMPLETED order can still carry a PENDING capture (PayPal risk review,
+  // an eCheque). No money has arrived, so do not record it as paid: the
+  // PAYMENT.CAPTURE.COMPLETED webhook re-reads the order once it clears. A
+  // DECLINED or FAILED capture is simply not an order.
+  const capture = purchaseUnit.payments?.captures?.[0];
+  if (capture && capture.status !== 'COMPLETED') {
+    console.warn(`PayPal order ${order.id} capture is ${capture.status}; not recorded`);
+    return { paid: false, reason: capture.status === 'PENDING' ? 'processing' : undefined };
+  }
+
   const record = await recordOrder(env, {
     orderId: order.id,
     provider: 'paypal',
@@ -802,7 +851,101 @@ async function handleStripeWebhook(request, env) {
     }
   }
 
+  // Money going back the other way. The endpoint must be subscribed to
+  // these events in the Stripe dashboard for them to arrive.
+  if (event.type === 'charge.refunded' || event.type === 'charge.dispute.created') {
+    const object = event.data.object;
+    const paymentIntent = typeof object.payment_intent === 'string' ? object.payment_intent : object.payment_intent?.id;
+    try {
+      const sessionId = paymentIntent ? await findStripeSessionByPaymentIntent(paymentIntent, env) : null;
+      if (!sessionId) {
+        console.warn(`Stripe ${event.type}: no checkout session for payment ${paymentIntent}`);
+      } else if (event.type === 'charge.dispute.created') {
+        await flagOrder(env, sessionId, {
+          status: 'disputed',
+          reason: `Dispute opened in Stripe for £${(object.amount / 100).toFixed(2)} (reason: ${object.reason || 'not given'}).`,
+        });
+      } else {
+        const full = object.refunded === true || object.amount_refunded >= object.amount;
+        await flagOrder(env, sessionId, {
+          status: full ? 'refunded' : null,
+          reason: full
+            ? `Refunded in full (£${(object.amount_refunded / 100).toFixed(2)}) in Stripe.`
+            : `Partly refunded: £${(object.amount_refunded / 100).toFixed(2)} of £${(object.amount / 100).toFixed(2)} in Stripe.`,
+        });
+      }
+    } catch (err) {
+      console.error('Stripe webhook error:', err);
+      return corsError('Could not flag order', 500);
+    }
+  }
+
   return corsResponse({ received: true });
+}
+
+/**
+ * Mark a recorded order as refunded or disputed so nobody ships it, cancel
+ * the back-office sale if it has not gone out, and alert the shop. `status`
+ * null leaves the status alone and only notes and alerts (a partial refund).
+ * Safe to call twice: a repeat with the same status does nothing.
+ */
+async function flagOrder(env, orderId, { status, reason }) {
+  if (!env.ORDERS) return null;
+  const existing = await getOrder(env.ORDERS, orderId);
+  if (!existing) {
+    console.warn(`Cannot flag order ${orderId} (${status || 'note'}): not recorded`);
+    return null;
+  }
+  const notes = Array.isArray(existing.flags) ? existing.flags : [];
+  if (notes.some((n) => n.reason === reason)) return existing;
+
+  const at = new Date().toISOString();
+  const updates = { flags: [...notes, { at, status: status || null, reason }] };
+  if (status && existing.status !== status) updates.status = status;
+  const updated = await updateOrder(env.ORDERS, orderId, updates);
+  console.log(`Order ${orderId} ${status || 'noted'}: ${reason}`);
+
+  if (existing.saleId) {
+    try {
+      const store = routedStore(env);
+      const sale = await getRecord(store, 'sales', existing.saleId);
+      if (sale) {
+        const note = `${sale.notes ? `${sale.notes} ` : ''}${at.slice(0, 10)}: ${reason}`;
+        // A refunded sale that has not gone out is cancelled. A dispute is
+        // not a refund yet, and a dispatched sale needs a person: note only.
+        const cancel = status === 'refunded' && !sale.dispatch && sale.status === 'paid';
+        await putRecord(store, 'sales', { ...sale, notes: note, ...(cancel ? { status: 'cancelled' } : {}) });
+      }
+    } catch (err) {
+      console.error('Could not update back-office sale for flagged order:', err);
+    }
+  }
+
+  if (env.RESEND_API_KEY) {
+    try {
+      await sendOrderFlagAlert(env, updated, { status, reason });
+    } catch (err) {
+      console.error('Order flag alert failed:', err);
+    }
+  }
+  return updated;
+}
+
+/** The recorded PayPal order whose capture has this id, if any. */
+async function findOrderByCaptureId(kv, captureId) {
+  if (!captureId) return null;
+  let cursor;
+  let seen = 0;
+  do {
+    const page = await kv.list({ prefix: 'order:', cursor });
+    for (const { name } of page.keys) {
+      if (++seen > 500) return null;
+      const order = await getOrder(kv, name.slice('order:'.length));
+      if (order?.captureId === captureId) return order;
+    }
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+  return null;
 }
 
 // =========================================================================
@@ -833,6 +976,52 @@ async function handlePayPalWebhook(request, env) {
         console.error('PayPal webhook error:', err);
         return corsError('Could not record order', 500);
       }
+    }
+  }
+
+  // Money going back: a refund (ours), a reversal (PayPal's, after a
+  // chargeback) or a dispute opened by the buyer. The webhook in the PayPal
+  // dashboard must include these event types for them to arrive.
+  if (
+    event.event_type === 'PAYMENT.CAPTURE.REFUNDED' ||
+    event.event_type === 'PAYMENT.CAPTURE.REVERSED' ||
+    event.event_type === 'CUSTOMER.DISPUTE.CREATED'
+  ) {
+    try {
+      const resource = event.resource || {};
+      if (event.event_type === 'CUSTOMER.DISPUTE.CREATED') {
+        const captureId = resource.disputed_transactions?.[0]?.seller_transaction_id;
+        const order = env.ORDERS ? await findOrderByCaptureId(env.ORDERS, captureId) : null;
+        if (!order) {
+          console.warn(`PayPal dispute: no recorded order for capture ${captureId}`);
+        } else {
+          const amount = resource.dispute_amount?.value;
+          await flagOrder(env, order.orderId, {
+            status: 'disputed',
+            reason: `Dispute opened in PayPal${amount ? ` for £${amount}` : ''} (reason: ${resource.reason || 'not given'}).`,
+          });
+        }
+      } else {
+        const orderId = resource.supplementary_data?.related_ids?.order_id;
+        const order = orderId && env.ORDERS ? await getOrder(env.ORDERS, orderId) : null;
+        if (!order) {
+          console.warn(`PayPal ${event.event_type}: no recorded order ${orderId}`);
+        } else {
+          const pence = Math.round(parseFloat(resource.amount?.value || '0') * 100);
+          const full = event.event_type === 'PAYMENT.CAPTURE.REVERSED' || pence >= (order.total || 0);
+          await flagOrder(env, orderId, {
+            status: full ? 'refunded' : null,
+            reason: event.event_type === 'PAYMENT.CAPTURE.REVERSED'
+              ? `Payment reversed by PayPal (£${(pence / 100).toFixed(2)}).`
+              : full
+                ? `Refunded in full (£${(pence / 100).toFixed(2)}) in PayPal.`
+                : `Partly refunded: £${(pence / 100).toFixed(2)} of £${((order.total || 0) / 100).toFixed(2)} in PayPal.`,
+          });
+        }
+      }
+    } catch (err) {
+      console.error('PayPal webhook error:', err);
+      return corsError('Could not flag order', 500);
     }
   }
 
@@ -973,6 +1162,10 @@ async function handleStripeCheck(env) {
       endpointFound: Boolean(endpoint),
       endpointStatus: endpoint?.status ?? null,
       listensForCheckoutCompleted: Boolean(listens),
+      // Refunds and disputes only reach /webhooks/stripe if the endpoint is
+      // subscribed to these too. Informational: checkout works without them.
+      listensForRefundsAndDisputes: Boolean(endpoint && (endpoint.enabled_events.includes('*') ||
+        ['charge.refunded', 'charge.dispute.created'].every((e) => endpoint.enabled_events.includes(e)))),
       webhookSecretSet: Boolean(env.STRIPE_WEBHOOK_SECRET),
       // Near-misses on our own domain (e.g. no www) are the usual mistake.
       otherSiteEndpoints: (data.data || []).filter((e) => e !== endpoint && e.url.includes('tugahardware')).map((e) => e.url),
@@ -1407,6 +1600,9 @@ function getDiscountPercent(totalQty) {
  * Implements the same algorithm as Stripe's official SDK.
  */
 async function verifyStripeSignature(rawBody, signatureHeader, secret) {
+  // An empty key would make the HMAC below verify anything signed with an
+  // empty secret. Fail closed instead.
+  if (!secret || !signatureHeader) return false;
   try {
     // Parse the signature header
     // Stripe can send several v1 signatures (e.g. while a secret is rolled).
