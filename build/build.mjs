@@ -1166,7 +1166,7 @@ ${sectionHead({
             <span>${esc(DELIVERY.summary)} ${esc(PRICE_NOTE)} (${esc(TRADER.legalName)} is not VAT registered). 30-day returns.</span>
             <span>Prices valid for 30 days from the date above. To pay by bank transfer, ask for a proforma invoice at ${SITE.origin.replace('https://', '')}/contact.</span>
           </div>
-          <div class="compare-wrap">
+          <div class="compare-wrap" tabindex="0">
             <table class="compare-table calc-table">
               <caption class="sr-only">Bulk order calculator</caption>
               <thead>
@@ -1975,7 +1975,7 @@ ${breadcrumbs(trail)}
         <div class="tier-grid">
           ${warranty.tiers.map(tierCard).join('')}
         </div>
-        <aside class="callout" style="margin-top:var(--space-l)"><strong>Accidental damage.</strong> ${esc(warrantyCopy.care_note)}</aside>
+        <div class="callout" role="note" style="margin-top:var(--space-l)"><strong>Accidental damage.</strong> ${esc(warrantyCopy.care_note)}</div>
       </div>
     </section>
 
@@ -1990,7 +1990,7 @@ ${breadcrumbs(trail)}
     <section class="section">
       <div class="container">
 ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 'The amounts payable today. Destello Tech Ltd is not VAT registered. Plans are never discounted and do not count toward the device discount tiers.' })}
-        <div class="compare-wrap reveal">
+        <div class="compare-wrap reveal" tabindex="0">
           <table class="compare-table">
             <caption class="sr-only">Plan prices per device</caption>
             <thead>
@@ -2027,12 +2027,12 @@ ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 
     <section class="section section-tint">
       <div class="container">
 ${sectionHead({ tag: 'Side by side', title: 'What each plan does', lede: 'Every line in the paid columns has a numbered clause in the Plan Terms.' })}
-        <div class="compare-wrap reveal">
+        <div class="compare-wrap reveal" tabindex="0">
           <table class="compare-table compare-table-wrap">
             <caption class="sr-only">Comparison of the three cover levels</caption>
             <thead>
               <tr>
-                <th scope="col"></th>
+                <th scope="col"><span class="sr-only">Feature</span></th>
                 <th scope="col">Standard</th>
                 <th scope="col">3-Year Warranty</th>
                 <th scope="col">Total Care</th>
@@ -2606,7 +2606,7 @@ function vsTable(a, b, keys) {
     .join('');
 
   return `
-        <div class="compare-wrap reveal">
+        <div class="compare-wrap reveal" tabindex="0">
           <table class="spec-table vs-table">
             <caption class="sr-only">Full specification of the ${esc(a.name)} and the ${esc(b.name)}, side by side</caption>
             <thead>
@@ -3295,7 +3295,7 @@ ${breadcrumbs(trail)}
 ${sectionHead({ tag: 'Devices', title: `Which Tuga device fits ${esc(w.software)}`, lede: 'Picked on the published requirements above and nothing else.' })}
         <div class="pick-list">${picks}
         </div>
-        ${w.not_recommended_note ? `<aside class="callout"><strong>Worth knowing.</strong> ${esc(w.not_recommended_note)}</aside>` : ''}
+        ${w.not_recommended_note ? `<div class="callout" role="note"><strong>Worth knowing.</strong> ${esc(w.not_recommended_note)}</div>` : ''}
       </div>
     </section>
 

@@ -1219,8 +1219,12 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   border-radius: var(--radius-lg);
   background: var(--surface);
   overflow-x: auto;
+  /* tabindex="0" in the markup, so keyboard users can scroll a wide table. */
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
+
+.compare-wrap:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
 
 .compare-table {
   min-width: 780px;
@@ -2859,7 +2863,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   color: var(--ink-inverse-mid);
 }
 
-.footer-col h3 {
+.footer-col h2 {
   font-family: var(--font-mono);
   font-size: var(--step--2);
   font-weight: 500;
@@ -2945,6 +2949,13 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 .cookie-banner a { color: var(--copper-light); text-decoration: underline; }
 
 .cookie-actions { display: flex; gap: 0.5rem; }
+/* The banner is dark green, so the plain button needs light text to be
+   readable (the default .btn colour is ink on cream). */
+.cookie-banner [data-cookie-decline] {
+  color: var(--cream);
+  border-color: var(--rule-inverse);
+}
+.cookie-banner [data-cookie-decline]:hover { border-color: var(--cream); }
 
 .toast {
   position: fixed;
@@ -3015,7 +3026,7 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   color: var(--ink-light);
 }
 .pdp-quote a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.field-optional { font-weight: 400; opacity: 0.7; }
+.field-optional { font-weight: 400; color: var(--ink-light); }
 
 /* --------------------------------------------------------------------------
    Works with pages

@@ -131,7 +131,7 @@ export function compareTable(list = devices) {
     .join('');
 
   return `
-        <div class="compare-wrap reveal">
+        <div class="compare-wrap reveal" tabindex="0">
           <table class="compare-table">
             <caption class="sr-only">Specification comparison of every Tuga device</caption>
             <thead>
