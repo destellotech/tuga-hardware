@@ -78,6 +78,7 @@ Scanner versions: Tuga WH6 with Barcode Scanner Â£779; Tuga W8 with 2D Scanner Â
 
 ## Guides
 
+- [Setting Up a New Work Tablet: A First Day Checklist](https://www.tugahardware.com/blog/setting-up-a-new-work-tablet-checklist): From the box to the first job in one sitting: battery, accounts, updates, screen lock, storage, the apps to test before you trust them, backup and the kit worth fitting on day one.
 - [Screen Brightness Explained: What Nits Mean for Outdoor Work](https://www.tugahardware.com/blog/screen-brightness-nits-explained): What a nit measures, why 350 and 1000 nits differ so much in sunlight, and how glare, auto brightness and battery decide which Tuga screen suits outdoor work.
 - [Rugged Phone or Rugged Tablet: Which Do You Need?](https://www.tugahardware.com/blog/rugged-phone-or-rugged-tablet): Pocket handheld or tablet screen? How the Tuga A6 compares with the A8 and A10 on size, screen, camera and price, and when one device or two makes sense.
 - [How to Protect Customer Data on a Work Tablet](https://www.tugahardware.com/blog/protect-customer-data-work-tablet): Screen lock, fingerprint, encryption and remote wipe for a work tablet, UK GDPR basics in plain English and what to do in the first hour after it goes missing.
