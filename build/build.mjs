@@ -2213,6 +2213,12 @@ if (!BLOG_IMAGE_POOL.length) throw new Error('build/content/blog-images.json lis
 function assignBlogImages(list) {
   const uses = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, 0]));
   const byFile = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, i]));
+  // Count every pin first, wherever it sits in the listing, so an unpinned
+  // post prefers a photo nothing else shows over one a later pin will use.
+  for (const post of list) {
+    const pinned = post.imagePin || BLOG_IMAGE_MANIFEST.pinned?.[post.slug];
+    if (pinned && uses.has(pinned)) uses.set(pinned, uses.get(pinned) + 1);
+  }
   let previous = null;
   for (const post of list) {
     const pinned = post.imagePin || BLOG_IMAGE_MANIFEST.pinned?.[post.slug];

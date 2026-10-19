@@ -29,9 +29,7 @@
         "ip68",
         "ip67",
         "rain",
-        "weather",
-        "cold",
-        "winter"
+        "weather"
       ],
       "credit": "Existing site photo"
     },
@@ -228,17 +226,6 @@
         "glare"
       ],
       "credit": "Kindel Media on Pexels, Pexels licence, https://www.pexels.com/photo/yellow-hardhat-worn-by-a-woman-engineer-8486980/"
-    },
-    {
-      "file": "blog-roofer.webp",
-      "tags": [
-        "roof",
-        "scaffold",
-        "height",
-        "drop",
-        "mil-std"
-      ],
-      "credit": "Ryan Stephens on Pexels, Pexels licence, https://www.pexels.com/photo/workers-renovating-roof-of-brick-house-in-texas-37677476/"
     },
     {
       "file": "blog-desk.webp",
