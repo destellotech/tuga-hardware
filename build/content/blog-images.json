@@ -1,0 +1,23 @@
+{
+  "_note": "Hero photo pool for /blog. Each entry: file in img/blog/ (run `npm run images` after adding one), tags = words that, found in a post's slug or title, make it a good match, and the credit. The build picks the best match per post, balances use and never repeats a photo on neighbouring cards. Pin a photo with an `image:` line in the post's meta block or in `pinned` below.",
+  "pinned": {
+    "best-rugged-tablets-construction": "blog-construction.webp",
+    "ip68-vs-ip67-waterproof-rating": "blog-waterproof.webp",
+    "rugged-vs-consumer-tablet-cost": "blog-cost.webp",
+    "best-tablets-field-engineers": "blog-field-engineer.webp",
+    "why-tradespeople-switching-rugged-tablets": "blog-tradespeople.webp",
+    "why-rugged-tablets-expensive": "blog-expensive.webp",
+    "best-budget-rugged-tablets-under-400": "blog-budget.webp",
+    "do-you-need-enterprise-rugged-tablet": "blog-enterprise.webp"
+  },
+  "images": [
+    { "file": "blog-construction.webp", "tags": ["construction", "site", "scaffold", "surveyor", "mil-std"], "credit": "Existing site photo" },
+    { "file": "blog-waterproof.webp", "tags": ["waterproof", "ip68", "ip67", "rain", "weather", "cold", "winter"], "credit": "Existing site photo" },
+    { "file": "blog-cost.webp", "tags": ["cost", "price", "warranty", "last", "lifespan"], "credit": "Existing site photo" },
+    { "file": "blog-field-engineer.webp", "tags": ["engineer", "field", "windows", "laptop", "ports", "ethernet"], "credit": "Existing site photo" },
+    { "file": "blog-tradespeople.webp", "tags": ["tradespeople", "tradesperson", "electrician", "trade", "team"], "credit": "Existing site photo" },
+    { "file": "blog-expensive.webp", "tags": ["expensive", "budget"], "credit": "Existing site photo" },
+    { "file": "blog-budget.webp", "tags": ["budget", "under-400", "cheap"], "credit": "Existing site photo" },
+    { "file": "blog-enterprise.webp", "tags": ["enterprise", "data", "security", "office", "facilities"], "credit": "Existing site photo" }
+  ]
+}
