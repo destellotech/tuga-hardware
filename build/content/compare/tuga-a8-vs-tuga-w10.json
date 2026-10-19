@@ -2,7 +2,7 @@
   "a": "tuga-a8",
   "b": "tuga-w10",
   "group": "cross",
-  "title": "Tuga A8 vs Tuga W10: Pocketable Android or Full Windows Tablet?",
+  "title": "Tuga A8 vs Tuga W10: One-Handed Android or Full Windows Tablet?",
   "description": "Tuga A8 (8 inch Android, £379) or Tuga W10 (10.1 inch Windows 11 Pro, £649)? £270 apart. Buy the A8 unless you need Windows, Ethernet or HDMI on site.",
   "summary": "£270 apart and different in almost everything: the A8 is the cheaper, brighter, one-handed Android tablet with the bigger battery; the W10 is a full Windows 11 Pro PC on an Intel N100 with Ethernet, HDMI, USB-A and a 10.1 inch screen, at 1197g.",
   "lede": "For anyone weighing a small, cheap Android tablet against the biggest Windows tablet in the range. The short answer: buy the Tuga A8 at £379 unless a program you rely on only installs on a Windows PC, or you need to plug a cable into a panel, a switch or a screen, in which case the Tuga W10 at £649 is the one.",
@@ -14,7 +14,7 @@
   "chooseA": [
     "Everything you use runs in a web browser or has an Android app, so Windows would be £270 spent on nothing you need.",
     "You read the screen outdoors: the A8 is rated at 1000 nits, and the W10 lists no brightness figure.",
-    "You hold the tablet in one hand up a ladder or carry it in a pocket: the A8 is the 8 inch tablet, and the W10 weighs 1197g.",
+    "You hold the tablet in one hand up a ladder or carry it in a van door pocket: the A8 is the 8 inch tablet, and the W10 weighs 1197g.",
     "You want the larger battery of the two: 8000mAh against 5000mAh, both removable, with dual SIM 4G, NFC and GPS as standard rather than optional.",
     "The tablet gets wet: IP67, which covers immersion, against IP65 on the W10, which covers water jets."
   ],
@@ -36,7 +36,7 @@
     },
     {
       "q": "How do the batteries compare?",
-      "a": "The A8 carries an 8000mAh battery and the W10 5000mAh, so the A8 starts the day with 60 percent more capacity. Both batteries are removable, so a charged spare can take over on either; spare batteries are not listed as an accessory, so <a href=\"/contact\">ask us</a> before you plan around one. The W10 lists 9V/3A fast charging over USB-C; the A8 does not list fast charging. Both take the 12V DC Car Charger (£26), and the Vehicle Mounting Dock (£109), which charges through its DC input, is listed for both. The Charging Dock (£49.99) is listed for the W10 only; see <a href=\"/accessories\">accessories</a>. Neither lists an operating temperature, so read our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in cold weather</a> before leaving either in a van overnight in winter."
+      "a": "The A8 carries an 8000mAh battery and the W10 5000mAh, so the A8 starts the day with 60 percent more capacity. Both batteries are removable, so a charged spare can take over on either; spare batteries are not listed as an accessory, so <a href=\"/contact\">ask us</a> before you plan around one. The W10 lists 9V/3A fast charging over USB-C; the A8 does not list fast charging. Both take the 12V DC Car Charger (£26), and the Vehicle Mounting Dock (£109), which has a DC power input, is listed for both. The Charging Dock (£49.99) is listed for the W10 only; see <a href=\"/accessories\">accessories</a>. Neither lists an operating temperature, so read our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in cold weather</a> before leaving either in a van overnight in winter."
     },
     {
       "q": "Which is tougher, the Tuga A8 or the Tuga W10?",

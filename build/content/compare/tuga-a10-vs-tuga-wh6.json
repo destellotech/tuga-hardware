@@ -32,7 +32,7 @@
     },
     {
       "q": "Which is tougher, the A10 or the WH6?",
-      "a": "The A10 is better sealed, and both list MIL-STD-810H. The A10 is IP68, which covers dust and immersion, while the WH6 is IP65, which covers dust and water jets but not immersion. Both list MIL-STD-810H and an operating range of -20°C to 60°C. The WH6 also lists a 1.5 metre drop rating; the A10 lists no drop figure, so there is nothing to compare on that line. A 6.5 inch handheld at 470g is also easier to keep hold of than a 10.1 inch tablet at 680g, which is why the A10 comes with a hand strap in the box. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what each number is tested for, and the <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explains why two devices with the same rating can have been tested quite differently."
+      "a": "The A10 is better sealed, and both list MIL-STD-810H. The A10 is IP68, which covers dust and immersion, while the WH6 is IP65, which covers dust and water jets but not immersion. Both list MIL-STD-810H and an operating range of -20°C to 60°C. The WH6 also lists a 1.5 metre drop rating; the A10 lists no drop figure, so there is nothing to compare on that line. A 6.5 inch handheld at 470g is also easier to keep hold of than a 10.1 inch tablet at 680g; the A10 comes with a hand strap in the box. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what each number is tested for, and the <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explains why two devices with the same rating can have been tested quite differently."
     },
     {
       "q": "How do the batteries compare?",
