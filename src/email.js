@@ -247,7 +247,7 @@ export async function sendShippingNotification(env, email, trackingNumber, carri
 // ---------------------------------------------------------------------------
 // Review request, sent once per order by the daily cron (src/reviews.js)
 // ---------------------------------------------------------------------------
-export async function sendReviewRequest(env, email, { items, reviewUrl }) {
+export async function sendReviewRequest(env, email, { items, reviewUrl, idempotencyKey }) {
   const names = (items || []).map((i) => escapeHtml(i.name)).join(', ') || 'your order';
 
   const bodyHtml = `
@@ -277,6 +277,7 @@ export async function sendReviewRequest(env, email, { items, reviewUrl }) {
     subject: 'How is your Tuga holding up?',
     html: emailWrapper('How is it holding up? — Tuga Hardware', bodyHtml),
     replyTo: SUPPORT_EMAIL,
+    idempotencyKey,
   });
 }
 

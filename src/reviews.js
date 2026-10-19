@@ -79,21 +79,33 @@ export async function sendReviewRequests(env) {
       if (!(age >= REVIEW_DELAY_DAYS * DAY_MS && age <= REVIEW_MAX_AGE_DAYS * DAY_MS)) continue;
 
       const token = crypto.randomUUID();
+      // Mark the order before sending. If the mark were written after the
+      // send and that write failed, tomorrow's run would email the customer
+      // again; a mark with no email behind it is the lesser harm, and the
+      // send failure below clears it so the next run can retry.
+      let marked = false;
       try {
         await env.ORDERS.put(`reviewtoken:${token}`, order.orderId, {
           expirationTtl: 120 * 24 * 60 * 60,
         });
-        await sendReviewRequest(env, order.customerEmail, {
-          items: order.items,
-          reviewUrl: `${env.SITE_URL}/review?t=${token}`,
-        });
         await updateOrder(env.ORDERS, order.orderId, {
           reviewRequestedAt: new Date().toISOString(),
         });
+        marked = true;
+        await sendReviewRequest(env, order.customerEmail, {
+          items: order.items,
+          reviewUrl: `${env.SITE_URL}/review?t=${token}`,
+          // Resend drops a repeat with the same key, so even a retry of
+          // this run cannot send twice.
+          idempotencyKey: `review-${order.orderId}`,
+        });
         sent++;
       } catch (err) {
-        // Leave reviewRequestedAt unset so tomorrow's run tries again.
         console.error('Review request failed for', order.orderId, err);
+        if (marked) {
+          await updateOrder(env.ORDERS, order.orderId, { reviewRequestedAt: null })
+            .catch((e) => console.error('Could not clear review mark for', order.orderId, e));
+        }
       }
     }
   } while (cursor);
