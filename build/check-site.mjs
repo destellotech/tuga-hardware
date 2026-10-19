@@ -43,14 +43,22 @@ function siteFiles(exts) {
 
 // ---------------------------------------------------------------- drift
 if (steps.includes('drift')) {
-  const changed = execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf8' })
-    .split('\n')
-    .filter(Boolean)
-    .filter((l) => !/package(-lock)?\.json$/.test(l));
+  // Sitemap <lastmod> and BlogPosting dateModified come from the last git
+  // commit touching a page's sources, so a squash merge or a rebuild on a
+  // later day moves them without anyone editing anything. Ignore those
+  // lines: the check is for hand-edited output and forgotten rebuilds.
+  const git = (args) => execSync(`git ${args}`, { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
+  const untracked = git('ls-files --others --exclude-standard');
+  // --name-only ignores -I, so ask for the real diff of each file and keep
+  // only those with something left once the date lines are dropped.
+  const modified = git('diff --name-only')
+    .filter((f) => !/package(-lock)?\.json$/.test(f))
+    .filter((f) => git(`diff -I '<lastmod>|"dateModified"' -- "${f}"`).length > 0);
+  const changed = [...modified.map((f) => ` M ${f}`), ...untracked.map((f) => `?? ${f}`)];
   if (changed.length) {
     fail(`build output differs from the committed files (run npm run build and commit):\n  ${changed.join('\n  ')}`);
   } else {
-    ok('drift: committed files match a fresh build');
+    ok('drift: committed files match a fresh build (date-only changes ignored)');
   }
 }
 

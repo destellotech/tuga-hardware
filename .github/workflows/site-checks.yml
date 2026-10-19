@@ -14,6 +14,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          # build.mjs dates each page from the last commit touching its
+          # sources; a shallow clone would date everything "today".
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
