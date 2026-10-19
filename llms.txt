@@ -50,10 +50,16 @@ Scanner versions: Tuga WH6 with Barcode Scanner £779; Tuga W8 with 2D Scanner �
 ## Choosing
 
 - [Which Tuga? picker](https://www.tugahardware.com/which-tuga): four questions to a recommendation
+- [Rugged tablets for agriculture and grounds work](https://www.tugahardware.com/for/agriculture): Rugged tablets for UK farms, estates and grounds teams. Crop and livestock records, field maps and cab mounting on sealed tablets built for mud, rain and frost.
 - [Rugged tablets for construction sites](https://www.tugahardware.com/for/construction): Rugged tablets for UK construction sites. Big enough to read drawings, sealed against dust and rain, with honest advice on which size suits managers and trades.
 - [Rugged tablets for electricians](https://www.tugahardware.com/for/electricians): Rugged Android tablets and handhelds for UK electricians. Sealed against plaster dust and damp, readable in lofts, and priced for a sole trader or a small firm.
+- [Rugged tablets for facilities and maintenance teams](https://www.tugahardware.com/for/facilities-management): Rugged tablets for UK facilities and maintenance teams. CMMS work orders, asset tags, meter readings and photos on shared devices that survive plant rooms.
 - [Rugged tablets for field service engineers](https://www.tugahardware.com/for/field-service): Rugged tablets for UK field service engineers. Job sheets, parts lookups and customer sign-off on a device that lives in the van and survives plant rooms.
 - [Rugged devices for logistics and delivery](https://www.tugahardware.com/for/logistics): Rugged handhelds for UK delivery drivers and logistics teams. Proof of delivery, scanning and navigation on IP67 handhelds with removable batteries, from £349.
+- [Rugged tablets for plumbers and heating engineers](https://www.tugahardware.com/for/plumbers-heating): Rugged tablets for UK plumbers and heating engineers. Wet hands, dark cupboards, boiler software and certificates on an IP67 device that lives in the van.
+- [Rugged tablets for surveyors and site managers](https://www.tugahardware.com/for/surveyors): Rugged tablets for UK surveyors and site managers. A1 drawings, mark-ups, snagging and photos on a 10.1 inch IP68 tablet at 680g, or Windows when CAD needs it.
+- [Rugged tablets for engineering and utilities work](https://www.tugahardware.com/for/utilities): Rugged tablets for UK water, gas, power and telecoms engineers. Windows diagnostic and GIS tools with Ethernet and HDMI on board, or Android for work orders.
+- [Rugged handhelds for warehouse and stock control](https://www.tugahardware.com/for/warehouse): Rugged handhelds for UK warehouses and stockrooms. Goods in, picking and stocktakes on a handheld with a built-in 2D scanner from £349, or Windows where needed.
 
 ## Compare
 

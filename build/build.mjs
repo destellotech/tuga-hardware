@@ -424,14 +424,44 @@ const TRADES = [
   {
     icon: icons.factory(24),
     name: 'Engineering & utilities',
+    page: '/for/utilities',
     copy: 'Diagnostic software, GIS and network tools that never made it to mobile. Ethernet on board for plugging straight into plant.',
     pick: 'tuga-w10',
   },
   {
     icon: icons.leaf(24),
     name: 'Agriculture & grounds',
+    page: '/for/agriculture',
     copy: 'Crop records, livestock tracking and field mapping. Sealed against mud, rain and frost, with a big screen for maps.',
     pick: 'tuga-a10',
+  },
+  {
+    icon: icons.droplet(24),
+    name: 'Plumbing & heating',
+    page: '/for/plumbers-heating',
+    copy: 'Boiler manufacturer apps, digital certificates and photos under the sink. Sealed against the wet, with a flash for the dark corners.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.ruler(24),
+    name: 'Surveyors & site managers',
+    page: '/for/surveyors',
+    copy: 'A1 drawings, mark-ups and snagging on a 10 inch screen you can read on site. Windows when your survey software demands it.',
+    pick: 'tuga-a10',
+  },
+  {
+    icon: icons.wrench(24),
+    name: 'Facilities & maintenance',
+    page: '/for/facilities-management',
+    copy: 'Work orders, asset tags and meter photos in plant rooms and on roofs. Shared devices that live on a charging dock between shifts.',
+    pick: 'tuga-a10',
+  },
+  {
+    icon: icons.box(24),
+    name: 'Warehouse & stock',
+    page: '/for/warehouse',
+    copy: 'Goods in, picking and stocktakes with a built-in 2D scan engine. A handheld that fits a holster and survives the loading bay.',
+    pick: 'tuga-a6',
   },
 ];
 
