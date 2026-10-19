@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tuga Hardware | Rugged Tablets for UK Tradespeople</title>
   <meta name="description" content="Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. From £349 with free UK delivery.">
@@ -802,18 +817,5 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>
