@@ -14,3 +14,4 @@ package.json
 package-lock.json
 data/images.json
 data/reviews.json
+.github
