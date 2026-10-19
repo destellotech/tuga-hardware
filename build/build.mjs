@@ -250,7 +250,7 @@ const breadcrumbSchema = (trail) => ({
    ========================================================================== */
 
 const COMPARE_DIR = join(ROOT, 'build', 'content', 'compare');
-const COMPARE_GROUPS = ['size', 'android', 'windows'];
+const COMPARE_GROUPS = ['size', 'android', 'windows', 'cross'];
 
 /** Device name without the brand: "Tuga A8" -> "A8". */
 const shortName = (p) => p.name.replace(/^Tuga\s+/, '');
@@ -2839,6 +2839,12 @@ const COMPARE_SECTIONS = [
     tag: 'The Windows range',
     title: 'Pick a size on Windows',
     lede: 'Three Windows 11 devices, one per size. Ports, screen and weight against the price.',
+  },
+  {
+    group: 'cross',
+    tag: 'Different size, different system',
+    title: 'Across the range',
+    lede: 'A bigger Android screen against a smaller Windows device, or the other way round. For buyers torn between a size and an operating system at once.',
   },
 ];
 
