@@ -47,7 +47,7 @@ export async function sendReviewRequests(env) {
       // when their review request is sent.
       if (metadata) {
         if (metadata.reviewRequestedAt || !metadata.paidAt) continue;
-        if (metadata.status === 'refunded' || metadata.status === 'cancelled') continue;
+        if (['refunded', 'cancelled', 'disputed'].includes(metadata.status)) continue;
         const metaAge = now - Date.parse(metadata.paidAt);
         if (!(metaAge >= REVIEW_DELAY_DAYS * DAY_MS && metaAge <= REVIEW_MAX_AGE_DAYS * DAY_MS)) continue;
       }
@@ -73,7 +73,7 @@ export async function sendReviewRequests(env) {
       }
 
       if (order.reviewRequestedAt || !order.customerEmail || !order.paidAt) continue;
-      if (order.status === 'refunded' || order.status === 'cancelled') continue;
+      if (['refunded', 'cancelled', 'disputed'].includes(order.status)) continue;
 
       const age = now - Date.parse(order.paidAt);
       if (!(age >= REVIEW_DELAY_DAYS * DAY_MS && age <= REVIEW_MAX_AGE_DAYS * DAY_MS)) continue;
