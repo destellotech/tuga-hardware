@@ -30,7 +30,7 @@
     },
     {
       "requirement": "Timesheets with a timer, splits and uncharged time, including a Timesheet User role",
-      "detail": "The vendor documents adding time from the job card or the Timesheet screen, a blue start button that runs while on site and a Stop timer action, splitting one entry into up to six work types or uncharged reasons such as travel or a break, and uncharged time such as toolbox meetings. Labour rates must be set up on the web product and assigned to the user before they appear in Fergus Go. A cheaper Timesheet User role, priced separately on the UK pricing page, gets the schedule, time entries, and the job card tools for photos, files, notes, forms, hazards and checklists.",
+      "detail": "The vendor documents adding time from the job card or the Timesheet screen, a blue start button that runs while on site and a Stop timer action, splitting one entry into up to six segments, each a work type or an uncharged reason such as travel or a break, and uncharged time such as toolbox meetings. Labour rates must be set up on the web product and assigned to the user before they appear in Fergus Go. A cheaper Timesheet User role, priced separately on the UK pricing page, gets the schedule, time entries, and the job card tools for photos, files, notes, forms, hazards and checklists.",
       "source_url": "https://help.fergus.com/en/articles/11568296-fergus-go-timesheet-user"
     },
     {
