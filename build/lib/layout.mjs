@@ -21,8 +21,16 @@ export const ROOT = join(here, '..', '..');
    Cloudflare PoPs) end up stuck on whichever bytes they cached first, for up
    to a year. This bit product photography on 2026-07-29: replacing an image
    in place left some edges serving the old file under the unchanged URL. */
-const assetHash = (rel) =>
-  createHash('sha256').update(readFileSync(join(ROOT, rel))).digest('hex').slice(0, 10);
+// Text assets are hashed with LF line endings, so a Windows checkout (CRLF
+// via core.autocrlf) builds the same ?v= as the Linux CI build and does not
+// fail the drift check. Binary files are hashed as they are.
+const assetHash = (rel) => {
+  const raw = readFileSync(join(ROOT, rel));
+  const data = /\.(css|js|mjs|svg|json|txt|xml|html)$/i.test(rel)
+    ? raw.toString('utf8').replace(/\r\n/g, '\n')
+    : raw;
+  return createHash('sha256').update(data).digest('hex').slice(0, 10);
+};
 
 const CSS_V = assetHash('css/style.css');
 const JS_V = assetHash('js/app.js');

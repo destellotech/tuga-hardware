@@ -2221,6 +2221,7 @@ const BLOG_IMAGES = {
   'best-rugged-tablets-landscapers-gardeners': 'blog-waterproof.webp',
   'going-paperless-tradesperson-guide': 'blog-tradespeople.webp',
   'buying-rugged-tablets-small-team': 'blog-enterprise.webp',
+  'setting-up-a-new-work-tablet-checklist': 'blog-tradespeople.webp',
 };
 
 /** Read a blog fragment from build/content/blog/. */
