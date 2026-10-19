@@ -22,7 +22,7 @@ Scanner versions: Tuga WH6 with Barcode Scanner Â£779; Tuga W8 with 2D Scanner Â
 
 ## Works with your software
 
-- [Rugged tablets for maintenance and field service apps](https://www.tugahardware.com/works-with/)
+- [Rugged tablets for job management, construction and maintenance apps](https://www.tugahardware.com/works-with/)
 - [Agility CMMS/EAM and the AgilityMobile app](https://www.tugahardware.com/works-with/agility-cmms-ssg-insight): Which Tuga rugged Android tablet fits SSG Insight's AgilityMobile app for maintenance engineers, with offline working and in-app QR scanning.
 - [BigChange](https://www.tugahardware.com/works-with/bigchange): BigChange JobWatch needs Android 9 or later. The Tuga A8 (Android 12, 6GB RAM, 1000 nit screen, removable battery) meets it and docks in the van.
 - [Commusoft](https://www.tugahardware.com/works-with/commusoft): Commusoft needs Android 12, 3GB RAM, 32GB and a 5.5 inch screen. The Tuga A10 (Android 14, 8GB RAM, IP68) clears each one; the A8 meets Android 12 exactly.

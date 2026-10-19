@@ -3072,7 +3072,7 @@ Scanner versions: ${data.products.filter((p) => p.isVariant).map((v) => `${v.nam
 
 ## Works with your software
 
-- [Rugged tablets for maintenance and field service apps](${SITE.origin}/works-with/)
+- [Rugged tablets for job management, construction and maintenance apps](${SITE.origin}/works-with/)
 ${readdirSync(join(ROOT, 'build', 'content', 'works-with'))
   .filter((file) => file.endsWith('.json') && !file.startsWith('_'))
   .map((file) => JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'works-with', file), 'utf8')))
@@ -3358,9 +3358,9 @@ if (worksWith.length) {
   write(
     'works-with/index.html',
     page({
-      title: 'Rugged tablets for job management and field apps | Tuga Hardware',
+      title: 'Rugged tablets for job management, construction and field apps',
       description:
-        'Which Tuga rugged tablet runs your job management, CMMS or inspection app. Published requirements checked against each device, with trial units available.',
+        'Which Tuga rugged tablet runs your job management, construction, CMMS or inspection app. Published requirements checked against each device, with trial units available.',
       path: '/works-with/',
       active: 'works-with',
       schema: [orgSchema, breadcrumbSchema(worksWithTrail)],
@@ -3370,7 +3370,7 @@ if (worksWith.length) {
 ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
         ${eyebrow('Works with')}
         <h1>Rugged tablets for the software your team already runs</h1>
-        <p class="lede">Job management, maintenance and inspection apps publish what they need from a device. We check those requirements against each Tuga tablet and say plainly which one fits, and where it does not.</p>
+        <p class="lede">Job management, construction, maintenance and inspection apps publish what they need from a device. We check those requirements against each Tuga tablet and say plainly which one fits, and where it does not.</p>
       </div>
     </section>
 
