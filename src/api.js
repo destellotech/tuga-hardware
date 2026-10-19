@@ -475,6 +475,24 @@ const receiptSent = (record) =>
   Boolean(record?.receiptSentAt) || record?.emailVia === 'stripe-receipt';
 
 /**
+ * A claim older than this with no order behind it is treated as abandoned
+ * (the holder's request died between claiming and saving). Longer than KV's
+ * worst-case replication delay of about a minute, so a slow read cannot be
+ * mistaken for a dead holder.
+ */
+const ORDER_CLAIM_TTL_MS = 2 * 60 * 1000;
+
+/** Re-read an order a few times while a concurrent request saves it. */
+async function waitForOrder(kv, orderId, attempts = 3, delayMs = 1000) {
+  for (let i = 0; i < attempts; i++) {
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+    const record = await getOrder(kv, orderId);
+    if (record) return record;
+  }
+  return null;
+}
+
+/**
  * Save and email an order unless it has already been recorded.
  * Returns the stored record.
  */
@@ -490,10 +508,30 @@ async function recordOrder(env, orderDetails) {
   }
 
   if (!record) {
-    console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
-    record = { ...orderDetails, alertPending: true };
+    // The provider's webhook and the customer's confirmation page both call
+    // this within seconds of payment, usually from different locations. KV
+    // is eventually consistent, so each can read "no order yet" and both
+    // would save, file, alert and email. D1 is not, so claim the order there
+    // first: one request records it and the other waits for the record.
     if (env.ORDERS) {
-      record = await saveOrder(env.ORDERS, orderDetails.orderId, record);
+      const store = routedStore(env);
+      const claimKey = `claim:order:${orderDetails.orderId}`;
+      if (!(await store.claim(claimKey, ORDER_CLAIM_TTL_MS))) {
+        console.log(`${orderDetails.provider} order ${orderDetails.orderId} is being recorded by a concurrent request`);
+        return (await waitForOrder(env.ORDERS, orderDetails.orderId)) || { ...orderDetails };
+      }
+      console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
+      try {
+        record = await saveOrder(env.ORDERS, orderDetails.orderId, { ...orderDetails, alertPending: true });
+      } catch (err) {
+        // Nothing was saved, so let the next caller (a webhook retry, a page
+        // reload) record it instead of waiting on a claim that leads nowhere.
+        await store.delete(claimKey).catch(() => {});
+        throw err;
+      }
+    } else {
+      console.log(`${orderDetails.provider} order received:`, orderDetails.orderId);
+      record = { ...orderDetails, alertPending: true };
     }
   }
 
@@ -678,6 +716,16 @@ async function recordPayPalOrder(orderId, env) {
 
   const purchaseUnit = order.purchase_units?.[0] || {};
   const shipping = purchaseUnit.shipping || {};
+
+  // A COMPLETED order can still carry a PENDING capture (PayPal risk review,
+  // an eCheque). No money has arrived, so do not record it as paid: the
+  // PAYMENT.CAPTURE.COMPLETED webhook re-reads the order once it clears. A
+  // DECLINED or FAILED capture is simply not an order.
+  const capture = purchaseUnit.payments?.captures?.[0];
+  if (capture && capture.status !== 'COMPLETED') {
+    console.warn(`PayPal order ${order.id} capture is ${capture.status}; not recorded`);
+    return { paid: false, reason: capture.status === 'PENDING' ? 'processing' : undefined };
+  }
 
   const record = await recordOrder(env, {
     orderId: order.id,
@@ -1407,6 +1455,9 @@ function getDiscountPercent(totalQty) {
  * Implements the same algorithm as Stripe's official SDK.
  */
 async function verifyStripeSignature(rawBody, signatureHeader, secret) {
+  // An empty key would make the HMAC below verify anything signed with an
+  // empty secret. Fail closed instead.
+  if (!secret || !signatureHeader) return false;
   try {
     // Parse the signature header
     // Stripe can send several v1 signatures (e.g. while a secret is rolled).
