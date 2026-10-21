@@ -72,6 +72,7 @@ Scanner versions: Tuga WH6 with Barcode Scanner Â£779; Tuga W8 with 2D Scanner Â
 
 - [Bulk orders and calculator](https://www.tugahardware.com/bulk): automatic team discounts
 - [Trade accounts](https://www.tugahardware.com/trade): order on invoice, pay by bank transfer
+- [Bespoke requests](https://www.tugahardware.com/bespoke): custom set-up, branding, bundles or specs
 - [Accessories](https://www.tugahardware.com/accessories)
 - [Shipping and returns](https://www.tugahardware.com/shipping-returns)
 - [Contact](https://www.tugahardware.com/contact): support@tugahardware.com
