@@ -577,5 +577,37 @@
       "warrantyFor": "tuga-wh6",
       "tier": "3yr"
     }
+  ],
+  "upgrades": [
+    {
+      "id": "upg-ram16-tuga-w10",
+      "name": "16GB RAM upgrade for Tuga W10",
+      "label": "16GB RAM",
+      "summary": "Doubles the memory from 8GB to 16GB. Fitted before dispatch.",
+      "price": 69,
+      "currency": "GBP",
+      "upgradeFor": "tuga-w10",
+      "group": "ram"
+    },
+    {
+      "id": "upg-ssd256-tuga-w10",
+      "name": "256GB storage upgrade for Tuga W10",
+      "label": "256GB storage",
+      "summary": "Doubles the storage from 128GB to 256GB. Fitted before dispatch.",
+      "price": 69,
+      "currency": "GBP",
+      "upgradeFor": "tuga-w10",
+      "group": "storage"
+    },
+    {
+      "id": "upg-ssd512-tuga-w10",
+      "name": "512GB storage upgrade for Tuga W10",
+      "label": "512GB storage",
+      "summary": "Quadruples the storage from 128GB to 512GB. Fitted before dispatch.",
+      "price": 125,
+      "currency": "GBP",
+      "upgradeFor": "tuga-w10",
+      "group": "storage"
+    }
   ]
 }

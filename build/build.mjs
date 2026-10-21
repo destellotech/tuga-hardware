@@ -26,6 +26,7 @@ import {
   warranty,
   warrantyTier,
   variantsOf,
+  upgradesFor,
   esc,
   money,
   icons,
@@ -140,6 +141,29 @@ function variantChooser(p, variants) {
             <legend>${eyebrow('Version')}</legend>
             ${opt(p, `${p.name}`, 'Scan with the camera through your app', true)}
             ${variants.map((v) => opt(v, v.name, `Integrated 2D barcode scanner, ${money(v.price - p.price)} more`, false)).join('')}
+          </fieldset>`;
+}
+
+/** Factory upgrades under a product's buy box. RAM is a checkbox; storage is
+    a radio group that starts on the standard size. Ticked SKUs are added with
+    the device, one per unit (js/app.js, initAddToCart). */
+function upgradeChooser(p) {
+  const upgrades = upgradesFor(p.id);
+  if (!upgrades.length) return '';
+  const row = (u, type, name, checked, label, text) => `
+            <label class="protect-opt">
+              <input type="${type}" name="${name}" value="${u ? esc(u.id) : ''}" data-upgrade-choice${checked ? ' checked' : ''}>
+              <span class="protect-text"><strong>${esc(label)}</strong>${esc(text)}</span>
+              <span class="protect-price">${u ? `+${money(u.price)}<small>per device</small>` : 'Included'}</span>
+            </label>`;
+  const ram = upgrades.filter((u) => u.group === 'ram');
+  const storage = upgrades.filter((u) => u.group === 'storage');
+  return `
+          <fieldset class="protect" data-upgrade-chooser>
+            <legend>${eyebrow('Upgrades')}</legend>
+            ${ram.map((u) => row(u, 'checkbox', `upg-${u.group}`, false, u.label, u.summary)).join('')}
+            ${storage.length ? row(null, 'radio', 'upg-storage', true, `${p.specs.storage} storage`, 'Standard') : ''}
+            ${storage.map((u) => row(u, 'radio', 'upg-storage', false, u.label, u.summary)).join('')}
           </fieldset>`;
 }
 
@@ -912,7 +936,7 @@ ${breadcrumbs(trail)}
             <p class="pdp-paused" role="status">${esc(SALES_PAUSED_MESSAGE)}</p>
             <a class="btn btn-primary btn-lg" href="${quoteUrl(p.name)}">Ask about availability</a>
           </div>`
-              : `${variantChooser(p, variants)}${warrantyChooser(p)}
+              : `${variantChooser(p, variants)}${upgradeChooser(p)}${warrantyChooser(p)}
           <div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>

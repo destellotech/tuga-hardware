@@ -76,6 +76,10 @@ export const accessories = data.accessories;
 export const warranty = data.warranty ?? { tiers: [], careMinUnits: 5 };
 export const warrantyTier = (id) => warranty.tiers.find((t) => t.id === id);
 
+/** Factory upgrades sold for a device (scanner variants share the base device's). */
+export const upgradesFor = (id) =>
+  (data.upgrades ?? []).filter((u) => u.upgradeFor === id.replace(/-scanner$/, ''));
+
 export const variantsOf = (id) =>
   data.products.filter((p) => p.isVariant && p.variantOf === id);
 
