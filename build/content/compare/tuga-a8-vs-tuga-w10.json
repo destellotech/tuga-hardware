@@ -1,0 +1,52 @@
+{
+  "a": "tuga-a8",
+  "b": "tuga-w10",
+  "group": "cross",
+  "title": "Tuga A8 vs Tuga W10: One-Handed Android or Full Windows Tablet?",
+  "description": "Tuga A8 (8 inch Android, £379) or Tuga W10 (10.1 inch Windows 11 Pro, £649)? £270 apart. Buy the A8 unless you need Windows, Ethernet or HDMI on site.",
+  "summary": "£270 apart and different in almost everything: the A8 is the cheaper, brighter, one-handed Android tablet with the bigger battery; the W10 is a full Windows 11 Pro PC on an Intel N100 with Ethernet, HDMI, USB-A and a 10.1 inch screen, at 1197g.",
+  "lede": "For anyone weighing a small, cheap Android tablet against the biggest Windows tablet in the range. The short answer: buy the Tuga A8 at £379 unless a program you rely on only installs on a Windows PC, or you need to plug a cable into a panel, a switch or a screen, in which case the Tuga W10 at £649 is the one.",
+  "verdict": [
+    "Software decides this one, and then the ports. The Tuga A8 costs £379 and the Tuga W10 costs £649, a gap of £270, and they are not two versions of the same tablet. The A8 is an 8 inch Android 12 tablet with a MediaTek Helio P35, 6GB of RAM and 128GB of storage, built to be held in one hand and dropped into a van door pocket. The W10 is a 10.1 inch Windows 11 Pro tablet on an Intel N100 with 8GB of RAM and 128GB, and the point of it is the ports: RJ45 Ethernet, HDMI, USB-A and USB-C on the body, so it plugs straight into plant, panels and network gear. If everything you use runs in a web browser or has an Android app, and nothing you do needs a cable, the W10 is £270 spent on a PC you do not need, and it weighs 1197g.",
+    "On the screen and the battery, the A8 is ahead on paper. It is rated at 1000 nits, where the W10 lists no brightness figure, so if you read the screen on a roof or in a yard the A8 is the safer choice of the two. Both have 1280 x 800 resolution, so the W10 spreads the same number of pixels over a bigger screen rather than showing more detail. The A8's 8000mAh battery is larger than the W10's 5000mAh, and both are removable, so a charged spare can take over on either. The A8 has dual SIM 4G, NFC and GPS built in and a 13MP autofocus rear camera; on the W10, 4G and GPS are listed as options rather than standard, and the rear camera is 5MP. On sealing, the A8 is IP67, which covers immersion, against IP65 on the W10, which covers water jets. Neither lists a MIL-STD rating or an operating temperature, and the A8 lists no weight. One more thing: the A8 runs Android 12, an older version, so check the minimum Android version your apps ask for.",
+    "Pay the £270 when a program only installs on a Windows PC, or when the job needs a wired connection: commissioning software for a panel, a network switch that has never seen Wi-Fi, or a screen in a site office over HDMI. The W10 also has a microSD slot, NFC and a pogo pin dock connector, and the Charging Dock (£49.99) is listed for it but not the A8. The W10 with 2D Scanner costs £729, £80 over the standard W10, and there is no scanner version of the A8. Ask your software provider whether the apps you use run on the device before ordering either, and try them on the device once it arrives. The five minute test in our <a href=\"/blog/android-vs-windows-rugged-tablet\">Android or Windows guide</a> is the place to start, our <a href=\"/blog/8-inch-or-10-inch-rugged-tablet\">8 inch or 10 inch guide</a> covers the size question on its own, and the <a href=\"/for/field-service\">field service page</a> shows where each fits that job."
+  ],
+  "chooseA": [
+    "Everything you use runs in a web browser or has an Android app, so Windows would be £270 spent on nothing you need.",
+    "You read the screen outdoors: the A8 is rated at 1000 nits, and the W10 lists no brightness figure.",
+    "You hold the tablet in one hand up a ladder or carry it in a van door pocket: the A8 is the 8 inch tablet, and the W10 weighs 1197g.",
+    "You want the larger battery of the two: 8000mAh against 5000mAh, both removable, with dual SIM 4G, NFC and GPS as standard rather than optional.",
+    "The tablet gets wet: IP67, which covers immersion, against IP65 on the W10, which covers water jets."
+  ],
+  "chooseB": [
+    "One program you rely on only installs on a Windows PC, which settles it on its own.",
+    "You plug into equipment with a cable: the W10 has RJ45 Ethernet, HDMI, USB-A and USB-C on the body, where the A8 has USB-C, a DC input and pogo pin contacts.",
+    "You want the bigger screen for drawings, spreadsheets and desktop programs: 10.1 inches against 8, with 8GB of RAM against 6GB.",
+    "You want a desk dock to drop it into: the Charging Dock (£49.99) is listed for the W10 and not for the A8.",
+    "You scan barcodes all day: the W10 with 2D Scanner is £729, £80 over the standard W10, and there is no scanner version of the A8."
+  ],
+  "faq": [
+    {
+      "q": "Is the Tuga W10 worth £270 more than the Tuga A8?",
+      "a": "Only if you need Windows or the ports. The W10 costs £649 and the A8 £379. The £270 buys Windows 11 Pro on an Intel N100, 8GB of RAM against 6GB, a 10.1 inch screen against 8, and RJ45 Ethernet, HDMI and USB-A on the body, plus the option of a 2D scanner, a fingerprint reader and a UHF RFID reader. What it does not buy is a brighter screen, a bigger battery or better sealing: the A8 is rated at 1000 nits where the W10 lists no figure, carries 8000mAh against 5000mAh, and is IP67 against IP65. If nothing on the Windows list is on yours, buy the <a href=\"/products/tuga-a8\">Tuga A8</a>. Both include the 12 month warranty, there is no VAT to add to either price, and delivery is free to UK addresses in 7 to 10 working days."
+    },
+    {
+      "q": "Does the Tuga W10 have 4G?",
+      "a": "As an option, not as standard. The W10's listed connectivity is dual-band Wi-Fi 5, Bluetooth 5.2, NFC and 100Mbps Ethernet, with 4G LTE and GPS listed as options, so if you need a mobile connection away from Wi-Fi, <a href=\"/contact\">ask us</a> about the 4G option before you order. The A8 has 4G with dual SIM, NFC and GPS, GLONASS, Galileo and BeiDou built in at £379, which is one reason it suits a tablet that lives in the van and goes from site to site. Our guide to <a href=\"/blog/4g-5g-or-wifi-only-site-connectivity\">4G, 5G or Wi-Fi only</a> goes through when a SIM in the tablet is worth having."
+    },
+    {
+      "q": "How do the batteries compare?",
+      "a": "The A8 carries an 8000mAh battery and the W10 5000mAh, so the A8 starts the day with 60 percent more capacity. Both batteries are removable, so a charged spare can take over on either; spare batteries are not listed as an accessory, so <a href=\"/contact\">ask us</a> before you plan around one. The W10 lists 9V/3A fast charging over USB-C; the A8 does not list fast charging. Both take the 12V DC Car Charger (£26), and the Vehicle Mounting Dock (£109), which has a DC power input, is listed for both. The Charging Dock (£49.99) is listed for the W10 only; see <a href=\"/accessories\">accessories</a>. Neither lists an operating temperature, so read our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in cold weather</a> before leaving either in a van overnight in winter."
+    },
+    {
+      "q": "Which is tougher, the Tuga A8 or the Tuga W10?",
+      "a": "On what is listed, the A8 is better sealed. It is IP67, which covers dust and immersion, while the W10 is IP65, which covers dust and water jets but not immersion. Beyond that there is little to compare: neither lists a MIL-STD rating, a drop rating or an operating temperature, and the A8 lists no weight. The W10 weighs 1197g and measures 280 x 198 x 22mm, which matters if it is carried rather than docked or set on a bench. The A8 has AGC glass on an 8 inch screen. If you want a tablet in the range with a listed MIL-STD rating, the <a href=\"/products/tuga-a10\">Tuga A10</a> (£449, MIL-STD-810H) and the <a href=\"/products/tuga-w8\">Tuga W8</a> (£629, MIL-STD-810G) are the ones to look at. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what each number is tested for."
+    }
+  ],
+  "guides": [
+    "/blog/android-vs-windows-rugged-tablet",
+    "/blog/8-inch-or-10-inch-rugged-tablet",
+    "/blog/screen-brightness-nits-explained",
+    "/blog/ip68-vs-ip67-waterproof-rating"
+  ]
+}
