@@ -1,0 +1,173 @@
+{
+  "slug": "planradar",
+  "software": "PlanRadar",
+  "vendor": "PlanRadar GmbH",
+  "vendor_url": "https://www.planradar.com/gb/",
+  "title": "Rugged tablet for PlanRadar: UK buyer's guide",
+  "meta_description": "PlanRadar publishes Android 10 with 4GB RAM and over 32GB storage. The Tuga A10 (Android 14, 8GB RAM, 128GB, IP68) meets each for tickets, plans and diaries.",
+  "target_query": "best tablet for PlanRadar",
+  "h1": "Rugged tablet for PlanRadar",
+  "intro": [
+    "PlanRadar is construction and property documentation software from PlanRadar GmbH, a Vienna company that lists a London office at 79-81 Borough Road on its contact page and prices in pounds on its UK site. The vendor describes it as one platform for project documentation, processes and reporting: tasks and defects are recorded as tickets pinned to a digital plan or a BIM model, with photos, text, voice messages and documents attached, and the same tickets feed site diaries, snag lists, inspection forms and handover reports exported as PDF or Excel. The office works in the web app in a browser; the site team works in the mobile app.",
+    "The vendor's own help centre draws that line clearly. The web app is described as optimised for back office work, reporting, statistics and account setup, and it cannot take new photos, videos or voice recordings, only upload existing files. The mobile app is where tickets are created on site, where GPS positions are added, where QR codes and NFC tags open tickets, and where work carries on without a connection and syncs later. That is a device that gets carried round a half-built floor plate, held up against a wall to photograph a defect, and used in the rain on an external inspection, which is a hard life for a consumer tablet.",
+    "This page sets out what PlanRadar publishes about the devices its apps run on, which Tuga rugged tablets meet those published figures, where the Windows app fits and what the vendor says it does not do, and how a UK contractor or facilities team can buy a single trial unit before kitting out a wider team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 10 with a minimum of 4GB RAM; the help centre adds a rolling support policy",
+      "detail": "The vendor's System Requirements and Security page lists the Android app for smartphones and tablets as requiring Android 10 with a minimum of 4GB RAM, and the iOS app as requiring iOS 16 or later. Its help centre System Requirements article (updated 26 August 2026) states a different, rolling rule: for iOS and Android we always support the two latest major operating system versions. It does not name those versions. It also says iOS and Android tablets with access to the App Store or Play Store can be used to install and run the mobile app. Because the two pages differ, treat Android 10 and 4GB as the published floor and check the help centre before buying for a long service life.",
+      "source_url": "https://www.planradar.com/system-requirements-and-security/"
+    },
+    {
+      "requirement": "Android app from Google Play, for phones and tablets",
+      "detail": "The Android app is published on Google Play as PlanRadar Construction Manager (package com.defectradar, developer PlanRadar GmbH). When checked on 19 October 2026 the listing showed version 14.3.0, updated 11 October 2026, a Requires Android figure of 7.0, more than 1,000,000 downloads, and device chips for Phone and Tablet. The help centre's download section links to this listing for Android and to the App Store for iOS, where the listing showed iOS 17.0 or iPadOS 17.0 or later at the time of checking. The Play Store floor of Android 7.0 is lower than the vendor's own published Android 10, and the vendor's figure is the one to plan on.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.defectradar&hl=en_GB"
+    },
+    {
+      "requirement": "More than 32GB of internal storage, and 8GB RAM for BIM",
+      "detail": "The help centre System Requirements article gives a minimum internal storage of more than 32GB and recommends mobile devices with a lot of internal storage, because the need depends on your projects. Its estimates are about 350MB for the Android app before any project data, about 350MB for 1,000 pictures, about 700MB for 100 plans and about 1GB for 10 BIM models. For BIM it asks for modern devices with a fast GPU and CPU and a minimum of 8GB of RAM, and the separate BIM Support article (updated 24 August 2026) says models are synced to the mobile apps for offline use and suggests 16GB of RAM or more for larger models. No processor model or screen size is published for the mobile app.",
+      "source_url": "https://help.planradar.com/hc/articles/12274938036125"
+    },
+    {
+      "requirement": "Offline working in the mobile app, with a sync before you lose signal",
+      "detail": "The Working Offline article says you must be logged in to work offline and should sync regularly, especially before going somewhere with poor or no connectivity; syncing downloads tickets, ticket attachments and plans to the app. Offline you can browse synced projects, plans and tickets, and view, edit and create tickets. Changes made offline are not visible to other users until the app is opened with an active connection, when they are pushed to the server automatically. Syncing a single project rather than all projects is currently iOS only, not Android. The quick start guide says a first sync might take a few minutes and the app should stay open until it finishes. Documents can be marked Make available offline. The vendor does not document offline working for the web app.",
+      "source_url": "https://help.planradar.com/hc/articles/12723568916509"
+    },
+    {
+      "requirement": "QR codes and NFC tags to open tickets: camera scanning, iOS and Android apps only, Pro and Enterprise plans",
+      "detail": "The QR code article says the feature is available to Pro and Enterprise accounts and is only available on the iOS and Android apps. It is switched on in the app's Settings, and scanning uses the in-app scanner, which opens the camera from the search icon in the ticket list or plan view, with a flashlight toggle for dark areas; on Android the device's own camera app can also read the code and open the link. QR codes must be ordered with information supplied by PlanRadar, or they will not work with the app. The NFC article, also Pro and Enterprise, says the device must support reading and writing NFC tags, that tags must be NDEF, writable and at least 100 bytes, and that on Android the feature is enabled in the app settings with NFC turned on in the Android settings. No dedicated hardware scan engine and no external scanner is documented.",
+      "source_url": "https://help.planradar.com/hc/articles/9991872178717"
+    },
+    {
+      "requirement": "GPS positions on tickets, and photos, video and voice captured in the mobile app",
+      "detail": "The Add GPS Position to Tickets in the Mobile App article (updated 29 October 2025) says GPS must be enabled on the device, the app must be allowed to add GPS positions in its Application Settings, and the ticket form must have Geographical Location switched on. Adding, editing and removing a position is done in the mobile app; the web app only displays it. The quick start guide for in-house users says photos, videos of up to 2 minutes, one voice recording per ticket and documents can be added to tickets from the mobile app, and that the web app only supports uploading existing documents and media files. No location accuracy figure is published.",
+      "source_url": "https://help.planradar.com/hc/articles/13125873526685"
+    },
+    {
+      "requirement": "Windows: a Microsoft Store app for Windows 10 or later, with the vendor saying not all features are supported",
+      "detail": "The vendor's quick start welcome page links a Windows download to the Microsoft Store, where the listing (product 9NRWNZW8400X, publisher PlanRadar GmbH, last updated 22 May 2026) gives a minimum of Windows 10 version 17763.0 or higher, x64 architecture, available on PC, and recommends an integrated camera. The System Requirements and Security page lists Windows 10 tablets with the note that not all features are supported and that to use all features you should use an iOS or Android device. The current help centre articles on system requirements, the app overview and BIM support describe iOS, Android and the web app only. The web app itself runs in any modern browser, with the latest Chrome recommended, at a minimum resolution of 1024 x 768 and a recommended 1440 x 900 (figures from the help centre system requirements article in the sources below).",
+      "source_url": "https://planradar.com/quick-start-guides/welcome/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "PlanRadar's site features (tickets on plans, photos, voice notes, GPS positions, QR and NFC ticket links and offline working) live in the Android and iOS apps, and the vendor itself says to use an iOS or Android device for the full feature set. The Tuga A10 runs Android 14 against a published floor of Android 10, and its 8GB of RAM is double the published 4GB minimum and matches the 8GB the help centre asks for on BIM, which the A8 and A6 do not. Its 128GB of storage clears the published minimum of more than 32GB with room for the plans, photo sets and BIM models the vendor's own estimates describe. The work is plan-based: a ticket is pinned to a drawing and the latest plan version is what the team reads on site, and the 10.1 inch 1920 x 1200 screen shows more of a drawing at once than the 8 or 6 inch options. IP68 and MIL-STD-810H cover rain, dust and drops, and the 13MP rear camera with flash is the scan and photo path the vendor documents. It fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 10 from Google Play, with a Play listing floor of Android 7.0. Tuga A10: Android 14 with Google Play, so the published requirement is met.",
+        "Requirement: a minimum of 4GB RAM, and 8GB RAM for BIM. Tuga A10: 8GB RAM, so it meets the BIM figure as well as the general minimum.",
+        "Requirement: more than 32GB of internal storage, with plans, photos and BIM models cached for offline use. Tuga A10: 128GB storage with microSD up to 2TB.",
+        "Requirement: QR code ticket scanning through the in-app camera scanner, plus photos and video on tickets. Tuga A10: 13MP rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: NFC tag ticket links on Pro and Enterprise plans, and GPS positions on tickets. Tuga A10: NFC, and GPS + Galileo + BeiDou + QZSS + NavIC.",
+        "Requirement: plans readable on site in all weathers. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, dual SIM 4G."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 runs the same PlanRadar Android app on an 8 inch screen that is easier to hold in one hand while photographing a defect or walking a floor, and its 1000 nit screen is the better choice for external inspections in full sun. It runs Android 12 with Google Play, above the published Android 10, and its 6GB of RAM is above the 4GB minimum, though below the 8GB the help centre asks for on BIM, so a team working mostly in 3D models should pick the A10. Storage is 128GB with a microSD slot. The 8000mAh battery is removable for long days, and VESA mount points and a pogo pin connector suit a van fit. Against the A10 it is IP67 rather than IP68, has no MIL-STD rating and a lower 1280 x 800 resolution, which shows less of a drawing before zooming. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 10 from Google Play. Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: a minimum of 4GB RAM, and 8GB for BIM. Tuga A8: 6GB RAM, above the minimum but below the BIM figure.",
+        "Requirement: more than 32GB of internal storage. Tuga A8: 128GB storage with a microSD slot.",
+        "Requirement: camera QR code scanning and photo capture on tickets. Tuga A8: 13MP autofocus rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: NFC tag ticket links and GPS positions on tickets. Tuga A8: NFC, and GPS + GLONASS + Galileo + BeiDou.",
+        "Requirement: plans readable outdoors on a long day. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass, IP67 with no MIL-STD rating, removable 8000mAh battery, dual SIM 4G."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For someone who wants PlanRadar in a pocket, the Tuga A6 runs the same Android app on a 6 inch handheld at 277g, and the Google Play listing carries a Phone device chip, so a phone-sized layout is one the vendor publishes for. It runs Android 15, well above the Android 10 floor, and has NFC for the vendor's tag feature, which its own article describes in terms of holding a phone near the tag. Be clear on memory and screen: its 4GB of RAM meets the published 4GB minimum exactly, with no headroom, and is half the figure the help centre asks for on BIM, and a 6 inch screen shows a small part of a plan at a time. Its 64GB of storage clears the published 32GB minimum. It has a Zebra 2D scan engine, but PlanRadar documents camera scanning only, so plan on the 13MP rear camera for QR codes. It suits a facilities engineer opening NFC-tagged tickets on a round more than a site manager marking up drawings.",
+      "fit": [
+        "Requirement: Android 10 from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: a minimum of 4GB RAM. Tuga A6: 4GB RAM, which meets the minimum with no margin and is below the 8GB asked for on BIM.",
+        "Requirement: more than 32GB of internal storage. Tuga A6: 64GB storage with microSD up to 256GB.",
+        "Requirement: camera QR code scanning and photo capture on tickets. Tuga A6: 13MP rear camera with flash (scanning through the camera via the app; the Zebra 2D scan engine is not a documented PlanRadar input).",
+        "Requirement: NFC tag ticket links and GPS positions on tickets. Tuga A6: NFC, and GPS + GLONASS + BeiDou + Galileo.",
+        "Requirement: a device that survives site use. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery, 4G LTE dual SIM."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "PlanRadar does publish a Windows app, so the Tuga W10 is a real option rather than a browser-only one, but read the vendor's wording before choosing it. The Microsoft Store listing asks for Windows 10 version 17763.0 or higher on x64, and the W10 runs Windows 11 Pro, a 64-bit system, on an Intel N100 with 8GB RAM and 128GB storage, with a 5MP rear camera against the listing's recommended integrated camera. The vendor's requirements page says that on Windows tablets not all features are supported and that you should use an iOS or Android device for all of them; the QR code and NFC features are documented for the iOS and Android apps only, GPS positions for the mobile app, and the current help centre articles describe iOS, Android and the web app without mentioning Windows. The W10 earns its place where the site team also needs the full web app: Ethernet, HDMI and a desktop browser for reports, project setup and user management in a site office. Its 1280 x 800 screen meets the web app's 1024 x 768 minimum but is below the recommended 1440 x 900. It is IP65 rather than IP68 and weighs 1197g.",
+      "fit": [
+        "Requirement: Windows 10 version 17763.0 or higher, x64, for the Microsoft Store app. Tuga W10: Windows 11 Pro (64-bit) on an Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage.",
+        "Requirement: the web app in any modern browser at a minimum of 1024 x 768, recommended 1440 x 900. Tuga W10: 10.1 inch IPS 1280 x 800 multi-touch, which meets the minimum and not the recommended figure.",
+        "Requirement: an integrated camera is recommended for the Windows app. Tuga W10: 5MP autofocus rear and 2MP front camera; QR code and NFC ticket links are documented for the iOS and Android apps only.",
+        "Requirement: a fixed position in a site office for reports and project setup. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your PlanRadar administrator to invite the user to the account with a role that can create and edit tickets, and to add the projects, plans and forms (including the site diary form) they will need on site.",
+    "On the Tuga A10, A8 or A6, open Google Play and install PlanRadar Construction Manager (package com.defectradar, developer PlanRadar GmbH), then sign in. Allow camera, location and notification access when the app asks.",
+    "Before the first visit, open the main menu and tap Sync with All projects selected, and keep the app open until it finishes; the vendor says a first sync might take a few minutes. Mark any documents you need in the Documents section as Make available offline.",
+    "In the app's Settings, turn on Add GPS Position to Tickets, and on Pro or Enterprise plans turn on the QR code feature and the NFC feature. For NFC, also switch NFC on in the Android settings and test a sample tag before buying a batch, as the vendor recommends.",
+    "Order QR codes using the information PlanRadar support supplies, because the vendor says codes ordered without it will not work with the app. Test the in-app scanner on one code and the flashlight toggle in a dark plant room.",
+    "Complete a test ticket on a plan with a photo, a voice note and a GPS position, then put the device in flight mode, create a second ticket, and confirm both sync when you come back online.",
+    "On a Tuga W10, install PlanRadar from the Microsoft Store or open the web app in Edge or Chrome, and use it for reports, project setup and user management. Check the features your team needs on it before relying on it on site, since the vendor says not all features are supported on Windows.",
+    "For the A10 and A8, fit the vehicle mounting dock in the van; for the A10 and W10, add the charging dock where devices live overnight; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for teams working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Hand strap, £24 (Tuga A8, A10 and W10), for one-handed use while photographing defects",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for plan markups and signatures",
+    "Shoulder strap, £19 (Tuga A8, A10 and W10), to keep the tablet hands free on a walk-round",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will PlanRadar run on the Tuga A10?",
+      "a": "PlanRadar's requirements page publishes Android 10 with a minimum of 4GB RAM, its help centre asks for more than 32GB of internal storage and 8GB of RAM for BIM, and its Google Play listing gives a Requires Android figure of 7.0 with Phone and Tablet device chips. The Tuga A10 runs Android 14 with Google Play and has 8GB RAM and 128GB storage, so it meets each published figure, including the BIM one. The Tuga A8 (Android 12, 6GB RAM, 128GB) meets the general figures but not the 8GB BIM recommendation, and the Tuga A6 (Android 15, 4GB RAM, 64GB) meets the 4GB minimum with no headroom. We do not describe any device as certified or tested by PlanRadar; these are the vendor's published figures set against the device specifications. The help centre also states a rolling policy of supporting the two latest major Android versions without naming them, so check it before buying for a long service life."
+    },
+    {
+      "q": "Does PlanRadar work without signal on these tablets?",
+      "a": "Yes, in the mobile app, provided you sync first. The vendor's Working Offline article says you must be logged in, that syncing downloads tickets, attachments and plans to the app, and that offline you can browse synced projects and plans and view, edit and create tickets. Changes made offline are pushed to the server automatically once the app is opened with a connection, and until then other users cannot see them. The A10, A8 and A6 all run the Google Play app. The vendor does not document offline working for the web app, and its current help centre articles do not describe the Windows app, so on a Tuga W10 check offline behaviour yourself before relying on it."
+    },
+    {
+      "q": "Can we scan QR codes and NFC tags to open tickets, and does the A6's scanner help?",
+      "a": "On Pro and Enterprise plans, yes. The vendor's QR code article says the feature is only available on the iOS and Android apps and that the in-app scanner opens the camera, with a flashlight toggle for dark areas; QR codes must be ordered with information PlanRadar supplies. The NFC article says the device must support reading and writing NDEF tags and that on Android the feature is enabled in the app settings with NFC turned on. The A10, A8 and A6 all have NFC and a 13MP rear camera with flash, and on each of them QR scanning runs through the camera via the app. The A6 also has a Zebra 2D scan engine, but the vendor documents no dedicated scan engine or external scanner, so do not buy it for that reason alone."
+    },
+    {
+      "q": "Should we buy the Windows W10 instead, since PlanRadar has a Windows app?",
+      "a": "Only if the main job is the web app in a site office. The Windows app is on the Microsoft Store with a minimum of Windows 10 version 17763.0 on x64, which the Tuga W10's Windows 11 Pro meets, but the vendor's requirements page says not all features are supported on Windows tablets and tells you to use an iOS or Android device for all of them. QR code and NFC ticket links are documented for the iOS and Android apps only, GPS positions for the mobile app, and the current help centre articles on requirements, the app overview and BIM describe iOS, Android and the web app without mentioning Windows. The W10 does bring Ethernet, HDMI and a desktop browser for reports, project setup and user management, so a team with one site office desk and several people on the floor is usually better served by a W10 at the desk and A10s on site."
+    },
+    {
+      "q": "Should site staff have the 10.1 inch A10 or the 8 inch A8?",
+      "a": "Both meet PlanRadar's published Android and RAM figures. The A10 has 8GB RAM against 6GB, which matters because the help centre asks for 8GB on BIM, a sharper 1920 x 1200 screen for reading drawings and placing tickets on them, IP68 against IP67, and MIL-STD-810H, which the A8 does not have. The A8 has a 1000 nit screen against the A10's 350 nits, a removable battery, VESA mount points, and costs £379 against £449. Staff who spend the day on external inspections in bright light, or who want a one-handed device, may prefer the A8; those working from drawings or BIM models, or in wetter and harder conditions, are better served by the A10."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a wider order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £379 (A8), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "PlanRadar publishes a Windows app on the Microsoft Store, but its requirements page says not all features are supported on Windows tablets and directs users to iOS or Android for the full set, and its current help centre articles describe iOS, Android and the web app only. The QR code and NFC ticket features are documented for the iOS and Android apps, and GPS positions for the mobile app, so the Tuga W10 suits a site office desk running the web app rather than the person walking the floor. On the Android side, the only scan method the vendor documents is the camera, so the A6's Zebra 2D scan engine is not a documented PlanRadar input. The Tuga A6's 4GB of RAM meets the published 4GB minimum exactly, with no margin, and both the A6 and the A8 sit below the 8GB of RAM the help centre asks for on BIM. The vendor's two requirement pages differ: one gives Android 10, the other a rolling policy of the two latest major versions without naming them, and the Google Play listing accepts Android 7.0, so check the help centre before buying for a long service life. The vendor publishes no processor, screen size or location accuracy figure for the mobile app, and the QR code and NFC features need a Pro or Enterprise plan.",
+  "disclaimer": "PlanRadar is a product of PlanRadar GmbH, Vienna, Austria (FN 400573 d, Handelsgericht Wien). Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by PlanRadar or PlanRadar GmbH.",
+  "sources": [
+    "https://www.planradar.com/gb/",
+    "https://www.planradar.com/contact/",
+    "https://planradar.com/imprint/",
+    "https://www.planradar.com/system-requirements-and-security/",
+    "https://help.planradar.com/hc/articles/12274938036125",
+    "https://help.planradar.com/hc/en-gb/articles/22539675406365-PlanRadar-Webapp-Mobile-App-Overview",
+    "https://help.planradar.com/hc/articles/13411016869789",
+    "https://help.planradar.com/hc/articles/12723568916509",
+    "https://help.planradar.com/hc/articles/9991872178717",
+    "https://help.planradar.com/hc/articles/15090843045917",
+    "https://help.planradar.com/hc/articles/13125873526685",
+    "https://help.planradar.com/hc/articles/12592417948061",
+    "https://www.planradar.com/gb/how-to-create-a-site-diary-in-planradar/",
+    "https://planradar.com/quick-start-guides/welcome/",
+    "https://play.google.com/store/apps/details?id=com.defectradar&hl=en_GB",
+    "https://apps.apple.com/gb/app/planradar-construction-manager/id720159081",
+    "https://apps.microsoft.com/store/detail/9nrwnzw8400x"
+  ]
+}

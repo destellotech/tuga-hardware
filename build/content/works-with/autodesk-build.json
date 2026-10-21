@@ -1,0 +1,158 @@
+{
+  "slug": "autodesk-build",
+  "software": "Autodesk Build",
+  "vendor": "Autodesk, Inc.",
+  "vendor_url": "https://construction.autodesk.co.uk/products/construction-app/",
+  "title": "Rugged tablet for Autodesk Build: UK buyer's guide",
+  "meta_description": "Autodesk publishes Android 13.0 or later for the Autodesk Build mobile app. The Tuga A10 (Android 14, 8GB RAM, IP68) meets it for sheets, issues and forms.",
+  "target_query": "best tablet for Autodesk Build",
+  "h1": "Rugged tablet for Autodesk Build",
+  "intro": [
+    "Autodesk Build is the construction project management and field product in Autodesk Construction Cloud, made by Autodesk, Inc. A naming change matters here: Autodesk says that from 24 March 2026 Autodesk Construction Cloud is part of Autodesk Forma, Autodesk Build is now sold as Forma Build, and the Autodesk Construction Cloud mobile app has been renamed Forma. The vendor says no data migration is involved, that projects, members, settings, URLs and logins stay as they are, and that apart from the branding no changes to the app are expected. So if your firm still calls it Autodesk Build or the ACC app, the app you install on a tablet today is the one listed on Google Play as Autodesk Forma.",
+    "That app is where the site work happens. The Google Play description says it is for capturing snag list items and issues, marking up drawings, completing daily reports, logs and forms with photos and signatures attached, viewing the latest sheets, files and 3D models, and, with Forma Build, managing RFIs, approved submittals and project assets. The vendor's help pages document downloading a project to the device for work offline or on a limited connection, and scanning barcodes, QR codes or NFC tags on equipment through the Assets tool. A tablet that spends its day on scaffolds, in plant rooms and in a van needs sealing and a drop rating that a consumer tablet in a thin case does not have.",
+    "This page sets out what Autodesk publishes about the devices the mobile app runs on, which Tuga rugged devices meet those published requirements, why the 8 inch Tuga A8 does not, where the Windows tablet fits (web product and Desktop Connector only) and where it does not, and how a UK contractor can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 13.0 or later (iOS and iPadOS 17.0 or later on Apple devices)",
+      "detail": "The vendor's Install Autodesk Forma Mobile App page lists the minimum operating system versions the app supports: Android 13.0 or later, iOS 17.0 or later on iPhone and iPadOS 17.0 or later on iPad. It adds that devices should run at least these versions for the best performance. It gives no RAM, storage or device model requirement. The same page notes that Apple devices on iOS 16 or earlier can no longer install or update the app, and that version 7.70.0 was the last to run there, which shows the vendor does move its minimum versions up over time. The companion About page says Autodesk supports all versions of the mobile app that are less than six months old.",
+      "source_url": "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/getting-started/Install_ACC_App.html"
+    },
+    {
+      "requirement": "Android app from Google Play, listed as Autodesk Forma, for phones and tablets",
+      "detail": "The Android app is published on Google Play as Autodesk Forma (package com.plangrid.android, developer Autodesk Inc.). When checked on 19 October 2026 the listing showed version 8.14.0, updated 6 October 2026, with device chips for Phone and Tablet and a description beginning with the note that ACC mobile is now the Forma mobile app. The listing's data showed a minimum API level of 26 (Android 8.0) as the technical floor for installing, but Autodesk's own install page gives Android 13.0 or later as the minimum supported version, and that is the figure to buy against. The vendor's About page says the app is for subscribers to Forma Build, Forma Design Collaboration or Forma Data Management, and that features may differ between the web and the mobile app.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.plangrid.android&hl=en_GB"
+    },
+    {
+      "requirement": "Offline working by downloading a project to the device, with sync when connected",
+      "detail": "The vendor's Sync and Download Projects pages say projects are synced and downloaded from the cloud to an iOS or Android device for work in the field, so that work continues offline or on a limited connection. On first download you choose what comes down: sheets (current only, all with every version, or none), files (all or none, settable per file and folder afterwards), photos (all, the last 7, 14, 30 or 60 days, or none) and attachments and references for issues, forms, RFIs and submittals. The vendor says this helps manage storage, but publishes no total storage figure. Background sync, which pulls web changes down automatically, runs only when the device is charging, connected to Wi-Fi, not in use and has at least 100MB free; it closes open projects, so unsaved work can be lost, and it switches off for a project not opened in 30 days. Sheet updates can also be synced by hand from a Sheets updates available message.",
+      "source_url": "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/download-project/Mobile_Background_Sync.html"
+    },
+    {
+      "requirement": "Scanning barcodes, QR codes and NFC tags, on equipment and at locations",
+      "detail": "The vendor's About Assets page for Forma Build says a mobile device is used to scan barcodes, QR codes or NFC tags on equipment to access and edit equipment information, track installation, or perform quality and commissioning workflows. Separately, the Locations help for the Android app documents a Scan option (More menu, Locations, Scan) that brings up the forms, issues and assets linked to a location; the QR code itself is made with an external tool and its text (up to 255 alphanumeric characters, no spaces) is entered against the location in project settings. The vendor does not say which hardware does the scanning and documents no dedicated scan engine or external scanner, so on any device plan on the camera for barcodes and QR codes, and an NFC radio for NFC tags.",
+      "source_url": "https://help.autodesk.com/cloudhelp/ENU/Build-Assets/files/getting-started/About_Assets.html"
+    },
+    {
+      "requirement": "Sheets, issues, forms, photos and RFIs on the device",
+      "detail": "The Google Play description lists viewing and marking up drawings, logging issues with photos, locations and references, completing daily reports, checklists and forms with photos and signatures attached, and, with Forma Build, managing RFIs and tracking responses. The vendor's Sheets on mobile page documents version history, favourites, comparing sheets and exporting on Android, and its Create an RFI page gives the mobile steps, including uploading files from the device as references. Its project download FAQ says that on Android, photos not yet downloaded show a spinning icon and download automatically while you view them with an internet connection. No screen size or resolution guidance is published, but the Google Play listing carries a Tablet device chip.",
+      "source_url": "https://help.autodesk.com/cloudhelp/ENU/Build-Sheets/files/View_Manage_Sheets_Mobile.html"
+    },
+    {
+      "requirement": "RAM, storage and screen size for mobile: not published",
+      "detail": "Autodesk publishes no RAM, processor or storage figure for phones or tablets running the mobile app, and no screen-size guidance. The only device figures it gives are the operating system versions and the 100MB of free storage needed for background sync. For the web product its System Requirements page says there are no specific hardware requirements because the products are web based, that a stand-alone video card is recommended when using the Viewer, and that RAM and CPU requirements depend on project size. Because sheets, files, photos and models are downloaded to the device for offline work, the storage a project takes depends on the download options chosen, so a device with room to spare and a microSD slot is the practical answer.",
+      "source_url": "https://help.autodesk.com/cloudhelp/ENU/Docs-About-ACC/files/System_Requirements_ACC.html"
+    },
+    {
+      "requirement": "Windows: no Windows mobile app, web product in a browser, Desktop Connector for file sync",
+      "detail": "Autodesk publishes the mobile app for iOS and Android only; no Windows app is documented. The web product runs in Chrome (recommended), Firefox, Safari or Edge, with 64-bit browsers recommended, browser versions no more than a year old strongly advised, and Internet Explorer 11 not supported. The vendor also publishes Desktop Connector, a Windows program that creates a virtual drive so that files in Forma Data Management (formerly Autodesk Docs) appear in Windows File Explorer and sync to the cloud; its help gives Windows 10 or 11, an active internet connection and free disk space of at least three times the data set during uploads. That is a tool for office and design staff working with files; the field features the vendor documents (offline projects, sheet markups, issues, forms, photos and scanning) are in the mobile app.",
+      "source_url": "https://help.autodesk.com/cloudhelp/ENU/CONNECT-Getting-Started/files/What_Is_Desktop-Connector.htm"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Autodesk Build's site features (sheets and markups, issues, forms with photos and signatures, RFIs, project assets, scanning and offline projects) live in the Android app, so the device a site team carries needs to run that app well rather than a browser. The Tuga A10 runs Android 14 against a published minimum of Android 13.0, which is one version of headroom; the vendor has already moved its iOS floor up once, so a device sitting on the minimum is a poorer buy. The app is built around drawings: a 10.1 inch 1920 x 1200 screen shows a sheet, a markup or a 3D model with far less pinching and zooming than a 6 inch handheld. The vendor publishes no RAM or storage figure, but downloaded projects hold sheets, files, photos and models on the device, and the A10's 8GB of RAM, 128GB of storage and microSD slot up to 2TB give room for that. The vendor documents NFC tags as an asset input and the A10 has NFC; barcodes and QR codes go through the 13MP rear camera. IP68 and MIL-STD-810H cover rain, dust and drops from a scaffold, and it fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 13.0 or later, installed from Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met with one version of headroom.",
+        "Requirement: no RAM or storage figure published, but downloaded projects hold sheets, files, photos and models on the device, and background sync needs at least 100MB free. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: viewing and marking up sheets, 3D models and multi-page forms, with a Tablet device chip on Google Play. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it for markups and signatures.",
+        "Requirement: scanning barcodes, QR codes or NFC tags on equipment, and photos on issues, forms and daily reports. Tuga A10: 13MP rear camera with flash for barcodes, QR codes and photos (no dedicated scan engine), and NFC for NFC tags.",
+        "Requirement: a device that works offline on site and syncs when back on Wi-Fi and charging. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, dual SIM 4G, dual-band Wi-Fi 5, GPS + Galileo + BeiDou + QZSS + NavIC, pogo pin connector for the charging dock."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For a supervisor or engineer who wants issues, forms, photos and asset scanning in a pocket or a belt holster rather than a tablet, the Tuga A6 runs the same Forma Android app on a 6 inch handheld at 277g. It runs Android 15, above the published Android 13.0 minimum, and the Google Play listing carries a Phone device chip, so a phone-sized layout is one the vendor publishes for. It has NFC for the NFC tags the Assets tool documents, and a 13MP rear camera for barcodes and QR codes. It also has a Zebra 2D scan engine, but Autodesk documents no dedicated scan engine as an input, so do not count on it being used. Be clear on the trade-offs: a 6 inch screen is a poor place to read a drawing or mark up a sheet, and the vendor publishes no RAM figure, so the A6's 4GB cannot be checked against a vendor number. Storage is 64GB with microSD up to 256GB, so choose project download options with care. At £349 it is £100 less than the A10.",
+      "fit": [
+        "Requirement: Android 13.0 or later, installed from Google Play. Tuga A6: Android 15 with Google Play, so the published requirement is met.",
+        "Requirement: no RAM figure published; downloaded projects take device storage. Tuga A6: 4GB RAM and 64GB storage with microSD up to 256GB, so pick current sheets only and a short photo window on first download.",
+        "Requirement: scanning barcodes, QR codes or NFC tags on equipment and at locations. Tuga A6: 13MP rear camera with flash and NFC (the Zebra 2D scan engine is not a documented Autodesk input).",
+        "Requirement: issues, forms and daily reports with photos and signatures. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, 13MP rear camera with flash, 5MP front camera.",
+        "Requirement: a device carried all day on site. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C, removable 5050mAh battery, 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, GPS + GLONASS + BeiDou + Galileo."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Autodesk publishes no Windows version of the mobile app. The Tuga W10 runs Windows 11 Pro, so it can run the Autodesk Build web product in Chrome or Edge, which the vendor supports with 64-bit browsers recommended, and it can run Desktop Connector, the vendor's Windows 10 or 11 program that puts Forma Data Management files into File Explorer. That makes it a fit for a site office or a cabin where someone needs the full web product, a keyboard and mouse over USB, a second screen over HDMI, or a wired network through its RJ45 port. It is not the device for the field: downloaded projects for offline work, sheet markups, issues, forms with photos and signatures, and barcode, QR and NFC scanning are documented in the mobile app only, the web product has no documented offline mode, and the vendor recommends a stand-alone video card for the Viewer, which the W10's Intel N100 does not have. It is IP65 rather than IP68, so it is protected against water jets but not rated for immersion, and it weighs 1197g.",
+      "fit": [
+        "Requirement: the web product in Chrome, Firefox, Safari or Edge, 64-bit recommended, with a browser no more than a year old. Tuga W10: Windows 11 Pro running current desktop browsers.",
+        "Requirement: Desktop Connector on Windows 10 or 11 with an active internet connection. Tuga W10: Windows 11 Pro, Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage with a microSD slot, dual-band Wi-Fi 5 and 100Mbps RJ45 Ethernet.",
+        "Requirement: a fixed position in a site office or cabin. Tuga W10: HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock and the vehicle mounting dock.",
+        "Requirement: dust and splash protection in a cabin or a van. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 10.1 inch IPS 1280 x 800 multi-touch screen, 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your project administrator to add the user as a project member in Forma Build (Autodesk Build) with the roles and permissions they need; the vendor says the same permissions apply in the mobile app as on the web.",
+    "On the Tuga A10 or A6, open Google Play and install Autodesk Forma (package com.plangrid.android, developer Autodesk Inc.), then sign in with the user's Autodesk ID. Keep the app updated: the vendor supports only versions less than six months old.",
+    "Before the first visit to a site with poor signal, open the project under In the cloud and download it while on Wi-Fi. Choose the download options: current sheets only or all sheets, files, a photo window (7, 14, 30 or 60 days, or all) and attachments and references for issues, forms, RFIs and submittals. On the A6 with its 64GB of storage, start with current sheets only and a short photo window.",
+    "Decide whether to turn on background sync for the project. It runs only when the device is charging, on Wi-Fi, not in use and has at least 100MB free, and it closes open projects, so the vendor says to close the project and return to the Projects list before leaving the device on charge.",
+    "Allow camera access when prompted so photos on issues, forms and daily reports and barcode or QR scanning in the Assets tool work, and allow location access if your team records locations with photos and issues. For NFC tags on equipment, check NFC is switched on in the device settings.",
+    "Test the site flows on one unit before rolling out: open and mark up a sheet, raise an issue with a photo, complete a form with a signature, scan an asset barcode or NFC tag, and sync the project back on Wi-Fi. If your project uses location QR codes, ask the administrator to link a code to a location and test the Scan option under Locations.",
+    "On a Tuga W10, open the Autodesk Build web product in Edge or Chrome and keep the browser updated as the vendor advises; install Desktop Connector if the user needs project files in File Explorer. Use it for office work; it will not run the mobile app.",
+    "Fit the vehicle mounting dock for an A10 or W10 that lives in a van, the charging dock where A10 and W10 units charge overnight, and the belt holster for the A6. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A10 and W10), for devices working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10), for overnight charging where units are kept",
+    "Capacitive stylus, £14.99 (Tuga A10 and W10), for sheet markups and signatures on screen",
+    "Hand strap, £24 (Tuga A10 and W10), for one-handed use on a scaffold or ladder",
+    "Shoulder strap, £19 (Tuga A10 and W10), to keep the tablet hands free on a walk-round",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Car phone mount, £17 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A10 and W10)",
+    "USB-C to USB-A OTG adapter, £8, for a keyboard or USB drive on the A10 or A6"
+  ],
+  "faq": [
+    {
+      "q": "Will Autodesk Build run on the Tuga A10?",
+      "a": "Autodesk's install page for the Forma mobile app, which is the app for Autodesk Build (now Forma Build), publishes Android 13.0 or later as the minimum supported version, with no RAM or storage figure. The Tuga A10 runs Android 14 with Google Play and has 8GB RAM and 128GB storage, so it meets the published requirement. The Tuga A6 (Android 15, 4GB RAM, 64GB storage) also meets it. The Tuga A8 runs Android 12, which is below the published minimum, so we do not suggest it for this app. We do not describe any device as certified or tested by Autodesk; these are the vendor's published requirements set against the device specifications."
+    },
+    {
+      "q": "Is the app still called Autodesk Build or Autodesk Construction Cloud on Google Play?",
+      "a": "No. Autodesk says that from 24 March 2026 Autodesk Construction Cloud is part of Autodesk Forma, Autodesk Build is now Forma Build, and the ACC mobile app has been renamed Forma. On Google Play the app is listed as Autodesk Forma by Autodesk Inc., with the same package name, com.plangrid.android, that the vendor's help pages link to, and its description opens by saying ACC mobile is now the Forma mobile app. The vendor says projects, members, settings, URLs and logins are unchanged and that no changes to the app beyond branding are expected."
+    },
+    {
+      "q": "Does Autodesk Build work without signal on these tablets?",
+      "a": "Yes, if the project has been downloaded first. The vendor documents syncing and downloading a project to an iOS or Android device so work continues offline or on a limited connection, with options for which sheets, files, photos and attachments come down. Changes sync back when connected, by hand or through background sync, which runs only when the device is charging, on Wi-Fi, not in use and has at least 100MB free. The A10 and A6 both run the Google Play app. A Tuga W10 can only use the web product in a browser, and the vendor does not document offline working there."
+    },
+    {
+      "q": "Can site teams scan barcodes, QR codes and NFC tags, and does the A6's scanner help?",
+      "a": "Autodesk documents scanning barcodes, QR codes or NFC tags on equipment through the Assets tool in Forma Build, and a Scan option under Locations on the Android app for QR codes linked to locations. It does not say which hardware does the scanning and documents no dedicated scan engine or external scanner, so on the A10 and A6 plan on the 13MP rear camera for barcodes and QR codes, and on the NFC radio both devices have for NFC tags. The A6 also has a Zebra 2D scan engine, but it is not a documented Autodesk input, so do not buy it for that reason alone."
+    },
+    {
+      "q": "Why not the 8 inch Tuga A8?",
+      "a": "The A8 runs Android 12. Autodesk's install page gives Android 13.0 or later as the minimum supported version for the mobile app, so the A8 does not meet the published requirement and we do not suggest it for Autodesk Build, whatever its other merits on site. If you want something smaller than the A10, the 6 inch A6 on Android 15 meets the requirement, with the screen-size trade-off described above."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome, and with this app it is worth doing, because the vendor publishes no RAM or storage figure and your project download options decide how much space a project takes. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "We do not suggest the Tuga A8 for Autodesk Build. It runs Android 12, and Autodesk's install page gives Android 13.0 or later as the minimum supported version for the mobile app, so it does not meet the published requirement. Autodesk publishes no Windows version of the mobile app, so the Tuga W10 only runs the web product in a browser and Desktop Connector for file sync; the field features the vendor documents (downloaded projects for offline work, sheet markups, issues, forms with photos and signatures, RFIs on mobile, and barcode, QR and NFC scanning) are in the mobile app, so a W10 suits a site office or cabin, not a site walk. The vendor recommends a stand-alone video card for the Viewer in the web product, which the W10 does not have. On the Android side, the vendor documents no dedicated scan engine or external scanner, so the A6's Zebra 2D scan engine is not a documented Autodesk input. The vendor publishes no RAM, storage or screen-size figure for mobile devices, and the Google Play listing's technical minimum (API level 26, Android 8.0) is lower than the vendor's own stated minimum of Android 13.0; buy against the vendor's figure. Autodesk also says it supports only app versions less than six months old and has raised its iOS minimum before, so a device with operating system headroom is the safer purchase.",
+  "disclaimer": "Autodesk Build, Forma Build, Autodesk Construction Cloud and Autodesk Forma are products of Autodesk, Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Autodesk, Inc.",
+  "sources": [
+    "https://construction.autodesk.co.uk/products/construction-app/",
+    "https://construction.autodesk.com/go/acc-to-forma-info/",
+    "https://play.google.com/store/apps/details?id=com.plangrid.android&hl=en_GB",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/getting-started/Install_ACC_App.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/getting-started/About_ACC_App.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Docs-About-ACC/files/System_Requirements_ACC.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/Download_Project_Mobile.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/download-project/Download_Project_Initial.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/download-project/Mobile_Background_Sync.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Mobile/files/download-project/Mobile_Download_Projects_FAQs.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Sheets/files/View_Manage_Sheets_Mobile.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Assets/files/getting-started/About_Assets.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Docs-Admin/files/project-administration/locations/Locations_Mobile_Android.html",
+    "https://help.autodesk.com/cloudhelp/ENG/Docs-Admin/files/project-administration/locations/Link_QR_Code_Locations.html",
+    "https://help.autodesk.com/cloudhelp/ENU/Build-Rfis/files/work-rfis/Create_RFI.html",
+    "https://help.autodesk.com/cloudhelp/ENU/CONNECT-Getting-Started/files/What_Is_Desktop-Connector.htm"
+  ]
+}
