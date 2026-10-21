@@ -208,7 +208,7 @@
       "tagline": "Desktop power. Site-proof build.",
       "shortFor": "Windows software in the field, with real ports.",
       "description": "An 8 inch rugged Windows 11 Pro tablet with an Intel processor, full USB ports and HDMI output. For professionals who need Windows software in the field without giving up durability.",
-      "longDescription": "The W8 puts full Windows 11 Pro in a rugged 8 inch body. An Intel Celeron N5100, 8GB of RAM and a 128GB SSD run your Windows software as they would on a desk. The 1920 x 1200 screen gives you room for a full page, and the port selection is the point: USB-C, USB-A and Mini HDMI, so you can connect to whatever the job needs rather than carrying a bag of adapters. Sealed to IP65 and tested to MIL-STD-810G with 1.22 metre drops, with a removable 5000mAh battery and a pogo pin dock connector for desk mounting. A barcode scanner variant is available, and NFC is an option.",
+      "longDescription": "The W8 puts full Windows 11 Pro in a rugged 8 inch body. An Intel Celeron N5100, 8GB of RAM and a 128GB SSD run your Windows software as they would on a desk. The 1920 x 1200 screen gives you room for a full page, and the port selection is the point: USB-C, USB-A and Mini HDMI, so you can connect to whatever the job needs rather than carrying a bag of adapters. Sealed to IP65 and tested to MIL-STD-810G with 1.22 metre drops, with a removable 5000mAh battery and a pogo pin dock connector for desk mounting. NFC is built in, and a barcode scanner variant is available.",
       "price": 629,
       "compareAtPrice": null,
       "currency": "GBP",
@@ -233,14 +233,14 @@
         "charging": "USB-C, PD fast charge",
         "os": "Windows 11 Pro",
         "cpu": "Intel Celeron N5100, up to 2.8GHz",
-        "connectivity": "4G LTE, Wi-Fi 5, Bluetooth 5.0, optional NFC",
+        "connectivity": "4G LTE, Wi-Fi 5, Bluetooth 5.0, NFC",
         "ports": "USB-C 3.1, USB-A 3.0, Mini HDMI 2.0a, 3.5mm audio, SIM/TF tray, pogo pin",
         "camera": "8MP rear + 5MP front",
         "weight": "910g",
         "dimensions": "236.7 x 155.7 x 20mm",
         "operating_temp": "-20°C to 60°C"
       },
-      "features": ["Windows 11 Pro", "1920 x 1200 display", "GPS + GLONASS", "USB-C + USB-A + Mini HDMI", "Removable battery", "Pogo pin dock connector", "Optional NFC", "Barcode scanner optional"],
+      "features": ["Windows 11 Pro", "1920 x 1200 display", "GPS + GLONASS", "USB-C + USB-A + Mini HDMI", "Removable battery", "Pogo pin dock connector", "NFC", "Barcode scanner optional"],
       "inBox": ["Tuga W8 tablet", "USB-C cable", "UK power adapter", "Hand strap", "Quick start guide"],
       "badge": null,
       "positioning": "The 8 inch Windows tablet for professionals who need real software in the field."
@@ -586,7 +586,7 @@
     {
       "id": "upg-ram16-tuga-w10",
       "name": "16GB RAM upgrade for Tuga W10",
-      "label": "16GB RAM",
+      "label": "16GB",
       "summary": "Doubles the memory from 8GB to 16GB. Fitted before dispatch.",
       "price": 69,
       "currency": "GBP",
@@ -596,7 +596,7 @@
     {
       "id": "upg-ssd256-tuga-w10",
       "name": "256GB storage upgrade for Tuga W10",
-      "label": "256GB storage",
+      "label": "256GB",
       "summary": "Doubles the storage from 128GB to 256GB. Fitted before dispatch.",
       "price": 69,
       "currency": "GBP",
@@ -606,7 +606,7 @@
     {
       "id": "upg-ssd512-tuga-w10",
       "name": "512GB storage upgrade for Tuga W10",
-      "label": "512GB storage",
+      "label": "512GB",
       "summary": "Quadruples the storage from 128GB to 512GB. Fitted before dispatch.",
       "price": 125,
       "currency": "GBP",
