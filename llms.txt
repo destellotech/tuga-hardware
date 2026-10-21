@@ -10,7 +10,7 @@ Small UK retailer of rugged Android and Windows tablets and handhelds for trades
 - [Tuga A8](https://www.tugahardware.com/products/tuga-a8): £379. 8 inch tablet, Android 12, IP67, 8000mAh removable. Forms, maps, site photos and quotes, readable in full sun.
 - [Tuga A10](https://www.tugahardware.com/products/tuga-a10): £449. 10.1 inch tablet, Android 14, IP68, MIL-STD-810H, 8000mAh, 680g. Blueprints, BIM viewers, full spreadsheets and PDF plans.
 - [Tuga WH6](https://www.tugahardware.com/products/tuga-wh6): £699. 6.5 inch handheld, Windows 11 IoT, IP65, MIL-STD-810H, 4000mAh, 470g. Legacy Windows software and network drives, in a holster.
-- [Tuga W8](https://www.tugahardware.com/products/tuga-w8): £629. 8 inch tablet, Windows 11 Pro, IP67, MIL-STD-810G, 5000mAh, 750g. Windows software in the field, with real ports.
+- [Tuga W8](https://www.tugahardware.com/products/tuga-w8): £629. 8 inch tablet, Windows 11 Pro, IP65, MIL-STD-810G, 5000mAh removable, 910g. Windows software in the field, with real ports.
 - [Tuga W10](https://www.tugahardware.com/products/tuga-w10): £649. 10.1 inch tablet, Windows 11 Pro, IP65, 5000mAh, 1197g. Engineers and surveyors who need Ethernet, HDMI and a full screen.
 
 Scanner versions: Tuga WH6 with Barcode Scanner £779; Tuga W8 with 2D Scanner £699; Tuga W10 with 2D Scanner £729. Each is sold from its base model's page.
@@ -60,12 +60,12 @@ Scanner versions: Tuga WH6 with Barcode Scanner £779; Tuga W8 with 2D Scanner �
 - [Compare two devices head to head](https://www.tugahardware.com/compare/): a verdict, every specification side by side and the price gap
 - [Tuga A6 vs Tuga A8](https://www.tugahardware.com/compare/tuga-a6-vs-tuga-a8): Only £30 apart and both IP67 with removable batteries: the A8 has the 8 inch 1000 nit screen, a larger 8000mAh battery and VESA mounting; the A6 has a built-in Zebra 2D scan engine, Android 15 and fits a pocket.
 - [Tuga A8 vs Tuga A10](https://www.tugahardware.com/compare/tuga-a8-vs-tuga-a10): £70 apart, both 8000mAh: the A8 is far brighter at 1000 nits against 350 and its battery is removable; the A10 has the 10.1 inch 1920 x 1200 screen, 8GB of RAM, Android 14, IP68 and MIL-STD-810H.
-- [Tuga WH6 vs Tuga W8](https://www.tugahardware.com/compare/tuga-wh6-vs-tuga-w8): Same Celeron N5100 and 8GB, £70 apart: the WH6 is a 470g handheld with a removable battery, the W8 an 8 inch tablet with a brighter screen, HDMI and a fingerprint sensor.
-- [Tuga W8 vs Tuga W10](https://www.tugahardware.com/compare/tuga-w8-vs-tuga-w10): £20 apart and both on Windows 11 Pro: the W8 is 447g lighter with IP67, MIL-STD-810G, 4G and GPS built in; the W10 adds a 10.1 inch screen, RJ45 Ethernet, a removable battery and a UHF RFID option.
+- [Tuga WH6 vs Tuga W8](https://www.tugahardware.com/compare/tuga-wh6-vs-tuga-w8): Same Celeron N5100 and 8GB, £70 apart: the WH6 is a 470g handheld with built-in NFC, the W8 an 8 inch tablet with a brighter, sharper screen, Mini HDMI and a larger battery.
+- [Tuga W8 vs Tuga W10](https://www.tugahardware.com/compare/tuga-w8-vs-tuga-w10): £20 apart and both on Windows 11 Pro: the W8 is 287g lighter with a sharper 1920 x 1200 screen, MIL-STD-810G, 4G and GPS built in; the W10 adds a 10.1 inch screen, RJ45 Ethernet, built-in NFC and a UHF RFID option.
 - [Tuga A6 vs Tuga A10](https://www.tugahardware.com/compare/tuga-a6-vs-tuga-a10): The A6 is £100 cheaper, pocketable and has a built-in barcode scanner and a removable battery; the A10 has the 10.1 inch Full HD screen, more memory, a bigger battery and IP68.
 - [Tuga WH6 vs Tuga W10](https://www.tugahardware.com/compare/tuga-wh6-vs-tuga-w10): £50 apart and the bigger one is cheaper: the W10 is a 10.1 inch Windows 11 Pro tablet with Ethernet and HDMI, the WH6 a 470g Windows 11 handheld with 4G LTE.
 - [Tuga A6 vs Tuga WH6](https://www.tugahardware.com/compare/tuga-a6-vs-tuga-wh6): The Android A6 is £350 cheaper, better sealed, lighter and has a Zebra 2D scan engine built in; the Windows WH6 earns its extra cost when you need a desktop program or a network drive in the field.
-- [Tuga A8 vs Tuga W8](https://www.tugahardware.com/compare/tuga-a8-vs-tuga-w8): Same 8 inch size and IP67, £250 apart: the A8 has the brighter 1000 nit screen and a larger, removable battery; the W8 adds full Windows 11 Pro, USB-A and HDMI, a fingerprint sensor and MIL-STD-810G.
+- [Tuga A8 vs Tuga W8](https://www.tugahardware.com/compare/tuga-a8-vs-tuga-w8): Same 8 inch size, £250 apart: the A8 has the brighter 1000 nit screen, a larger battery and IP67 sealing; the W8 adds full Windows 11 Pro, a sharper 1920 x 1200 screen, USB-A and Mini HDMI, and MIL-STD-810G.
 - [Tuga A10 vs Tuga W10](https://www.tugahardware.com/compare/tuga-a10-vs-tuga-w10): The A10 is £200 cheaper, sharper, 517g lighter and rated IP68 and MIL-STD-810H; the W10 adds Windows 11 Pro, RJ45 Ethernet, HDMI and a removable battery for engineers who plug into panels and plant.
 
 ## Buying
