@@ -422,7 +422,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/autodesk-build</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -434,7 +434,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/bluebeam</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -446,6 +446,12 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/dalux</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/elogs-cafm</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -457,14 +463,20 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.tugahardware.com/works-with/fergus</loc>
+    <loc>https://www.tugahardware.com/works-with/eworks-manager</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/fergus</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/fieldwire</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -476,7 +488,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/gas-engineer-software</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -517,6 +529,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/klipboard</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/limble-cmms</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -535,6 +553,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/dynamics-365-field-service</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/okappy</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/papertrail-io</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -542,7 +572,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/payaca</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -553,8 +583,14 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.tugahardware.com/works-with/planradar</loc>
+    <loc>https://www.tugahardware.com/works-with/planon</loc>
     <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/planradar</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -566,7 +602,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/procore</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -584,7 +620,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/servicem8</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -609,6 +645,12 @@
   <url>
     <loc>https://www.tugahardware.com/works-with/upkeep</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/workever</loc>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

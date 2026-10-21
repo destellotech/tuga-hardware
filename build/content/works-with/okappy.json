@@ -1,0 +1,168 @@
+{
+  "slug": "okappy",
+  "software": "Okappy",
+  "vendor": "Okappy Ltd",
+  "vendor_url": "https://www.okappy.com/",
+  "title": "Rugged tablet for Okappy: UK buyer's guide",
+  "meta_description": "Okappy's Google Play listing needs Android 7.0 or later, with no RAM figure published. The Tuga A8 (Android 12, 6GB RAM, IP67) meets it for job sheets on site.",
+  "target_query": "best tablet for Okappy",
+  "h1": "Rugged tablet for Okappy",
+  "intro": [
+    "Okappy is job management and workforce software from Okappy Ltd, a UK company whose Google Play developer details give a London address. The vendor's Play listing describes it as workforce management and scheduling for plumbing, drainage and electrical contractors, facilities managers, councils and any company with employees or subcontractors working at different locations, and says it is ideal for companies with 5 to 250 employees or subcontractors. It is built around a network: customers can create jobs and forward them to you, and you can allocate jobs to your own engineers and to subcontractors. The office runs the jobs dashboard in a web browser; engineers view and update their jobs in the Okappy mobile app for Android or iOS.",
+    "The app is where the site work happens. The Play listing says engineers can view and update jobs assigned to them, see the location of colleagues, message them, add signatures, attach pictures, videos and documents, fill in tailored job sheets and checksheets, and get directions to the next job. Invoicing and reporting are marked web only. The vendor's features page says the app is optimised for poor or no network and sends updates when it next has signal, and its support article on photos and signatures says the engineer or customer signs with a finger or stylus on the device. That is a device that gets handed across a doorstep for a signature, rides in a van between jobs and comes out in the rain, which is where a consumer tablet with no sealing or drop rating tends to fail first.",
+    "This page sets out what Okappy publishes about the devices its app runs on, which Tuga rugged devices meet those published requirements, where the Windows tablet fits (the web dashboard in a browser) and where it does not, and how a UK contractor can buy one unit to try before kitting out a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android: Google Play lists Android 7.0 or later; the vendor's own page says Marshmallow and above",
+      "detail": "The vendor's System requirements support article (published May 2017, last modified August 2022) says it supports Android v23 (Marshmallow) and above, which reads as API level 23, or Android 6.0, and asks users to upgrade the operating system before use. The Google Play listing checked on 19 October 2026 gives a minimum API level of 24, which is Android 7.0, so the Play figure is the one that decides whether the app will install. For Apple devices the same article says iOS 8.1 or above on an iPhone 5s or iPad 2 or later, while the App Store listing now asks for iOS 17.6 or later. No RAM or storage figure is published for phones or tablets.",
+      "source_url": "https://www.okappy.com/support-article/system-requirements/"
+    },
+    {
+      "requirement": "Android app from Google Play, with a Phone device chip only",
+      "detail": "The Android app is published on Google Play as Okappy - workforce management (package com.okappy.okappy, developer Okappy, with OKAPPY LTD. and a London address under the developer details). When checked on 19 October 2026 the listing showed version 3.0.60, updated 8 October 2026, a minimum API level of 24 (Android 7.0), a target API level of 36 and more than 5,000 downloads. The listing carried a device chip for Phone only; no Tablet or Chromebook chip was shown. The listing text nonetheless says you can manage your business from your tablet, phone or desktop computer, and the vendor's features page says its native apps work on most mobile devices from tablets to mobile phones, so expect a phone-style layout on a tablet rather than one designed for the larger screen.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.okappy.okappy&hl=en_GB"
+    },
+    {
+      "requirement": "Poor or no network: the app queues updates and sends them when it next has signal",
+      "detail": "The vendor's mobile app features page says the app is optimised for poor or no network, that it is easy for engineers to update their work even with poor network, and that the app will send the updates when it next has network. The App Store version history adds that checksheets saved in memory load better in low-connectivity areas. The vendor does not publish how much job data is held on the device or whether a job can be opened for the first time without signal, and its photo troubleshooting article says queued images wait for the operating system to pick a time to upload based on network, power and other factors, with a recommendation to keep the app open on a good connection, ideally Wi-Fi.",
+      "source_url": "https://www.okappy.com/features/mobile-app-works-real-time/"
+    },
+    {
+      "requirement": "Photos and videos through the device camera, and signatures by finger or stylus",
+      "detail": "The support article on taking photos and capturing signatures says that on Android the app opens your camera app to take a photo or video, and that a signature is taken using your finger or stylus, then saved and named. The job management page says client signatures are captured on site using your touch screen device and presented in the final job sheet, and the features page says signatures can be made mandatory so a job cannot be completed until one is taken. The troubleshooting article asks Android users to keep the Camera and Storage permissions on, to keep documents under 10MB, and notes that power saving mode can slow uploads.",
+      "source_url": "https://www.okappy.com/support-article/taking-photos-and-capturing-signatures/"
+    },
+    {
+      "requirement": "Job sheets and checksheets filled in on the app",
+      "detail": "The vendor's support article on updating a job describes the engineer's flow on an iOS or Android device: any daily checksheet appears first, a risk assessment checksheet can be set to appear before the job is marked on site, the work done sheet follows the job template, and a closing checksheet such as customer feedback can follow that. Custom checksheets offer small, medium and large text fields, a numeric field, a rating field, a Yes/No field and a dropdown with custom options. A signature, image, video or document can be added at any stage from the Okappy icon or the + button. The vendor publishes no screen-size guidance for these forms.",
+      "source_url": "https://www.okappy.com/support-article/updating-a-job-on-the-mobile-app/"
+    },
+    {
+      "requirement": "GPS tracking with four settings, and the vendor's note that sending locations uses power",
+      "detail": "The Mobile GPS tracking options article lists four ways to track devices: always track, track for a period of time, save the location and time stamp when updating jobs, or turn tracking off. It says sending locations uses power and recommends sending the location only with job updates if you want to save battery. The Radar tab in the web dashboard shows the latest location of all engineers. The vendor publishes no location accuracy or GNSS hardware requirement, and the Play listing notes the app shares location.",
+      "source_url": "https://www.okappy.com/support-article/mobile-gps-tracking-options/"
+    },
+    {
+      "requirement": "Windows: no Windows app, web dashboard in a current browser, with a recommended desktop specification",
+      "detail": "The System requirements article says Okappy is web based and works across all operating systems, with a strong suggestion to run the latest Windows version. It recommends the latest Chrome, Safari, Microsoft Edge or Firefox and, because of TLS 1.3, does not support Internet Explorer, Chrome 69 and below, Edge 78 and below, Firefox 62 and below or Safari 12.1 and below. For desktops and laptops it recommends a minimum of 8GB of RAM, an Intel Core i5 processor or equivalent, 500GB of storage (the vendor notes it is cloud based) and a display of 21 inches or above for optimal viewing. The Play listing marks invoicing and reporting as web only. No barcode, QR or NFC scanning is documented anywhere in the vendor's help centre or listings.",
+      "source_url": "https://www.okappy.com/support-article/system-requirements/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Okappy's engineer work is job sheets, checksheets with short text, number, rating and Yes/No fields, camera photos and on-screen signatures, and the Google Play listing carries a Phone device chip only, so the app is published for a phone-style layout rather than a large tablet one. The 8 inch Tuga A8 gives enough room for a form or a customer signature without the size of a 10 inch tablet, and it can be held in one hand on a doorstep or up a ladder. It runs Android 12 with Google Play against a Play minimum of Android 7.0 and the vendor's own Marshmallow and above, and its 6GB of RAM is not checked against any vendor figure because none is published. Two things the vendor does say point at the A8: sending locations uses power, and the A8's 8000mAh battery is removable, so a charged spare takes over on a long tracking day; and photo uploads wait for a good connection, which the dual SIM 4G helps with away from Wi-Fi. The 1000 nit screen stays readable outdoors, and the VESA mount points and pogo pin connector suit a van dock. It is IP67 with no MIL-STD rating, so for wetter or rougher work the A10 is the tougher choice. At £379 it is £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 7.0 or later from Google Play (vendor page: Marshmallow and above). Tuga A8: Android 12 with Google Play, so the published requirement is met.",
+        "Requirement: no RAM or storage figure published. Tuga A8: 6GB RAM and 128GB storage with a microSD slot.",
+        "Requirement: photos and videos through the camera app, and signatures by finger or stylus on the screen. Tuga A8: 13MP autofocus rear camera with flash, 8 inch IPS 1280 x 800 touch screen at 1000 nits with AGC glass; the capacitive stylus accessory fits it.",
+        "Requirement: GPS tracking that the vendor says uses power, and uploads that wait for a good connection. Tuga A8: GPS + GLONASS + Galileo + BeiDou, removable 8000mAh battery, dual SIM 4G and Wi-Fi.",
+        "Requirement: a device that lives in the van and comes out on site. Tuga A8: IP67, VESA mount points, pogo pin dock connector, NFC (not an Okappy feature)."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 is the larger and tougher option. It is sealed to IP68 and tested to MIL-STD-810H, which the A8 is not, so it suits drainage, groundworks and anyone who works in the wet or drops kit on hard floors. The 10.1 inch 1920 x 1200 screen shows more of a long work done sheet or an attached PDF at once and gives a customer a bigger signature box, though remember the Play listing is published for phones, so the app may not use all of that space. It runs Android 14 with Google Play, well above the Android 7.0 minimum, with 8GB of RAM and a 13MP rear camera for photos. It has GPS for the tracking module and dual SIM 4G for uploads. The trade-offs against the A8 are a 350 nit screen rather than 1000 nits, a battery that is not listed as removable, and £449 against £379.",
+      "fit": [
+        "Requirement: Android 7.0 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: no RAM or storage figure published. Tuga A10: 8GB RAM, 128GB storage with microSD up to 2TB.",
+        "Requirement: camera photos and on-screen signatures. Tuga A10: 13MP rear camera with flash, 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: GPS tracking and a connection for queued uploads. Tuga A10: GPS + Galileo + BeiDou + QZSS + NavIC, 4G dual SIM, dual-band Wi-Fi 5, 8000mAh battery with quick charge.",
+        "Requirement: a device that survives site work. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 680g."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Google Play listing carries a Phone device chip, so the 6 inch Tuga A6 is the closest match to the layout the vendor publishes for, and at 277g it goes in a pocket or the belt holster. It runs the same Okappy Android app on Android 15, well above the Android 7.0 minimum, with a 13MP rear camera for photos and GPS for tracking. Its 4GB of RAM cannot be checked against a vendor number because Okappy publishes none; try one unit with your usual apps open before buying for a team. The removable 5050mAh battery covers the vendor's warning that sending locations uses power. The trade-off is screen area: a customer signs on a 6 inch screen, and a long work done sheet needs more scrolling than on the A8 or A10. It has a Zebra 2D scan engine, but Okappy documents no barcode or QR scanning, so do not buy it for that. At £349 it is £30 less than the A8.",
+      "fit": [
+        "Requirement: Android 7.0 or later from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: no RAM or storage figure published. Tuga A6: 4GB RAM and 64GB storage with microSD up to 256GB.",
+        "Requirement: camera photos and finger or stylus signatures. Tuga A6: 13MP rear camera with flash, 6 inch FHD+ IPS 2160 x 1080 touch screen (the Zebra 2D scan engine is not a documented Okappy input).",
+        "Requirement: GPS tracking that uses power. Tuga A6: GPS + GLONASS + BeiDou + Galileo, removable 5050mAh battery, 4G LTE dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, operating temperature -20 to 50C."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Okappy has no Windows app. The Tuga W10 runs Windows 11 Pro, so it runs the Okappy web dashboard in a current Edge, Chrome or Firefox, which is where the vendor puts invoicing, reporting, the Radar map and job sheet templates. Be clear about the vendor's desktop recommendation: it asks for a minimum of 8GB RAM, which the W10 has, but recommends an Intel Core i5 or equivalent, 500GB of storage and a 21 inch or larger display, and the W10 has an Intel N100, 128GB of storage and a 10.1 inch screen, so it sits below three of the four recommended figures. The vendor says Okappy is cloud based and does not need much storage itself. That makes the W10 a fit for a site office, a workshop counter or a supervisor's van, with Ethernet and HDMI for a fixed position, and not for an engineer: the photo capture, finger signatures, queued offline updates and checksheet flow the vendor documents are in the mobile app, which does not run on Windows.",
+      "fit": [
+        "Requirement: the latest Chrome, Safari, Microsoft Edge or Firefox with TLS 1.3. Tuga W10: Windows 11 Pro running current desktop browsers.",
+        "Requirement: a minimum of 8GB RAM, with an Intel Core i5 or equivalent and 500GB of storage recommended. Tuga W10: 8GB RAM (meets the minimum), Intel N100 up to 3.4GHz and 128GB storage with a microSD slot (below the recommended processor and storage).",
+        "Requirement: a 21 inch or larger display recommended for optimal viewing. Tuga W10: 10.1 inch IPS 1280 x 800 multi-touch, which is smaller than the vendor recommends; an external monitor can be attached over HDMI.",
+        "Requirement: a fixed position in a site office or workshop. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock. IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Okappy administrator to add the engineer as a user in your Okappy account, and to set up the job sheet template and any daily, risk assessment, work done or closing checksheets you want to appear on the app.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Okappy - workforce management (package com.okappy.okappy, developer Okappy), then sign in with the engineer's details.",
+    "When the app asks, allow the Camera and Storage permissions, which the vendor says are required for images to upload to jobs, and allow location access if your business uses the Radar map.",
+    "In the web dashboard, pick the tracking setting that suits you: always track, track for a period, save the location only when a job is updated, or off. The vendor says sending locations uses power and suggests the job update option if you want to save battery.",
+    "Before the first job in a poor signal area, open the app on a good connection so the engineer's jobs and checksheets are on the device. The vendor says updates made with no network are sent when the app next has signal, but publishes no detail on what is held for first use offline, so test a job in a known dead spot.",
+    "Run a test job end to end: mark on site, take a photo, fill in the work done sheet, capture a signature with a finger or the stylus, and complete the job. Check the photo arrives on the dashboard; the vendor's troubleshooting article says a stuck image blocks the queue behind it and that resetting the app clears it.",
+    "On a Tuga W10, open okappy.com in Edge or Chrome and keep the browser updated. Use it for the dashboard, invoicing and reporting; it will not run the mobile app.",
+    "For the A8 and A10, fit the vehicle mounting dock in the van; for the A10 and W10, add the charging dock where devices live overnight; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for engineers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for signatures when a finger is too clumsy",
+    "12V DC car charger, £26, for charging between jobs",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Okappy run on the Tuga A8?",
+      "a": "Okappy's Google Play listing gives a minimum API level of 24, which is Android 7.0, and the vendor's own System requirements article says Marshmallow and above. The Tuga A8 runs Android 12 with Google Play, so it meets both, and so do the A10 (Android 14) and the A6 (Android 15). Okappy publishes no RAM or storage figure for phones or tablets, so the A8's 6GB, the A10's 8GB and the A6's 4GB cannot be checked against a vendor number. We do not describe any device as certified or tested by Okappy; these are the vendor's published requirements set against the device specifications, so try the app on one unit before buying for a team."
+    },
+    {
+      "q": "Does Okappy work without signal on these devices?",
+      "a": "Partly, according to the vendor. Its features page says the app is optimised for poor or no network, that engineers can update their work with poor network, and that the app sends the updates when it next has network. It does not publish what is stored on the device for use before signal returns, so get the engineer's jobs onto the device on a good connection first. Queued photos wait for the operating system to pick an upload time, and the vendor recommends keeping the app open on a good connection, ideally Wi-Fi. The A8, A10 and A6 all have dual SIM 4G so a second network can cover a weak one. A Tuga W10 only runs the web dashboard, which the vendor does not describe as working offline."
+    },
+    {
+      "q": "The Play listing only shows a Phone chip. Does the app work on a tablet at all?",
+      "a": "When we checked Google Play on 19 October 2026 the Okappy listing carried a device chip for Phone only, with no Tablet chip. The vendor's own text says you can manage your business from your tablet, phone or desktop, its features page says the native apps work on most mobile devices from tablets to mobile phones, and its support article on adding jobs is written for iPad. Google Play normally still allows a phone app to install on an Android tablet, but the layout may be the phone one scaled up. That is one reason the 8 inch A8 is our first choice over the 10.1 inch A10, and why a single trial unit is worth running before a fleet order."
+    },
+    {
+      "q": "Can engineers scan barcodes or QR codes, and does the A6's scanner help?",
+      "a": "No scanning of any kind is documented. We found no barcode, QR code or NFC feature in Okappy's Google Play listing, App Store listing, help centre or features pages. The Tuga A6 has a Zebra 2D scan engine and the A10, A8 and A6 all have NFC, but none of that is an Okappy input, so do not choose a device for Okappy on that basis. Photos go through the camera app, which on the A8, A10 and A6 is a 13MP rear camera with flash."
+    },
+    {
+      "q": "Should I choose the A8 or the A10 for Okappy?",
+      "a": "The A8 suits most Okappy users: job sheets, checksheets, photos and finger signatures fit on its 8 inch 1000 nit screen, the 8000mAh battery is removable for days with GPS tracking on, it docks in the van through its VESA mount points, and it costs £379. Choose the A10 at £449 if you work in the wet or expect drops on hard surfaces, because it is IP68 and MIL-STD-810H where the A8 is IP67 with no MIL-STD rating, or if you want the larger 10.1 inch 1920 x 1200 screen for long work done sheets and attached documents, remembering that the app is published for phones."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Okappy has no Windows app, so the Tuga W10 only runs the web dashboard in a browser. The engineer features the vendor documents (camera photos, finger or stylus signatures, checksheets, queued updates in poor signal and the Radar location sharing) are in the mobile app, so a W10 suits a site office or workshop desk, not an engineer on site, and it sits below the vendor's recommended desktop processor, storage and display size even though it meets the 8GB RAM minimum. On the Android side, the vendor's two published Android figures do not agree: its System requirements article (last modified 2022) says Marshmallow and above, while Google Play says Android 7.0; both are far below the Android 12, 14 and 15 on the A8, A10 and A6, so the gap does not change the answer. The Play listing carries a Phone device chip only, so expect a phone layout on a tablet. The vendor publishes no RAM, storage or screen-size figure for mobile devices, no barcode, QR or NFC support, and no location accuracy requirement, so the A6's Zebra 2D scan engine and the NFC radio on the A10, A8 and A6 should not be treated as Okappy features. The vendor's statements on offline working describe queued updates being sent when signal returns; it does not publish what is held on the device for first use without signal.",
+  "disclaimer": "Okappy is a product of Okappy Ltd. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Okappy or Okappy Ltd.",
+  "sources": [
+    "https://www.okappy.com/",
+    "https://www.okappy.com/faq/",
+    "https://www.okappy.com/job-management/",
+    "https://www.okappy.com/job-tracking/",
+    "https://www.okappy.com/features/mobile-app-works-real-time/",
+    "https://www.okappy.com/support/",
+    "https://www.okappy.com/support-article/system-requirements/",
+    "https://www.okappy.com/support-article/taking-photos-and-capturing-signatures/",
+    "https://www.okappy.com/support-article/photos-have-not-been-received-for-a-job/",
+    "https://www.okappy.com/support-article/updating-a-job-on-the-mobile-app/",
+    "https://www.okappy.com/support-article/type-of-job-check-sheet-and-when-to-insert-them/",
+    "https://www.okappy.com/support-article/creating-using-custom-checksheet/",
+    "https://www.okappy.com/support-article/adding-jobs-from-your-phone-tablet/",
+    "https://www.okappy.com/support-article/mobile-gps-tracking-options/",
+    "https://www.okappy.com/support-article/android-app-updates/",
+    "https://www.okappy.com/support-article/check-okappy-app-version/",
+    "https://play.google.com/store/apps/details?id=com.okappy.okappy&hl=en_GB",
+    "https://apps.apple.com/gb/app/okappy-field-service-app/id494390368"
+  ]
+}

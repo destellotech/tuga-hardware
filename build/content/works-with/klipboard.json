@@ -1,0 +1,161 @@
+{
+  "slug": "klipboard",
+  "software": "Klipboard",
+  "vendor": "Klipboard Limited (Kerridge Commercial Systems)",
+  "vendor_url": "https://www.klipboard.com/products/field-service-management",
+  "title": "Rugged tablet for Klipboard: UK buyer's guide",
+  "meta_description": "Klipboard publishes Android 12 or later and at least 4GB RAM. The Tuga A10 (Android 14, 8GB RAM, IP68) meets both for job forms, photos, signatures and QR tags.",
+  "target_query": "best tablet for Klipboard",
+  "h1": "Rugged tablet for Klipboard",
+  "intro": [
+    "Klipboard is field service and job management software built in the UK. It started life as Klipboard Limited, which is still the developer named on its Google Play and App Store listings, and since July 2024 it has been part of Kerridge Commercial Systems Ltd, which now trades as Klipboard and sells it as its Field Service Management product. The vendor describes it as connecting scheduling and dispatch, digital job sheets, job costing, inventory, customer communication, invoicing and payments and accounting integrations in one system, with fire safety, HVAC, water treatment, plumbing, facilities management and healthcare equipment servicing among the sectors its customers come from. The office runs the web dashboard; engineers work from the Klipboard mobile app on iOS and Android.",
+    "The mobile app is where the site work happens. The vendor's help centre documents workflow forms that must be completed before a job can be closed, photographs and PDF documents uploaded from the device to the job, asset service records with up to six images and an Add Signature step, and asset QR code tags that are scanned in the app to pull up an asset's details and history. Its App Store listing describes image and electronic signature capture from clients in the field and a live map of team members' GPS positions. The help centre also tells engineers who expect to work where there is little or no data coverage to sync their jobs, forms, documents and assets before they set off, which is the pattern of a device that spends its day in a van, a plant room or a roof space and comes back to signal later.",
+    "This page sets out what Klipboard publishes about the devices its app runs on, which Tuga rugged tablets meet those published requirements, where the Windows option fits and where it does not, and how a UK contractor can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 12 or later with at least 4GB RAM",
+      "detail": "The vendor's Klipboard iOS & Android Device Requirements article (last updated 31 July 2026) states that Android devices need version 12 or later with at least 4GB RAM, and that iPhone and iPad need iOS 13.0 or later. No storage figure is published. The article adds that the minimums may change over time, recommends keeping the device on the latest software, and warns that untested device models, even ones that meet the minimums, may have issues that are harder to troubleshoot. An old launch announcement for the Android app quoted Android 4.1; the device requirements article is the current figure.",
+      "source_url": "https://intercom.help/klipboard/en/articles/1245515-klipboard-ios-android-device-requirements"
+    },
+    {
+      "requirement": "Android app from Google Play, published by Klipboard Limited",
+      "detail": "The Android app is published on Google Play as Klipboard (package com.app.klipboard.phone, developer Klipboard Limited). When checked on 19 October 2026 the listing showed version 54.0.11, updated on 16 October 2025. The listing we fetched did not show a Requires Android figure or a clear phone and tablet device breakdown, so the Android 12 floor comes from the help centre article rather than Google Play. The help centre's Getting Started article says the app is available on iOS and Android and gives mobile users a QR code to download it.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.app.klipboard.phone&hl=en_GB"
+    },
+    {
+      "requirement": "Sync before going offline, with a data connection needed to sync",
+      "detail": "The vendor does not publish a dedicated offline mode article. Instead its mobile app articles say that the Sync Jobs button downloads current job data, including scheduled jobs, assets and inventory, only when the device has a suitable data connection, that the first sync takes longer and the app should be kept open during it, and that team members who expect to work offline or in areas with limited or no data coverage should sync their devices and download the required workflow forms, documents and assets before going to the job. The app warns that any completed jobs not uploaded will be lost on logout, so completed work has to be synced before switching device. How much data is held on the device is not published.",
+      "source_url": "https://intercom.help/klipboard/en/articles/5367453-klipboard-mobile-app-menu-options"
+    },
+    {
+      "requirement": "Asset QR code tags scanned in the app",
+      "detail": "The help centre says Klipboard generates a unique QR code tag for each asset, and that on the mobile app a team member can find an asset's details and service records by scanning the asset QR tag or by searching; if the tag is scanned the details are downloaded automatically. A damaged or missing tag can be replaced by tapping Add / Edit QR, which opens the in-app QR scanner, then scanning a pre-printed tag. The articles describe an in-app scanner only; no dedicated hardware scan engine, external scanner or barcode format is documented, so on any device the scan path is the app and its camera.",
+      "source_url": "https://intercom.help/klipboard/en/articles/6590287-scanning-qr-code-tag-or-searching-to-view-edit-assets"
+    },
+    {
+      "requirement": "Workflow forms, photos, documents and signatures in the app",
+      "detail": "The Complete A Job article says mandatory workflow forms must be completed before a job can be completed, that extra forms can be added on the app, that forms must be uploaded to be viewable on the web dashboard, and that PDF documents or photographs can be uploaded from the mobile device to the job. The asset service record article says team members can take up to six images within each service record and select Add Signature before syncing the record to the dashboard. The App Store listing describes capturing images and electronic signatures from clients in the field, with double signatures on forms from version 3.7. The vendor does not publish a camera resolution or screen size requirement.",
+      "source_url": "https://intercom.help/klipboard/en/articles/5385859-complete-a-job-on-the-mobile-app"
+    },
+    {
+      "requirement": "GPS live tracking and timers with the app open or in the background",
+      "detail": "The GPS Live Tracking & Timer On App article says a team member must have the Klipboard app open or running in the background for their real-time GPS location to be seen from the office, that travel and job time are recorded with Start Travel, Arrived and the in-app timers, that the timer continues even if the team member is not on the app, and that the device needs to be connected to the internet for this data to be shared. No location accuracy or hardware requirement is published.",
+      "source_url": "https://intercom.help/klipboard/en/articles/2815662-gps-live-tracking-timer-on-app"
+    },
+    {
+      "requirement": "Windows: no Windows app, web dashboard in a browser",
+      "detail": "Klipboard publishes mobile apps for iOS and Android only, and the vendor's site links office users to the web dashboard at app.klipboard.io. No Windows app is published and the device requirements article covers iOS and Android only. The vendor does not publish a supported browser list or minimum browser versions for the web dashboard; the only browser guidance in the help centre is to keep the browser open during data imports. Treat the web dashboard as a current desktop browser product and check it on your own browser before buying for an office.",
+      "source_url": "https://www.klipboard.com/products/field-service-management"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Klipboard's engineer features (workflow forms, photos and PDF uploads, service record images and signatures, QR asset tag scanning, GPS timers and syncing for offline work) live in the Android app, so the device an engineer carries needs to run that app well rather than a browser. The Tuga A10 runs Android 14 against a published requirement of Android 12 or later, and carries 8GB of RAM against a published minimum of 4GB, so it clears both figures with room to spare rather than sitting on them. Mandatory workflow forms and asset service records run to several screens, and the 10.1 inch 1920 x 1200 display shows more of each at once than the 8 or 6 inch options, which also helps when a customer signs on screen. The IP68 and MIL-STD-810H ratings cover rain on a roof, dust in a plant room and drops from a ladder, and the 13MP rear camera with flash is the path the in-app QR scanner and photo capture use. It fits both the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 12 or later from Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met with two versions of headroom.",
+        "Requirement: at least 4GB RAM. Tuga A10: 8GB RAM and 128GB storage, with microSD up to 2TB.",
+        "Requirement: asset QR tag scanning through the in-app scanner, and photos on jobs and service records. Tuga A10: 13MP rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: multi-screen workflow forms and customer signatures on screen. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: sync before the job, then work with or without signal, with GPS timers running in the background. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, dual SIM 4G and GPS + Galileo + BeiDou + QZSS + NavIC."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 is the closer call, with one thing to be clear about. It runs the same Klipboard Android app on an 8 inch screen that is big enough for workflow forms without the size of the A10, and small enough to hold in one hand up a ladder. Its 6GB of RAM is above Klipboard's 4GB minimum, though below the A10's 8GB. On the operating system it runs Android 12, which is exactly the vendor's published minimum of Android 12 or later: it meets the requirement today with no version headroom, and the vendor says its minimums may change over time, so a buyer planning to keep the device for several years should weigh that against the A10's Android 14 or the A6's Android 15. Its 1000 nit screen suits engineers who spend much of the day outside, the 8000mAh battery is removable for long days, and VESA mount points and a pogo pin connector suit a van fit. Against the A10 it is sealed to IP67 rather than IP68, has no MIL-STD rating, a lower 1280 x 800 resolution, and does not fit the charging dock. At £379 it costs £70 less than the A10.",
+      "fit": [
+        "Requirement: Android 12 or later from Google Play. Tuga A8: Android 12 with Google Play, which meets the published minimum exactly, with no version headroom.",
+        "Requirement: at least 4GB RAM. Tuga A8: 6GB RAM and 128GB storage with a microSD slot.",
+        "Requirement: in-app QR asset tag scanning and photo capture. Tuga A8: 13MP autofocus rear camera with flash (scanning is through the camera via the app; there is no dedicated scan engine).",
+        "Requirement: readable workflow forms outdoors. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass.",
+        "Requirement: a device for long days between van and site with GPS timers running. Tuga A8: removable 8000mAh battery, IP67 with no MIL-STD rating, VESA mount points, pogo pin dock connector, dual SIM 4G and GPS + GLONASS + Galileo + BeiDou."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For engineers who want something that goes in a pocket or a belt holster at 277g, the Tuga A6 runs the same Klipboard Android app on a 6 inch handheld, and the Google Play package name (com.app.klipboard.phone) and the help centre's phone-first instructions make a phone-sized layout one the vendor plainly publishes for. It runs Android 15, well above the Android 12 requirement, but be clear on memory: its 4GB of RAM meets Klipboard's 4GB minimum exactly, with no headroom, so for heavy daily form filling the A10 or A8 is the safer choice and a trial unit is worth running first. It has a Zebra 2D scan engine, but Klipboard documents only its in-app QR scanner, so plan on the 13MP rear camera. The trade-off is screen area: a 6 inch display shows less of a long workflow form or a signature box than the larger tablets.",
+      "fit": [
+        "Requirement: Android 12 or later from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: at least 4GB RAM. Tuga A6: 4GB RAM, which meets the minimum with no margin, and 64GB storage with microSD up to 256GB.",
+        "Requirement: in-app QR asset tag scanning and photo capture. Tuga A6: 13MP rear camera with flash (scanning through the camera via the app; the Zebra 2D scan engine is not a documented Klipboard input).",
+        "Requirement: a device that survives site use and drops. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g.",
+        "Requirement: connectivity and location for GPS live tracking and syncing. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, GPS + GLONASS + BeiDou + Galileo, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Klipboard has no Windows app; its device requirements cover iOS and Android only. The Tuga W10 runs Windows 11 Pro, so it can run the Klipboard web dashboard at app.klipboard.io in a current desktop browser, which is where the vendor's scheduling, dispatch, form builder, asset registers, quoting and invoicing live. That makes it a fit for a scheduler's desk, a site office or a workshop counter, and it has Ethernet and HDMI for a fixed position. It is not the device for an engineer: the workflow forms, in-app QR scanning, photos, signatures, GPS timers and sync-then-work-offline pattern the vendor documents are in the mobile app, which does not run on Windows, and the vendor publishes no browser requirements, so check the dashboard in Edge or Chrome on your own machine first. The W10 is also IP65 rather than IP68, so it is protected against water jets but not rated for immersion.",
+      "fit": [
+        "Requirement: a current desktop browser for the web dashboard (no browser list is published). Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: office scheduling, form building and admin in the web dashboard. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage, 10.1 inch 1280 x 800 multi-touch screen.",
+        "Requirement: a fixed position in a site office or workshop. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Klipboard administrator to add the engineer as a team member with mobile access on the web dashboard and to set the Team Member App Sync Settings, which control how far ahead scheduled jobs reach the device.",
+    "On the Tuga A10, A8 or A6, open Google Play and install Klipboard (package com.app.klipboard.phone, developer Klipboard Limited). Confirm the account from the email Klipboard sends, then sign in; the vendor allows five attempts before the account is disabled from the dashboard, and an optional 4-digit PIN can be added.",
+    "Run the first Sync Jobs with the app open and on a stable connection. The vendor says the first sync takes longer than later ones because of the volume of data, and that scheduled jobs, assets and inventory come down together.",
+    "Allow camera and location access when prompted so the in-app QR scanner, photo capture and GPS live tracking can work, and let the app run in the background, which the vendor says is needed for real-time location and for the travel and job timers to keep going.",
+    "Before the first job in an area with limited or no coverage, sync and download the workflow forms, documents and assets the vendor says to prepare in advance, and use Sync Assets on any job that does not yet show the client's registered assets.",
+    "Test the QR scanner against an asset tag already generated in Klipboard, complete a test job with a mandatory workflow form, photos and a service record signature, then upload it and check it arrives on the web dashboard as Pending before rolling out to the team.",
+    "Make syncing the end-of-day habit: the app warns that any completed jobs not uploaded will be lost on logout, so completed work must be synced before an engineer switches to another device.",
+    "On a Tuga W10, open app.klipboard.io in Edge or Chrome and keep the browser updated. Use it for office work; it will not run the mobile app. For the A10 and A8, fit the vehicle mounting dock in the van; for the A10 and W10, add the charging dock where devices live overnight; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for engineers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for customer signatures on screen",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Klipboard run on the Tuga A10?",
+      "a": "Klipboard's device requirements article publishes Android 12 or later with at least 4GB RAM. The Tuga A10 runs Android 14 with Google Play and has 8GB RAM and 128GB storage, so it meets each published figure with headroom. The Tuga A8 (Android 12, 6GB RAM) meets the Android figure exactly and the RAM figure with headroom, and the Tuga A6 (Android 15, 4GB RAM) meets the Android figure with headroom and the RAM figure exactly. We do not describe any device as certified or tested by Klipboard; the vendor itself says untested models may be harder to troubleshoot, and these are its published requirements set against the device specifications."
+    },
+    {
+      "q": "Does Klipboard work without signal on these tablets?",
+      "a": "The vendor does not publish a dedicated offline mode article, but its mobile app guides say that team members who expect to work offline or in areas with limited or no data coverage should sync their devices and download the required workflow forms, documents and assets before going to the job, and that syncing itself needs a data connection. Completed jobs have to be uploaded afterwards, and the app warns they are lost if the engineer logs out first. The A10, A8 and A6 all run the Google Play app and have dual SIM 4G, which gives a second network to fall back on for the sync. A Tuga W10 can only use the web dashboard in a browser, and the vendor does not document offline working there."
+    },
+    {
+      "q": "Can engineers scan asset QR tags, and does the A6's scanner help?",
+      "a": "Klipboard's help centre says every asset gets a unique QR code tag, and that on the app an engineer can pull up an asset's details and service records by scanning the tag or by searching, and can link a replacement tag through the in-app QR scanner. The A10, A8 and A6 all have a 13MP rear camera with flash, and on each of them scanning runs through the camera via the app. The A6 also has a Zebra 2D scan engine, but the vendor documents no dedicated scan engine or external scanner support, so do not buy it for that reason alone."
+    },
+    {
+      "q": "Should engineers have the 10.1 inch A10 or the 8 inch A8?",
+      "a": "Both meet Klipboard's published requirements, but the A8 does so with no Android headroom: it runs Android 12 against a minimum of Android 12 or later, and the vendor says its minimums may change over time. The A10 runs Android 14, has more RAM (8GB against 6GB), a sharper 1920 x 1200 screen for multi-screen workflow forms and service records, IP68 against IP67, and MIL-STD-810H, which the A8 does not have. The A8 has a 1000 nit screen against the A10's 350 nits, a removable battery, VESA mount points, and costs £379 against £449. Engineers who mostly work outdoors or do long days away from a charger may prefer the A8; those filling in long forms, working in wetter and harder conditions, or keeping the device for several years are better served by the A10."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £379 (A8), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Klipboard has no Windows app and its device requirements cover iOS and Android only, so the Tuga W10 only runs the web dashboard in a browser. The engineer features the vendor documents (workflow forms, photos and documents, service record images and signatures, in-app QR asset scanning, GPS timers and sync-then-work-offline) are in the mobile app, so a W10 suits an office or workshop desk, not an engineer on site. The vendor publishes no supported browser list for the web dashboard. On the Android side, the only scan method the vendor documents is its in-app QR scanner, with no dedicated scan engine, external scanner or barcode format published, so the A6's Zebra 2D scan engine is not a documented Klipboard input. The Tuga A8's Android 12 meets the published Android 12 minimum exactly, and the Tuga A6's 4GB of RAM meets the published 4GB minimum exactly, each with no margin. The vendor publishes no storage figure, no screen-size guidance, no camera resolution and no NFC or RFID support, so the NFC radio on the A10, A8 and A6 should not be treated as a Klipboard feature. The Google Play listing we fetched did not show a Requires Android figure, so the Android 12 floor rests on the help centre article alone.",
+  "disclaimer": "Klipboard is a product of Klipboard Limited, part of Kerridge Commercial Systems Ltd, which trades as Klipboard. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Klipboard, Klipboard Limited or Kerridge Commercial Systems Ltd.",
+  "sources": [
+    "https://www.klipboard.com/products/field-service-management",
+    "https://www.klipboard.com/faq",
+    "https://intercom.help/klipboard/en/articles/1245515-klipboard-ios-android-device-requirements",
+    "https://intercom.help/klipboard/en/collections/3004352-mobile-app-ios-and-android",
+    "https://intercom.help/klipboard/en/articles/5367787-getting-started-with-the-mobile-app",
+    "https://intercom.help/klipboard/en/articles/5367453-klipboard-mobile-app-menu-options",
+    "https://intercom.help/klipboard/en/articles/5385859-complete-a-job-on-the-mobile-app",
+    "https://intercom.help/klipboard/en/articles/5385860-view-create-or-edit-an-asset-on-the-mobile-app",
+    "https://intercom.help/klipboard/en/articles/6590287-scanning-qr-code-tag-or-searching-to-view-edit-assets",
+    "https://intercom.help/klipboard/en/articles/6589793-how-to-replace-link-or-print-a-new-qr-code-tag-for-an-asset",
+    "https://intercom.help/klipboard/en/articles/2459222-completing-a-client-asset-service-record-on-the-mobile-app-for-planned-or-reactive-maintenance-job",
+    "https://intercom.help/klipboard/en/articles/2815662-gps-live-tracking-timer-on-app",
+    "https://play.google.com/store/apps/details?id=com.app.klipboard.phone&hl=en_GB",
+    "https://apps.apple.com/app/id1283345963",
+    "https://www.tyrepress.com/2024/07/kerridge-commercial-systems-buys-klipboard-in-field-service-management-acquisition/"
+  ]
+}
