@@ -1,7 +1,7 @@
 {
   "_note": "Copy for /warranty, generated from the signed-off warranty design. Prices and tier names come from data/products.json; keep the two in step. Clause numbers refer to build/content/warranty-terms.json.",
   "title": "Warranty and care plans",
-  "meta_description": "Every Tuga device has a 12-month warranty. Add the 3-Year Warranty with carriage paid both ways, or Total Care for fleets with a swap unit dispatched the same working day.",
+  "meta_description": "Every Tuga has a 12-month warranty. Add the 3-Year Warranty with carriage paid both ways, or Total Care with a same working day swap unit.",
   "h1": "Warranty and care plans for Tuga devices",
   "lede": "Every Tuga device comes with 12 months against defects. If you want longer, or you run a fleet that cannot wait for a repair, there are two paid plans, with published prices and numbered terms you can send to your finance team.",
   "intro": [
