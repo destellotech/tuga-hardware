@@ -26,6 +26,7 @@ import {
   warranty,
   warrantyTier,
   variantsOf,
+  upgradesFor,
   esc,
   money,
   icons,
@@ -87,7 +88,7 @@ function sourceDate(files) {
 }
 
 /** Add the brand to a page title only when it still fits in about 65 characters. */
-const withBrand = (title) => (title.length <= 49 ? `${title} | Tuga Hardware` : title);
+const withBrand = (title) => (title.length <= 44 ? `${title} | Tuga Hardware` : title);
 
 function write(relPath, contents) {
   const full = join(ROOT, relPath);
@@ -141,6 +142,37 @@ function variantChooser(p, variants) {
             ${opt(p, `${p.name}`, 'Scan with the camera through your app', true)}
             ${variants.map((v) => opt(v, v.name, `Integrated 2D barcode scanner, ${money(v.price - p.price)} more`, false)).join('')}
           </fieldset>`;
+}
+
+/** Factory upgrades under a product's buy box: one fieldset per group
+    (Memory, Storage), each a radio group that starts on the standard size.
+    Chosen SKUs are added with the device, one per unit (js/app.js,
+    initAddToCart). */
+function upgradeChooser(p) {
+  const upgrades = upgradesFor(p.id);
+  if (!upgrades.length) return '';
+  const row = (u, name, checked, label, text) => `
+            <label class="protect-opt">
+              <input type="radio" name="${name}" value="${u ? esc(u.id) : ''}" data-upgrade-choice${checked ? ' checked' : ''}>
+              <span class="protect-text"><strong>${esc(label)}</strong>${esc(text)}</span>
+              <span class="protect-price">${u ? `+${money(u.price)}<small>per device</small>` : 'Included'}</span>
+            </label>`;
+  const groups = [
+    { group: 'ram', title: 'Memory', standard: p.specs.ram },
+    { group: 'storage', title: 'Storage', standard: p.specs.storage },
+  ];
+  return groups
+    .map(({ group, title, standard }) => {
+      const options = upgrades.filter((u) => u.group === group);
+      if (!options.length) return '';
+      return `
+          <fieldset class="protect" data-upgrade-chooser>
+            <legend>${eyebrow(title)}</legend>
+            ${row(null, `upg-${group}`, true, standard, 'Standard')}
+            ${options.map((u) => row(u, `upg-${group}`, false, u.label, u.summary)).join('')}
+          </fieldset>`;
+    })
+    .join('');
 }
 
 /** The cover options under a product's buy box. Every tier is a radio: a
@@ -424,14 +456,44 @@ const TRADES = [
   {
     icon: icons.factory(24),
     name: 'Engineering & utilities',
+    page: '/for/utilities',
     copy: 'Diagnostic software, GIS and network tools that never made it to mobile. Ethernet on board for plugging straight into plant.',
     pick: 'tuga-w10',
   },
   {
     icon: icons.leaf(24),
     name: 'Agriculture & grounds',
+    page: '/for/agriculture',
     copy: 'Crop records, livestock tracking and field mapping. Sealed against mud, rain and frost, with a big screen for maps.',
     pick: 'tuga-a10',
+  },
+  {
+    icon: icons.droplet(24),
+    name: 'Plumbing & heating',
+    page: '/for/plumbers-heating',
+    copy: 'Boiler manufacturer apps, digital certificates and photos under the sink. Sealed against the wet, with a flash for the dark corners.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.ruler(24),
+    name: 'Surveyors & site managers',
+    page: '/for/surveyors',
+    copy: 'A1 drawings, mark-ups and snagging on a 10 inch screen you can read on site. Windows when your survey software demands it.',
+    pick: 'tuga-a10',
+  },
+  {
+    icon: icons.wrench(24),
+    name: 'Facilities & maintenance',
+    page: '/for/facilities-management',
+    copy: 'Work orders, asset tags and meter photos in plant rooms and on roofs. Shared devices that live on a charging dock between shifts.',
+    pick: 'tuga-a10',
+  },
+  {
+    icon: icons.box(24),
+    name: 'Warehouse & stock',
+    page: '/for/warehouse',
+    copy: 'Goods in, picking and stocktakes with a built-in 2D scan engine. A handheld that fits a holster and survives the loading bay.',
+    pick: 'tuga-a6',
   },
 ];
 
@@ -631,7 +693,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. From £349 with free UK delivery.',
+      'Rugged Android and Windows tablets for UK tradespeople. IP65 to IP68 sealed, half the range MIL-STD-810 drop tested. From £349, free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -651,7 +713,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged Android and Windows tablets and handhelds. IP65 to IP68 sealed, free UK delivery, 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -912,7 +974,7 @@ ${breadcrumbs(trail)}
             <p class="pdp-paused" role="status">${esc(SALES_PAUSED_MESSAGE)}</p>
             <a class="btn btn-primary btn-lg" href="${quoteUrl(p.name)}">Ask about availability</a>
           </div>`
-              : `${variantChooser(p, variants)}${warrantyChooser(p)}
+              : `${variantChooser(p, variants)}${upgradeChooser(p)}${warrantyChooser(p)}
           <div class="buy-row">
             <div class="qty">
               <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
@@ -1037,7 +1099,7 @@ ${ctaBanner({
 
   return page({
     title: `${p.name}: ${p.sizeLabel} inch Rugged ${p.category === 'android' ? 'Android' : 'Windows'} ${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} | Tuga Hardware`,
-    description: p.description,
+    description: p.metaDescription || p.description,
     path: productUrl(p),
     active: 'products',
     ogType: 'product',
@@ -1125,7 +1187,7 @@ write(
   page({
     title: 'Bulk Orders & Team Discounts | Tuga Hardware',
     description:
-      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, free UK delivery, and business quotes with proforma invoices.',
+      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9, 10% at 10+. No codes, free UK delivery, proforma invoices.',
     path: '/bulk',
     active: 'bulk',
     schema: [breadcrumbSchema(bulkTrail), bulkFaq.schema],
@@ -1505,6 +1567,129 @@ ${honeypot}
     </section>
 
 ${tradeFaq.html}
+`,
+  })
+);
+
+/* ==========================================================================
+   BESPOKE REQUESTS
+   ========================================================================== */
+
+const bespokeTrail = [{ label: 'Home', href: '/' }, { label: 'Bespoke requests' }];
+
+const BESPOKE_FAQ = [
+  {
+    q: 'What counts as a bespoke request?',
+    a: 'Anything the standard range does not cover: devices pre-loaded with your apps and settings, your logo on the boot screen or casing, a particular mount or accessory bundle, mixed fleets delivered to several sites, or a spec the shop does not list. If you are not sure it is possible, ask.',
+  },
+  {
+    q: 'Is there a minimum order?',
+    a: 'It depends on the request. Software set-up and accessory bundles can often be done for a handful of devices. Anything that involves the hardware itself, such as branding, needs a larger run, and we will tell you the number up front.',
+  },
+  {
+    q: 'How much does it cost and how long does it take?',
+    a: 'We reply within one working day with whether we can do it and a written quote. Nothing is charged until you accept the quote. Lead times depend on the request and are stated in the quote.',
+  },
+  {
+    q: 'Do bespoke devices keep the warranty?',
+    a: 'Yes. Software set-up and accessories do not affect the warranty. If a request would change anything about the cover, we say so in the quote before you commit.',
+  },
+];
+
+const bespokeFaq = faq(BESPOKE_FAQ, { heading: 'Bespoke request questions' });
+
+write(
+  'bespoke.html',
+  page({
+    title: 'Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware',
+    description:
+      'Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.',
+    path: '/bespoke',
+    active: 'bulk',
+    schema: [breadcrumbSchema(bespokeTrail), bespokeFaq.schema],
+    body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(bespokeTrail)}
+        ${eyebrow('Bespoke requests')}
+        <h1>Need something the range does not cover?</h1>
+        <p class="lede">Tell us what you need. We reply within one working day with whether we can do it and a written quote, and you pay nothing until you accept it.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="editorial" style="align-items:start">
+          <div class="editorial-body">
+            <h2 class="title-xs">What we can usually do</h2>
+            <ul class="editorial-list">
+              <li>Pre-load your apps, settings and device management</li>
+              <li>Your logo on the boot screen or casing</li>
+              <li>Custom accessory bundles, mounts and chargers</li>
+              <li>Mixed fleets delivered to several sites</li>
+              <li>A spec the shop does not list</li>
+            </ul>
+            <p style="margin-top:1.5rem">Just want standard devices in volume? <a class="link-arrow" href="/bulk">Use the bulk calculator</a></p>
+          </div>
+
+          <div>
+            <form class="form" data-api-form="/api/bespoke-request" data-success="Thanks. We will reply within one working day with whether we can do it and a quote." novalidate>
+${honeypot}
+              <div class="field-row">
+                <div class="field">
+                  <label for="name">Your name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company" autocomplete="organization" placeholder="Optional">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Optional">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="requestType">What kind of request?</label>
+                  <select id="requestType" name="requestType">
+                    <option>Software or set-up</option>
+                    <option>Branding</option>
+                    <option>Accessory bundle or mounts</option>
+                    <option>Mixed fleet or multi-site delivery</option>
+                    <option>Custom spec</option>
+                    <option>Something else</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="quantity">How many devices?</label>
+                  <select id="quantity" name="quantity">
+                    <option>1 to 4</option>
+                    <option>5 to 9</option>
+                    <option>10 to 49</option>
+                    <option>50 or more</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="message">What do you need?</label>
+                <textarea id="message" name="message" required placeholder="Which models, what you want changed, any deadline, and where the devices are going."></textarea>
+              </div>
+              <button class="btn btn-primary btn-lg" type="submit">Send request</button>
+              <p class="form-status hidden" data-form-status role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+${bespokeFaq.html}
 `,
   })
 );
@@ -3100,6 +3285,7 @@ ${comparePairs.map((c) => `- [${c.a.name} vs ${c.b.name}](${SITE.origin}${c.path
 
 - [Bulk orders and calculator](${SITE.origin}/bulk): automatic team discounts
 - [Trade accounts](${SITE.origin}/trade): order on invoice, pay by bank transfer
+- [Bespoke requests](${SITE.origin}/bespoke): custom set-up, branding, bundles or specs
 - [Accessories](${SITE.origin}/accessories)
 - [Shipping and returns](${SITE.origin}/shipping-returns)
 - [Contact](${SITE.origin}/contact): ${SITE.email}
@@ -3364,7 +3550,7 @@ if (worksWith.length) {
   write(
     'works-with/index.html',
     page({
-      title: 'Rugged tablets for job management and field apps | Tuga Hardware',
+      title: 'Rugged tablets for job management and field apps',
       description:
         'Which Tuga rugged tablet runs your job management, CMMS or inspection app. Published requirements checked against each device, with trial units available.',
       path: '/works-with/',
@@ -3445,6 +3631,7 @@ const urls = [
   ...trades.map((t) => ({ loc: `/for/${t.slug}`, priority: '0.7', freq: 'monthly' })),
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
   { loc: '/trade', priority: '0.6', freq: 'monthly' },
+  { loc: '/bespoke', priority: '0.6', freq: 'monthly' },
   { loc: '/register-warranty', priority: '0.4', freq: 'yearly' },
   { loc: '/bulk', priority: '0.7', freq: 'monthly' },
   { loc: '/warranty', priority: '0.7', freq: 'monthly' },

@@ -37,7 +37,7 @@
     const res = await fetch('/data/products.json');
     if (!res.ok) throw new Error('Could not load the product catalogue');
     const data = await res.json();
-    catalogue = [...data.products, ...data.accessories, ...(data.warranties || [])];
+    catalogue = [...data.products, ...data.accessories, ...(data.warranties || []), ...(data.upgrades || [])];
     knownIds = new Set(catalogue.map((p) => p.id));
     return catalogue;
   }
@@ -73,7 +73,7 @@
 
   const currentId = (id) => {
     for (const [from, to] of Object.entries(LEGACY_IDS)) {
-      const m = id.match(new RegExp(`^(wty-[a-z0-9]+-)?${from}(-scanner)?$`));
+      const m = id.match(new RegExp(`^((?:wty-[a-z0-9]+|upg-[a-z0-9]+)-)?${from}(-scanner)?$`));
       if (m) return `${m[1] || ''}${to}${m[2] || ''}`;
     }
     return id;
@@ -164,7 +164,7 @@
       this.read().forEach((entry) => {
         const product = findItem(products, entry.id);
         if (!product) return;
-        const isDevice = !/^(acc|wty)-/.test(String(product.id));
+        const isDevice = !/^(acc|wty|upg)-/.test(String(product.id));
         if (isDevice) deviceUnits += entry.quantity;
         entries.push({ ...entry, product, isDevice });
       });
@@ -543,14 +543,27 @@
         const base = id.replace(/-scanner$/, '');
         const plan = products ? findItem(products, warrantySku) : null;
         const covers = plan ? plan.warrantyFor === base : warrantySku.endsWith(`-${base}`);
-        if (/^(acc|wty)-/.test(id) || !covers) warrantySku = '';
+        if (/^(acc|wty|upg)-/.test(id) || !covers) warrantySku = '';
       }
+
+      // Factory upgrades ticked in the buy box: one per device unit, and only
+      // ever for the device actually being added.
+      const upgradeSkus = box && !/^(acc|wty|upg)-/.test(id)
+        ? [...box.querySelectorAll('[data-upgrade-choice]:checked')]
+            .map((el) => el.value)
+            .filter((sku) => {
+              const up = products ? findItem(products, sku) : null;
+              return up ? up.upgradeFor === id.replace(/-scanner$/, '') : false;
+            })
+        : [];
 
       if (!Cart.add(id, qty)) return;
       if (warrantySku) Cart.add(warrantySku, qty);
+      upgradeSkus.forEach((sku) => Cart.add(sku, qty));
 
       const product = products ? findItem(products, id) : null;
-      toast(`${product ? product.name : 'Item'}${warrantySku ? ' and warranty' : ''} added to basket`);
+      const extras = [warrantySku && 'warranty', upgradeSkus.length && (upgradeSkus.length === 1 ? 'upgrade' : 'upgrades')].filter(Boolean);
+      toast(`${product ? product.name : 'Item'}${extras.length ? ` and ${extras.join(' and ')}` : ''} added to basket`);
     });
   }
 
@@ -634,7 +647,7 @@
     const p = line.product;
     const image = p.imageBase
       ? `<img src="/img/products/${p.imageBase}-1-400.webp" alt="" width="120" height="90" loading="lazy">`
-      : p.warrantyFor
+      : p.warrantyFor || p.upgradeFor
         ? '<span class="cart-item-glyph" aria-hidden="true">✓</span>'
         : '<span aria-hidden="true">◧</span>';
 
@@ -662,7 +675,7 @@
      device's warranty, so the offer sits under whichever line comes first. */
   function warrantyOffer(line, lines, products) {
     const p = line.product;
-    if (/^(acc|wty)-/.test(p.id)) return '';
+    if (/^(acc|wty|upg)-/.test(p.id)) return '';
     const base = p.id.replace(/-scanner$/, '');
     const wty = products.find((x) => x.warrantyFor === base);
     if (!wty) return '';
@@ -670,7 +683,7 @@
     if (firstForBase !== line) return '';
 
     const units = lines
-      .filter((l) => !/^(acc|wty)-/.test(l.product.id) && l.product.id.replace(/-scanner$/, '') === base)
+      .filter((l) => !/^(acc|wty|upg)-/.test(l.product.id) && l.product.id.replace(/-scanner$/, '') === base)
       .reduce((n, l) => n + l.quantity, 0);
     const covered = lines.find((l) => l.product.id === wty.id)?.quantity || 0;
     const missing = units - covered;
@@ -871,15 +884,21 @@
       const products = await getCatalogue();
       const units = {};
       items.forEach((i) => {
-        if (/^(acc|wty)-/.test(i.id)) return;
+        if (/^(acc|wty|upg)-/.test(i.id)) return;
         const base = i.id.replace(/-scanner$/, '');
         units[base] = (units[base] || 0) + i.quantity;
       });
+      const perGroup = {};
       for (const i of items) {
         const p = findItem(products, i.id);
-        if (!p || !p.warrantyFor) continue;
-        if (i.quantity > (units[p.warrantyFor] || 0)) {
-          setStatus(`${p.name} covers one device each. Reduce it to match the number of Tuga ${p.warrantyFor.replace('tuga-', '').toUpperCase()} units in the basket.`);
+        if (!p) continue;
+        const device = p.warrantyFor || p.upgradeFor;
+        if (!device) continue;
+        const count = p.upgradeFor ? (perGroup[`${device}:${p.group}`] = (perGroup[`${device}:${p.group}`] || 0) + i.quantity) : i.quantity;
+        if (count > (units[device] || 0)) {
+          setStatus(p.upgradeFor
+            ? `${p.name} fits one device each, and a device takes one ${p.group} option. Reduce the ${p.group} upgrades to match the number of Tuga ${device.replace('tuga-', '').toUpperCase()} units in the basket.`
+            : `${p.name} covers one device each. Reduce it to match the number of Tuga ${device.replace('tuga-', '').toUpperCase()} units in the basket.`);
           return;
         }
       }
