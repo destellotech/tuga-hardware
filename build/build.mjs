@@ -1605,7 +1605,7 @@ write(
     description:
       'Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.',
     path: '/bespoke',
-    active: 'bulk',
+    active: 'bespoke',
     schema: [breadcrumbSchema(bespokeTrail), bespokeFaq.schema],
     body: `
     <section class="page-header">

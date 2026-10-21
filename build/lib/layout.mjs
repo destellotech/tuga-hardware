@@ -268,6 +268,7 @@ const NAV_LINKS = [
   { href: '/products/', label: 'Tablets', key: 'products' },
   { href: '/accessories', label: 'Accessories', key: 'accessories' },
   { href: '/bulk', label: 'Bulk Orders', key: 'bulk' },
+  { href: '/bespoke', label: 'Bespoke', key: 'bespoke' },
   { href: '/works-with/', label: 'Works with', key: 'works-with' },
   { href: '/blog/', label: 'Guides', key: 'blog' },
   { href: '/about', label: 'About', key: 'about' },

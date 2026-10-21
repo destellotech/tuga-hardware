@@ -642,7 +642,9 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 
 .nav-toggle:hover { background: rgba(5, 46, 22, 0.06); }
 
-@media (max-width: 900px) {
+/* Collapse to the drawer wherever the eight links would not fit on one
+   line (they need about 1110px). */
+@media (max-width: 1120px) {
   .nav-toggle { display: grid; }
 
   .primary-nav {
@@ -677,9 +679,6 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
     transition: opacity var(--base), transform var(--base), visibility 0s;
   }
 
-  /* Keep the announcement bar to one line on phones. */
-  .announce-more { display: none; }
-
   .primary-nav a {
     padding-block: 0.95rem;
     border-bottom: 1px solid var(--rule);
@@ -687,6 +686,11 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   }
 
   .primary-nav a::after { display: none; }
+}
+
+/* Keep the announcement bar to one line on phones. */
+@media (max-width: 900px) {
+  .announce-more { display: none; }
 }
 
 /* --------------------------------------------------------------------------
