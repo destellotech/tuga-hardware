@@ -54,6 +54,11 @@ const PRODUCTS = {
   'wty-3yr-tuga-a8': { name: "3-Year Warranty for Tuga A8", price: 6500, warrantyFor: 'tuga-a8', tier: '3yr' },
   'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
+  // Factory upgrades: one per device unit, and only one per group (a device
+  // has one storage size). Never discounted, never a device.
+  'upg-ram16-tuga-w10':   { name: '16GB RAM upgrade for Tuga W10',   price: 8900,  upgradeFor: 'tuga-w10', group: 'ram' },
+  'upg-ssd256-tuga-w10':  { name: '256GB storage upgrade for Tuga W10', price: 8900,  upgradeFor: 'tuga-w10', group: 'storage' },
+  'upg-ssd512-tuga-w10':  { name: '512GB storage upgrade for Tuga W10', price: 15900, upgradeFor: 'tuga-w10', group: 'storage' },
 };
 
 /** What the back office needs from the catalogue: stockable models and every sellable line. */
@@ -119,6 +124,18 @@ function validateWarranties(lines) {
     const units = deviceUnits[w] || 0;
     if (line.quantity > units) {
       throw new BasketError(`${line.product.name} covers one device each: you have ${line.quantity} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
+    }
+  }
+  // Upgrades: one per device unit, and one per group (RAM, storage).
+  const perGroup = {};
+  for (const line of lines) {
+    const { upgradeFor, group } = line.product;
+    if (!upgradeFor) continue;
+    const units = deviceUnits[upgradeFor] || 0;
+    const key = `${upgradeFor}:${group}`;
+    perGroup[key] = (perGroup[key] || 0) + line.quantity;
+    if (perGroup[key] > units) {
+      throw new BasketError(`${line.product.name} fits one device each, and a device takes one ${group} option: you have ${perGroup[key]} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
     }
   }
 }
