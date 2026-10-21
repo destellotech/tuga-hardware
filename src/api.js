@@ -56,9 +56,9 @@ const PRODUCTS = {
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
   // Factory upgrades: one per device unit, and only one per group (a device
   // has one storage size). Never discounted, never a device.
-  'upg-ram16-tuga-w10':   { name: '16GB RAM upgrade for Tuga W10',   price: 8900,  upgradeFor: 'tuga-w10', group: 'ram' },
-  'upg-ssd256-tuga-w10':  { name: '256GB storage upgrade for Tuga W10', price: 8900,  upgradeFor: 'tuga-w10', group: 'storage' },
-  'upg-ssd512-tuga-w10':  { name: '512GB storage upgrade for Tuga W10', price: 15900, upgradeFor: 'tuga-w10', group: 'storage' },
+  'upg-ram16-tuga-w10':   { name: '16GB RAM upgrade for Tuga W10',   price: 6900,  upgradeFor: 'tuga-w10', group: 'ram' },
+  'upg-ssd256-tuga-w10':  { name: '256GB storage upgrade for Tuga W10', price: 6900,  upgradeFor: 'tuga-w10', group: 'storage' },
+  'upg-ssd512-tuga-w10':  { name: '512GB storage upgrade for Tuga W10', price: 12500, upgradeFor: 'tuga-w10', group: 'storage' },
 };
 
 /** What the back office needs from the catalogue: stockable models and every sellable line. */
