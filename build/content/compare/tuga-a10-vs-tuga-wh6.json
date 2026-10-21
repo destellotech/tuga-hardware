@@ -1,0 +1,52 @@
+{
+  "a": "tuga-a10",
+  "b": "tuga-wh6",
+  "group": "cross",
+  "title": "Tuga A10 vs Tuga WH6: Big Android Screen or Windows Handheld?",
+  "description": "Tuga A10 (10.1 inch Android tablet, £449) or Tuga WH6 (6.5 inch Windows 11 handheld, £699)? £250 apart. Full HD drawings on site, or Windows in a pocket.",
+  "summary": "The A10 is £250 cheaper, with a 10.1 inch 1920 x 1200 screen, IP68, MIL-STD-810H and double the battery capacity; the WH6 fits a pocket at 470g, runs Windows 11 IoT on an Intel Celeron N5100, has a removable battery and a USB-A port, and lists a 1.5 metre drop rating.",
+  "lede": "For anyone who needs real screen space for drawings and plans but keeps wondering whether a Windows handheld would be the smarter buy. The short answer: buy the Tuga A10 at £449 if the screen is doing the work; buy the Tuga WH6 at £699 only if the device has to fit a pocket or run a Windows desktop program.",
+  "verdict": [
+    "Screen size settles this unless Windows does. The Tuga A10 costs £449 and the Tuga WH6 costs £699, a gap of £250, and the two share more than you might expect: 8GB of RAM, 128GB of storage with a microSD slot, MIL-STD-810H, an operating range of -20°C to 60°C, 4G LTE, dual-band Wi-Fi 5, NFC and a pogo pin connector. The difference is the shape. The A10 is a 10.1 inch Full HD tablet with a 1920 x 1200 screen, sealed to IP68, with an 8000mAh battery, a 13MP rear camera, dual SIM and Android 14, in a 14.5mm body weighing 680g. The WH6 is a 6.5 inch handheld with a 720 x 1600 screen, IP65, a removable 4000mAh battery, an 8MP autofocus rear camera, a USB-A port and Windows 11 IoT on an Intel Celeron N5100, at 470g. If you read drawings, PDF plans or wide spreadsheets on site and your software has an Android app or runs in a browser, the A10's screen is the whole point and the WH6 cannot match it at any price.",
+    "On the rest of the sheet, the A10 leads on sealing and battery, the WH6 on pocketability. The A10 is IP68 against IP65, so it is rated for immersion where the WH6 is rated for water jets, and it carries double the battery capacity, 8000mAh against 4000mAh, with quick charge listed. The WH6's battery is removable, so a charged spare swaps in; the A10 does not list a removable battery. The WH6 lists a 1.5 metre drop rating and the A10 lists no drop figure, though both list MIL-STD-810H. On size, the A10 is 250 x 167mm and the WH6 183.1 x 88.6mm, which is the difference between a device that needs a bag, a strap or a dock and one that goes in a holster. Neither screen is bright: 350 nits on the A10 and 400 on the WH6, both in the range our <a href=\"/blog/screen-brightness-nits-explained\">brightness guide</a> treats as an indoor, cab and under cover screen, so if you read outdoors in full sun all day, the 1000 nit <a href=\"/products/tuga-a8\">Tuga A8</a> is the one to look at instead.",
+    "Pay the £250 when one of two things is true: the device has to live in a pocket or holster, or a program you rely on only installs on a Windows PC and you need it in the field. The WH6 runs Windows desktop software and reaches network drives, and its USB-A port connects instruments and USB sticks directly, where the A10 needs the £8 OTG adapter. Check that the specific program runs on it and is usable on a 6.5 inch screen before you order. The <a href=\"/products/tuga-wh6\">WH6 with Barcode Scanner</a> at £779, £80 over the standard WH6, adds a 2D scan engine; there is no scanner version of the A10. Both include the 12 month warranty, the paid <a href=\"/warranty\">3-Year Warranty</a> is £65 on the A10 and £89 on the WH6, delivery is free to UK addresses in 7 to 10 working days with no VAT to add, and either can come back within 30 days. Our <a href=\"/blog/android-vs-windows-rugged-tablet\">Android or Windows guide</a> has a five minute test for the software question, and the <a href=\"/for/construction\">construction page</a> shows where the A10 fits on a site."
+  ],
+  "chooseA": [
+    "You read drawings, plans or wide spreadsheets on the device: 10.1 inches at 1920 x 1200 against 6.5 inches at 720 x 1600.",
+    "Everything you use has an Android app or runs in a browser, and you would rather keep £250.",
+    "The device gets wet: IP68 covers immersion, where the WH6's IP65 covers water jets.",
+    "You want the bigger battery: 8000mAh with quick charge against 4000mAh, and the Charging Dock (£49.99) and Vehicle Mounting Dock (£109) are listed for the A10.",
+    "You photograph every job: a 13MP rear camera with flash against 8MP on the WH6, with 8GB of RAM and microSD up to 2TB for the photos and plans."
+  ],
+  "chooseB": [
+    "One program you rely on only installs on a Windows PC, or you need a network drive in the field, and you have checked it runs on the WH6.",
+    "It has to fit a pocket or belt holster: 183.1 x 88.6 x 24.1mm and 470g against 250 x 167 x 14.5mm and 680g, with the Belt Holster (£22) listed for it.",
+    "You want a removable battery so a spare takes over mid shift: the WH6's 4000mAh battery is removable, and the A10 does not list a removable battery.",
+    "You plug into instruments or USB sticks: the WH6 has a USB-A port built in.",
+    "You scan barcodes all day and need the scans in a Windows program: the WH6 with Barcode Scanner is £779, and there is no scanner version of the A10."
+  ],
+  "faq": [
+    {
+      "q": "Is the Tuga WH6 worth £250 more than the Tuga A10?",
+      "a": "Only if you need Windows or a device that fits a pocket. The WH6 costs £699 and the A10 £449. The two share 8GB of RAM, 128GB of storage, MIL-STD-810H and the same -20°C to 60°C operating range, so the £250 buys Windows 11 IoT on an Intel Celeron N5100, a USB-A port, a removable battery, a listed 1.5 metre drop rating and a handheld body at 470g. It does not buy a better screen, better sealing or more battery: the <a href=\"/products/tuga-a10\">A10</a> has a 10.1 inch 1920 x 1200 screen against 6.5 inches at 720 x 1600, IP68 against IP65, and 8000mAh against 4000mAh. If the screen is why you are buying, the A10 is the one. Both have the 12 month warranty included, there is no VAT to add to either price, and delivery is free to UK addresses in 7 to 10 working days."
+    },
+    {
+      "q": "Which is tougher, the A10 or the WH6?",
+      "a": "The A10 is better sealed, and both list MIL-STD-810H. The A10 is IP68, which covers dust and immersion, while the WH6 is IP65, which covers dust and water jets but not immersion. Both list MIL-STD-810H and an operating range of -20°C to 60°C. The WH6 also lists a 1.5 metre drop rating; the A10 lists no drop figure, so there is nothing to compare on that line. A 6.5 inch handheld at 470g is also easier to keep hold of than a 10.1 inch tablet at 680g; the A10 comes with a hand strap in the box. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains what each number is tested for, and the <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explains why two devices with the same rating can have been tested quite differently."
+    },
+    {
+      "q": "How do the batteries compare?",
+      "a": "The A10 carries 8000mAh and the WH6 4000mAh, so the A10 starts the day with double the capacity, and the A10 lists quick charge against USB-C PD fast charging on the WH6. The difference is what happens when the battery runs down. The WH6's battery is removable, so a charged spare takes over without a cable; the A10 does not list a removable battery, so it charges in place. Spare batteries are not listed as an accessory for either device. For charging, the 12V DC Car Charger (£26) fits both; the A10 also drops into the Charging Dock (£49.99) or the Vehicle Mounting Dock (£109), and the WH6 into the WH6 Charging Cradle (£79). See <a href=\"/accessories\">accessories</a> for the full list. Both are rated from -20°C to 60°C, and our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in cold weather</a> explains what the cold does to any battery."
+    },
+    {
+      "q": "Could I use the WH6 for drawings instead of the A10?",
+      "a": "You could open them, but a 6.5 inch screen at 720 x 1600 is not a drawing screen. The A10's 10.1 inch 1920 x 1200 screen shows a plan, a PDF or a wide spreadsheet without constant pinching and zooming, which is the reason to buy a tablet over a handheld in the first place. The WH6 earns its place when the device has to be in a pocket between uses and the screen is for a job sheet, a fault code or a parts label, not a drawing. If you need both, a handheld in the pocket and a big screen in the van, the <a href=\"/products/tuga-a10\">A10</a> and the <a href=\"/products/tuga-wh6\">WH6</a> together cost £1,148, and the <a href=\"/bulk\">bulk page</a> covers orders of several devices. Our guide to <a href=\"/blog/rugged-phone-or-rugged-tablet\">rugged handhelds or rugged tablets</a> goes through when one device or two makes sense, and the <a href=\"/blog/8-inch-or-10-inch-rugged-tablet\">8 inch or 10 inch guide</a> covers the choice if you decide a tablet is the answer."
+    }
+  ],
+  "guides": [
+    "/blog/android-vs-windows-rugged-tablet",
+    "/blog/rugged-phone-or-rugged-tablet",
+    "/blog/mil-std-810h-explained",
+    "/blog/8-inch-or-10-inch-rugged-tablet"
+  ]
+}

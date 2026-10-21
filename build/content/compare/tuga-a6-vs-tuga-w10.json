@@ -1,0 +1,52 @@
+{
+  "a": "tuga-a6",
+  "b": "tuga-w10",
+  "group": "cross",
+  "title": "Tuga A6 vs Tuga W10: Pocket Scanner or Desktop Replacement?",
+  "description": "The two ends of the range: Tuga A6 (6 inch Android handheld, £349) or Tuga W10 (10.1 inch Windows 11 Pro tablet, £649)? £300 apart, and how to decide.",
+  "summary": "The A6 is a 277g Android handheld with a scanner built in; the W10 is a 1197g Windows 11 Pro tablet with Ethernet and HDMI, £300 more. They rarely suit the same job, so decide whether you want a pocket device or a desktop replacement.",
+  "lede": "The smallest device in the range against the largest. These two rarely compete for the same job, so the useful question is not which is better but which kind of device your work needs: something that lives in a pocket and scans, or a full Windows PC with real ports that you carry to the job. The short answer: the Tuga A6 at £349 for the first, the Tuga W10 at £649 for the second.",
+  "verdict": [
+    "Decide what kind of device you need and the choice makes itself. The Tuga A6 is a 6 inch Android 15 handheld at 277g with a Zebra 2D scan engine and two side scan keys built in, sealed to IP67, rated for 1.5 metre drops, with a removable 5050mAh battery, 4G with dual SIM and GPS as standard, at £349. The Tuga W10 is a 10.1 inch Windows 11 Pro tablet at 1197g, more than four times the weight, with an Intel N100 (up to 3.4GHz), 8GB of RAM against 4GB, 128GB of storage against 64GB, and RJ45 Ethernet, HDMI, USB-C and USB-A on the body, at £649, £300 more. One goes in a pocket or a <a href=\"/accessories\">belt holster</a> (£22); the other goes in a bag, a <a href=\"/accessories\">Rugged Carry Case</a> (£34) or a Vehicle Mounting Dock (£109).",
+    "Buy the A6 if the work is done standing up and on the move: proof of delivery, stock checks, asset tags, job photos, messaging, and apps that run on Android or in a browser. The scanner is built in at £349, where the <a href=\"/products/tuga-w10\">W10 with 2D Scanner</a> is £729, £80 over the standard W10 and £380 over the A6. The A6 also has the higher listed toughness figures: IP67 against IP65 on the W10, which covers water jets but not immersion, a 1.5 metre drop rating and an operating range of -20°C to 50°C, where the W10 lists neither a drop rating nor an operating temperature, and no MIL-STD rating. Its 13MP rear camera beats the W10's 5MP, and its 2160 x 1080 screen is sharper than the W10's 1280 x 800, though neither lists a brightness figure.",
+    "Buy the W10 if the work is done at a panel, a desk or a bonnet with a cable: commissioning and diagnostic software that only installs on a Windows PC, network gear that has never seen Wi-Fi, or a drawing or spreadsheet that needs a 10.1 inch screen. The W10's 5000mAh battery is removable, like the A6's, and it has a microSD slot, NFC and a pogo pin dock connector; the Charging Dock (£49.99) and Vehicle Mounting Dock (£109) are listed for it, and no dock is listed for the A6. Two things to check before you order: the standard W10 is a Wi-Fi tablet, with 4G LTE and GPS listed as options, so <a href=\"/contact\">ask us</a> if you need either, and confirm that your specific program runs on it, using the five minute test in our <a href=\"/blog/android-vs-windows-rugged-tablet\">Android or Windows guide</a>. Both include the 12 month warranty, the paid <a href=\"/warranty\">3-Year Warranty</a> is £65 on the A6 and £79 on the W10, delivery is free to UK addresses in 7 to 10 working days, and there is no VAT to add. If you need both kinds of device for different people, the <a href=\"/bulk\">bulk page</a> covers mixed orders."
+  ],
+  "chooseA": [
+    "The work is done on foot and the device has to live in a pocket or on a belt: 277g and 164 x 77.6 x 16mm, against 1197g and 280 x 198 x 22mm for the W10.",
+    "You scan barcodes and want it built in at the lowest price: a Zebra 2D scan engine with two side scan keys at £349, against £729 for the W10 with 2D Scanner.",
+    "You need mobile data and GPS as standard: dual SIM 4G and GPS are built into the A6, and listed only as options on the W10.",
+    "The device gets rained on, dropped or left in a cold van: IP67 against IP65, a listed 1.5 metre drop rating and a -20°C to 50°C range, where the W10 lists no drop rating or operating temperature.",
+    "Everything you use runs on Android or in a browser, so you keep £300 and get the sharper screen and the 13MP camera."
+  ],
+  "chooseB": [
+    "One program you rely on only installs on a Windows PC, and you have checked it runs on the W10.",
+    "You plug into panels, plant or network gear by cable: the W10 has RJ45 Ethernet, HDMI, USB-C and USB-A, where the A6 has USB-C and an £8 OTG adapter.",
+    "You work from drawings, test schedules or spreadsheets that need a 10.1 inch screen, not 6 inches.",
+    "You want desktop-class memory and storage: 8GB of RAM and 128GB, with a microSD slot, against 4GB and 64GB on the A6.",
+    "You want it docked at a desk or in the van: the Charging Dock (£49.99) and Vehicle Mounting Dock (£109) are listed for the W10, and no dock is listed for the A6."
+  ],
+  "faq": [
+    {
+      "q": "Is the A6 against the W10 a real choice?",
+      "a": "Rarely for the same job, and that is the point of this page. They are the two ends of the range: the A6 is the smallest and cheapest device at £349, the W10 the largest at £649. Someone comparing them usually has not yet decided what kind of device the job needs. If the device is carried all day and the work is scanning, photos and apps, you want a handheld, and the <a href=\"/products/tuga-a6\">A6</a> is the one; if you want Windows in a handheld, the <a href=\"/products/tuga-wh6\">WH6</a> is the closer comparison. If the work is Windows software, cables and a big screen, you want a tablet, and the <a href=\"/products/tuga-w10\">W10</a> is the one; if you want the same ports in a smaller body, look at the <a href=\"/products/tuga-w8\">W8</a>. Our guide to <a href=\"/blog/rugged-phone-or-rugged-tablet\">rugged phone or rugged tablet</a> goes through that first decision."
+    },
+    {
+      "q": "Is the Tuga W10 worth £300 more than the Tuga A6?",
+      "a": "Only if you need what a Windows tablet does and a handheld cannot. The £300 buys Windows 11 Pro on an Intel N100 with 8GB of RAM and 128GB of storage, a 10.1 inch screen, and RJ45 Ethernet, HDMI, USB-C and USB-A. If a program you rely on only installs on a Windows PC, or you plug into equipment by cable, the A6 cannot do the job at any price. If your work runs on Android apps or in a browser and you scan, the A6 does it with the scanner included, where the W10 with 2D Scanner is £729, £380 more. Both have the 12 month warranty, there is no VAT to add to either price, and delivery is free to UK addresses in 7 to 10 working days."
+    },
+    {
+      "q": "Which is tougher, the A6 or the W10?",
+      "a": "The A6 lists more. It is sealed to IP67, which covers dust and immersion, where the W10 is IP65, which covers dust and water jets but not immersion. The A6 lists a 1.5 metre drop rating and an operating range of -20°C to 50°C; the W10 lists no drop rating and no operating temperature, so do not assume figures it does not state. Neither lists a MIL-STD rating. A 1197g tablet also lands harder than a 277g handheld, so a <a href=\"/accessories\">Rugged Carry Case</a> (£34) or Hand Strap (£24) is worth adding to the W10. Our <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> explains the difference between IP65 and IP67."
+    },
+    {
+      "q": "How do the batteries compare?",
+      "a": "Both are removable, so a charged spare can take over mid shift. The A6 has 5050mAh and the W10 5000mAh, but the A6 is running a 6 inch screen on a MediaTek Helio P35 and the W10 a 10.1 inch screen on an Intel N100, so expect very different hours from similar capacities. The W10 lists 9V/3A fast charging over USB-C; the A6 lists no fast charging. Spare batteries are not listed as an accessory for either, so <a href=\"/contact\">ask us</a> before you plan around one. The 12V DC Car Charger (£26) fits both; the Charging Dock (£49.99) and Vehicle Mounting Dock (£109) are listed for the W10 only, and the A6 has charging contacts but no dock listed, so it charges over USB-C. The A6 is rated from -20°C to 50°C; the W10 lists no operating temperature. Our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in cold weather</a> covers what the cold does to any battery."
+    }
+  ],
+  "guides": [
+    "/blog/rugged-phone-or-rugged-tablet",
+    "/blog/android-vs-windows-rugged-tablet",
+    "/blog/rugged-tablet-barcode-scanner",
+    "/blog/8-inch-or-10-inch-rugged-tablet"
+  ]
+}

@@ -75,7 +75,7 @@ Use the date the post is written.
 - The operating system differs by model: the WH6 runs Windows 11 IoT, the
   W8 and W10 Windows 11 Pro. Say "Windows 11" when talking about the range.
 - If products.json does not list something (voice calls, vibration
-  testing, dimensions for the A8 or W8, software update periods), do not
+  testing, dimensions for the A8, software update periods), do not
   state it. Tell readers to check their own apps on the device rather than
   implying they will run.
 - Do not name or criticise competitors by brand.

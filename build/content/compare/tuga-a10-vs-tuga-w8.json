@@ -1,0 +1,52 @@
+{
+  "a": "tuga-a10",
+  "b": "tuga-w8",
+  "group": "cross",
+  "title": "Tuga A10 vs Tuga W8: Big Android Screen or Small Windows Tablet?",
+  "description": "Tuga A10 (10.1 inch Android 14, £449) or Tuga W8 (8 inch Windows 11 Pro, £629)? £180 apart. Buy the A10 unless a Windows program, USB-A or HDMI is essential.",
+  "summary": "£180 apart: the A10 has the bigger, sharper 1920 x 1200 screen, IP68, MIL-STD-810H, the larger battery and less weight at 680g; the W8 is a full Windows 11 Pro PC in an 8 inch body with USB-A, HDMI, a fingerprint sensor and the brighter 700 nit screen.",
+  "lede": "For anyone torn between the largest Android tablet in the range and the smallest Windows one. The short answer: buy the Tuga A10 at £449 unless a program you rely on only installs on a Windows PC, or you need USB-A and HDMI on the body, in which case the Tuga W8 at £629 is the one.",
+  "verdict": [
+    "Software decides this one. The Tuga A10 costs £449 and the Tuga W8 costs £629, a gap of £180, and apart from 8GB of RAM, 128GB of storage, 4G LTE, NFC and a pogo pin dock connector, they share little. The A10 is a 10.1 inch Android 14 tablet with a 1920 x 1200 screen, sealed to IP68, tested to MIL-STD-810H and weighing 680g. The W8 is an 8 inch Windows 11 Pro tablet on an Intel Celeron N5100 with a 1280 x 800 screen, sealed to IP67, rated to MIL-STD-810G and weighing 750g, with USB-A and HDMI ports and a fingerprint sensor. If everything you use runs in a web browser or has an Android app, the A10 gives you the bigger, sharper, lighter, better sealed tablet for £180 less. If one program only installs on a Windows PC, the W8 is the only choice of the two, however good the A10 looks on paper.",
+    "Away from software, the A10 leads on most of the listed figures. Its screen has more than twice the pixels of the W8's, which is what you want for drawings, PDF plans and wide spreadsheets, but the W8's screen is brighter at 700 nits against 350, so in direct sun the smaller tablet is the easier one to read. The A10's 8000mAh battery is larger than the W8's 5000mAh; neither is listed as removable, and both list quick or fast charging. The A10 is rated from -20°C to 60°C against -10°C to 50°C, has dual SIM 4G, dual-band Wi-Fi 5 and Bluetooth 5.2 against Wi-Fi 5 and Bluetooth 4.2, a 13MP rear camera against 8MP, a microSD slot that takes cards up to 2TB where the W8 lists no microSD, and a 3.5mm headphone jack. It also weighs 70g less than the W8 despite the bigger screen, and lists its dimensions at 250 x 167 x 14.5mm; the W8 lists none.",
+    "Pay the £180 for the W8 when the Windows program is the job, or when you plug into things. The W8 has USB-C, USB-A and HDMI on the body, so instruments, keyboards, USB drives and a screen connect without an adapter; the A10 has USB-C and would need the USB-C to USB-A OTG Adapter (£8) for USB-A peripherals, and has no HDMI output. The W8 also has a fingerprint sensor for sign-in, and the W8 with 2D Scanner costs £699, £70 over the standard W8, for parts and asset scanning; there is no scanner version of the A10. Ask your software provider whether the apps you use run on the device before you order either, and try them on the device once it arrives. The five minute test in our <a href=\"/blog/android-vs-windows-rugged-tablet\">Android or Windows guide</a> is the place to start, and the <a href=\"/for/construction\">construction page</a> shows where a 10.1 inch screen earns its place."
+  ],
+  "chooseA": [
+    "Everything you use runs in a web browser or has an Android app, so Windows would be £180 spent on nothing you need.",
+    "You read drawings, PDF plans and wide spreadsheets: a 10.1 inch 1920 x 1200 screen against 8 inches at 1280 x 800.",
+    "You want the tougher listed build: IP68 and MIL-STD-810H, rated from -20°C to 60°C, against IP67, MIL-STD-810G and -10°C to 50°C.",
+    "You want the larger battery of the two: 8000mAh against 5000mAh, with dual SIM 4G for patchy coverage.",
+    "You carry it all day and want the lighter tablet: 680g against 750g, in a 14.5mm body."
+  ],
+  "chooseB": [
+    "One program you rely on only installs on a Windows PC, which settles it on its own.",
+    "You plug into equipment or a screen: the W8 has USB-C, USB-A and HDMI, where the A10 has USB-C and a pogo pin connector.",
+    "You work in direct sun: the W8 is rated at 700 nits against 350 on the A10.",
+    "You want a fingerprint sensor for sign-in: the W8 has one built in.",
+    "You scan barcodes all day: the W8 with 2D Scanner is £699, £70 over the standard W8, and there is no scanner version of the A10."
+  ],
+  "faq": [
+    {
+      "q": "Is the Tuga W8 worth £180 more than the Tuga A10?",
+      "a": "Only if you need Windows, or one of the W8's extras such as USB-A, HDMI output, the fingerprint sensor or the brighter screen. The W8 costs £629 and the A10 £449. The A10 has the bigger and sharper screen, the better sealing and MIL-STD rating, the larger battery, the wider operating temperature range and the lower weight. The £180 buys Windows 11 Pro on an Intel Celeron N5100, USB-A and HDMI on the body, a fingerprint sensor, 700 nits against 350 and the option of a scanner. If none of those is on your list, buy the <a href=\"/products/tuga-a10\">Tuga A10</a>. Both include the 12 month warranty, there is no VAT to add to either price, and delivery is free to UK addresses in 7 to 10 working days."
+    },
+    {
+      "q": "Is the 8 inch W8 big enough for Windows software?",
+      "a": "Check it before you buy rather than assuming. Windows desktop programs are written for a monitor, and the W8 shows them on an 8 inch screen at 1280 x 800, so a program with dense menus or small buttons can be hard to use with a finger. The Capacitive Stylus (£14.99) helps with small targets, and the HDMI port means the W8 can drive a larger screen on a bench or in a site office. If the program is usable on the W8 you get Windows in a tablet that fits one hand; if it is not, the <a href=\"/products/tuga-w10\">Tuga W10</a> (£649) runs the same Windows 11 Pro on a 10.1 inch screen, though at the same 1280 x 800 resolution and at 1197g. Our <a href=\"/blog/8-inch-or-10-inch-rugged-tablet\">8 inch or 10 inch guide</a> goes through the size question on its own."
+    },
+    {
+      "q": "Which is tougher, the Tuga A10 or the Tuga W8?",
+      "a": "On the listed ratings, the A10. It is IP68, which covers dust and immersion beyond the IP67 test, and tested to MIL-STD-810H, the newer version of the military standard, where the W8 is IP67 and MIL-STD-810G. The A10 is rated from -20°C to 60°C against -10°C to 50°C on the W8, so for a van cab in summer or a yard in January the A10 has the wider listed range. Neither lists a drop height. The A10's screen is tempered glass; the W8 lists no glass type. Our <a href=\"/blog/mil-std-810h-explained\">MIL-STD-810H guide</a> explains what the standard does and does not test, and the <a href=\"/blog/ip68-vs-ip67-waterproof-rating\">IP rating guide</a> covers the difference between the two IP numbers."
+    },
+    {
+      "q": "How do the batteries compare?",
+      "a": "The A10 carries an 8000mAh battery and the W8 5000mAh, so the A10 starts the day with 60 percent more capacity. Neither battery is listed as removable, so plan on charging rather than swapping. The A10 lists quick charge and the W8 fast charge. Both take the 12V DC Car Charger (£26), and the Charging Dock (£49.99) and Vehicle Mounting Dock (£109) are listed for both; see <a href=\"/accessories\">accessories</a>. Both include the 12 month warranty, and the paid <a href=\"/warranty\">3-Year Warranty</a>, which covers battery defects but not normal capacity loss, is £65 on the A10 and £79 on the W8. Our guide to <a href=\"/blog/rugged-tablet-cold-weather-battery\">rugged tablets in cold weather</a> explains what the cold does to any battery."
+    }
+  ],
+  "guides": [
+    "/blog/android-vs-windows-rugged-tablet",
+    "/blog/8-inch-or-10-inch-rugged-tablet",
+    "/blog/mil-std-810h-explained",
+    "/blog/ip68-vs-ip67-waterproof-rating"
+  ]
+}

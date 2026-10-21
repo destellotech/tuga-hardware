@@ -105,7 +105,7 @@ if (steps.includes('a11y')) {
   const PAGES = [
     '/', '/products/', '/products/tuga-a10', '/cart', '/contact', '/which-tuga', '/blog/',
     '/blog/best-rugged-tablets-electricians', '/compare/tuga-a6-vs-tuga-a8', '/for/construction',
-    '/works-with/jobber', '/accessories', '/warranty', '/bulk', '/order-confirmation', '/404.html',
+    '/works-with/jobber', '/accessories', '/warranty', '/bulk', '/bespoke', '/order-confirmation', '/404.html',
   ];
   const VIEWPORTS = [{ width: 390, height: 844 }, { width: 1280, height: 900 }];
   const MIME = { html: 'text/html', css: 'text/css', js: 'text/javascript', mjs: 'text/javascript', svg: 'image/svg+xml', webp: 'image/webp', png: 'image/png', jpg: 'image/jpeg', woff2: 'font/woff2', mp4: 'video/mp4', webm: 'video/webm', xml: 'application/xml', txt: 'text/plain', json: 'application/json' };

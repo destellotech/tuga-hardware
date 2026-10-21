@@ -76,6 +76,10 @@ export const accessories = data.accessories;
 export const warranty = data.warranty ?? { tiers: [], careMinUnits: 5 };
 export const warrantyTier = (id) => warranty.tiers.find((t) => t.id === id);
 
+/** Factory upgrades sold for a device (scanner variants share the base device's). */
+export const upgradesFor = (id) =>
+  (data.upgrades ?? []).filter((u) => u.upgradeFor === id.replace(/-scanner$/, ''));
+
 export const variantsOf = (id) =>
   data.products.filter((p) => p.isVariant && p.variantOf === id);
 
@@ -325,6 +329,7 @@ const footer = () => `
             <a href="/blog/">Guides</a>
             <a href="/bulk">Bulk orders</a>
             <a href="/trade">Trade accounts</a>
+            <a href="/bespoke">Bespoke requests</a>
             <a href="/which-tuga">Which Tuga?</a>
             <a href="/compare/">Compare devices</a>
             <a href="/contact">Contact</a>
