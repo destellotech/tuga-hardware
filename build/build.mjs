@@ -2379,34 +2379,55 @@ ${p.prose}
    BLOG
    ========================================================================== */
 
-const BLOG_IMAGES = {
-  'best-rugged-tablets-construction': 'blog-construction.webp',
-  'ip68-vs-ip67-waterproof-rating': 'blog-waterproof.webp',
-  'rugged-vs-consumer-tablet-cost': 'blog-cost.webp',
-  'best-tablets-field-engineers': 'blog-field-engineer.webp',
-  'why-tradespeople-switching-rugged-tablets': 'blog-tradespeople.webp',
-  'why-rugged-tablets-expensive': 'blog-expensive.webp',
-  'best-budget-rugged-tablets-under-400': 'blog-budget.webp',
-  'do-you-need-enterprise-rugged-tablet': 'blog-enterprise.webp',
-  // Placeholders reusing existing heroes until dedicated photos are sourced.
-  'mil-std-810h-explained': 'blog-construction.webp',
-  'android-vs-windows-rugged-tablet': 'blog-field-engineer.webp',
-  'rugged-tablet-barcode-scanner': 'blog-enterprise.webp',
-  'rugged-tablet-cold-weather-battery': 'blog-waterproof.webp',
-  'best-rugged-tablets-electricians': 'blog-tradespeople.webp',
-  'best-rugged-tablets-plumbers-heating-engineers': 'blog-tradespeople.webp',
-  'rugged-phone-or-rugged-tablet': 'blog-field-engineer.webp',
-  '8-inch-or-10-inch-rugged-tablet': 'blog-construction.webp',
-  'screen-brightness-nits-explained': 'blog-construction.webp',
-  'mounting-a-tablet-in-a-van': 'blog-field-engineer.webp',
-  '4g-5g-or-wifi-only-site-connectivity': 'blog-field-engineer.webp',
-  'protect-customer-data-work-tablet': 'blog-enterprise.webp',
-  'best-rugged-tablets-delivery-drivers-couriers': 'blog-tradespeople.webp',
-  'how-long-should-a-rugged-tablet-last': 'blog-cost.webp',
-  'best-rugged-tablets-landscapers-gardeners': 'blog-waterproof.webp',
-  'going-paperless-tradesperson-guide': 'blog-tradespeople.webp',
-  'buying-rugged-tablets-small-team': 'blog-enterprise.webp',
-};
+/* Hero images come from build/content/blog-images.json: a pool of photos,
+   each with the topic words it suits. assignBlogImages() below gives every
+   post the best-matching photo, spreads use across the pool and never shows
+   the same photo on two neighbouring cards in the listing. A post can pin a
+   photo with an `image:` line in its meta block, or in the manifest's
+   "pinned" map. New posts therefore need no edit here. */
+const BLOG_IMAGE_MANIFEST = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'blog-images.json'), 'utf8'));
+const BLOG_IMAGE_POOL = BLOG_IMAGE_MANIFEST.images.filter((i) => existsSync(join(ROOT, 'img', 'blog', i.file)));
+if (!BLOG_IMAGE_POOL.length) throw new Error('build/content/blog-images.json lists no photos that exist in img/blog/');
+
+/**
+ * Give each post (already in listing order, newest first) a hero image.
+ * Score = how many of a photo's topic words appear in the slug or title.
+ * Among equal scores the least-used photo wins, and a photo is skipped when
+ * the post above it in the listing already shows it, unless it is pinned.
+ */
+function assignBlogImages(list) {
+  const uses = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, 0]));
+  const byFile = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, i]));
+  // Count every pin first, wherever it sits in the listing, so an unpinned
+  // post prefers a photo nothing else shows over one a later pin will use.
+  for (const post of list) {
+    const pinned = post.imagePin || BLOG_IMAGE_MANIFEST.pinned?.[post.slug];
+    if (pinned && uses.has(pinned)) uses.set(pinned, uses.get(pinned) + 1);
+  }
+  let previous = null;
+  for (const post of list) {
+    const pinned = post.imagePin || BLOG_IMAGE_MANIFEST.pinned?.[post.slug];
+    let chosen;
+    if (pinned) {
+      if (!byFile.has(pinned)) throw new Error(`blog/${post.slug}: pinned image ${pinned} is not in build/content/blog-images.json or img/blog/`);
+      chosen = pinned;
+    } else {
+      const text = `${post.slug} ${post.title}`.toLowerCase();
+      const ranked = BLOG_IMAGE_POOL.map((i, index) => ({
+        file: i.file,
+        score: (i.tags || []).filter((t) => text.includes(t.toLowerCase())).length,
+        uses: uses.get(i.file),
+        index,
+      })).sort((a, b) => b.score - a.score || a.uses - b.uses || a.index - b.index);
+      // Never repeat the photo on the card above: a near match on topic beats
+      // two identical pictures side by side.
+      chosen = (ranked.find((r) => r.file !== previous) || ranked[0]).file;
+    }
+    post.image = `/img/blog/${chosen}`;
+    uses.set(chosen, uses.get(chosen) + 1);
+    previous = chosen;
+  }
+}
 
 /** Read a blog fragment from build/content/blog/. */
 function readPost(file) {
@@ -2428,7 +2449,7 @@ function readPost(file) {
     description: field('description'),
     date: field('date') || '2026-03-01',
     body,
-    image: `/img/blog/${BLOG_IMAGES[slug] ?? 'blog-construction.webp'}`,
+    imagePin: field('image'),
   };
 }
 
@@ -2436,6 +2457,7 @@ const posts = readdirSync(join(ROOT, 'build', 'content', 'blog'))
   .filter((f) => f.endsWith('.html'))
   .map(readPost)
   .sort((a, b) => (a.date < b.date ? 1 : -1));
+assignBlogImages(posts);
 
 /* Related guides by topic, not by date: posts that link each other score
    highest, then posts that discuss the same products or trades. A use count

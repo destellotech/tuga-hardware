@@ -1,0 +1,289 @@
+{
+  "_note": "Hero photo pool for /blog. Each entry: file in img/blog/ (run `npm run images` after adding one), tags = words that, found in a post's slug or title, make it a good match, and the credit. The build picks the best match per post, balances use and never repeats a photo on neighbouring cards. Pin a photo with an `image:` line in the post's meta block or in `pinned` below.",
+  "pinned": {
+    "best-rugged-tablets-construction": "blog-construction.webp",
+    "ip68-vs-ip67-waterproof-rating": "blog-waterproof.webp",
+    "rugged-vs-consumer-tablet-cost": "blog-cost.webp",
+    "best-tablets-field-engineers": "blog-field-engineer.webp",
+    "why-tradespeople-switching-rugged-tablets": "blog-tradespeople.webp",
+    "why-rugged-tablets-expensive": "blog-expensive.webp",
+    "best-budget-rugged-tablets-under-400": "blog-budget.webp",
+    "do-you-need-enterprise-rugged-tablet": "blog-enterprise.webp"
+  },
+  "images": [
+    {
+      "file": "blog-construction.webp",
+      "tags": [
+        "construction",
+        "site",
+        "scaffold",
+        "surveyor",
+        "mil-std"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-waterproof.webp",
+      "tags": [
+        "waterproof",
+        "ip68",
+        "ip67",
+        "rain",
+        "weather"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-cost.webp",
+      "tags": [
+        "cost",
+        "price",
+        "warranty",
+        "last",
+        "lifespan"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-field-engineer.webp",
+      "tags": [
+        "engineer",
+        "field",
+        "windows",
+        "laptop",
+        "ports",
+        "ethernet"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-tradespeople.webp",
+      "tags": [
+        "tradespeople",
+        "tradesperson",
+        "electrician",
+        "trade",
+        "team"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-expensive.webp",
+      "tags": [
+        "expensive",
+        "budget"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-budget.webp",
+      "tags": [
+        "budget",
+        "under-400",
+        "cheap"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-enterprise.webp",
+      "tags": [
+        "enterprise",
+        "data",
+        "security",
+        "office",
+        "facilities"
+      ],
+      "credit": "Existing site photo"
+    },
+    {
+      "file": "blog-plumber.webp",
+      "tags": [
+        "plumb",
+        "heating",
+        "boiler",
+        "gas"
+      ],
+      "credit": "МОБО Модульные Котельные (MOBO Modular Boiler Rooms) on Pexels, Pexels licence, https://www.pexels.com/photo/technician-repairing-heating-system-in-workshop-34938439/"
+    },
+    {
+      "file": "blog-electrician.webp",
+      "tags": [
+        "electrician",
+        "electrical",
+        "eicr"
+      ],
+      "credit": "Kathleen Austin Kuhn on Pexels, Pexels licence, https://www.pexels.com/photo/electrician-inspecting-residential-fuse-box-area-32497160/"
+    },
+    {
+      "file": "blog-van.webp",
+      "tags": [
+        "van",
+        "mount",
+        "vehicle",
+        "connectivity",
+        "4g"
+      ],
+      "credit": "Tima Miroshnichenko on Pexels, Pexels licence, https://www.pexels.com/photo/delivery-man-sitting-on-a-driver-s-seat-6169129/"
+    },
+    {
+      "file": "blog-warehouse.webp",
+      "tags": [
+        "warehouse",
+        "stock",
+        "barcode",
+        "scanner",
+        "picking"
+      ],
+      "credit": "Tiger Lily on Pexels, Pexels licence, https://www.pexels.com/photo/photo-of-a-man-scanning-products-in-a-warehouse-4483942/"
+    },
+    {
+      "file": "blog-delivery.webp",
+      "tags": [
+        "delivery",
+        "courier",
+        "driver",
+        "proof"
+      ],
+      "credit": "Tima Miroshnichenko on Pexels, Pexels licence, https://www.pexels.com/photo/delivery-man-going-out-from-a-van-6169135/"
+    },
+    {
+      "file": "blog-landscaper.webp",
+      "tags": [
+        "landscap",
+        "garden",
+        "grounds"
+      ],
+      "credit": "Gustavo Fring on Pexels, Pexels licence, https://www.pexels.com/photo/man-trimming-the-grass-using-a-grass-cutter-4920293/"
+    },
+    {
+      "file": "blog-winter.webp",
+      "tags": [
+        "winter",
+        "cold",
+        "frost",
+        "snow",
+        "temperature"
+      ],
+      "credit": "Braeson Holland on Pexels, Pexels licence, https://www.pexels.com/photo/drone-shot-of-a-construction-site-14822653/"
+    },
+    {
+      "file": "blog-surveyor.webp",
+      "tags": [
+        "surveyor",
+        "site manager",
+        "drawings",
+        "8-inch",
+        "10-inch",
+        "screen size",
+        "construction"
+      ],
+      "credit": "Mikael Blomkvist on Pexels, Pexels licence, https://www.pexels.com/photo/a-man-in-blue-shirt-using-a-walkie-talkie-while-standing-beside-the-woman-near-the-wooden-fence-8961131/"
+    },
+    {
+      "file": "blog-signal.webp",
+      "tags": [
+        "4g",
+        "5g",
+        "wi-fi",
+        "signal",
+        "connectivity",
+        "rural"
+      ],
+      "credit": "Vladimir Srajber on Pexels, Pexels licence, https://www.pexels.com/photo/rural-field-with-communication-tower-28575432/"
+    },
+    {
+      "file": "blog-security.webp",
+      "tags": [
+        "protect",
+        "data",
+        "security",
+        "lost",
+        "stolen",
+        "lock"
+      ],
+      "credit": "Nathan Thomas on Pexels, Pexels licence, https://www.pexels.com/photo/close-up-of-hand-holding-a-secure-padlock-36740854/"
+    },
+    {
+      "file": "blog-battery.webp",
+      "tags": [
+        "battery",
+        "charg",
+        "power",
+        "shift",
+        "last"
+      ],
+      "credit": "Eleonora Vokueva on Pexels, Pexels licence, https://www.pexels.com/photo/smartphone-charging-with-portable-power-bank-37475677/"
+    },
+    {
+      "file": "blog-sun.webp",
+      "tags": [
+        "brightness",
+        "nits",
+        "sun",
+        "summer",
+        "heat",
+        "screen",
+        "glare"
+      ],
+      "credit": "Kindel Media on Pexels, Pexels licence, https://www.pexels.com/photo/yellow-hardhat-worn-by-a-woman-engineer-8486980/"
+    },
+    {
+      "file": "blog-desk.webp",
+      "tags": [
+        "laptop",
+        "replace",
+        "windows",
+        "paperless",
+        "office",
+        "storage",
+        "ports"
+      ],
+      "credit": "Towfiqu barbhuiya on Pexels, Pexels licence, https://www.pexels.com/photo/laptop-and-calculator-on-top-of-a-table-11412585/"
+    },
+    {
+      "file": "blog-plantroom.webp",
+      "tags": [
+        "facilities",
+        "maintenance",
+        "plant room",
+        "cmms",
+        "nfc"
+      ],
+      "credit": "МОБО Модульные Котельные (MOBO Modular Boiler Rooms) on Pexels, Pexels licence, https://www.pexels.com/photo/engineer-adjusting-industrial-pipes-in-factory-34938441/"
+    },
+    {
+      "file": "blog-team.webp",
+      "tags": [
+        "team",
+        "small team",
+        "buying",
+        "fleet",
+        "bulk",
+        "tradespeople"
+      ],
+      "credit": "This Viktọ on Pexels, Pexels licence, https://www.pexels.com/photo/construction-workers-on-the-building-site-10202865/"
+    },
+    {
+      "file": "blog-rain.webp",
+      "tags": [
+        "rain",
+        "waterproof",
+        "ip68",
+        "ip67",
+        "weather",
+        "wet"
+      ],
+      "credit": "Marianna Zuzanna on Pexels, Pexels licence, https://www.pexels.com/photo/back-view-of-worker-in-cloak-16239800/"
+    },
+    {
+      "file": "blog-farm.webp",
+      "tags": [
+        "farm",
+        "agricultur",
+        "grounds",
+        "mud"
+      ],
+      "credit": "Kausik Paul on Pexels, Pexels licence, https://www.pexels.com/photo/a-tractor-on-the-farm-field-6054341/"
+    }
+  ]
+}

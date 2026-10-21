@@ -7,9 +7,13 @@ Rules for anyone (human or agent) adding a post to tugahardware.com/blog.
 - Post source: `build/content/blog/<slug>.html`, an HTML fragment (no
   `<html>`, `<head>` or layout). The build wraps it in the page template,
   adds the hero image, schema, CTA and "More guides".
-- Hero image: add the slug to `BLOG_IMAGES` in `build/build.mjs`. New photos
-  go in `img/blog/` as `.webp`, then run `npm run images`. Without a new
-  photo, reuse an existing one and leave the "Placeholders" comment above it.
+- Hero image: picked automatically from the pool in
+  `build/content/blog-images.json` by matching each photo's tags against the
+  post's slug and title, so a new post needs no image work. To force a
+  photo, add `image: <file>.webp` to the meta block. To add a photo, put a
+  landscape `.webp` (about 1600 px wide) in `img/blog/`, run `npm run
+  images`, and add it to the manifest with its tags and credit. Only use
+  photos under a licence that allows commercial use (Pexels, Unsplash).
 - Never hand-edit generated `.html` at the repo root, `blog/`, `products/`,
   `sitemap.xml` or `feed.xml`. Run `npm run build` and commit the output.
 
@@ -95,6 +99,6 @@ Use the date the post is written.
 1. `npm install` (first time), then `npm run build` succeeds.
 2. `blog/index.html` lists the new post with its title and description, and
    no card has an empty `<h2></h2>`.
-3. The diff only touches the new fragment, `build/build.mjs` (image map),
+3. The diff only touches the new fragment, `build/content/blog-images.json` (only if you added a photo),
    regenerated blog pages, `sitemap.xml`, and the calendar row. If unrelated
    generated files change, find out why before committing.
