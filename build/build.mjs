@@ -1542,6 +1542,129 @@ ${tradeFaq.html}
 );
 
 /* ==========================================================================
+   BESPOKE REQUESTS
+   ========================================================================== */
+
+const bespokeTrail = [{ label: 'Home', href: '/' }, { label: 'Bespoke requests' }];
+
+const BESPOKE_FAQ = [
+  {
+    q: 'What counts as a bespoke request?',
+    a: 'Anything the standard range does not cover: devices pre-loaded with your apps and settings, your logo on the boot screen or casing, a particular mount or accessory bundle, mixed fleets delivered to several sites, or a spec the shop does not list. If you are not sure it is possible, ask.',
+  },
+  {
+    q: 'Is there a minimum order?',
+    a: 'It depends on the request. Software set-up and accessory bundles can often be done for a handful of devices. Anything that involves the hardware itself, such as branding, needs a larger run, and we will tell you the number up front.',
+  },
+  {
+    q: 'How much does it cost and how long does it take?',
+    a: 'We reply within one working day with whether we can do it and a written quote. Nothing is charged until you accept the quote. Lead times depend on the request and are stated in the quote.',
+  },
+  {
+    q: 'Do bespoke devices keep the warranty?',
+    a: 'Yes. Software set-up and accessories do not affect the warranty. If a request would change anything about the cover, we say so in the quote before you commit.',
+  },
+];
+
+const bespokeFaq = faq(BESPOKE_FAQ, { heading: 'Bespoke request questions' });
+
+write(
+  'bespoke.html',
+  page({
+    title: 'Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware',
+    description:
+      'Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.',
+    path: '/bespoke',
+    active: 'bulk',
+    schema: [breadcrumbSchema(bespokeTrail), bespokeFaq.schema],
+    body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(bespokeTrail)}
+        ${eyebrow('Bespoke requests')}
+        <h1>Need something the range does not cover?</h1>
+        <p class="lede">Tell us what you need. We reply within one working day with whether we can do it and a written quote, and you pay nothing until you accept it.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="editorial" style="align-items:start">
+          <div class="editorial-body">
+            <h2 class="title-xs">What we can usually do</h2>
+            <ul class="editorial-list">
+              <li>Pre-load your apps, settings and device management</li>
+              <li>Your logo on the boot screen or casing</li>
+              <li>Custom accessory bundles, mounts and chargers</li>
+              <li>Mixed fleets delivered to several sites</li>
+              <li>A spec the shop does not list</li>
+            </ul>
+            <p style="margin-top:1.5rem">Just want standard devices in volume? <a class="link-arrow" href="/bulk">Use the bulk calculator</a></p>
+          </div>
+
+          <div>
+            <form class="form" data-api-form="/api/bespoke-request" data-success="Thanks. We will reply within one working day with whether we can do it and a quote." novalidate>
+${honeypot}
+              <div class="field-row">
+                <div class="field">
+                  <label for="name">Your name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company" autocomplete="organization" placeholder="Optional">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Optional">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="requestType">What kind of request?</label>
+                  <select id="requestType" name="requestType">
+                    <option>Software or set-up</option>
+                    <option>Branding</option>
+                    <option>Accessory bundle or mounts</option>
+                    <option>Mixed fleet or multi-site delivery</option>
+                    <option>Custom spec</option>
+                    <option>Something else</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="quantity">How many devices?</label>
+                  <select id="quantity" name="quantity">
+                    <option>1 to 4</option>
+                    <option>5 to 9</option>
+                    <option>10 to 49</option>
+                    <option>50 or more</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="message">What do you need?</label>
+                <textarea id="message" name="message" required placeholder="Which models, what you want changed, any deadline, and where the devices are going."></textarea>
+              </div>
+              <button class="btn btn-primary btn-lg" type="submit">Send request</button>
+              <p class="form-status hidden" data-form-status role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+${bespokeFaq.html}
+`,
+  })
+);
+
+/* ==========================================================================
    WARRANTY REGISTRATION
    ========================================================================== */
 
@@ -3126,6 +3249,7 @@ ${comparePairs.map((c) => `- [${c.a.name} vs ${c.b.name}](${SITE.origin}${c.path
 
 - [Bulk orders and calculator](${SITE.origin}/bulk): automatic team discounts
 - [Trade accounts](${SITE.origin}/trade): order on invoice, pay by bank transfer
+- [Bespoke requests](${SITE.origin}/bespoke): custom set-up, branding, bundles or specs
 - [Accessories](${SITE.origin}/accessories)
 - [Shipping and returns](${SITE.origin}/shipping-returns)
 - [Contact](${SITE.origin}/contact): ${SITE.email}
@@ -3471,6 +3595,7 @@ const urls = [
   ...trades.map((t) => ({ loc: `/for/${t.slug}`, priority: '0.7', freq: 'monthly' })),
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
   { loc: '/trade', priority: '0.6', freq: 'monthly' },
+  { loc: '/bespoke', priority: '0.6', freq: 'monthly' },
   { loc: '/register-warranty', priority: '0.4', freq: 'yearly' },
   { loc: '/bulk', priority: '0.7', freq: 'monthly' },
   { loc: '/warranty', priority: '0.7', freq: 'monthly' },
