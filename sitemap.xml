@@ -73,6 +73,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/compare/tuga-a10-vs-tuga-wh6</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/compare/tuga-wh6-vs-tuga-w8</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -86,6 +92,18 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/compare/tuga-a6-vs-tuga-a10</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/compare/tuga-a8-vs-tuga-wh6</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/compare/tuga-a10-vs-tuga-w8</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -115,6 +133,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/compare/tuga-a6-vs-tuga-w8</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/compare/tuga-a8-vs-tuga-w10</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/compare/tuga-a6-vs-tuga-w10</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/for/agriculture</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/for/construction</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -122,6 +164,12 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/for/electricians</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/for/facilities-management</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -139,6 +187,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/for/plumbers-heating</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/for/surveyors</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/for/utilities</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/for/warehouse</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/accessories</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -146,6 +218,12 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/trade</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/bespoke</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -272,7 +350,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/blog/mil-std-810h-explained</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -343,8 +421,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/autodesk-build</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/bigchange</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/bluebeam</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -355,14 +445,50 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/dalux</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/elogs-cafm</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/emaint-x5</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/eworks-manager</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/fergus</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/fieldwire</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/fiix-cmms</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/gas-engineer-software</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -403,6 +529,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/klipboard</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/limble-cmms</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -421,8 +553,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/dynamics-365-field-service</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/okappy</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/papertrail-io</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/payaca</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -433,8 +583,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/planon</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/planradar</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/rugged-tablet-prisma-mobile-maintenance</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/procore</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -447,6 +615,12 @@
   <url>
     <loc>https://www.tugahardware.com/works-with/sap-service-and-asset-manager</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/servicem8</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -475,6 +649,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/workever</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/about</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>yearly</changefreq>
@@ -494,7 +674,7 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/privacy</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>

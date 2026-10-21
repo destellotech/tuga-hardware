@@ -1,0 +1,163 @@
+{
+  "slug": "elogs-cafm",
+  "software": "Elogs CAFM",
+  "vendor": "Elogbooks Facilities Management Limited (now Vantify)",
+  "vendor_url": "https://vantify.com/the-vantify-ecosystem/vantify-cafm/",
+  "title": "Rugged tablet for Elogs CAFM: UK buyer's guide",
+  "meta_description": "Elogs publishes its Elogbooks V2 app for Android and iOS with a phone layout and no minimum spec. The Tuga A8 (Android 12, 6GB RAM, IP67, 1000 nits) runs it.",
+  "target_query": "rugged tablet for Elogbooks app",
+  "h1": "Rugged tablet for Elogs CAFM (Elogbooks)",
+  "intro": [
+    "Elogs is a UK facilities management and compliance platform, better known to many engineers by its older name, Elogbooks. The company behind it, Elogbooks Facilities Management Limited, was incorporated in 2010 and is registered at 20 Grosvenor Place, London. In April 2025 the Elogs, Meridian and Prosure 360 products were brought together under the Vantify brand, part of Axiom GRC, and the vendor now sells the CAFM product as Vantify CAFM. The mobile app has kept its old name: it is still published on Google Play and the App Store as Elogbooks V2, and its most recent iOS release note says it now supports the vantify.com domain for clients. Property managers, helpdesk staff and the vendor's own 24/7 service desk work in the web platform; engineers and service providers who are sent jobs use the app.",
+    "The vendor says less about its app than most field service vendors do. The store listings describe Elogbooks V2 as the mobile solution for interacting with an Elogbooks V2 system, which lets engineers and facility managers view and update their jobs and quotes and see information on sites and service providers. Release notes mention an offline sync fix and audit templates. The Vantify CAFM page describes jobs, assets, PPMs, documents, actions and audit trails in one system, and jobs being closed out with evidence back in CAFM. That is the shape of the work: an engineer arrives at a managed building, opens the job on a device, does the work, records it and closes it, often in a plant room, a riser or a car park with poor signal, and then drives to the next site.",
+    "This page sets out exactly what the vendor publishes about the devices its app runs on, which is not much, and says plainly where it publishes nothing. It then sets those published facts against the Tuga rugged Android tablets, explains where the Windows option fits and where it does not, and covers how a UK contractor or FM team can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android app on Google Play, published for phones; no minimum Android version shown",
+      "detail": "The Android app is on Google Play as Elogbooks V2 (package uk.co.elogbooks.v2, developer shown as Elogbooks FM, with the developer details giving Elogbooks Facilities Management Limited, 20 Grosvenor Place, London SW1X 7HN). When checked on 19 October 2026 the listing showed Updated on 3 October 2023, 5k+ downloads, a Business category, a rating of 2.9 from 19 reviews and a content rating of 3+. The ratings filter showed a Phone device chip only, with no Tablet or Chromebook chip. Google Play's web listing no longer displays a Requires Android figure, and the vendor publishes no minimum version, RAM or storage figure anywhere we could find. A third-party APK mirror lists version 17.175.0 (December 2024) as Android 5.1 and up; that is not a vendor statement, so treat it as a hint rather than a requirement.",
+      "source_url": "https://play.google.com/store/apps/details?id=uk.co.elogbooks.v2&hl=en_GB"
+    },
+    {
+      "requirement": "iOS 11.0 or later on iPhone, iPadOS 11.0 or later on iPad (for context)",
+      "detail": "The App Store listing for Elogbooks V2 (seller Elogbooks FM, copyright Elogbooks FM Ltd, developer website vantify.com) states Requires iOS 11.0 or later for iPhone and Requires iPadOS 11.0 or later for iPad, with a download size of 16.6 MB. The current version is 17.179.01, released 29 September 2025 with the note Support new vantify.com domain for clients. Apple's listing is the only place the vendor publishes a minimum operating system figure for any platform.",
+      "source_url": "https://apps.apple.com/gb/app/elogbooks-v2/id1339855417"
+    },
+    {
+      "requirement": "Jobs, quotes, site and service provider information in the app",
+      "detail": "Both store listings carry the same description: Elogbooks V2 is the mobile based solution for interacting with your Elogbooks V2 system, and it allows both engineers and facility managers to view and update their jobs and quotes along with viewing crucial information on sites and service providers. The App Store release notes add a new option on audit templates for marking sections as N/A (version 17.173.0, August 2023), so audit templates are completed in the app. The vendor does not publish a user guide for the app, so the exact fields an engineer fills in are not documented in public.",
+      "source_url": "https://apps.apple.com/gb/app/elogbooks-v2/id1339855417"
+    },
+    {
+      "requirement": "Offline working: an offline sync exists, but its scope is not published",
+      "detail": "The App Store version history includes Offline sync bug Fix for version 17.160.2 (30 August 2022), which is the only vendor statement about offline use. The vendor publishes nothing about what is cached on the device, whether a job can be opened without signal, or how sync is triggered. Plan for mobile data on site rather than relying on an offline mode the vendor does not describe, and test offline behaviour on a trial unit before rolling out.",
+      "source_url": "https://apps.apple.com/gb/app/elogbooks-v2/id1339855417"
+    },
+    {
+      "requirement": "QR, barcode and NFC asset scanning: not published",
+      "detail": "Neither store listing, the Vantify CAFM product page nor the Axiom GRC CAFM page mentions QR codes, barcodes, NFC or RFID. The Vantify page describes real-time asset tracking linked to service history and specifications, and the Axiom GRC page says asset records can be linked to service history, but neither says how an engineer identifies an asset on site. Because no scan path is documented, do not buy a device for Elogs on the strength of a dedicated scan engine, and do not treat an NFC radio as an Elogs feature. If your contract uses asset tags, ask Vantify what the app reads before choosing hardware.",
+      "source_url": "https://axiomgrc.com/solutions/cafm-supply-chain-compliance/"
+    },
+    {
+      "requirement": "Photos, evidence and signatures: evidence is mentioned, the method is not",
+      "detail": "The Vantify CAFM page says its Facilities Services team closes a job out with evidence back in CAFM, and describes full job documentation and real-time audit trails. It does not say whether that evidence is a photo taken in the app, an uploaded file or a note, and no customer signature capture is documented anywhere we could find. A device with a rear camera and flash covers the likely case; a device that fits a stylus covers signatures if your account uses them.",
+      "source_url": "https://vantify.com/the-vantify-ecosystem/vantify-cafm/"
+    },
+    {
+      "requirement": "Windows: no Windows app; the CAFM platform is a web system",
+      "detail": "The vendor publishes no Windows or desktop app. The CAFM product is described by the vendor as a platform that brings jobs, assets, PPMs, documents, actions and audit trails into one system, used by its own 24/7 service desk, and third-party directories describe it as browser based (cloud). The vendor's Terms of Use name Vantify Limited (company number 05277497) and mention mobile apps only as intellectual property; they do not list supported browsers, devices or system requirements. The old elogs.co.uk and cafm.elogbooks.co.uk addresses now redirect to the Vantify CAFM page.",
+      "source_url": "https://vantify.com/terms-of-use/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Elogs publishes no minimum Android version, RAM, storage or screen size, so the choice rests on what it does publish: an Android app on Google Play whose listing carries a Phone device chip only, built around viewing and updating jobs, quotes and audits, with evidence recorded on site. The Tuga A8 is the right size for that. An 8 inch 1280 x 800 screen shows a phone-layout app without the stretched look it can have on a 10 inch display, and is still big enough to work through an audit template without pinching and zooming. It runs Android 12 with Google Play, well above the Android 5.1 figure a third-party mirror lists, and has 6GB of RAM and 128GB of storage against a published requirement of nothing at all. The 1000 nit screen is readable on a roof or in a car park, the removable 8000mAh battery covers a long day of site visits with a spare in the van, and IP67 sealing handles plant rooms and rain. The 13MP rear camera with flash covers photo evidence. VESA mount points and a pogo pin connector mean it fits the vehicle mounting dock, and at £379 it is £70 less than the A10.",
+      "fit": [
+        "Requirement: an Android app from Google Play, with no minimum version published by the vendor. Tuga A8: Android 12 with Google Play, which is above the Android 5.1 figure listed by a third-party mirror.",
+        "Requirement: no RAM or storage figure published. Tuga A8: 6GB RAM and 128GB storage with a microSD slot, so there is headroom whatever the app needs.",
+        "Requirement: a Phone layout on Google Play, used for jobs, quotes and audit templates. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass, readable outdoors and large enough for forms.",
+        "Requirement: evidence recorded against the job on site. Tuga A8: 13MP autofocus rear camera with flash (any scanning would also be through the camera; the vendor documents no scan path); the capacitive stylus accessory fits it for signatures.",
+        "Requirement: a device that lasts a day of site visits with patchy signal and an offline sync the vendor does not describe. Tuga A8: removable 8000mAh battery, IP67, dual SIM 4G, NFC, GPS + GLONASS + Galileo + BeiDou, VESA mount points and pogo pin dock connector."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "The Tuga A10 runs the same Elogbooks V2 app on a 10.1 inch 1920 x 1200 screen and is the better choice where the same device also has to show drawings, O and M manuals or PDF compliance documents from the CAFM system, or where the engineer wants a larger keyboard for notes. It runs Android 14 with Google Play, has 8GB of RAM and 128GB of storage expandable to 2TB, and is sealed to IP68 and tested to MIL-STD-810H, both a step above the A8. It fits the charging dock as well as the vehicle mounting dock. Against the A8 it costs £70 more at £449, its 350 nit screen is dimmer outdoors, its 8000mAh battery is not removable, and because the Play listing shows a Phone chip only, a phone-layout app may use the larger screen less well than a tablet-aware one would.",
+      "fit": [
+        "Requirement: an Android app from Google Play, with no minimum version published. Tuga A10: Android 14 with Google Play.",
+        "Requirement: no RAM or storage figure published. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: audit templates, job records and the documents linked to assets in CAFM. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass.",
+        "Requirement: photo evidence on the job. Tuga A10: 13MP rear camera with flash (scanning, if your account uses it, would be through the camera; no scan path is documented).",
+        "Requirement: a device that survives plant rooms, roofs and vans. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, dual SIM 4G, NFC, GPS + Galileo + BeiDou + QZSS + NavIC."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is the closest match to what the vendor actually publishes: the Google Play listing shows a Phone device chip and no Tablet chip, and the A6 is a 6 inch, 277g handheld that goes in a pocket or belt holster. It runs Android 15 with Google Play, the newest Android in the range, with 4GB of RAM and 64GB of storage plus microSD. It is sealed to IP67, rated for 1.5 metre drops, and the 5050mAh battery is removable. It has a Zebra 2D scan engine with two side scan keys, but Elogs documents no scan path at all, so do not buy it for that reason; its 13MP rear camera with flash is the realistic photo and scan route. The trade-off is screen area: a 6 inch display shows less of an audit template or a quote than the tablets, so engineers who do long compliance audits on site may find the A8 easier.",
+      "fit": [
+        "Requirement: an Android app from Google Play, with no minimum version published. Tuga A6: Android 15 with Google Play.",
+        "Requirement: a Phone layout on Google Play. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, 277g, 164 x 77.6 x 16mm, which is the form factor the listing is published for.",
+        "Requirement: no RAM or storage figure published. Tuga A6: 4GB RAM and 64GB storage with microSD up to 256GB.",
+        "Requirement: photo evidence on the job. Tuga A6: 13MP rear camera with flash (the Zebra 2D scan engine is not a documented Elogs input).",
+        "Requirement: a device that lives in a pocket between sites. Tuga A6: IP67, 1.5 metre drop rating, removable 5050mAh battery, dual SIM 4G, NFC, GPS + GLONASS + BeiDou + Galileo; the belt holster and car phone mount fit it."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Elogs has no Windows app. The Tuga W10 runs Windows 11 Pro, so it can open the Vantify CAFM web platform in a current desktop browser, which suits a helpdesk, a site office, a building manager's desk or a security lodge that logs jobs and checks service provider attendance. It has RJ45 Ethernet, HDMI, USB-A and USB-C for a fixed position and fits the charging dock. It is not the device for an engineer on jobs: the Elogbooks V2 app the vendor publishes for engineers runs on Android and iOS only, and whatever offline sync the app has is not available in a browser. The W10 is also IP65 rather than IP67 or IP68, so it is protected against water jets but not rated for immersion, and at 1197g it is the heaviest device here. The vendor publishes no browser list or version numbers, so keep the browser updated.",
+      "fit": [
+        "Requirement: a web platform used by the helpdesk and facility managers, with no published browser requirements. Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: logging jobs, checking PPMs, documents and audit trails in the web system. Tuga W10: Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage, 10.1 inch 1280 x 800 multi-touch screen.",
+        "Requirement: a fixed position in a site office, security lodge or helpdesk. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock.",
+        "Requirement: dust and splash protection on a building site or in a plant room. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Elogs or Vantify administrator, or the client's helpdesk, to set the engineer up as a user on the Elogbooks V2 system with the right service provider account, and to confirm whether your account uses audit templates, quotes or asset tags in the app.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Elogbooks V2 (package uk.co.elogbooks.v2, developer Elogbooks FM), then sign in. If the app asks for the system address, use the one your administrator gives you; the latest iOS release note says the app supports the vantify.com domain for clients.",
+    "Allow camera access when the app asks, so photo evidence works, and allow location if your account uses it. The vendor publishes no list of permissions, so note what the app requests on first run.",
+    "Before the first job in a basement or plant room, open the engineer's jobs while the device is online, then put it in flight mode and check what can still be opened and updated. The vendor mentions an offline sync but does not publish what it covers, so this test tells you what to expect.",
+    "Complete a test job end to end on a trial unit: open it, update it, attach evidence and close it, and confirm with the office that everything arrived in CAFM. If your contract uses asset tags, test whether the app reads them through the camera before buying for a fleet.",
+    "Check the Google Play listing date before a fleet order. When we checked on 19 October 2026 the Android app was last updated on 3 October 2023, while the iOS app had a September 2025 release, so confirm with Vantify that the Android app is current for your account.",
+    "On a Tuga W10, open the Vantify CAFM web platform in Edge or Chrome and keep the browser updated. Use it for helpdesk and office work; it will not run the engineer app.",
+    "Fit the vehicle mounting dock for A8 and A10 units that live in a van, the charging dock for A10 and W10 units that live in a site office, and the belt holster for the A6. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A8, A10 and W10), for engineers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Capacitive stylus, £14.99 (Tuga A8, A10 and W10), for signatures and detail work on screen",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Car phone mount, £17 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A8, A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will the Elogbooks app run on the Tuga A8?",
+      "a": "Elogs publishes an Android app, Elogbooks V2, on Google Play, but it does not publish a minimum Android version, RAM or storage figure, and the Play web listing no longer shows a Requires Android line. A third-party APK mirror lists the app as Android 5.1 and up, which is not a vendor statement. The Tuga A8 runs Android 12 with Google Play and has 6GB RAM and 128GB storage; the A10 runs Android 14 with 8GB RAM, and the A6 runs Android 15 with 4GB RAM. All three are far above any figure in circulation. We do not describe any device as certified or tested by Elogs or Vantify; these are the vendor's published facts set against the device specifications, and we suggest a single trial unit first."
+    },
+    {
+      "q": "Does the Elogbooks app work without signal?",
+      "a": "The only vendor statement is an App Store release note from August 2022 that reads Offline sync bug Fix, which tells you an offline sync exists but not what it covers. Nothing is published about opening jobs or completing audits without a connection. The A8, A10 and A6 all have dual SIM 4G, so a second network is the practical answer in buildings with weak coverage, and the flight mode test in the setup steps shows what the app does when there is none. A Tuga W10 only uses the web platform in a browser and has no offline mode at all."
+    },
+    {
+      "q": "Can engineers scan asset QR codes or NFC tags, and does the A6's scanner help?",
+      "a": "The vendor does not document QR code, barcode, NFC or RFID scanning anywhere we could find: not on Google Play, not on the App Store, and not on the Vantify or Axiom GRC CAFM pages. If your client's buildings are tagged, ask Vantify what the app reads before you choose a device. The A6 has a Zebra 2D scan engine and the A8, A10 and A6 all have NFC, but none of that is a documented Elogs input, so do not pay for it on Elogs' account. If scanning turns out to be camera based, all three Android devices have a 13MP rear camera with flash."
+    },
+    {
+      "q": "Should engineers have the 8 inch A8 or the 10.1 inch A10?",
+      "a": "The Google Play listing shows a Phone device chip and no Tablet chip, so the app is published for a phone-sized layout. On the A8's 8 inch screen that layout still looks right and the 1000 nit display suits outdoor work; it also has a removable battery and costs £379. The A10 has a sharper 1920 x 1200 screen, 8GB of RAM, IP68 and MIL-STD-810H, and costs £449, which makes sense where the same device shows drawings and compliance PDFs from CAFM or runs other software alongside Elogs. For an engineer whose day is jobs, quotes and audits in the app, the A8 is the better value."
+    },
+    {
+      "q": "Why is the app still called Elogbooks V2 if the product is Elogs or Vantify?",
+      "a": "The product has had three names. Elogbooks Facilities Management Limited, incorporated in 2010, published the Elogbooks V2 app; the product was later marketed as Elogs; and in April 2025 the vendor rebranded Elogs, Meridian and Prosure 360 as Vantify, part of Axiom GRC. The app listings have not been renamed: Google Play shows the developer as Elogbooks FM with Elogbooks Facilities Management Limited in the developer details, and the App Store lists the developer website as vantify.com. Search for Elogbooks V2 on Google Play, not for Elogs or Vantify."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome, and for an app with this little published about it we would suggest it. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £379 (A8), £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "Elogs has no Windows app, so the Tuga W10 only runs the Vantify CAFM web platform in a browser. The engineer app the vendor publishes, Elogbooks V2, is Android and iOS only, so a W10 suits a helpdesk, site office or building manager's desk, not an engineer on jobs. On the Android side the vendor publishes no minimum Android version, RAM, storage or screen size, no user guide, and nothing about QR, barcode, NFC or RFID scanning, photo capture or signatures, so none of those can be treated as Elogs features and the A6's Zebra 2D scan engine and the NFC radio on all three Android devices are not documented Elogs inputs. The Google Play listing shows a Phone device chip only, with no Tablet chip, so expect a phone-sized layout on any tablet. When checked on 19 October 2026 the Android listing had last been updated on 3 October 2023, two years behind the iOS app, so confirm with Vantify that the Android app is current for your account before buying a fleet.",
+  "disclaimer": "Elogbooks V2 and Elogs are products of Elogbooks Facilities Management Limited (company number 07259147), now sold as Vantify CAFM by Vantify Limited (company number 05277497), both part of Axiom GRC. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Elogs, Elogbooks Facilities Management Limited, Vantify Limited or Axiom GRC.",
+  "sources": [
+    "https://play.google.com/store/apps/details?id=uk.co.elogbooks.v2&hl=en_GB",
+    "https://apps.apple.com/gb/app/elogbooks-v2/id1339855417",
+    "https://vantify.com/the-vantify-ecosystem/vantify-cafm/",
+    "https://vantify.com/",
+    "https://vantify.com/product-updates/",
+    "https://vantify.com/terms-of-use/",
+    "https://vantify.com/privacy-policy/",
+    "https://axiomgrc.com/solutions/cafm-supply-chain-compliance/",
+    "https://find-and-update.company-information.service.gov.uk/company/07259147",
+    "https://find-and-update.company-information.service.gov.uk/company/05277497",
+    "https://apkpure.com/elogbooks-v2/uk.co.elogbooks.v2",
+    "https://www.saasworthy.com/product/elogbooks"
+  ]
+}

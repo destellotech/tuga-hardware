@@ -151,7 +151,7 @@ function countDeviceUnits(lines) {
 /** Contact enquiries, sign ups and trade applications: see privacy policy section 7. */
 const TWELVE_MONTHS = 365 * 24 * 60 * 60;
 
-const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/warranty-register', '/api/review'];
+const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/bespoke-request', '/api/warranty-register', '/api/review'];
 
 const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check', '/api/reviews-export'];
 
@@ -236,6 +236,9 @@ export async function handleRequest(request, env) {
   }
   if (request.method === 'POST' && path === '/api/trade-apply') {
     return handleTradeApply(request, env);
+  }
+  if (request.method === 'POST' && path === '/api/bespoke-request') {
+    return handleBespokeRequest(request, env);
   }
   if (request.method === 'POST' && path === '/api/warranty-register') {
     return handleWarrantyRegister(request, env);
@@ -1427,6 +1430,59 @@ async function handleTradeApply(request, env) {
     );
   } catch (err) {
     console.error('Trade application error:', err);
+    return corsError('Could not send the form', 500);
+  }
+}
+
+/** Bespoke requests: custom set-up, branding, bundles or specs. */
+async function handleBespokeRequest(request, env) {
+  try {
+    const body = await request.json();
+    if (body.website) return corsResponse({ ok: true }); // honeypot
+
+    const req = {
+      name: clip(body.name, 120),
+      company: clip(body.company, 160),
+      email: clip(body.email, 160),
+      phone: clip(body.phone, 40),
+      requestType: clip(body.requestType, 60),
+      quantity: clip(body.quantity, 40),
+      message: clip(body.message, 4000),
+      receivedAt: new Date().toISOString(),
+      status: 'new',
+    };
+
+    if (!EMAIL_RE.test(req.email)) {
+      return corsError('A valid email address is required', 422);
+    }
+    if (req.message.length < 10) {
+      return corsError('Please tell us what you need', 422);
+    }
+
+    const lines = [
+      `Company: ${req.company || 'not given'}`,
+      `Contact: ${req.name}`,
+      `Phone: ${req.phone || 'not given'}`,
+      `Request type: ${req.requestType || 'not given'}`,
+      `Devices: ${req.quantity || 'not given'}`,
+      '',
+      req.message,
+    ];
+
+    return storeAndNotify(
+      env,
+      `bespoke:${req.receivedAt}:${req.email.toLowerCase()}`,
+      req,
+      {
+        name: req.name || req.company,
+        email: req.email,
+        topic: 'Bespoke request',
+        message: lines.join('\n'),
+      },
+      { expirationTtl: TWELVE_MONTHS }
+    );
+  } catch (err) {
+    console.error('Bespoke request error:', err);
     return corsError('Could not send the form', 500);
   }
 }
