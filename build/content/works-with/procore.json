@@ -1,0 +1,169 @@
+{
+  "slug": "procore",
+  "software": "Procore",
+  "vendor": "Procore Technologies, Inc.",
+  "vendor_url": "https://www.procore.com/en-gb",
+  "title": "Rugged tablet for Procore: UK buyer's guide",
+  "meta_description": "Procore's Android app needs Android 13 or later from Google Play, with 64GB of free storage recommended. The Tuga A10 (Android 14, 128GB, IP68) meets both.",
+  "target_query": "best tablet for Procore",
+  "h1": "Rugged tablet for Procore",
+  "intro": [
+    "Procore is a construction management platform built and sold by Procore Technologies, Inc., a US company with a UK site and a UK phone line. The vendor describes it as a connected platform that brings main contractors, owners and subcontractors together on one project record, and its product areas cover project execution, cost management, resource management and document management. The office sets projects up in the web product; site managers, engineers and trades do their part of the work in the Procore mobile app, which is published for Android and iOS.",
+    "The mobile app is where the site work happens. Its Google Play listing says you can access every drawing revision offline or online, mark drawings up, scan QR codes to see open items by location, track punch lists (snag lists) and observations, submit and respond to RFIs, log daily reports with weather, crew, equipment and notes, and auto-stamp photos with GPS location, date and direction. The vendor's own help centre adds forms, inspections and a documented offline mode on both tablets and smartphones. That is a device that is walked around a site all day, held up against a wall to compare a drawing with the work, and handed between people in the rain, which is a hard life for a consumer tablet in a thin case.",
+    "This page sets out what Procore publishes about the devices its app runs on, which Tuga rugged devices meet those published requirements and which do not, what the Windows option can honestly do now that Procore has no Windows field app, and how a UK contractor can buy a single trial unit before committing to a fleet."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 13 or later, installed only from Google Play",
+      "detail": "The vendor's Android Requirements FAQ states that the Procore Android app currently requires Android 13 or later, and that earlier versions of Android stopped being supported in February 2026. A device already running the app on an older version can keep using the installed copy for one year after support for that version ended, after which the app is no longer accessible until the device is updated. The FAQ also says the app should only be installed from Google Play, and that Procore does not support issues arising from installations outside Google Play. For context, the matching iOS FAQ gives iOS 17.1 or later, also from February 2026. No RAM figure is published for the app itself.",
+      "source_url": "https://support.procore.com/faq/android-requirements?mt-view=f1"
+    },
+    {
+      "requirement": "Android app from Google Play, for phones and tablets",
+      "detail": "The Android app is published on Google Play as Procore (package com.procore.activities, developer Procore Technologies Inc). When checked on 19 October 2026 the UK listing showed Updated on 8 Oct 2026, more than 1 million downloads, a Productivity category and review filters for Phone and Tablet. The page as fetched did not show a Requires Android figure or a version number, so the Android 13 figure above comes from the vendor's FAQ rather than the store. The listing's description covers drawings with every revision available offline, drawing markup, QR code scanning, punch lists and observations, RFIs, daily reports, photo annotation and GPS stamping, 3D models, time entry and material tracking, and says an active Procore subscription is required.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.procore.activities&hl=en_GB"
+    },
+    {
+      "requirement": "Storage: at least 64GB free recommended, and no SD card storage",
+      "detail": "The vendor's mobile device FAQ says that a device with at least 64GB of free storage is recommended, that large projects may need 5 to 10GB each for drawings, photos and documents, and gives working figures of about 1.5MB per drawing page, about 1MB per photo and about 1.5MB per document page. It also recommends replacing devices every 2 to 3 years to keep up with current operating systems, a data plan of at least 10GB per user, and strongly advises against rooted Android devices. The Android getting started guide states that Procore does not support SD card data storage, so a microSD card does not count towards that free space; cached project data can be cleared per tool or per project from Project Settings, Manage Storage.",
+      "source_url": "https://support.procore.com/faq/what-type-of-mobile-device-should-i-use-for-procore?mt-view=f1"
+    },
+    {
+      "requirement": "Offline mode on tablets and smartphones, for items cached while online",
+      "detail": "The vendor's offline FAQ says the iOS and Android apps have offline capabilities whether used on a tablet or a smartphone. Offline use is limited to items that were viewed or downloaded while online, with drawings, RFIs, punch list items and inspections given as examples, and new project data cannot be retrieved offline. Actions taken offline, such as creating a punch list item, are held on the device and sent to Procore when the connection returns; deleting the app removes the cache. The Android drawings guide says drawings must be downloaded before first viewing, by discipline or individually, and a Sync button checks for updates. The Android guides for RFIs, punch list items, daily log entries and forms each state that the action can be performed offline, and the forms guide warns that a form filled out offline is not saved until the device syncs.",
+      "source_url": "https://support.procore.com/faq/can-i-use-procores-mobile-application-offline?mt-view=f1"
+    },
+    {
+      "requirement": "QR code scanning through the Procore camera, with GPS used for photo stamps and equipment scans",
+      "detail": "The Android camera guide says you open the camera tool in the Procore app, point it at a QR code and tap the link that appears to open the item, and lists Assets, Correspondence, Drawings, Equipment and Locations as the tools whose QR codes can be scanned, with submittals covered in a separate guide. It requires Standard or higher permission on the Photos tool and Read Only or higher on the tool holding the item. No barcode scanning, dedicated scan engine or external scanner is documented, so on any device the scan path is the camera. The vendor's location FAQ says Procore captures a point in time location when a user clocks in or out, takes a photo or scans an equipment QR code, if location services are enabled, and that it does not continuously monitor location. The Android photos guide documents a location stamp on photos taken in the app.",
+      "source_url": "https://support.procore.com/procore-mobile-android/user-guide/camera-android/tutorials/scan-a-qr-code-with-the-procore-camera-to-view-an-item-android?mt-view=f1"
+    },
+    {
+      "requirement": "RAM: no minimum for the app; 4GB or more recommended and Vulkan support needed for Models",
+      "detail": "Procore publishes no RAM minimum for the Android app as a whole. Its Models hardware FAQ, which covers viewing 3D models in the app, says a device with 4GB of RAM or more is highly recommended for smooth performance, that Android devices must support the Vulkan graphics API, and that free space should be kept at about four times the size of the model file. For models over 1.75GB it recommends an iPad Pro because of its higher RAM. On computers, the Models tool in a browser lists a minimum of 16GB RAM with 32GB or more recommended and an Intel Core i5 or AMD Ryzen 5 or better. We do not have a published Vulkan statement for any Tuga device, so Models on Android is something to check on a trial unit.",
+      "source_url": "https://support.procore.com/faq/what-are-the-computer-and-mobile-hardware-requirements-for-procore-models"
+    },
+    {
+      "requirement": "Windows: no Windows field app since 2021, web product in a browser, Procore Drive for desktop uploads",
+      "detail": "Procore's release note for its Windows 10 app says the app was deprecated on 1 February 2021 because it had not gained the adoption needed to justify further development, and that the change affected the field and jobsite mobile experience only. What remains on Windows is the Procore web app in a browser, Procore Drive, the Outlook and Office plugins, the Imports and Extracts applications and a VDC plugin. The browser FAQ lists Chrome, Firefox, Safari and Edge on Windows and macOS, says JavaScript must be enabled, lists Chrome Mobile and Safari Mobile for mobile browsers, and strongly recommends the iOS or Android app over a browser on mobile devices. Procore Drive is described as a free desktop app for Windows 10 or newer that uploads batches of documents, emails and photos and integrates project schedules.",
+      "source_url": "https://support.procore.com/tc/procore/Legacy/Release_Documentation_Archives/2021/Windows_10_App%3A_End_of_Support_for_Windows_10_App"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Procore's site work (drawings with markup, RFIs, daily log entries, punch and snag items, forms, photos, QR scanning and offline mode) lives in the Android app, so the device a site manager carries needs to run that app well rather than a browser. The Tuga A10 runs Android 14 against a published requirement of Android 13 or later, so it clears the current cut-off with one version to spare, which matters because Procore moved its minimum to Android 13 in February 2026 and says earlier versions keep working for only a year after support ends. It has 128GB of internal storage against the vendor's recommendation of at least 64GB free, and because Procore does not support SD card storage, internal capacity is the figure that counts. Its 8GB of RAM is double the 4GB the vendor recommends for the Models tool. Drawings are the reason to choose the 10.1 inch 1920 x 1200 screen over the 6 inch handheld: a drawing sheet, a drawing comparison or a multi-field RFI shows far more at once. The IP68 and MIL-STD-810H ratings cover rain, dust and drops on site, the 13MP rear camera with flash is the QR scan and photo path the app documents, and the GNSS receiver supplies the location the vendor says it stamps on photos and equipment scans. It fits the charging dock and the vehicle mounting dock.",
+      "fit": [
+        "Requirement: Android 13 or later from Google Play. Tuga A10: Android 14 with Google Play, so the published requirement is met.",
+        "Requirement: at least 64GB of free storage recommended, with no SD card storage supported. Tuga A10: 128GB internal storage (the microSD slot, up to 2TB, does not count for Procore).",
+        "Requirement: 4GB of RAM or more recommended for the Models tool; no RAM minimum published for the app. Tuga A10: 8GB RAM.",
+        "Requirement: QR code scanning through the Procore camera, photo capture with annotation and a location stamp. Tuga A10: 13MP rear camera with flash and GPS + Galileo + BeiDou + QZSS + NavIC (scanning is through the camera via the app; no dedicated scan engine is documented).",
+        "Requirement: drawings, drawing comparison and markup on screen, offline after download. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass; the capacitive stylus accessory fits it.",
+        "Requirement: a device that keeps working on site with or without signal, and a 10GB or larger data plan per user. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge, dual SIM 4G and dual-band Wi-Fi 5."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For trades who want punch items, photos, QR scans and daily log entries in a pocket or a belt holster at 277g, the Tuga A6 runs the same Procore Android app on a 6 inch handheld. It runs Android 15, above the Android 13 requirement, and its 4GB of RAM meets the vendor's 4GB recommendation for Models exactly, with no headroom. Be clear on storage: the A6 has 64GB in total, so it cannot offer the 64GB of free space the vendor recommends, and its microSD slot does not help because Procore does not support SD card storage. That makes it a device for a trade on one or two projects who downloads the disciplines they need, not for a site manager caching every drawing set on a large job; clearing cached data per project from Manage Storage is the routine to plan for. It has a Zebra 2D scan engine, but Procore documents camera QR scanning only, so plan on the 13MP rear camera. The trade-off is screen area: a 6 inch display shows a small part of a drawing sheet at a time.",
+      "fit": [
+        "Requirement: Android 13 or later from Google Play. Tuga A6: Android 15 with Google Play.",
+        "Requirement: at least 64GB of free storage recommended, with no SD card storage supported. Tuga A6: 64GB total storage, so the recommended free space is not available; microSD up to 256GB is not usable by Procore.",
+        "Requirement: 4GB of RAM or more recommended for the Models tool. Tuga A6: 4GB RAM, which meets the recommendation with no margin.",
+        "Requirement: QR code scanning through the Procore camera and photo capture with a location stamp. Tuga A6: 13MP rear camera with flash and GPS + GLONASS + BeiDou + Galileo (the Zebra 2D scan engine is not a documented Procore input).",
+        "Requirement: a device that survives site use and drops. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g, removable 5050mAh battery.",
+        "Requirement: connectivity for syncing offline work and a 10GB or larger data plan. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Procore has had no Windows field app since 1 February 2021. The Tuga W10 runs Windows 11 Pro, so it can run the Procore web product in Chrome, Firefox or Edge, which the vendor lists as supported on Windows, and it can run Procore Drive, which the vendor says needs Windows 10 or newer, for batch uploads of documents, emails and photos and for schedule integration. That makes it a fit for a site office or a document controller's desk, and it has Ethernet and HDMI for a fixed position with a monitor. It is not the device for a site manager walking the job: the offline mode, QR scanning, photo stamping, daily log and punch list features the vendor documents are in the mobile app, which does not run on Windows, and the vendor strongly recommends the app over a browser on mobile devices. The Models tool in a browser lists a 16GB RAM minimum, which the W10's 8GB does not meet. It is IP65 rather than IP68, so it is protected against water jets but not rated for immersion.",
+      "fit": [
+        "Requirement: a supported desktop browser (Chrome, Firefox or Edge on Windows) with JavaScript enabled. Tuga W10: Windows 11 Pro running standard desktop browsers.",
+        "Requirement: Windows 10 or newer for Procore Drive. Tuga W10: Windows 11 Pro, Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage.",
+        "Requirement: a fixed position in a site office. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector, removable 5000mAh battery; fits the charging dock.",
+        "Requirement: 16GB RAM minimum for the Models tool in a browser. Tuga W10: 8GB RAM, so the Models minimum is not met.",
+        "Requirement: dust and splash protection. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 1197g, 10.1 inch 1280 x 800 multi-touch screen."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Procore administrator to add the user to the company directory and grant them access to the project, with Standard or Admin permission on the tools they need (Drawings, RFIs, Daily Log, Punch List, Forms and Photos). The app shows no project data until that is done.",
+    "On the Tuga A10 or A6, open Google Play and install Procore (package com.procore.activities, developer Procore Technologies Inc), then sign in. Install from Google Play only; the vendor does not support copies installed any other way.",
+    "Allow camera and location access when the app asks. The camera is the QR scan and photo path, and location services are what Procore uses to stamp photos, record equipment scan locations and log clock in and out.",
+    "While still on Wi-Fi, open the project's Drawings tool and download the disciplines the user needs, then open the RFIs, punch items, daily log and forms they will work on. Procore's offline mode only covers items viewed or downloaded while online, and it does not support SD card storage, so watch the free space on the device.",
+    "Before the first day without signal, test the offline flow: switch on Airplane Mode, open a downloaded drawing, create a punch item with a photo, then reconnect and confirm it syncs. Forms filled out offline are not saved until the device syncs.",
+    "Set the Uploads Queue to Wi-Fi only if the data plan is tight, and use Project Settings, Manage Storage to clear cached data for finished projects. The vendor recommends a data plan of at least 10GB per user.",
+    "On a Tuga W10, open the Procore web product in Edge or Chrome and install Procore Drive for batch uploads and schedule integration. Use it for the site office; it will not run the mobile app.",
+    "For the A10, fit the vehicle mounting dock in the van and the charging dock where devices live overnight; for the A6, add the belt holster. Fit the tempered glass screen protector before the device goes out."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A10 and W10), for site managers working from a van",
+    "Charging dock, £49.99 (Tuga A10 and W10)",
+    "Hand strap, £24 (Tuga A10 and W10), for one-handed use while walking a site with a drawing open",
+    "Capacitive stylus, £14.99 (Tuga A10 and W10), for drawing markup and signatures on screen",
+    "Shoulder strap, £19 (Tuga A10 and W10)",
+    "12V DC car charger, £26",
+    "Belt holster, £22 (Tuga A6)",
+    "Car phone mount, £17 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14",
+    "Rugged carry case, £34 (Tuga A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Procore run on the Tuga A10?",
+      "a": "Procore publishes a requirement of Android 13 or later, installed from Google Play, and recommends at least 64GB of free storage with no SD card storage supported. The Tuga A10 runs Android 14 with Google Play and has 128GB of internal storage and 8GB RAM, so it meets the published Android figure and has room for the recommended free space. The Tuga A6 (Android 15, 4GB RAM, 64GB storage) meets the Android figure but cannot offer 64GB free. We do not describe any device as certified or tested by Procore; these are the vendor's published requirements set against the device specifications."
+    },
+    {
+      "q": "Why is the Tuga A8 not on this page?",
+      "a": "The Tuga A8 runs Android 12. Procore's Android Requirements FAQ says the app currently requires Android 13 or later and that earlier versions stopped being supported in February 2026, so the A8 does not meet the published requirement and we do not suggest it for Procore. If you already run Procore on an Android 12 device, the vendor says an installed copy keeps working for one year after support for that version ended, but it will not receive updates and will then stop opening."
+    },
+    {
+      "q": "Does Procore work offline on these tablets?",
+      "a": "Yes, within the limits the vendor sets. Procore's offline FAQ says the Android app has offline capabilities on tablets and smartphones, but only for items viewed or downloaded while online: drawings have to be downloaded by discipline or individually, and RFIs, punch items, daily log entries and forms can be created or edited offline and sync when the connection returns. New project data cannot be fetched offline, and a form filled out offline is not saved until the device syncs. The A10 and A6 run the Google Play app. A Tuga W10 can only use the web product in a browser, and the vendor does not document offline working there."
+    },
+    {
+      "q": "Can I scan QR codes on drawings and equipment, and does the A6's scanner help?",
+      "a": "Procore's Android camera guide documents QR code scanning through the Procore camera tool for assets, correspondence, drawings, equipment and locations, with submittals handled in a separate guide. The A10 and A6 both have a 13MP rear camera with flash, and on each of them scanning runs through the camera via the app. The A6 also has a Zebra 2D scan engine, but the vendor documents no barcode scanning, dedicated scan engine or external scanner support, so do not buy it for that reason alone. The vendor documents no NFC use either, so the NFC radio on the A10 and A6 is not a Procore feature."
+    },
+    {
+      "q": "How much storage do I need for drawings?",
+      "a": "Procore recommends at least 64GB of free storage and says large projects may need 5 to 10GB each, at about 1.5MB per drawing page, 1MB per photo and 1.5MB per document page. Because the app does not support SD card storage, only internal storage counts. The A10's 128GB leaves room for several large projects after Android and other apps; the A6's 64GB total means downloading only the disciplines you need and clearing cached data for finished projects from Project Settings, Manage Storage."
+    },
+    {
+      "q": "Can we trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "We do not suggest the Tuga A8 for Procore: it runs Android 12, and the vendor's published requirement is Android 13 or later, with earlier versions unsupported since February 2026. Procore has had no Windows field app since 1 February 2021, so the Tuga W10 only runs the web product in a browser and the Procore Drive desktop app; the offline mode, QR scanning, photo stamping, daily log, punch list and forms features the vendor documents are in the mobile app, and the vendor strongly recommends the app over a browser on mobile devices, so a W10 suits a site office, not a site manager walking the job. The Models tool lists a 16GB RAM minimum in a browser, which the W10's 8GB does not meet. On the Android side, the only scan method the vendor documents is the camera, so the A6's Zebra 2D scan engine is not a documented Procore input, and the vendor documents no NFC use. The A6's 64GB total storage cannot provide the 64GB of free space the vendor recommends, and Procore does not support SD card storage on any device. The vendor publishes no RAM minimum for the app itself, no screen-size guidance for Android tablets (its multi-column tablet layouts are documented for iPad only) and no Vulkan statement we can match against a Tuga spec, so the Models tool is something to check on a trial unit. We do not describe any device as certified or tested by Procore.",
+  "disclaimer": "Procore is a product of Procore Technologies, Inc. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Procore or Procore Technologies, Inc.",
+  "sources": [
+    "https://www.procore.com/en-gb",
+    "https://play.google.com/store/apps/details?id=com.procore.activities&hl=en_GB",
+    "https://support.procore.com/faq/android-requirements?mt-view=f1",
+    "https://support.procore.com/faq/ios-requirements?mt-view=f1",
+    "https://support.procore.com/faq/what-type-of-mobile-device-should-i-use-for-procore?mt-view=f1",
+    "https://support.procore.com/faq/can-i-use-procores-mobile-application-offline?mt-view=f1",
+    "https://support.procore.com/faq/which-web-browsers-are-supported-by-procore",
+    "https://v2.support.procore.com/en-gb/faq-which-web-browsers-are-supported-by-procore",
+    "https://support.procore.com/faq/what-are-the-computer-and-mobile-hardware-requirements-for-procore-models",
+    "https://support.procore.com/faq/when-does-procore-track-my-location-in-the-procore-mobile-app?mt-view=f1",
+    "https://support.procore.com/faq/what-layouts-are-available-for-ipad",
+    "https://support.procore.com/procore-mobile-android/getting-started-procore-app-android",
+    "https://support.procore.com/procore-mobile-android/getting-started-procore-app-android/manage-the-storage-that-procores-android-app-uses-on-your-device?mt-view=f1",
+    "https://support.procore.com/procore-mobile-android/user-guide/drawings-android/tutorials/sync-and-download-drawings-android",
+    "https://support.procore.com/procore-mobile-android/user-guide/drawings-android/tutorials/view-drawings-android",
+    "https://support.procore.com/procore-mobile-android/user-guide/camera-android/tutorials/scan-a-qr-code-with-the-procore-camera-to-view-an-item-android?mt-view=f1",
+    "https://support.procore.com/procore-mobile-android/user-guide/photos-android/tutorials/stamp-a-photo-with-the-current-location-android",
+    "https://support.procore.com/procore-mobile-android/user-guide/rfis-android/tutorials/create-an-rfi-android?mt-view=f1",
+    "https://support.procore.com/procore-mobile-android/user-guide/punch-list-android/tutorials/create-a-punch-list-item-android?mt-view=f1",
+    "https://support.procore.com/procore-mobile-android/user-guide/daily-log-android/tutorials/add-inspection-entries-android?mt-view=f1",
+    "https://support.procore.com/procore-mobile-android/user-guide/forms-android/tutorials/fill-out-a-form-android?mt-view=f1",
+    "https://support.procore.com/procore-mobile-android/user-guide/forms-android/permissions?mt-view=f1",
+    "https://support.procore.com/tc/procore/Legacy/Release_Documentation_Archives/2021/Windows_10_App%3A_End_of_Support_for_Windows_10_App",
+    "https://support.procore.com/tc/procore/Legacy/Release_Documentation_Archives/2023/Procore_Android_App%3A_No_Longer_Providing_Updates_for_Android_9",
+    "https://v2.support.procore.com/en-gb/product-manuals/procore-drive/"
+  ]
+}

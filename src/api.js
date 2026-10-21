@@ -54,6 +54,11 @@ const PRODUCTS = {
   'wty-3yr-tuga-a8': { name: "3-Year Warranty for Tuga A8", price: 6500, warrantyFor: 'tuga-a8', tier: '3yr' },
   'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
+  // Factory upgrades: one per device unit, and only one per group (a device
+  // has one storage size). Never discounted, never a device.
+  'upg-ram16-tuga-w10':   { name: '16GB RAM upgrade for Tuga W10',   price: 6900,  upgradeFor: 'tuga-w10', group: 'ram' },
+  'upg-ssd256-tuga-w10':  { name: '256GB storage upgrade for Tuga W10', price: 6900,  upgradeFor: 'tuga-w10', group: 'storage' },
+  'upg-ssd512-tuga-w10':  { name: '512GB storage upgrade for Tuga W10', price: 12500, upgradeFor: 'tuga-w10', group: 'storage' },
 };
 
 /** What the back office needs from the catalogue: stockable models and every sellable line. */
@@ -121,6 +126,18 @@ function validateWarranties(lines) {
       throw new BasketError(`${line.product.name} covers one device each: you have ${line.quantity} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
     }
   }
+  // Upgrades: one per device unit, and one per group (RAM, storage).
+  const perGroup = {};
+  for (const line of lines) {
+    const { upgradeFor, group } = line.product;
+    if (!upgradeFor) continue;
+    const units = deviceUnits[upgradeFor] || 0;
+    const key = `${upgradeFor}:${group}`;
+    perGroup[key] = (perGroup[key] || 0) + line.quantity;
+    if (perGroup[key] > units) {
+      throw new BasketError(`${line.product.name} fits one device each, and a device takes one ${group} option: you have ${perGroup[key]} but ${units} matching ${units === 1 ? 'device' : 'devices'} in the basket`);
+    }
+  }
 }
 
 /** Bulk tiers are earned on devices only. */
@@ -134,7 +151,7 @@ function countDeviceUnits(lines) {
 /** Contact enquiries, sign ups and trade applications: see privacy policy section 7. */
 const TWELVE_MONTHS = 365 * 24 * 60 * 60;
 
-const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/warranty-register', '/api/review'];
+const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/bespoke-request', '/api/warranty-register', '/api/review'];
 
 const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check', '/api/reviews-export'];
 
@@ -219,6 +236,9 @@ export async function handleRequest(request, env) {
   }
   if (request.method === 'POST' && path === '/api/trade-apply') {
     return handleTradeApply(request, env);
+  }
+  if (request.method === 'POST' && path === '/api/bespoke-request') {
+    return handleBespokeRequest(request, env);
   }
   if (request.method === 'POST' && path === '/api/warranty-register') {
     return handleWarrantyRegister(request, env);
@@ -1410,6 +1430,59 @@ async function handleTradeApply(request, env) {
     );
   } catch (err) {
     console.error('Trade application error:', err);
+    return corsError('Could not send the form', 500);
+  }
+}
+
+/** Bespoke requests: custom set-up, branding, bundles or specs. */
+async function handleBespokeRequest(request, env) {
+  try {
+    const body = await request.json();
+    if (body.website) return corsResponse({ ok: true }); // honeypot
+
+    const req = {
+      name: clip(body.name, 120),
+      company: clip(body.company, 160),
+      email: clip(body.email, 160),
+      phone: clip(body.phone, 40),
+      requestType: clip(body.requestType, 60),
+      quantity: clip(body.quantity, 40),
+      message: clip(body.message, 4000),
+      receivedAt: new Date().toISOString(),
+      status: 'new',
+    };
+
+    if (!EMAIL_RE.test(req.email)) {
+      return corsError('A valid email address is required', 422);
+    }
+    if (req.message.length < 10) {
+      return corsError('Please tell us what you need', 422);
+    }
+
+    const lines = [
+      `Company: ${req.company || 'not given'}`,
+      `Contact: ${req.name}`,
+      `Phone: ${req.phone || 'not given'}`,
+      `Request type: ${req.requestType || 'not given'}`,
+      `Devices: ${req.quantity || 'not given'}`,
+      '',
+      req.message,
+    ];
+
+    return storeAndNotify(
+      env,
+      `bespoke:${req.receivedAt}:${req.email.toLowerCase()}`,
+      req,
+      {
+        name: req.name || req.company,
+        email: req.email,
+        topic: 'Bespoke request',
+        message: lines.join('\n'),
+      },
+      { expirationTtl: TWELVE_MONTHS }
+    );
+  } catch (err) {
+    console.error('Bespoke request error:', err);
     return corsError('Could not send the form', 500);
   }
 }
