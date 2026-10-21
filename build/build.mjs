@@ -88,7 +88,7 @@ function sourceDate(files) {
 }
 
 /** Add the brand to a page title only when it still fits in about 65 characters. */
-const withBrand = (title) => (title.length <= 49 ? `${title} | Tuga Hardware` : title);
+const withBrand = (title) => (title.length <= 44 ? `${title} | Tuga Hardware` : title);
 
 function write(relPath, contents) {
   const full = join(ROOT, relPath);
@@ -663,7 +663,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. From £349 with free UK delivery.',
+      'Rugged Android and Windows tablets for UK tradespeople. IP65 to IP68 sealed, half the range MIL-STD-810 drop tested. From £349, free UK delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -683,7 +683,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged tablets and handhelds in Android and Windows. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G, free UK delivery and 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged Android and Windows tablets and handhelds. IP65 to IP68 sealed, free UK delivery, 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -1069,7 +1069,7 @@ ${ctaBanner({
 
   return page({
     title: `${p.name}: ${p.sizeLabel} inch Rugged ${p.category === 'android' ? 'Android' : 'Windows'} ${p.formFactor === 'handheld' ? 'Handheld' : 'Tablet'} | Tuga Hardware`,
-    description: p.description,
+    description: p.metaDescription || p.description,
     path: productUrl(p),
     active: 'products',
     ogType: 'product',
@@ -1157,7 +1157,7 @@ write(
   page({
     title: 'Bulk Orders & Team Discounts | Tuga Hardware',
     description:
-      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9 and 10% at 10+. No codes, free UK delivery, and business quotes with proforma invoices.',
+      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9, 10% at 10+. No codes, free UK delivery, proforma invoices.',
     path: '/bulk',
     active: 'bulk',
     schema: [breadcrumbSchema(bulkTrail), bulkFaq.schema],
@@ -3514,7 +3514,7 @@ if (worksWith.length) {
   write(
     'works-with/index.html',
     page({
-      title: 'Rugged tablets for job management and field apps | Tuga Hardware',
+      title: 'Rugged tablets for job management and field apps',
       description:
         'Which Tuga rugged tablet runs your job management, CMMS or inspection app. Published requirements checked against each device, with trial units available.',
       path: '/works-with/',
