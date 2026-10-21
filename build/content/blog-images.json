@@ -2,13 +2,16 @@
   "_note": "Hero photo pool for /blog. Each entry: file in img/blog/ (run `npm run images` after adding one), tags = words that, found in a post's slug or title, make it a good match, and the credit. The build picks the best match per post, balances use and never repeats a photo on neighbouring cards. Pin a photo with an `image:` line in the post's meta block or in `pinned` below.",
   "pinned": {
     "best-rugged-tablets-construction": "blog-construction.webp",
-    "ip68-vs-ip67-waterproof-rating": "blog-waterproof.webp",
-    "rugged-vs-consumer-tablet-cost": "blog-cost.webp",
     "best-tablets-field-engineers": "blog-field-engineer.webp",
     "why-tradespeople-switching-rugged-tablets": "blog-tradespeople.webp",
-    "why-rugged-tablets-expensive": "blog-expensive.webp",
-    "best-budget-rugged-tablets-under-400": "blog-budget.webp",
-    "do-you-need-enterprise-rugged-tablet": "blog-enterprise.webp"
+    "rugged-phone-or-rugged-tablet": "blog-warehouse.webp",
+    "rugged-tablet-barcode-scanner": "blog-stocktake.webp",
+    "going-paperless-tradesperson-guide": "blog-desk.webp",
+    "android-vs-windows-rugged-tablet": "blog-ports.webp",
+    "how-long-should-a-rugged-tablet-last": "blog-workwear.webp",
+    "why-rugged-tablets-expensive": "blog-plantroom.webp",
+    "rugged-vs-consumer-tablet-cost": "blog-repair.webp",
+    "best-budget-rugged-tablets-under-400": "blog-pounds.webp"
   },
   "images": [
     {
@@ -19,28 +22,6 @@
         "scaffold",
         "surveyor",
         "mil-std"
-      ],
-      "credit": "Existing site photo"
-    },
-    {
-      "file": "blog-waterproof.webp",
-      "tags": [
-        "waterproof",
-        "ip68",
-        "ip67",
-        "rain",
-        "weather"
-      ],
-      "credit": "Existing site photo"
-    },
-    {
-      "file": "blog-cost.webp",
-      "tags": [
-        "cost",
-        "price",
-        "warranty",
-        "last",
-        "lifespan"
       ],
       "credit": "Existing site photo"
     },
@@ -64,34 +45,6 @@
         "electrician",
         "trade",
         "team"
-      ],
-      "credit": "Existing site photo"
-    },
-    {
-      "file": "blog-expensive.webp",
-      "tags": [
-        "expensive",
-        "budget"
-      ],
-      "credit": "Existing site photo"
-    },
-    {
-      "file": "blog-budget.webp",
-      "tags": [
-        "budget",
-        "under-400",
-        "cheap"
-      ],
-      "credit": "Existing site photo"
-    },
-    {
-      "file": "blog-enterprise.webp",
-      "tags": [
-        "enterprise",
-        "data",
-        "security",
-        "office",
-        "facilities"
       ],
       "credit": "Existing site photo"
     },
@@ -284,6 +237,122 @@
         "mud"
       ],
       "credit": "Kausik Paul on Pexels, Pexels licence, https://www.pexels.com/photo/a-tractor-on-the-farm-field-6054341/"
+    },
+    {
+      "file": "blog-pounds.webp",
+      "tags": [
+        "cost",
+        "price",
+        "budget",
+        "expensive",
+        "under-400",
+        "cheap",
+        "value",
+        "pay"
+      ],
+      "credit": "Alaur Rahman on Pexels, Pexels licence, https://www.pexels.com/photo/silver-and-gold-coins-on-white-printer-paper-5277965/"
+    },
+    {
+      "file": "blog-roofer2.webp",
+      "tags": [
+        "roof",
+        "scaffold",
+        "height",
+        "drop",
+        "mil-std"
+      ],
+      "credit": "Gundula Vogel on Pexels, Pexels licence, https://www.pexels.com/photo/roofer-performing-maintenance-on-red-brick-building-31762405/"
+    },
+    {
+      "file": "blog-ports.webp",
+      "tags": [
+        "ports",
+        "ethernet",
+        "hdmi",
+        "usb",
+        "laptop",
+        "replace",
+        "windows",
+        "connect"
+      ],
+      "credit": "Brett Sayles on Pexels, Pexels licence, https://www.pexels.com/photo/cables-connected-to-ethernet-ports-2881232/"
+    },
+    {
+      "file": "blog-sdcard.webp",
+      "tags": [
+        "storage",
+        "card",
+        "photos",
+        "memory",
+        "sd"
+      ],
+      "credit": "Patrick on Pexels, Pexels licence, https://www.pexels.com/photo/close-up-of-sd-card-connector-pins-30662603/"
+    },
+    {
+      "file": "blog-stocktake.webp",
+      "tags": [
+        "stock",
+        "stocktake",
+        "warehouse",
+        "barcode",
+        "scanner",
+        "picking"
+      ],
+      "credit": "Centre for Ageing Better on Pexels, Pexels licence, https://www.pexels.com/photo/employees-looking-at-the-clipboard-while-standing-near-metal-shelves-13804490/"
+    },
+    {
+      "file": "blog-repair.webp",
+      "tags": [
+        "warranty",
+        "repair",
+        "last",
+        "how-long",
+        "lifespan",
+        "expensive"
+      ],
+      "credit": "Bulat843 on Pexels, Pexels licence, https://www.pexels.com/photo/close-up-of-technician-repairing-electronics-with-soldering-iron-38264269/"
+    },
+    {
+      "file": "blog-drawings.webp",
+      "tags": [
+        "drawings",
+        "measure",
+        "surveyor",
+        "site manager",
+        "8-inch",
+        "10-inch",
+        "screen size"
+      ],
+      "credit": "Anete Lusina on Pexels, Pexels licence, https://www.pexels.com/photo/set-of-various-instruments-for-work-for-architect-4792501/"
+    },
+    {
+      "file": "blog-workwear.webp",
+      "tags": [
+        "last",
+        "lifespan",
+        "durable",
+        "tradespeople",
+        "boots",
+        "mud",
+        "landscap",
+        "farm"
+      ],
+      "credit": "Nishant Aneja on Pexels, Pexels licence, https://www.pexels.com/photo/close-up-photo-of-dirty-boots-9107160/"
+    },
+    {
+      "file": "blog-fleet.webp",
+      "tags": [
+        "enterprise",
+        "fleet",
+        "team",
+        "small team",
+        "facilities",
+        "bulk",
+        "buying",
+        "data",
+        "protect"
+      ],
+      "credit": "Stanislav Kondratiev on Pexels, Pexels licence, https://www.pexels.com/photo/heavy-black-metal-cases-in-dense-room-7375098/"
     }
   ]
 }

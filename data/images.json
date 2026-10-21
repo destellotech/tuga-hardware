@@ -97,23 +97,7 @@
     800,
     1200
   ],
-  "/img/blog/blog-budget.webp": [
-    640,
-    1200
-  ],
   "/img/blog/blog-construction.webp": [
-    640,
-    1200
-  ],
-  "/img/blog/blog-cost.webp": [
-    640,
-    1200
-  ],
-  "/img/blog/blog-enterprise.webp": [
-    640,
-    1200
-  ],
-  "/img/blog/blog-expensive.webp": [
     640,
     1200
   ],
@@ -122,10 +106,6 @@
     1200
   ],
   "/img/blog/blog-tradespeople.webp": [
-    640,
-    1200
-  ],
-  "/img/blog/blog-waterproof.webp": [
     640,
     1200
   ],
@@ -194,6 +174,42 @@
     1600
   ],
   "/img/blog/blog-winter.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-pounds.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-roofer2.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-ports.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-sdcard.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-stocktake.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-repair.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-drawings.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-workwear.webp": [
+    640,
+    1600
+  ],
+  "/img/blog/blog-fleet.webp": [
     640,
     1600
   ]

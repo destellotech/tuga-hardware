@@ -602,7 +602,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="${versioned('/img/blog/blog-waterproof.webp')}"${responsive('/img/blog/blog-waterproof.webp', '(max-width: 820px) 92vw, 556px')} alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-rain.webp')}"${responsive('/img/blog/blog-rain.webp', '(max-width: 820px) 92vw, 556px')} alt="Worker in a waterproof coat laying paving on a wet site" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Sealed against dust and water</h3>
@@ -2381,8 +2381,8 @@ ${p.prose}
 
 /* Hero images come from build/content/blog-images.json: a pool of photos,
    each with the topic words it suits. assignBlogImages() below gives every
-   post the best-matching photo, spreads use across the pool and never shows
-   the same photo on two neighbouring cards in the listing. A post can pin a
+   post its own best-matching photo while the pool lasts, oldest posts first,
+   and never shows the same photo on two neighbouring cards. A post can pin a
    photo with an `image:` line in its meta block, or in the manifest's
    "pinned" map. New posts therefore need no edit here. */
 const BLOG_IMAGE_MANIFEST = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'blog-images.json'), 'utf8'));
@@ -2390,42 +2390,61 @@ const BLOG_IMAGE_POOL = BLOG_IMAGE_MANIFEST.images.filter((i) => existsSync(join
 if (!BLOG_IMAGE_POOL.length) throw new Error('build/content/blog-images.json lists no photos that exist in img/blog/');
 
 /**
- * Give each post (already in listing order, newest first) a hero image.
- * Score = how many of a photo's topic words appear in the slug or title.
- * Among equal scores the least-used photo wins, and a photo is skipped when
- * the post above it in the listing already shows it, unless it is pinned.
+ * Give each post a hero photo, a different one wherever the pool allows.
+ *   1. Pins (an `image:` line, or the manifest's "pinned" map) are fixed.
+ *   2. Unpinned posts are taken oldest first, so a new guide never changes
+ *      the photo on an older one. Each takes the unused photo whose tags
+ *      match its slug and title best; posts with no tag match wait.
+ *   3. Posts that matched nothing get the leftover photos in pool order.
+ *   4. Only if the pool is smaller than the number of posts is a photo
+ *      reused: the least-used one, never the same as the card above.
+ * `list` is in listing order, newest first.
  */
 function assignBlogImages(list) {
-  const uses = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, 0]));
   const byFile = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, i]));
-  // Count every pin first, wherever it sits in the listing, so an unpinned
-  // post prefers a photo nothing else shows over one a later pin will use.
+  const uses = new Map(BLOG_IMAGE_POOL.map((i) => [i.file, 0]));
+  const chosen = new Map();
+  const take = (post, file) => {
+    chosen.set(post.slug, file);
+    uses.set(file, uses.get(file) + 1);
+  };
+  const scoreOf = (file, post) => {
+    const text = `${post.slug} ${post.title}`.toLowerCase();
+    return (byFile.get(file).tags || []).filter((t) => text.includes(t.toLowerCase())).length;
+  };
+
   for (const post of list) {
     const pinned = post.imagePin || BLOG_IMAGE_MANIFEST.pinned?.[post.slug];
-    if (pinned && uses.has(pinned)) uses.set(pinned, uses.get(pinned) + 1);
+    if (!pinned) continue;
+    if (!byFile.has(pinned)) throw new Error(`blog/${post.slug}: pinned image ${pinned} is not in build/content/blog-images.json or img/blog/`);
+    take(post, pinned);
   }
+
+  const oldestFirst = [...list].filter((p) => !chosen.has(p.slug)).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.slug < b.slug ? -1 : 1));
+  const unused = () => BLOG_IMAGE_POOL.filter((i) => uses.get(i.file) === 0);
+
+  for (const post of oldestFirst) {
+    const best = unused()
+      .map((i, index) => ({ file: i.file, score: scoreOf(i.file, post), index }))
+      .sort((a, b) => b.score - a.score || a.index - b.index)[0];
+    if (best && best.score > 0) take(post, best.file);
+  }
+  for (const post of oldestFirst) {
+    if (chosen.has(post.slug)) continue;
+    const next = unused()[0];
+    if (next) take(post, next.file);
+  }
+
   let previous = null;
   for (const post of list) {
-    const pinned = post.imagePin || BLOG_IMAGE_MANIFEST.pinned?.[post.slug];
-    let chosen;
-    if (pinned) {
-      if (!byFile.has(pinned)) throw new Error(`blog/${post.slug}: pinned image ${pinned} is not in build/content/blog-images.json or img/blog/`);
-      chosen = pinned;
-    } else {
-      const text = `${post.slug} ${post.title}`.toLowerCase();
-      const ranked = BLOG_IMAGE_POOL.map((i, index) => ({
-        file: i.file,
-        score: (i.tags || []).filter((t) => text.includes(t.toLowerCase())).length,
-        uses: uses.get(i.file),
-        index,
-      })).sort((a, b) => b.score - a.score || a.uses - b.uses || a.index - b.index);
-      // Never repeat the photo on the card above: a near match on topic beats
-      // two identical pictures side by side.
-      chosen = (ranked.find((r) => r.file !== previous) || ranked[0]).file;
+    if (!chosen.has(post.slug)) {
+      const ranked = BLOG_IMAGE_POOL.map((i, index) => ({ file: i.file, score: scoreOf(i.file, post), uses: uses.get(i.file), index })).sort(
+        (a, b) => a.uses - b.uses || b.score - a.score || a.index - b.index
+      );
+      take(post, (ranked.find((r) => r.file !== previous) || ranked[0]).file);
     }
-    post.image = `/img/blog/${chosen}`;
-    uses.set(chosen, uses.get(chosen) + 1);
-    previous = chosen;
+    post.image = `/img/blog/${chosen.get(post.slug)}`;
+    previous = chosen.get(post.slug);
   }
 }
 
