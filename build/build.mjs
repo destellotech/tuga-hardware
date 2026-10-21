@@ -1573,7 +1573,7 @@ write(
   page({
     title: 'Bespoke Requests: Custom Rugged Tablet Orders',
     description:
-      'Need something the range does not cover? Ask about a custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.',
+      'Need something the range does not cover? Ask about a custom rugged tablet or handheld: pre-loaded software, branding, accessory bundles or a specific spec.',
     path: '/bespoke',
     active: 'bulk',
     schema: [breadcrumbSchema(bespokeTrail), bespokeFaq.schema],
