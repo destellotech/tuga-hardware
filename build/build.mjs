@@ -144,27 +144,35 @@ function variantChooser(p, variants) {
           </fieldset>`;
 }
 
-/** Factory upgrades under a product's buy box. RAM is a checkbox; storage is
-    a radio group that starts on the standard size. Ticked SKUs are added with
-    the device, one per unit (js/app.js, initAddToCart). */
+/** Factory upgrades under a product's buy box: one fieldset per group
+    (Memory, Storage), each a radio group that starts on the standard size.
+    Chosen SKUs are added with the device, one per unit (js/app.js,
+    initAddToCart). */
 function upgradeChooser(p) {
   const upgrades = upgradesFor(p.id);
   if (!upgrades.length) return '';
-  const row = (u, type, name, checked, label, text) => `
+  const row = (u, name, checked, label, text) => `
             <label class="protect-opt">
-              <input type="${type}" name="${name}" value="${u ? esc(u.id) : ''}" data-upgrade-choice${checked ? ' checked' : ''}>
+              <input type="radio" name="${name}" value="${u ? esc(u.id) : ''}" data-upgrade-choice${checked ? ' checked' : ''}>
               <span class="protect-text"><strong>${esc(label)}</strong>${esc(text)}</span>
               <span class="protect-price">${u ? `+${money(u.price)}<small>per device</small>` : 'Included'}</span>
             </label>`;
-  const ram = upgrades.filter((u) => u.group === 'ram');
-  const storage = upgrades.filter((u) => u.group === 'storage');
-  return `
+  const groups = [
+    { group: 'ram', title: 'Memory', standard: p.specs.ram },
+    { group: 'storage', title: 'Storage', standard: p.specs.storage },
+  ];
+  return groups
+    .map(({ group, title, standard }) => {
+      const options = upgrades.filter((u) => u.group === group);
+      if (!options.length) return '';
+      return `
           <fieldset class="protect" data-upgrade-chooser>
-            <legend>${eyebrow('Upgrades')}</legend>
-            ${ram.map((u) => row(u, 'checkbox', `upg-${u.group}`, false, u.label, u.summary)).join('')}
-            ${storage.length ? row(null, 'radio', 'upg-storage', true, `${p.specs.storage} storage`, 'Standard') : ''}
-            ${storage.map((u) => row(u, 'radio', 'upg-storage', false, u.label, u.summary)).join('')}
+            <legend>${eyebrow(title)}</legend>
+            ${row(null, `upg-${group}`, true, standard, 'Standard')}
+            ${options.map((u) => row(u, `upg-${group}`, false, u.label, u.summary)).join('')}
           </fieldset>`;
+    })
+    .join('');
 }
 
 /** The cover options under a product's buy box. Every tier is a radio: a

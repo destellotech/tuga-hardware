@@ -4,7 +4,7 @@
   "group": "windows",
   "title": "Tuga W8 vs Tuga W10: 8 Inch or 10 Inch Rugged Windows Tablet?",
   "description": "Tuga W8 (8 inch, £629) or Tuga W10 (10.1 inch, £649)? £20 apart, so ports, weight and screen size decide it. Who needs Ethernet, and who should buy the lighter W8?",
-  "summary": "£20 apart and both on Windows 11 Pro: the W8 is 287g lighter with a sharper 1920 x 1200 screen, MIL-STD-810G, 4G and GPS built in; the W10 adds a 10.1 inch screen, RJ45 Ethernet, built-in NFC and a UHF RFID option.",
+  "summary": "£20 apart and both on Windows 11 Pro: the W8 is 287g lighter with a sharper 1920 x 1200 screen, MIL-STD-810G, 4G and GPS built in; the W10 adds a 10.1 inch screen, RJ45 Ethernet and a UHF RFID option.",
   "lede": "For anyone settled on Windows 11 Pro and choosing between the two Tuga tablets. The short answer: the £20 price gap decides nothing, so buy the Tuga W8 if the tablet is carried around, and the Tuga W10 if it plugs into network gear with a cable or spends its day on a desk or in a vehicle mount showing diagrams.",
   "verdict": [
     "Weight and ports decide this one, not price. The Tuga W8 costs £629 and the Tuga W10 £649, a gap of £20 for two tablets that share Windows 11 Pro, 8GB of RAM, 128GB of storage and the same accessories. The W10's extra £20 buys a 10.1 inch screen against 8 inch and an RJ45 Ethernet port, in a tablet that weighs 1197g against the W8's 910g. The W8's screen is the sharper of the two at 1920 x 1200 against the W10's 1280 x 800, so the W10 shows the same amount at a larger size rather than more detail. The W10 uses an Intel N100 (up to 3.4GHz) where the W8 has an Intel Celeron N5100.",
@@ -21,13 +21,13 @@
   "chooseB": [
     "You plug into panels, switches or plant with a cable: the W10 has an RJ45 Ethernet port and the W8 lists none.",
     "You read wiring diagrams, drawings or spreadsheets on a desk or in a vehicle mount: 10.1 inches against 8, at a lower 1280 x 800 resolution than the W8's 1920 x 1200.",
-    "You want NFC as standard: the W10 has it built in, where the W8 lists it as an option.",
+    "You want the faster processor: the W10 has an Intel N100 (up to 3.4GHz), against the W8's Celeron N5100 (up to 2.8GHz).",
     "You tag assets with RFID: the W10 lists an optional UHF RFID reader, and the W8 does not."
   ],
   "faq": [
     {
       "q": "Is the Tuga W10 worth £20 more than the Tuga W8?",
-      "a": "Only if the cable or the larger screen matters to you. The W10 costs £649 and the W8 £629, and they share Windows 11 Pro, 8GB of RAM, 128GB of storage, a 5000mAh removable battery, HDMI (Mini HDMI on the W8), USB-C and USB-A. The W10 adds a 10.1 inch screen, RJ45 Ethernet, built-in NFC and the option of a UHF RFID reader, and weighs 1197g against 910g. The W8 keeps 4G LTE and GPS as standard, has the sharper 1920 x 1200 screen against the W10's 1280 x 800, and is rated MIL-STD-810G where the W10 lists no MIL-STD rating. Both are IP65. If you do not need the cable or the screen size, buy the <a href=\"/products/tuga-w8\">Tuga W8</a>. Both include 12 months of warranty, and the paid 3-Year Warranty is £79 on either."
+      "a": "Only if the cable or the larger screen matters to you. The W10 costs £649 and the W8 £629, and they share Windows 11 Pro, 8GB of RAM, 128GB of storage, a 5000mAh removable battery, HDMI (Mini HDMI on the W8), USB-C, USB-A and NFC. The W10 adds a 10.1 inch screen, RJ45 Ethernet and the option of a UHF RFID reader, and weighs 1197g against 910g. The W8 keeps 4G LTE and GPS as standard, has the sharper 1920 x 1200 screen against the W10's 1280 x 800, and is rated MIL-STD-810G where the W10 lists no MIL-STD rating. Both are IP65. If you do not need the cable or the screen size, buy the <a href=\"/products/tuga-w8\">Tuga W8</a>. Both include 12 months of warranty, and the paid 3-Year Warranty is £79 on either."
     },
     {
       "q": "Which is tougher, the Tuga W8 or the Tuga W10?",
@@ -35,7 +35,7 @@
     },
     {
       "q": "Does the Tuga W10 have 4G and GPS like the W8?",
-      "a": "As options, not as standard. The W8 has 4G LTE and GPS + GLONASS built in, alongside Wi-Fi 5 and Bluetooth 5.0, with NFC as an option. The W10's listed connectivity is dual-band Wi-Fi 5, Bluetooth 5.2, NFC and 100Mbps Ethernet, with 4G LTE and GPS listed as options without prices, so the standard W10 is a Wi-Fi and cable tablet; <a href=\"/contact\">ask us before you order</a> if you need either. If the tablet needs its own mobile connection in the van and a position fix without a phone hotspot, the W8 has both built in. Both tablets fit the Vehicle Mounting Dock (£109) and the 12V DC Car Charger (£26) on the <a href=\"/accessories\">accessories page</a>."
+      "a": "As options, not as standard. The W8 has 4G LTE and GPS + GLONASS built in, alongside Wi-Fi 5, Bluetooth 5.0 and NFC. The W10's listed connectivity is dual-band Wi-Fi 5, Bluetooth 5.2, NFC and 100Mbps Ethernet, with 4G LTE and GPS listed as options without prices, so the standard W10 is a Wi-Fi and cable tablet; <a href=\"/contact\">ask us before you order</a> if you need either. If the tablet needs its own mobile connection in the van and a position fix without a phone hotspot, the W8 has both built in. Both tablets fit the Vehicle Mounting Dock (£109) and the 12V DC Car Charger (£26) on the <a href=\"/accessories\">accessories page</a>."
     },
     {
       "q": "Can I get the Tuga W8 or W10 with a barcode scanner?",
