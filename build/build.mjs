@@ -602,7 +602,7 @@ ${sectionHead({
 
         <article class="editorial reveal">
           <div class="editorial-media">
-            <img src="${versioned('/img/blog/blog-waterproof.webp')}"${responsive('/img/blog/blog-waterproof.webp', '(max-width: 820px) 92vw, 556px')} alt="Rugged tablet being used in wet conditions" loading="lazy" width="800" height="600">
+            <img src="${versioned('/img/blog/blog-rain.webp')}"${responsive('/img/blog/blog-rain.webp', '(max-width: 820px) 92vw, 556px')} alt="Worker in a waterproof coat laying paving on a wet site" loading="lazy" width="800" height="600">
           </div>
           <div class="editorial-body">
             <h3>Sealed against dust and water</h3>
