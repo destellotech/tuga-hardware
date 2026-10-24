@@ -13,7 +13,12 @@
    are counted (isPageView), so the trend is
    people, not crawlers with a browser user agent.
 
-   Table (D1 binding DB): see schema/pageviews.sql.
+   Two sidecar tables, same database: crawls
+   (verified search engine hits, so we can see
+   what Google has found) and misses (404s for
+   page-shaped URLs, so broken links show up).
+
+   Tables (D1 binding DB): see schema/pageviews.sql.
    Without the binding, counting is skipped.
    ============================================ */
 
@@ -114,6 +119,102 @@ export function countPageView(request, response, env, ctx) {
 const dayOf = (t) => new Date(t).toISOString().slice(0, 10);
 
 /**
+ * Which search engine crawler a request is, or '' for none. The user agent
+ * name wins because it is more specific than Cloudflare's category
+ * ("Search Engine Crawler" covers all of them); the category catches the
+ * verified bots we do not name. Scrapers claiming to be Googlebot are a
+ * known trick, so where Cloudflare gives a verification signal at all, a
+ * named bot only counts when that signal agrees.
+ */
+const CRAWLER_UA = /(Googlebot|Bingbot|DuckDuckBot|Applebot|YandexBot)/i;
+const CRAWLER_NAMES = { googlebot: 'Googlebot', bingbot: 'Bingbot', duckduckbot: 'DuckDuckBot', applebot: 'Applebot', yandexbot: 'YandexBot' };
+
+export function classifyCrawler(request) {
+  const cf = request.cf || {};
+  const hasSignal = 'verifiedBotCategory' in cf || Boolean(cf.botManagement);
+  const verified = Boolean(cf.verifiedBotCategory) || Boolean(cf.botManagement?.verifiedBot);
+  const m = CRAWLER_UA.exec(request.headers.get('User-Agent') || '');
+  if (m && (!hasSignal || verified)) return CRAWLER_NAMES[m[1].toLowerCase()];
+  if (cf.verifiedBotCategory) return String(cf.verifiedBotCategory);
+  return '';
+}
+
+/**
+ * The crawls and misses tables arrived after pageviews, so production may
+ * not have them yet. Create them once per isolate, the first time a writer
+ * needs them, and keep the promise so every later write just awaits it.
+ */
+const SIDECAR_DDL = [
+  'CREATE TABLE IF NOT EXISTS crawls (day TEXT NOT NULL, path TEXT NOT NULL, bot TEXT NOT NULL, hits INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, path, bot))',
+  "CREATE TABLE IF NOT EXISTS misses (day TEXT NOT NULL, path TEXT NOT NULL, referrer TEXT NOT NULL DEFAULT '', hits INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, path, referrer))",
+];
+let sidecarReady = null;
+function ensureSidecarTables(db) {
+  if (!sidecarReady) {
+    sidecarReady = Promise.all(SIDECAR_DDL.map((sql) => db.prepare(sql).run())).catch((err) => {
+      sidecarReady = null; // so the next write tries again
+      throw err;
+    });
+  }
+  return sidecarReady;
+}
+
+/**
+ * Count a verified crawler fetching a page that exists. Same background
+ * pattern as countPageView: never delays the response, errors only logged.
+ */
+export function countCrawl(request, response, env, ctx) {
+  if (!env.DB || request.method !== 'GET' || response.status !== 200) return;
+  if (!(response.headers.get('Content-Type') || '').includes('text/html')) return;
+  const bot = classifyCrawler(request);
+  if (!bot) return;
+  const url = new URL(request.url);
+  ctx.waitUntil(
+    ensureSidecarTables(env.DB)
+      .then(() =>
+        env.DB.prepare(
+          `INSERT INTO crawls (day, path, bot, hits) VALUES (?, ?, ?, 1)
+           ON CONFLICT(day, path, bot) DO UPDATE SET hits = hits + 1`
+        )
+          .bind(dayOf(Date.now()), url.pathname.slice(0, 200), bot)
+          .run()
+      )
+      .catch((err) => console.error('Crawl count failed:', err))
+  );
+}
+
+/** File extensions that mean an asset, not a page; their 404s are noise. */
+const ASSET_EXT = /\.(?:css|js|mjs|map|json|xml|txt|webp|jpe?g|png|gif|svg|ico|avif|woff2?|ttf|otf|eot|mp4|webm|pdf|zip)$/i;
+
+/** True when a 404 is for something that looks like a page URL. */
+export function isPageMiss(request) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return false;
+  return !ASSET_EXT.test(new URL(request.url).pathname);
+}
+
+/**
+ * Count a 404 for a page-shaped URL, with the referring host. Bots are
+ * counted on purpose: a crawler hitting an old URL is exactly the thing
+ * to redirect. The path is capped so a junk URL cannot bloat the table.
+ */
+export function countMiss(request, env, ctx) {
+  if (!env.DB || !isPageMiss(request)) return;
+  const url = new URL(request.url);
+  ctx.waitUntil(
+    ensureSidecarTables(env.DB)
+      .then(() =>
+        env.DB.prepare(
+          `INSERT INTO misses (day, path, referrer, hits) VALUES (?, ?, ?, 1)
+           ON CONFLICT(day, path, referrer) DO UPDATE SET hits = hits + 1`
+        )
+          .bind(dayOf(Date.now()), url.pathname.slice(0, 200), referrerHost(request, url.hostname))
+          .run()
+      )
+      .catch((err) => console.error('Miss count failed:', err))
+  );
+}
+
+/**
  * Totals for the last `days` days (today included) for the admin Visits
  * screen, with the same-length period before it for comparison. With
  * `uk` true, every figure except the country table counts GB visits only,
@@ -165,4 +266,118 @@ export async function pageviewStats(env, days = 30, { uk = false } = {}) {
     byDay, pages, referrers, countries, devices,
     previous: { since: prevSince, total: prevPages.reduce((n, r) => n + r.views, 0) },
   };
+}
+
+/** Referrers that mean a visitor arrived from a search result. */
+const SEARCH_WHERE =
+  "(referrer LIKE 'google.%' OR referrer LIKE '%bing.com' OR referrer = 'duckduckgo.com' OR referrer LIKE '%ecosia.org' OR referrer LIKE '%yahoo.com')";
+
+/** Paths whose crawl dates say whether the content work is being found. */
+const CONTENT_WHERE = "(path LIKE '/blog/%' OR path LIKE '/works-with/%' OR path LIKE '/for/%' OR path LIKE '/compare/%')";
+
+/**
+ * The second half of the Visits screen: where search sends people, how
+ * views turn into orders, what the crawlers have fetched, and which URLs
+ * are dead. Landing pages and the funnel follow the UK switch; crawls and
+ * misses never do, since those are about machines, not customers.
+ */
+export async function siteStats(env, days = 30, { uk = false } = {}) {
+  const since = dayOf(Date.now() - (days - 1) * 86400000);
+  const prevSince = dayOf(Date.now() - (2 * days - 1) * 86400000);
+  const empty = {
+    landing: [],
+    funnel: { products: 0, productsMobile: 0, cart: 0, confirmations: 0 },
+    crawls: { byBot: [], recent: [] },
+    misses: [],
+  };
+  if (!env.DB) return empty;
+
+  const where = uk ? "AND country = 'GB'" : '';
+  const query = (sql, ...args) =>
+    env.DB.prepare(sql).bind(...args).all().then((r) => r.results).catch((err) => {
+      // The sidecar tables may not exist until the first crawl or 404 after
+      // deploy; an empty list is the honest answer until then.
+      console.error('Site stats query failed:', err);
+      return [];
+    });
+
+  const [landing, prevLanding, funnelRows, byBot, recent, misses] = await Promise.all([
+    query(`SELECT path, SUM(views) AS views FROM pageviews WHERE day >= ? AND ${SEARCH_WHERE} ${where} GROUP BY path ORDER BY views DESC LIMIT 15`, since),
+    query(`SELECT path, SUM(views) AS views FROM pageviews WHERE day >= ? AND day < ? AND ${SEARCH_WHERE} ${where} GROUP BY path`, prevSince, since),
+    query(
+      `SELECT
+         SUM(CASE WHEN path LIKE '/products/%' AND path != '/products/' THEN views ELSE 0 END) AS products,
+         SUM(CASE WHEN path LIKE '/products/%' AND path != '/products/' AND device = 'mobile' THEN views ELSE 0 END) AS productsMobile,
+         SUM(CASE WHEN path = '/cart' THEN views ELSE 0 END) AS cart,
+         SUM(CASE WHEN path = '/order-confirmation' THEN views ELSE 0 END) AS confirmations
+       FROM pageviews WHERE day >= ? ${where}`,
+      since
+    ),
+    query('SELECT bot, SUM(hits) AS hits FROM crawls WHERE day >= ? GROUP BY bot ORDER BY hits DESC', since),
+    query(`SELECT path, MAX(day) AS day, SUM(hits) AS hits FROM crawls WHERE day >= ? AND ${CONTENT_WHERE} GROUP BY path ORDER BY day DESC, hits DESC LIMIT 10`, since),
+    query('SELECT path, referrer, SUM(hits) AS hits FROM misses WHERE day >= ? GROUP BY path, referrer ORDER BY hits DESC LIMIT 15', since),
+  ]);
+
+  const prevByPath = new Map(prevLanding.map((r) => [r.path, r.views]));
+  for (const p of landing) p.previous = prevByPath.get(p.path) || 0;
+  const f = funnelRows[0] || {};
+  return {
+    landing,
+    funnel: { products: f.products || 0, productsMobile: f.productsMobile || 0, cart: f.cart || 0, confirmations: f.confirmations || 0 },
+    crawls: { byBot, recent },
+    misses,
+  };
+}
+
+/**
+ * Orders paid on or after `since` (YYYY-MM-DD), from the ORDERS KV in one
+ * list pass. Keys carry paidAt and status as metadata (src/orders.js), so
+ * most are decided without a read; the few legacy keys without metadata are
+ * read, up to a cap, so a run can never exhaust the KV operation limit.
+ * Returns null without the binding, so the screen can say "not available"
+ * rather than "0".
+ */
+export async function countOrdersSince(kv, since, { maxReads = 50 } = {}) {
+  if (!kv) return null;
+  const sinceMs = Date.parse(`${since}T00:00:00Z`);
+  const dead = new Set(['refunded', 'cancelled', 'disputed']);
+  let orders = 0;
+  let reads = 0;
+  let cursor;
+  do {
+    const page = await kv.list({ prefix: 'order:', cursor });
+    cursor = page.list_complete ? undefined : page.cursor;
+    for (const { name, metadata } of page.keys) {
+      let paidAt = metadata?.paidAt;
+      let status = metadata?.status;
+      if (!metadata) {
+        if (reads >= maxReads) continue;
+        reads++;
+        const raw = await kv.get(name);
+        if (!raw) continue;
+        const order = JSON.parse(raw);
+        paidAt = order.paidAt || order.createdAt;
+        status = order.status;
+      }
+      if (!paidAt || dead.has(status)) continue;
+      if (Date.parse(paidAt) >= sinceMs) orders++;
+    }
+  } while (cursor);
+  return orders;
+}
+
+/**
+ * Referring hosts seen in the last `days` days that had sent nothing in the
+ * `lookback` days before: someone new has linked to the site.
+ */
+export async function newReferrers(env, days = 7, lookback = 28) {
+  if (!env.DB) return [];
+  const since = dayOf(Date.now() - (days - 1) * 86400000);
+  const before = dayOf(Date.now() - (days + lookback - 1) * 86400000);
+  return env.DB.prepare(
+    `SELECT referrer, SUM(views) AS views FROM pageviews
+     WHERE day >= ? AND referrer != ''
+       AND referrer NOT IN (SELECT referrer FROM pageviews WHERE day >= ? AND day < ?)
+     GROUP BY referrer ORDER BY views DESC LIMIT 10`
+  ).bind(since, before, since).all().then((r) => r.results);
 }

@@ -46,7 +46,7 @@ import {
 } from './backoffice.js';
 import { sendShippingNotification } from './email.js';
 import { routedStore } from './store.js';
-import { pageviewStats } from './pageviews.js';
+import { pageviewStats, siteStats, countOrdersSince } from './pageviews.js';
 
 const BY = 'Admin';
 // Web order statuses that mean the money has gone back or is in question.
@@ -146,7 +146,15 @@ export async function handleAdmin(request, env, ctx) {
       case 'visits':
         if (method === 'GET') {
           const days = Math.min(Math.max(parseInt(url.searchParams.get('days'), 10) || 30, 1), 365);
-          return json(await pageviewStats(env, days, { uk: url.searchParams.get('uk') === '1' }));
+          const uk = url.searchParams.get('uk') === '1';
+          const [views, site] = await Promise.all([pageviewStats(env, days, { uk }), siteStats(env, days, { uk })]);
+          // Orders come from KV, not D1, so they are counted here rather than
+          // in the stats query; null means the binding is missing.
+          const orders = await countOrdersSince(env.ORDERS, views.since).catch((err) => {
+            console.error('Order count failed:', err);
+            return null;
+          });
+          return json({ ...views, ...site, orders });
         }
         break;
     }
