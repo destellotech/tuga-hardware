@@ -11,7 +11,8 @@
     "reviews": "node build/pull-reviews.mjs",
     "indexnow": "node build/indexnow.mjs",
     "check": "node build/check-site.mjs",
-    "test": "npm run build && npm run check"
+    "test:unit": "node --test \"test/**/*.test.mjs\"",
+    "test": "npm run build && npm run check && npm run test:unit"
   },
   "devDependencies": {
     "axe-core": "^4.10.2",

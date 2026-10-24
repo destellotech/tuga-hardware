@@ -146,7 +146,7 @@ export async function handleAdmin(request, env, ctx) {
       case 'visits':
         if (method === 'GET') {
           const days = Math.min(Math.max(parseInt(url.searchParams.get('days'), 10) || 30, 1), 365);
-          return json(await pageviewStats(env, days));
+          return json(await pageviewStats(env, days, { uk: url.searchParams.get('uk') === '1' }));
         }
         break;
     }
