@@ -27,10 +27,12 @@ https://support.google.com/merchants/answer/13889434
 Stripe's dashboard version is a US-only beta, so it is not an option for a
 UK account. The worker now does it through the API instead
 (`after_expiration.recovery` on the Checkout Session and the
-`checkout.session.expired` webhook). What you must do: in the Stripe
-dashboard, add `checkout.session.expired` to the events the
-`/webhooks/stripe` endpoint receives. Checkout now shows a "keep me
-updated" box; Stripe only shares the email of a customer who typed it in
+`checkout.session.expired` webhook). The worker now adds `checkout.session.expired` to the
+`/webhooks/stripe` endpoint itself on the daily 09:00 UTC cron
+(`src/stripe-webhook-config.js`), using the key it already holds, so no
+dashboard visit is needed unless the key is a restricted one without
+webhook write access, in which case the cron logs the refusal and the
+event must be added by hand. Checkout now shows a "keep me updated" box; Stripe only shares the email of a customer who typed it in
 and ticked that box, so the recovery email reaches a subset of
 abandoners. Checkout pages now expire after three hours (the basket link
 in the email then works for 30 days). Stripe's rules:
@@ -48,12 +50,11 @@ https://openbankingtracker.com/embedded-finance/kriya
 
 ## 5. Cloudflare Web Analytics
 
-Named in the privacy policy, but the beacon is only on three pages.
-Because www.tugahardware.com is proxied through Cloudflare, Web Analytics
-can inject the beacon itself: in the Cloudflare dashboard, Web Analytics,
-add the hostname and leave automatic setup on. It gives Core Web Vitals
-and real-user timing with no cookies. Docs:
-https://developers.cloudflare.com/web-analytics/
+Already live: the page shell puts the beacon on every page (66 of 66
+checked), so Core Web Vitals and real-user timing are collecting with no
+cookies. Read them in the Cloudflare dashboard under Web Analytics. (An
+earlier version of this note said three pages; that was a truncated
+check, not the site.)
 
 ## 6. Google Search Console and Bing Webmaster Tools
 
@@ -102,6 +103,8 @@ Two self-feeding routines now run: "Tuga weekly guide (self-feeding)" on
 Mondays (prompt in `ROUTINE-PROMPT.md`, queue in `CALENDAR.md`) and "Tuga
 weekly works-with page" on Wednesdays (prompt in `WORKS-WITH-ROUTINE.md`,
 queue in `WORKS-WITH-QUEUE.md`). Each opens one PR a week for you to
-review and stops while three of its PRs are open. Disable the old "Tuga
-weekly blog post" (created 9 October) at https://claude.ai/code/routines so
-it cannot double up with the Monday one.
+review and stops while three of its PRs are open. The old "Tuga weekly
+blog post" (created 9 October) cannot be switched off from a session, so
+the calendar now queues new rows as `queued`, which the old routine does
+not read, and it will find nothing to do. Delete it anyway at
+https://claude.ai/code/routines when you are next there.

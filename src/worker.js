@@ -13,6 +13,7 @@
 import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
 import { sendWarrantyReminders } from './warranty-reminders.js';
+import { ensureStripeWebhookEvents } from './stripe-webhook-config.js';
 import { ADMIN_PAGE } from './admin-page.js';
 import { sendDailyDigest } from './backoffice.js';
 import { countPageView, countCrawl, countMiss } from './pageviews.js';
@@ -220,5 +221,8 @@ export default {
     ctx.waitUntil(sendWarrantyReminders(env));
     ctx.waitUntil(recheckProcessingPayments(env));
     ctx.waitUntil(sendDailyDigest(env));
+    // Keeps the Stripe webhook subscribed to the events the code handles,
+    // so a new handler needs no dashboard visit (src/stripe-webhook-config.js).
+    ctx.waitUntil(ensureStripeWebhookEvents(env));
   },
 };
