@@ -12,6 +12,7 @@
 
 import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
+import { sendWarrantyReminders } from './warranty-reminders.js';
 import { ADMIN_PAGE } from './admin-page.js';
 import { sendDailyDigest } from './backoffice.js';
 import { countPageView } from './pageviews.js';
@@ -207,6 +208,7 @@ export default {
   // Daily cron (see [triggers] in wrangler.toml).
   async scheduled(event, env, ctx) {
     ctx.waitUntil(sendReviewRequests(env));
+    ctx.waitUntil(sendWarrantyReminders(env));
     ctx.waitUntil(recheckProcessingPayments(env));
     ctx.waitUntil(sendDailyDigest(env));
   },

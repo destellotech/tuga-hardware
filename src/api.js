@@ -4,9 +4,13 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation, sendNewOrderAlert, sendOrderFlagAlert, sendEnquiry } from './email.js';
+import {
+  sendOrderConfirmation, sendNewOrderAlert, sendOrderFlagAlert, sendEnquiry,
+  sendQuoteAcknowledgement, sendWarrantyRegistrationReceipt,
+} from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
-import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
+import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES, QUOTE_TOPIC } from './store-config.js';
+import { devicePriceRows, discountSentence, idempotencyKeyFor } from './quote-ack.js';
 import { handleAdmin } from './admin.js';
 import { fileWebOrder } from './backoffice.js';
 import { getRecord, putRecord } from './records.js';
@@ -21,7 +25,7 @@ import { routedStore } from './store.js';
 // `device: true` marks the items that count toward a bulk discount tier.
 // Accessories are deliberately excluded — otherwise nine £8 adapters would
 // unlock 10% off a £449 tablet.
-const PRODUCTS = {
+export const PRODUCTS = {
   // Devices — Android
   'tuga-a6':            { name: 'Tuga A6',                        price: 34900, device: true },
   'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
@@ -156,7 +160,7 @@ const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/
 const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check', '/api/reviews-export'];
 
 // Bulk discount tiers: { minQty: discountPercent }
-const DISCOUNT_TIERS = [
+export const DISCOUNT_TIERS = [
   { min: 10, percent: 10 },
   { min: 5,  percent: 8 },
   { min: 3,  percent: 5 },
@@ -1100,6 +1104,15 @@ async function handleContact(request, env) {
     // Only fail the request if the message is now nowhere at all.
     if (!emailed && !stored) return corsError('Could not send the message', 500);
 
+    // A quote request gets an immediate acknowledgement with today's prices
+    // and the discount tiers, so the buyer has something to put in front of
+    // whoever signs it off before our reply arrives. Best effort only: the
+    // enquiry is already safe, and a failure here must not turn it into an
+    // error on the page.
+    if (isQuoteTopic(enquiry.topic)) {
+      await acknowledgeQuote(env, enquiry);
+    }
+
     // emailed: false tells the page the message is kept but support has not
     // been notified yet, so it can say so rather than promise a quick reply.
     return corsResponse({ ok: true, emailed });
@@ -1213,6 +1226,26 @@ async function deliverEnquiry(env, enquiry) {
     return true;
   } catch (mailErr) {
     console.error('Enquiry email failed:', mailErr);
+    return false;
+  }
+}
+
+/** The contact form preselects QUOTE_TOPIC; a hand-typed topic may add to it. */
+const isQuoteTopic = (topic) => String(topic || '').toLowerCase().startsWith(QUOTE_TOPIC.toLowerCase());
+
+async function acknowledgeQuote(env, enquiry) {
+  if (!env.RESEND_API_KEY) return false;
+  try {
+    await sendQuoteAcknowledgement(env, {
+      name: enquiry.name,
+      email: enquiry.email,
+      rows: devicePriceRows(PRODUCTS),
+      discounts: discountSentence(DISCOUNT_TIERS),
+      idempotencyKey: idempotencyKeyFor('quote-ack', enquiry.receivedAt, enquiry.email),
+    });
+    return true;
+  } catch (err) {
+    console.error('Quote acknowledgement failed:', err);
     return false;
   }
 }
@@ -1516,7 +1549,7 @@ async function handleWarrantyRegister(request, env) {
       registration.purchaseDate = '';
     }
 
-    return storeAndNotify(
+    const response = await storeAndNotify(
       env,
       `warranty:${registration.serial}:${registration.receivedAt}`,
       registration,
@@ -1532,6 +1565,25 @@ async function handleWarrantyRegister(request, env) {
         ].join('\n'),
       }
     );
+
+    // Confirm to the registrant what we hold and what the warranty does.
+    // Best effort: the registration is already stored or sent, and a
+    // failure here must not turn the form into an error.
+    if (response.ok && env.RESEND_API_KEY) {
+      try {
+        await sendWarrantyRegistrationReceipt(env, {
+          email: registration.email,
+          name: registration.name,
+          modelName: PRODUCTS[registration.model].name,
+          serial: registration.serial,
+          planPrice: PRODUCTS[`wty-3yr-${registration.model}`]?.price ?? null,
+          idempotencyKey: idempotencyKeyFor('wty-reg', registration.serial, registration.receivedAt),
+        });
+      } catch (err) {
+        console.error('Warranty registration receipt failed:', err);
+      }
+    }
+    return response;
   } catch (err) {
     console.error('Warranty registration error:', err);
     return corsError('Could not send the form', 500);
