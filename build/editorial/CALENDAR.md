@@ -5,13 +5,17 @@ takes the **first row with status `todo`**, writes it, opens a PR and sets the
 row to `pr`. When the PR is merged, the row counts as published. Reorder, edit
 or delete rows freely; set a row to `skip` to veto it.
 
-The agent keeps the queue fed: when fewer than three `todo` rows remain it
-appends six new topics to this table in the same PR as that week's post, so
+The agent keeps the queue fed: when fewer than three `queued` (or `todo`)
+rows remain it appends six new topics to this table, status `queued`, in the same PR as that week's post, so
 the topics get reviewed alongside the writing. Delete or `skip` any you do
 not want. It stops, and writes nothing, while three or more `blog/` PRs are
 open and waiting for review.
 
-Status: `todo` → `pr` → `done` (or `skip`).
+Status: `queued` → `pr` → `done` (or `skip`). Use `queued`, not `todo`, for
+new rows: an older routine from 9 October that cannot be edited from a
+session still looks for `todo` rows on Monday mornings, and `queued` keeps
+it from writing the same post twice. The current routine takes `todo` and
+`queued` alike.
 
 Before writing, check the topic does not overlap an existing post in
 `build/content/blog/`. If it does, sharpen the angle rather than repeat it.
