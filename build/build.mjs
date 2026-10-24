@@ -1628,9 +1628,9 @@ const bespokeFaq = faq(BESPOKE_FAQ, { heading: 'Bespoke request questions' });
 write(
   'bespoke.html',
   page({
-    title: 'Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware',
+    title: 'Bespoke Requests: Custom Rugged Tablet Orders',
     description:
-      'Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.',
+      'Need something the range does not cover? Ask about a custom rugged tablet or handheld: pre-loaded software, branding, accessory bundles or a specific spec.',
     path: '/bespoke',
     active: 'bulk',
     schema: [breadcrumbSchema(bespokeTrail), bespokeFaq.schema],
