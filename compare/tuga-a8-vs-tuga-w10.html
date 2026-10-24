@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tuga A8 vs Tuga W10: One-Handed Android or Full Windows Tablet?</title>
   <meta name="description" content="Tuga A8 (8 inch Android, £379) or Tuga W10 (10.1 inch Windows 11 Pro, £649)? £270 apart. Buy the A8 unless you need Windows, Ethernet or HDMI on site.">
@@ -244,7 +259,7 @@
               <p class="product-card-tagline">The full desktop experience. Anywhere.</p>
               <div class="spec-chips">
                 <span class="chip">IP65</span>
-                <span class="chip">5000mAh</span>
+                <span class="chip">5000mAh removable</span>
                 <span class="chip">Windows 11 Pro</span>
               </div>
               <div class="product-card-foot">
@@ -313,7 +328,7 @@
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The W10 has the bigger screen: 10.1 inch against 8 inch on the A8.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Both run at 1280 x 800.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Brightness is not listed for the W10; the A8 lists 1000 nits.</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A8 has the bigger battery: 8000mAh removable against 5000mAh on the W10.</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A8 has the bigger battery: 8000mAh removable against 5000mAh removable on the W10.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A8 is sealed to IP67 and the W10 to IP65.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Drop standard is not listed for the A8 or the W10.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A8 runs Android 12; the W10 runs Windows 11 Pro.</span></li>
@@ -370,7 +385,7 @@
               <tr class="is-diff">
                 <th scope="row">Battery</th>
                 <td>8000mAh removable</td>
-                <td>5000mAh</td>
+                <td>5000mAh removable</td>
               </tr>
               <tr class="is-diff">
                 <th scope="row">Operating system</th>
@@ -390,7 +405,7 @@
               <tr class="is-diff">
                 <th scope="row">Ports</th>
                 <td>USB-C, DC in, dual SIM, microSD, pogo pin</td>
-                <td><span class="vs-missing">Not listed</span></td>
+                <td>USB-C, USB-A, HDMI, RJ45 Ethernet, microSD, pogo pin</td>
               </tr>
               <tr class="is-diff">
                 <th scope="row">Camera</th>
@@ -667,23 +682,10 @@
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 
-  <script src="/js/app.js?v=11b2cfa22d" defer></script>
+  <script src="/js/app.js?v=7b98b65916" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>

@@ -320,21 +320,33 @@
   // The clip ships without autoplay and invisible over a still of its first
   // frame, and fades in only once frames are actually playing, so a failed
   // download just leaves the still in place. Reduced motion keeps the still
-  // on purpose. If autoplay is refused (iOS Low Power Mode does this), try
-  // again on the visitor's first tap, click or key press, which it allows.
+  // on purpose, and so does a connection that asks for less data: the clip
+  // is a megabyte and the still already says what it needs to. It is
+  // preload="none" in the markup and only starts once the page has loaded
+  // and the browser is idle, so it never competes with the still (the LCP
+  // image), the stylesheet or the script. If autoplay is refused (iOS Low
+  // Power Mode does this), try again on the visitor's first tap, click or
+  // key press, which it allows.
   function initHeroVideo() {
     const video = $('.hero-video');
     if (!video) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const net = navigator.connection;
+    if (net && (net.saveData || /(^|-)2g$/.test(net.effectiveType || ''))) return;
     video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
-    video.play().catch(() => {
-      const gestures = ['pointerdown', 'keydown'];
-      const retry = () => {
-        gestures.forEach((type) => document.removeEventListener(type, retry, true));
-        video.play().catch(() => {});
-      };
-      gestures.forEach((type) => document.addEventListener(type, retry, { capture: true, passive: true }));
-    });
+    const start = () => {
+      video.play().catch(() => {
+        const gestures = ['pointerdown', 'keydown'];
+        const retry = () => {
+          gestures.forEach((type) => document.removeEventListener(type, retry, true));
+          video.play().catch(() => {});
+        };
+        gestures.forEach((type) => document.addEventListener(type, retry, { capture: true, passive: true }));
+      });
+    };
+    const whenIdle = () => (window.requestIdleCallback ? requestIdleCallback(start, { timeout: 2000 }) : setTimeout(start, 300));
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
   }
 
   /* ----------------------------------------------------------------- reveal */

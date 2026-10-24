@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tuga W8 vs W10: 8 Inch or 10 Inch Rugged Windows Tablet?</title>
   <meta name="description" content="Tuga W8 (8 inch, £629) or W10 (10.1 inch, £649)? £20 apart, so ports, weight and screen size decide it. Who needs Ethernet?">
@@ -245,7 +260,7 @@
               <p class="product-card-tagline">The full desktop experience. Anywhere.</p>
               <div class="spec-chips">
                 <span class="chip">IP65</span>
-                <span class="chip">5000mAh</span>
+                <span class="chip">5000mAh removable</span>
                 <span class="chip">Windows 11 Pro</span>
               </div>
               <div class="product-card-foot">
@@ -319,7 +334,7 @@
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Both run Windows 11 Pro.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Connectivity: 4G LTE, Wi-Fi 5, Bluetooth 5.0, NFC on the W8 vs Dual-band Wi-Fi 5, Bluetooth 5.2, NFC, 100Mbps Ethernet, optional 4G LTE on the W10.</span></li>
         </ul>
-        <p class="vs-same">Identical on both: memory (8GB), expandable storage (microSD (TF) slot), IP rating (IP65), operating system (Windows 11 Pro).</p>
+        <p class="vs-same">Identical on both: memory (8GB), expandable storage (microSD (TF) slot), IP rating (IP65), battery (5000mAh removable), operating system (Windows 11 Pro).</p>
 
         <div class="compare-wrap reveal" tabindex="0">
           <table class="spec-table vs-table">
@@ -377,10 +392,10 @@
                 <td>1.22m</td>
                 <td><span class="vs-missing">Not listed</span></td>
               </tr>
-              <tr class="is-diff">
+              <tr>
                 <th scope="row">Battery</th>
                 <td>5000mAh removable</td>
-                <td>5000mAh</td>
+                <td>5000mAh removable</td>
               </tr>
               <tr class="is-diff">
                 <th scope="row">Charging</th>
@@ -405,7 +420,7 @@
               <tr class="is-diff">
                 <th scope="row">Ports</th>
                 <td>USB-C 3.1, USB-A 3.0, Mini HDMI 2.0a, 3.5mm audio, SIM/TF tray, pogo pin</td>
-                <td><span class="vs-missing">Not listed</span></td>
+                <td>USB-C, USB-A, HDMI, RJ45 Ethernet, microSD, pogo pin</td>
               </tr>
               <tr class="is-diff">
                 <th scope="row">Camera</th>
@@ -674,23 +689,10 @@
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 
-  <script src="/js/app.js?v=11b2cfa22d" defer></script>
+  <script src="/js/app.js?v=7b98b65916" defer></script>
 
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>

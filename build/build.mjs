@@ -514,7 +514,7 @@ const hero = () => `
         <source type="image/webp" srcset="${versioned('/img/hero/tablet-on-site-still-800.webp')} 800w, ${versioned('/img/hero/tablet-on-site-still.webp')} 1280w" sizes="100vw">
         <img src="${versioned('/img/hero/tablet-on-site-still.jpg')}" alt="" width="1280" height="720" fetchpriority="high">
       </picture>
-      <video class="hero-video" muted loop playsinline preload="metadata" aria-hidden="true">
+      <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true">
         <source src="${versioned('/img/hero/tablet-on-site.webm')}" type="video/webm">
         <source src="${versioned('/img/hero/tablet-on-site.mp4')}" type="video/mp4">
       </video>
@@ -1630,7 +1630,7 @@ write(
   page({
     title: 'Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware',
     description:
-      'Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.',
+      'Need something the standard range does not cover? Tell us about a custom rugged tablet or handheld order: pre-loaded software, branding, bundles or a spec.',
     path: '/bespoke',
     active: 'bulk',
     schema: [breadcrumbSchema(bespokeTrail), bespokeFaq.schema],
