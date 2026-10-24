@@ -12,7 +12,7 @@ import {
   specLabel,
   devices,
 } from './layout.mjs';
-import { SALES_PAUSED } from '../../src/store-config.js';
+import { SALES_PAUSED, quoteUrl } from '../../src/store-config.js';
 
 /* --- small pieces -------------------------------------------------------- */
 
@@ -290,10 +290,22 @@ export const ctaBanner = ({
 
 /* --- accessory card ------------------------------------------------------ */
 
+/**
+ * A quote-only accessory (spare batteries, for now) has no price in the
+ * catalogue and is never added to the basket: the card asks for a quote
+ * with the accessory name prefilled instead. The Worker's PRODUCTS map does
+ * not know these ids, so even a hand-crafted basket line would be refused.
+ */
 export function accessoryCard(a) {
   const names = a.compatibleWith
     .map((id) => devices.find((p) => p.id === id)?.name)
     .filter(Boolean);
+
+  const foot = a.quoteOnly
+    ? `<span class="accessory-price accessory-price-quote">Price on request</span>
+              <a class="btn btn-sm btn-outline" href="${quoteUrl(a.name)}">Ask for a price</a>`
+    : `<span class="accessory-price">${money(a.price)}</span>
+              ${SALES_PAUSED ? '' : `<button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>`}`;
 
   return `
           <div class="accessory-card reveal">
@@ -302,8 +314,7 @@ export function accessoryCard(a) {
             <p>${esc(a.description)}</p>
             <p class="accessory-compat">Fits: ${esc(names.join(', '))}</p>
             <div class="accessory-foot">
-              <span class="accessory-price">${money(a.price)}</span>
-              ${SALES_PAUSED ? '' : `<button class="btn btn-sm btn-outline" data-add-to-cart="${a.id}">Add to basket</button>`}
+              ${foot}
             </div>
           </div>`;
 }

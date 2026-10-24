@@ -14,6 +14,7 @@ const PREFIX = 'order:';
 const orderMeta = (r) => ({
   paidAt: r.paidAt || r.createdAt || null,
   reviewRequestedAt: r.reviewRequestedAt || null,
+  warrantyReminderAt: r.warrantyReminderAt || null,
   status: r.status || null,
 });
 

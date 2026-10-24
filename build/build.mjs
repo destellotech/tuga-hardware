@@ -842,7 +842,15 @@ function productPage(p) {
 
   const variants = variantsOf(p.id);
   const related = devices.filter((d) => d.id !== p.id).slice(0, 3);
-  const compatible = accessories.filter((a) => a.compatibleWith.includes(p.id));
+  const fits = accessories.filter((a) => a.compatibleWith.includes(p.id));
+  // Four purchasable accessories, then anything on quote (a spare battery),
+  // so the quote-only ones are never pushed off the page by the limit.
+  const compatible = [...fits.filter((a) => !a.quoteOnly).slice(0, 4), ...fits.filter((a) => a.quoteOnly)];
+  // The van kit: the tablet plus the two things that make it a dashboard
+  // unit, added to the basket together. Only where the dock fits.
+  const vanKit = ['acc-vehicle-mount', 'acc-car-charger'].map((id) => accessories.find((a) => a.id === id));
+  const hasVanKit = !SALES_PAUSED && vanKit.every((a) => a && !a.quoteOnly && a.compatibleWith.includes(p.id));
+  const vanKitTotal = p.price + vanKit.reduce((n, a) => n + (a?.price || 0), 0);
   const reviews = reviewsFor(p);
 
   const productSchema = {
@@ -1068,8 +1076,23 @@ ${specSheet(p)}
         ${eyebrow('Goes with it')}
         <h2 class="title-sm" style="margin-bottom:2rem">Accessories that fit</h2>
         <div class="card-grid">
-          ${compatible.slice(0, 4).map(accessoryCard).join('\n')}
+          ${compatible.map(accessoryCard).join('\n')}
         </div>
+      </section>`
+          : ''
+      }
+
+      ${
+        hasVanKit
+          ? `
+      <section class="pdp-section">
+        ${eyebrow('Van kit')}
+        <h2 class="title-sm" style="margin-bottom:1rem">Set up for the van in one go</h2>
+        <p class="lede" style="margin-bottom:1.5rem">The ${esc(p.name)} with the dock that keeps it secure and charged on the road, and the charger for the cab. Three lines, one button, no bundle pricing: ${money(vanKitTotal)} in total, with any team discount worked out at checkout as usual.</p>
+        <ul class="check-list" style="margin-bottom:1.5rem">
+          ${[p, ...vanKit].map((x) => `<li>${icons.check(16)}<span>${esc(x.name)} (${money(x.price)})</span></li>`).join('\n          ')}
+        </ul>
+        <button class="btn btn-primary" data-add-kit="${[p.id, ...vanKit.map((a) => a.id)].join(',')}" data-kit-name="${esc(`${p.name} van kit`)}">Add the van kit to basket</button>
       </section>`
           : ''
       }
@@ -1173,6 +1196,10 @@ const BULK_FAQ = [
   {
     q: 'Can you invoice us instead of taking card payment?',
     a: 'Yes, for any business order, including a single trial unit. Ask for a quote with what you need and your company billing and delivery addresses, and we will send a proforma invoice for bank transfer. We can also complete your supplier setup forms. If you buy regularly, <a href="/trade">apply for a trade account</a> to order on invoice.',
+  },
+  {
+    q: 'Can we try one before we order for the whole team?',
+    a: 'Yes. Order a single unit, by card or on a proforma invoice, and try it for up to 30 days as something you may send back: the <a href="/shipping-returns">30-day returns policy</a> needs it in its original condition and packaging with everything that came in the box, so keep the box and treat it gently, and unless it is faulty you pay the return carriage. If it is right, order the rest and the team discount is worked out on the devices in that order. Business fleets on a Total Care plan get a loan unit for trials as part of the plan; see the <a href="/warranty">warranty page</a>.',
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
@@ -1300,7 +1327,7 @@ ${sectionHead({
               <li>The tier is calculated on the total number of devices and applied at checkout</li>
               <li>Everything ships free, with the same warranty and returns as a single unit</li>
             </ul>
-            <p style="margin-top:1.5rem">Prefer to pay by bank transfer, or want one unit to trial before the rest? Ask for a quote and we will send a proforma invoice and complete your supplier forms. Buying regularly? <a href="/trade">Apply for a trade account</a> to order on invoice.</p>
+            <p style="margin-top:1.5rem">Not sure which model suits the team? Order one and try it with your apps before the rest: if it is wrong, return it within 30 days in its original condition, box and all, then order the rest. Prefer to pay by bank transfer? Ask for a quote and we will send a proforma invoice and complete your supplier forms. Buying regularly? <a href="/trade">Apply for a trade account</a> to order on invoice.</p>
             <div style="margin-top:2rem">
               <a class="btn btn-primary" href="/products/">Start an order</a>
               <a class="btn btn-outline" href="/contact?quote=#enquiry" style="margin-left:0.5rem">Get a business quote</a>
@@ -2027,7 +2054,10 @@ write(
       </div>
 
       <div class="cart-layout" data-cart-layout hidden>
-        <div data-cart-items></div>
+        <div>
+          <div data-cart-items></div>
+          <div data-cart-upsell></div>
+        </div>
         <aside class="cart-summary" data-cart-summary aria-label="Order summary"></aside>
       </div>
     </div>
@@ -2987,7 +3017,7 @@ ${sectionHead({ tag: 'Accessories', title: 'What fits which', lede: 'Every acces
               (l) => `<div>
             <h3 class="title-xs" style="margin-bottom:1rem">${esc(l.title)}</h3>
             <ul class="check-list">
-              ${l.items.map((x) => checkItem(`<a href="/accessories">${esc(x.name)} (${money(x.price)})</a>`)).join('\n              ')}
+              ${l.items.map((x) => checkItem(`<a href="/accessories">${esc(x.name)} (${x.quoteOnly ? 'price on request' : money(x.price)})</a>`)).join('\n              ')}
             </ul>
           </div>`
             )

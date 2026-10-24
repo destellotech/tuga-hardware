@@ -4,9 +4,12 @@
    All calls use native fetch — zero npm deps.
    ============================================ */
 
-import { sendOrderConfirmation, sendNewOrderAlert, sendOrderFlagAlert, sendEnquiry } from './email.js';
+import {
+  sendOrderConfirmation, sendNewOrderAlert, sendOrderFlagAlert, sendEnquiry,
+  sendQuoteAcknowledgement, sendWarrantyRegistrationReceipt, sendCartRecovery } from './email.js';
 import { saveOrder, getOrder, updateOrder } from './orders.js';
-import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES } from './store-config.js';
+import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES, QUOTE_TOPIC } from './store-config.js';
+import { devicePriceRows, discountSentence, idempotencyKeyFor } from './quote-ack.js';
 import { handleAdmin } from './admin.js';
 import { fileWebOrder } from './backoffice.js';
 import { getRecord, putRecord } from './records.js';
@@ -21,7 +24,7 @@ import { routedStore } from './store.js';
 // `device: true` marks the items that count toward a bulk discount tier.
 // Accessories are deliberately excluded — otherwise nine £8 adapters would
 // unlock 10% off a £449 tablet.
-const PRODUCTS = {
+export const PRODUCTS = {
   // Devices — Android
   'tuga-a6':            { name: 'Tuga A6',                        price: 34900, device: true },
   'tuga-a8':            { name: 'Tuga A8',                        price: 37900, device: true },
@@ -151,12 +154,15 @@ function countDeviceUnits(lines) {
 /** Contact enquiries, sign ups and trade applications: see privacy policy section 7. */
 const TWELVE_MONTHS = 365 * 24 * 60 * 60;
 
+/** How long a Stripe Checkout page stays open before the basket is saved for recovery. */
+const CHECKOUT_TTL_SECONDS = 3 * 60 * 60;
+
 const FORM_PATHS = ['/api/contact', '/api/subscribe', '/api/trade-apply', '/api/bespoke-request', '/api/warranty-register', '/api/review'];
 
 const DIAGNOSTIC_PATHS = ['/api/paypal-check', '/api/email-check', '/api/stripe-check', '/api/reviews-export'];
 
 // Bulk discount tiers: { minQty: discountPercent }
-const DISCOUNT_TIERS = [
+export const DISCOUNT_TIERS = [
   { min: 10, percent: 10 },
   { min: 5,  percent: 8 },
   { min: 3,  percent: 5 },
@@ -348,6 +354,16 @@ async function handleStripeCheckout(request, env) {
     if (discountPercent > 0) {
       params.append('metadata[discount_percent]', discountPercent);
     }
+
+    // Abandoned checkouts. The session expires after three hours instead of
+    // Stripe's 24; when it does, Stripe sends checkout.session.expired with
+    // a recovery URL that reopens the same basket for 30 days, and we email
+    // it (handleStripeWebhook) to a customer who typed their address and
+    // ticked Checkout's promotional-email box. Without that tick Stripe
+    // withholds the address and no email goes out.
+    params.append('expires_at', String(Math.floor(Date.now() / 1000) + CHECKOUT_TTL_SECONDS));
+    params.append('after_expiration[recovery][enabled]', 'true');
+    params.append('consent_collection[promotions]', 'auto');
 
     const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
@@ -871,6 +887,17 @@ async function handleStripeWebhook(request, env) {
     }
   }
 
+  // An abandoned checkout: Stripe hands us a link that reopens the basket.
+  // The endpoint must be subscribed to this event in the Stripe dashboard.
+  if (event.type === 'checkout.session.expired') {
+    try {
+      await sendCartRecoveryForSession(event.data.object, env);
+    } catch (err) {
+      // Not worth a retry storm: the basket is saved for 30 days either way.
+      console.error('Cart recovery email failed:', err);
+    }
+  }
+
   // Money going back the other way. The endpoint must be subscribed to
   // these events in the Stripe dashboard for them to arrive.
   if (event.type === 'charge.refunded' || event.type === 'charge.dispute.created') {
@@ -901,6 +928,48 @@ async function handleStripeWebhook(request, env) {
   }
 
   return corsResponse({ received: true });
+}
+
+/**
+ * What an expired Checkout Session gives us to work with, or null when the
+ * customer never typed an email, did not tick the promotional box, or
+ * Stripe issued no recovery link. Pure, so it is unit tested.
+ */
+export function recoveryFromExpiredSession(session) {
+  if (!session || session.status !== 'expired') return null;
+  const url = session.after_expiration?.recovery?.url;
+  const email = session.customer_details?.email || session.customer_email;
+  if (!url || !email) return null;
+  if (session.consent?.promotions !== 'opt_in') return null;
+  if (session.after_expiration?.recovery?.expires_at && session.after_expiration.recovery.expires_at * 1000 < Date.now()) return null;
+  return {
+    sessionId: session.id,
+    email,
+    name: session.customer_details?.name || '',
+    url,
+    amountTotal: session.amount_total ?? null,
+    currency: session.currency || 'gbp',
+  };
+}
+
+/**
+ * One recovery email per expired session. The KV mark is written before
+ * the send so a webhook retry cannot send twice; Resend's idempotency key
+ * is the second lock. Does nothing without ORDERS or RESEND_API_KEY.
+ */
+async function sendCartRecoveryForSession(session, env) {
+  const recovery = recoveryFromExpiredSession(session);
+  if (!recovery || !env.ORDERS || !env.RESEND_API_KEY) return false;
+  const key = `recovery:${recovery.sessionId}`;
+  if (await env.ORDERS.get(key)) return false;
+  await env.ORDERS.put(key, new Date().toISOString(), { expirationTtl: 60 * 24 * 60 * 60 });
+  await sendCartRecovery(env, recovery.email, {
+    name: recovery.name,
+    url: recovery.url,
+    amountTotal: recovery.amountTotal,
+    idempotencyKey: `cart-recovery-${recovery.sessionId}`,
+  });
+  return true;
 }
 
 /**
@@ -1100,6 +1169,15 @@ async function handleContact(request, env) {
     // Only fail the request if the message is now nowhere at all.
     if (!emailed && !stored) return corsError('Could not send the message', 500);
 
+    // A quote request gets an immediate acknowledgement with today's prices
+    // and the discount tiers, so the buyer has something to put in front of
+    // whoever signs it off before our reply arrives. Best effort only: the
+    // enquiry is already safe, and a failure here must not turn it into an
+    // error on the page.
+    if (isQuoteTopic(enquiry.topic)) {
+      await acknowledgeQuote(env, enquiry);
+    }
+
     // emailed: false tells the page the message is kept but support has not
     // been notified yet, so it can say so rather than promise a quick reply.
     return corsResponse({ ok: true, emailed });
@@ -1213,6 +1291,26 @@ async function deliverEnquiry(env, enquiry) {
     return true;
   } catch (mailErr) {
     console.error('Enquiry email failed:', mailErr);
+    return false;
+  }
+}
+
+/** The contact form preselects QUOTE_TOPIC; a hand-typed topic may add to it. */
+const isQuoteTopic = (topic) => String(topic || '').toLowerCase().startsWith(QUOTE_TOPIC.toLowerCase());
+
+async function acknowledgeQuote(env, enquiry) {
+  if (!env.RESEND_API_KEY) return false;
+  try {
+    await sendQuoteAcknowledgement(env, {
+      name: enquiry.name,
+      email: enquiry.email,
+      rows: devicePriceRows(PRODUCTS),
+      discounts: discountSentence(DISCOUNT_TIERS),
+      idempotencyKey: idempotencyKeyFor('quote-ack', enquiry.receivedAt, enquiry.email),
+    });
+    return true;
+  } catch (err) {
+    console.error('Quote acknowledgement failed:', err);
     return false;
   }
 }
@@ -1516,7 +1614,7 @@ async function handleWarrantyRegister(request, env) {
       registration.purchaseDate = '';
     }
 
-    return storeAndNotify(
+    const response = await storeAndNotify(
       env,
       `warranty:${registration.serial}:${registration.receivedAt}`,
       registration,
@@ -1532,6 +1630,25 @@ async function handleWarrantyRegister(request, env) {
         ].join('\n'),
       }
     );
+
+    // Confirm to the registrant what we hold and what the warranty does.
+    // Best effort: the registration is already stored or sent, and a
+    // failure here must not turn the form into an error.
+    if (response.ok && env.RESEND_API_KEY) {
+      try {
+        await sendWarrantyRegistrationReceipt(env, {
+          email: registration.email,
+          name: registration.name,
+          modelName: PRODUCTS[registration.model].name,
+          serial: registration.serial,
+          planPrice: PRODUCTS[`wty-3yr-${registration.model}`]?.price ?? null,
+          idempotencyKey: idempotencyKeyFor('wty-reg', registration.serial, registration.receivedAt),
+        });
+      } catch (err) {
+        console.error('Warranty registration receipt failed:', err);
+      }
+    }
+    return response;
   } catch (err) {
     console.error('Warranty registration error:', err);
     return corsError('Could not send the form', 500);

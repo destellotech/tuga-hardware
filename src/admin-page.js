@@ -148,7 +148,7 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
   try { token = localStorage.getItem(TOKEN_KEY) || ''; } catch (e) {}
 
   var META = null;
-  var UI = { stockFilter: 'all', stockQ: '', moveFilter: 'all', saleFilter: 'open', visitDays: 30 };
+  var UI = { stockFilter: 'all', stockQ: '', moveFilter: 'all', saleFilter: 'open', visitDays: 30, visitUk: true };
   var root = document.getElementById('root');
 
   /* ---------------- helpers ---------------- */
@@ -1111,35 +1111,94 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
 
   /* ================= VISITS =================
      Counted by the worker on every page request (src/pageviews.js), so
-     visitors who block Google Analytics or decline cookies are included. */
+     visitors who block Google Analytics or decline cookies are included.
+     Only requests shaped like a browser navigation count, and the UK-only
+     view is the default: for a UK shop that is the trend worth watching. */
+  function pctChange(now, before) {
+    if (!before) return now ? 'new' : '';
+    var pc = Math.round(100 * (now - before) / before);
+    return (pc > 0 ? '+' : '') + pc + '%';
+  }
+  /* Product page views, basket views, confirmations and orders for the
+     period. Orders come from the KV store (null when it is not bound), so
+     "views per order" is the one conversion figure the site can measure
+     without any cookie. */
+  function funnelBlock(r) {
+    var f = r.funnel || { products: 0, productsMobile: 0, cart: 0, confirmations: 0 };
+    var orders = r.orders;
+    var perOrder = orders ? Math.round(f.products / orders) : null;
+    return '<div class="lbl" style="margin-top:18px">Funnel' + (r.uk ? ' (UK)' : '') + '</div>' +
+      '<div class="grid-sum" style="margin-top:6px">' +
+        '<div class="sum"><div class="n">' + f.products + '</div><div class="l">Product page views' + (f.products ? ' (' + Math.round(100 * f.productsMobile / f.products) + '% mobile)' : '') + '</div></div>' +
+        '<div class="sum"><div class="n">' + f.cart + '</div><div class="l">Basket views</div></div>' +
+        '<div class="sum"><div class="n">' + f.confirmations + '</div><div class="l">Order confirmations</div></div>' +
+        '<div class="sum"><div class="n">' + (orders == null ? 'n/a' : orders) + '</div><div class="l">Orders paid (all countries)</div></div>' +
+        '<div class="sum"><div class="n">' + (perOrder == null ? 'n/a' : perOrder) + '</div><div class="l">Product views per order</div></div>' +
+      '</div>';
+  }
+
+  /* Verified search engine fetches: who is crawling, and which of the
+     content pages (guides, works-with, trade, compare) they reached last.
+     Never filtered by country: crawlers come from wherever they come from. */
+  function crawlBlock(r) {
+    var c = r.crawls || { byBot: [], recent: [] };
+    var bots = c.byBot.map(function (b) { return { name: b.bot, views: b.hits }; });
+    var recent = c.recent.map(function (x) { return { path: x.path, views: x.hits, day: x.day }; });
+    var max = bots.reduce(function (m, x) { return Math.max(m, x.views); }, 0) || 1;
+    return '<div class="lbl" style="margin-top:18px">Crawler hits (everywhere)</div><div class="list">' + (bots.length ? bots.map(function (b) {
+        return '<div class="row"><div><div class="t">' + esc(b.name) + '</div><div class="vbar" style="width:' + Math.round(100 * b.views / max) + '%"></div></div><div class="r num">' + b.views + '</div></div>';
+      }).join('') : '<div class="empty">No verified crawler has fetched a page in this period.</div>') + '</div>' +
+      '<div class="lbl" style="margin-top:18px">Content pages crawled most recently</div><div class="list">' + (recent.length ? recent.map(function (x) {
+        return '<div class="row"><div><div class="t mono">' + esc(x.path) + '</div><div class="s">last fetched ' + esc(fmtDate(x.day)) + '</div></div><div class="r num">' + x.views + '</div></div>';
+      }).join('') : '<div class="empty">Nothing yet.</div>') + '</div>';
+  }
+
   function visitsView() {
     loading();
-    api('GET', 'visits?days=' + UI.visitDays).then(function (r) {
-      function table(title, rows, key, label) {
+    api('GET', 'visits?days=' + UI.visitDays + '&uk=' + (UI.visitUk ? 1 : 0)).then(function (r) {
+      function bars(title, rows, key, label, sub) {
         var max = rows.reduce(function (m, x) { return Math.max(m, x.views); }, 0) || 1;
         return '<div class="lbl" style="margin-top:18px">' + esc(title) + '</div><div class="list">' + (rows.length ? rows.map(function (x) {
+          var extra = sub ? sub(x) : '';
           return '<div class="row"><div><div class="t' + (key === 'path' ? ' mono' : '') + '">' + esc(label ? label(x[key]) : x[key]) + '</div>' +
-            '<div class="vbar" style="width:' + Math.round(100 * x.views / max) + '%"></div></div><div class="r num">' + x.views + '</div></div>';
+            '<div class="vbar" style="width:' + Math.round(100 * x.views / max) + '%"></div></div>' +
+            '<div class="r num">' + x.views + (extra ? '<span class="s">' + extra + '</span>' : '') + '</div></div>';
         }).join('') : '<div class="empty">Nothing yet.</div>') + '</div>';
       }
-      var today = r.byDay.length && r.byDay[r.byDay.length - 1].day === new Date().toISOString().slice(0, 10) ? r.byDay[r.byDay.length - 1].views : 0;
+      var today = r.byDay.length ? r.byDay[r.byDay.length - 1].views : 0;
       var mobile = (r.devices.filter(function (d) { return d.device === 'mobile'; })[0] || { views: 0 }).views;
+      var change = pctChange(r.total, r.previous.total);
+      var perDay = r.days ? Math.round(10 * r.total / r.days) / 10 : 0;
+      var strictInWindow = r.strictSince && r.since < r.strictSince;
       main().innerHTML =
-        '<h2>Visits</h2><p class="muted">Page views counted on the server, including visitors who block Google Analytics. No cookies, nothing that identifies anyone. Known bots are left out.</p>' +
+        '<h2>Visits</h2><p class="muted">Page views counted on the server, including visitors who block Google Analytics. No cookies, nothing that identifies anyone. Only requests shaped like a browser opening a page are counted, so crawlers are left out.</p>' +
         '<div class="chips" style="margin-top:14px">' + [[7, '7 days'], [30, '30 days'], [90, '90 days']].map(function (p) {
           return '<button class="chip' + (UI.visitDays === p[0] ? ' on' : '') + '" data-vd="' + p[0] + '">' + p[1] + '</button>';
         }).join('') + '</div>' +
+        '<div class="chips">' + [[1, 'UK only'], [0, 'Everywhere']].map(function (p) {
+          return '<button class="chip' + ((UI.visitUk ? 1 : 0) === p[0] ? ' on' : '') + '" data-vuk="' + p[0] + '">' + p[1] + '</button>';
+        }).join('') + '</div>' +
         '<div class="grid-sum">' +
-          '<div class="sum"><div class="n">' + r.total + '</div><div class="l">Page views, last ' + r.days + ' days</div></div>' +
+          '<div class="sum"><div class="n">' + r.total + '</div><div class="l">' + (r.uk ? 'UK page views' : 'Page views') + ', last ' + r.days + ' days</div></div>' +
+          '<div class="sum"><div class="n">' + (change || '–') + '</div><div class="l">vs the ' + r.days + ' days before (' + r.previous.total + ')</div></div>' +
+          '<div class="sum"><div class="n">' + perDay + '</div><div class="l">A day, on average</div></div>' +
           '<div class="sum"><div class="n">' + today + '</div><div class="l">Today (UTC)</div></div>' +
           '<div class="sum"><div class="n">' + (r.total ? Math.round(100 * mobile / r.total) : 0) + '%</div><div class="l">On mobile</div></div>' +
         '</div>' +
-        table('By day', r.byDay.slice().reverse(), 'day', fmtDate) +
-        table('Top pages', r.pages, 'path') +
-        table('Referring sites', r.referrers, 'referrer') +
-        table('Countries', r.countries, 'country', function (c) { return c || 'Unknown'; });
+        (strictInWindow ? '<p class="muted" style="margin-top:10px">Stricter bot filtering started on ' + esc(fmtDate(r.strictSince)) + '. Earlier days include crawlers that copied a browser user agent, so compare days before and after with care.</p>' : '') +
+        bars('By day' + (r.uk ? ' (UK)' : ''), r.byDay.slice().reverse(), 'day', fmtDate, r.uk ? null : function (x) { return x.uk + ' UK'; }) +
+        bars('Top pages', r.pages, 'path', null, function (x) { return 'was ' + x.previous; }) +
+        bars('Referring sites', r.referrers, 'referrer') +
+        bars('Search landing pages' + (r.uk ? ' (UK)' : ''), r.landing || [], 'path', null, function (x) { return 'was ' + x.previous; }) +
+        funnelBlock(r) +
+        crawlBlock(r) +
+        bars('Dead URLs, 404s (everywhere, crawlers included)', (r.misses || []).map(function (m) { return { path: m.path, views: m.hits, referrer: m.referrer }; }), 'path', null, function (x) { return x.referrer ? 'from ' + esc(x.referrer) : 'no referrer'; }) +
+        bars('Countries (all visits)', r.countries, 'country', function (c) { return c || 'Unknown'; });
       $$('[data-vd]').forEach(function (b) {
         b.onclick = function () { UI.visitDays = +b.getAttribute('data-vd'); visitsView(); };
+      });
+      $$('[data-vuk]').forEach(function (b) {
+        b.onclick = function () { UI.visitUk = b.getAttribute('data-vuk') === '1'; visitsView(); };
       });
     }).catch(function (e) { errBox('#main', e); });
   }

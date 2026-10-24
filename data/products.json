@@ -479,6 +479,61 @@
       "currency": "GBP",
       "compatibleWith": ["tuga-a8", "tuga-a10", "tuga-w8", "tuga-w10"],
       "category": "tablet"
+    },
+    {
+      "id": "acc-battery-tuga-a6",
+      "name": "Spare Battery for Tuga A6",
+      "slug": "battery-tuga-a6",
+      "description": "A genuine replacement 5050mAh battery for the Tuga A6, fitted by you: a charged spare takes over mid shift, and a worn cell is a part to replace rather than a reason to replace the device. Price and lead time on request.",
+      "price": null,
+      "quoteOnly": true,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-a6"],
+      "category": "handheld"
+    },
+    {
+      "id": "acc-battery-tuga-a8",
+      "name": "Spare Battery for Tuga A8",
+      "slug": "battery-tuga-a8",
+      "description": "A genuine replacement 8000mAh battery for the Tuga A8, fitted by you: a charged spare takes over mid shift, and a worn cell is a part to replace rather than a reason to replace the device. Price and lead time on request.",
+      "price": null,
+      "quoteOnly": true,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-a8"],
+      "category": "tablet"
+    },
+    {
+      "id": "acc-battery-tuga-wh6",
+      "name": "Spare Battery for Tuga WH6",
+      "slug": "battery-tuga-wh6",
+      "description": "A genuine replacement 4000mAh battery for the Tuga WH6, fitted by you: a charged spare takes over mid shift, and a worn cell is a part to replace rather than a reason to replace the device. Price and lead time on request.",
+      "price": null,
+      "quoteOnly": true,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-wh6"],
+      "category": "handheld"
+    },
+    {
+      "id": "acc-battery-tuga-w8",
+      "name": "Spare Battery for Tuga W8",
+      "slug": "battery-tuga-w8",
+      "description": "A genuine replacement 5000mAh battery for the Tuga W8, fitted by you: a charged spare takes over mid shift, and a worn cell is a part to replace rather than a reason to replace the device. Price and lead time on request.",
+      "price": null,
+      "quoteOnly": true,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-w8"],
+      "category": "tablet"
+    },
+    {
+      "id": "acc-battery-tuga-w10",
+      "name": "Spare Battery for Tuga W10",
+      "slug": "battery-tuga-w10",
+      "description": "A genuine replacement 5000mAh battery for the Tuga W10, fitted by you: a charged spare takes over mid shift, and a worn cell is a part to replace rather than a reason to replace the device. Price and lead time on request.",
+      "price": null,
+      "quoteOnly": true,
+      "currency": "GBP",
+      "compatibleWith": ["tuga-w10"],
+      "category": "tablet"
     }
   ],
   "warranty": {

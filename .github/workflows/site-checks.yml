@@ -10,7 +10,9 @@ on:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest became 26.04 in October 2026 and Playwright's
+    # bundled Chromium has no build for it yet, so the install step fails.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -26,3 +28,4 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run check
+      - run: npm run test:unit
