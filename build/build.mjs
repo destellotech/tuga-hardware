@@ -994,7 +994,7 @@ ${breadcrumbs(trail)}
             </button>
           </div>
           <p class="cover-note" id="cover-note" aria-live="polite" data-cover-note></p>
-          <p class="pdp-quote">Buying for a business? <a href="${quoteUrl(p.name)}">Get a quote and pay by bank transfer</a>. Trial units welcome.</p>`
+          <p class="pdp-quote">Buying for a business? <a href="${quoteUrl(p.name)}">Get a quote and pay by bank transfer</a>. Trial units welcome. Prefer to talk? Call <a href="tel:+441279912065">+44 1279 912065</a>.</p>`
           }
 
           <div class="pdp-assurance">
