@@ -1119,6 +1119,40 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
     var pc = Math.round(100 * (now - before) / before);
     return (pc > 0 ? '+' : '') + pc + '%';
   }
+  /* Product page views, basket views, confirmations and orders for the
+     period. Orders come from the KV store (null when it is not bound), so
+     "views per order" is the one conversion figure the site can measure
+     without any cookie. */
+  function funnelBlock(r) {
+    var f = r.funnel || { products: 0, productsMobile: 0, cart: 0, confirmations: 0 };
+    var orders = r.orders;
+    var perOrder = orders ? Math.round(f.products / orders) : null;
+    return '<div class="lbl" style="margin-top:18px">Funnel' + (r.uk ? ' (UK)' : '') + '</div>' +
+      '<div class="grid-sum" style="margin-top:6px">' +
+        '<div class="sum"><div class="n">' + f.products + '</div><div class="l">Product page views' + (f.products ? ' (' + Math.round(100 * f.productsMobile / f.products) + '% mobile)' : '') + '</div></div>' +
+        '<div class="sum"><div class="n">' + f.cart + '</div><div class="l">Basket views</div></div>' +
+        '<div class="sum"><div class="n">' + f.confirmations + '</div><div class="l">Order confirmations</div></div>' +
+        '<div class="sum"><div class="n">' + (orders == null ? 'n/a' : orders) + '</div><div class="l">Orders paid (all countries)</div></div>' +
+        '<div class="sum"><div class="n">' + (perOrder == null ? 'n/a' : perOrder) + '</div><div class="l">Product views per order</div></div>' +
+      '</div>';
+  }
+
+  /* Verified search engine fetches: who is crawling, and which of the
+     content pages (guides, works-with, trade, compare) they reached last.
+     Never filtered by country: crawlers come from wherever they come from. */
+  function crawlBlock(r) {
+    var c = r.crawls || { byBot: [], recent: [] };
+    var bots = c.byBot.map(function (b) { return { name: b.bot, views: b.hits }; });
+    var recent = c.recent.map(function (x) { return { path: x.path, views: x.hits, day: x.day }; });
+    var max = bots.reduce(function (m, x) { return Math.max(m, x.views); }, 0) || 1;
+    return '<div class="lbl" style="margin-top:18px">Crawler hits (everywhere)</div><div class="list">' + (bots.length ? bots.map(function (b) {
+        return '<div class="row"><div><div class="t">' + esc(b.name) + '</div><div class="vbar" style="width:' + Math.round(100 * b.views / max) + '%"></div></div><div class="r num">' + b.views + '</div></div>';
+      }).join('') : '<div class="empty">No verified crawler has fetched a page in this period.</div>') + '</div>' +
+      '<div class="lbl" style="margin-top:18px">Content pages crawled most recently</div><div class="list">' + (recent.length ? recent.map(function (x) {
+        return '<div class="row"><div><div class="t mono">' + esc(x.path) + '</div><div class="s">last fetched ' + esc(fmtDate(x.day)) + '</div></div><div class="r num">' + x.views + '</div></div>';
+      }).join('') : '<div class="empty">Nothing yet.</div>') + '</div>';
+  }
+
   function visitsView() {
     loading();
     api('GET', 'visits?days=' + UI.visitDays + '&uk=' + (UI.visitUk ? 1 : 0)).then(function (r) {
@@ -1155,6 +1189,10 @@ export const ADMIN_PAGE = String.raw`<!doctype html>
         bars('By day' + (r.uk ? ' (UK)' : ''), r.byDay.slice().reverse(), 'day', fmtDate, r.uk ? null : function (x) { return x.uk + ' UK'; }) +
         bars('Top pages', r.pages, 'path', null, function (x) { return 'was ' + x.previous; }) +
         bars('Referring sites', r.referrers, 'referrer') +
+        bars('Search landing pages' + (r.uk ? ' (UK)' : ''), r.landing || [], 'path', null, function (x) { return 'was ' + x.previous; }) +
+        funnelBlock(r) +
+        crawlBlock(r) +
+        bars('Dead URLs, 404s (everywhere, crawlers included)', (r.misses || []).map(function (m) { return { path: m.path, views: m.hits, referrer: m.referrer }; }), 'path', null, function (x) { return x.referrer ? 'from ' + esc(x.referrer) : 'no referrer'; }) +
         bars('Countries (all visits)', r.countries, 'country', function (c) { return c || 'Unknown'; });
       $$('[data-vd]').forEach(function (b) {
         b.onclick = function () { UI.visitDays = +b.getAttribute('data-vd'); visitsView(); };

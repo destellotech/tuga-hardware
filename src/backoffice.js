@@ -13,6 +13,7 @@ import { listDevices } from './inventory.js';
 import { updateOrder } from './orders.js';
 import { sendDigest } from './email.js';
 import { routedStore } from './store.js';
+import { pageviewStats, siteStats, countOrdersSince, newReferrers } from './pageviews.js';
 
 // ---------------------------------------------------------------------------
 // Warranty plans. Months match data/products.json warranty.tiers.
@@ -201,10 +202,58 @@ export async function buildDigest(kv) {
   return sections;
 }
 
+/**
+ * The week on the website, as one digest section: UK views against the
+ * week before, where people landed from search, who linked to us for the
+ * first time, orders against product views, what the crawlers fetched and
+ * which URLs are dead. Numbers first on every line, so it reads on a phone.
+ * Sent on Mondays (see sendDailyDigest); skipped without the D1 binding.
+ */
+export async function buildSiteDigest(env, days = 7) {
+  if (!env.DB) return null;
+  const [views, site, fresh] = await Promise.all([
+    pageviewStats(env, days, { uk: true }),
+    siteStats(env, days, { uk: true }),
+    newReferrers(env, days, 28),
+  ]);
+  const orders = await countOrdersSince(env.ORDERS, views.since).catch(() => null);
+
+  const pct = (now, before) => {
+    if (!before) return now ? 'up from 0' : 'no change';
+    const n = Math.round((100 * (now - before)) / before);
+    return n === 0 ? 'no change' : `${n > 0 ? 'up' : 'down'} ${Math.abs(n)}%`;
+  };
+  const lines = [];
+  lines.push(
+    `${views.total} UK page views, ${pct(views.total, views.previous.total)} on the ${days} days before (${views.previous.total})` +
+      (orders == null ? '' : `; ${orders} order${orders === 1 ? '' : 's'} paid` + (orders ? `, ${Math.round(site.funnel.products / orders)} product views per order` : '')) +
+      `; ${site.funnel.products} product page views, ${site.funnel.cart} basket views`
+  );
+  for (const p of views.pages.slice(0, 5)) lines.push(`${p.views} views (was ${p.previous}) · ${p.path}`);
+  if (site.landing.length) lines.push('From search:');
+  for (const p of site.landing.slice(0, 5)) lines.push(`${p.views} from search (was ${p.previous}) · ${p.path}`);
+  for (const r of fresh.slice(0, 3)) lines.push(`${r.views} visits · new referrer: ${r.referrer}`);
+  if (site.crawls.byBot.length) {
+    lines.push(site.crawls.byBot.map((b) => `${b.hits} ${b.bot}`).join(', ') + ' crawler hits');
+  } else {
+    lines.push('0 verified crawler hits');
+  }
+  for (const m of site.misses.slice(0, 5)) lines.push(`${m.hits} x 404 · ${m.path}${m.referrer ? ` (from ${m.referrer})` : ''}`);
+  return { title: `Last ${days} days on the site`, lines, link: '#/visits' };
+}
+
 export async function sendDailyDigest(env) {
   if (!env.ORDERS || !env.RESEND_API_KEY) return;
   try {
     const sections = await buildDigest(routedStore(env));
+    // Mondays carry the week's site numbers as well.
+    if (new Date().getUTCDay() === 1) {
+      const site = await buildSiteDigest(env).catch((err) => {
+        console.error('Site digest failed:', err);
+        return null;
+      });
+      if (site) sections.push(site);
+    }
     if (sections.length) await sendDigest(env, sections);
   } catch (err) {
     console.error('Daily digest failed:', err);

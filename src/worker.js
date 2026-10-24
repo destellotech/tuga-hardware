@@ -14,7 +14,7 @@ import { handleRequest, recheckProcessingPayments } from './api.js';
 import { sendReviewRequests } from './reviews.js';
 import { ADMIN_PAGE } from './admin-page.js';
 import { sendDailyDigest } from './backoffice.js';
-import { countPageView } from './pageviews.js';
+import { countPageView, countCrawl, countMiss } from './pageviews.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
 
@@ -93,8 +93,13 @@ function withHtmlHeaders(response, status = response.status) {
   return out;
 }
 
-/** The generated /404.html (build/build.mjs), served with a 404 status. */
-async function notFound(request, env) {
+/**
+ * The generated /404.html (build/build.mjs), served with a 404 status. The
+ * miss is counted (src/pageviews.js) on the live site so dead URLs surface
+ * in the back office; `ctx` is absent for the local and preview hosts.
+ */
+async function notFound(request, env, ctx) {
+  if (ctx) countMiss(request, env, ctx);
   if (env.ASSETS) {
     // Ask for the extensionless path: the asset layer 307s /404.html to /404.
     const pageUrl = new URL('/404', request.url);
@@ -176,7 +181,7 @@ export default {
           const probe = await env.ASSETS.fetch(new Request(swapped, { method: 'GET' }));
           if (probe.ok) return redirect(swapped);
         }
-        return notFound(request, env);
+        return notFound(request, env, isLocal ? null : ctx);
       }
 
       // Long-cache assets only when the URL carries a content hash (?v=), so a
@@ -195,13 +200,17 @@ export default {
       // The workers.dev host serves a full copy of the site for previews; keep
       // it out of search results so it cannot compete with www.
       if (url.hostname.endsWith('.workers.dev')) page.headers.set('X-Robots-Tag', 'noindex, nofollow');
-      // Count real visits on the live site only, not previews or local runs.
-      if (!isLocal) countPageView(request, page, env, ctx);
+      // Count real visits, and verified crawler fetches, on the live site
+      // only, not previews or local runs.
+      if (!isLocal) {
+        countPageView(request, page, env, ctx);
+        countCrawl(request, page, env, ctx);
+      }
       return page;
     }
 
     // --- 4. Not found ------------------------------------------------------
-    return notFound(request, env);
+    return notFound(request, env, isLocal ? null : ctx);
   },
 
   // Daily cron (see [triggers] in wrangler.toml).
