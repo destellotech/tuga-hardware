@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rugged tablet for Dalux Field: UK buyer&#39;s guide</title>
   <meta name="description" content="Dalux publishes Android 11.0 or higher for its mobile app, with no RAM figure. The Tuga A10 (Android 14, 8GB RAM, 10.1 inch FHD, IP68) meets it for BIM on site.">
@@ -419,7 +434,7 @@
               <p class="product-card-tagline">The full desktop experience. Anywhere.</p>
               <div class="spec-chips">
                 <span class="chip">IP65</span>
-                <span class="chip">5000mAh</span>
+                <span class="chip">5000mAh removable</span>
                 <span class="chip">Windows 11 Pro</span>
               </div>
               <div class="product-card-foot">
@@ -685,18 +700,5 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>

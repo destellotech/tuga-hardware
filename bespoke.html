@@ -3,9 +3,24 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware</title>
-  <meta name="description" content="Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.">
+  <meta name="description" content="Need something the standard range does not cover? Tell us about a custom rugged tablet or handheld order: pre-loaded software, branding, bundles or a spec.">
   <link rel="canonical" href="https://www.tugahardware.com/bespoke">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#052e16">
@@ -14,13 +29,13 @@
   <meta property="og:site_name" content="Tuga Hardware">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware">
-  <meta property="og:description" content="Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.">
+  <meta property="og:description" content="Need something the standard range does not cover? Tell us about a custom rugged tablet or handheld order: pre-loaded software, branding, bundles or a spec.">
   <meta property="og:url" content="https://www.tugahardware.com/bespoke">
   <meta property="og:image" content="https://www.tugahardware.com/img/products/t85s-1.webp?v=54a3847ca1">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Bespoke Requests: Custom Rugged Tablet Orders | Tuga Hardware">
-  <meta name="twitter:description" content="Need something the standard range does not cover? Tell us about your custom rugged tablet or handheld order: pre-loaded software, branding, accessory bundles or a specific spec.">
+  <meta name="twitter:description" content="Need something the standard range does not cover? Tell us about a custom rugged tablet or handheld order: pre-loaded software, branding, bundles or a spec.">
   <meta name="twitter:image" content="https://www.tugahardware.com/img/products/t85s-1.webp?v=54a3847ca1">
 
   <script>document.documentElement.classList.add('js')</script>
@@ -337,18 +352,5 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>

@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tuga A10 vs Tuga W8: Big Android Screen or Small Windows Tablet?</title>
   <meta name="description" content="Tuga A10 (10.1 inch Android 14, £449) or Tuga W8 (8 inch Windows 11 Pro, £629)? £180 apart. Buy the A10 unless a Windows program, USB-A or HDMI is essential.">
@@ -400,6 +415,11 @@
                 <td>4G LTE, Wi-Fi 5, Bluetooth 5.0, NFC</td>
               </tr>
               <tr class="is-diff">
+                <th scope="row">Ports</th>
+                <td>USB-C, 3.5mm headphone jack, dual SIM, microSD, pogo pin</td>
+                <td>USB-C 3.1, USB-A 3.0, Mini HDMI 2.0a, 3.5mm audio, SIM/TF tray, pogo pin</td>
+              </tr>
+              <tr class="is-diff">
                 <th scope="row">Camera</th>
                 <td>13MP rear with flash + 5MP front</td>
                 <td>8MP rear + 5MP front</td>
@@ -423,11 +443,6 @@
                 <th scope="row">Drop spec</th>
                 <td><span class="vs-missing">Not listed</span></td>
                 <td>1.22m</td>
-              </tr>
-              <tr class="is-diff">
-                <th scope="row">Ports</th>
-                <td><span class="vs-missing">Not listed</span></td>
-                <td>USB-C 3.1, USB-A 3.0, Mini HDMI 2.0a, 3.5mm audio, SIM/TF tray, pogo pin</td>
               </tr>
             </tbody>
           </table>
@@ -683,18 +698,5 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>

@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tuga A10 vs Tuga WH6: Big Android Screen or Windows Handheld?</title>
   <meta name="description" content="Tuga A10 (10.1 inch Android tablet, £449) or Tuga WH6 (6.5 inch Windows 11 handheld, £699)? £250 apart. Full HD drawings on site, or Windows in a pocket.">
@@ -246,7 +261,7 @@
               <div class="spec-chips">
                 <span class="chip">IP65</span>
                 <span class="chip">MIL-STD-810H</span>
-                <span class="chip">4000mAh</span>
+                <span class="chip">4000mAh removable</span>
                 <span class="chip">Windows 11 IoT</span>
               </div>
               <div class="product-card-foot">
@@ -315,7 +330,7 @@
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A10 has the bigger screen: 10.1 inch against 6.5 inch on the WH6.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A10 has the higher resolution: 1920 x 1200 against 720 x 1600 on the WH6.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The WH6 is brighter: 400 nits against 350 nits on the A10.</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A10 has the bigger battery: 8000mAh against 4000mAh on the WH6.</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A10 has the bigger battery: 8000mAh against 4000mAh removable on the WH6.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A10 is sealed to IP68 and the WH6 to IP65.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Both are drop tested to MIL-STD-810H.</span></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The A10 runs Android 14; the WH6 runs Windows 11 IoT.</span></li>
@@ -377,7 +392,7 @@
               <tr class="is-diff">
                 <th scope="row">Battery</th>
                 <td>8000mAh</td>
-                <td>4000mAh</td>
+                <td>4000mAh removable</td>
               </tr>
               <tr class="is-diff">
                 <th scope="row">Charging</th>
@@ -398,6 +413,11 @@
                 <th scope="row">Connectivity</th>
                 <td>4G Dual SIM, dual-band Wi-Fi 5, Bluetooth 5.2, NFC</td>
                 <td>4G LTE, dual-band Wi-Fi 5, Bluetooth 5.0, NFC, GPS + GLONASS</td>
+              </tr>
+              <tr class="is-diff">
+                <th scope="row">Ports</th>
+                <td>USB-C, 3.5mm headphone jack, dual SIM, microSD, pogo pin</td>
+                <td>USB-C (OTG), USB-A, microSD, Nano-SIM, pogo pin</td>
               </tr>
               <tr class="is-diff">
                 <th scope="row">Camera</th>
@@ -423,11 +443,6 @@
                 <th scope="row">Drop spec</th>
                 <td><span class="vs-missing">Not listed</span></td>
                 <td>1.5m</td>
-              </tr>
-              <tr class="is-diff">
-                <th scope="row">Ports</th>
-                <td><span class="vs-missing">Not listed</span></td>
-                <td>USB-C (OTG), USB-A, microSD, Nano-SIM, pogo pin</td>
               </tr>
             </tbody>
           </table>
@@ -691,18 +706,5 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>

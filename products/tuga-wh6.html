@@ -3,6 +3,21 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js), straight after <head> as Google's install
+       instructions ask; charset stays first so it is in the first 1024 bytes.
+       Consent Mode: analytics_storage stays denied (no cookies, cookieless
+       pings only) until the visitor accepts in the cookie banner, which is
+       remembered in localStorage. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var tugaConsent = 'denied';
+    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
+    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tuga WH6: 6.5 inch Rugged Windows Handheld | Tuga Hardware</title>
   <meta name="description" content="6.5 inch rugged Windows 11 handheld for desktop software on the move. Run legacy apps, reach network drives, and carry it in a holster.">
@@ -172,7 +187,7 @@
     {
       "@type": "PropertyValue",
       "name": "battery",
-      "value": "4000mAh"
+      "value": "4000mAh removable"
     },
     {
       "@type": "PropertyValue",
@@ -472,7 +487,7 @@
               </tr>
               <tr>
                 <th scope="row">Battery</th>
-                <td>4000mAh</td>
+                <td>4000mAh removable</td>
               </tr>
               <tr>
                 <th scope="row">Charging</th>
@@ -667,7 +682,7 @@
                 <td class="cell-mono">6.5&Prime; handheld</td>
                 <td class="cell-mono">Windows 11 IoT</td>
                 <td class="cell-mono">IP65</td>
-                <td class="cell-mono">4000mAh</td>
+                <td class="cell-mono">4000mAh removable</td>
                 <td class="cell-mono">470g</td>
                 <td class="cell-price">£699</td>
               </tr>
@@ -685,7 +700,7 @@
                 <td class="cell-mono">10.1&Prime; tablet</td>
                 <td class="cell-mono">Windows 11 Pro</td>
                 <td class="cell-mono">IP65</td>
-                <td class="cell-mono">5000mAh</td>
+                <td class="cell-mono">5000mAh removable</td>
                 <td class="cell-mono">1197g</td>
                 <td class="cell-price">£649</td>
               </tr>
@@ -856,18 +871,5 @@
   <!-- Cloudflare Web Analytics: cookieless, no fingerprinting, no personal
        data. Kept accurate in the cookie notice and privacy policy. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a78fa81439c044abbd4e788762a301aa"}'></script>
-  <!-- Google Analytics 4 with Consent Mode: analytics_storage stays denied
-       (no cookies, cookieless pings only) until the visitor accepts in the
-       cookie banner, which is remembered in localStorage. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-52918YKRYV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    var tugaConsent = 'denied';
-    try { if (localStorage.getItem('tuga-consent') === 'granted') tugaConsent = 'granted'; } catch (e) {}
-    gtag('consent', 'default', { analytics_storage: tugaConsent, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-    gtag('js', new Date());
-    gtag('config', 'G-52918YKRYV', { allow_google_signals: false, allow_ad_personalization_signals: false });
-  </script>
 </body>
 </html>
