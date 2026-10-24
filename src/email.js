@@ -521,6 +521,48 @@ export async function sendWarrantyReminder(env, email, { orderId, customerName, 
 }
 
 // ---------------------------------------------------------------------------
+// Abandoned checkout recovery (checkout.session.expired in src/api.js)
+// ---------------------------------------------------------------------------
+/**
+ * One email, sent once, to a customer who opened Stripe Checkout, typed
+ * their address, ticked the box to hear from us, and did not pay. The link
+ * is Stripe's recovery URL and reopens the same basket for 30 days. No
+ * discount, no countdown: the basket is just there if they want it.
+ */
+export async function sendCartRecovery(env, email, { name, url, amountTotal, idempotencyKey }) {
+  const site = env.SITE_URL || 'https://www.tugahardware.com';
+  const total = typeof amountTotal === 'number' ? `£${(amountTotal / 100).toFixed(2).replace(/\.00$/, '')}` : '';
+  const bodyHtml = `
+    <h2 style="margin:0 0 8px;font-size:22px;color:${BRAND.green};">Your basket is saved</h2>
+    <p style="margin:0 0 16px;font-size:15px;color:${BRAND.mutedText};line-height:1.6;">
+      ${name ? `Hello ${escapeHtml(name)}, you` : 'You'} started a checkout at Tuga Hardware${total ? ` for ${total}` : ''}
+      and did not finish. That happens: a call, a customer, a van to move. The basket is saved for
+      30 days, so you can pick it up where you left off.
+    </p>
+    <p style="margin:0 0 24px;">
+      <a href="${escapeHtml(url)}" style="display:inline-block;background:${BRAND.copper};color:#ffffff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:8px;font-size:15px;">Finish your order</a>
+    </p>
+    <p style="margin:0 0 12px;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
+      ${escapeHtml(DELIVERY.short)}, ${escapeHtml(PRICE_NOTE).toLowerCase()}, 30-day returns and a 12-month warranty on every
+      device. If something stopped you, a price, a spec, a question about your software, reply to
+      this email and a person will answer within one working day. Business buyers can ask for a
+      <a href="${site}/contact" style="color:${BRAND.copper};">quote and proforma invoice</a> instead.
+    </p>
+    <p style="margin:0;font-size:12px;color:${BRAND.mutedText};">
+      You are receiving this because you ticked the box to hear from us at checkout. This is the
+      only reminder we send about this basket. Reply if you would rather not hear from us.
+    </p>
+  `;
+  return sendEmail(env, {
+    to: email,
+    subject: 'Your Tuga Hardware basket is saved',
+    html: emailWrapper('Your basket is saved. Tuga Hardware', bodyHtml),
+    replyTo: SUPPORT_EMAIL,
+    idempotencyKey,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Quote request acknowledgement (handleContact in src/api.js)
 // ---------------------------------------------------------------------------
 /**

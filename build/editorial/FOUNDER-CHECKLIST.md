@@ -29,10 +29,12 @@ UK account. The worker now does it through the API instead
 (`after_expiration.recovery` on the Checkout Session and the
 `checkout.session.expired` webhook). What you must do: in the Stripe
 dashboard, add `checkout.session.expired` to the events the
-`/webhooks/stripe` endpoint receives. Stripe only shares the email of a
-customer who typed it in and consented to promotional email, so the
-recovery email reaches a subset of abandoners, and Stripe's rules on that
-are here: https://docs.stripe.com/payments/checkout/abandoned-carts
+`/webhooks/stripe` endpoint receives. Checkout now shows a "keep me
+updated" box; Stripe only shares the email of a customer who typed it in
+and ticked that box, so the recovery email reaches a subset of
+abandoners. Checkout pages now expire after three hours (the basket link
+in the email then works for 30 days). Stripe's rules:
+https://docs.stripe.com/payments/checkout/abandoned-carts
 
 ## 4. Business finance at checkout
 
