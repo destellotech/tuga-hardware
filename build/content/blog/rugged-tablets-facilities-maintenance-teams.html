@@ -1,0 +1,98 @@
+<!--meta
+title: Choosing Rugged Tablets for a Facilities and Maintenance Team
+description: A step by step buying guide for in-house maintenance and FM teams: work orders, NFC asset tags, meter photos, shared devices on a dock, and a worked budget.
+date: 2026-10-24
+-->
+<p>For most in-house maintenance and facilities teams, the device to start with is the <a href="/products/tuga-a10">Tuga A10</a> at £449: a 10.1 inch Android tablet, sealed to IP68, with NFC for asset tags and a pogo pin connector for a drop-in Charging Dock, so it lives on the dock between shifts and goes out with whoever is on. If the device has to ride in a pocket up a ladder, the <a href="/products/tuga-a6">Tuga A6</a> at £349 is the handheld. If your maintenance system or building management software is Windows only, or you need to plug an Ethernet lead into a panel, the <a href="/products/tuga-w10">Tuga W10</a> at £649 is the Windows option. Our <a href="/for/facilities-management">facilities and maintenance page</a> covers what the job does to a device. This guide is the specification behind that answer, for whoever has to put a number on a purchase request.</p>
+
+        <h2>Start With One Work Order, Not With a Spec Sheet</h2>
+
+        <p>An in-house team usually buys a pool of devices that belong to the shift, and the work arrives from a CMMS. So take a typical work order and walk it through the shift. Each step sets a requirement.</p>
+
+        <ol>
+          <li><strong>The job appears.</strong> The technician opens the CMMS app and sees the work order. Requirement: the app runs on the device's operating system and version.</li>
+          <li><strong>They find the asset.</strong> They tap an NFC tag on the pump, or scan a QR label. Requirement: NFC or a camera the app can scan with, and an app that supports it on your platform.</li>
+          <li><strong>They do the work.</strong> The device is put down on a plant frame, a parapet or a wet floor. Requirement: sealing, and a drop rating if it will be used at height.</li>
+          <li><strong>They record the result.</strong> A meter reading, a photo of the gauge, a note. Requirement: a camera that copes with a dark plant room.</li>
+          <li><strong>They close the job.</strong> In a basement with no signal. Requirement: an app that works offline and syncs later, which is a question for the vendor, not for us.</li>
+          <li><strong>They hand the device over.</strong> Requirement: a charged battery for the next person, which in practice means a dock.</li>
+        </ol>
+
+        <h2>Step 1: Let the CMMS Choose the Operating System</h2>
+
+        <p>Most CMMS apps are built for Android and iOS, with a browser version for the office. A smaller number of maintenance and building management systems only run on a Windows PC. Whichever yours is, it decides the platform.</p>
+
+        <p>Ask the vendor three things: which operating systems and minimum versions the mobile app supports, whether it supports NFC and camera scanning on that platform, and how it behaves offline. Our <a href="/works-with/">works-with pages</a> collect the published requirements for a number of maintenance systems and show which Tuga models meet them, for example <a href="/works-with/maintainx">MaintainX</a>, <a href="/works-with/fiix-cmms">Fiix CMMS</a> and <a href="/works-with/limble-cmms">Limble CMMS</a>. They match published figures to our listed specs, not a claim that we have run the app on the device, so trial your own system on one unit before you buy the pool.</p>
+
+        <p>On Android, the version matters. The A10 runs Android 14 and the A6 Android 15. The <a href="/products/tuga-a8">Tuga A8</a> runs Android 12, which is older, so check it against the vendor's minimum with more care. On Windows, the W10 and <a href="/products/tuga-w8">Tuga W8</a> run Windows 11 Pro and the <a href="/products/tuga-wh6">Tuga WH6</a> runs Windows 11 IoT. If you are unsure which way to go, our guide to <a href="/blog/android-vs-windows-rugged-tablet">Android versus Windows rugged tablets</a> has a five minute test.</p>
+
+        <h2>Step 2: Shared Pool or Assigned Device</h2>
+
+        <p>A <strong>shared pool</strong> suits shift-based teams. The devices live on docks in the maintenance office, and the spec needs a dock per device or per pair, a screen protector on every unit from day one, a strap, and a plan for logins. Some CMMS vendors publish a shared device or kiosk mode; others expect each technician to sign in and out. Ask. A shared device also needs a PIN the shift knows, changed when people leave.</p>
+
+        <p>An <strong>assigned device</strong> suits a small team where each technician has a patch. The spec is simpler: a holster or hand strap, a charger, and the person looks after it.</p>
+
+        <p>Either way, standardise on one model. Spares, chargers, docks, protectors and training all get simpler when every device is the same. Our guide to <a href="/blog/buying-rugged-tablets-small-team">buying rugged tablets for a small team</a> explains why, and how the volume discount works.</p>
+
+        <h2>Step 3: Match the Sealing and Temperature to the Buildings</h2>
+
+        <p>Specify for the worst room on the estate, not the average one.</p>
+
+        <ul>
+          <li><strong>IP65</strong> (WH6, W8, W10) is dust tight and protected against water jets from any direction. It is not rated for immersion.</li>
+          <li><strong>IP67</strong> (A6, A8) adds immersion to a metre for 30 minutes.</li>
+          <li><strong>IP68</strong> (A10) is rated for immersion beyond IP67. Our <a href="/blog/ip68-vs-ip67-waterproof-rating">IP68 versus IP67 guide</a> explains the difference in full.</li>
+        </ul>
+
+        <p>None of our devices is rated IP69K, so none should be pressure washed. For roof plant and roof spaces, add a drop rating: the A10 and WH6 are tested to MIL-STD-810H, the W8 to MIL-STD-810G with 1.22 metre drops, and the A6 and WH6 are rated for 1.5 metre drops. No drop rating is listed for the A8 or W10.</p>
+
+        <p>Plant rooms get hot. The listed upper operating temperatures are 60°C for the A10, WH6 and W8 and 50°C for the A6. The A8 and W10 list no operating temperature range, so if the device will sit on top of a boiler casing while someone works, pick one with a published figure.</p>
+
+        <h2>Step 4: Tags, Readings and Photos</h2>
+
+        <p>Every Tuga model lists NFC, so tap-to-identify asset tags are covered on any of them, provided your CMMS supports NFC on your platform. Our guide to <a href="/blog/nfc-work-tablet-what-it-is-for">what NFC on a work tablet is actually for</a> explains what it does and does not do. For QR or barcode labels, the camera does the reading on most models. If the team scans dozens of labels a day, the A6 has a built-in Zebra 2D scan engine with two side scan keys, and scanner versions of the WH6 (£779), W8 (£699) and W10 (£729) exist. Our <a href="/blog/rugged-tablet-barcode-scanner">barcode scanner guide</a> covers when a built-in engine is worth the money.</p>
+
+        <p>Meter readings and condition photos happen in dark cupboards and ceiling voids. The A6, A8 and A10 list a 13MP rear camera with a flash. The WH6 and W8 list an 8MP rear camera and the W10 a 5MP rear camera, and no flash is listed for the Windows models, so a torch in the other hand becomes part of the routine. Our guide to <a href="/blog/taking-site-photos-that-hold-up">taking site photos that hold up</a> covers framing and backing up.</p>
+
+        <h2>The Devices, Against the Six Requirements</h2>
+
+        <h3>Tuga A10: The Shared Android Tablet</h3>
+
+        <p>The <a href="/products/tuga-a10">Tuga A10</a> at £449 is the one to specify for a shared pool on Android. A 10.1 inch 1920 x 1200 screen gives a work order, its checklist and the asset history room without scrolling. IP68, MIL-STD-810H, rated from -20°C to 60°C, 680g, with 8GB RAM, 128GB storage and a microSD slot up to 2TB. The 13MP camera has a flash, NFC is built in, and the pogo pin connector means it drops into the Charging Dock. Two honest limits: the 350 nit screen is fine indoors and in plant rooms but harder to read on a bright roof, and the 8000mAh battery is not removable, so the dock is doing the work a spare battery does elsewhere.</p>
+
+        <h3>Tuga A6: The Handheld for the Ladder</h3>
+
+        <p>The <a href="/products/tuga-a6">Tuga A6</a> at £349 is a 6 inch Android 15 handheld at 277g, sealed to IP67, rated for 1.5 metre drops, with a removable 5050mAh battery, NFC, a 13MP camera with flash and a built-in 2D scanner. It suits a technician who is up and down ladders all day, or a site where every asset carries a barcode. The 6 inch screen means a long checklist is scrolled. A Belt Holster is £22.</p>
+
+        <h3>Tuga W10: Windows With an Ethernet Port</h3>
+
+        <p>The <a href="/products/tuga-w10">Tuga W10</a> at £649 runs Windows 11 Pro on an Intel N100 with 8GB RAM and 128GB storage, and has RJ45 Ethernet, HDMI, USB-A and USB-C on board. That port selection is the reason to specify it: a Windows only maintenance system, or a building management panel that only talks over a cable. It is rated IP65, has NFC and a removable 5000mAh battery, docks in the Charging Dock, and weighs 1197g. No drop rating, MIL-STD rating or operating temperature is listed, and 4G is an option rather than standard.</p>
+
+        <h3>Tuga WH6: Windows in a Holster</h3>
+
+        <p>The <a href="/products/tuga-wh6">Tuga WH6</a> at £699 is the Windows handheld: a 6.5 inch screen, Intel Celeron N5100, 8GB RAM, 128GB storage, IP65, MIL-STD-810H, 1.5 metre drops, a removable 4000mAh battery, NFC and 4G. It costs £250 more than the A6, so it earns its place only where the software has to be Windows. Its own WH6 Charging Cradle is £79.</p>
+
+        <h2>Writing the Kit List</h2>
+
+        <p>For a shared A10 or W10 pool, specify these with the devices rather than afterwards:</p>
+
+        <ul>
+          <li><strong>Charging Dock</strong>, £49.99, fits the A10, W8 and W10. One per device if they all come back at once, one per two if shifts overlap.</li>
+          <li><strong>Tempered Glass Screen Protector (2 Pack)</strong>, £14, fits every model. Fit one before the device goes out for the first time.</li>
+          <li><strong>Hand Strap</strong>, £24, for the A8, A10, W8 and W10. One-handed grip on a ladder or in a riser.</li>
+        </ul>
+
+        <p>For handhelds, swap the dock and straps for a <strong>Belt Holster</strong> (£22) on the A6 or WH6, and the <strong>WH6 Charging Cradle</strong> (£79) for the WH6. Everything is on the <a href="/accessories">accessories page</a>. Our guide to <a href="/blog/tablet-battery-last-full-shift">making a tablet battery last a full shift</a> covers the settings side.</p>
+
+        <h2>A Worked Budget for a Six-Person Team</h2>
+
+        <p>Six Tuga A10s at £449 come to £2,694. Six devices falls in the 5 to 9 band, so the automatic 8% team discount takes £215.52 off, leaving £2,478.48 for the devices. Add two Charging Docks (£99.98), six screen protector packs (£84) and six hand straps (£144), and the kit is £327.98 at list price, for a total around £2,806. Adding the 3-Year Warranty at £65 per A10 is another £390. The <a href="/bulk">bulk pricing page</a> works it out for any mix of models. There is no VAT to add, and delivery to UK addresses is free in 7 to 10 working days. For a quote or a proforma invoice, use the <a href="/contact">contact form</a>.</p>
+
+        <h2>Before You Sign the Purchase Request</h2>
+
+        <ol>
+          <li><strong>Buy one first.</strong> Install your CMMS, tap your actual asset tags, and close a work order in the worst basement you have. A fortnight with one device saves a difficult conversation about six.</li>
+          <li><strong>Confirm offline behaviour with the vendor.</strong> It is the app that works offline, not the tablet.</li>
+          <li><strong>Think about the warranty.</strong> Every device comes with 12 months. The 3-Year Warranty is £65 on the A6, A8 and A10, £79 on the W8 and W10 and £89 on the WH6. For fleets of five or more devices, Total Care adds a swap unit with your software image, on a quote; details are on the <a href="/warranty">warranty page</a>.</li>
+          <li><strong>Write the serial numbers into your own asset register</strong> when the devices arrive.</li>
+        </ol>
