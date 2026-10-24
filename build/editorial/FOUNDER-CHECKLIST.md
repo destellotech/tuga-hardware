@@ -96,9 +96,12 @@ writing guide bans naming competitors and the site has never done it.
 If you want them, say so and the ban changes with it; until then nothing
 is written.
 
-## 12. The old weekly routine
+## 12. The weekly routines
 
-Disable "Tuga weekly blog post" (created 9 October) at
-https://claude.ai/code/routines so it cannot double up with the
-self-feeding one, or paste `build/editorial/ROUTINE-PROMPT.md` into it and
-delete the new one instead.
+Two self-feeding routines now run: "Tuga weekly guide (self-feeding)" on
+Mondays (prompt in `ROUTINE-PROMPT.md`, queue in `CALENDAR.md`) and "Tuga
+weekly works-with page" on Wednesdays (prompt in `WORKS-WITH-ROUTINE.md`,
+queue in `WORKS-WITH-QUEUE.md`). Each opens one PR a week for you to
+review and stops while three of its PRs are open. Disable the old "Tuga
+weekly blog post" (created 9 October) at https://claude.ai/code/routines so
+it cannot double up with the Monday one.
