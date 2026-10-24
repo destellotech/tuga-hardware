@@ -1199,7 +1199,7 @@ const BULK_FAQ = [
   },
   {
     q: 'Can we try one before we order for the whole team?',
-    a: 'Yes. Order a single unit, by card or on a proforma invoice, and use it for up to 30 days. If it is not right, return it under the <a href="/shipping-returns">30-day returns policy</a>: in its original condition and packaging with everything that came in the box, so keep the box, and unless it is faulty you pay the return carriage. If it is right, order the rest and the team discount is worked out on the devices in that order. Business fleets on a Total Care plan get a loan unit for trials as part of the plan; see the <a href="/warranty">warranty page</a>.',
+    a: 'Yes. Order a single unit, by card or on a proforma invoice, and try it for up to 30 days as something you may send back: the <a href="/shipping-returns">30-day returns policy</a> needs it in its original condition and packaging with everything that came in the box, so keep the box and treat it gently, and unless it is faulty you pay the return carriage. If it is right, order the rest and the team discount is worked out on the devices in that order. Business fleets on a Total Care plan get a loan unit for trials as part of the plan; see the <a href="/warranty">warranty page</a>.',
   },
   {
     q: 'Do bulk orders still get the warranty and returns?',
@@ -1327,7 +1327,7 @@ ${sectionHead({
               <li>The tier is calculated on the total number of devices and applied at checkout</li>
               <li>Everything ships free, with the same warranty and returns as a single unit</li>
             </ul>
-            <p style="margin-top:1.5rem">Not sure which model suits the team? Order one, use it on site for up to 30 days and return it under the 30-day returns policy if it is wrong, box and all; then order the rest. Prefer to pay by bank transfer? Ask for a quote and we will send a proforma invoice and complete your supplier forms. Buying regularly? <a href="/trade">Apply for a trade account</a> to order on invoice.</p>
+            <p style="margin-top:1.5rem">Not sure which model suits the team? Order one and try it with your apps before the rest: if it is wrong, return it within 30 days in its original condition, box and all, then order the rest. Prefer to pay by bank transfer? Ask for a quote and we will send a proforma invoice and complete your supplier forms. Buying regularly? <a href="/trade">Apply for a trade account</a> to order on invoice.</p>
             <div style="margin-top:2rem">
               <a class="btn btn-primary" href="/products/">Start an order</a>
               <a class="btn btn-outline" href="/contact?quote=#enquiry" style="margin-left:0.5rem">Get a business quote</a>
