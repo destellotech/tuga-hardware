@@ -37,7 +37,9 @@
     const res = await fetch('/data/products.json');
     if (!res.ok) throw new Error('Could not load the product catalogue');
     const data = await res.json();
-    catalogue = [...data.products, ...data.accessories, ...(data.warranties || []), ...(data.upgrades || [])];
+    // Quote-only accessories (spare batteries) have no price and are sold on
+    // request, so they are not part of the basket's catalogue at all.
+    catalogue = [...data.products, ...data.accessories.filter((a) => !a.quoteOnly), ...(data.warranties || []), ...(data.upgrades || [])];
     knownIds = new Set(catalogue.map((p) => p.id));
     return catalogue;
   }
@@ -499,6 +501,16 @@
   /* ------------------------------------------------------------ add to cart */
 
   function initAddToCart() {
+    // A kit button adds every id it lists, one of each, and reports once.
+    document.addEventListener('click', (e) => {
+      const kit = e.target.closest('[data-add-kit]');
+      if (!kit) return;
+      e.preventDefault();
+      const ids = kit.dataset.addKit.split(',').map((id) => id.trim()).filter(Boolean);
+      if (!ids.every((id) => Cart.add(id, 1))) return;
+      toast(`${kit.dataset.kitName || 'Kit'} added to basket: ${ids.length} items`);
+    });
+
     document.addEventListener('click', async (e) => {
       const btn = e.target.closest('[data-add-to-cart]');
       if (!btn) return;
@@ -752,6 +764,41 @@
       <p class="summary-note" data-checkout-status hidden></p>`;
   }
 
+  /**
+   * Accessories that fit every device in the basket and are not in it yet.
+   * Nothing is suggested for a basket of warranties, upgrades or accessories
+   * alone, and nothing that only fits some of the devices: a strap that fits
+   * the A8 but not the A10 is noise to someone buying both.
+   */
+  function upsellBlock(lines, products) {
+    const deviceIds = lines
+      .map((l) => l.product)
+      .filter((p) => !p.warrantyFor && !p.upgradeFor && !p.compatibleWith)
+      .map((p) => p.id.replace(/-scanner$/, ''));
+    if (!deviceIds.length) return '';
+    const inBasket = new Set(lines.map((l) => l.product.id));
+    const fits = products.filter(
+      (a) => Array.isArray(a.compatibleWith) && !inBasket.has(a.id) && deviceIds.every((id) => a.compatibleWith.includes(id))
+    );
+    if (!fits.length) return '';
+    return `
+      <section class="cart-upsell" aria-labelledby="cart-upsell-title">
+        <h2 id="cart-upsell-title" class="cart-upsell-title">Fits what is in your basket</h2>
+        <ul class="cart-upsell-list">
+          ${fits
+            .map(
+              (a) => `
+          <li class="cart-upsell-item">
+            <span class="cart-upsell-name">${a.name}</span>
+            <span class="cart-upsell-price">${money(a.price)}</span>
+            <button type="button" class="btn btn-sm btn-outline" data-add-to-cart="${a.id}" aria-label="Add ${a.name} to basket">Add</button>
+          </li>`
+            )
+            .join('')}
+        </ul>
+      </section>`;
+  }
+
   async function renderCart() {
     const layout = $('[data-cart-layout]');
     const emptyEl = $('[data-cart-empty]');
@@ -798,18 +845,23 @@
     const rowIds = [...document.querySelectorAll('[data-cart-items] [data-line]')].map((r) => r.dataset.line);
     const removedIndex = active?.matches?.('[data-line-remove]') ? rowIds.indexOf(lineId) : -1;
     const addedWarranty = active?.matches?.('[data-add-warranty]') ? active.dataset.addWarranty : null;
+    // An upsell Add button goes away with the re-render: its line appears in
+    // the basket, so focus lands on that line's quantity instead.
+    const addedUpsell = active?.closest?.('[data-cart-upsell]') && active.dataset?.addToCart ? active.dataset.addToCart : null;
 
     $('[data-cart-items]').innerHTML = totals.lines
       .map((line) => cartItemRow(line) + warrantyOffer(line, totals.lines, products))
       .join('');
+    const upsell = $('[data-cart-upsell]');
+    if (upsell) upsell.innerHTML = upsellBlock(totals.lines, products);
     $('[data-cart-summary]').innerHTML = cartSummary(totals);
 
     if (lineId && control) {
       const row = $(`[data-line="${CSS.escape(lineId)}"]`);
       const target = (row && $(control, row)) || $('[data-line-qty]');
       target?.focus();
-    } else if (addedWarranty) {
-      $(`[data-line="${CSS.escape(addedWarranty)}"] [data-line-qty]`)?.focus();
+    } else if (addedWarranty || addedUpsell) {
+      $(`[data-line="${CSS.escape(addedWarranty || addedUpsell)}"] [data-line-qty]`)?.focus();
     } else if (removedIndex >= 0) {
       const rows = document.querySelectorAll('[data-cart-items] [data-line]');
       const next = rows[Math.min(removedIndex, rows.length - 1)];

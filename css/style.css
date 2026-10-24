@@ -2404,6 +2404,8 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   color: var(--green-900);
 }
 
+.accessory-price-quote { font-size: var(--step-0); color: var(--ink-light); }
+
 /* --------------------------------------------------------------------------
    22. CART
    -------------------------------------------------------------------------- */
@@ -2467,6 +2469,39 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   color: var(--green-900);
   margin-left: auto;
   font-size: var(--step-1);
+}
+
+/* Accessories that fit everything in the basket, offered under the lines. */
+.cart-upsell { margin-top: var(--space-l); }
+
+.cart-upsell-title {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-s);
+}
+
+.cart-upsell-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-xs); }
+
+.cart-upsell-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--space-s) var(--space-m);
+  padding: var(--space-s) var(--space-m);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.cart-upsell-name { font-weight: 600; color: var(--ink); }
+
+.cart-upsell-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--green-900);
+  white-space: nowrap;
 }
 
 /* 44px tall so it is an easy tap on a phone, without growing the row much. */
