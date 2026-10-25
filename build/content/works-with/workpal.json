@@ -59,19 +59,40 @@
       "device_id": "tuga-a8",
       "role": "primary",
       "why": "WorkPal is built around a shift that starts in the van and runs on location tracking until it ends, and the vendor's own advice is to leave Battery Saver off and carry a portable charger. The Tuga A8 answers that directly: an 8000mAh removable battery, so a charged spare takes over mid shift rather than a power bank dangling from a USB lead, and VESA mount points with pogo pin contacts so it locks into the Vehicle Mounting Dock on the road and charges between jobs. It runs Android 12 with Google Play, which meets the published Android 11 minimum, has 6GB of RAM and 128GB of storage for the photos and PDFs that sit in the Outbox until signal returns, dual SIM 4G so the sync happens from site rather than from the next Wi-Fi, and GPS, GLONASS, Galileo and BeiDou for the tracking WorkPal asks to run all the time. The 1000 nit screen stays readable on a roof or a forecourt, and the 13MP autofocus camera with flash covers the before and after photos. It is sealed to IP67. The trade-offs: Android 12 is one version above the floor, so with the app targeting API 36 you should expect to replace it sooner than an Android 14 device, and no drop rating is listed for the A8, so fit the Hand Strap where it is carried up ladders.",
-      "best_for": "Field service firms running WorkPal from the van: drainage, pest control, plumbing and HVAC, fire and security, property maintenance."
+      "fit": [
+        "Requirement: Android 11 or later from Google Play, phone or tablet. Tuga A8: Android 12 with Google Play, one version above the minimum.",
+        "Requirement: RAM, storage and screen size not published. Tuga A8: 6GB RAM, 128GB storage with a microSD slot, 8 inch IPS, 1280 x 800, 1000 nits, AGC glass.",
+        "Requirement: offline working with an Outbox that syncs when signal returns. Tuga A8: 4G LTE dual SIM, Wi-Fi, Bluetooth, so the Outbox empties from site.",
+        "Requirement: location tracking allowed all the time with Battery Saver off, and a charger to hand. Tuga A8: GPS, GLONASS, Galileo and BeiDou; removable 8000mAh battery; VESA mount points and pogo pin connector for the Vehicle Mounting Dock.",
+        "Requirement: photos from the camera or gallery, forms, PDFs and signatures. Tuga A8: 13MP autofocus rear camera with flash; Capacitive Stylus listed for it.",
+        "Requirement: a device that lives in the van and on site. Tuga A8: IP67; no drop rating listed, so fit the Hand Strap."
+      ]
     },
     {
       "device_id": "tuga-a10",
       "role": "alternative",
       "why": "For facilities and grounds teams whose WorkPal day is forms, equipment records and site plans rather than driving, the Tuga A10 gives a 10.1 inch 1920 x 1200 screen for the attached PDFs and longer forms, Android 14 with Google Play (three versions above the published minimum, so more headroom for future app releases), 8GB of RAM and 128GB of storage expandable to 2TB. It is sealed to IP68 and tested to MIL-STD-810H in a 680g body, with dual SIM 4G, NFC and a pogo pin connector for the Charging Dock when devices return to a desk overnight. The battery is 8000mAh with quick charge but is not listed as removable, so a long tracked shift leans on the 12V DC Car Charger or the dock, and the screen is 350 nits, which is readable under cover and in a cab but not the choice for a day on a roof. It also costs £70 more than the A8.",
-      "best_for": "Facilities, cleaning and grounds teams working from a site base, and anyone who reads plans on the device."
+      "fit": [
+        "Requirement: Android 11 or later from Google Play, phone or tablet. Tuga A10: Android 14 with Google Play, three versions above the minimum.",
+        "Requirement: RAM, storage and screen size not published. Tuga A10: 8GB RAM, 128GB storage with microSD up to 2TB, 10.1 inch FHD IPS, 1920 x 1200, tempered glass, 350 nits.",
+        "Requirement: offline working with an Outbox that syncs when signal returns. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, Bluetooth 5.2.",
+        "Requirement: location tracking allowed all the time with Battery Saver off. Tuga A10: GPS, Galileo, BeiDou, QZSS and NavIC; 8000mAh battery with quick charge, not listed as removable; pogo pin connector for the Charging Dock.",
+        "Requirement: photos, forms, PDFs and signatures. Tuga A10: 13MP rear camera with flash; Capacitive Stylus listed for it.",
+        "Requirement: plant rooms, yards and sites. Tuga A10: IP68, MIL-STD-810H, -20 to 60C, 680g."
+      ]
     },
     {
       "device_id": "tuga-a6",
       "role": "alternative",
       "why": "Pest control rounds, cleaning audits and salting and gritting runs want a device that lives in a pocket and comes out for a form, a photo and a signature. The Tuga A6 is a 6 inch Android 15 handheld at 277g, sealed to IP67 and rated for 1.5 metre drops, with a 13MP camera with flash, dual SIM 4G, GPS, GLONASS, BeiDou and Galileo, and a removable 5050mAh battery, so the always-on tracking that WorkPal asks for does not end the day early. Android 15 gives the most headroom in the range above the published Android 11 minimum. Its built-in Zebra 2D scanner is not used by WorkPal, which describes no scanning, so you pay for it only if another app does. The trade-offs are the 6 inch screen for longer forms and PDFs, 4GB of RAM and 64GB of storage with a microSD slot up to 256GB, and no stylus listed for it. The Belt Holster at £22 keeps it on the operative rather than in the van.",
-      "best_for": "One-handed rounds: pest control, cleaning, gritting, lone workers who need the tracking but not a big screen."
+      "fit": [
+        "Requirement: Android 11 or later from Google Play, phone or tablet. Tuga A6: Android 15 with Google Play, four versions above the minimum.",
+        "Requirement: RAM, storage and screen size not published. Tuga A6: 4GB RAM, 64GB storage with microSD up to 256GB, 6 inch FHD+ IPS, 2160 x 1080.",
+        "Requirement: offline working with an Outbox that syncs when signal returns. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: location tracking allowed all the time with Battery Saver off. Tuga A6: GPS, GLONASS, BeiDou and Galileo; removable 5050mAh battery.",
+        "Requirement: photos, forms and signatures on a handheld. Tuga A6: 13MP rear camera with flash; no stylus listed, so sign with a finger.",
+        "Requirement: a device carried all day on rounds. Tuga A6: IP67, 1.5 metre drop rating, -20 to 50C, 277g; Belt Holster listed for it."
+      ]
     }
   ],
   "setup_steps": [
