@@ -24,14 +24,14 @@ Status: `todo` → `pr` → `done` (or `skip`).
 
 | # | Status | Software | Vendor | Why | Notes |
 |---|--------|----------|--------|-----|-------|
-| 1 | todo | Powered Now | Powered Now Ltd | UK field service app for plumbers, electricians and builders; quoting, certificates, invoicing | |
-| 2 | todo | WorkPal | Workpal Ltd (Northern Ireland) | UK and Ireland job management for field teams, strong in FM and maintenance | |
-| 3 | todo | Clik Service | Clik Ltd | UK service management with the Clik Jobs mobile app; HVAC, fire and security | |
-| 4 | todo | Protean Software | Protean Software Ltd | UK field service and asset management; HVAC, lifts, fire, access | |
-| 5 | todo | Synchroteam | Synchroteam | Field service management with an Android app; used by UK SMEs | |
-| 6 | todo | Castle Field Service | Castle Computer Services | UK field service software for engineers; maintenance and compliance | |
-| 7 | todo | Re-flow | Re-flow Ltd | UK construction and civils field management; forms, timesheets, plant | |
-| 8 | todo | GoCanvas | GoCanvas | Mobile forms and inspections used by UK trades; Android app | |
+| 1 | pr | Powered Now | Powered Now Ltd | UK field service app for plumbers, electricians and builders; quoting, certificates, invoicing | A10 primary; Android 14 minimum per the Powered Now support article |
+| 2 | pr | WorkPal | Workpal Ltd (Northern Ireland) | UK and Ireland job management for field teams, strong in FM and maintenance | A8 primary; Play listing declares Android 11 (API 30) |
+| 3 | pr | Clik Service | Clik Ltd | UK service management with the Clik Jobs mobile app; HVAC, fire and security | A8 primary; Play listing Android 5.0, app last updated July 2024, Clik now part of Joblogic |
+| 4 | skip | Protean Software | Protean Software Ltd | UK field service and asset management; HVAC, lifts, fire, access | Only a 2016 spec is published (Android 4.4) and the engineer app was not found on Google Play; revisit when Joblogic publishes current requirements |
+| 5 | pr | Synchroteam | Synchroteam | Field service management with an Android app; used by UK SMEs | A10 primary; help centre says Android 12 or later (September 2025) |
+| 6 | skip | Castle Field Service | Castle Computer Services | UK field service software for engineers; maintenance and compliance | No such product: Castle Computer Services is an accounting and IT firm acquired by Kick ICT in 2018; no field service app exists |
+| 7 | pr | Re-flow | Re-flow Ltd | UK construction and civils field management; forms, timesheets, plant | A8 primary; vendor FAQ gives Android 7 minimum, 8 recommended, GPS and camera required |
+| 8 | pr | GoCanvas | GoCanvas | Mobile forms and inspections used by UK trades; Android app | A10 primary; help centre says Android 13 and higher (October 2026) |
 | 9 | todo | Shire Systems Pirana CMMS | Shire Systems Ltd | UK CMMS with a mobile app for engineers | |
 | 10 | todo | Infraspeak | Infraspeak | Maintenance and FM platform with Android app; NFC asset tags | |
 | 11 | todo | Zuper | Zuper | Field service management with an Android app; HVAC and FM | |

@@ -1,0 +1,155 @@
+{
+  "slug": "gocanvas",
+  "software": "GoCanvas",
+  "vendor": "Canvas Solutions, Inc., part of the Nemetschek Group",
+  "vendor_url": "https://www.gocanvas.com/",
+  "title": "Rugged tablet for GoCanvas forms: UK buyer's guide",
+  "meta_description": "GoCanvas needs Android 13 or higher, or a Windows Pro tablet. The Tuga A10 (Android 14, 8GB RAM, IP68) and the Windows 11 Pro W10 meet it; the A8 does not.",
+  "target_query": "rugged tablet for GoCanvas",
+  "h1": "Rugged tablet for GoCanvas mobile forms",
+  "intro": [
+    "GoCanvas is a mobile forms platform from Canvas Solutions, Inc., based in Reston, Virginia and part of the Nemetschek Group since July 2024. The vendor says it has operated since 2008 and runs three platforms, GoCanvas, Device Magic and SiteDocs. Its Google Play listing (updated 30 September 2026) shows more than 500,000 downloads and names inspections, invoices, quality control, work orders, scheduling and dispatch and safety as the forms customers most often digitise, from a library of more than 30,000 templates. It is sold by subscription to field teams of every size, and UK trades and maintenance firms use it to replace paper job sheets, inspection checklists and risk assessments.",
+    "On site, the field user opens the GoCanvas app, picks a form from the home screen, fills it in with photos, signatures, GPS stamps and barcode scans, and submits it. The vendor's help centre says the app works as a rich client, so forms can be completed without coverage and uploaded when the device syncs, which suits plant rooms, basements and rural sites. That is work for a sealed device with a camera flash, a long battery and a screen that reads outdoors, rather than a consumer tablet in a case.",
+    "This page sets out what the vendor publishes about devices for GoCanvas, which Tuga device meets those requirements for the Android app and for the Windows desktop client, why the Tuga A8 falls short, how to get a new user running, and the commercial terms for UK business buyers. We have not tested GoCanvas on these devices; the page matches the vendor's published requirements to the published specifications, and we suggest a trial on one unit before a fleet order."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 13 or higher",
+      "detail": "The vendor's article What devices does GoCanvas support? (updated 9 October 2026) states: GoCanvas supports Android devices running Android 13 and higher. The same article says GoCanvas runs on a variety of smartphones, barcode scanners, tablets and netbooks, and is downloaded from Google Play or by visiting gocanvas.com/m on the device.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/26352389145623"
+    },
+    {
+      "requirement": "Android 11 and 12 no longer supported",
+      "detail": "A release note titled April '26 Support for Android 13 and Above (published 30 March 2026) says GoCanvas will be dropping support for Android OS Version 11 and 12 and that all Android users must update to Android OS Version 13 or higher before late April 2026. It adds that service on Android 12 and below is not interrupted, but future product enhancements and security updates will not be available on those versions.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/22160838373015"
+    },
+    {
+      "requirement": "Windows: desktop client on Windows 8 or higher, tablets on a Pro edition",
+      "detail": "The devices article says GoCanvas supports Windows desktops running 8 or higher and, in addition, supports tablets running a Windows Pro version of Windows. The install article (updated 7 October 2026) offers GoCanvas for Windows Desktop as a download, and a Web Client in the web portal that is not compatible with all features at this time. The vendor gives no RAM or storage figures for any platform.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/26352389145623"
+    },
+    {
+      "requirement": "Unsupported devices",
+      "detail": "The install article states that GoCanvas is not supported on Windows Phones, Blackberry devices, ChromeOS, MacOS, Split or Modified Android devices, or Surface devices. Android devices without Google Play are not addressed, so a device needs Google Play to install the app the documented way.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/26308504550423"
+    },
+    {
+      "requirement": "Offline working and credential checks",
+      "detail": "The article Does GoCanvas work if my device isn't connected to the internet? (updated 14 November 2025) says GoCanvas operates as a rich client on your mobile device, so forms can be completed without wireless coverage and uploaded when coverage returns. It notes that many customers buy tablets without data plans and sync at the start and end of the day. The device must validate credentials against the server, every 24 hours by default; the Client Timeout Window setting extends that to 30 days for users often out of coverage.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/115006594907"
+    },
+    {
+      "requirement": "Sync",
+      "detail": "The article What does it mean to sync my device? (updated 28 September 2026) says a sync loads new forms, form updates, reference data, dispatches and assigned workflows, and that submitting data eventually needs a connection. On Android, iOS and Windows the user taps Sync in the upper right corner or turns on Sync after submit; on Android and iOS they can pull down to force a sync and turn on Auto Sync when often disconnected.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/26461887164183"
+    },
+    {
+      "requirement": "Barcode scanning: built-in camera or a scan wedge",
+      "detail": "The Play listing names Barcode Scanning among the app's features. The article Connect GoCanvas to a Barcode Scanner says GoCanvas will receive data from any barcode scanner that has a supporting scan wedge application compatible with a supported operating system, internal to the device or connected by cable or Bluetooth, with the scanned text typed into the active field. It warns that on some devices a scan wedge app can interfere with the camera, and the vendor keeps no list of compatible external scanners.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/26461987360535"
+    },
+    {
+      "requirement": "GPS fields",
+      "detail": "The article Capturing GPS Coordinates using your Mobile Device describes a GPS field with an accuracy setting in metres, a timeout and a Force Accuracy option that holds coordinates until the target accuracy is reached, so a device with a satellite receiver is needed for location stamps rather than one that relies on Wi-Fi positioning alone.",
+      "source_url": "https://help.gocanvas.com/hc/en-us/articles/26462664726679"
+    },
+    {
+      "requirement": "Google Play listing",
+      "detail": "GoCanvas Business Apps & Forms by Canvas Solutions, Inc., package com.gocanvas, updated 30 September 2026, with Phone and Tablet device sections, 500k+ downloads and a 4.2 rating from about 1,700 reviews. The listing does not display a Requires Android value, so the minimum above comes from the vendor's help centre.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.gocanvas&hl=en_GB&gl=GB"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "GoCanvas sets Android 13 as its floor and has already withdrawn enhancements and security updates from Android 12 and below, so headroom above the floor matters for a device you expect to keep for years. The Tuga A10 runs Android 14 with Google Play, one version above the requirement, and carries 8GB of RAM and 128GB of storage with microSD up to 2TB, which the vendor does not require but which holds a season of photos and offline submissions comfortably. Its 10.1 inch 1920 x 1200 screen gives room for long inspection forms and signature boxes, the 13MP rear camera has a flash for plant rooms and lofts, and GPS with Galileo, BeiDou, QZSS and NavIC serves the GPS field. It is sealed to IP68, tested to MIL-STD-810H and rated from -20 to 60C, and dual SIM 4G means it can sync from site rather than waiting for the office Wi-Fi. The trade-offs are a 350 nit screen, which is readable in shade and in a cab but not in direct summer sun, and no built-in scan engine, so barcode fields use the camera or a Bluetooth scanner with a wedge app.",
+      "fit": [
+        "Vendor minimum Android 13 (devices article, 9 October 2026): the A10 runs Android 14.",
+        "No RAM or storage figure published: the A10 has 8GB RAM, 128GB storage and microSD up to 2TB for offline submissions and photos.",
+        "Offline working with sync when coverage returns: the A10 has 4G dual SIM, dual-band Wi-Fi 5 and an 8000mAh battery with quick charge.",
+        "GPS field with accuracy in metres: the A10 lists GPS, Galileo, BeiDou, QZSS and NavIC.",
+        "Barcode scanning by camera or scan wedge: the A10 has a 13MP rear camera with flash and Bluetooth 5.2; it has no integrated scan engine."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 (£349, £100 less than the A10) is the handheld for a user whose forms are short and whose day involves scanning. It runs Android 15, two versions above the vendor's floor, in a 277g body sealed to IP67 and rated for 1.5 metre drops, with a removable 5050mAh battery so a charged spare takes over mid shift. Its integrated Zebra 2D scan engine with two side scan keys is the kind of internal scanner the vendor's barcode article describes, provided a scan wedge application on the device types the result into the active GoCanvas field; check that on a trial unit before relying on it, because the vendor warns a wedge app can interfere with the camera on some devices. GPS, GLONASS, BeiDou and Galileo cover the GPS field and the 13MP camera has a flash. The trade-offs are a 6 inch screen, which makes a long form a lot of scrolling, 4GB of RAM and 64GB of storage with microSD up to 256GB, and no listed stylus support.",
+      "fit": [
+        "Vendor minimum Android 13: the A6 runs Android 15.",
+        "Barcode scanning from a scanner internal to the device through a scan wedge app (barcode article): the A6 has an integrated Zebra 2D scan engine and two side scan keys.",
+        "Offline working: the A6 has 4G LTE with dual SIM, dual-band Wi-Fi 5 and a removable 5050mAh battery.",
+        "GPS field: the A6 lists GPS, GLONASS, BeiDou and Galileo.",
+        "Photos in dark spaces: 13MP rear camera with flash."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "The vendor supports tablets running a Windows Pro version of Windows through its GoCanvas for Windows Desktop client, and the Tuga W10 runs Windows 11 Pro on an Intel N100 with 8GB of RAM and 128GB of storage, with factory options of 16GB RAM (£69) and 256GB (£69) or 512GB (£125) storage fitted before dispatch. It is the choice for a team that already runs the Windows desktop client, or that needs RJ45 Ethernet, HDMI and USB-A on the same device for other software. It is rated IP65, so dust tight and protected against water jets but not immersion, and at 1197g it is heavy for a day on foot. 4G LTE and GPS are options rather than standard, so specify them if forms will be submitted from site or stamped with a location. The vendor lists Surface devices as unsupported; the W10 is not a Surface, but trial the desktop client on one unit first because the vendor publishes no requirements for the client beyond the Windows version.",
+      "fit": [
+        "Tablets running a Windows Pro version are supported (devices article): the W10 runs Windows 11 Pro.",
+        "Windows desktop client downloads from the install article; the W10 has an Intel N100 up to 3.4GHz, 8GB RAM and 128GB storage, with RAM and storage upgrades available.",
+        "Sync from the client with Sync and Click to Sync: the W10 has dual-band Wi-Fi 5 and 100Mbps Ethernet, with 4G LTE optional.",
+        "Wired connections to plant and panels for other tools: RJ45 Ethernet, HDMI, USB-A and USB-C.",
+        "GPS is optional on the W10, so order it if GPS fields matter."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your GoCanvas administrator to add you to the account, then look for the activation email and set your password; your username is the email address the account was created with. If the email does not arrive, use the forgot password form or ask the admin.",
+    "On an Android device, install GoCanvas Business Apps & Forms by Canvas Solutions, Inc. from Google Play, or open gocanvas.com/m in the device browser and it redirects to the right download. On the W10, download GoCanvas for Windows Desktop from the vendor's install article.",
+    "Sign in with the same username and password. Your admin assigns forms to your account, and each appears as a tile on the home page.",
+    "Tap Sync in the upper right corner to load your forms, reference data and dispatches. If you are often out of coverage, turn on Auto Sync and Sync after submit in the app settings.",
+    "If the device will be offline for days at a time, ask the admin to change the Client Timeout Window from the default 24 hours to 30 days so the app does not demand a credential check while you are out of signal.",
+    "Open a form tile, complete a test submission with a photo, a signature and a GPS stamp, then sync and confirm it reached the web portal before you rely on the device on a real job."
+  ],
+  "accessories": [
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10, W8 and W10), a locking VESA mount with DC power for a tablet that lives in the van between jobs",
+    "Charging Dock, £49.99 (Tuga A10, W8 and W10), for a shared tablet that returns to the office to sync and charge overnight",
+    "Hand Strap, £24 (Tuga A8, A10, W8 and W10), for one handed use on a ladder or in a riser; the A10 and W10 ship with one in the box",
+    "Belt Holster, £22 (Tuga A6 and WH6), so the handheld is on the hip between scans",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10, W8, W10 and WH6; not listed for the A6), for neater signatures on completion forms",
+    "Tempered Glass Screen Protector (2 Pack), £14, fits every model",
+    "12V DC Car Charger, £26, fits every model, for charging between jobs",
+    "USB-C to USB-A OTG Adapter, £8, fits every model, for a wired barcode scanner or keyboard on the Android devices"
+  ],
+  "faq": [
+    {
+      "q": "Will GoCanvas run on the Tuga A10 and A6?",
+      "a": "The vendor's requirement is Android 13 or higher. The Tuga A10 runs Android 14 and the A6 runs Android 15, so both meet it. The vendor publishes no RAM or storage minimum. We have not tested the app on either device, so trial it on one unit with your own forms before ordering for a team."
+    },
+    {
+      "q": "Why is the Tuga A8 not recommended for GoCanvas?",
+      "a": "The A8 runs Android 12. The vendor's March 2026 notice says support for Android 11 and 12 was withdrawn in late April 2026: the app keeps working, but future enhancements and security updates are not available on Android 12 and below, and the devices article now states Android 13 and higher. A device bought today should be inside the supported range, so choose the A10 or A6."
+    },
+    {
+      "q": "Does GoCanvas work offline on site?",
+      "a": "Yes. The vendor describes the app as a rich client that completes forms without coverage and uploads them when you sync. It must validate your login against the server every 24 hours by default; an administrator can extend that to 30 days with the Client Timeout Window setting. Submissions reach the portal only after a sync, so sync before leaving a site with signal."
+    },
+    {
+      "q": "Can I use the A6's built-in barcode scanner with GoCanvas forms?",
+      "a": "The vendor says GoCanvas receives data from any scanner, internal or external, that has a supporting scan wedge application typing the result into the active field. The A6 has an integrated Zebra 2D scan engine with two side scan keys; whether it feeds GoCanvas fields depends on a wedge app being present and configured on the device. Check this on a trial unit, and note the vendor's warning that a wedge app can interfere with the camera on some devices."
+    },
+    {
+      "q": "Can we buy for a team and pay on invoice?",
+      "a": "Yes. Team discounts apply automatically at checkout: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more, any mix of models. Business buyers can ask for a quote and pay a proforma invoice by bank transfer. Prices have no VAT to add, delivery is free to UK addresses in 7 to 10 working days, every device has a 12-month warranty and returns are accepted within 30 days in original condition."
+    }
+  ],
+  "not_recommended_note": "The Tuga A8 is not recommended for GoCanvas. It runs Android 12, below the Android 13 floor the vendor set in April 2026, and although the vendor says service on older versions is not interrupted, enhancements and security updates no longer reach them. The Tuga WH6 runs Windows 11 IoT; the vendor names tablets running a Windows Pro version, and does not address the IoT edition, so confirm with the vendor before choosing it. The Tuga W8 also runs Windows 11 Pro; this page covers the W10 as the Windows pick for its larger screen and Ethernet port.",
+  "disclaimer": "GoCanvas is a product of Canvas Solutions, Inc., part of the Nemetschek Group. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Canvas Solutions, Inc.",
+  "sources": [
+    "https://www.gocanvas.com/",
+    "https://help.gocanvas.com/hc/en-us/articles/26352389145623",
+    "https://help.gocanvas.com/hc/en-us/articles/22160838373015",
+    "https://help.gocanvas.com/hc/en-us/articles/26308504550423",
+    "https://help.gocanvas.com/hc/en-us/articles/26352563045015",
+    "https://help.gocanvas.com/hc/en-us/articles/115006594907",
+    "https://help.gocanvas.com/hc/en-us/articles/26461887164183",
+    "https://help.gocanvas.com/hc/en-us/articles/26461987360535",
+    "https://help.gocanvas.com/hc/en-us/articles/26462664726679",
+    "https://play.google.com/store/apps/details?id=com.gocanvas&hl=en_GB&gl=GB",
+    "https://nemetschek-ag-com.mynewsdesk.com/pressreleases/nemetschek-group-completes-acquisition-of-gocanvas-holdings-inc-3333088"
+  ]
+}
