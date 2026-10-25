@@ -34,13 +34,14 @@ const LEGACY_PATHS = {
   '/blog': '/blog/',
   '/works-with': '/works-with/',
   '/compare': '/compare/',
+  '/for': '/for/',
 };
 
 /**
  * Paths that are real directory indexes (a folder with an index.html). These
  * keep their trailing slash; every other path loses it.
  */
-const DIRECTORY_INDEXES = new Set(['/', '/products/', '/blog/', '/works-with/', '/compare/']);
+const DIRECTORY_INDEXES = new Set(['/', '/products/', '/blog/', '/works-with/', '/compare/', '/for/']);
 
 /** Headers for every HTML page. No CSP: Stripe and PayPal load their own scripts. */
 const SECURITY_HEADERS = {
@@ -63,7 +64,7 @@ function redirect(url, status = 301) {
  * of it before redirecting means an old URL reaches its destination in one
  * 301 instead of a chain.
  */
-function canonicalPath(pathname) {
+export function canonicalPath(pathname) {
   let p = pathname;
 
   // Canonical URLs are extensionless (matching the asset binding's
