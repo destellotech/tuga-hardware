@@ -1,0 +1,158 @@
+{
+  "slug": "pirana-cmms",
+  "software": "ShireSystem (formerly Pirana CMMS) and the Mobile Pro app",
+  "vendor": "Elecosoft UK Ltd, trading as Eleco",
+  "vendor_url": "https://eleco.com/products/shiresystem/",
+  "title": "Rugged tablet for ShireSystem, formerly Pirana CMMS",
+  "meta_description": "ShireSystem Mobile Pro is on Google Play with an Android 4.1 minimum and needs ShireSystem 3.2.6 or later. The Tuga A10 (Android 14, 8GB RAM, IP68) runs it.",
+  "target_query": "rugged tablet for Pirana CMMS",
+  "h1": "Rugged tablet for ShireSystem (formerly Pirana CMMS)",
+  "intro": [
+    "ShireSystem is the computerised maintenance management system that Shire Systems of Southampton sold for years as Pirana CMMS. Trade press from 2016 describes Pirana's Work Orders PRO and Data Collector PRO mobile apps, and the Android app on Google Play still carries the package name co.uk.shiresystems.pirana, but the product is now sold by Elecosoft UK Ltd, trading as Eleco, as ShireSystem. The vendor's product page describes it as a CMMS that helps you take control of your assets, plan maintenance efficiently, and reduce unplanned downtime, used across the aviation, automotive, healthcare, education, food and drink manufacturing, industrial and retail sectors, with four plans (Essentials, Professional, Advanced and Expert) priced on quote. The main system runs in a browser, either as Eleco's cloud service or on a customer's own Windows server.",
+    "On the floor, engineers use ShireSystem Mobile Pro. The vendor's Mobile Pro page says mobile users have access to a wealth of work order information including documents, parts, labour costs, meter readings and images, that job sign-off can be initiated by optionally scanning a barcode and can require customer, engineer and a third signature, that the Data Collector creates new assets, movements and locations, and that stock items can be received into stores, stocktakes performed and parts issued to work orders. The Google Play listing sums it up as Work Orders, Materials and Data Collection, use on or offline. That work happens in plant rooms, food factories, depots and estates, where a consumer phone in a case tends to run flat, crack or fog up.",
+    "This page sets out what Eleco publishes about the devices the app and the browser client run on, what it does not publish, which Tuga rugged devices meet the published figures, and how a UK maintenance team can buy one trial unit before standardising. Nothing here is a vendor endorsement: ShireSystem has not been tested on Tuga devices by either company, so check your own account on the device during the 30-day returns window."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 4.1 or later, from Google Play, published as a phone app",
+      "detail": "ShireSystem Mobile PRO is on Google Play from developer Elecosoft (package co.uk.shiresystems.pirana). When read on 25 October 2026 the listing showed version 4.1.0.8, updated 15 September 2025, with the release note Fixes scrolling issue on the Subject Info page, a minimum API level of 16 (Android 4.1) and a target API level of 34 in the listing data, a Phone device chip and no Tablet chip, and a rating of 3.3 stars. The minimum is low enough that every Tuga Android device clears it by many versions; the absence of a Tablet chip means Google Play may describe the app as designed for phones on a tablet, which is a reason to trial it on the device you intend to buy.",
+      "source_url": "https://play.google.com/store/apps/details?id=co.uk.shiresystems.pirana&hl=en_GB"
+    },
+    {
+      "requirement": "A current ShireSystem licence and software version 3.2.6 or later",
+      "detail": "The vendor's Mobile Pro page says the app is available providing you have purchased relevant licences and are on ShireSystem software version 3.2.6 or later, and links to the Google Play and App Store listings. Mobile Pro is a companion to a ShireSystem account, not a standalone product, so this page is for teams that already run ShireSystem and now need devices for the engineers.",
+      "source_url": "https://elecosoft.com/us/products/shiresystem/mobile-pro/"
+    },
+    {
+      "requirement": "Browser client: the latest version of an industry standard browser, Chrome recommended",
+      "detail": "Eleco's system requirements guide says ShireSystem, cloud or on premise, is accessed through the latest version of an industry standard web browser, with Google Chrome recommended and Microsoft Edge and Mozilla Firefox also supported, or through iOS and Android mobile apps. It gives no minimum Android or iOS version and no device specification for the apps. The same guide lists the on-premise server requirements (Windows Server 2016 to 2022, a 64-bit dual-core 2GHz processor, 16GB RAM and 100GB free disk for 3 to 20 concurrent users, IIS, SQL Server) which apply to the server, not to the devices engineers carry.",
+      "source_url": "https://help.elecosoft.com/system_requirements_guide/english/Content/Topics/Products/ShireSystem.htm"
+    },
+    {
+      "requirement": "Works on or offline",
+      "detail": "The Google Play description says use on or offline, and the App Store listing for the iOS version says teams can track and maintain assets both online and offline. Neither listing nor the requirements guide says how much data the app caches on the device or how sync conflicts are handled, so test a plant room with no signal during the trial.",
+      "source_url": "https://apps.apple.com/gb/app/shiresystem-mobile-pro/id1473791508"
+    },
+    {
+      "requirement": "QR codes, barcodes and RFID tags for sign-off, assets and stock",
+      "detail": "The Mobile Pro page says QR, Barcodes and RDIF tags are also supported (the page's own spelling) and that job sign-off can be initiated by optionally scanning a barcode. The App Store release notes add that Part Code and Store can be set with one QR code scan and that work orders can be started and finished by scanning a barcode. The vendor does not say whether scanning uses the camera, a built-in scan engine or a Bluetooth scanner, or which RFID frequency it means, so check the method your administrator has configured.",
+      "source_url": "https://elecosoft.com/us/products/shiresystem/mobile-pro/"
+    },
+    {
+      "requirement": "Network: 10 Mbps download and 5 Mbps upload recommended",
+      "detail": "The requirements guide recommends a minimum download speed of 10 Mbps and a minimum upload speed of 5 Mbps for best performance. It is written for the browser client, but it is a fair target for a 4G tablet uploading work order photos from site.",
+      "source_url": "https://help.elecosoft.com/system_requirements_guide/english/Content/Topics/Products/ShireSystem.htm"
+    },
+    {
+      "requirement": "RAM, storage and screen size: not published",
+      "detail": "No minimum or recommended RAM, storage or screen size for Mobile Pro was found on the Google Play listing, the Mobile Pro page or the requirements guide when read on 25 October 2026. The iOS version of the app lists iOS 11.0 or later and is designed for iPad, which suggests tablet layouts exist on that platform; on Android, Google Play shows only a Phone chip. If your Eleco account manager gives a device specification, check it against the figures below.",
+      "source_url": "https://play.google.com/store/apps/details?id=co.uk.shiresystems.pirana&hl=en_GB"
+    },
+    {
+      "requirement": "Stay on a supported release",
+      "detail": "The requirements guide says Eleco shall maintain technical support on the two most current releases of the software. The App Store notes say Entra ID single sign-on and the latest Document Manager need ShireSystem V4.5 onward, so a team on an old ShireSystem release may find the current app expects features its server does not have. Keep the server, the app and the device's Android updates current together.",
+      "source_url": "https://help.elecosoft.com/system_requirements_guide/english/Content/Topics/Products/ShireSystem.htm"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "ShireSystem's published floor is so low that any Tuga Android device clears it, so the choice comes down to the work. Work orders with documents, parts, labour and meter readings, and the Data Collector's asset and location records, are forms and lists, and they read far better on the Tuga A10's 10.1 inch 1920 x 1200 screen than on a phone. It runs Android 14 with Google Play, ten versions above the published minimum and inside the target API the app is built for, with 8GB of RAM and 128GB of storage plus microSD up to 2TB for the images that pile up on a maintenance account. It is sealed to IP68 and tested to MIL-STD-810H, works from -20 to 60C, and has NFC and a 13MP camera with flash for tags and QR codes on assets and stores. The pogo pin connector takes the Charging Dock, which suits a shared device that lives on a desk between shifts. The trade-offs: the 8000mAh battery is not listed as removable, the 350 nit screen is for plant rooms rather than yards in full sun, and Google Play shows the app with a Phone chip only, so trial the layout on the big screen before you buy six.",
+      "fit": [
+        "Requirement: Android 4.1 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: a current ShireSystem licence and version 3.2.6 or later. Tuga A10: no bearing; licences come from Eleco.",
+        "Requirement: RAM, storage and screen size not published. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB, 10.1 inch FHD IPS, 1920 x 1200, tempered glass, 350 nits.",
+        "Requirement: works on or offline, 10 Mbps down and 5 Mbps up recommended. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, Bluetooth 5.2.",
+        "Requirement: QR codes, barcodes and RFID tags. Tuga A10: 13MP rear camera with flash for codes; NFC for 13.56MHz tags; check the scanning method your account uses.",
+        "Requirement: plant rooms, factories and estates. Tuga A10: IP68, MIL-STD-810H, -20 to 60C, 680g, pogo pin connector for the Charging Dock."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "For engineers who carry the tablet all day, in a van and across a site, the Tuga A8 is the lighter, brighter choice. Its 8 inch 1280 x 800 screen is still enough for a work order form, the 1000 nit panel reads in a yard in full sun, and the 8000mAh battery is removable so a charged spare takes over mid shift. It runs Android 12, which is below the A10's Android 14 but still eleven versions above ShireSystem's published minimum, with 6GB of RAM, 128GB of storage and a microSD slot. Dual SIM 4G, NFC, a 13MP autofocus camera with flash, IP67 sealing and VESA mount points for the Vehicle Mounting Dock complete it. No drop rating or operating temperature is listed for the A8, so fit the Hand Strap.",
+      "fit": [
+        "Requirement: Android 4.1 or later from Google Play. Tuga A8: Android 12 with Google Play.",
+        "Requirement: RAM, storage and screen size not published. Tuga A8: 6GB RAM, 128GB storage with a microSD slot, 8 inch IPS, 1280 x 800, 1000 nits, AGC glass.",
+        "Requirement: works on or offline. Tuga A8: 4G LTE dual SIM, Wi-Fi, Bluetooth.",
+        "Requirement: QR codes, barcodes and RFID tags. Tuga A8: 13MP autofocus rear camera with flash; NFC.",
+        "Requirement: a device that lives in the van and on site. Tuga A8: IP67, removable 8000mAh battery, VESA mount points and pogo pin connector; no drop rating listed."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "If the job is mostly scanning, the Tuga A6 is the pocket option. Its integrated Zebra 2D scan engine with two side scan keys reads the barcodes and QR codes that start and finish a ShireSystem work order or identify a part in a store, without the camera-and-app dance, provided your account is set up to accept scanner input as keyboard text; check that on a trial unit. It runs Android 15, the newest in the range, with 4GB of RAM and 64GB of storage plus microSD up to 256GB, is sealed to IP67 and rated for 1.5 metre drops, weighs 277g, and has NFC, 4G dual SIM and a removable 5050mAh battery. The 6 inch 2160 x 1080 screen is phone sized, which matches the Phone chip on the Google Play listing, but it is cramped for long work order notes.",
+      "fit": [
+        "Requirement: Android 4.1 or later from Google Play, published as a phone app. Tuga A6: Android 15 with Google Play on a 6 inch handheld.",
+        "Requirement: QR codes, barcodes and RFID tags. Tuga A6: integrated Zebra 2D scan engine with two side scan keys; NFC; 13MP rear camera with flash.",
+        "Requirement: RAM, storage and screen size not published. Tuga A6: 4GB RAM, 64GB storage, microSD up to 256GB, 6 inch FHD+ IPS, 2160 x 1080.",
+        "Requirement: works on or offline. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: plant rooms and stores. Tuga A6: IP67, 1.5m drop rating, -20 to 50C, 277g, removable 5050mAh battery, charging contacts for a dock."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "ShireSystem's browser client wants the latest Chrome, Edge or Firefox, and the Tuga W10 runs Windows 11 Pro on an Intel N100 with 8GB of RAM, so a supervisor or planner can use the full system on site rather than the mobile app. The 10.1 inch 1280 x 800 touchscreen, RJ45 Ethernet for a plant room with no Wi-Fi, HDMI for a meeting room screen, NFC and a removable 5000mAh battery fit that role. It is IP65, so sealed against dust and water jets but not rated for immersion, and it does not run the Android Mobile Pro app at all. Treat it as the office client on a rugged body, not the engineer's device.",
+      "fit": [
+        "Requirement: browser client on the latest Chrome, Edge or Firefox. Tuga W10: Windows 11 Pro, Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage; Chrome installs as on any PC.",
+        "Requirement: 10 Mbps down and 5 Mbps up recommended. Tuga W10: 100Mbps Ethernet, dual-band Wi-Fi 5, optional 4G LTE.",
+        "Requirement: Android app. Tuga W10: does not apply; Windows does not run the Android app.",
+        "Requirement: RAM, storage and screen not published. Tuga W10: 10.1 inch IPS, 1280 x 800; 16GB RAM and 256GB or 512GB storage upgrades fitted before dispatch.",
+        "Requirement: plant rooms and site offices. Tuga W10: IP65, 1197g, removable 5000mAh battery, pogo pin connector for the Charging Dock; no drop rating or operating temperature listed."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your ShireSystem administrator to confirm the account is on version 3.2.6 or later and that a Mobile Pro licence is assigned to you; the vendor says the app is available only with the relevant licences.",
+    "On the device, sign in to Google Play and install ShireSystem Mobile PRO by Elecosoft (package co.uk.shiresystems.pirana); it is a free download and the licence is checked at login.",
+    "Open the app and enter the server address, username and password your administrator gives you. If your organisation uses Entra ID single sign-on, that needs ShireSystem V4.5 or later on the server.",
+    "Set the device's screen lock and ask your administrator whether work orders, documents and images are cached for offline use on your account, then test a work order with mobile data switched off and watch it sync when the signal returns.",
+    "If your account uses barcode or QR sign-off, scan a real asset label and a stores label on the device; on the Tuga A6 check whether the built-in scan engine feeds the field or whether the app expects the camera.",
+    "Turn on automatic app updates in Google Play, since Eleco supports only the two most current releases, and note the ShireSystem version your server runs so the app and server stay in step."
+  ],
+  "accessories": [
+    "Charging Dock, £49.99 (Tuga A10, W8 and W10), for a shared device that returns to the maintenance office between shifts",
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10, W8 and W10), for engineers who cover several sites from a van",
+    "Hand Strap, £24 (Tuga A8, A10, W8 and W10), for one-handed use on a ladder or in a riser",
+    "Belt Holster, £22 (Tuga A6 and WH6), so the handheld rides on a belt between scans",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10, W8, W10 and WH6), for the engineer, customer and third signatures the app can require",
+    "Tempered Glass Screen Protector (2 Pack), £14 (every Tuga device), for screens that get set down on plant",
+    "12V DC Car Charger, £26 (every Tuga device), for charging between sites",
+    "USB-C to USB-A OTG Adapter, £8 (every Tuga device), for a wired USB barcode scanner if your account is set up for one"
+  ],
+  "faq": [
+    {
+      "q": "Will ShireSystem Mobile Pro run on the Tuga A10, A8 and A6?",
+      "a": "The Google Play listing declares a minimum of Android 4.1, and the A10 (Android 14), A8 (Android 12) and A6 (Android 15) all run Google Play and are far above it. Whether the layout suits a 10.1 inch screen is not published: the listing shows a Phone chip and no Tablet chip, so trial it on the device you intend to buy and return it within 30 days if it is not right."
+    },
+    {
+      "q": "Is this the same product as Pirana CMMS?",
+      "a": "Yes, as far as the vendor's own materials show. Trade press from 2016 describes Pirana CMMS and its mobile apps from Shire Systems of Southampton, the Android app's package name is still co.uk.shiresystems.pirana, and the product is now sold as ShireSystem by Elecosoft UK Ltd, trading as Eleco. If your contract still says Pirana, ask your account manager which ShireSystem version you are on, because the app needs 3.2.6 or later."
+    },
+    {
+      "q": "Does the app work without signal in a plant room?",
+      "a": "The Play description says use on or offline and the iOS listing says assets can be tracked and maintained both online and offline. How much is cached and how conflicts are resolved is not published, so test it: open a work order with mobile data off, complete it, and watch it sync when you walk back into coverage."
+    },
+    {
+      "q": "Can I use NFC or RFID tags on assets?",
+      "a": "The vendor says QR codes, barcodes and RFID tags are supported, without saying which RFID technology. Every Tuga device lists NFC, which reads 13.56MHz tags at a few centimetres; the W10's optional UHF RFID reader is a different, longer range technology. Ask Eleco which tag type your account expects before buying tags."
+    },
+    {
+      "q": "Do I need the Windows W10 as well?",
+      "a": "Only if someone needs the full browser client on site. Eleco wants the latest Chrome, Edge or Firefox, which the W10 runs on Windows 11 Pro, and its Ethernet port suits plant rooms without Wi-Fi. Engineers using Mobile Pro are better served by the Android devices, which cost £200 to £300 less."
+    }
+  ],
+  "not_recommended_note": "The Tuga W8 and WH6 are not recommended for ShireSystem Mobile Pro, which Eleco publishes for Android and iOS only. Both run Windows 11 and could reach the browser client, but the W10 does that with a bigger screen and an Ethernet port, so it is the Windows pick. The Tuga A8 is the only Android device in the range still on Android 12; that is well above the app's published minimum, but if your account manager asks for a newer Android the A10 or A6 is the safer choice.",
+  "disclaimer": "ShireSystem and ShireSystem Mobile Pro are products of Elecosoft UK Ltd, trading as Eleco. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Elecosoft UK Ltd.",
+  "sources": [
+    "https://eleco.com/products/shiresystem/",
+    "https://elecosoft.com/us/products/shiresystem/mobile-pro/",
+    "https://help.elecosoft.com/system_requirements_guide/english/Content/Topics/Products/ShireSystem.htm",
+    "https://play.google.com/store/apps/details?id=co.uk.shiresystems.pirana&hl=en_GB",
+    "https://apps.apple.com/gb/app/shiresystem-mobile-pro/id1473791508",
+    "https://processengineering.co.uk/article/2023322/shire-systems-introduces-affordable-software-solution"
+  ]
+}
