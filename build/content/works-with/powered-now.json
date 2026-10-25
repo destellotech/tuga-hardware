@@ -1,0 +1,147 @@
+{
+  "slug": "powered-now",
+  "software": "Powered Now",
+  "vendor": "Powered Now Limited",
+  "vendor_url": "https://powerednow.com/",
+  "title": "Rugged tablet for Powered Now: UK buyer's guide",
+  "meta_description": "Powered Now supports Android 14 or later. The Tuga A10 (Android 14, 8GB RAM, IP68) meets it and the A6 runs Android 15; the A8 on Android 12 does not qualify.",
+  "target_query": "best tablet for Powered Now",
+  "h1": "Rugged tablet for Powered Now",
+  "intro": [
+    "Powered Now is job management software from Powered Now Limited, a UK company whose site describes the product as built in the UK for UK trades, from sole traders to full teams. It names heating and gas, plumbing, electrical, HVAC and refrigeration, landscaping, pest control, building and construction, property maintenance, painting and decorating, windows and glazing, screed and flooring, fire services, bricklaying, carpentry and roofing. Plans are priced in pounds (Business at £28 a month for sole traders, Professional at £32 and Premium at £40 a month per user at the time of checking) with a 14 day free trial and no card needed. The office side runs in a browser; the engineer carries the Powered Now app on an Android or Apple phone or tablet.",
+    "The app is where the site work happens: quotes and invoices made and sent from the job, a drag and drop diary, job photos, customer signatures captured on the screen, and more than 80 trade forms and certificates including the Gas Safety Record, the BS 7671 EICR and EIC, EV charging point, heat pump, solar PV, oil, fire alarm and pest control forms. Powered Now says the app keeps working with no signal, so certificates, notes, photos and quotes can be completed in a basement or a rural property and sync once a connection returns. That is a device that goes from the van into cupboards, lofts and plant rooms all day.",
+    "This page sets out what Powered Now publishes about the devices its app supports, which Tuga rugged devices meet those published figures and by how much, why the Tuga A8 is not on the list for this app, where the Windows tablet fits, and how a UK trade business can buy a single unit to trial before kitting out a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 14 or later, on a device up to two years old",
+      "detail": "Powered Now's support article What Devices and Browsers Does Powered Now Support? (undated; the page carries a 2026 copyright line) says the app is built for the latest Android version, that the company supports devices running Android versions up to two years old, and that the minimum Android version it supports is 14, with older versions possibly not working correctly. ColorOS and Huawei devices are not supported, and folding Android devices are not officially supported. The Google Play listing for Powered Now Job Software & App (package com.powerednow.fieldservices, developer Powered Now, updated 21 September 2026, 50,000 plus downloads) shows device chips for Phone, Tablet and Desktop. The listing's own minimum Android figure was not visible when we checked, so the support article is the figure this page uses.",
+      "source_url": "https://support.powerednow.com/en/knowledge/what-devices-and-browsers-does-powered-now-support"
+    },
+    {
+      "requirement": "Memory: 8GB RAM advised for very large accounts; no general minimum published",
+      "detail": "The same article advises an iPhone or Android device with at least 8GB RAM for very large accounts with many sites. It publishes no RAM, storage or screen size minimum for ordinary accounts. The offline article adds a practical caution: always make sure you have sufficient memory on your device to ensure all data is downloaded to the device database, because the app keeps a local copy of your data.",
+      "source_url": "https://support.powerednow.com/en/knowledge/what-devices-and-browsers-does-powered-now-support"
+    },
+    {
+      "requirement": "Offline working with automatic sync when a signal returns",
+      "detail": "Powered Now says the app is always available on your smartphone or tablet, even when you do not have a signal: you can record information, pictures and signatures related to the job straight onto the device and produce quotes and invoices straight after finishing with the customer. Everything is saved to the cloud as soon as there is a signal and copied to all of your devices (smartphone, tablet, PC and Mac) and to your team. It asks that devices are connected to a service as soon as possible to sync the data to its servers. The company's mobile app page lists updating job details, adding notes and photos, completing certificates and forms, tracking time and expenses and preparing invoices or quotes as things that work offline. Desktop use through a browser needs an internet connection.",
+      "source_url": "https://support.powerednow.com/en/knowledge/-does-powered-now-work-offline"
+    },
+    {
+      "requirement": "Customer signatures on the screen: mobile versions only",
+      "detail": "The support article How to Capture a Signature (Mobile Only) states that the feature is only available on the mobile versions of Powered Now. A project is signed off from Add new item to project, then Capture signature, and the customer signs in the box; a quote, invoice or other document is signed from its Options menu, then Sign, and the signature appears in the document preview after you tap Save. The article does not say whether a finger or a stylus is used. Powered Now's site also describes customers signing quotes on their own phone through a one tap link, which does not depend on your device.",
+      "source_url": "https://support.powerednow.com/en/knowledge/how-to-capture-a-signature"
+    },
+    {
+      "requirement": "Forms and certificates raised from the home screen, locked once sent",
+      "detail": "The Raising a Certificate article describes opening the forms and certificates quick action from the home screen, choosing the certificate, selecting the customer and, where the installation address differs, the site, naming the project, completing the certificate and sending it; once sent its contents are locked. The What Certificates Do You Have? page lists more than 80 forms by category: gas (including the Gas Safety Record and Gas Warning Notice), electrical to BS 7671:2018 A3:2024 (MEIC, EIC, EICR and EV Charging Point Installation Certificate), renewable (heat pump, solar PV, G98), oil (CD/10 to CD/14), plumbing, fire alarm, pest control, waste notes and customisable site visit and job completion forms. A Powered Now blog post says certificates are switched on under Settings, then Forms and Certificates.",
+      "source_url": "https://support.powerednow.com/en/knowledge/raising-a-certificate"
+    },
+    {
+      "requirement": "Photos, GPS team tracking and the camera",
+      "detail": "The Google Play description says the app can track your employees' location live using GPS, that the feature can be disabled, and that continued use of GPS running in the background can decrease battery life. It also lists capturing customers' signatures, recording hours against appointments, and sending documents online or as a PDF by email and text message. The offline article says pictures are recorded straight onto the device, and the company's site says job photos feed quotes and certificates. No barcode, QR or NFC scanning is described for the app on any page we checked.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.powerednow.fieldservices&hl=en_GB"
+    },
+    {
+      "requirement": "Windows and the web version: Chrome recommended, internet required",
+      "detail": "The support site recommends Google Chrome for Powered Now Web and says Safari, Firefox and Edge are supported but may not work as efficiently. A separate Windows 10 Compatibility article says Powered Now and Microsoft tested the app installed on Intel-based systems running Windows 10, that the latest version is compatible, and that the web version is at web.powerednow.com with Chrome recommended; it does not mention Windows 11. The company says desktop and laptop use through a browser requires an internet connection, and signature capture is mobile only, so a Windows device is the office and van-desk view of Powered Now rather than the certificate-on-site device.",
+      "source_url": "https://support.powerednow.com/en/knowledge/windows-10-compatibility"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Powered Now's published floor is Android 14, and the Tuga A10 runs Android 14 with Google Play, so it meets the stated minimum exactly. Its 8GB of RAM matches the figure Powered Now advises for very large accounts, and 128GB of storage with a microSD slot rated to 2TB leaves room for the local copy of your data the app keeps for offline working. The 10.1 inch 1920 x 1200 screen shows a full EICR page or a Gas Safety Record without pinching, and the 13MP rear camera with flash covers the photos that go on certificates and quotes. It is sealed to IP68 and tested to MIL-STD-810H, with dual SIM 4G for syncing from site and NFC for the future. The trade-offs are a 350 nit screen, which is readable under cover but dim in direct sun, a battery that is not listed as removable, and the Android version itself: because the vendor states both a minimum of 14 and support for versions up to two years old, the A10 sits at the edge of that window with no headroom, so confirm the current position with Powered Now before buying for a team, and trial one unit first. £449, no VAT to add.",
+      "fit": [
+        "Requirement: Android 14 or later. Tuga A10: Android 14 with Google Play, meeting the published minimum exactly.",
+        "Requirement: 8GB RAM advised for very large accounts, sufficient memory for the local database. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: offline working with sync when a signal returns. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5.",
+        "Requirement: certificates, forms, photos and on-screen signatures on site. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 with tempered glass, 13MP rear camera with flash.",
+        "Requirement: a device that lives in the van and in plant rooms. Tuga A10: IP68, MIL-STD-810H, -20°C to 60°C, 680g, 8000mAh battery with quick charge, pogo pin connector."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For an engineer who wants Powered Now in a pocket or a belt holster rather than a tablet, the Tuga A6 runs Android 15 with Google Play, a full version above the published minimum, which gives it a year more headroom than the A10 under Powered Now's two year rule. It has 4G with dual SIM for syncing from site, a 13MP rear camera with flash for photos in dark cupboards, and a removable 5050mAh battery so a charged spare can take over if GPS team tracking is left running. Its 4GB of RAM is below the 8GB Powered Now advises for very large accounts with many sites, so it suits a sole trader or a small team rather than a big multi-site account, and the 6 inch 2160 x 1080 screen means customers sign on a phone sized display and long certificates need more scrolling than on the A10. The Zebra 2D barcode scanner is not a Powered Now feature. It is sealed to IP67 and rated for 1.5 metre drops, weighs 277g, and costs £349.",
+      "fit": [
+        "Requirement: Android 14 or later. Tuga A6: Android 15 with Google Play.",
+        "Requirement: 8GB RAM advised for very large accounts. Tuga A6: 4GB RAM, 64GB storage, microSD up to 256GB, so suited to small accounts rather than very large ones.",
+        "Requirement: offline working with sync when a signal returns. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1.",
+        "Requirement: photos and on-screen signatures. Tuga A6: 6 inch FHD+ IPS 2160 x 1080, 13MP rear camera with flash.",
+        "Requirement: a device carried all day. Tuga A6: 277g, IP67, 1.5 metre drop rating, -20°C to 50°C, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "The Tuga W10 is for the browser version of Powered Now, not for the certificate on site. Powered Now Web runs in Chrome, which the vendor recommends, and the W10 runs Windows 11 Pro on an Intel N100 with 8GB RAM and a 10.1 inch 1280 x 800 touchscreen, with HDMI, RJ45 Ethernet, USB-A and USB-C for a van desk or an office. Two limits come from the vendor rather than the device: the web version needs an internet connection, and customer signatures are only available on the mobile versions, so a W10 user still needs an Android or Apple device for sign-off on site. Powered Now's Windows article names Windows 10 as tested and does not mention Windows 11, so trial the web version on the W10 before relying on it. 4G is optional on the W10, and it has no operating temperature or drop rating listed. £649.",
+      "fit": [
+        "Requirement: Powered Now Web in Google Chrome. Tuga W10: Windows 11 Pro, Intel N100 up to 3.4GHz, 8GB RAM, 128GB storage with microSD.",
+        "Requirement: an internet connection for the web version. Tuga W10: dual-band Wi-Fi 5, 100Mbps Ethernet, optional 4G LTE.",
+        "Requirement: a screen for the diary, reports and documents. Tuga W10: 10.1 inch IPS 1280 x 800, HDMI out for a second screen.",
+        "Limit from the vendor: signatures are mobile only and the Windows article names Windows 10, not 11. Tuga W10: pair it with an Android device for sign-off, and trial first."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Start a Powered Now free trial at powerednow.com (14 days, no card needed), or ask the account owner to add you as a user under Settings, then Team, which the getting started guide covers in Lesson Four.",
+    "On the Tuga A10 or A6, open Google Play and install Powered Now Job Software & App (package com.powerednow.fieldservices, developer Powered Now), then sign in. Powered Now says logging in on a new device downloads your information automatically.",
+    "Fit a data SIM before the first job. Both devices take two SIMs, so a second network covers areas where the first is weak; Powered Now asks that devices connect as soon as possible after offline work so the data reaches its servers.",
+    "Work through the vendor's getting started lessons on the device: Lesson Two for your document template and logo, Lesson Three for tax, Lesson Five for your first quote or invoice, and switch on the certificates you use under Settings, then Forms and Certificates.",
+    "Raise a test certificate from the forms and certificates quick action on the home screen, add a photo, capture a signature from the document's Options menu, and send it to yourself, so you know the layout and the locking behaviour before a customer is waiting.",
+    "If the account owner uses live team tracking, decide whether to leave GPS running: Powered Now notes that continued background use can decrease battery life. For the A10, fit the vehicle mounting dock and a 12V car charger so it charges between jobs; for the A6, add the belt holster and consider a spare battery."
+  ],
+  "accessories": [
+    "Vehicle mounting dock, £109 (Tuga A10 and W10), so the device stays secure and charged in the van",
+    "12V DC car charger, £26, fits every model, for charging between jobs",
+    "Capacitive stylus, £14.99 (Tuga A10 and W10), for signatures and tick boxes on certificates; not listed for the A6",
+    "Hand strap, £24 (Tuga A10 and W10), for one handed use in a loft or a plant room",
+    "Charging dock, £49.99 (Tuga A10 and W10), for devices that return to the office overnight",
+    "Belt holster, £22 (Tuga A6)",
+    "Tempered glass screen protector 2-pack, £14, fits every model",
+    "Rugged carry case, £34 (Tuga A10 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will Powered Now run on the Tuga A10?",
+      "a": "Powered Now publishes a minimum of Android 14 and says it supports Android versions up to two years old. The Tuga A10 runs Android 14 with Google Play, so it meets the published minimum, and its 8GB of RAM matches the figure Powered Now advises for very large accounts. Because the A10 meets the minimum exactly rather than exceeding it, ask Powered Now how long Android 14 will stay supported before buying for a team. We do not describe any device as tested or certified by Powered Now; this page sets the vendor's published requirements against the device specifications, so trial the app on one unit first."
+    },
+    {
+      "q": "Why is the Tuga A8 not recommended for Powered Now?",
+      "a": "The A8 runs Android 12, and Powered Now's published minimum is Android 14, with a note that older versions may not function correctly. The A8 meets or exceeds the requirements of many other job management apps, but not this one. If you want an 8 inch device for Powered Now, there is no Tuga model that meets the Android 14 floor at that size; the choice is the 10.1 inch A10 or the 6 inch A6."
+    },
+    {
+      "q": "Does Powered Now work offline on these devices?",
+      "a": "Yes, according to the vendor. Powered Now says the app is available on your smartphone or tablet even without a signal, that pictures, signatures, notes, certificates and forms can be recorded on the device, and that everything is saved to the cloud and copied to your other devices as soon as there is a signal. It asks you to connect as soon as possible after working offline and to keep enough free storage for the local database. The A10 has 128GB with a microSD slot and the A6 has 64GB with a microSD slot, and both have dual SIM 4G for syncing from site."
+    },
+    {
+      "q": "Can customers sign certificates and quotes on the tablet?",
+      "a": "Yes. Powered Now documents capturing a signature on a project or on a document from its Options menu, and states that this feature is only available on the mobile versions of the app, which includes the Android app on the A10 and A6. Customers can also sign quotes on their own phone through a link. We sell a capacitive stylus at £14.99 that fits the A10 but is not listed for the A6; the vendor's article does not say whether a finger or a stylus is expected."
+    },
+    {
+      "q": "Can I trial one unit first, and do you invoice businesses?",
+      "a": "Yes to both. A single unit to try before kitting out a team is welcome, and business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware is the trading name of Destello Tech Ltd and is not VAT registered, so there is no VAT to add to the £449 (A10), £349 (A6) or £649 (W10) prices. Delivery is free to UK addresses in 7 to 10 working days, with 30-day returns and a 12-month warranty. Team discounts apply automatically: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+    }
+  ],
+  "not_recommended_note": "We do not suggest the Tuga A8 for Powered Now: it runs Android 12 and the vendor's published minimum is Android 14. We also do not suggest the Tuga W10 as the device for certificates and sign-off on site, because Powered Now's signature capture is mobile only and its web version needs an internet connection; the W10 is listed above only as a Windows option for the browser version at a van desk or in the office, and the vendor's Windows article names Windows 10 rather than Windows 11, so trial it first. Powered Now describes no barcode, QR or NFC scanning in its app, so the A6's Zebra 2D scan engine and the NFC radio on the A10 and A6 are not Powered Now features. Powered Now states a minimum of Android 14 and support for Android versions up to two years old; the A10 runs Android 14 and the A6 Android 15, so check the current position with Powered Now before a large order. Powered Now does not name Tuga devices, and we do not describe any device as certified or tested by Powered Now.",
+  "disclaimer": "Powered Now is a product of Powered Now Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Powered Now Limited.",
+  "sources": [
+    "https://powerednow.com/",
+    "https://support.powerednow.com/en/knowledge/what-devices-and-browsers-does-powered-now-support",
+    "https://support.powerednow.com/en/knowledge/use-it-on-any-device",
+    "https://support.powerednow.com/en/knowledge/-does-powered-now-work-offline",
+    "https://support.powerednow.com/en/knowledge/how-to-capture-a-signature",
+    "https://support.powerednow.com/en/knowledge/raising-a-certificate",
+    "https://support.powerednow.com/en/knowledge/what-certificates-do-you-have",
+    "https://support.powerednow.com/en/knowledge/windows-10-compatibility",
+    "https://support.powerednow.com/en/knowledge/getting-started-guide",
+    "https://support.powerednow.com/en/knowledge/lesson-one-finding-your-way-around",
+    "https://play.google.com/store/apps/details?id=com.powerednow.fieldservices&hl=en_GB",
+    "https://powerednow.com/?p=12780",
+    "https://powerednow.com/new-powered-now-diary-and-more-certificates-available/",
+    "https://powerednow.com/resources/get-in-touch/"
+  ]
+}

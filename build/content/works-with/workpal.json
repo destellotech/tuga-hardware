@@ -1,0 +1,133 @@
+{
+  "slug": "workpal",
+  "software": "WorkPal",
+  "vendor": "WorkPal Limited",
+  "vendor_url": "https://yourworkpal.com/",
+  "title": "Rugged tablet for WorkPal: UK and Ireland buyer's guide",
+  "meta_description": "WorkPal's app needs Android 11 or later on Google Play. The Tuga A8 (Android 12, 1000 nit screen, removable 8000mAh battery) meets it and docks in the van.",
+  "target_query": "best tablet for WorkPal",
+  "h1": "Rugged tablet for WorkPal",
+  "intro": [
+    "WorkPal is job management software from WorkPal Limited of Belfast, which describes it as the all-in-one job management software built to streamline your business from quote to cash. The industries listed on its site are cleaning management, drainage, electrical, environmental services, facilities management, fire and security, landscaping and grounds maintenance, pest control, plumbing and HVAC, property maintenance, roofing, and salting and gritting. The vendor's supported countries page says the system is accessible from the United Kingdom and Ireland among a list of 32 countries. The office works in a desktop web platform; field staff use the WorkPal mobile app, which has its own login and licence.",
+    "The mobile app is where the day's work is recorded. The vendor's mobile user guide describes starting a shift, which records working time and enables location tracking, travelling to a job with directions and travel timers, then on site adding notes, attaching read-only PDFs such as safety certificates or site plans, completing forms, taking photos or choosing them from the gallery, and finishing with an operative signature and, where required, a customer signature. The vendor says the app works without an internet connection and syncs when the connection returns, with an Outbox counter that shows what is still waiting. All of that happens in plant rooms, loft spaces, drains, gardens and vans, where a consumer tablet tends to crack, fog up or run flat before the shift ends.",
+    "This page sets out what WorkPal publishes about the devices its app runs on, what it does not publish, which Tuga rugged devices meet the published requirement, and how a UK field team can buy a single trial unit before committing to a fleet. Nothing here is a vendor endorsement: check your own WorkPal account on the device during the 30-day returns window."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 11 or later, from Google Play, on phones and tablets",
+      "detail": "The Android app is published on Google Play as WorkPal (package com.workpal.workpal, developer WORKPAL LIMITED, Grove House, 145-149 Donegall Pass, Belfast BT7 1DT). When checked on 25 October 2026 the listing showed version 5.4.5, updated 16 October 2026, with a minimum API level of 30 (Android 11), a target API level of 36, device chips for Phone and Tablet, and 5,000 plus downloads. The release notes for that version mention image upload performance, parts and assets on jobs, and forms on completed jobs.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.workpal.workpal&hl=en_GB"
+    },
+    {
+      "requirement": "Keep the app current: the vendor blames many issues on old versions",
+      "detail": "The vendor's mobile user guide says to open the Google Play Store and search for WorkPal, to check for updates if it is already installed, and that many issues we see come down to older versions still being in use. With the Play minimum already at Android 11 and the app targeting API 36, a device with headroom above the floor is less likely to be left behind by a future release.",
+      "source_url": "https://workpal-support.instantdocsbase.com/help/mobile-user-guide"
+    },
+    {
+      "requirement": "RAM, storage and screen size: not published",
+      "detail": "No minimum or recommended RAM, storage or screen size for the WorkPal app was found on the vendor's site, its Google Play listing or its help centre when read on 25 October 2026. The help centre does say to keep the device and apps updated for performance. If your WorkPal account manager gives a device specification, check it against the figures below before you buy.",
+      "source_url": "https://workpal-support.instantdocsbase.com/"
+    },
+    {
+      "requirement": "Offline working with an Outbox that syncs when signal returns",
+      "detail": "The vendor's mobile app page says the app works even without an internet connection, that teams can fill in forms and capture data offline, and that it syncs once they are back online. The mobile user guide adds that syncing happens automatically in the background, that a connection indicator and an Outbox counter show what is waiting, that if your signal drops the app stores your updates and sends them when the connection returns, that a manual sync is available from the top right menu, and not to close the app while the Outbox is not zero. The vendor does not publish how much is cached on the device or how long a completed job is kept before it is removed.",
+      "source_url": "https://yourworkpal.com/mobile-for-job-management/"
+    },
+    {
+      "requirement": "Location tracking needs Allow all the time, precise location and Battery Saver off",
+      "detail": "The vendor's location permissions article says WorkPal needs access to your device's location for the tracking feature to work. On Android it asks for Allow all the time under the app's Location permission, the device location toggle on and Google Location Accuracy on, and for Battery Saver to be disabled because it can restrict location services and background syncing. The battery usage article recommends using WorkPal with Battery Saver Mode disabled wherever possible, says navigation and location-based apps can significantly increase battery usage when running continuously in the background, and recommends carrying a portable charger or battery pack when working away from a power source for extended periods.",
+      "source_url": "https://workpal-support.instantdocsbase.com/help/how-to-enable-location-permissions-on-android-and-ios"
+    },
+    {
+      "requirement": "Photos from the camera or the gallery, documents, forms and signatures",
+      "detail": "The mobile user guide describes taking a photo through Add in the Images section, or pressing and holding Add to pick one from the camera roll, and a newer help article describes an Add Image from Gallery button beside the Camera button for choosing one or more existing images. Forms are completed in the app, read-only PDFs can be attached to a job, and the job is finished with an operative signature and, if required, a customer signature. No barcode, QR or NFC scanning is described, so plan on the camera for photos and nothing more.",
+      "source_url": "https://workpal-support.instantdocsbase.com/help/newaddimagefromgallerybutton"
+    },
+    {
+      "requirement": "One device per user, and a mobile login is not a desktop login",
+      "detail": "The vendor's guide says each user should log in on one device only, because shared logins can cause syncing problems and missing or duplicated data; the username looks like an email address but does not need to be a real email account, and passwords are system-generated and reset by a desktop administrator. A separate help article says desktop login details will not work on mobile and mobile login details will not work on desktop, and that a user who needs both needs an additional licence. For a shared pool of tablets, that means one WorkPal mobile user per device rather than one login passed around.",
+      "source_url": "https://workpal-support.instantdocsbase.com/help/can-i-use-my-desktop-log-in-on-mobile"
+    },
+    {
+      "requirement": "Windows: no Windows app; the office platform is a web login",
+      "detail": "The vendor publishes Android and iOS apps (the App Store listing, read on 25 October 2026, requires iOS 17.6 or iPadOS 17.6 or later and is designed for iPad) and refers to a desktop platform for the office, which its home page links to as a web login. No Windows app and no list of supported browsers or browser versions was found on the vendor's site or help centre.",
+      "source_url": "https://apps.apple.com/gb/app/workpal/id1563757237"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "WorkPal is built around a shift that starts in the van and runs on location tracking until it ends, and the vendor's own advice is to leave Battery Saver off and carry a portable charger. The Tuga A8 answers that directly: an 8000mAh removable battery, so a charged spare takes over mid shift rather than a power bank dangling from a USB lead, and VESA mount points with pogo pin contacts so it locks into the Vehicle Mounting Dock on the road and charges between jobs. It runs Android 12 with Google Play, which meets the published Android 11 minimum, has 6GB of RAM and 128GB of storage for the photos and PDFs that sit in the Outbox until signal returns, dual SIM 4G so the sync happens from site rather than from the next Wi-Fi, and GPS, GLONASS, Galileo and BeiDou for the tracking WorkPal asks to run all the time. The 1000 nit screen stays readable on a roof or a forecourt, and the 13MP autofocus camera with flash covers the before and after photos. It is sealed to IP67. The trade-offs: Android 12 is one version above the floor, so with the app targeting API 36 you should expect to replace it sooner than an Android 14 device, and no drop rating is listed for the A8, so fit the Hand Strap where it is carried up ladders.",
+      "best_for": "Field service firms running WorkPal from the van: drainage, pest control, plumbing and HVAC, fire and security, property maintenance."
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "For facilities and grounds teams whose WorkPal day is forms, equipment records and site plans rather than driving, the Tuga A10 gives a 10.1 inch 1920 x 1200 screen for the attached PDFs and longer forms, Android 14 with Google Play (three versions above the published minimum, so more headroom for future app releases), 8GB of RAM and 128GB of storage expandable to 2TB. It is sealed to IP68 and tested to MIL-STD-810H in a 680g body, with dual SIM 4G, NFC and a pogo pin connector for the Charging Dock when devices return to a desk overnight. The battery is 8000mAh with quick charge but is not listed as removable, so a long tracked shift leans on the 12V DC Car Charger or the dock, and the screen is 350 nits, which is readable under cover and in a cab but not the choice for a day on a roof. It also costs £70 more than the A8.",
+      "best_for": "Facilities, cleaning and grounds teams working from a site base, and anyone who reads plans on the device."
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Pest control rounds, cleaning audits and salting and gritting runs want a device that lives in a pocket and comes out for a form, a photo and a signature. The Tuga A6 is a 6 inch Android 15 handheld at 277g, sealed to IP67 and rated for 1.5 metre drops, with a 13MP camera with flash, dual SIM 4G, GPS, GLONASS, BeiDou and Galileo, and a removable 5050mAh battery, so the always-on tracking that WorkPal asks for does not end the day early. Android 15 gives the most headroom in the range above the published Android 11 minimum. Its built-in Zebra 2D scanner is not used by WorkPal, which describes no scanning, so you pay for it only if another app does. The trade-offs are the 6 inch screen for longer forms and PDFs, 4GB of RAM and 64GB of storage with a microSD slot up to 256GB, and no stylus listed for it. The Belt Holster at £22 keeps it on the operative rather than in the van.",
+      "best_for": "One-handed rounds: pest control, cleaning, gritting, lone workers who need the tracking but not a big screen."
+    }
+  ],
+  "setup_steps": [
+    "Ask your WorkPal administrator to create a mobile user for you. A mobile login is separate from a desktop login and needs its own licence, and the vendor says each user should log in on one device only, so for a shared pool of tablets set up one mobile user per device.",
+    "On the Tuga device, open the Google Play Store, search for WorkPal (the listing is by WORKPAL LIMITED, package com.workpal.workpal) and install it. If it is already installed, check for an update: the vendor says many issues come down to older versions still being in use.",
+    "Log in with the username your office gives you, which looks like an email address but need not be a real mailbox, and the system-generated password. Only a desktop administrator can reset it.",
+    "Grant the permissions the vendor asks for: Settings, Apps, WorkPal, Permissions, Location, Allow all the time; then Settings, Location on with Google Location Accuracy on. Turn Battery Saver off on the device, since the vendor says it can restrict location services and background syncing.",
+    "Run a test job before the first real one: tap Start Shift, open a job from the Jobs tile, use Directions and the travel timers, then on site add a note, attach a PDF, complete a form, take a photo and add one from the gallery, and finish with the operative and customer signatures. Watch the connection indicator and the Outbox counter in the app.",
+    "Before closing the app at the end of a shift, make sure the Outbox reads zero; trigger a manual sync from the top right menu if it does not. The vendor says a completed job syncs to the office and is removed from the device after a short period, so the device is not your archive."
+  ],
+  "accessories": [
+    "Vehicle Mounting Dock, £109 (Tuga A8 and A10), so the tablet rides locked and charging between jobs while WorkPal tracks the shift",
+    "12V DC Car Charger, £26 (every Tuga device), the vendor's own advice is to work with Battery Saver off and a charger to hand",
+    "Hand Strap, £24 (Tuga A8 and A10), for photos and signatures up a ladder or in a riser, since no drop rating is listed for the A8",
+    "Charging Dock, £49.99 (Tuga A10), for shared devices that return to a site office or depot overnight",
+    "Capacitive Stylus, £14.99 (Tuga A8 and A10), for neater customer signatures when the gloves are off; not listed for the A6",
+    "Tempered Glass Screen Protector (2 Pack), £14 (every Tuga device), treat it as a consumable on a device that lives in a van",
+    "Belt Holster, £22 (Tuga A6), keeps the handheld on the operative for pest control and cleaning rounds",
+    "A spare battery for the A8 or A6 is available on request; with WorkPal tracking all shift, a charged spare in the van is the simplest answer to the vendor's portable charger advice"
+  ],
+  "faq": [
+    {
+      "q": "Will WorkPal run on the Tuga A8, A10 and A6?",
+      "a": "WorkPal's Google Play listing, read on 25 October 2026, sets a minimum of Android 11 with device chips for Phone and Tablet. The Tuga A8 runs Android 12, the A10 Android 14 and the A6 Android 15, all with Google Play, so each meets the published minimum. We have not run WorkPal on these devices ourselves and WorkPal Limited has not certified them, so install the app on one unit and run a test job during the 30-day returns window before buying for the team."
+    },
+    {
+      "q": "Does WorkPal work offline on a rugged tablet?",
+      "a": "The vendor says the app works without an internet connection, stores your updates if your signal drops and sends them when the connection returns, with an Outbox counter showing what is waiting. That is a property of the app, not the device. What the device adds is dual SIM 4G on the A8, A10 and A6 so the Outbox empties from site rather than from the next Wi-Fi, and enough storage (128GB on the A8 and A10, 64GB plus microSD on the A6) for a day of photos and PDFs waiting to sync."
+    },
+    {
+      "q": "WorkPal says to keep Battery Saver off and carry a portable charger. Which Tuga lasts a tracked shift?",
+      "a": "We do not publish run times, because they depend on screen brightness, signal and how often the app polls location. What the catalogue does list is battery capacity and whether it is removable: 8000mAh removable on the A8, 8000mAh with quick charge but not listed as removable on the A10, and 5050mAh removable on the A6. A removable battery means a charged spare takes over mid shift, which is the vendor's portable charger advice without the cable. The 12V DC Car Charger at £26 fits every model, and the Vehicle Mounting Dock at £109 keeps the A8 or A10 charging on the move."
+    },
+    {
+      "q": "Can we run WorkPal on the Tuga W10 Windows tablet?",
+      "a": "Not the mobile app: WorkPal publishes it for Android and iOS only. The office side of WorkPal is a desktop web platform, and a desktop login is separate from a mobile login with its own licence, so a W10 in the office could reach that platform in a browser the vendor supports (it publishes no browser list). For the field app, choose an Android device."
+    },
+    {
+      "q": "Does WorkPal use the barcode scanner on the Tuga A6 or NFC on the A8?",
+      "a": "WorkPal's published material describes photos, forms, documents, signatures and location tracking, and no barcode, QR or NFC scanning, so plan on none. The A6's built-in 2D scanner and the NFC on every Tuga device are there for other apps you may run alongside WorkPal; ask WorkPal Limited directly if scanning matters to you, as features change."
+    }
+  ],
+  "not_recommended_note": "The Tuga W10, W8 and WH6 are not recommended for the WorkPal mobile app, which the vendor publishes for Android and iOS only. A Windows device could reach WorkPal's desktop web platform in a browser for office tasks, under a separate desktop licence, but that is not the field app this page is about.",
+  "disclaimer": "WorkPal is a product of WorkPal Limited. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by WorkPal Limited. Requirements quoted here are as published by the vendor on the dates given and may change; check them against your own WorkPal account before you buy.",
+  "sources": [
+    "https://yourworkpal.com/",
+    "https://yourworkpal.com/mobile-for-job-management/",
+    "https://yourworkpal.com/features-of-job-management-software/",
+    "https://play.google.com/store/apps/details?id=com.workpal.workpal&hl=en_GB",
+    "https://apps.apple.com/gb/app/workpal/id1563757237",
+    "https://workpal-support.instantdocsbase.com/",
+    "https://workpal-support.instantdocsbase.com/help/mobile-user-guide",
+    "https://workpal-support.instantdocsbase.com/help/how-to-enable-location-permissions-on-android-and-ios",
+    "https://workpal-support.instantdocsbase.com/help/workpals-battery-usage",
+    "https://workpal-support.instantdocsbase.com/help/can-i-use-my-desktop-log-in-on-mobile",
+    "https://workpal-support.instantdocsbase.com/help/newaddimagefromgallerybutton",
+    "https://workpal-support.instantdocsbase.com/help/supported-countries"
+  ]
+}

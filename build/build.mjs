@@ -495,6 +495,62 @@ const TRADES = [
     copy: 'Goods in, picking and stocktakes with a built-in 2D scan engine. A handheld that fits a holster and survives the loading bay.',
     pick: 'tuga-a6',
   },
+  {
+    icon: icons.thermometer(24),
+    name: 'HVAC & refrigeration',
+    page: '/for/hvac-refrigeration',
+    copy: 'Service sheets, commissioning readings and photos of the plant, from a rooftop condenser to a cold room, on a sealed tablet that docks in the van.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.lock(24),
+    name: 'Fire & security',
+    page: '/for/fire-security',
+    copy: 'Device schedules, commissioning tests and service records, with a flash camera for ceiling voids and risers. Sealed against the dust above the tile, and a Windows option for panel software.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.sun(24),
+    name: 'Solar & EV installers',
+    page: '/for/solar-ev-installers',
+    copy: 'Layout drawings readable on a sunny roof, serial numbers scanned in the loft, handover photos in the garage. A bright, sealed tablet for solar PV and EV charger installs.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.signal(24),
+    name: 'Telecoms & fibre',
+    page: '/for/telecoms-fibre',
+    copy: 'Serial scans, splice records and chamber photos from the roadside, up a pole or in a wet footway box. A pocket handheld sealed to IP67 with a built-in scanner.',
+    pick: 'tuga-a6',
+  },
+  {
+    icon: icons.building(24),
+    name: 'Housing repairs teams',
+    page: '/for/housing-repairs',
+    copy: 'Responsive repairs, voids and compliance photos on a shared device that gets handed between operatives. Removable battery, van dock and a flash for damp evidence in dark rooms.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.shield(24),
+    name: 'Pest control',
+    page: '/for/pest-control',
+    copy: 'Bait station scans, evidence photos in lofts and drains, and a signed visit report before you leave. A pocket handheld with a built-in scanner that survives the round.',
+    pick: 'tuga-a6',
+  },
+  {
+    icon: icons.ruler(24),
+    name: 'Inventory clerks & inspectors',
+    page: '/for/property-inventory',
+    copy: 'Check-in and check-out inventories, meter readings and a few hundred photos per property. A camera with a flash, storage to match and a battery that lasts the round.',
+    pick: 'tuga-a8',
+  },
+  {
+    icon: icons.droplet(24),
+    name: 'Drainage engineers',
+    page: '/for/drainage',
+    copy: 'Job sheets, survey photos and reports, from the roadside to the back of the van. Sealed for spray and wet chambers, with a Windows option for survey software.',
+    pick: 'tuga-a8',
+  },
 ];
 
 function tradeCard(t) {

@@ -1,0 +1,117 @@
+{
+  "slug": "re-flow",
+  "software": "Re-flow",
+  "vendor": "Workflow Management Ltd (trading as Re-flow Field Management)",
+  "vendor_url": "https://re-flow.co.uk/",
+  "title": "Rugged tablet for Re-flow: UK buyer's guide",
+  "meta_description": "Re-flow's app needs Android 7 or later, built-in GPS and a camera, and works offline. The Tuga A8 (Android 12, 1000 nit screen, IP67) meets each one on site.",
+  "target_query": "best tablet for Re-flow",
+  "h1": "Rugged tablet for Re-flow",
+  "intro": [
+    "Re-flow is field management software from Workflow Management Ltd, an Exeter company that trades as Re-flow Field Management. It is built for site work rather than service calls: its own FAQ names highways (traffic management, road markings, surfacing), civil engineering, utilities, groundworks and construction, with commercial landscaping, arboriculture and rail infrastructure alongside, and lists Breedon Group, Colas, FM Conway, Highway Care, M V Kelly, Kiely Group and Heffernan Utilities among the organisations using it. The office works in a web dashboard that schedules jobs, builds forms with a no-code form builder, tracks assets such as vehicles and plant, and reports on what comes back from site. The vendor says it requires a minimum of 10 users across the app and the dashboard, so this page is for a contractor with gangs to equip, not a sole trader.",
+    "On site, operatives use the Re-flow app on a phone or tablet to see their schedule, jobs, maps and project documents, and to complete and digitally sign forms: the vendor's examples include risk assessments (RAMS), time sheets, daily record sheets, vehicle checks, site audits, LOLER and POWRA checks and defect reports, with photos, signatures and GPS logs as proof of work. That work happens on a carriageway closure at night, on a surfacing crew in July and in a compound in January, so the device has to survive rain, grit, sun and the back of a van, and it has to be readable with the sun behind it.",
+    "This page sets out what Re-flow publishes about the devices its app runs on, which Tuga rugged tablets and handhelds meet each published requirement and with how much headroom, what the Windows tablet can and cannot do for a Re-flow business, and how a UK contractor can buy a single trial unit before ordering for a workforce."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 7 as a minimum, Android 8 or later recommended",
+      "detail": "Re-flow's FAQ, under What are the required device specs for the Re-flow app? (page checked 25 October 2026, carrying a 2026 copyright), says the app requires iOS 14 as a minimum on the iPhone and iPad and Android 7 as a minimum on other brands of phones and tablets. It adds that modern smartphones and tablets will have no problem running the app, but for optimal performance it recommends iOS 16 and beyond and Android 8 (Android Oreo, released August 2017) and beyond. A separate FAQ answer says the app is available via the Google Play Store and works across a wide range of Android smartphones and tablets.",
+      "source_url": "https://re-flow.co.uk/product/faqs"
+    },
+    {
+      "requirement": "Mandatory hardware: built-in GPS, a built-in camera, an unmodified device, UK or Ireland store region",
+      "detail": "The same FAQ answer says other features are mandatory for running Re-flow and devices must satisfy the following criteria: a device or app store region set to UK or Ireland; built-in GPS or location functions (on older phones, it says, a common tell is whether the device supports a SIM card); a built-in camera; and standard security and firmware, meaning the device must not be modified by jailbreaking or rooting, as that may affect compatibility with the app store. It also says all operatives and other app users must be on Re-flow version 1.9.001 or higher.",
+      "source_url": "https://re-flow.co.uk/product/faqs"
+    },
+    {
+      "requirement": "Storage: no fixed figure; files and photos take the space",
+      "detail": "The FAQ says there is no exact storage space requirement for the app, as this will fluctuate dependent upon the company's usage levels, and that files and photos require the most space. The vendor publishes no RAM, processor or screen-size figure for the app.",
+      "source_url": "https://re-flow.co.uk/product/faqs"
+    },
+    {
+      "requirement": "Offline working, syncing when signal returns",
+      "detail": "Re-flow's offline working page says the forms and features operatives rely on all work offline and sync when there is signal, and that data is automatically synchronised from the dashboard. The FAQ's description of Re-flow says the mobile app works offline, syncing when back online, and that the office team accesses the dashboard through a web browser while operatives use the mobile app. Neither page names which modules beyond forms work offline.",
+      "source_url": "https://re-flow.co.uk/product/features/offline-working"
+    },
+    {
+      "requirement": "Android app from Google Play, for phones and tablets",
+      "detail": "The Android app is published on Google Play as Re-flow (package com.reactor15.reflow, developer Workflow Management Limited, Exeter). When checked on 25 October 2026 the UK listing showed Updated on 21 Aug 2026, more than 10,000 downloads, a Business category and a Phone review filter. Its description says the information is accessed by the employee in the field via a smart phone or tablet, and that the user signs in to see their schedule, jobs and tasks, access relevant maps and project information, and complete and digitally sign forms such as risk assessments and time sheets. The page as fetched did not display a Requires Android figure, so the FAQ's Android 7 is the published minimum. The App Store listing, by comparison, states iOS 13.0 or later while the FAQ says iOS 14; the FAQ is the vendor's own statement and the stricter of the two.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.reactor15.reflow&hl=en_GB"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Re-flow's site work is forms, photos and signatures done outdoors by operatives, often on a road in full sun, so the screen matters more than raw power. The Tuga A8 runs Android 12 with Google Play, five versions above Re-flow's Android 7 floor and four above its Android 8 recommendation, and it has the two things the vendor makes mandatory: GPS (with GLONASS, Galileo and BeiDou) and a 13MP autofocus rear camera with a flash. Its 8 inch, 1000 nit screen is the brightest in our range, which is what a daily record sheet on a carriageway at midday needs, and it is sealed to IP67. The 8000mAh battery is removable, so a charged spare can take over on a long shift, and dual SIM 4G means forms sync from site without hotspotting. VESA mount points and pogo pin contacts take the Vehicle Mounting Dock, so it rides in the van between sites and comes out as the gang's tablet. Storage is 128GB with a microSD slot, which matters because the vendor says photos and files are what fill a Re-flow device. The trade-off is Android 12: it is comfortably above the requirement today, but it is the oldest Android in our range, and no drop rating or operating temperature is listed for the A8, so check it against your own site conditions on a trial unit."
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "For a supervisor or site manager who opens the PDFs attached to Re-flow jobs, traffic management drawings and method statements, the Tuga A10 gives a 10.1 inch 1920 x 1200 screen on Android 14, two versions above the vendor's recommendation, with 8GB RAM, 128GB storage and microSD up to 2TB for a season of photos. It carries GPS with Galileo, BeiDou, QZSS and NavIC and a 13MP rear camera with flash, meeting both mandatory items, and it is the toughest tablet we sell: IP68, tested to MIL-STD-810H, rated for -20°C to 60°C, at 680g. Dual SIM 4G and an 8000mAh battery with quick charge are built in. The trade-offs for a Re-flow operative are the 350 nit screen, which is not a sunlight screen, and a battery that is not listed as removable, so it suits the person in the cab or the site office more than the gang on the carriageway."
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "Re-flow's own FAQ says site workers already use the app on their own phones, so a phone-sized device is within what the vendor expects. The Tuga A6 is a 6 inch handheld at 277g on Android 15, the newest Android in our range, with GPS, GLONASS, BeiDou and Galileo, a 13MP rear camera with flash and dual SIM 4G, so it meets every mandatory item and goes in a pocket or the £22 Belt Holster for a gang on foot. It is sealed to IP67 and rated for 1.5 metre drops, and its 5050mAh battery is removable. The trade-offs are 64GB of storage (with microSD up to 256GB) on a platform the vendor says fills up with photos, and a 6 inch screen for long forms and signatures. The built-in 2D barcode scanner is not a documented Re-flow feature, so do not buy the A6 for it."
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Re-flow publishes its app for Android and iOS only and says the office team accesses the dashboard through a web browser, so the Tuga W10, a 10.1 inch Windows 11 Pro tablet with an Intel N100 and 8GB RAM, is a dashboard device: scheduling, form building, asset records and reports in Chrome or Edge from a site cabin, with RJ45 Ethernet for a compound network and HDMI for a screen. It does not run the Re-flow app, its GPS and 4G are options rather than standard, and its camera is 5MP, so it is not the device an operative carries. For a Re-flow business the W10 is the supervisor's or planner's machine, bought alongside Android devices for the gangs, not instead of them."
+    }
+  ],
+  "setup_steps": [
+    "Agree the rollout with Re-flow first: the vendor requires a minimum of 10 users across the app and the dashboard, says a system is usually deployed within one working day, and offers onboarding sessions, nominated Re-flow champions and site visits. Your dashboard administrator creates each operative's login and assigns them to a user group with the right permissions.",
+    "Set each Tuga device's Google account and Play Store region to the UK or Ireland: the vendor lists a UK or Ireland device or app store region as mandatory for the app.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Re-flow (package com.reactor15.reflow, developer Workflow Management Limited). Keep automatic updates on: the vendor says every app user must be on version 1.9.001 or higher.",
+    "Sign in with the credentials from your administrator and allow the location and camera permissions when asked. GPS and a camera are mandatory items in the vendor's device requirements, and photos, signatures and GPS logs are what Re-flow treats as proof of work.",
+    "Sync while the device is online before the first shift so the schedule, jobs, maps and project documents are on the device; the vendor says forms and features work offline and sync when signal returns.",
+    "Give operatives the support route: Re-flow's support line is open 8.30am to 5.30pm Monday to Friday, with tickets through the dashboard's Support page or support@re-flow.co.uk outside those hours, and a knowledge base of written and video guides."
+  ],
+  "accessories": [
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10 and W10), a locking VESA mount with DC power for the van between sites",
+    "Hand Strap, £24 (Tuga A8, A10 and W10), for one-handed form filling on a verge",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10 and W10), for signatures on RAMS and time sheets",
+    "12V DC Car Charger, £26, fits every model",
+    "Charging Dock, £49.99 (Tuga A10 and W10), for devices that return to the site cabin",
+    "Belt Holster, £22 (Tuga A6)",
+    "Car Phone Mount, £17 (Tuga A6)",
+    "Tempered Glass Screen Protector 2-pack, £14, fits every model",
+    "Rugged Carry Case, £34 (Tuga A8, A10 and W10)",
+    "Shoulder Strap, £19 (Tuga A8, A10 and W10), for walking a site with the tablet to hand"
+  ],
+  "faq": [
+    {
+      "q": "Will Re-flow run on the Tuga A8, A10 and A6?",
+      "a": "Re-flow publishes Android 7 as the minimum and recommends Android 8 or later, with built-in GPS, a built-in camera, an unmodified device and a UK or Ireland store region as mandatory. The Tuga A8 runs Android 12, the A10 Android 14 and the A6 Android 15, all with Google Play, GPS and a 13MP rear camera with flash, so each meets every published item. We do not describe any device as tested or certified by Re-flow; the vendor publishes requirements, not a device list, so buy one unit, install the app and run through a shift's forms before ordering for the gangs."
+    },
+    {
+      "q": "Does Re-flow work offline on these devices?",
+      "a": "The vendor says the forms and features operatives rely on all work offline and sync when there is signal, and that the app works offline, syncing when back online. That is a feature of the app rather than the device, so it applies to the A8, A10 and A6 alike. Dual SIM 4G on all three means the sync happens from site when a signal is there, without hotspotting from a phone."
+    },
+    {
+      "q": "Can we use the Tuga W10 for Re-flow?",
+      "a": "Only for the dashboard. Re-flow's app is published for Android and iOS, and the vendor says the office team uses the dashboard in a web browser. The W10 runs Windows 11 Pro, so it opens the dashboard in Chrome or Edge from a site cabin, with Ethernet and HDMI on board, but it cannot run the operatives' app, and its GPS and 4G are options rather than standard."
+    },
+    {
+      "q": "How much storage does a Re-flow device need?",
+      "a": "The vendor gives no exact figure and says usage decides it, with files and photos taking the most space. The A8 and A10 have 128GB with a microSD slot (the A10's listed up to 2TB); the A6 has 64GB with microSD up to 256GB. For a crew that photographs every job, pick the 128GB devices or budget for a card."
+    },
+    {
+      "q": "We are a small firm. Is Re-flow for us, and can we buy one Tuga to try?",
+      "a": "Re-flow says it requires a minimum of 10 users across the app and the dashboard, so it is aimed at contractors with gangs rather than a one-van business; ask the vendor directly if you are close to that line. On our side you can order a single device by card, or ask for a quote and a proforma invoice to pay by bank transfer. Delivery is free to UK addresses in 7 to 10 working days, there is no VAT to add, every device has a 12-month warranty and 30-day returns, and team discounts apply automatically at 2 devices (3%), 3 to 4 (5%), 5 to 9 (8%) and 10 or more (10%)."
+    }
+  ],
+  "not_recommended_note": "The Tuga W10 is not recommended as an operative's Re-flow device: there is no Windows app, and the vendor makes GPS and a camera mandatory, both of which the W10 only offers as an option or at 5MP; it is a dashboard machine for the site cabin. Re-flow documents no barcode, QR or NFC input, so the A6's Zebra 2D scan engine and the NFC radio on the A8, A10 and A6 are not Re-flow features. The vendor publishes no RAM, processor or screen-size requirement, so the figures above are our device specs set against the Android version, GPS, camera, region and version rules it does publish. Re-flow's minimum of 10 users is the vendor's commercial rule, not a device limit. No drop rating or operating temperature is listed for the A8, and the A10's battery is not listed as removable. We have not checked the App Store listing beyond its stated iOS 13.0 compatibility, which differs from the FAQ's iOS 14 minimum; neither affects an Android purchase.",
+  "disclaimer": "Re-flow is a product of Workflow Management Ltd, trading as Re-flow Field Management, registered in England and Wales no. 11202964. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Workflow Management Ltd or Re-flow.",
+  "sources": [
+    "https://re-flow.co.uk/",
+    "https://re-flow.co.uk/product/faqs",
+    "https://re-flow.co.uk/product/features/offline-working",
+    "https://re-flow.co.uk/product/features",
+    "https://play.google.com/store/apps/details?id=com.reactor15.reflow&hl=en_GB",
+    "https://apps.apple.com/gb/app/re-flow/id1124400522",
+    "https://re-flow.co.uk/privacy-policy"
+  ]
+}
