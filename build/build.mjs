@@ -3709,6 +3709,53 @@ ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Works with' }])}
 }
 
 /* ==========================================================================
+   TRADES HUB — /for/, every trade landing page in one place. The homepage
+   shows the same cards; this page gives them a URL of their own to link
+   to, a breadcrumb, and a sitemap entry that outlives homepage redesigns.
+   ========================================================================== */
+
+{
+  const trail = [{ label: 'Home', href: '/' }, { label: 'Tablets', href: '/products/' }, { label: 'By trade' }];
+  write(
+    'for/index.html',
+    page({
+      title: 'Rugged tablets by trade: which Tuga suits your work',
+      description:
+        'Rugged tablets and handhelds picked by trade: electricians, plumbers, construction, HVAC, fire and security, telecoms, housing repairs, pest control and more.',
+      path: '/for/',
+      active: 'products',
+      schema: [orgSchema, breadcrumbSchema(trail)],
+      body: `
+    <section class="page-header">
+      <div class="container">
+${breadcrumbs(trail)}
+        ${eyebrow('By trade')}
+        <h1>Rugged tablets by trade</h1>
+        <p class="lede">Different trades break devices in different ways: wet hands, plaster dust, a drop off the scaffold, a day in a cold van. Each page below says what the work does to a device, what matters in the spec, which Tuga we would pick and why, and the accessories worth adding.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card-grid">
+          ${TRADES.map(tradeCard).join('\n')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint">
+      <div class="container-narrow">
+        ${eyebrow('Not listed?')}
+        <h2 class="title-md">Your trade is not here</h2>
+        <p class="lede">The <a href="/which-tuga">Which Tuga? picker</a> gets to a recommendation in four questions whatever the trade, and the <a href="/works-with/">works-with pages</a> match the range to the software you already run. Or <a href="/contact">tell us what the work involves</a> and we will say which device fits, including when the answer is none of them.</p>
+      </div>
+    </section>
+`,
+    })
+  );
+}
+
+/* ==========================================================================
    SITEMAP + ROBOTS
    ========================================================================== */
 
@@ -3736,6 +3783,7 @@ const urls = [
   { loc: '/which-tuga', priority: '0.8', freq: 'monthly' },
   { loc: '/compare/', priority: '0.8', freq: 'monthly' },
   ...comparePairs.map((c) => ({ loc: c.path, priority: '0.7', freq: 'monthly' })),
+  { loc: '/for/', priority: '0.8', freq: 'monthly' },
   ...trades.map((t) => ({ loc: `/for/${t.slug}`, priority: '0.7', freq: 'monthly' })),
   { loc: '/accessories', priority: '0.7', freq: 'monthly' },
   { loc: '/trade', priority: '0.6', freq: 'monthly' },

@@ -151,6 +151,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/for/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/for/agriculture</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
