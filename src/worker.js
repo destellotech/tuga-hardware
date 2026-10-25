@@ -35,7 +35,43 @@ const LEGACY_PATHS = {
   '/works-with': '/works-with/',
   '/compare': '/compare/',
   '/for': '/for/',
+  '/for/field-engineers': '/for/field-service',
+  // The shop ran on Shopify before this site; its URLs are still in search
+  // results and a few old links. Each maps to the nearest live page.
+  '/pages/faqs': '/shipping-returns',
+  '/pages/faq': '/shipping-returns',
+  '/pages/contact': '/contact',
+  '/pages/contact-us': '/contact',
+  '/pages/about': '/about',
+  '/pages/about-us': '/about',
+  '/pages/data-sharing-opt-out': '/privacy',
+  '/policies/privacy-policy': '/privacy',
+  '/policies/shipping-policy': '/shipping-returns',
+  '/policies/refund-policy': '/shipping-returns',
+  '/policies/terms-of-service': '/terms',
+  '/policies/legal-notice': '/terms',
+  '/policies/contact-information': '/contact',
 };
+
+/**
+ * Shopify-era URL families with no one-to-one match: the whole family goes
+ * to the section that replaced it. Checked after LEGACY_PATHS, so a precise
+ * entry above wins over the family rule.
+ */
+const LEGACY_PREFIXES = [
+  ['/collections', '/products/'],
+  ['/blogs', '/blog/'],
+  ['/policies', '/terms'],
+  ['/pages', '/'],
+  ['/account', '/'],
+];
+
+function legacyPrefixTarget(p) {
+  for (const [prefix, target] of LEGACY_PREFIXES) {
+    if (p === prefix || p.startsWith(`${prefix}/`)) return target;
+  }
+  return null;
+}
 
 /**
  * Paths that are real directory indexes (a folder with an index.html). These
@@ -77,7 +113,7 @@ export function canonicalPath(pathname) {
     p = p.replace(/\/+$/, '') || '/';
   }
 
-  return LEGACY_PATHS[p] || p || '/';
+  return LEGACY_PATHS[p] || legacyPrefixTarget(p) || p || '/';
 }
 
 /** Copy a response so its headers are mutable, adding the HTML security headers. */
@@ -183,6 +219,14 @@ export default {
           const swapped = new URL(`/compare/${pair[1]}-vs-${pair[0]}${url.search}`, url);
           const probe = await env.ASSETS.fetch(new Request(swapped, { method: 'GET' }));
           if (probe.ok) return redirect(swapped);
+        }
+        // A product handle that no longer exists (the Shopify-era listings
+        // still turn up in search results) lands on the catalogue rather
+        // than a dead end. The miss is still counted so the old URL shows
+        // in the back office.
+        if (url.pathname.startsWith('/products/')) {
+          if (!isLocal) countMiss(request, env, ctx);
+          return redirect(new URL('/products/', url));
         }
         return notFound(request, env, isLocal ? null : ctx);
       }
