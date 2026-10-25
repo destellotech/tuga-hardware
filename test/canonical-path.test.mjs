@@ -24,3 +24,24 @@ test('ordinary pages lose extensions and trailing slashes', () => {
   assert.equal(canonicalPath('/products/tuga-h6'), '/products/tuga-a6');
   assert.equal(canonicalPath('/'), '/');
 });
+
+test('Shopify-era URLs land on the nearest live page in one hop', () => {
+  assert.equal(canonicalPath('/collections/frontpage'), '/products/');
+  assert.equal(canonicalPath('/collections/all'), '/products/');
+  assert.equal(canonicalPath('/collections'), '/products/');
+  assert.equal(canonicalPath('/blogs/news'), '/blog/');
+  assert.equal(canonicalPath('/blogs/news/some-old-post'), '/blog/');
+  assert.equal(canonicalPath('/pages/faqs'), '/shipping-returns');
+  assert.equal(canonicalPath('/pages/data-sharing-opt-out'), '/privacy');
+  assert.equal(canonicalPath('/pages/anything-else'), '/');
+  assert.equal(canonicalPath('/policies/privacy-policy'), '/privacy');
+  assert.equal(canonicalPath('/policies/shipping-policy'), '/shipping-returns');
+  assert.equal(canonicalPath('/policies/terms-of-service'), '/terms');
+  assert.equal(canonicalPath('/policies/whatever'), '/terms');
+  assert.equal(canonicalPath('/account/login'), '/');
+  assert.equal(canonicalPath('/for/field-engineers'), '/for/field-service');
+  // Live paths that merely share a word with a legacy family are untouched.
+  assert.equal(canonicalPath('/products/tuga-a10'), '/products/tuga-a10');
+  assert.equal(canonicalPath('/blog/best-tablets-field-engineers'), '/blog/best-tablets-field-engineers');
+  assert.equal(canonicalPath('/accessories'), '/accessories');
+});
