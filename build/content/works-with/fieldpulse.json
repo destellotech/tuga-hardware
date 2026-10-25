@@ -1,0 +1,150 @@
+{
+  "slug": "fieldpulse",
+  "software": "FieldPulse",
+  "vendor": "Flicent Inc., trading as FieldPulse",
+  "vendor_url": "https://www.fieldpulse.com/",
+  "title": "Rugged tablet for FieldPulse: which Tuga fits",
+  "meta_description": "FieldPulse supports Android 7.0 or later and works offline. The Tuga A8 (Android 12, GPS, dual SIM 4G, IP67, removable battery) meets it for jobs on site.",
+  "target_query": "best tablet for FieldPulse",
+  "h1": "Rugged tablet for FieldPulse",
+  "intro": [
+    "FieldPulse is field service management software from Flicent Inc., a Delaware corporation trading as FieldPulse from Dallas, Texas. Its site names HVAC, electrical, plumbing, garage door, locksmith, property management, appliance repair, commercial equipment, fire and security, septic and audio visual installation among the trades it serves, and lists scheduling and dispatching, estimates and invoices, custom forms, fleet tracking and FieldPulse Payments as the core products. Pricing is seat based and by quote; the vendor's site shows no published prices, no UK office and no sterling pricing, so a UK firm should ask about billing currency and VAT invoicing before signing up.",
+    "The mobile app is where a technician spends the day: the vendor's getting started guide for field technicians runs from checking assigned jobs in the Schedule or Work tab, clocking in from the job's Actions menu and getting directions, through status updates, notes and files, to finalising the invoice and collecting payment on the spot. Offline mode switches on by itself when the signal goes and syncs when it returns, so plant rooms, basements and rural jobs do not stop the work. That is a hard life for a consumer phone in a case, and the reason to put the app on a sealed device with its own SIM and a battery that lasts the shift.",
+    "This page sets out what FieldPulse publishes about the devices it supports, which Tuga rugged devices meet those published requirements, where the published information runs out, and how a sole trader or small firm can buy one unit to try before kitting out a team. We do not describe any device as tested or certified by FieldPulse: trial the app on the device before you rely on it."
+  ],
+  "requirements": [
+    {
+      "requirement": "Platform: Android 7.0 (Nougat) or later",
+      "detail": "FieldPulse's Supported Devices and Browsers article says Android devices running Android 7.0 (Nougat) through the latest update are supported, and that a device which cannot be updated to that minimum is not compatible with FieldPulse. The article carries no date. Checked 25 October 2026.",
+      "source_url": "https://help.fieldpulse.com/troubleshooting-technical-specs/supported-devices-and-browsers"
+    },
+    {
+      "requirement": "Google Play listing: FieldPulse by Flicent Inc., phone layout declared",
+      "detail": "The Google Play listing for FieldPulse (package com.fieldpulse.app, developer Flicent Inc., version 2.16.2, updated 15 July 2026, 10,000 plus downloads) shows a device chip for Phone only; it does not declare Tablet. Google no longer displays the Requires Android line on the listing, so the Android 7.0 figure above comes from the help centre. On an 8 or 10 inch tablet the app may run in its phone layout, which is one reason to trial it on the device you intend to buy.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.fieldpulse.app&hl=en_GB"
+    },
+    {
+      "requirement": "Memory, storage and screen size: not published",
+      "detail": "The Supported Devices and Browsers article gives operating system versions only. It publishes no RAM, storage or screen size figure for phones or tablets, so none is claimed here. For the web app it says Google Chrome gives the best results and that FieldPulse is also available in Safari, Firefox and Microsoft Edge.",
+      "source_url": "https://help.fieldpulse.com/troubleshooting-technical-specs/supported-devices-and-browsers"
+    },
+    {
+      "requirement": "Offline mode: automatic, with sync on reconnection",
+      "detail": "The Offline Mode overview says the app switches to offline mode automatically when it loses internet or the device is in Airplane Mode, that changes made offline are saved locally on the device, and that changes sync automatically when the device reconnects. Offline mode is available to Admins, Team Managers and Service Agents, in the mobile app only. Cached data is described as a recent subset, not your whole account.",
+      "source_url": "https://help.fieldpulse.com/offline-mode/offline-mode-overview"
+    },
+    {
+      "requirement": "Offline limits on jobs, photos and forms",
+      "detail": "The jobs, customers and projects offline article says jobs are cached for one week, job notes save on the device and sync later, up to 50 job photos can be uploaded at a time, up to 200 existing custom forms per record can be edited offline with unlimited new drafts, and a job can be moved through its custom status workflow. Creating a new job or a new customer takes an internet connection, and payment collection is not available offline.",
+      "source_url": "https://help.fieldpulse.com/offline-mode/customers-jobs-projects-offline-mode"
+    },
+    {
+      "requirement": "GPS, maps and timesheets in the field app",
+      "detail": "The Service Agent overview describes a Map view with your jobs plotted on a map, clocking in and out from the dashboard or a job, calling or emailing the customer from the job, and creating estimates, invoices and material lists from the Sales tab. The getting started guide for technicians has the engineer open the customer's address for directions, so a device with its own GPS and a data connection is the practical minimum.",
+      "source_url": "https://help.fieldpulse.com/en/articles/6167243-mobile-app-overview-service-agents"
+    },
+    {
+      "requirement": "Apple devices: iOS 17.4 and iPadOS 15.1, with one conflicting article",
+      "detail": "For completeness: the Supported Devices and Browsers article lists iOS 17.4 through the latest update for iPhone and iPadOS 15.1 through the latest update for iPad, while an older help article on the same question says iPads are not supported and asks for an iPhone XS or newer on iOS 18. Neither affects the Android requirement, but it shows the published floors move, so check the current article before buying for a team.",
+      "source_url": "https://help.fieldpulse.com/en/articles/482408-can-i-use-fieldpulse-on-my-iphone-ipad-or-android-which-devices-are-supported"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "FieldPulse's published floor is Android 7.0, and the Tuga A8 runs Android 12 with Google Play, five major versions above it. The 8 inch 1280 x 800 screen at 1000 nits is readable on a roof or a forecourt, which matters for an app whose day is schedule, job, estimate, invoice and payment in turn. GPS, GLONASS, Galileo and BeiDou cover the map view and directions, and dual SIM 4G keeps the sync running where one network is weak, so offline mode is the exception rather than the routine. The 8000mAh battery is removable, so a charged spare takes over on a long day, and VESA mount points with pogo pin contacts let it live in the Vehicle Mounting Dock between jobs. It is sealed to IP67. The trade-offs: no drop rating or operating temperature is listed for the A8, and the Play listing declares a phone layout only, so run the app on the A8 for a fortnight before ordering for a team. £379, no VAT to add.",
+      "fit": [
+        "Requirement: Android 7.0 or later. Tuga A8: Android 12 with Google Play.",
+        "Requirement: map view, directions and a working sync. Tuga A8: GPS, GLONASS, Galileo and BeiDou, dual SIM 4G LTE, Wi-Fi.",
+        "Requirement: photos on jobs, up to 50 per offline upload. Tuga A8: 13MP autofocus rear camera with flash, 128GB storage, microSD slot.",
+        "Requirement: a full day of clocking in and out and site visits. Tuga A8: 8000mAh removable battery, IP67, 1000 nit screen, VESA mount points and pogo pin dock connector."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Google Play listing declares a Phone chip and nothing else, so the Tuga A6 is the device the published layout is written for: a 6 inch 2160 x 1080 handheld at 277g, running Android 15 with Google Play, which clears the Android 7.0 floor by eight versions. It has GPS, GLONASS, BeiDou and Galileo for the map and directions, dual SIM 4G, NFC and a 13MP rear camera with flash for job photos, and the 5050mAh battery is removable. The integrated 2D barcode scanner is a bonus for parts and asset labels, though whether FieldPulse accepts scanned input in its fields is not published, so test it. It is sealed to IP67 and rated for 1.5 metre drops. The trade-off is screen size: estimates with Good, Better and Best options, and a day of invoices, are a lot of scrolling on 6 inches. £349, no VAT to add.",
+      "fit": [
+        "Requirement: Android 7.0 or later. Tuga A6: Android 15 with Google Play.",
+        "Requirement: phone layout as declared on Google Play. Tuga A6: 6 inch FHD+ handheld, 277g, Belt Holster and Car Phone Mount available.",
+        "Requirement: map, directions and sync. Tuga A6: GPS, GLONASS, BeiDou and Galileo, dual SIM 4G LTE, dual-band Wi-Fi 5.",
+        "Requirement: drops and weather on site. Tuga A6: IP67, rated for 1.5 metre drops, -20°C to 50°C."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "For a supervisor or an estimator who builds itemised estimates and reads drawings between jobs, the Tuga A10's 10.1 inch 1920 x 1200 screen is the one to pick. It runs Android 14 with Google Play, has 8GB of RAM and 128GB of storage with a microSD slot rated to 2TB, GPS with Galileo, BeiDou, QZSS and NavIC, dual SIM 4G and NFC, and is sealed to IP68 and tested to MIL-STD-810H. The trade-offs are a 350 nit screen, which is readable under cover but dim in direct sun, a battery that is not listed as removable, and the same phone layout caveat as the A8: the Play listing declares a Phone chip, so check how the app presents itself on 10 inches before buying several. £449, no VAT to add.",
+      "fit": [
+        "Requirement: Android 7.0 or later. Tuga A10: Android 14 with Google Play.",
+        "Requirement: estimates, invoices and custom forms with room to work. Tuga A10: 10.1 inch FHD IPS 1920 x 1200, 8GB RAM, 128GB plus microSD up to 2TB.",
+        "Requirement: site conditions. Tuga A10: IP68, MIL-STD-810H, -20°C to 60°C, 680g, 8000mAh battery with quick charge."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "FieldPulse's web app runs in a browser, with Google Chrome recommended and Safari, Firefox and Edge also supported. The Tuga W10 runs Windows 11 Pro on an Intel N100 with 8GB of RAM, so it runs Chrome and the web app for dispatchers, office managers and anyone who lives in the schedule and dispatch views, and its RJ45 Ethernet, HDMI, USB-A and USB-C ports suit a desk or a site cabin. It is not the device for the field app: the mobile app is published for Android and iOS, and offline mode is mobile app only, so a W10 is online or nothing. 4G is optional on the W10 rather than standard, and it weighs 1197g. £649, no VAT to add.",
+      "fit": [
+        "Requirement: web app in a modern browser, Chrome recommended. Tuga W10: Windows 11 Pro, Intel N100, 8GB RAM, 10.1 inch IPS 1280 x 800.",
+        "Requirement: a desk, a cabin or a van office. Tuga W10: RJ45 Ethernet, HDMI, USB-A, USB-C, removable 5000mAh battery, pogo pin dock connector."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your FieldPulse administrator to add you as a user (Service Agent, Team Manager or Admin) and send the setup email; the vendor's help centre says to download the mobile app from the Google Play store by searching FieldPulse or following the link in that email.",
+    "On the Tuga A8, A6 or A10, open Google Play, install FieldPulse (package com.fieldpulse.app, developer Flicent Inc.) and log in with your credentials. Allow location access when asked, because the Map view and directions depend on it.",
+    "Fit a data SIM before the first job. The A8, A6 and A10 take two SIMs, so a second network covers areas where the first is weak, and offline mode then only has to bridge the gaps rather than carry whole days.",
+    "Follow the vendor's field technician guide on the device: open the Schedule or Work tab to find your assigned jobs, open a job to review the customer details, notes and tags, then tap Actions and Clock In, and open the customer's address for directions.",
+    "On a test job, update the status from the job's Info page, add a note, a photo and a file, set the finished status and clock out, then create an invoice from the job and tap Finalize Invoice, so you know the flow before a customer is waiting. Try the same job in Airplane Mode to see what offline mode keeps and what it holds back.",
+    "Fit the Vehicle Mounting Dock and a 12V DC Car Charger for an A8 or A10 that lives in the van, or the Belt Holster and Car Phone Mount for an A6, and keep the device charged between jobs: the vendor's offline mode caches a week of jobs, but syncing still needs the device awake and connected."
+  ],
+  "accessories": [
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10, W8 and W10), a locking VESA mount with DC power for the van",
+    "12V DC Car Charger, £26, fits every model, for charging between jobs",
+    "Hand Strap, £24 (Tuga A8, A10, W8 and W10), for one handed use on a ladder; the A6, A10, W8 and W10 ship with one in the box",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10, W8, W10 and WH6), for signatures on estimates and invoices; not listed for the A6",
+    "Belt Holster, £22 (Tuga A6 and WH6), and Car Phone Mount, £17 (Tuga A6 and WH6)",
+    "Charging Dock, £49.99 (Tuga A10, W8 and W10), for devices that return to the office overnight",
+    "Tempered Glass Screen Protector 2-pack, £14, fits every model",
+    "Rugged Carry Case, £34 (Tuga A8, A10, W8 and W10)"
+  ],
+  "faq": [
+    {
+      "q": "Will FieldPulse run on the Tuga A8, A6 and A10?",
+      "a": "FieldPulse publishes a minimum of Android 7.0, and the three Tuga Android devices run Android 12 (A8), Android 15 (A6) and Android 14 (A10), each with Google Play, so all three meet the published requirement by a wide margin. We do not describe any device as tested or certified by FieldPulse; this page sets the vendor's published requirements against the device specifications. Buy one, run your real jobs on it for a fortnight, and order for the team afterwards."
+    },
+    {
+      "q": "The Google Play listing says Phone. Does FieldPulse work on a tablet?",
+      "a": "The listing declares a Phone chip and no Tablet chip, while the vendor's help centre says any Android device on 7.0 or later is supported. In practice that usually means the app installs and runs on a tablet but presents its phone layout, possibly letterboxed or stretched. On the 6 inch A6 that is the layout it was designed for; on the 8 inch A8 and 10.1 inch A10 it is something to look at on a trial unit before buying several. If the layout matters to you, ask FieldPulse whether a tablet layout is planned."
+    },
+    {
+      "q": "Does FieldPulse work without a signal?",
+      "a": "Yes, within published limits. The app switches to offline mode automatically when it loses internet or is in Airplane Mode, saves changes on the device and syncs when it reconnects. Jobs are cached for a week, you can add notes and up to 50 photos at a time, edit cached custom forms and move jobs through their status workflow, and collect signatures on cached estimates and invoices. You cannot create a new job or customer or take a payment until you are back online. A device with its own SIM, and ideally two, keeps those moments short."
+    },
+    {
+      "q": "Why is the Windows tablet only an alternative for FieldPulse?",
+      "a": "FieldPulse publishes its mobile app for Android and iOS, and offline mode is mobile app only. On Windows you get the web app in a browser, which the vendor says works best in Google Chrome. That suits a dispatcher or an office manager with a Tuga W10 on a desk or in a site cabin, with Ethernet and HDMI to hand, but an engineer in a basement with no signal needs the Android app."
+    },
+    {
+      "q": "Is FieldPulse a UK product, and can I pay in pounds?",
+      "a": "FieldPulse is made by Flicent Inc., a Delaware corporation based in Dallas, Texas. Its site shows no UK office, no sterling pricing and no published price list: pricing is seat based and by quote. Ask the vendor about billing currency and VAT invoicing before you commit. Our side is simpler: device prices are in pounds with no VAT to add, delivery is free to UK addresses in 7 to 10 working days, every device has a 12-month warranty and 30-day returns, and team discounts apply automatically at 3% for 2 devices, 5% for 3 to 4, 8% for 5 to 9 and 10% for 10 or more."
+    }
+  ],
+  "not_recommended_note": "The Tuga W8 and WH6 run Windows 11, and FieldPulse publishes its mobile app for Android and iOS only, with offline mode limited to the mobile app, so they would be restricted to the web app in a browser like the W10, at a higher price per inch of screen than the Android devices. The W10 is listed above only for the browser based back office. No Tuga device is tested or certified by FieldPulse; the recommendations rest on the published Android 7.0 minimum and the device specifications, and the Play listing's phone layout declaration is the point to check on a trial unit.",
+  "disclaimer": "FieldPulse is a product of Flicent Inc., a Delaware corporation doing business as FieldPulse. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Flicent Inc.",
+  "sources": [
+    "https://help.fieldpulse.com/troubleshooting-technical-specs/supported-devices-and-browsers",
+    "https://play.google.com/store/apps/details?id=com.fieldpulse.app&hl=en_GB",
+    "https://help.fieldpulse.com/offline-mode/offline-mode-overview",
+    "https://help.fieldpulse.com/offline-mode/customers-jobs-projects-offline-mode",
+    "https://help.fieldpulse.com/getting-started/get-started-by-role/get-started-as-a-field-technician",
+    "https://help.fieldpulse.com/en/articles/6167243-mobile-app-overview-service-agents",
+    "https://www.fieldpulse.com/features/mobile-app",
+    "https://www.fieldpulse.com/",
+    "https://www.fieldpulse.com/terms-of-service",
+    "https://www.fieldpulse.com/pricing",
+    "https://help.fieldpulse.com/en/articles/482408-can-i-use-fieldpulse-on-my-iphone-ipad-or-android-which-devices-are-supported"
+  ]
+}

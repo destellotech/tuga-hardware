@@ -1,0 +1,140 @@
+{
+  "slug": "infraspeak",
+  "software": "Infraspeak (Infraspeak Next app)",
+  "vendor": "Infraspeak S.A.",
+  "vendor_url": "https://infraspeak.com/en/",
+  "title": "Rugged tablet for Infraspeak Next: UK buyer's guide",
+  "meta_description": "Infraspeak Next needs Android 10 and 4GB RAM minimum, Android 13 and 6GB recommended, plus NFC. The Tuga A10 (Android 14, 8GB, NFC) meets the recommended spec.",
+  "target_query": "rugged tablet for Infraspeak",
+  "h1": "Rugged tablet for Infraspeak Next",
+  "intro": [
+    "Infraspeak is a maintenance and facilities management platform from Infraspeak S.A., a company incorporated in Portugal with its registered office in Porto (its general terms, in force since 15 September 2026, give company number 513 468 480). The vendor describes it as a platform that uses AI and predictive intelligence to connect a facilities management ecosystem in one place, and its site lists facility management, retail, hospitality, healthcare, education, HVAC, lifts and electrical maintenance among the sectors it serves. The manager's side runs in a web browser and in the Infraspeak Manager app; the people doing the work use Infraspeak Next, the technician app on Google Play and the App Store.",
+    "On site, Infraspeak Next is where a technician opens, approves, pauses and closes work orders, creates work orders by location by scanning a QR code, a barcode or an NFC tag, checks the work order list and its details, adds and views documents, exchanges messages with the team inside a work order, and works offline. Infraspeak's academy documents NFC tags assigned to equipment, users and locations, with one tag per item, and a sign-in by holding the device to a tag. That work happens in plant rooms, risers, kitchens and car parks, which is where a consumer tablet with an exposed screen and a small battery struggles.",
+    "This page sets out what Infraspeak publishes about the device the Next app needs, matches those figures to the Tuga range, and says which device fits and which does not. Every Tuga figure comes from our catalogue; every Infraspeak figure comes from the vendor's own pages, linked beside it. We have not tested the app on these devices and do not claim Infraspeak has, so start with one unit on a trial before buying for a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 10 or later at minimum; Android 13 or later recommended",
+      "detail": "The Infraspeak Academy article How to download the Infraspeak Next app on your device (undated; checked 25 October 2026) lists minimum device requirements of Android phones and tablets with Android 10 or later versions, and recommended requirements of Android phones and tablets with Android 13 or later versions. The same article lists iPhones and iPads with iOS 16 or later for Apple devices. The Google Play listing (Infraspeak Next, package com.infraspeak.one, developer Infraspeak S.A., 10,000 or more downloads when checked) did not display its own Requires Android figure in our check, so the academy figures are the ones to plan on.",
+      "source_url": "https://academy.infraspeak.com/en/support/solutions/articles/70000643651-how-to-download-the-infraspeak-next-app-on-your-device"
+    },
+    {
+      "requirement": "4GB of RAM at minimum; 6GB or more recommended",
+      "detail": "The same academy article gives 4 GB of RAM or superior as the minimum and 6 GB of RAM or superior as the recommended figure.",
+      "source_url": "https://academy.infraspeak.com/en/support/solutions/articles/70000643651-how-to-download-the-infraspeak-next-app-on-your-device"
+    },
+    {
+      "requirement": "32GB of storage or more",
+      "detail": "The academy article lists 32 GB of Storage or superior under both the minimum and the recommended requirements.",
+      "source_url": "https://academy.infraspeak.com/en/support/solutions/articles/70000643651-how-to-download-the-infraspeak-next-app-on-your-device"
+    },
+    {
+      "requirement": "Camera and NFC sensor, optional but needed for scanning tags, QR codes and barcodes",
+      "detail": "The academy article lists Camera and NFC Sensor with a footnote: these characteristics aren't mandatory but they will allow you to scan NFC Tags, QR Codes and Barcodes within the app. The Google Play description for Infraspeak Next says users can create work orders by location, with QR or barcode and with NFC tags. A separate academy article on assigning NFC tags to a location says the technician must swipe the tag near the NFC reader on the mobile device, and that there can only be one NFC tag for an equipment, user or location.",
+      "source_url": "https://academy.infraspeak.com/en/support/solutions/articles/70000154725-how-to-assign-nfc-near-field-communication-tags-to-a-location"
+    },
+    {
+      "requirement": "Offline working, with limits the vendor documents",
+      "detail": "The Google Play description lists Work offline among the app's features. The academy article Infraspeak Next offline capabilities says all actions that are done offline are stored on the device until the user regains an internet or mobile network connection with the app open, after which the app syncs the changes; that planned job orders must be started while online, only after starting them will the user be able to operate offline; and that the app must be fully synchronised to be able to find assets while offline. The article's detailed list of offline features is published as an image, so check it against your own workflow.",
+      "source_url": "https://academy.infraspeak.com/en/support/solutions/articles/70000674585-infraspeak-next-offline-capabilities"
+    },
+    {
+      "requirement": "Sign in by email and password, or by NFC tag",
+      "detail": "The academy's log in or log off article gives two routes: enter the registered email and password, or open the app and hold the device near the NFC tag linked to the user's account. The article gives no date.",
+      "source_url": "https://academy.infraspeak.com/en/support/solutions/articles/70000643670-log-in-or-log-off-on-the-infraspeak-next"
+    },
+    {
+      "requirement": "No Windows app for technicians; the manager's interface runs in a browser",
+      "detail": "The Infraspeak site lists the Infraspeak Next and Infraspeak Manager apps for the App Store and Google Play, and describes the manager's features as a web interface. Neither the site nor the academy article names a Windows requirement or a desktop app for technicians, and the academy article publishes no browser requirement.",
+      "source_url": "https://infraspeak.com/en/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Infraspeak publishes a minimum and a recommended specification, and the Tuga A10 meets the recommended one on every published figure: Android 14 against Android 13 recommended, 8GB RAM against 6GB, 128GB storage against 32GB, a 13MP rear camera with flash for QR codes and barcodes, and NFC for the tags Infraspeak assigns to equipment, users and locations. The 10.1 inch Full HD screen gives room for a work order's documents and messages, and the sealed IP68 body with MIL-STD-810H testing suits plant rooms and loading bays. The trade-off is weight and brightness: at 680g it is a two-handed device for a long walk round, and at 350 nits it is a screen for indoors and shade rather than full sun, which suits a facilities team better than a roofer.",
+      "fit": [
+        "Requirement: Android 13 or later recommended, Android 10 minimum. Tuga A10: Android 14 with Google Play.",
+        "Requirement: 6GB RAM recommended, 4GB minimum; 32GB storage. Tuga A10: 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: NFC sensor and camera for tags, QR codes and barcodes. Tuga A10: NFC and a 13MP rear camera with flash.",
+        "Requirement: offline working with sync when the connection returns. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, 8000mAh battery with quick charge.",
+        "Requirement: a device that survives a plant room. Tuga A10: IP68, MIL-STD-810H, -20C to 60C operating temperature, pogo pin connector for the charging dock and the vehicle mounting dock."
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The Tuga A8 meets the published minimum (Android 12 against Android 10, 6GB RAM against 4GB, 128GB storage against 32GB) and the recommended RAM and storage figures, but not the recommended Android 13. It has NFC and a 13MP autofocus camera with flash, so tags, QR codes and barcodes are covered. Its 1000 nit screen is the one to pick for a technician who works outdoors for part of the day, and the removable 8000mAh battery suits a shared device handed between shifts. The trade-off is Android 12: it clears the vendor's floor by two versions, but if Infraspeak raises its minimum towards its recommended figure the A8 has less headroom than the A10.",
+      "fit": [
+        "Requirement: Android 10 minimum. Tuga A8: Android 12 with Google Play, below the Android 13 recommendation.",
+        "Requirement: 6GB RAM recommended; 32GB storage. Tuga A8: 6GB RAM, 128GB storage, microSD slot.",
+        "Requirement: NFC sensor and camera. Tuga A8: NFC and a 13MP autofocus rear camera with flash.",
+        "Requirement: a shift's work offline and outdoors. Tuga A8: removable 8000mAh battery, 1000 nit screen, IP67, dual SIM 4G, VESA mount points for a vehicle dock."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Tuga A6 is the pocket option for a technician who scans tags and closes work orders rather than reading documents. It runs Android 15, well above both published Android figures, has NFC, a 13MP camera with flash and a built-in 2D barcode scanner with two side scan keys, and weighs 277g in a holster. It meets the published minimum RAM figure exactly, at 4GB, and its 64GB of storage clears the 32GB figure. The trade-off is that 4GB is the vendor's floor rather than its recommendation, and a 6 inch screen is cramped for a work order with several documents attached, so trial one before buying a fleet.",
+      "fit": [
+        "Requirement: Android 10 minimum, 13 recommended. Tuga A6: Android 15 with Google Play.",
+        "Requirement: 4GB RAM minimum; 32GB storage. Tuga A6: 4GB RAM (the minimum, not the 6GB recommendation), 64GB storage, microSD up to 256GB.",
+        "Requirement: NFC and camera for tags and codes. Tuga A6: NFC, 13MP rear camera with flash, and an integrated Zebra 2D scan engine for barcodes (whether the app accepts input from the scan engine depends on the app and a scan wedge, so check on a trial unit).",
+        "Requirement: a device that lives in a pocket all shift. Tuga A6: 277g, IP67, rated for 1.5 metre drops, removable 5050mAh battery, dual SIM 4G."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Infraspeak administrator to add the technician as a user, and to assign an NFC tag to the user if you want tag sign-in, which the academy says can be done once per user.",
+    "On the Tuga device, open the Google Play Store, search for Infraspeak Next, tap the app and tap Install, as the academy's download article describes.",
+    "Open the app, enter the registered email and tap Next, then enter the password and sign in; or hold the device near the user's NFC tag to sign in that way.",
+    "Open the app while online and let it synchronise fully before going into areas without signal: the vendor says assets can only be found offline once the app is fully synchronised, and planned job orders must be started while online.",
+    "Create a test work order: tap the Plus button, choose Create work order manually, then the building, location, area and type, and tap Create work order; then try the same by scanning a location's QR code or NFC tag.",
+    "Walk the worst-signal part of the site with the device, close a work order offline, come back into coverage with the app open and confirm the change syncs, before ordering for the team."
+  ],
+  "accessories": [
+    "Charging Dock, £49.99 (Tuga A10, W8 and W10), for shared devices that return to a desk between shifts",
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10, W8 and W10), for a mobile maintenance team working from a van",
+    "Hand Strap, £24 (Tuga A8, A10, W8 and W10), for one-handed use while the other hand holds a tag or a torch",
+    "Belt Holster, £22 (Tuga A6 and WH6), for the pocket handheld",
+    "Tempered Glass Screen Protector (2 Pack), £14 (every model), for a device that lives on plant room floors",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10, W8, W10 and WH6), for notes and signatures",
+    "12V DC Car Charger, £26 (every model), for charging between sites"
+  ],
+  "faq": [
+    {
+      "q": "Will Infraspeak Next run on the Tuga A10, A8 and A6?",
+      "a": "Infraspeak publishes a minimum of Android 10, 4GB RAM and 32GB storage, and a recommendation of Android 13, 6GB RAM and 32GB storage, with a camera and NFC sensor for scanning. The Tuga A10 (Android 14, 8GB RAM, 128GB, NFC) meets the recommended figures; the A8 (Android 12, 6GB RAM, 128GB, NFC) meets the minimum and the recommended RAM and storage but not the recommended Android version; the A6 (Android 15, 4GB RAM, 64GB, NFC) meets the minimum with RAM at the floor. We have not tested the app on these devices and do not claim Infraspeak has; these are the vendor's published requirements set against the catalogue, so trial one unit first."
+    },
+    {
+      "q": "Does the Tuga have the NFC reader Infraspeak's tags need?",
+      "a": "Yes. Every Tuga model lists NFC. Infraspeak's academy says a technician assigns a tag by swiping it near the NFC reader on the mobile device, and that a user can sign in by holding the device near their tag. NFC works over a few centimetres, so the tag has to be placed where the device can reach it; the position of the NFC antenna varies between devices, so find it on a trial unit before you fix tags to plant."
+    },
+    {
+      "q": "Can technicians work offline with Infraspeak Next?",
+      "a": "Infraspeak lists Work offline in the app's Google Play description, and its academy explains the rules: actions done offline are stored on the device until the connection returns with the app open, planned job orders must be started while online, and assets can only be found offline once the app is fully synchronised. The detailed list of what works offline is published as an image in the academy article, so check it against your own process. A Tuga A10 or A8 with dual SIM 4G reduces how often you are offline in the first place."
+    },
+    {
+      "q": "Is there a Windows version for the Tuga W10 or W8?",
+      "a": "Infraspeak publishes the technician app for Android and iOS only, and describes the manager's features as a web interface and the Infraspeak Manager app. A Tuga W10 can run the manager's web interface in a browser, but Infraspeak publishes no browser requirement and no Windows technician app, so a Windows tablet is not the device to give the people closing work orders."
+    },
+    {
+      "q": "What is the difference between Infraspeak Next and the other Infraspeak apps?",
+      "a": "The Google Play store lists three apps from Infraspeak S.A.: Infraspeak Next for technicians (work orders, scanning, documents, messages, offline working), Infraspeak Manager for managers (the store description names asset management, dashboards and scheduled work), and Infraspeak Operations, described as a mobile interface for anyone who works at a location and needs to check information about it. This page is about Infraspeak Next, the app the device requirements are published for."
+    }
+  ],
+  "not_recommended_note": "The Tuga W10, W8 and WH6 are not recommended as technician devices for Infraspeak. The vendor publishes the Infraspeak Next app for Android and iOS only and publishes no Windows app or browser requirement for technicians, so on a Windows device the work would have to be done through the manager's web interface in a browser, without the offline working, NFC sign-in and in-app scanning the vendor documents for the app. Among the Android devices, the A6 meets the published RAM minimum of 4GB exactly and the A8 runs Android 12 against a recommended Android 13; both meet the minimum, but the A10 is the only Tuga that meets every recommended figure.",
+  "disclaimer": "Infraspeak is a product of Infraspeak S.A. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Infraspeak S.A.",
+  "sources": [
+    "https://infraspeak.com/en/",
+    "https://infraspeak.com/nfc",
+    "https://infraspeak.com/en/general-terms-and-conditions",
+    "https://academy.infraspeak.com/en/support/solutions/articles/70000643651-how-to-download-the-infraspeak-next-app-on-your-device",
+    "https://academy.infraspeak.com/en/support/solutions/articles/70000154725-how-to-assign-nfc-near-field-communication-tags-to-a-location",
+    "https://academy.infraspeak.com/en/support/solutions/articles/70000643670-log-in-or-log-off-on-the-infraspeak-next",
+    "https://academy.infraspeak.com/en/support/solutions/articles/70000674585-infraspeak-next-offline-capabilities",
+    "https://academy.infraspeak.com/en/support/solutions/articles/70000643717-how-to-create-a-work-order-manually-on-infraspeak-next",
+    "https://play.google.com/store/apps/details?id=com.infraspeak.one&hl=en_GB"
+  ]
+}

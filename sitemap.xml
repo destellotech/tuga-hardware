@@ -625,6 +625,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/fieldpulse</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/fieldwire</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -673,6 +679,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/infraspeak</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/jobber</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -717,6 +729,12 @@
   <url>
     <loc>https://www.tugahardware.com/works-with/okappy</loc>
     <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/oracle-field-service</loc>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -793,6 +811,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/servicenow-field-service</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/pirana-cmms</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/simpro</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -830,6 +860,12 @@
   </url>
   <url>
     <loc>https://www.tugahardware.com/works-with/workpal</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tugahardware.com/works-with/zuper</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
