@@ -1,0 +1,152 @@
+{
+  "slug": "clik-service",
+  "software": "Clik Service and the Clik Jobs app",
+  "vendor": "Clik Limited (Clik Software), part of Joblogic since 2024",
+  "vendor_url": "https://www.cliksoftware.com/",
+  "title": "Rugged tablet for Clik Jobs and Clik Service: UK guide",
+  "meta_description": "Clik Jobs lists Android 5.0 or later on Google Play. The Tuga A8 (Android 12, 6GB RAM, IP67, removable battery) meets it for Clik Service users' engineers.",
+  "target_query": "rugged tablet for Clik Jobs",
+  "h1": "Rugged tablet for Clik Jobs and Clik Service",
+  "intro": [
+    "Clik Service is Windows job management software from Clik Limited, a Bristol company that has written service management and certification software since 2000 and sells mainly to HVAC and refrigeration, fire and security, electrical and plumbing contractors. The office runs Clik Service on a PC or server; engineers carry Clik Jobs, the companion app for Android and iOS that links to the Clik Service database. In 2024 Clik became part of Joblogic, and Clik's own website now steers new customers to Joblogic FSM and Clik Compliance while keeping a support portal for existing Clik Service installations. This page is therefore for firms already running Clik Service who need devices for the engineers using Clik Jobs; a firm starting fresh should read our Joblogic page instead.",
+    "On site, the Google Play listing says engineers use Clik Jobs to select and modify jobs, add time, materials, equipment and documents, attach photos to job sheets, take a customer's signature when the work is complete, and create jobs on the device when one starts unexpectedly. GPS sends engineers' routes back to the office. The app is described as designed to function almost completely without an active internet connection, with a connection needed only to sync, which is exactly the pattern of a boiler room, a plant deck or a rural fire alarm panel with no signal. That is a device that lives in a van, gets handed to a customer and spends its day in dust and damp.",
+    "This page sets out what Clik publishes about the devices Clik Jobs and Clik Service run on, which Tuga devices meet those published requirements, one caution about the age of the Android app, and how a UK contractor can buy a single trial unit before equipping a team."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 5.0 or later for the Clik Jobs app",
+      "detail": "The Google Play listing for Clik Jobs (package com.clik.clikmobile, developer CLIK LIMITED, support contact hello@cliksoftware.com) shows a minimum of Android 5.0 (API level 21) and device chips for Phone and Tablet. When checked on 25 October 2026 the current version was 1.37.2, updated 8 July 2024, with the listing first released on 16 July 2014 and more than 10,000 downloads. No RAM, storage or screen size figure is published. An app whose last update is more than two years old may not have been tested by its maker on recent Android releases, so trial it on the device you intend to buy.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.clik.clikmobile&hl=en_GB"
+    },
+    {
+      "requirement": "Installed from Google Play or the App Store, paired to Clik Service with a code",
+      "detail": "Clik's support article Downloading and Installing Clik Jobs says to open the Google Play Store for Android or the Apple App Store and search for Clik Jobs, press Continue, then, for existing customers, enter the pair code or PIN retrieved from Clik Service and log in with an account that has the correct privileges. New customers can press Demo to use a demo database. The first sync copies the Clik Service data the app needs and the article advises doing it over Wi-Fi to avoid mobile data charges. No Windows version of the app is offered.",
+      "source_url": "https://www.cliksoftware.com/kb/downloading-installing-the-app/"
+    },
+    {
+      "requirement": "Offline working, with a connection to sync",
+      "detail": "The Google Play listing says an internet connection is only required to sync jobs and that Clik Jobs has been designed to function almost completely without an active internet connection. Clik's support centre FAQ answers the question of whether engineers can access their jobs offline with yes: download the job before going out onto site and sync it back to the office when reconnected. How much data the app holds on the device is not published.",
+      "source_url": "https://www.cliksoftware.com/support-centre/"
+    },
+    {
+      "requirement": "Sync driven from Clik Service, on a schedule the office sets",
+      "detail": "The Syncing to Clik Jobs article says the Clik Service sync updates the app with modified users and privileges, edited jobs and anything linked to them, new job information including links and images, audit logs and notifications, and also synchronises customers, addresses, equipment, contacts and products. A sync can be run from a job sheet or scheduled under Settings, Settings, Modules, Clik Jobs; the article gives every 15 minutes as an example and warns against syncing as often as every 5 minutes because it can stop engineers downloading their jobs.",
+      "source_url": "https://www.cliksoftware.com/kb/syncing-to-clik-jobs/"
+    },
+    {
+      "requirement": "Photos, signatures, GPS routes and job creation in the app",
+      "detail": "The Google Play listing says Clik Jobs allows you to attach photos to job sheets and take a customer's signature once your work is complete, to add time items, material items, equipment and documents to jobs, to create jobs on the device and synchronise them later, and that GPS allows the office to track engineers with routes sent back and viewable at any time. No barcode or QR scanning is described, and no camera resolution or location accuracy is specified.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.clik.clikmobile&hl=en_GB"
+    },
+    {
+      "requirement": "Windows for Clik Service itself: .NET Framework 4.7.2 or higher",
+      "detail": "Clik's article Checking Your Microsoft .Net Version states that Microsoft .NET Framework 4.7.2 or higher is required to run Clik software, including Clik Service, Clik Cert and NICEIC Cert Software, and that a PC or server running the latest Windows updates should already have it. The support centre FAQ says software specifications are on the product pages, but when checked on 25 October 2026 those pages redirect to Joblogic FSM and Clik Compliance marketing and no processor, RAM, disk or Windows version figure for Clik Service is published. Clik Service is office software for a PC or server, not a field app, and Clik Jobs has no Windows version.",
+      "source_url": "https://www.cliksoftware.com/kb/checking-your-microsoft-net-version/"
+    },
+    {
+      "requirement": "Clik is now part of Joblogic",
+      "detail": "Joblogic's announcement, last updated 26 September 2024, says Clik has officially become part of the Joblogic family and that Joblogic is working on a cloud launch of Clik's electronic certification software. Clik's homepage now presents Joblogic FSM and Clik Compliance and offers a support portal for existing Clik Service installations. Existing users should ask Clik or Joblogic how long Clik Service and Clik Jobs will be supported before buying a fleet of devices around them.",
+      "source_url": "https://joblogic.com/blog/joblogic-welcomes-clik-to-our-family"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a8",
+      "role": "primary",
+      "why": "Clik Jobs asks very little of a device on paper: Android 5.0 or later, with no RAM or storage figure. What decides the choice is the work the listing describes, job sheets, photos, signatures and a day of GPS tracking between sites, done by engineers who live in a van. The Tuga A8 runs Android 12 with Google Play, seven versions above the published minimum, with 6GB of RAM and 128GB of storage for a cached database of customers, equipment and job images. Its 8 inch screen is large enough for a job sheet and a signature without being too big for one hand on a ladder, and at 1000 nits it stays readable on a roof plant deck. The 8000mAh battery is removable, so a charged spare covers a long day of callouts, and VESA mount points and a pogo pin connector let it lock into the vehicle mounting dock and come out as a site tablet. It is sealed to IP67 and the 13MP autofocus rear camera has a flash for photographs behind boilers and inside panels. The trade-offs are an Android 12 release that is older than the A6 or A10, no MIL-STD rating and a 1280 x 800 screen; the one thing to do before buying several is run Clik Jobs on one, because the app's last update predates Android 12 being current.",
+      "fit": [
+        "Requirement: Android 5.0 or later from Google Play. Tuga A8: Android 12 with Google Play, so the published minimum is met.",
+        "Requirement: job sheets, photos and customer signatures on screen. Tuga A8: 8 inch IPS 1280 x 800 at 1000 nits with AGC glass; 13MP autofocus rear camera with flash; the capacitive stylus accessory fits it.",
+        "Requirement: offline working between syncs. Tuga A8: 6GB RAM, 128GB storage with a microSD slot, dual SIM 4G LTE and Wi-Fi for the sync when a connection returns.",
+        "Requirement: GPS routes sent back to the office. Tuga A8: GPS + GLONASS + Galileo + BeiDou.",
+        "Requirement: a device that lives in the van. Tuga A8: IP67, removable 8000mAh battery, VESA mount points and a pogo pin dock connector; fits the vehicle mounting dock."
+      ]
+    },
+    {
+      "device_id": "tuga-a10",
+      "role": "alternative",
+      "why": "Where engineers fill in longer forms, read equipment documents attached to jobs, or work in wetter and rougher places, the Tuga A10 is the step up. It runs Android 14 with Google Play, carries 8GB of RAM and 128GB of storage with microSD up to 2TB for a large cached job history, and its 10.1 inch 1920 x 1200 screen shows a whole job sheet or a PDF manual at once. It is sealed to IP68 and tested to MIL-STD-810H, which covers hose-down plant rooms and drops from ladders, and it fits both the vehicle mounting dock and the charging dock for a shared device that returns to the office. Against the A8 it is 680g rather than a one-handed tablet, its 350 nit screen is dimmer outdoors, and its 8000mAh battery is not listed as removable. At £449 it is £70 more than the A8.",
+      "fit": [
+        "Requirement: Android 5.0 or later from Google Play. Tuga A10: Android 14 with Google Play.",
+        "Requirement: long job sheets and attached documents. Tuga A10: 10.1 inch FHD IPS 1920 x 1200 at 350 nits with tempered glass, 8GB RAM, 128GB storage, microSD up to 2TB.",
+        "Requirement: photos behind plant and in panels. Tuga A10: 13MP rear camera with flash.",
+        "Requirement: plant rooms, roofs and drops. Tuga A10: IP68, MIL-STD-810H, operating temperature -20 to 60C, 8000mAh battery with quick charge.",
+        "Requirement: connectivity and GPS. Tuga A10: 4G dual SIM, dual-band Wi-Fi 5, Bluetooth 5.2, NFC, GPS + Galileo + BeiDou + QZSS + NavIC."
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "The Google Play listing carries a Phone device chip, and Clik Jobs began life in 2014 as a phone app, so a phone-sized layout is one the vendor publishes for. The Tuga A6 runs it on a 6 inch Android 15 handheld at 277g that goes in a pocket or the £22 belt holster between jobs, which suits a fire and security engineer moving between detectors and panels all day. It is sealed to IP67, rated for 1.5 metre drops, and has 4G with dual SIM, GPS and a removable 5050mAh battery. Its 4GB of RAM and 64GB of storage (microSD up to 256GB) are below the tablets, and Clik publishes no minimum to compare them against, so trial it with your database size first. The built-in 2D barcode scanner is not something Clik Jobs documents using. The trade-off is screen area: a 6 inch screen shows less of a job sheet and a smaller signature box than the 8 or 10.1 inch tablets.",
+      "fit": [
+        "Requirement: Android 5.0 or later from Google Play, phone layout published. Tuga A6: Android 15 with Google Play.",
+        "Requirement: photos and signatures. Tuga A6: 13MP rear camera with flash on a 6 inch FHD+ 2160 x 1080 screen.",
+        "Requirement: offline working between syncs. Tuga A6: 4GB RAM, 64GB storage, microSD up to 256GB; no minimum is published to compare against, so trial first.",
+        "Requirement: a device that survives the toolbag. Tuga A6: IP67, 1.5 metre drop rating, operating temperature -20 to 50C, 277g.",
+        "Requirement: GPS and connectivity. Tuga A6: 4G LTE dual SIM, dual-band Wi-Fi 5, Bluetooth 5.1, NFC, GPS + GLONASS + BeiDou + Galileo, removable 5050mAh battery."
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "Clik Service itself is Windows software, and Clik Jobs has no Windows version. The Tuga W10 runs Windows 11 Pro on an Intel N100 with 8GB of RAM and 128GB of storage, with .NET Framework 4.7.2, Clik's one published requirement, included in a current Windows 11 install, so it can run the Clik Service office client for a scheduler on a workshop counter, in a site cabin or in a van that doubles as an office. It has RJ45 Ethernet, HDMI, USB-A and USB-C for a fixed position and a pogo pin dock, and it fits the charging dock. It is not the device for an engineer running Clik Jobs: that app is Android and iOS only. Clik publishes no processor, RAM or disk figure for Clik Service beyond the .NET version, so if your database is large, ask Clik's support team whether a client on an N100 with 8GB suits it before you buy. The W10 is IP65, protected against water jets but not rated for immersion, and weighs 1197g; 16GB RAM and larger storage are factory options.",
+      "fit": [
+        "Requirement: .NET Framework 4.7.2 or higher on a PC with current Windows updates. Tuga W10: Windows 11 Pro, Intel N100 up to 3.4GHz, 8GB RAM (16GB option), 128GB storage (256GB and 512GB options).",
+        "Requirement: a fixed office or site cabin position. Tuga W10: 100Mbps RJ45 Ethernet, HDMI, USB-A, USB-C, pogo pin dock connector; fits the charging dock.",
+        "Requirement: the Clik Jobs app. Tuga W10: not supported, Clik Jobs is published for Android and iOS only.",
+        "Requirement: dust and splash protection in a workshop. Tuga W10: IP65 (dust tight, protected against water jets, not rated for immersion), 10.1 inch 1280 x 800 touchscreen, 1197g, removable 5000mAh battery."
+      ]
+    }
+  ],
+  "setup_steps": [
+    "In Clik Service, check the engineer is set up as a user with the privileges Clik Jobs needs and retrieve the pair code or PIN, as Clik's installation article describes. Ask Clik or Joblogic support how long Clik Service and Clik Jobs will be supported if you are buying several devices.",
+    "On the Tuga A8, A10 or A6, open Google Play and install Clik Jobs (package com.clik.clikmobile, developer CLIK LIMITED), open it, press Continue, enter the pair code or PIN and log in.",
+    "Run the first sync on Wi-Fi, as Clik advises, so the app downloads your Clik Service data without using mobile data; it can take a while on a large database.",
+    "In Clik Service, under Settings, Settings, Modules, Clik Jobs, set a sync schedule (Clik's article gives every 15 minutes as an example) and tick Sync by Default for the engineer, so assigned jobs reach the device without anyone pressing a button.",
+    "Complete a test job on the device without signal: add time and materials, attach a photo, take a signature, then reconnect and sync, and check the audit log in Clik Service shows the job as received.",
+    "Fit the vehicle mounting dock for the A8 or A10 and keep the 12V car charger in the van; for a shared A10 that returns to the office, add the charging dock, and for an A6 the belt holster."
+  ],
+  "accessories": [
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10, W8 and W10), a locking VESA mount with DC power for the van",
+    "12V DC Car Charger, £26 (every Tuga model), for charging between jobs",
+    "Charging Dock, £49.99 (Tuga A10, W8 and W10), for a shared device that returns to the office",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10, W8, W10 and WH6), for neater customer signatures",
+    "Hand Strap, £24 (Tuga A8, A10, W8 and W10), for one-handed use on a ladder",
+    "Tempered Glass Screen Protector (2 Pack), £14 (every Tuga model)",
+    "Belt Holster, £22 (Tuga A6 and WH6), for a handheld between jobs",
+    "Spare batteries for the A6, A8, WH6, W8 and W10, price and lead time on request"
+  ],
+  "faq": [
+    {
+      "q": "Will Clik Jobs run on the Tuga A8, A10 and A6?",
+      "a": "Clik's Google Play listing sets a minimum of Android 5.0 and shows Phone and Tablet device chips. The Tuga A8 runs Android 12, the A10 Android 14 and the A6 Android 15, all with Google Play, so each meets the published minimum. Clik publishes no RAM, storage or screen requirement. The app's last update was 8 July 2024, so install it on one device and run a job before buying a fleet; we have not tested it ourselves."
+    },
+    {
+      "q": "Can I run Clik Service on the Tuga W10?",
+      "a": "Clik Service is Windows office software and its one published requirement is .NET Framework 4.7.2 or higher on a PC with current Windows updates, which a Windows 11 Pro device such as the W10 carries. Clik does not publish processor, RAM or disk figures for Clik Service, so for a large database ask Clik's support team before relying on an Intel N100 with 8GB. The W10 cannot run the Clik Jobs app, which is Android and iOS only."
+    },
+    {
+      "q": "Does Clik Jobs work without signal in a plant room?",
+      "a": "Yes, according to Clik: the Google Play listing says the app is designed to function almost completely without an active internet connection and only needs one to sync, and the support centre FAQ says engineers can download jobs before going to site and sync them back later. Jobs reach the device only when Clik Service runs a sync, so a scheduled sync and a connection in the van matter. The Tuga A8, A10 and A6 all have dual SIM 4G for that."
+    },
+    {
+      "q": "Clik has joined Joblogic. Should I still buy devices for Clik Jobs?",
+      "a": "That is a question for Clik or Joblogic, not for us. Joblogic's announcement says Clik's products continue and that a cloud launch of its certification software is in progress, and Clik keeps a support portal for Clik Service installations. If your firm expects to move to Joblogic, every device on this page also meets Joblogic's published Android 7.0 and 4GB requirement, so the hardware carries over; see our Joblogic page."
+    },
+    {
+      "q": "Can I try one before buying for the whole team?",
+      "a": "Yes. Order one by card or on a proforma invoice, pair it to your Clik Service database and run real jobs on it. Return it within 30 days under our returns policy if it is wrong, in its original condition with the box. Delivery to UK addresses is free in 7 to 10 working days, there is no VAT to add, and team discounts of 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more apply automatically when you order the rest."
+    }
+  ],
+  "not_recommended_note": "The Tuga W10, W8 and WH6 cannot run Clik Jobs, which Clik publishes for Android and iOS only; a Windows device suits only the Clik Service office client. Among the Android devices, buy the A6 for the pocket rather than for long forms, and because Clik publishes no RAM or storage minimum, trial any model with your own database before ordering several.",
+  "disclaimer": "Clik Service and Clik Jobs are products of Clik Limited, part of Joblogic. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Clik Limited or Joblogic. Device requirements are quoted from the vendor's published pages on the dates given; check them before you buy.",
+  "sources": [
+    "https://www.cliksoftware.com/",
+    "https://play.google.com/store/apps/details?id=com.clik.clikmobile&hl=en_GB",
+    "https://www.cliksoftware.com/kb/downloading-installing-the-app/",
+    "https://www.cliksoftware.com/kb/syncing-to-clik-jobs/",
+    "https://www.cliksoftware.com/support-centre/",
+    "https://www.cliksoftware.com/kb/checking-your-microsoft-net-version/",
+    "https://joblogic.com/blog/joblogic-welcomes-clik-to-our-family"
+  ]
+}
