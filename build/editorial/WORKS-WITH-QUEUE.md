@@ -32,11 +32,11 @@ Status: `todo` → `pr` → `done` (or `skip`).
 | 6 | skip | Castle Field Service | Castle Computer Services | UK field service software for engineers; maintenance and compliance | No such product: Castle Computer Services is an accounting and IT firm acquired by Kick ICT in 2018; no field service app exists |
 | 7 | pr | Re-flow | Re-flow Ltd | UK construction and civils field management; forms, timesheets, plant | A8 primary; vendor FAQ gives Android 7 minimum, 8 recommended, GPS and camera required |
 | 8 | pr | GoCanvas | GoCanvas | Mobile forms and inspections used by UK trades; Android app | A10 primary; help centre says Android 13 and higher (October 2026) |
-| 9 | todo | Shire Systems Pirana CMMS | Shire Systems Ltd | UK CMMS with a mobile app for engineers | |
-| 10 | todo | Infraspeak | Infraspeak | Maintenance and FM platform with Android app; NFC asset tags | |
-| 11 | todo | Zuper | Zuper | Field service management with an Android app; HVAC and FM | |
-| 12 | todo | Salesforce Field Service | Salesforce | Enterprise field service mobile app with published Android requirements | |
-| 13 | todo | Oracle Field Service | Oracle | Enterprise field service with a published mobile requirements page | |
-| 14 | todo | ServiceNow Field Service Management | ServiceNow | Enterprise FSM with the Now Mobile app; published device requirements | |
-| 15 | todo | FieldPulse | FieldPulse | Field service app for trades with an Android app; UK presence | |
-| 16 | todo | Buildertrend | Buildertrend | Construction project management with an Android app | |
+| 9 | pr | Shire Systems Pirana CMMS | Shire Systems Ltd | UK CMMS with a mobile app for engineers | Now ShireSystem Mobile PRO by Elecosoft; A10 primary; Play data gives Android 4.1 minimum, phone layout only |
+| 10 | pr | Infraspeak | Infraspeak | Maintenance and FM platform with Android app; NFC asset tags | A10 primary; Infraspeak Academy gives Android 10 minimum, 4GB RAM, recommended Android 13 and 6GB |
+| 11 | pr | Zuper | Zuper | Field service management with an Android app; HVAC and FM | A8 primary; docs.zuper.co Device Requirements gives Android 8.0 minimum |
+| 12 | skip | Salesforce Field Service | Salesforce | Enterprise field service mobile app with published Android requirements | Salesforce requires Android 15 (latest major minus two) and 5GB RAM minimum (October 2026); no Tuga Android device meets it. Revisit when the range changes |
+| 13 | pr | Oracle Field Service | Oracle | Enterprise field service with a published mobile requirements page | A10 primary; Oracle guide F75117-19 (September 2026) gives Android 7 or later |
+| 14 | pr | ServiceNow Field Service Management | ServiceNow | Enterprise FSM with the Now Mobile app; published device requirements | A10 primary; ServiceNow Zurich tested-devices page gives Android 12 minimum, 8GB RAM recommended; the app is ServiceNow Agent |
+| 15 | pr | FieldPulse | FieldPulse | Field service app for trades with an Android app; UK presence | A8 primary; help centre gives Android 7.0 through latest; Play lists a phone layout only; no UK presence found |
+| 16 | skip | Buildertrend | Buildertrend | Construction project management with an Android app | No clear published Android floor: the help article says no Android version before 7.9.9, which reads as an app version, and the Play listing shows no Requires Android figure |

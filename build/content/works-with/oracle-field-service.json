@@ -1,0 +1,154 @@
+{
+  "slug": "oracle-field-service",
+  "software": "Oracle Field Service (Oracle Fusion Field Service)",
+  "vendor": "Oracle Corporation",
+  "vendor_url": "https://www.oracle.com/uk/cx/service/field-service/",
+  "title": "Rugged tablet for Oracle Field Service: UK buyer's guide",
+  "meta_description": "Oracle publishes Android 7 or later for its Field Service mobile app (September 2026 guide). The Tuga A10, on Android 14 with 8GB RAM and IP68, clears it well.",
+  "target_query": "rugged tablet for Oracle Field Service",
+  "h1": "Rugged tablet for Oracle Field Service",
+  "intro": [
+    "Oracle Field Service, now branded Oracle Fusion Field Service and sold as part of Oracle's service cloud, is the scheduling and mobile workforce product behind some of the largest field operations in the UK: utilities, telecoms, home services and equipment maintenance firms with hundreds or thousands of engineers. The office side runs in a browser. Mobile workers use the Oracle Field Service app, published on Google Play by Oracle America, Inc. and on the App Store, or the browser-based mobility interface, to receive their route, work activities, update statuses, manage inventory, scan barcodes, capture photos and chat with the dispatcher. Oracle's own listing says the app works when the worker has no internet connection and synchronises when connectivity returns.",
+    "Unlike most job management vendors, Oracle publishes an operating system floor for the app in its current user guide: Android 7 or later for the Android app, Android 8 or later for Android Auto, and iOS 15 or later on Apple devices. It does not publish a RAM, storage or screen requirement; it asks you to check your device against Oracle Support article 2924910.1, which sits behind an Oracle Support login, and to keep location services in High Accuracy mode. Because the app is a native Android and iOS app and there is no Windows app, this is an Android decision for the people doing the work, with Windows only relevant to dispatchers and supervisors using the browser.",
+    "This page sets out what Oracle publishes about the devices its app runs on, which Tuga rugged tablets meet those published points and where each falls short, why the Tuga A10 is the primary pick and when the A8 or the A6 handheld is the better buy, and how a UK contractor can buy a single trial unit before committing to a fleet. Nothing here is a statement that Oracle has tested or certified a Tuga device; the match is between Oracle's published requirements and the specifications in our catalogue, and the first step is always a trial unit on your own environment."
+  ],
+  "requirements": [
+    {
+      "requirement": "Android 7 or later for the Oracle Field Service Android app; Android 8 or later for Android Auto",
+      "detail": "Oracle's user guide Using Android and iOS Mobile Applications (document F75117-19, copyright 2026, PDF generated 17 September 2026), chapter 2 Install the Mobile Application, says under Before you start: check the compatibility of your device on Oracle Support article ID 2924910.1; minimum supported operating system: Android 7 or later; Android Auto requires Android 8 or later. The iOS section gives iOS 15 or later, with Apple CarPlay needing iOS 16 or later. The support article itself is behind an Oracle Support login, so the device-level compatibility check is one for your Oracle administrator.",
+      "source_url": "https://docs.oracle.com/en/cloud/saas/field-service/famai/using-android-and-ios-mobile-applications.pdf"
+    },
+    {
+      "requirement": "A supported release of the app, kept current, with location services in High Accuracy mode",
+      "detail": "The guide's Device Requirements section (and the same page in the online help) says: to run the Oracle Fusion Field Service mobile app, ensure the device is using a supported release of the mobile app, and location services are available and enabled in High Accuracy mode (use GPS, WLAN, and mobile network to determine location). The Upgrade section says that when you log in, a prompt to upgrade to the latest major version appears if the installed app is at least one major version lower than the latest available, and that most Android devices update apps automatically. The Location Permissions section adds that the installed app needs location permissions for location-based alerts, duration estimates and the Multi-Image Watermark feature.",
+      "source_url": "https://docs.oracle.com/en/cloud/saas/field-service/famai/c-android-overview-mobile-application.html"
+    },
+    {
+      "requirement": "Native app from Google Play, for phones and tablets, with offline working and background location",
+      "detail": "The Google Play listing (package com.oracle.ofsc, developer Oracle America, Inc., updated 28 August 2026, more than 500,000 downloads, Phone and Tablet chips) says the app works when the mobile worker does not have internet connectivity and automatically synchronises any actions taken while offline when connectivity is established, and that with Oracle Field Service Smart Location, Professional or Enterprise it continually gathers the worker's coordinates while running in the background. The listing does not display a Requires Android figure, and points to Oracle's system requirements page for OS and browser versions, so the governing figure is the Android 7 floor in the guide above. The guide's environment section says that once an environment has been used, its offline data is updated when the device is online, and when the device is offline you can continue to work by entering the PIN.",
+      "source_url": "https://play.google.com/store/apps/details?id=com.oracle.ofsc&hl=en_GB"
+    },
+    {
+      "requirement": "Camera for in-app barcode scanning and photos; the device's native camera app from Android 11",
+      "detail": "The guide says the Barcode Scanner button on the inventory search page is available in the mobile app for both iOS and Android, but not in the browser-based application unless a plug-in is developed and configured. Set Camera Permissions to Use Barcode Scanner says the native app must be allowed to access the camera, and that third-party camera apps are not supported starting with Android 11, so you must use the native camera app. Capture Images With In-App Camera says the installed app has its own camera module, with an optional Multi-Image Watermark that stamps each photo with its timestamp and location. Work with Multiple Barcode Scanner describes scanning serial number, model number and MAC address fields in sequence.",
+      "source_url": "https://docs.oracle.com/en/cloud/saas/field-service/famai/using-android-and-ios-mobile-applications.pdf"
+    },
+    {
+      "requirement": "Free internal storage above 100 MB, with the app warning when it drops below",
+      "detail": "The guide's Available Storage Notification When Low section says you can view the available internal storage on the About page of the installed app, and if the storage goes below 100 MB a notification appears in the app notification area. The consumed figure covers every app on the device, not just Oracle Field Service. Oracle publishes no minimum storage or RAM figure for the app.",
+      "source_url": "https://docs.oracle.com/en/cloud/saas/field-service/famai/using-android-and-ios-mobile-applications.pdf"
+    },
+    {
+      "requirement": "Mobile Device Management must not block location, network or start-up permissions",
+      "detail": "The guide's troubleshooting page says that when MDM software is used, the application must not prevent a user from starting or launching a web application, and these Android permissions must not be blocked: precise location (GPS and network based), full network access, view network connections, run at startup. Coordinates are only gathered once the resource has logged in and their route is active. The Configure Your Environment section covers MDM deployment: the app installed through MDM is pointed at an environment name (without the fs.ocs.oraclecloud.com domain) and can load environments from an XML file.",
+      "source_url": "https://docs.oracle.com/en/cloud/saas/field-service/famai/t-android-troubleshooting-mobile-application.html"
+    },
+    {
+      "requirement": "Android Auto needs the January 2026 app release or later and platform 25D or later",
+      "detail": "Oracle's 26A What's New says Android Auto for Mobile Workers brings an extended version of the app to the vehicle's infotainment screen, showing the next activity, navigation and a call button, and lists its requirements: the Android version of the app on the January 2026 or later release, an Android Auto compatible vehicle, Oracle Fusion Field Service platform version 25D or later, location permission set to Always Allow, and an active route. The guide separately gives Android 8 or later for Android Auto.",
+      "source_url": "https://docs.oracle.com/en/cloud/saas/readiness/service/26a/fscv-26a/26A-fsvc-wn-f42113.htm"
+    },
+    {
+      "requirement": "Browser use: Chrome for Android only, the most recent version; Chrome 138 or later on Windows",
+      "detail": "The Play listing points to Oracle's system requirements page, which for Fusion Cloud Applications gives minimum browser versions of Chrome 138, Edge 138, Firefox 140 and Safari 18.5, and says that for mobile device operating systems Oracle supports only the most recent browser; on Android that is Chrome for Android only, not the native Android browser, and Firefox is not supported. Oracle's Software Web Browser Support Policy says the same for mobile operating systems. This matters for dispatchers and supervisors who use the browser rather than the app, and for a Windows tablet, which can only ever run Oracle Field Service in a browser because there is no Windows app.",
+      "source_url": "https://www.oracle.com/system-requirements/"
+    }
+  ],
+  "recommended": [
+    {
+      "device_id": "tuga-a10",
+      "role": "primary",
+      "why": "Oracle's floor is Android 7, and the A10 runs Android 14, seven versions above it, with Google Play for the app. Oracle publishes no RAM or storage figure, but the A10's 8GB RAM and 128GB storage, plus a microSD slot to 2TB, keep it far from the 100 MB low-storage warning even with months of watermarked photos. The 13MP rear camera with flash serves the in-app barcode scanner and the in-app camera, both of which use the device camera, and the app's warning about third-party camera apps does not apply because the A10 uses its native camera. GPS, Galileo, BeiDou, QZSS and NavIC cover the High Accuracy location mode the guide requires, and dual SIM 4G with dual-band Wi-Fi 5 handles the sync that follows an offline stretch. The 10.1 inch 1920 x 1200 screen suits the activity list, inventory search and multi-field barcode sections on the larger-screen layout Oracle shows in its screenshots. It is IP68 and MIL-STD-810H, rated for -20 to 60 degrees C, at 680g. The trade-off is a 350 nit screen, which is adequate under cover and in the van but not the brightest in the range, and a battery that is not removable; and the price, at £449 the dearest Android device we sell.",
+      "fit": [
+        "Android app: Android 14 with Google Play against Oracle's published Android 7 floor, and above the Android 8 Android Auto needs",
+        "RAM and storage: 8GB and 128GB, microSD to 2TB; Oracle publishes no minimum, and the app warns at 100 MB free",
+        "Camera scanning and photos: 13MP rear camera with flash for the in-app barcode scanner and the in-app camera with watermark",
+        "Location: GPS, Galileo, BeiDou, QZSS and NavIC for High Accuracy mode and background location tracking",
+        "Offline shifts: 8000mAh battery with quick charge, dual SIM 4G and dual-band Wi-Fi 5 for the sync afterwards; IP68, MIL-STD-810H, -20 to 60 degrees C"
+      ]
+    },
+    {
+      "device_id": "tuga-a8",
+      "role": "alternative",
+      "why": "The A8 runs Android 12, five versions above Oracle's Android 7 floor and above the Android 8 needed for Android Auto, with 6GB RAM, 128GB storage and a microSD slot. Its case over the A10 is the engineer who lives in the van: a 1000 nit screen that stays readable on a bright forecourt, a removable 8000mAh battery so a charged spare takes over on a long day, VESA mount points and pogo pins for the Vehicle Mounting Dock, and dual SIM 4G. The 13MP autofocus rear camera with flash serves the barcode scanner and in-app camera, and GPS, GLONASS, Galileo and BeiDou cover High Accuracy mode. The 8 inch 1280 x 800 screen shows less of a long activity list than the A10, it is IP67 rather than IP68, and no drop rating or operating temperature is listed for it. At £379 it is £70 less than the A10.",
+      "fit": [
+        "Android app: Android 12 with Google Play, above the published Android 7 floor and the Android 8 Android Auto needs",
+        "Van life: 1000 nit screen, removable 8000mAh battery, VESA mount points and pogo pins for the Vehicle Mounting Dock",
+        "Camera: 13MP autofocus rear camera with flash for in-app scanning and photos",
+        "Connectivity: dual SIM 4G, Wi-Fi, Bluetooth, NFC; GPS, GLONASS, Galileo and BeiDou"
+      ]
+    },
+    {
+      "device_id": "tuga-a6",
+      "role": "alternative",
+      "why": "For engineers who want one device in a pocket rather than a tablet in the van, the A6 is a 6 inch Android 15 handheld at 277g, sealed to IP67 and rated for 1.5 metre drops, with 4G, NFC, a removable 5050mAh battery and a 13MP rear camera with flash for the in-app barcode scanner and camera. Its built-in Zebra 2D scan engine is a separate thing: Oracle's barcode scanner uses the device camera, and whether the hardware engine can feed a field depends on a keyboard-wedge setup that Oracle's guide does not cover, so treat the engine as a bonus for other apps and test it on a trial unit. The 4GB RAM and 64GB storage are the smallest in the range, which matters only because Oracle publishes no minimum and the app warns at 100 MB free; a microSD card to 256GB covers photos. The 6 inch 2160 x 1080 screen is a phone layout, which Oracle's screenshots show it supports. At £349 it is the lowest priced device we sell.",
+      "fit": [
+        "Android app: Android 15 with Google Play, eight versions above Oracle's Android 7 floor",
+        "Pocket form: 277g, IP67, rated for 1.5 metre drops, Belt Holster available",
+        "Camera: 13MP rear camera with flash for in-app scanning; hardware scan engine for other uses",
+        "Shift: removable 5050mAh battery, dual SIM 4G, NFC, GPS, GLONASS, BeiDou and Galileo"
+      ]
+    },
+    {
+      "device_id": "tuga-w10",
+      "role": "alternative",
+      "why": "There is no Windows app, so the W10 is not a device for mobile workers running the Oracle Field Service app. It is listed here for the dispatcher, supervisor or team leader who uses the browser-based Oracle Field Service interface on site: Windows 11 Pro on an Intel N100 runs Chrome, and Oracle's system requirements give Chrome 138 or later on Windows, which the current Chrome release exceeds. Its 10.1 inch screen, RJ45 Ethernet, HDMI and USB-A suit a site office or a depot where the schedule board is shared on a screen. Options include 4G LTE and GPS, which are not fitted as standard, so check the configuration before relying on it away from Wi-Fi. At £649 it costs £200 more than the A10, and 16GB RAM and 256GB or 512GB storage are factory options.",
+      "fit": [
+        "Browser only: Windows 11 Pro with Chrome, against Oracle's Chrome 138 minimum on Windows; no Oracle Field Service Windows app exists",
+        "Site office: 10.1 inch IPS screen, RJ45 Ethernet, HDMI, USB-A and USB-C, pogo pin dock",
+        "Options: 4G LTE, GPS, 2D barcode scanner and fingerprint reader are optional, not standard"
+      ]
+    }
+  ],
+  "setup_steps": [
+    "Ask your Oracle Field Service administrator which environment name your organisation uses and whether devices are enrolled through Mobile Device Management; if they are, the guide's MDM configuration (an environment name without the fs.ocs.oraclecloud.com domain, optionally loaded from an XML file) applies, and the MDM policy must leave precise location, full network access, view network connections and run at startup unblocked.",
+    "On the Tuga A10, A8 or A6, install Oracle Field Service from Google Play (package com.oracle.ofsc, developer Oracle America, Inc.), or let your MDM push it; the guide says the app upgrades itself when Android's automatic updates are on, and prompts you if the installed app is a major version behind.",
+    "Open the app, accept the End User Licence Agreement, enter the environment name (for example sunrise or sunrise.test) and your username and password; the guide also allows Single Sign On and, on devices with a fingerprint reader, fingerprint login, which no Tuga Android device has as standard, so use a PIN or password.",
+    "When prompted, allow location access and set it to High Accuracy mode in Android's location settings, which the guide requires for the app to run; set it to Always Allow if your organisation uses Android Auto or background location tracking.",
+    "Allow camera access the first time you use the barcode scanner or the in-app camera; Oracle says third-party camera apps are not supported from Android 11, and every Tuga Android device uses its native camera.",
+    "Before the first real shift, check the About page in the app for available storage (the app warns below 100 MB), activate a test route so coordinates are gathered, and scan a known part barcode from inventory search to confirm the camera scanner works on your environment."
+  ],
+  "accessories": [
+    "Vehicle Mounting Dock, £109 (Tuga A8, A10 and W10), for the engineer whose route starts in the van",
+    "12V DC Car Charger, £26 (every model), for charging between activities",
+    "Hand Strap, £24 (Tuga A8, A10 and W10), for one-handed use on a ladder or in a plant room",
+    "Tempered Glass Screen Protector 2-pack, £14 (every model), a consumable worth keeping in the van",
+    "Charging Dock, £49.99 (Tuga A10 and W10), for shared devices that return to a depot overnight",
+    "Belt Holster, £22 (Tuga A6), for the handheld option",
+    "Capacitive Stylus, £14.99 (Tuga A8, A10 and W10), for signatures and small form fields"
+  ],
+  "faq": [
+    {
+      "q": "Will Oracle Field Service run on the Tuga A10?",
+      "a": "Oracle's current user guide (document F75117-19, September 2026) publishes Android 7 or later for the Android app, and the A10 runs Android 14 with Google Play, 8GB RAM and 128GB storage. Oracle publishes no RAM or storage minimum and directs you to Oracle Support article 2924910.1 for device compatibility, which needs an Oracle Support login, so ask your administrator to check it before a fleet order. We have not tested the app on the A10; buy one unit, point it at your environment and run a route before you buy more."
+    },
+    {
+      "q": "Does the A6's built-in barcode scanner work with Oracle Field Service?",
+      "a": "Oracle's barcode scanner button uses the device camera, and the A6 has a 13MP rear camera with flash for that. The A6's Zebra 2D scan engine is separate hardware; feeding its output into an app field depends on a keyboard-wedge configuration that Oracle's guide does not describe, so count it as a bonus for other apps and test it on a trial unit rather than assuming it."
+    },
+    {
+      "q": "Is there a Windows version for the Tuga W10 or W8?",
+      "a": "No. Oracle publishes the mobile app for Android and iOS only. On Windows, Oracle Field Service runs in a browser, and Oracle's system requirements give Chrome 138 or later. That suits the W10 for a dispatcher or supervisor on site, not for a mobile worker who needs the offline app, the in-app camera or the barcode scanner, which the guide says is not available in the browser without a plug-in."
+    },
+    {
+      "q": "Does the app work offline?",
+      "a": "Oracle's Play listing says the app works when the mobile worker has no internet connectivity and synchronises actions taken offline once connectivity is established, and the guide says that when a device is offline you can continue to work by entering the PIN, with offline data updated when it comes back online. Every Tuga Android device has 4G with dual SIM for the sync afterwards; the A8 and A10 carry 8000mAh batteries for a day with long gaps between signal."
+    },
+    {
+      "q": "Can we trial one device before equipping a team?",
+      "a": "Yes. Order a single A10, A8 or A6 by card or on a proforma invoice and use it against your own Oracle environment. Delivery is free to UK addresses in 7 to 10 working days, there is no VAT to add, every device carries a 12-month warranty, and the 30-day returns policy applies to a unit in its original condition and packaging. Team discounts apply automatically at checkout: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more, and Total Care is available on quote for fleets of five or more."
+    }
+  ],
+  "not_recommended_note": "The Tuga W8 and WH6 are not recommended for Oracle Field Service: there is no Windows app, so a Windows device can only run the browser-based interface, which Oracle's guide says lacks the barcode scanner button without a plug-in and uses the device's native camera rather than the in-app camera. The W10 is listed above only for browser-based dispatch and supervision. Two further honest points. First, Oracle's published floor is Android 7, but device compatibility is checked against Oracle Support article 2924910.1, which is behind a login we cannot see; the A8's Android 12 is the lowest Android version in our Android range, and a January 2026 reply on the Play listing attributes a loading fault to Google WebView changes, so keep Android System WebView updated on whichever device you choose. Second, the A6's Zebra scan engine is not the scanner Oracle's app uses; the app scans with the camera, which every Tuga Android device has.",
+  "disclaimer": "Oracle Field Service is a product of Oracle Corporation. Tuga Hardware is an independent hardware seller and is not affiliated with or endorsed by Oracle Corporation.",
+  "sources": [
+    "https://docs.oracle.com/en/cloud/saas/field-service/famai/using-android-and-ios-mobile-applications.pdf",
+    "https://docs.oracle.com/en/cloud/saas/field-service/famai/c-android-overview-mobile-application.html",
+    "https://docs.oracle.com/en/cloud/saas/field-service/famai/t-android-troubleshooting-mobile-application.html",
+    "https://docs.oracle.com/en/cloud/saas/readiness/service/26a/fscv-26a/26A-fsvc-wn-f42113.htm",
+    "https://play.google.com/store/apps/details?id=com.oracle.ofsc&hl=en_GB",
+    "https://www.oracle.com/system-requirements/",
+    "https://www.oracle.com/middleware/technologies/browser-policy.html",
+    "https://www.oracle.com/uk/cx/service/field-service/"
+  ]
+}

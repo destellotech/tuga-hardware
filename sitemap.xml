@@ -733,6 +733,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.tugahardware.com/works-with/oracle-field-service</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.tugahardware.com/works-with/papertrail-io</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -789,12 +795,6 @@
   <url>
     <loc>https://www.tugahardware.com/works-with/safetyculture</loc>
     <lastmod>2026-10-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.tugahardware.com/works-with/salesforce-field-service</loc>
-    <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
