@@ -2409,6 +2409,31 @@ ${ctaBanner({
   );
 
   const termsTrail = [{ label: 'Home', href: '/' }, { label: 'Warranty', href: '/warranty' }, { label: 'Plan Terms' }];
+  const clauseHtml = (c) => {
+    const n = clauseNumber(c);
+    return n
+      ? `<p id="clause-${n}"><strong>${n}.</strong> ${esc(clauseText(c))}</p>`
+      : `<p id="schedule-1"><strong>${esc(c.split('.')[0])}.</strong> ${esc(c.slice(c.indexOf('.') + 1).trim())}</p>`;
+  };
+  /* The clauses fold into the parts listed in warranty-terms.json sections,
+     by number. A clause in no part, or in two, fails the build rather than
+     going missing from the page. */
+  const termsSections = planTerms.sections.map((sec, i) => {
+    const clauses = planTerms.clauses.filter((c) => {
+      const n = Number(clauseNumber(c));
+      return sec.schedule ? !n : n >= sec.from && n <= sec.to;
+    });
+    return {
+      ...sec,
+      id: `part-${i + 1}`,
+      clauses,
+      range: sec.schedule ? 'Schedule' : sec.from === sec.to ? `Clause ${sec.from}` : `Clauses ${sec.from} to ${sec.to}`,
+    };
+  });
+  const placed = termsSections.flatMap((sec) => sec.clauses);
+  if (placed.length !== planTerms.clauses.length || new Set(placed).size !== placed.length) {
+    throw new Error('warranty-terms.json: every clause must fall in exactly one of the sections');
+  }
   write(
     'warranty-terms.html',
     page({
@@ -2429,16 +2454,21 @@ ${breadcrumbs(termsTrail)}
 
     <section class="section">
       <div class="container-narrow">
-        <div class="prose clauses">
-          ${planTerms.clauses
-            .map((c) => {
-              const n = clauseNumber(c);
-              return n
-                ? `<p id="clause-${n}"><strong>${n}.</strong> ${esc(clauseText(c))}</p>`
-                : `<p id="schedule-1"><strong>${esc(c.split('.')[0])}.</strong> ${esc(c.slice(c.indexOf('.') + 1).trim())}</p>`;
-            })
-            .join('\n          ')}
-        </div>
+        <p class="terms-tools"><button type="button" class="btn btn-sm btn-outline" data-terms-toggle aria-expanded="false">Open all</button></p>
+        ${termsSections
+          .map(
+            (sec) => `
+        <details class="terms-group" id="${sec.id}">
+          <summary>
+            <span class="terms-group-title">${esc(sec.title)}</span>
+            <span class="terms-group-meta">${esc(sec.range)} · ${esc(sec.applies)}</span>
+          </summary>
+          <div class="prose clauses">
+            ${sec.clauses.map(clauseHtml).join('\n            ')}
+          </div>
+        </details>`
+          )
+          .join('')}
         <p class="disclaimer" style="margin-top:2rem">See also our <a href="/terms">Terms and Conditions</a>, <a href="/warranty">warranty page</a> and <a href="/shipping-returns">shipping and returns</a>.</p>
       </div>
     </section>

@@ -1,8 +1,57 @@
 {
-  "_note": "Plan Terms for the 3-Year Warranty and Total Care, plus the standard warranty (clauses 44 to 49). Generated from the warranty design; edit here, not in the HTML.",
+  "_note": "Plan Terms for the 3-Year Warranty and Total Care, plus the standard warranty (clauses 44 to 49). Generated from the warranty design; edit here, not in the HTML. sections groups the clauses into the folding parts of /warranty-terms by clause number (from and to, inclusive); every clause must fall in exactly one, and the schedule goes in the part marked schedule.",
   "title": "Plan Terms: 3-Year Warranty and Total Care",
   "last_updated": "October 2026",
   "intro": "These are the terms of the Tuga 3-Year Warranty and Tuga Total Care, and of the standard 12-month warranty that comes with every Tuga device. They are given by Destello Tech Ltd, trading as Tuga Hardware, company number 16595781, registered in England and Wales, registered office 124 Vicarage Wood, Harlow, Essex CM20 3HH. Our Terms and Conditions of sale apply alongside them and say the same thing about the standard warranty.",
+  "sections": [
+    {
+      "title": "What these plans are",
+      "applies": "Both paid plans",
+      "from": 1,
+      "to": 4
+    },
+    {
+      "title": "Which devices, how long, when to buy and prices",
+      "applies": "Both paid plans",
+      "from": 5,
+      "to": 9
+    },
+    {
+      "title": "Making a claim, and what is and is not covered",
+      "applies": "Both paid plans",
+      "from": 10,
+      "to": 18
+    },
+    {
+      "title": "Total Care: swap units, battery service and fleet support",
+      "applies": "Total Care only",
+      "from": 19,
+      "to": 32
+    },
+    {
+      "title": "Transfer, cancelling, payment and ending a plan",
+      "applies": "Both paid plans",
+      "from": 33,
+      "to": 38
+    },
+    {
+      "title": "Liability, changes, complaints and law",
+      "applies": "Both paid plans",
+      "from": 39,
+      "to": 43
+    },
+    {
+      "title": "The standard 12-month warranty",
+      "applies": "Every Tuga device",
+      "from": 44,
+      "to": 49
+    },
+    {
+      "title": "Schedule 1: data processing",
+      "applies": "Total Care only",
+      "schedule": true
+    }
+  ],
   "clauses": [
     "1. Who gives these plans. The Tuga 3-Year Warranty and Tuga Total Care are given by Destello Tech Ltd, trading as Tuga Hardware, company number 16595781, registered in England, registered office 124 Vicarage Wood, Harlow, Essex CM20 3HH. In these Terms 'we', 'us' and 'Tuga' mean Destello Tech Ltd and 'you' means the customer named on the invoice. No insurer or other third party backs either plan and there is no financial protection scheme behind them. If Destello Tech Ltd stops trading, the plans end.",
     "2. Nature of the plans. The 3-Year Warranty is a warranty given by the seller against defects in materials and workmanship, including the battery. Total Care is a service contract that includes that warranty. Our remedy is repair, replacement or the services described in these Terms, never a payment of money except the refunds described in clauses 34 to 36.",

@@ -687,6 +687,54 @@
     });
   }
 
+  /* ----------------------------------------------------------- plan terms */
+
+  /* The Plan Terms fold into parts. A link to a clause (#clause-17) opens its
+     part, one button opens or closes them all, and printing shows every
+     clause whatever is open on screen. */
+  function initTermsGroups() {
+    const groups = $$('.terms-group');
+    if (!groups.length) return;
+    const toggle = $('[data-terms-toggle]');
+
+    const sync = () => {
+      if (!toggle) return;
+      const allOpen = groups.every((g) => g.open);
+      toggle.textContent = allOpen ? 'Close all' : 'Open all';
+      toggle.setAttribute('aria-expanded', String(allOpen));
+    };
+
+    const openTarget = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const target = id ? document.getElementById(id) : null;
+      const group = target?.closest('.terms-group');
+      if (!group) return;
+      group.open = true;
+      target.scrollIntoView();
+    };
+
+    groups.forEach((g) => g.addEventListener('toggle', sync));
+    toggle?.addEventListener('click', () => {
+      const open = !groups.every((g) => g.open);
+      groups.forEach((g) => { g.open = open; });
+      sync();
+    });
+
+    let before = null;
+    window.addEventListener('beforeprint', () => {
+      before = groups.map((g) => g.open);
+      groups.forEach((g) => { g.open = true; });
+    });
+    window.addEventListener('afterprint', () => {
+      if (before) groups.forEach((g, i) => { g.open = before[i]; });
+      before = null;
+    });
+
+    window.addEventListener('hashchange', openTarget);
+    openTarget();
+    sync();
+  }
+
   /* ------------------------------------------------------------- cart page */
 
   function cartItemRow(line) {
@@ -1660,6 +1708,7 @@
     initGallery();
     initFilters();
     initFaq();
+    initTermsGroups();
     initCartPage();
     initForms();
     initOrderSummary();
