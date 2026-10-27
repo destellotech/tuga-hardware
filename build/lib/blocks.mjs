@@ -184,7 +184,7 @@ export function specSheet(p) {
 export const trustStrip = () => `
     <section class="trust-strip" aria-label="What every order includes">
       <div class="container trust-strip-inner">
-        <div class="trust-item">${icons.truck(20)}<span>Free UK delivery</span></div>
+        <div class="trust-item">${icons.truck(20)}<span>Free worldwide delivery</span></div>
         <div class="trust-item">${icons.shieldCheck(20)}<span>12-month warranty</span></div>
         <div class="trust-item">${icons.refresh(20)}<span>30-day returns</span></div>
         <div class="trust-item">${icons.lock(20)}<span>Secure checkout</span></div>

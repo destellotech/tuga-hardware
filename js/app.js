@@ -1275,8 +1275,8 @@
             );
           } else if (ok && data.status === 'unsupported_country') {
             show(
-              'We deliver to the UK only',
-              'Your PayPal delivery address is outside the UK, so we have not taken payment and nothing has been charged. If you have a UK delivery address, change it in PayPal and try again.',
+              'We cannot deliver to that country',
+              'We cannot deliver to the country in your PayPal delivery address, so we have not taken payment and nothing has been charged. If you have a delivery address somewhere else, change it in PayPal and try again, or email support@tugahardware.com.',
               '<p class="mono"><a href="/cart">Back to basket</a></p>'
             );
           } else if (ok && data.status === 'processing') {
@@ -1451,8 +1451,8 @@
               <span class="pdp-price">${money(qty > 1 ? unit : pick.price)}</span>
               <span class="pdp-price-note">${
                 qty > 1
-                  ? `each, with ${tier.percent}% off from ${qty} devices. No VAT to add. Free UK delivery in 7 to 10 working days`
-                  : 'No VAT to add. Free UK delivery in 7 to 10 working days'
+                  ? `each, with ${tier.percent}% off from ${qty} devices. No VAT to add. Free worldwide delivery in 7 to 10 working days`
+                  : 'No VAT to add. Free worldwide delivery in 7 to 10 working days'
               }</span>
             </div>
             <div class="picker-actions">

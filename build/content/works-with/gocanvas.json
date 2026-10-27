@@ -134,7 +134,7 @@
     },
     {
       "q": "Can we buy for a team and pay on invoice?",
-      "a": "Yes. Team discounts apply automatically at checkout: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more, any mix of models. Business buyers can ask for a quote and pay a proforma invoice by bank transfer. Prices have no VAT to add, delivery is free to UK addresses in 7 to 10 working days, every device has a 12-month warranty and returns are accepted within 30 days in original condition."
+      "a": "Yes. Team discounts apply automatically at checkout: 3% at 2 devices, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more, any mix of models. Business buyers can ask for a quote and pay a proforma invoice by bank transfer. Prices have no VAT to add, delivery is free worldwide in 7 to 10 working days, every device has a 12-month warranty and returns are accepted within 30 days in original condition."
     }
   ],
   "not_recommended_note": "The Tuga A8 is not recommended for GoCanvas. It runs Android 12, below the Android 13 floor the vendor set in April 2026, and although the vendor says service on older versions is not interrupted, enhancements and security updates no longer reach them. The Tuga WH6 runs Windows 11 IoT; the vendor names tablets running a Windows Pro version, and does not address the IoT edition, so confirm with the vendor before choosing it. The Tuga W8 also runs Windows 11 Pro; this page covers the W10 as the Windows pick for its larger screen and Ethernet port.",

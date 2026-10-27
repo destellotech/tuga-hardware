@@ -218,7 +218,7 @@ export function countMiss(request, env, ctx) {
  * Totals for the last `days` days (today included) for the admin Visits
  * screen, with the same-length period before it for comparison. With
  * `uk` true, every figure except the country table counts GB visits only,
- * which is the trend worth watching for a UK-only shop: crawlers and
+ * which is the trend worth watching for a UK-first shop: crawlers and
  * scrapers mostly come from elsewhere.
  */
 export async function pageviewStats(env, days = 30, { uk = false } = {}) {

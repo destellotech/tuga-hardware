@@ -737,7 +737,8 @@ async function recordPayPalOrder(orderId, env) {
   let order = await fetchPayPalOrder(orderId, env);
 
   // PayPal takes the address from the buyer's account and cannot be limited
-  // to the UK up front, so refuse to capture an order shipping anywhere else.
+  // to SHIPPING_COUNTRIES up front, so refuse to capture an order shipping
+  // anywhere else.
   // An approved order that is never captured expires and nothing is charged.
   if (order.status === 'APPROVED') {
     const country = order.purchase_units?.[0]?.shipping?.address?.country_code;

@@ -10,7 +10,7 @@
   "intro": [
     "UpKeep is a cloud CMMS and asset operations platform that its vendor describes as trusted by more than 4,000 companies for work orders, compliance and preventive maintenance. Its industry pages cover manufacturing plants, facility management, food and beverage, healthcare, property management, hospitality, data centres, energy and utilities, schools and government and public works. The Google Play listing positions the mobile app as a replacement for pen and paper, spreadsheets and outdated desktop-based software.",
     "On the floor, technicians use the Android or iOS app to open and close work orders, work through inspection checklists, add notes and photos, look up asset history and parts, and scan asset barcodes or QR codes with the camera. UpKeep's own technical requirements article says tablets are ideal for technicians because large screens make work orders, inspections and checklists easy to navigate. Its primary tablet recommendations are consumer models (iPad, Samsung Galaxy Tab A9, Lenovo Tab P12), and for harsh sites it suggests rugged devices from Panasonic, Zebra and Samsung. It does not name Tuga devices, and we do not claim it does. A plant room, a washdown area, a cold store or a van exposes a tablet to drops, dust, water and low temperatures, which is the case for a rugged alternative.",
-    "This page sets out what UpKeep publishes about devices (platform, offline mode, scanning, connectivity), which of the four Tuga rugged devices meets each requirement and how, where the gaps are (offline mode plan limits, browser-only Windows access, undocumented NFC and RFID), and the steps to get a unit running. Prices are in pounds, delivery is UK only and a single trial unit is welcome before a fleet order."
+    "This page sets out what UpKeep publishes about devices (platform, offline mode, scanning, connectivity), which of the four Tuga rugged devices meets each requirement and how, where the gaps are (offline mode plan limits, browser-only Windows access, undocumented NFC and RFID), and the steps to get a unit running. Prices are in pounds, delivery is free worldwide and a single trial unit is welcome before a fleet order."
   ],
   "requirements": [
     {
@@ -118,7 +118,7 @@
     },
     {
       "q": "Can we trial one unit and pay by invoice?",
-      "a": "Yes. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd) is not VAT registered, so there is no VAT to add to the listed prices. Delivery is free within the UK in 7 to 10 working days, UK only, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
+      "a": "Yes. A single trial unit before a fleet order is welcome. Business buyers can request a quote and pay by bank transfer on a proforma invoice. Tuga Hardware (Destello Tech Ltd) is not VAT registered, so there is no VAT to add to the listed prices. Delivery is free worldwide in 7 to 10 working days, with 30-day returns and a 12-month warranty. Multi-unit discounts apply automatically: 3% at 2 units, 5% at 3 to 4, 8% at 5 to 9 and 10% at 10 or more."
     },
     {
       "q": "Should we choose the 10.1 inch A10 or the 6 inch A6?",

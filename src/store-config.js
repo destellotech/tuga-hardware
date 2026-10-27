@@ -45,8 +45,36 @@ export const TRADER_STATEMENT = `${TRADER.tradingName} is a trading name of ${TR
 export const VAT_REGISTERED = false;
 export const PRICE_NOTE = 'No VAT to add';
 
-/** We deliver to UK addresses only. Checkout refuses anything else. */
-export const SHIPPING_COUNTRIES = ['GB'];
+/**
+ * We deliver worldwide: the supplier ships straight from China to the
+ * customer and pays any duty and import tax on the way (DDP). This is every
+ * country Stripe Checkout accepts for a delivery address, less Russia and
+ * Belarus, which UK sanctions rule out, and the uninhabited territories
+ * (AQ, BV, GS, TF) and Stripe's ZZ placeholder. Checkout and PayPal refuse
+ * anything else.
+ */
+export const SHIPPING_COUNTRIES = [
+  'AC', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU',
+  'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ',
+  'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BW', 'BZ', 'CA', 'CD',
+  'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CV', 'CW',
+  'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH',
+  'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE',
+  'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GT', 'GU',
+  'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN',
+  'IO', 'IQ', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI',
+  'KM', 'KN', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR',
+  'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MK',
+  'ML', 'MM', 'MN', 'MO', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX',
+  'MY', 'MZ', 'NA', 'NC', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU',
+  'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR',
+  'PS', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SD',
+  'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS',
+  'ST', 'SV', 'SX', 'SZ', 'TA', 'TC', 'TD', 'TG', 'TH', 'TJ', 'TK', 'TL',
+  'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY',
+  'UZ', 'VA', 'VC', 'VE', 'VG', 'VN', 'VU', 'WF', 'WS', 'XK', 'YE', 'YT',
+  'ZA', 'ZM', 'ZW',
+];
 
 /**
  * Keep every delivery promise on the site, in the API and in emails pointed
@@ -56,8 +84,8 @@ export const SHIPPING_COUNTRIES = ['GB'];
 export const DELIVERY = {
   days: '7 to 10 working days',
   summary:
-    'Delivery is free to UK addresses on every order, with no minimum. Please allow 7 to 10 working days from order. We email a tracking number when your order is on its way.',
-  short: 'Free UK delivery in 7 to 10 working days',
+    'Delivery is free worldwide on every order, with no minimum. Please allow 7 to 10 working days from order. Any import duty and tax is paid before delivery, so there is nothing to pay on arrival. We email a tracking number when your order is on its way.',
+  short: 'Free worldwide delivery in 7 to 10 working days',
 };
 
 /**
