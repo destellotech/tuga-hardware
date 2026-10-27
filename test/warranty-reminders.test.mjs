@@ -24,7 +24,7 @@ test('the window is the 30 days from dispatch that warranty.json publishes', () 
   assert.equal(WINDOW_DAYS, 30);
 });
 
-test('uncovered devices are counted per base model against warranty lines', () => {
+test('uncovered devices are counted per model against warranty lines', () => {
   assert.deepEqual(uncoveredDevices([
     { id: 'tuga-a8', name: 'Tuga A8', quantity: 2 },
     { id: 'wty-3yr-tuga-a8', name: '3-Year Warranty for Tuga A8', quantity: 1 },
@@ -32,7 +32,7 @@ test('uncovered devices are counted per base model against warranty lines', () =
     { id: 'acc-car-charger', name: '12V DC Car Charger', quantity: 1 },
   ]), [
     { id: 'tuga-a8', name: 'Tuga A8', quantity: 1, planId: 'wty-3yr-tuga-a8', planPrice: 6500 },
-    { id: 'tuga-w10', name: 'Tuga W10', quantity: 1, planId: 'wty-3yr-tuga-w10', planPrice: 7900 },
+    { id: 'tuga-w10-scanner', name: 'Tuga W10 with 2D Scanner', quantity: 1, planId: 'wty-3yr-tuga-w10-scanner', planPrice: 9400 },
   ]);
 });
 

@@ -47,7 +47,7 @@ const FLAGGED = ['refunded', 'cancelled', 'disputed'];
 const MAX_PER_RUN = 25;
 const MAX_READS_PER_RUN = 400;
 
-/** Scanner variants carry their base device's warranty. */
+/** A scanner version's base device, for plans bought before scanner versions had their own. */
 const baseDeviceId = (id) => id.replace(/-scanner$/, '');
 
 /** A line's product id, from the id we stored or, failing that, its name. */
@@ -58,9 +58,11 @@ function productIdOf(item) {
 }
 
 /**
- * The devices in an order with no 3-Year Warranty bought for them, by base
+ * The devices in an order with no 3-Year Warranty bought for them, by
  * model: [{ id, name, quantity, planId, planPrice }]. A warranty line covers
- * one unit, so two A8s with one warranty leaves one A8 uncovered.
+ * one unit, so two A8s with one warranty leaves one A8 uncovered. A scanner
+ * version has its own plan; a base plan left over after its own model's
+ * units (orders placed before that) covers the scanner version too.
  */
 export function uncoveredDevices(items = []) {
   const devices = new Map();
@@ -71,19 +73,30 @@ export function uncoveredDevices(items = []) {
     const product = PRODUCTS[id];
     const qty = Math.max(1, Number(item.quantity) || 1);
     if (product.device) {
-      const base = baseDeviceId(id);
-      devices.set(base, (devices.get(base) || 0) + qty);
+      devices.set(id, (devices.get(id) || 0) + qty);
     } else if (product.warrantyFor) {
       covered.set(product.warrantyFor, (covered.get(product.warrantyFor) || 0) + qty);
     }
   }
+  const left = new Map();
+  for (const [id, qty] of devices) {
+    const own = Math.min(qty, covered.get(id) || 0);
+    covered.set(id, (covered.get(id) || 0) - own);
+    left.set(id, qty - own);
+  }
+  for (const [id, qty] of left) {
+    const base = baseDeviceId(id);
+    if (base === id || !qty) continue;
+    const spare = Math.min(qty, covered.get(base) || 0);
+    covered.set(base, (covered.get(base) || 0) - spare);
+    left.set(id, qty - spare);
+  }
   const out = [];
-  for (const [base, qty] of devices) {
-    const planId = `wty-3yr-${base}`;
+  for (const [id, qty] of left) {
+    const planId = `wty-3yr-${id}`;
     const plan = PRODUCTS[planId];
-    const left = qty - (covered.get(base) || 0);
-    if (!plan || left <= 0) continue;
-    out.push({ id: base, name: PRODUCTS[base].name, quantity: left, planId, planPrice: plan.price });
+    if (!plan || qty <= 0) continue;
+    out.push({ id, name: PRODUCTS[id].name, quantity: qty, planId, planPrice: plan.price });
   }
   return out;
 }

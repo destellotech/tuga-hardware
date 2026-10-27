@@ -2098,6 +2098,13 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   color: var(--ink-light);
 }
 
+.protect-note {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
 .protect-link {
   display: inline-block;
   margin-top: 0.7rem;
@@ -2311,6 +2318,9 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 }
 
 .check-list svg { flex-shrink: 0; margin-top: 0.28em; color: var(--green-600); }
+
+/* What a plan does not cover (warranty page). */
+.check-list-no svg { color: var(--copper-text); }
 
 .variant-row {
   display: flex;

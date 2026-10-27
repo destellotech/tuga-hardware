@@ -6,8 +6,8 @@
   "lede": "Every Tuga device comes with 12 months against defects. If you want longer, or you run a fleet that cannot wait for a repair, there are two paid plans, with published prices and numbered terms you can send to your finance team.",
   "intro": [
     "Every Tuga device comes with a 12-month warranty against defects in materials and workmanship. If you want longer, or you run a fleet that cannot wait for a repair, there are two paid plans. All three are given by us, Destello Tech Ltd trading as Tuga Hardware, company number 16595781, registered in England, registered office 124 Vicarage Wood, Harlow, Essex CM20 3HH. Every line in the 3-Year Warranty and Total Care columns below has a matching numbered clause in the Plan Terms (clauses 5 to 43); the included warranty is set out in clauses 44 to 49 of the same Terms and in our Terms of Business, which say the same thing. You can send either document to your finance team.",
-    "The 3-Year Warranty extends the defects warranty to 36 months from dispatch, covers the battery against defects for the whole term like any other part, and we pay UK carriage both ways on every accepted claim. It is available on every Tuga model. One price per device, the same at any quantity: A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89.",
-    "Total Care is for business fleets of five or more devices, on any Tuga model, and sole traders count as a business. If a device fails and we accept the claim by 14:00 on a working day, we dispatch a swap unit with your software image on it the same day, for delivery the next working day to addresses on our courier's standard next-day network (we check your sites by postcode when you join; other addresses, including Northern Ireland, the Scottish Highlands and Islands, the Isle of Wight and the Isle of Man, get same-day dispatch and two to five working days in transit). We service the batteries at month 18, hold swap stock for your fleet, lend you a unit for trials, answer the phone, report quarterly, and at the end of life we collect, erase and certify. If we miss the delivery level on a standard-network address we add time to your term, and the Terms say exactly how much. Per device for fleets of 10 or more: A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329. Fleets of 5 to 9 devices pay £30 more per device: A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359.",
+    "The 3-Year Warranty extends the defects warranty to 36 months from dispatch, covers the battery against defects for the whole term like any other part, and we pay UK carriage both ways on every accepted claim. It is available on every Tuga model. One price per device, the same at any quantity: A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89. Scanner versions cost £15 more to cover, because the scan engine is one more part we repair or replace: W8 with 2D Scanner £94, W10 with 2D Scanner £94, WH6 with Barcode Scanner £104.",
+    "Total Care is for business fleets of five or more devices, on any Tuga model, and sole traders count as a business. If a device fails and we accept the claim by 14:00 on a working day, we dispatch a swap unit with your software image on it the same day, for delivery the next working day to addresses on our courier's standard next-day network (we check your sites by postcode when you join; other addresses, including Northern Ireland, the Scottish Highlands and Islands, the Isle of Wight and the Isle of Man, get same-day dispatch and two to five working days in transit). We service the batteries at month 18, hold swap stock for your fleet, lend you a unit for trials, answer the phone, report quarterly, and at the end of life we collect, erase and certify. If we miss the delivery level on a standard-network address we add time to your term, and the Terms say exactly how much. Per device for fleets of 10 or more: A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329. Fleets of 5 to 9 devices pay £30 more per device: A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359. Scanner versions add £15 per device to either band.",
     "Neither plan covers accidental damage. We do not insure devices, and no insurer or other third party stands behind the plans: the remedy is always our own repair, replacement or service, never a cash payment. We say so because you should know who you are relying on. Prices are per device and are the amounts payable today; we are not currently VAT registered."
   ],
   "taglines": {
@@ -47,7 +47,34 @@
       "One loan device per account per contract year for up to 30 days to evaluate a new model, software or workflow, dispatched within five working days of request, carriage paid by us"
     ]
   },
-  "care_note": "Neither plan covers accidental damage, liquid damage, theft or loss. We do not insure devices and no insurer or other third party stands behind the plans: the remedy is always our own repair, replacement or service, never a cash payment.",
+  "coverage": {
+    "title": "What is covered, and what is not",
+    "lede": "Every Tuga warranty covers the device failing on its own. None of them covers something happening to it. The included warranty covers the first 12 months; the 3-Year Warranty and Total Care cover 36 months from dispatch, on exactly the same list.",
+    "covered_heading": "Covered: faults that happen on their own",
+    "covered": [
+      "A screen or touch panel that stops working without being damaged: dead areas, lines, flicker, touch that stops responding (clause 11)",
+      "The mainboard, memory and storage: a device that will not start, crashes from a hardware fault or loses its storage (clause 11)",
+      "Charging ports, buttons, cameras, speakers and microphones that fail in normal use (clause 11)",
+      "4G, Wi-Fi, Bluetooth, GPS and NFC that stop working because of a hardware fault (clause 11)",
+      "The built-in barcode scanner on the A6 and on the scanner versions of the W8, W10 and WH6 (clauses 5 and 11)",
+      "A battery that fails rather than fades: one that will not charge, cuts out or swells (clause 12)",
+      "Repair, or replacement with the same or an equivalent model, at no charge and with no limit on the number of claims (clause 11)",
+      "On the paid plans, UK carriage both ways on every accepted claim (clause 13)"
+    ],
+    "not_covered_heading": "Not covered: something happening to the device",
+    "not_covered": [
+      "Drops, knocks and crushing: a cracked screen, a device run over, sat on or trapped in a door",
+      "Liquid, or water getting in beyond the published IP rating, including through a port cover left open",
+      "Theft, loss, or a device that cannot be sent to us for inspection",
+      "Scratches, dents and discolouration that do not stop it working",
+      "A battery losing capacity with normal age and use",
+      "Worn consumables: seals, straps, styluses, screen protectors and cases",
+      "Software, apps, operating system updates, settings, viruses and your data",
+      "Misuse, heat damage, chargers we have not approved, or opening and repair by anyone we have not authorised",
+      "Devices outside the United Kingdom"
+    ],
+    "footnote": "The full list of exclusions is clause 17 of the Plan Terms. If a device comes in with an excluded fault or no fault, we tell you before we charge anything: either £35 for inspection and return carriage, or a repair quote if you would rather have it fixed (clause 15). For drops, liquid, theft and loss, talk to an insurer: we are not one."
+  },
   "consumer_info": "Information for consumers, which we are required to give and would give anyway. Extended warranties for electronic devices are available from other providers, and you may wish to compare them. If you are buying for your home, your household insurance may already be relevant to some of the same risks. You do not have to buy a plan at the same time as the device: either plan can be added within 30 days of dispatch at the published price, and the 3-Year Warranty up to the end of month 12 after a remote check. There is no financial protection scheme behind the plans: if Destello Tech Ltd stopped trading, the plans would end. Making a claim does not end a plan; it continues for the rest of its term. Consumers can cancel a plan within 45 days for a full refund if no claim has been made, and your statutory rights under the Consumer Rights Act 2015 and the Consumer Contracts Regulations 2013 are not affected; see clauses 3, 34, 46 and 47 of the Terms.",
   "comparison_rows": [
     {
@@ -137,8 +164,8 @@
     {
       "label": "Price per device (amount payable today, no VAT added)",
       "standard": "Included",
-      "three_year": "A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89",
-      "total_care": "Fleets of 10 or more: A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329. Fleets of 5 to 9: A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359. Paid on a proforma invoice."
+      "three_year": "A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89. Scanner versions £15 more: W8 £94, W10 £94, WH6 £104",
+      "total_care": "Fleets of 10 or more: A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329. Fleets of 5 to 9: A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359. Scanner versions £15 more in either band. Paid on a proforma invoice."
     },
     {
       "label": "When to buy",
@@ -181,6 +208,14 @@
     {
       "q": "What counts as a defect?",
       "a": "A fault in materials or workmanship that stops the device, or a part of it, working as described in its specification. A drop, a cracked screen, liquid inside a sealed port, or a battery that has lost capacity through normal ageing are not defects. The full exclusions are in clause 17 of the Terms, and they are the same list on this page."
+    },
+    {
+      "q": "My device was dropped, run over or got wet. Is it covered?",
+      "a": "No. None of our warranties covers damage caused by something that happens to the device, however it happened: drops, impact, crushing, liquid, theft and loss are all excluded under clause 17. If you send it in, we inspect it and tell you what we found before charging anything; you can then pay £35 for inspection and return carriage, or ask us for a repair quote. For accidental damage cover, speak to an insurer: business contents or gadget insurance often covers it."
+    },
+    {
+      "q": "Is the barcode scanner covered, and why do scanner versions cost more to cover?",
+      "a": "Yes. The built-in scanner on the A6 and on the scanner versions of the W8, W10 and WH6 is covered against defects like every other part, for 12 months as standard and 36 months under either plan. Scanner versions cost £15 more per device on either plan because the scan engine is one more part we may have to repair or replace: the 3-Year Warranty is £94 on the W8 with 2D Scanner and the W10 with 2D Scanner, and £104 on the WH6 with Barcode Scanner. The A6 always has its scanner, and its plan price already includes it."
     },
     {
       "q": "How do you test a battery?",
