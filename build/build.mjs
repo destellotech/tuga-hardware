@@ -103,8 +103,12 @@ function write(relPath, contents) {
 
 const warrantyCopy = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty.json'), 'utf8'));
 const paidTiers = warranty.tiers.filter((t) => !t.included);
-/** What a scanner version adds to each plan's price (the same on both paid tiers). */
+/** What a scanner version adds to each paid plan's price, e.g. "£15 more on the 3-Year Warranty and £30 more on Total Care". */
 const scannerSurcharge = warrantyTier('3yr')?.scannerSurcharge ?? 0;
+const scannerSurchargeText = paidTiers
+  .filter((t) => t.scannerSurcharge)
+  .map((t) => `${money(t.scannerSurcharge)} more on ${t.id === '3yr' ? 'the ' : ''}${t.name}`)
+  .join(' and ');
 const fromPrice = (t) => Math.min(...Object.values(t.prices || { x: 0 }));
 /** True when the 3-Year Warranty is sold for this device. Scanner versions
     have their own price key (the base price plus the tier's scannerSurcharge). */
@@ -230,7 +234,7 @@ function warrantyChooser(p) {
             </label>`;
               })
               .join('')}
-            ${versions.length > 1 && scannerSurcharge ? `<p class="protect-note">Scanner versions cost ${money(scannerSurcharge)} more to cover on either plan: the scan engine is one more part we repair or replace.</p>` : ''}
+            ${versions.length > 1 && scannerSurcharge ? `<p class="protect-note">Scanner versions cost more to cover, ${scannerSurchargeText}, because the scan engine is one more part we repair or replace.</p>` : ''}
             <a class="protect-link" href="/warranty#covered">What is and is not covered, and the terms</a>
           </fieldset>`;
 }
@@ -2212,8 +2216,9 @@ const liftProse = (name) =>
 
 const planTerms = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty-terms.json'), 'utf8'));
 const warrantyDevices = devices.filter((d) => paidTiers.some((t) => t.prices?.[d.id] !== undefined));
-const clauseText = (c) => c.replace(/^(\d+)\.\s+/, '');
-const clauseNumber = (c) => (c.match(/^(\d+)\./) || [])[1];
+const clauseText = (c) => c.replace(/^(\d+[A-Z]?)\.\s+/, '');
+/** "17" or, for a clause added between two others, "21A". */
+const clauseNumber = (c) => (c.match(/^(\d+[A-Z]?)\./) || [])[1];
 
 {
   const trail = [{ label: 'Home', href: '/' }, { label: 'Warranty' }];
@@ -2274,19 +2279,18 @@ ${breadcrumbs(trail)}
     <section class="section section-tint" id="covered">
       <div class="container">
 ${sectionHead({ tag: 'Cover', title: coverage.title, lede: coverage.lede })}
-        <div class="choose-grid">
+        <div class="choose-grid coverage-grid">
+          ${coverage.groups
+            .map(
+              (g) => `
           <div class="choose-card reveal">
-            <h3>${esc(coverage.covered_heading)}</h3>
-            <ul class="check-list">
-              ${coverage.covered.map((x) => `<li>${icons.check(16)}<span>${esc(x)}</span></li>`).join('\n              ')}
+            <h3>${esc(g.heading)}</h3>
+            <ul class="check-list${g.kind === 'no' ? ' check-list-no' : ''}">
+              ${g.items.map((x) => `<li>${g.kind === 'no' ? icons.close(16) : icons.check(16)}<span>${esc(x)}</span></li>`).join('\n              ')}
             </ul>
-          </div>
-          <div class="choose-card reveal">
-            <h3>${esc(coverage.not_covered_heading)}</h3>
-            <ul class="check-list check-list-no">
-              ${coverage.not_covered.map((x) => `<li>${icons.close(16)}<span>${esc(x)}</span></li>`).join('\n              ')}
-            </ul>
-          </div>
+          </div>`
+            )
+            .join('')}
         </div>
         <p class="disclaimer" style="margin-top:1.25rem">${esc(coverage.footnote)}</p>
       </div>
@@ -2334,7 +2338,7 @@ ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 
             </tbody>
           </table>
         </div>
-        ${scannerSurcharge ? `<p class="disclaimer" style="margin-top:1rem">Scanner versions cost ${money(scannerSurcharge)} more per device to cover on either plan, because the scan engine is one more part we repair or replace. The A6 always has its scanner, and its prices include it.</p>` : ''}
+        ${scannerSurcharge ? `<p class="disclaimer" style="margin-top:1rem">Scanner versions cost ${scannerSurchargeText} per device, because the scan engine is one more part we repair or replace and a scanner version costs more to replace. The A6 always has its scanner, and its prices include it.</p>` : ''}
         ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more devices on any model, sole traders included${careTier.smallFleet ? `; fleets of ${careTier.minUnits} to ${careTier.smallFleet.maxUnits} devices pay ${money(careTier.smallFleet.surcharge)} more per device than the ${careTier.smallFleet.maxUnits + 1}+ prices shown` : ''}.</p>` : ''}
       </div>
     </section>
@@ -2412,7 +2416,7 @@ ${ctaBanner({
   const clauseHtml = (c) => {
     const n = clauseNumber(c);
     return n
-      ? `<p id="clause-${n}"><strong>${n}.</strong> ${esc(clauseText(c))}</p>`
+      ? `<p id="clause-${n.toLowerCase()}"><strong>${n}.</strong> ${esc(clauseText(c))}</p>`
       : `<p id="schedule-1"><strong>${esc(c.split('.')[0])}.</strong> ${esc(c.slice(c.indexOf('.') + 1).trim())}</p>`;
   };
   /* The clauses fold into the parts listed in warranty-terms.json sections,
@@ -2420,7 +2424,7 @@ ${ctaBanner({
      going missing from the page. */
   const termsSections = planTerms.sections.map((sec, i) => {
     const clauses = planTerms.clauses.filter((c) => {
-      const n = Number(clauseNumber(c));
+      const n = parseInt(clauseNumber(c), 10);
       return sec.schedule ? !n : n >= sec.from && n <= sec.to;
     });
     return {
@@ -3440,7 +3444,7 @@ Scanner versions: ${data.products.filter((p) => p.isVariant).map((v) => `${v.nam
 
 ## Warranty
 
-- [Warranty and paid plans](${SITE.origin}/warranty): 12 months included on every device. 3-Year Warranty per device: ${Object.entries(warrantyTier('3yr')?.prices || {}).map(([id, price]) => `${data.products.find((d) => d.id === id)?.name.replace(/^Tuga /, '')} ${money(price)}`).join(', ')}. Covers faults in the device, not accidental damage, liquid, theft or loss. Total Care for business fleets of ${warrantyTier('care')?.minUnits} or more devices on any model, on a quote.
+- [Warranty and paid plans](${SITE.origin}/warranty): 12 months included on every device. 3-Year Warranty per device: ${Object.entries(warrantyTier('3yr')?.prices || {}).map(([id, price]) => `${data.products.find((d) => d.id === id)?.name.replace(/^Tuga /, '')} ${money(price)}`).join(', ')}. The 3-Year Warranty extends the included warranty on the same terms and covers faults, not accidental damage, liquid, theft or loss. Total Care, for business fleets of ${warrantyTier('care')?.minUnits} or more devices on any model, on a quote, also covers accidental damage, theft and loss.
 - [Plan Terms](${SITE.origin}/warranty-terms)
 
 ## Works with your software

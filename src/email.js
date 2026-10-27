@@ -492,10 +492,10 @@ export async function sendWarrantyReminder(env, email, { orderId, customerName, 
     </table>
 
     <p style="margin:0 0 12px;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
-      <strong>What it covers.</strong> 36 months from dispatch against defects in materials and
-      workmanship, including battery defects (normal capacity loss is not a defect). We pay UK
-      carriage both ways on accepted claims. If we cannot repair within ten working days we send a
-      replacement. It does not cover accidental damage, liquid damage, theft or loss.
+      <strong>What it covers.</strong> The included 12-month warranty, extended to 36 months from
+      dispatch on the same terms: defects in materials and workmanship, including battery defects
+      (normal capacity loss is not a defect). It does not cover accidental damage, liquid damage,
+      theft or loss.
     </p>
     <p style="margin:0 0 12px;font-size:14px;color:${BRAND.darkText};line-height:1.6;">
       <strong>Changing your mind.</strong> A full refund within 30 days if no claim has been made

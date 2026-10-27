@@ -2322,6 +2322,11 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 /* What a plan does not cover (warranty page). */
 .check-list-no svg { color: var(--copper-text); }
 
+/* Warranty page: every warranty / Total Care also / no plan, side by side when there is room. */
+@media (min-width: 1000px) {
+  .coverage-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
 .variant-row {
   display: flex;
   align-items: center;
