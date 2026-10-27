@@ -103,8 +103,12 @@ function write(relPath, contents) {
 
 const warrantyCopy = JSON.parse(readFileSync(join(ROOT, 'build', 'content', 'warranty.json'), 'utf8'));
 const paidTiers = warranty.tiers.filter((t) => !t.included);
-/** What a scanner version adds to each plan's price (the same on both paid tiers). */
+/** What a scanner version adds to each paid plan's price, e.g. "£15 more on the 3-Year Warranty and £30 more on Total Care". */
 const scannerSurcharge = warrantyTier('3yr')?.scannerSurcharge ?? 0;
+const scannerSurchargeText = paidTiers
+  .filter((t) => t.scannerSurcharge)
+  .map((t) => `${money(t.scannerSurcharge)} more on ${t.id === '3yr' ? 'the ' : ''}${t.name}`)
+  .join(' and ');
 const fromPrice = (t) => Math.min(...Object.values(t.prices || { x: 0 }));
 /** True when the 3-Year Warranty is sold for this device. Scanner versions
     have their own price key (the base price plus the tier's scannerSurcharge). */
@@ -230,7 +234,7 @@ function warrantyChooser(p) {
             </label>`;
               })
               .join('')}
-            ${versions.length > 1 && scannerSurcharge ? `<p class="protect-note">Scanner versions cost ${money(scannerSurcharge)} more to cover on either plan: the scan engine is one more part we repair or replace.</p>` : ''}
+            ${versions.length > 1 && scannerSurcharge ? `<p class="protect-note">Scanner versions cost more to cover, ${scannerSurchargeText}, because the scan engine is one more part we repair or replace.</p>` : ''}
             <a class="protect-link" href="/warranty#covered">What is and is not covered, and the terms</a>
           </fieldset>`;
 }
@@ -2334,7 +2338,7 @@ ${sectionHead({ tag: 'Prices', title: 'What each plan costs, per device', lede: 
             </tbody>
           </table>
         </div>
-        ${scannerSurcharge ? `<p class="disclaimer" style="margin-top:1rem">Scanner versions cost ${money(scannerSurcharge)} more per device to cover on either plan, because the scan engine is one more part we repair or replace. The A6 always has its scanner, and its prices include it.</p>` : ''}
+        ${scannerSurcharge ? `<p class="disclaimer" style="margin-top:1rem">Scanner versions cost ${scannerSurchargeText} per device, because the scan engine is one more part we repair or replace and a scanner version costs more to replace. The A6 always has its scanner, and its prices include it.</p>` : ''}
         ${careTier ? `<p class="disclaimer" style="margin-top:1rem">${esc(careTier.name)} is bought on a quote and proforma invoice for business fleets of ${careTier.minUnits} or more devices on any model, sole traders included${careTier.smallFleet ? `; fleets of ${careTier.minUnits} to ${careTier.smallFleet.maxUnits} devices pay ${money(careTier.smallFleet.surcharge)} more per device than the ${careTier.smallFleet.maxUnits + 1}+ prices shown` : ''}.</p>` : ''}
       </div>
     </section>

@@ -539,7 +539,7 @@
     }
   ],
   "warranty": {
-    "_note": "Paid plans. Prices here MUST match the wty-* entries in src/api.js PRODUCTS. Total Care is quote-only (no checkout SKU). Page copy lives in build/content/warranty.json; Plan Terms in build/content/warranty-terms.json. Scanner versions are priced per tier as the base device price plus scannerSurcharge; each has its own key in prices and (3-Year Warranty) its own SKU below, and test/warranty-prices.test.mjs checks the sums.",
+    "_note": "Paid plans. Prices here MUST match the wty-* entries in src/api.js PRODUCTS. Total Care is quote-only (no checkout SKU). Page copy lives in build/content/warranty.json; Plan Terms in build/content/warranty-terms.json. Scanner versions are priced per tier as the base device price plus that tier's scannerSurcharge (£15 on the 3-Year Warranty, £30 on Total Care); each has its own key in prices and (3-Year Warranty) its own SKU below, and test/warranty-prices.test.mjs checks the sums.",
     "tiers": [
       {
         "id": "standard",
@@ -581,17 +581,17 @@
         },
         "summary": "The whole package for business fleets of five or more devices, any Tuga model. Accidental damage, theft and loss covered, and a swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
         "prices": {
-          "tuga-a6": 249,
-          "tuga-a8": 269,
-          "tuga-a10": 279,
-          "tuga-w8": 299,
-          "tuga-w10": 299,
-          "tuga-wh6": 329,
-          "tuga-w8-scanner": 314,
-          "tuga-w10-scanner": 314,
-          "tuga-wh6-scanner": 344
+          "tuga-a6": 349,
+          "tuga-a8": 379,
+          "tuga-a10": 399,
+          "tuga-w8": 459,
+          "tuga-w10": 469,
+          "tuga-wh6": 509,
+          "tuga-w8-scanner": 489,
+          "tuga-w10-scanner": 499,
+          "tuga-wh6-scanner": 539
         },
-        "scannerSurcharge": 15,
+        "scannerSurcharge": 30,
         "chooser": "The whole package for business fleets of five or more. Covers accidental damage, theft and loss as well as faults. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
       }
     ]
