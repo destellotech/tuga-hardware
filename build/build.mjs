@@ -1378,7 +1378,7 @@ ${sectionHead({
               <div><span class="stat-label">Devices</span><strong data-calc-units>0</strong></div>
               <div><span class="stat-label">Discount</span><strong data-calc-tier>0%</strong></div>
               <div><span class="stat-label">You save</span><strong data-calc-saving>£0</strong></div>
-              <div><span class="stat-label">Total</span><strong data-calc-total>£0</strong></div>
+              <div><span class="stat-label">Total</span><strong data-calc-total data-local-price>£0</strong></div>
             </div>
             <p class="calc-note" data-calc-note>Add two or more devices to unlock a discount. Delivery is free.</p>
             <p class="calc-vat" data-calc-vat></p>

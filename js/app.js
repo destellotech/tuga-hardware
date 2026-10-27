@@ -821,7 +821,7 @@
       }
       <div class="summary-row summary-row-total">
         <span>Total</span>
-        <span>${money(totals.total)}</span>
+        <span data-local-price>${money(totals.total)}</span>
       </div>
       <p class="summary-note">No VAT to add. Outside the UK, checkout shows the total in your own currency.</p>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
@@ -1694,6 +1694,77 @@
 
   /* ------------------------------------------------------------------- init */
 
+  /* A visitor outside the UK sees an approximate price in their own
+     currency under each pound price: "about €453". The worker answers with
+     the visitor's currency and the ECB rate (src/currency.js); checkout then
+     charges the exact amount in that currency. A MutationObserver keeps the
+     hint in step with prices the page rewrites (variant choice, basket,
+     picker, calculator). */
+  function initLocalPrices() {
+    const SELECTOR = '.pdp-price, .product-price, [data-local-price]';
+
+    const load = async () => {
+      try {
+        const saved = sessionStorage.getItem('tuga-locale');
+        if (saved) return JSON.parse(saved);
+      } catch {}
+      const res = await fetch('/api/locale');
+      if (!res.ok) return null;
+      const data = await res.json();
+      try {
+        sessionStorage.setItem('tuga-locale', JSON.stringify(data));
+      } catch {}
+      return data;
+    };
+
+    load()
+      .then((locale) => {
+        if (!locale || !locale.currency || !locale.rate) return;
+        let fmt;
+        try {
+          fmt = new Intl.NumberFormat(navigator.language || 'en-GB', {
+            style: 'currency',
+            currency: locale.currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          });
+        } catch {
+          return;
+        }
+        const apply = () => {
+          $$(SELECTOR).forEach((el) => {
+            let hint = $('.price-local', el);
+            const own = [...el.childNodes].filter((n) => n !== hint).map((n) => n.textContent).join('');
+            const m = own.match(/£\s?([\d,]+(?:\.\d+)?)/);
+            const gbp = m ? Number(m[1].replace(/,/g, '')) : 0;
+            const text = gbp > 0 ? `about ${fmt.format(gbp * locale.rate)}` : '';
+            if (!text) {
+              hint?.remove();
+              return;
+            }
+            if (hint && hint.textContent === text) return;
+            if (!hint) {
+              hint = document.createElement('span');
+              hint.className = 'price-local';
+              el.appendChild(hint);
+            }
+            hint.textContent = text;
+          });
+        };
+        apply();
+        let queued = false;
+        new MutationObserver(() => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(() => {
+            queued = false;
+            apply();
+          });
+        }).observe(document.body, { childList: true, subtree: true, characterData: true });
+      })
+      .catch(() => {});
+  }
+
   function init() {
     paintCount();
     pruneCart();
@@ -1717,6 +1788,7 @@
     initCalc();
     initApiForms();
     initReview();
+    initLocalPrices();
   }
 
   if (document.readyState === 'loading') {

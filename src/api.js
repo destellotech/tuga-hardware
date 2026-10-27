@@ -11,6 +11,7 @@ import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES, QUOTE_TOPIC } from './store-config.js';
 import { devicePriceRows, discountSentence, idempotencyKeyFor } from './quote-ack.js';
 import { handleAdmin } from './admin.js';
+import { handleLocale } from './currency.js';
 import { fileWebOrder } from './backoffice.js';
 import { getRecord, putRecord } from './records.js';
 import { routedStore } from './store.js';
@@ -262,6 +263,9 @@ export async function handleRequest(request, env) {
   }
   if (request.method === 'POST' && path === '/api/review') {
     return handleReviewSubmit(request, env);
+  }
+  if (request.method === 'GET' && path === '/api/locale') {
+    return handleLocale(request, env);
   }
   if (request.method === 'GET' && path === '/api/payment-methods') {
     return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
