@@ -553,7 +553,7 @@
         "name": "3-Year Warranty",
         "months": 36,
         "recommended": true,
-        "summary": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims.",
+        "summary": "The included 12-month warranty, extended to 36 months on the same terms: defects in materials and workmanship, including battery defects (normal capacity loss excluded).",
         "prices": {
           "tuga-a10": 65,
           "tuga-w10": 79,
@@ -566,7 +566,7 @@
           "tuga-wh6-scanner": 104
         },
         "scannerSurcharge": 15,
-        "chooser": "36 months against faults in the device itself, including the battery and any built-in scanner. UK carriage paid both ways on accepted claims. Not drops, cracked screens, liquid, theft or loss."
+        "chooser": "The included warranty for 36 months instead of 12: faults in the device itself, including the battery and any built-in scanner. Not drops, cracked screens, liquid, theft or loss."
       },
       {
         "id": "care",
@@ -579,7 +579,7 @@
           "maxUnits": 9,
           "surcharge": 30
         },
-        "summary": "For business fleets of five or more devices, any Tuga model. A swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
+        "summary": "The whole package for business fleets of five or more devices, any Tuga model. Accidental damage, theft and loss covered, and a swap unit with your software image dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, a fleet support desk, a loan unit, and collection with a data-erasure certificate at end of life.",
         "prices": {
           "tuga-a6": 249,
           "tuga-a8": 269,
@@ -592,7 +592,7 @@
           "tuga-wh6-scanner": 344
         },
         "scannerSurcharge": 15,
-        "chooser": "Business fleets of five or more devices. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
+        "chooser": "The whole package for business fleets of five or more. Covers accidental damage, theft and loss as well as faults. Swap unit dispatched the same working day for claims accepted by 14:00, batteries serviced at month 18, your software image on every device."
       }
     ]
   },
@@ -600,7 +600,7 @@
     {
       "id": "wty-3yr-tuga-a10",
       "name": "3-Year Warranty for Tuga A10",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a10",
@@ -609,7 +609,7 @@
     {
       "id": "wty-3yr-tuga-w10",
       "name": "3-Year Warranty for Tuga W10",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 79,
       "currency": "GBP",
       "warrantyFor": "tuga-w10",
@@ -618,7 +618,7 @@
     {
       "id": "wty-3yr-tuga-a6",
       "name": "3-Year Warranty for Tuga A6",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a6",
@@ -627,7 +627,7 @@
     {
       "id": "wty-3yr-tuga-a8",
       "name": "3-Year Warranty for Tuga A8",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 65,
       "currency": "GBP",
       "warrantyFor": "tuga-a8",
@@ -636,7 +636,7 @@
     {
       "id": "wty-3yr-tuga-w8",
       "name": "3-Year Warranty for Tuga W8",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 79,
       "currency": "GBP",
       "warrantyFor": "tuga-w8",
@@ -645,7 +645,7 @@
     {
       "id": "wty-3yr-tuga-wh6",
       "name": "3-Year Warranty for Tuga WH6",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded). We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded). Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 89,
       "currency": "GBP",
       "warrantyFor": "tuga-wh6",
@@ -654,7 +654,7 @@
     {
       "id": "wty-3yr-tuga-w8-scanner",
       "name": "3-Year Warranty for Tuga W8 with 2D Scanner",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded) and the built-in scanner. We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded) and the built-in scanner. Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 94,
       "currency": "GBP",
       "warrantyFor": "tuga-w8-scanner",
@@ -663,7 +663,7 @@
     {
       "id": "wty-3yr-tuga-w10-scanner",
       "name": "3-Year Warranty for Tuga W10 with 2D Scanner",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded) and the built-in scanner. We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded) and the built-in scanner. Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 94,
       "currency": "GBP",
       "warrantyFor": "tuga-w10-scanner",
@@ -672,7 +672,7 @@
     {
       "id": "wty-3yr-tuga-wh6-scanner",
       "name": "3-Year Warranty for Tuga WH6 with Barcode Scanner",
-      "description": "36 months against defects, including battery defects (normal capacity loss excluded) and the built-in scanner. We pay UK carriage both ways on accepted claims. Faults only: not accidental damage, liquid, theft or loss. One per device.",
+      "description": "36 months against defects, including battery defects (normal capacity loss excluded) and the built-in scanner. Extends the included warranty on the same terms. Faults only: not accidental damage, liquid, theft or loss. One per device.",
       "price": 104,
       "currency": "GBP",
       "warrantyFor": "tuga-wh6-scanner",
