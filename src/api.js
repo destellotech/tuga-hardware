@@ -349,6 +349,10 @@ async function handleStripeCheckout(request, env) {
     SHIPPING_COUNTRIES.forEach((country, i) => {
       params.append(`shipping_address_collection[allowed_countries][${i}]`, country);
     });
+    // Adaptive Pricing: Checkout shows and charges the total in the buyer's
+    // own currency at Stripe's rate. The session's amount_total and currency
+    // stay in GBP, so orders, emails and payouts are unchanged.
+    params.append('adaptive_pricing[enabled]', 'true');
 
     // Encode each line item
     lineItems.forEach((li, i) => {

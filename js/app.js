@@ -823,7 +823,7 @@
         <span>Total</span>
         <span>${money(totals.total)}</span>
       </div>
-      <p class="summary-note">No VAT to add.</p>
+      <p class="summary-note">No VAT to add. Outside the UK, checkout shows the total in your own currency.</p>
       ${nextTier ? `<p class="summary-note">${nextTier}</p>` : ''}
       ${
         document.body.hasAttribute('data-sales-paused')

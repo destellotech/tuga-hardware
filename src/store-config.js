@@ -45,36 +45,54 @@ export const TRADER_STATEMENT = `${TRADER.tradingName} is a trading name of ${TR
 export const VAT_REGISTERED = false;
 export const PRICE_NOTE = 'No VAT to add';
 
-/**
- * We deliver worldwide: the supplier ships straight from China to the
- * customer and pays any duty and import tax on the way (DDP). This is every
- * country Stripe Checkout accepts for a delivery address, less Russia and
- * Belarus, which UK sanctions rule out, and the uninhabited territories
- * (AQ, BV, GS, TF) and Stripe's ZZ placeholder. Checkout and PayPal refuse
- * anything else.
- */
-export const SHIPPING_COUNTRIES = [
-  'AC', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU',
-  'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ',
-  'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BW', 'BZ', 'CA', 'CD',
-  'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CV', 'CW',
-  'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH',
-  'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE',
-  'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GT', 'GU',
-  'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN',
-  'IO', 'IQ', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI',
-  'KM', 'KN', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR',
-  'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MK',
-  'ML', 'MM', 'MN', 'MO', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX',
-  'MY', 'MZ', 'NA', 'NC', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU',
-  'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR',
-  'PS', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SD',
-  'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS',
-  'ST', 'SV', 'SX', 'SZ', 'TA', 'TC', 'TD', 'TG', 'TH', 'TJ', 'TK', 'TL',
-  'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY',
-  'UZ', 'VA', 'VC', 'VE', 'VG', 'VN', 'VU', 'WF', 'WS', 'XK', 'YE', 'YT',
-  'ZA', 'ZM', 'ZW',
+/** Every country Stripe Checkout accepts as a delivery address. */
+const STRIPE_COUNTRIES = [
+  'AC', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AT',
+  'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI',
+  'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY',
+  'BZ', 'CA', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO',
+  'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC',
+  'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FO', 'FR', 'GA',
+  'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ',
+  'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID',
+  'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP',
+  'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB',
+  'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD',
+  'ME', 'MF', 'MG', 'MK', 'ML', 'MM', 'MN', 'MO', 'MQ', 'MR', 'MS', 'MT',
+  'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NG', 'NI', 'NL',
+  'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK',
+  'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU',
+  'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL',
+  'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SZ', 'TA', 'TC', 'TD',
+  'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV',
+  'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VN',
+  'VU', 'WF', 'WS', 'XK', 'YE', 'YT', 'ZA', 'ZM', 'ZW', 'ZZ',
 ];
+
+/**
+ * Where we do not deliver, and why. The supplier ships straight from China
+ * with duty and import tax paid (DDP), so delivery is free everywhere else.
+ * Keep the list on /shipping-returns in step with this one.
+ */
+export const NO_DELIVERY = {
+  // UK sanctions: exporting electronics to these is banned or licensed.
+  RU: 'UK sanctions', BY: 'UK sanctions',
+  // Conflict or collapse: couriers have suspended or cannot insure delivery.
+  VE: 'conflict', MM: 'conflict', AF: 'conflict', CD: 'conflict', CF: 'conflict', HT: 'conflict', LY: 'conflict',
+  ML: 'conflict', BF: 'conflict', NE: 'conflict', PS: 'conflict', SD: 'conflict',
+  SS: 'conflict', SO: 'conflict', YE: 'conflict', ER: 'conflict',
+  // Remote territories no courier from China reaches on a tracked, duty-paid
+  // service: a free delivery there costs more than the device earns.
+  AC: 'remote', TA: 'remote', SH: 'remote', PN: 'remote', TK: 'remote',
+  NU: 'remote', IO: 'remote', EH: 'remote', SJ: 'remote', FK: 'remote',
+  WF: 'remote', TV: 'remote', NR: 'remote', KI: 'remote',
+  // Uninhabited, and Stripe's placeholder for an unknown country.
+  AQ: 'uninhabited', BV: 'uninhabited', GS: 'uninhabited', TF: 'uninhabited',
+  ZZ: 'unknown',
+};
+
+/** Checkout and PayPal refuse a delivery address anywhere else. */
+export const SHIPPING_COUNTRIES = STRIPE_COUNTRIES.filter((c) => !(c in NO_DELIVERY));
 
 /**
  * Keep every delivery promise on the site, in the API and in emails pointed
