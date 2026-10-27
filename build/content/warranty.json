@@ -7,7 +7,7 @@
   "intro": [
     "Every Tuga device comes with a 12-month warranty against defects in materials and workmanship. If you want longer, or you run a fleet that cannot wait for a repair, there are two paid plans. All three are given by us, Destello Tech Ltd trading as Tuga Hardware, company number 16595781, registered in England, registered office 124 Vicarage Wood, Harlow, Essex CM20 3HH. Every line in the 3-Year Warranty and Total Care columns below has a matching numbered clause in the Plan Terms (clauses 5 to 43); the included warranty is set out in clauses 44 to 49 of the same Terms and in our Terms of Business, which say the same thing. You can send either document to your finance team.",
     "The 3-Year Warranty is the included warranty for longer: the same cover, the same terms and the same service, for 36 months from dispatch instead of 12. It covers defects in materials and workmanship, including the battery and any built-in scanner, and nothing else. It is available on every Tuga model. One price per device, the same at any quantity: A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89. Scanner versions cost £15 more to cover, because the scan engine is one more part we repair or replace: W8 with 2D Scanner £94, W10 with 2D Scanner £94, WH6 with Barcode Scanner £104.",
-    "Total Care is the whole package, for business fleets of five or more devices on any Tuga model, and sole traders count as a business. It covers what the warranties do not: accidental damage (drops, cracked screens, crushing, liquid and fire), up to two claims per device in each contract year at a £49 excess; theft and loss, one claim per device over the term at a £99 excess; and software faults, which we fix by restoring your image. Whatever the claim, if we accept it by 14:00 on a working day, we dispatch a swap unit with your software image on it the same day, for delivery the next working day to addresses on our courier's standard next-day network (we check your sites by postcode when you join; other addresses, including Northern Ireland, the Scottish Highlands and Islands, the Isle of Wight and the Isle of Man, get same-day dispatch and two to five working days in transit). We service the batteries at month 18, hold swap stock for your fleet, lend you a unit for trials, answer the phone, report quarterly, and at the end of life we collect, erase and certify. If we miss the delivery level on a standard-network address we add time to your term, and the Terms say exactly how much. Per device for fleets of 10 or more: A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329. Fleets of 5 to 9 devices pay £30 more per device: A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359. Scanner versions add £15 per device to either band.",
+    "Total Care is the whole package, for business fleets of five or more devices on any Tuga model, and sole traders count as a business. It covers what the warranties do not: accidental damage (drops, cracked screens, crushing, liquid and fire), theft and loss, and software faults, which we fix by restoring your image. There is no excess; a published fair use limit allows two damage claims per device in each contract year and one theft or loss claim per device over the term. Whatever the claim, if we accept it by 14:00 on a working day, we dispatch a swap unit with your software image on it the same day, for delivery the next working day to addresses on our courier's standard next-day network (we check your sites by postcode when you join; other addresses, including Northern Ireland, the Scottish Highlands and Islands, the Isle of Wight and the Isle of Man, get same-day dispatch and two to five working days in transit). We service the batteries at month 18, hold swap stock for your fleet, lend you a unit for trials, answer the phone, report quarterly, and at the end of life we collect, erase and certify. If we miss the delivery level on a standard-network address we add time to your term, and the Terms say exactly how much. Per device for fleets of 10 or more: A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329. Fleets of 5 to 9 devices pay £30 more per device: A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359. Scanner versions add £15 per device to either band.",
     "The included warranty and the 3-Year Warranty cover defects only. Total Care's cover for damage, theft and loss is provided by us as part of the service, not by an insurer, and no insurer or other third party stands behind any of the plans: the remedy is always our own repair, replacement or service, never a cash payment. Prices are per device and are the amounts payable today; we are not currently VAT registered."
   ],
   "taglines": {
@@ -37,11 +37,12 @@
       "Does not cover accidental damage, liquid, theft or loss. Total Care does"
     ],
     "care": [
-      "Everything in the 3-Year Warranty, with UK carriage paid both ways on every claim",
+      "Everything in the 3-Year Warranty, with all parts and labour for defects and UK carriage paid both ways on every claim",
       "Advance replacement: for a claim accepted by 14:00 on a working day we dispatch a swap unit of the same model, carrying your current approved image, the same working day on a next-working-day courier service with tracking and declared value",
-      "Accidental damage: drops, cracked screens, crushing (run over, sat on, trapped), liquid and fire. Up to two claims per device in each contract year, £49 excess per claim, met with a swap unit like any other claim",
-      "Theft and loss: a replacement device with your image once you give us a police crime reference (theft) or a written loss report within five working days. One claim per device over the term, £99 excess, refunded if a lost device turns up",
+      "Accidental damage: drops, cracked screens, crushing (run over, sat on, trapped), liquid and fire, met with a swap unit like any other claim. No excess",
+      "Theft and loss: a replacement device with your image once you give us a police crime reference (theft) or a written loss report within five working days. No excess",
       "Software faults: if the operating system, your image or an update stops a device working, we restore your approved image remotely or send a swap unit",
+      "Fair use, published: two accidental damage claims per device in each contract year and one theft or loss claim per device over the term. Defects, software and battery service have no limit",
       "Delivery service level: the swap unit is delivered by the end of the next working day after acceptance to addresses on our courier's published standard next-working-day network, confirmed by postcode at onboarding and listed in your fleet schedule. Other addresses, including Northern Ireland, the Scottish Highlands and Islands, the Isle of Wight and the Isle of Man, get same-day dispatch on the courier's fastest available service with a target of two to five working days",
       "Service credit if we miss the delivery level on a standard-network address: one month added to the Total Care term of the affected device for each working day of delay, up to three months per incident, applied without you asking",
       "Swap pool held by us: at least one pre-imaged swap unit for every 20 covered devices of each model, minimum one for each model covered and at least one for every fleet, so a fleet of five has a swap unit from day one, charged and function-tested quarterly, never scheduled out beyond what it holds. At onboarding we quote one customer-held spare of each model per site at your fleet discount, replenished by us within three working days of use",
@@ -54,7 +55,7 @@
   "coverage": {
     "title": "What is covered, and what is not",
     "lede": "Every Tuga warranty covers the device failing on its own. Total Care also covers something happening to it. The included warranty covers the first 12 months; the 3-Year Warranty and Total Care cover 36 months from dispatch.",
-    "footnote": "The full list is clauses 11, 17 and 21A to 21C of the Plan Terms. If a device comes in with an excluded fault or no fault, we tell you before we charge anything: either £35 for inspection and return carriage, or a repair quote if you would rather have it fixed (clause 15).",
+    "footnote": "The full list is clauses 11, 17 and 21A to 21D of the Plan Terms. If a device comes in with an excluded fault or no fault, we tell you before we charge anything: either £35 for inspection and return carriage, or a repair quote if you would rather have it fixed (clause 15).",
     "groups": [
       {
         "heading": "Every warranty: faults that happen on their own",
@@ -78,7 +79,7 @@
           "Liquid and water getting in beyond the IP rating, and fire (clause 21A)",
           "Theft, with a police crime reference, and loss, reported to us within five working days (clause 21B)",
           "Software faults: the operating system, your image or an update stopping the device working (clause 21C)",
-          "Two damage claims per device each contract year at £49, and one theft or loss claim per device over the term at £99 (clauses 21A and 21B)",
+          "No excess. Fair use: two damage claims per device each contract year, and one theft or loss claim per device over the term (clause 21D)",
           "A swap unit dispatched the same working day for every claim accepted by 14:00, and UK carriage both ways (clauses 13 and 21)"
         ]
       },
@@ -176,13 +177,13 @@
       "label": "Accidental damage, liquid and fire",
       "standard": "Not covered",
       "three_year": "Not covered",
-      "total_care": "Covered: up to two claims per device each contract year, £49 excess per claim, met with a swap unit"
+      "total_care": "Covered, no excess, met with a swap unit. Fair use: two claims per device each contract year"
     },
     {
       "label": "Theft and loss",
       "standard": "Not covered",
       "three_year": "Not covered",
-      "total_care": "Covered: one claim per device over the term, £99 excess, with a police crime reference or written loss report within five working days"
+      "total_care": "Covered, no excess, with a police crime reference or written loss report within five working days. Fair use: one claim per device over the term"
     },
     {
       "label": "Software faults",
@@ -238,7 +239,7 @@
   "faq": [
     {
       "q": "Is this insurance?",
-      "a": "No. The included warranty and the 3-Year Warranty are warranties given by the seller, Destello Tech Ltd trading as Tuga Hardware, against defects in materials and workmanship, including the battery. Total Care is a service contract that includes that warranty and adds cover for accidental damage, theft and loss, which we provide ourselves within the limits and excesses in clauses 21A and 21B. No insurer or other third party stands behind any of them, and the remedy is always our own repair, replacement or service, never a cash payment. All of them are in addition to your legal rights and do not reduce them."
+      "a": "No. The included warranty and the 3-Year Warranty are warranties given by the seller, Destello Tech Ltd trading as Tuga Hardware, against defects in materials and workmanship, including the battery. Total Care is a service contract that includes that warranty and adds cover for accidental damage, theft and loss, which we provide ourselves within the fair use limits in clause 21D. No insurer or other third party stands behind any of them, and the remedy is always our own repair, replacement or service, never a cash payment. All of them are in addition to your legal rights and do not reduce them."
     },
     {
       "q": "What counts as a defect?",
@@ -246,11 +247,15 @@
     },
     {
       "q": "My device was dropped, run over or got wet. Is it covered?",
-      "a": "Under Total Care, yes: drops, cracked screens, crushing (run over, sat on, trapped), liquid and fire are covered, up to two claims per device in each contract year with a £49 excess per claim, and we send a swap unit the same working day for a claim accepted by 14:00. Under the included warranty and the 3-Year Warranty, no: they cover defects only. If you send a damaged device in under those, we inspect it and tell you what we found before charging anything; you can then pay £35 for inspection and return carriage, or ask us for a repair quote."
+      "a": "Under Total Care, yes: drops, cracked screens, crushing (run over, sat on, trapped), liquid and fire are covered, with no excess and a fair use limit of two claims per device in each contract year, and we send a swap unit the same working day for a claim accepted by 14:00. Under the included warranty and the 3-Year Warranty, no: they cover defects only. If you send a damaged device in under those, we inspect it and tell you what we found before charging anything; you can then pay £35 for inspection and return carriage, or ask us for a repair quote."
     },
     {
       "q": "What if a device is stolen or lost?",
-      "a": "Under Total Care we replace it. Report a theft to the police and send us the crime reference number, or tell us in writing where and when a lost device was last seen, within five working days. Lock or wipe it through your device management, or ask us to, and we bar its serial. We then send a replacement of the same model with your image on it, like any other Total Care claim. Each device can make one theft or loss claim over the term, with a £99 excess, and if a lost device turns up you return either one and we refund the excess. A device left on show in an unlocked van, or kept by an employee who leaves, is not covered. The included warranty and the 3-Year Warranty do not cover theft or loss."
+      "a": "Under Total Care we replace it. Report a theft to the police and send us the crime reference number, or tell us in writing where and when a lost device was last seen, within five working days. Lock or wipe it through your device management, or ask us to, and we bar its serial. We then send a replacement of the same model with your image on it, like any other Total Care claim. There is no excess. Fair use allows one theft or loss claim per device over the term, and if a lost device turns up you return either one and the claim no longer counts. A device left on show in an unlocked van, or kept by an employee who leaves, is not covered. The included warranty and the 3-Year Warranty do not cover theft or loss."
+    },
+    {
+      "q": "What does fair use mean under Total Care?",
+      "a": "It is the published limit on claims for things that happen to a device, so the price stays fair for every fleet: two accidental damage claims per device in each contract year, and one theft or loss claim per device over the 36-month term. Within those limits there is no excess and nothing to pay. Beyond them, we send a fixed-price repair quote for a damaged device, or quote a replacement for a stolen or lost one at list price less your fleet discount, and we never charge without your agreement. Defects, software faults and the month-18 battery service have no limit. The rule is clause 21D of the Plan Terms."
     },
     {
       "q": "Is the barcode scanner covered, and why do scanner versions cost more to cover?",
