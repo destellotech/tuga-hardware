@@ -20,7 +20,7 @@
       "12 months from the dispatch date on your invoice against defects in materials and workmanship",
       "Repair, or replacement with the same or an equivalent Tuga model, at our choice, at no charge",
       "Battery covered against defects for 12 months (normal capacity loss is not a defect)",
-      "Carriage: business buyers pay to send the device to us and we pay the return carriage after a valid repair or replacement. If you buy as a consumer and the device is faulty, we pay the postage both ways under the Consumer Rights Act 2015",
+      "Carriage: business buyers pay to send the device to us and we pay the return carriage after a valid repair or replacement. If you buy as a consumer and the device is faulty, we pay the postage both ways under the Consumer Rights Act 2015. Outside the UK, you pay to send the device to us and we pay to send it back",
       "Returns: any buyer may return a device in its original condition and packaging within 30 days of delivery. Consumers also may cancel within 14 days of delivery under the Consumer Contracts Regulations 2013 (we may deduct only for handling beyond what is needed to inspect the device) and have 30 days to reject a faulty device under the Consumer Rights Act 2015",
       "Email and phone help with set-up on working days, one working day response",
       "Return for recycling under the WEEE Regulations 2013 on request"
@@ -32,12 +32,12 @@
       "The same service as the included warranty: a reply within one working day, and a target of ten working days from receiving the device to sending it back",
       "The same carriage as the included warranty: business buyers send the device to us at their cost and we pay the return; if you buy as a consumer and the device is faulty, we pay both ways",
       "A repaired or replaced device, or a replaced part, carries the rest of the original term, or 90 days from dispatch of the replacement if that is longer",
-      "Stays with the device: if you pass it to another user in the UK and tell us, the warranty continues for the rest of the term",
+      "Stays with the device: if you pass it to another user, in any country, and tell us, the warranty continues for the rest of the term",
       "Cancel within 30 days of purchase for a full refund if you have made no claim (45 days if you buy as a consumer), then at any time for a pro rata refund by full unexpired months",
       "Does not cover accidental damage, liquid, theft or loss. Total Care does"
     ],
     "care": [
-      "Everything in the 3-Year Warranty, with all parts and labour for defects and UK carriage paid both ways on every claim",
+      "Everything in the 3-Year Warranty, with all parts and labour for defects and UK carriage paid both ways on every claim. Outside the UK, you pay to send devices to us and we pay to send swap units and repairs back",
       "Advance replacement: for a claim accepted by 14:00 on a working day we dispatch a swap unit of the same model, carrying your current approved image, the same working day on a next-working-day courier service with tracking and declared value",
       "Accidental damage: drops, cracked screens, crushing (run over, sat on, trapped), liquid and fire, met with a swap unit like any other claim. No excess",
       "Theft and loss: a replacement device with your image once you give us a police crime reference (theft) or a written loss report within five working days. No excess",
@@ -93,8 +93,7 @@
           "A battery losing capacity with normal age and use (Total Care services batteries at month 18)",
           "Worn consumables and accessories: seals, straps, styluses, screen protectors, cases and chargers",
           "Your own apps, services and data",
-          "Opening or repair by anyone we have not authorised, and unapproved chargers",
-          "Devices outside the United Kingdom"
+          "Opening or repair by anyone we have not authorised, and unapproved chargers"
         ]
       }
     ]
@@ -219,7 +218,7 @@
       "label": "Transfer",
       "standard": "Stays with the device",
       "three_year": "Stays with the device; tell us the new UK user",
-      "total_care": "Personal to your business; transfer to another UK business with our written consent"
+      "total_care": "Personal to your business; transfer to another business with our written consent"
     }
   ],
   "claim_steps": [

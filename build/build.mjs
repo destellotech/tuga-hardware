@@ -264,13 +264,11 @@ const orgSchema = {
     propertyID: 'Companies House company number',
     value: TRADER.companyNumber,
   },
-  areaServed: { '@type': 'Country', name: 'United Kingdom' },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
     email: SITE.email,
     telephone: '+44 1279 912065',
-    areaServed: 'GB',
     availableLanguage: 'English',
   },
 };
@@ -748,7 +746,7 @@ ${sectionHead({
           </div>
           <div class="promise reveal">
             <h3>One price, shown up front</h3>
-            <p>No minimum order and no enterprise licensing. Free UK delivery on everything, team discounts applied automatically at checkout, and a quote with a proforma invoice for any business that wants to pay by bank transfer.</p>
+            <p>No minimum order and no enterprise licensing. Free worldwide delivery on everything, team discounts applied automatically at checkout, and a quote with a proforma invoice for any business that wants to pay by bank transfer.</p>
           </div>
           <div class="promise reveal">
             <h3>30 days to change your mind</h3>
@@ -774,7 +772,7 @@ write(
   page({
     title: 'Tuga Hardware | Rugged Tablets for UK Tradespeople',
     description:
-      'Rugged Android and Windows tablets for UK tradespeople. IP65 to IP68 sealed, half the range MIL-STD-810 drop tested. From £349, free UK delivery.',
+      'Rugged Android and Windows tablets for UK tradespeople. IP65 to IP68 sealed, half the range MIL-STD-810 drop tested. From £349, free worldwide delivery.',
     path: '/',
     active: null,
     ogImage: imgPath(devices.find((d) => d.id === 'tuga-a8'), 1),
@@ -794,7 +792,7 @@ write(
   page({
     title: 'All Rugged Tablets & Handhelds | Tuga Hardware',
     description:
-      'The full Tuga range: 6, 8 and 10 inch rugged Android and Windows tablets and handhelds. IP65 to IP68 sealed, free UK delivery, 30-day returns.',
+      'The full Tuga range: 6, 8 and 10 inch rugged Android and Windows tablets and handhelds. IP65 to IP68 sealed, free worldwide delivery, 30-day returns.',
     path: '/products/',
     active: 'products',
     schema: [
@@ -1226,7 +1224,7 @@ write(
   page({
     title: 'Accessories for Rugged Tablets | Tuga Hardware',
     description:
-      'Docks, mounts, straps, cases and cables for Tuga rugged tablets and handhelds. Free UK delivery on every order.',
+      'Docks, mounts, straps, cases and cables for Tuga rugged tablets and handhelds. Free worldwide delivery on every order.',
     path: '/accessories',
     active: 'accessories',
     schema: [breadcrumbSchema(accTrail)],
@@ -1295,7 +1293,7 @@ write(
   page({
     title: 'Bulk Orders & Team Discounts | Tuga Hardware',
     description:
-      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9, 10% at 10+. No codes, free UK delivery, proforma invoices.',
+      'Automatic team discounts on rugged tablets: 3% at 2 units, 5% at 3-4, 8% at 5-9, 10% at 10+. No codes, free worldwide delivery, proforma invoices.',
     path: '/bulk',
     active: 'bulk',
     schema: [breadcrumbSchema(bulkTrail), bulkFaq.schema],
@@ -1380,7 +1378,7 @@ ${sectionHead({
               <div><span class="stat-label">Devices</span><strong data-calc-units>0</strong></div>
               <div><span class="stat-label">Discount</span><strong data-calc-tier>0%</strong></div>
               <div><span class="stat-label">You save</span><strong data-calc-saving>£0</strong></div>
-              <div><span class="stat-label">Total</span><strong data-calc-total>£0</strong></div>
+              <div><span class="stat-label">Total</span><strong data-calc-total data-local-price>£0</strong></div>
             </div>
             <p class="calc-note" data-calc-note>Add two or more devices to unlock a discount. Delivery is free.</p>
             <p class="calc-vat" data-calc-vat></p>
@@ -2115,7 +2113,7 @@ write(
   'cart.html',
   page({
     title: 'Your Basket | Tuga Hardware',
-    description: 'Review your basket and check out securely. Free UK delivery and automatic team discounts on every order.',
+    description: 'Review your basket and check out securely. Free worldwide delivery and automatic team discounts on every order.',
     path: '/cart',
     noindex: true,
     schema: [],
@@ -2130,7 +2128,7 @@ write(
     <div class="container">
       <div class="cart-empty" data-cart-empty hidden>
         <h2 class="title-md">Nothing in the basket yet</h2>
-        <p>Six devices across three sizes, from ${money(Math.min(...devices.map((d) => d.price)))}. Free UK delivery on all of them.</p>
+        <p>Six devices across three sizes, from ${money(Math.min(...devices.map((d) => d.price)))}. Free worldwide delivery on all of them.</p>
         <a class="btn btn-primary btn-lg" href="/products/">Browse the range</a>
       </div>
 
@@ -2503,7 +2501,7 @@ const legalPages = [
     title: 'Shipping & Returns | Tuga Hardware',
     h1: 'Shipping & Returns',
     description:
-      'Free UK delivery in 7 to 10 working days and 30-day returns on every Tuga Hardware order.',
+      'Free worldwide delivery in 7 to 10 working days and 30-day returns on every Tuga Hardware order.',
     path: '/shipping-returns',
   },
 ];
@@ -2729,7 +2727,7 @@ ${(() => {
 
         <div class="prose-cta">
           <h3>Rugged tablets from ${money(Math.min(...devices.map((d) => d.price)))}</h3>
-          <p>IP65 to IP68 sealed, with 1000 nit screens and removable batteries where they matter. Free UK delivery, 30-day returns and a 12-month warranty on every device.</p>
+          <p>IP65 to IP68 sealed, with 1000 nit screens and removable batteries where they matter. Free worldwide delivery, 30-day returns and a 12-month warranty on every device.</p>
           <a class="link-arrow" href="/products/">Browse the range</a>
         </div>
       </article>
@@ -3522,7 +3520,7 @@ ${extraImages}
       <g:product_type>${esc(`Rugged Devices > ${p.category === 'android' ? 'Android' : 'Windows'} > ${p.sizeLabel} inch`)}</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>

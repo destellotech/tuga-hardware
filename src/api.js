@@ -11,6 +11,7 @@ import { saveOrder, getOrder, updateOrder } from './orders.js';
 import { SALES_PAUSED, SALES_PAUSED_MESSAGE, SHIPPING_COUNTRIES, QUOTE_TOPIC } from './store-config.js';
 import { devicePriceRows, discountSentence, idempotencyKeyFor } from './quote-ack.js';
 import { handleAdmin } from './admin.js';
+import { handleLocale } from './currency.js';
 import { fileWebOrder } from './backoffice.js';
 import { getRecord, putRecord } from './records.js';
 import { routedStore } from './store.js';
@@ -263,6 +264,9 @@ export async function handleRequest(request, env) {
   if (request.method === 'POST' && path === '/api/review') {
     return handleReviewSubmit(request, env);
   }
+  if (request.method === 'GET' && path === '/api/locale') {
+    return handleLocale(request, env);
+  }
   if (request.method === 'GET' && path === '/api/payment-methods') {
     return corsResponse({ card: !SALES_PAUSED, paypal: !SALES_PAUSED && isPayPalLive(env), paused: SALES_PAUSED });
   }
@@ -349,6 +353,10 @@ async function handleStripeCheckout(request, env) {
     SHIPPING_COUNTRIES.forEach((country, i) => {
       params.append(`shipping_address_collection[allowed_countries][${i}]`, country);
     });
+    // Adaptive Pricing: Checkout shows and charges the total in the buyer's
+    // own currency at Stripe's rate. The session's amount_total and currency
+    // stay in GBP, so orders, emails and payouts are unchanged.
+    params.append('adaptive_pricing[enabled]', 'true');
 
     // Encode each line item
     lineItems.forEach((li, i) => {
@@ -737,7 +745,8 @@ async function recordPayPalOrder(orderId, env) {
   let order = await fetchPayPalOrder(orderId, env);
 
   // PayPal takes the address from the buyer's account and cannot be limited
-  // to the UK up front, so refuse to capture an order shipping anywhere else.
+  // to SHIPPING_COUNTRIES up front, so refuse to capture an order shipping
+  // anywhere else.
   // An approved order that is never captured expires and nothing is charged.
   if (order.status === 'APPROVED') {
     const country = order.purchase_units?.[0]?.shipping?.address?.country_code;

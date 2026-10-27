@@ -17,6 +17,7 @@ import { ensureStripeWebhookEvents } from './stripe-webhook-config.js';
 import { ADMIN_PAGE } from './admin-page.js';
 import { sendDailyDigest } from './backoffice.js';
 import { countPageView, countCrawl, countMiss } from './pageviews.js';
+import { refreshRates } from './currency.js';
 
 const CANONICAL_HOST = 'www.tugahardware.com';
 
@@ -269,5 +270,7 @@ export default {
     // Keeps the Stripe webhook subscribed to the events the code handles,
     // so a new handler needs no dashboard visit (src/stripe-webhook-config.js).
     ctx.waitUntil(ensureStripeWebhookEvents(env));
+    // Today's GBP exchange rates for the local price hint (src/currency.js).
+    ctx.waitUntil(refreshRates(env).catch((err) => console.warn('Rates refresh failed:', err.message)));
   },
 };

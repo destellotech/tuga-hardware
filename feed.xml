@@ -3,7 +3,7 @@
   <channel>
     <title>Tuga Hardware</title>
     <link>https://www.tugahardware.com</link>
-    <description>Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free UK delivery.</description>
+    <description>Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free worldwide delivery.</description>
     <item>
       <g:id>tuga-a6</g:id>
       <g:title>Tuga A6 6 inch Rugged Android Handheld</g:title>
@@ -20,7 +20,7 @@
       <g:product_type>Rugged Devices &gt; Android &gt; 6 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>
@@ -44,7 +44,7 @@
       <g:product_type>Rugged Devices &gt; Android &gt; 8 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>
@@ -69,7 +69,7 @@
       <g:product_type>Rugged Devices &gt; Android &gt; 10.1 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>
@@ -94,7 +94,7 @@
       <g:product_type>Rugged Devices &gt; Windows &gt; 6.5 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>
@@ -120,7 +120,7 @@
       <g:product_type>Rugged Devices &gt; Windows &gt; 8 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>
@@ -145,7 +145,7 @@
       <g:product_type>Rugged Devices &gt; Windows &gt; 10.1 inch</g:product_type>
       <g:shipping>
         <g:country>GB</g:country>
-        <g:service>Free UK delivery</g:service>
+        <g:service>Free worldwide delivery</g:service>
         <g:price>0.00 GBP</g:price>
         <g:min_transit_time>1</g:min_transit_time>
         <g:max_transit_time>3</g:max_transit_time>

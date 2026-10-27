@@ -58,7 +58,7 @@ export const SITE = {
   phone: '01279 912065',
   phoneHref: 'tel:+441279912065',
   description:
-    'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free UK delivery.',
+    'Rugged tablets and handhelds built for UK tradespeople. IP65 to IP68 sealed, half the range drop tested to MIL-STD-810H or 810G. Free worldwide delivery.',
 };
 
 export const data = JSON.parse(
@@ -282,7 +282,7 @@ const header = (active) => `
     ${
       SALES_PAUSED
         ? `<strong>New orders are paused</strong><span class="announce-sep">/</span>We are moving to UK stock. <a href="/contact">Ask us when a device is available</a>`
-        : `<strong>Free UK delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes<span class="announce-more"> and proforma invoices</span></a><span class="announce-more"><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns</span>`
+        : `<strong>Free worldwide delivery</strong><span class="announce-sep">/</span><a href="/contact?quote=#enquiry">Business quotes<span class="announce-more"> and proforma invoices</span></a><span class="announce-more"><span class="announce-sep">/</span>12-month warranty<span class="announce-sep">/</span>30-day returns</span>`
     }
   </div>
   <header class="site-header" id="site-header">
