@@ -57,6 +57,10 @@ export const PRODUCTS = {
   'wty-3yr-tuga-a8': { name: "3-Year Warranty for Tuga A8", price: 6500, warrantyFor: 'tuga-a8', tier: '3yr' },
   'wty-3yr-tuga-w8': { name: "3-Year Warranty for Tuga W8", price: 7900, warrantyFor: 'tuga-w8', tier: '3yr' },
   'wty-3yr-tuga-wh6': { name: "3-Year Warranty for Tuga WH6", price: 8900, warrantyFor: 'tuga-wh6', tier: '3yr' },
+  // Scanner versions: the base plan plus the scanner surcharge (£15).
+  'wty-3yr-tuga-w8-scanner': { name: "3-Year Warranty for Tuga W8 with 2D Scanner", price: 9400, warrantyFor: 'tuga-w8-scanner', tier: '3yr' },
+  'wty-3yr-tuga-w10-scanner': { name: "3-Year Warranty for Tuga W10 with 2D Scanner", price: 9400, warrantyFor: 'tuga-w10-scanner', tier: '3yr' },
+  'wty-3yr-tuga-wh6-scanner': { name: "3-Year Warranty for Tuga WH6 with Barcode Scanner", price: 10400, warrantyFor: 'tuga-wh6-scanner', tier: '3yr' },
   // Factory upgrades: one per device unit, and only one per group (a device
   // has one storage size). Never discounted, never a device.
   'upg-ram16-tuga-w10':   { name: '16GB RAM upgrade for Tuga W10',   price: 6900,  upgradeFor: 'tuga-w10', group: 'ram' },
@@ -72,7 +76,7 @@ const ADMIN_CATALOGUE = {
   ),
 };
 
-/** Scanner variants carry their base device's warranty. */
+/** Scanner variants take their base device's upgrades (their warranty has its own SKU). */
 const baseDeviceId = (id) => id.replace(/-scanner$/, '');
 
 /**
@@ -115,11 +119,15 @@ function resolveBasket(items) {
  * unit. Throws with a message the basket page can show.
  */
 function validateWarranties(lines) {
+  // A plan covers its exact device (a scanner version has its own plan);
+  // upgrades fit the base device and its scanner version alike.
   const deviceUnits = {};
+  const baseUnits = {};
   for (const line of lines) {
     if (!line.product.device) continue;
     const base = baseDeviceId(line.id);
-    deviceUnits[base] = (deviceUnits[base] || 0) + line.quantity;
+    deviceUnits[line.id] = (deviceUnits[line.id] || 0) + line.quantity;
+    baseUnits[base] = (baseUnits[base] || 0) + line.quantity;
   }
   for (const line of lines) {
     const w = line.product.warrantyFor;
@@ -134,7 +142,7 @@ function validateWarranties(lines) {
   for (const line of lines) {
     const { upgradeFor, group } = line.product;
     if (!upgradeFor) continue;
-    const units = deviceUnits[upgradeFor] || 0;
+    const units = baseUnits[upgradeFor] || 0;
     const key = `${upgradeFor}:${group}`;
     perGroup[key] = (perGroup[key] || 0) + line.quantity;
     if (perGroup[key] > units) {

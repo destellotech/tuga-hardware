@@ -17,7 +17,7 @@ Scanner versions: Tuga WH6 with Barcode Scanner £779; Tuga W8 with 2D Scanner �
 
 ## Warranty
 
-- [Warranty and paid plans](https://www.tugahardware.com/warranty): 12 months included on every device. 3-Year Warranty per device: A10 £65, W10 £79, A6 £65, A8 £65, W8 £79, WH6 £89. Total Care for business fleets of 5 or more devices on any model, on a quote.
+- [Warranty and paid plans](https://www.tugahardware.com/warranty): 12 months included on every device. 3-Year Warranty per device: A10 £65, W10 £79, A6 £65, A8 £65, W8 £79, WH6 £89, W8 with 2D Scanner £94, W10 with 2D Scanner £94, WH6 with Barcode Scanner £104. Covers faults in the device, not accidental damage, liquid, theft or loss. Total Care for business fleets of 5 or more devices on any model, on a quote.
 - [Plan Terms](https://www.tugahardware.com/warranty-terms)
 
 ## Works with your software
@@ -138,7 +138,7 @@ Scanner versions: Tuga WH6 with Barcode Scanner £779; Tuga W8 with 2D Scanner �
 - [Removable Batteries: Why They Matter and Which Tugas Have One](https://www.tugahardware.com/blog/removable-battery-rugged-tablet): What a removable battery gives you on a work tablet: a swap mid shift, a worn cell replaced instead of the device, spares in the van. Which Tugas have one.
 - [NFC on a Work Tablet: What It Is Actually For](https://www.tugahardware.com/blog/nfc-work-tablet-what-it-is-for): Every Tuga device lists NFC. What it does on site, what it does not do, how it differs from a barcode scanner and UHF RFID, and whether you will ever use it.
 - [How Much Storage Does a Work Tablet Need?](https://www.tugahardware.com/blog/how-much-storage-work-tablet): 64GB or 128GB on a work tablet, what fills it (photos and PDF drawings), how microSD cards and cloud sync change the answer, and which Tuga models can grow.
-- [Is an Extended Warranty on a Rugged Tablet Worth It?](https://www.tugahardware.com/blog/extended-warranty-rugged-tablet-worth-it): Every Tuga device has 12 months included. The 3-Year Warranty costs £65 to £89 per device. How to weigh that against the price and how long you will keep it.
+- [Is an Extended Warranty on a Rugged Tablet Worth It?](https://www.tugahardware.com/blog/extended-warranty-rugged-tablet-worth-it): Every Tuga device has 12 months included. The 3-Year Warranty costs £65 to £104 per device. How to weigh that against the price and how long you will keep it.
 - [Ethernet, HDMI and USB-A: When a Work Tablet Needs Real Ports](https://www.tugahardware.com/blog/ethernet-hdmi-usb-a-work-tablet-ports): Which trades need a wired network port, HDMI or full size USB on a work tablet, which Tuga devices have them, and what an £8 OTG adapter can and cannot do.
 - [Can a Rugged Tablet Replace a Laptop?](https://www.tugahardware.com/blog/can-a-rugged-tablet-replace-a-laptop): An honest answer for sole traders and small firms: when a rugged Windows or Android tablet can do the laptop's job, when it cannot, and which Tuga device fits.
 - [Best Rugged Tablets for Surveyors and Site Managers](https://www.tugahardware.com/blog/best-rugged-tablets-surveyors-site-managers): Rugged tablets for surveyors and site managers compared on the work: drawing sets, snagging, mark-ups and site walks. A10, W10 and A8 on specs and price.

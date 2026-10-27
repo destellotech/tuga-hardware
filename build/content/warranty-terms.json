@@ -1,20 +1,69 @@
 {
-  "_note": "Plan Terms for the 3-Year Warranty and Total Care, plus the standard warranty (clauses 44 to 49). Generated from the warranty design; edit here, not in the HTML.",
+  "_note": "Plan Terms for the 3-Year Warranty and Total Care, plus the standard warranty (clauses 44 to 49). Generated from the warranty design; edit here, not in the HTML. sections groups the clauses into the folding parts of /warranty-terms by clause number (from and to, inclusive); every clause must fall in exactly one, and the schedule goes in the part marked schedule.",
   "title": "Plan Terms: 3-Year Warranty and Total Care",
   "last_updated": "October 2026",
   "intro": "These are the terms of the Tuga 3-Year Warranty and Tuga Total Care, and of the standard 12-month warranty that comes with every Tuga device. They are given by Destello Tech Ltd, trading as Tuga Hardware, company number 16595781, registered in England and Wales, registered office 124 Vicarage Wood, Harlow, Essex CM20 3HH. Our Terms and Conditions of sale apply alongside them and say the same thing about the standard warranty.",
+  "sections": [
+    {
+      "title": "What these plans are",
+      "applies": "Both paid plans",
+      "from": 1,
+      "to": 4
+    },
+    {
+      "title": "Which devices, how long, when to buy and prices",
+      "applies": "Both paid plans",
+      "from": 5,
+      "to": 9
+    },
+    {
+      "title": "Making a claim, and what is and is not covered",
+      "applies": "Both paid plans",
+      "from": 10,
+      "to": 18
+    },
+    {
+      "title": "Total Care: swap units, battery service and fleet support",
+      "applies": "Total Care only",
+      "from": 19,
+      "to": 32
+    },
+    {
+      "title": "Transfer, cancelling, payment and ending a plan",
+      "applies": "Both paid plans",
+      "from": 33,
+      "to": 38
+    },
+    {
+      "title": "Liability, changes, complaints and law",
+      "applies": "Both paid plans",
+      "from": 39,
+      "to": 43
+    },
+    {
+      "title": "The standard 12-month warranty",
+      "applies": "Every Tuga device",
+      "from": 44,
+      "to": 49
+    },
+    {
+      "title": "Schedule 1: data processing",
+      "applies": "Total Care only",
+      "schedule": true
+    }
+  ],
   "clauses": [
     "1. Who gives these plans. The Tuga 3-Year Warranty and Tuga Total Care are given by Destello Tech Ltd, trading as Tuga Hardware, company number 16595781, registered in England, registered office 124 Vicarage Wood, Harlow, Essex CM20 3HH. In these Terms 'we', 'us' and 'Tuga' mean Destello Tech Ltd and 'you' means the customer named on the invoice. No insurer or other third party backs either plan and there is no financial protection scheme behind them. If Destello Tech Ltd stops trading, the plans end.",
     "2. Nature of the plans. The 3-Year Warranty is a warranty given by the seller against defects in materials and workmanship, including the battery. Total Care is a service contract that includes that warranty. Our remedy is repair, replacement or the services described in these Terms, never a payment of money except the refunds described in clauses 34 to 36.",
     "3. Your legal rights. These plans are in addition to your legal rights and do not reduce them. If you buy as a consumer, your rights under the Consumer Rights Act 2015 are not affected, and if you buy at a distance you also have the cancellation rights under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013 described in clauses 34 and 47. If you buy for your business, your rights under the Sale of Goods Act 1979 apply as set out in our Terms of Business.",
     "4. Accidental damage. Neither plan covers accidental damage, liquid damage, fire, theft or loss. We do not sell accidental damage protection ourselves, and nothing on our website or in these Terms offers it. If we offer it in future it will be provided by an insurer authorised and regulated by the Financial Conduct Authority, named on our website with its firm reference number, and we will state that we sell the policy and are not the insurer.",
-    "5. Which devices. The plans apply only to Tuga A6, A8, A10, W8, W10 and WH6 devices, including their scanner versions, sold by us, recorded by serial number on our warranty register at dispatch, and located in the United Kingdom. Each plan is bought per device and matched to that device's serial number. Both plans are available on every one of these models; a scanner version takes the plan and price of its base model.",
+    "5. Which devices. The plans apply only to Tuga A6, A8, A10, W8, W10 and WH6 devices, including their scanner versions, sold by us, recorded by serial number on our warranty register at dispatch, and located in the United Kingdom. Each plan is bought per device and matched to that device's serial number. Both plans are available on every one of these models. A scanner version (W8 with 2D Scanner, W10 with 2D Scanner, WH6 with Barcode Scanner) takes the plan of its base model at the scanner price in clause 8, and its built-in scanner is a covered part.",
     "6. Term. Each plan runs for 36 months from the dispatch date shown on your invoice and includes the 12-month warranty already supplied with the device. The term does not restart on repair or replacement, and a claim does not end the plan.",
     "7. When you can buy. Either plan can be bought with the device or within 30 days of dispatch at the published price. From day 31 to the end of month 12 the 3-Year Warranty can be bought only after a remote diagnostic check of each device, which we may decline; Total Care can be bought in that window only for devices joining a Total Care fleet already registered on your account. Neither plan is available after the end of month 12. Total Care is sold to business customers only, including sole traders, and requires a minimum of five covered devices on one account at the time of purchase.",
-    "8. Prices and VAT. Prices are shown per device on our website and on your invoice and are the amounts payable at the time of purchase. The 3-Year Warranty is one price per device at any quantity: A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89. Total Care is priced per device by the number of Total Care devices on your account once the quote is accepted, counting all models together and including the devices on that quote: for 10 or more devices, A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329; for 5 to 9 devices, £30 more per device (A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359). Devices added to a registered fleet take the band for the enlarged fleet; prices already paid do not change. Destello Tech Ltd is not currently VAT registered, so no VAT is added. If we become VAT registered, VAT will be added to new purchases from that date at the rate then in force; prices already paid do not change. Fleet discounts (3% at 2 units, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more) apply to devices and not to these plans, and plan lines do not count toward the discount tier.",
+    "8. Prices and VAT. Prices are shown per device on our website and on your invoice and are the amounts payable at the time of purchase. The 3-Year Warranty is one price per device at any quantity: A6 £65, A8 £65, A10 £65, W8 £79, W10 £79, WH6 £89. Scanner versions cost £15 more per device on either plan: W8 with 2D Scanner £94, W10 with 2D Scanner £94, WH6 with Barcode Scanner £104 for the 3-Year Warranty. Total Care is priced per device by the number of Total Care devices on your account once the quote is accepted, counting all models together and including the devices on that quote: for 10 or more devices, A6 £249, A8 £269, A10 £279, W8 £299, W10 £299, WH6 £329, and for the scanner versions W8 £314, W10 £314, WH6 £344; for 5 to 9 devices, £30 more per device (A6 £279, A8 £299, A10 £309, W8 £329, W10 £329, WH6 £359, and for the scanner versions W8 £344, W10 £344, WH6 £374). Devices added to a registered fleet take the band for the enlarged fleet; prices already paid do not change. Destello Tech Ltd is not currently VAT registered, so no VAT is added. If we become VAT registered, VAT will be added to new purchases from that date at the rate then in force; prices already paid do not change. Fleet discounts (3% at 2 units, 5% at 3 to 4, 8% at 5 to 9, 10% at 10 or more) apply to devices and not to these plans, and plan lines do not count toward the discount tier.",
     "9. Working days and hours. A working day is Monday to Friday excluding bank holidays in England and Wales. Our working hours are 08:30 to 17:30 UK time on working days. Anything received outside working hours is treated as received at 08:30 on the next working day. Transit time with the carrier is not counted in our workshop turnaround times.",
     "10. How to claim and remote check. Email support@tugahardware.com or call 01279 912065 with the serial number, a description of the fault and, where possible, a photo, short video or diagnostic report. We respond within one working day under the 3-Year Warranty and, under Total Care, acknowledge within two working hours and start triage within four working hours. Before we accept a claim we may ask you to complete our published remote checklist, which takes no more than 20 minutes. We confirm acceptance by email with a claim number.",
-    "11. What the warranty covers. If a covered device fails during the term because of a defect in materials or workmanship, we repair it or replace it with the same or an equivalent Tuga model, at our choice, at no charge. There is no limit on the number of defect repairs during the term. Replacement devices and parts may be new or refurbished to our working standard.",
+    "11. What the warranty covers. If a covered device fails during the term because of a defect in materials or workmanship, we repair it or replace it with the same or an equivalent Tuga model, at our choice, at no charge. There is no limit on the number of defect repairs during the term. Replacement devices and parts may be new or refurbished to our working standard. Every part of the device as supplied is covered against defects, including the screen and touch panel, mainboard, memory and storage, ports, buttons, cameras, speakers and microphones, radios (4G, Wi-Fi, Bluetooth, GPS and NFC), the battery as clause 12 sets out, and the built-in barcode scanner on the A6 and on scanner versions. A defect is a fault that arises on its own; damage caused by something that happens to the device is excluded under clause 17.",
     "12. Batteries. Under the 3-Year Warranty the battery is covered against defects in materials and workmanship for the full term, like any other part. Normal loss of capacity with age and use is not a defect. Where we measure capacity, it is measured as the battery controller's reported full charge capacity divided by rated capacity, read three times across three full charge cycles, using the Windows battery report on the W8, W10 and WH6 and our diagnostic app or the Android battery statistics on the A6, A8 and A10. On an accepted battery claim for the W8 or W10 we send a new pack with fitting instructions to your UK address by road courier under our carrier's dangerous-goods acceptance; you fit it and take the old pack to a local battery recycling point or hold it for collection with the device at end of life. We never ask you to post a battery to us. A6, A8, A10 and WH6: we replace the pack in our workshop and test the seal before return. Capacity loss caused by heat, physical damage or chargers we have not approved is excluded. Clause 26 applies to Total Care.",
     "13. Carriage. On an accepted claim under either plan we pay carriage both ways within the United Kingdom using the prepaid label we provide (Royal Mail Tracked 24 for devices sent to us, a tracked next-working-day carrier for devices we send to you) and, if you ask, the box we provide. If you use your own packaging you are responsible for packing the device so it is not damaged in transit. If you use a different carrier or label, you pay that carriage and transit damage is not covered. For addresses outside UK mainland under the 3-Year Warranty we tell you any extra cost before you send the device.",
     "14. Workshop service level (3-Year Warranty). Within two working days of receiving your device we tell you whether we will repair or replace it and when we expect to dispatch it. Our target is to dispatch the repaired or replacement device within five working days of receipt by tracked next-day carrier. This is a target and not a guaranteed service level. If we cannot dispatch the repaired device within ten working days of receipt, we send a replacement device instead.",

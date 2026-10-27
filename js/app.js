@@ -489,8 +489,10 @@
   /* -------------------------------------------------------- variant chooser */
 
   /* A device with a scanner version offers both as radios in the buy box.
-     Picking one points the main button and the price at that SKU; the
-     cover chooser already maps a scanner SKU to its base device's plans. */
+     Picking one points the main button and the price at that SKU, and
+     switches each cover option to that version's plan: a scanner version
+     costs more to cover and has its own plan SKU (data-plan-by-variant,
+     written by build.mjs warrantyChooser). */
   function initVariantChooser() {
     $$('[data-buy-box]').forEach((box) => {
       const chooser = $('[data-variant-chooser]', box);
@@ -503,6 +505,26 @@
         btn.dataset.addToCart = checked.value;
         btn.dataset.deviceName = checked.dataset.variantName;
         if (price) price.textContent = checked.dataset.variantPrice;
+        $$('[data-plan-by-variant]', box).forEach((radio) => {
+          let plan;
+          try {
+            plan = JSON.parse(radio.dataset.planByVariant)[checked.value];
+          } catch {
+            return;
+          }
+          if (!plan) return;
+          if (!radio.dataset.quoteTier) radio.value = plan.sku;
+          if (plan.quoteNote) radio.dataset.quoteNote = plan.quoteNote;
+          const opt = radio.closest('.protect-opt');
+          const cost = opt && $('[data-plan-price]', opt);
+          const note = opt && $('[data-plan-note]', opt);
+          if (cost) cost.textContent = plan.price;
+          if (note && plan.note) note.textContent = plan.note;
+        });
+        // A quote note already showing must follow the version too.
+        const cover = $('[data-warranty-choice]:checked', box);
+        const coverNote = $('[data-cover-note]', box);
+        if (cover?.dataset.quoteTier && coverNote) coverNote.textContent = cover.dataset.quoteNote || '';
       };
       chooser.addEventListener('change', update);
       window.addEventListener('pageshow', update);
@@ -564,9 +586,9 @@
       }
 
       if (warrantySku) {
-        const base = id.replace(/-scanner$/, '');
+        // A plan covers its exact device: a scanner version has its own.
         const plan = products ? findItem(products, warrantySku) : null;
-        const covers = plan ? plan.warrantyFor === base : warrantySku.endsWith(`-${base}`);
+        const covers = plan ? plan.warrantyFor === id : warrantySku.endsWith(`-${id}`);
         if (/^(acc|wty|upg)-/.test(id) || !covers) warrantySku = '';
       }
 
@@ -665,6 +687,54 @@
     });
   }
 
+  /* ----------------------------------------------------------- plan terms */
+
+  /* The Plan Terms fold into parts. A link to a clause (#clause-17) opens its
+     part, one button opens or closes them all, and printing shows every
+     clause whatever is open on screen. */
+  function initTermsGroups() {
+    const groups = $$('.terms-group');
+    if (!groups.length) return;
+    const toggle = $('[data-terms-toggle]');
+
+    const sync = () => {
+      if (!toggle) return;
+      const allOpen = groups.every((g) => g.open);
+      toggle.textContent = allOpen ? 'Close all' : 'Open all';
+      toggle.setAttribute('aria-expanded', String(allOpen));
+    };
+
+    const openTarget = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const target = id ? document.getElementById(id) : null;
+      const group = target?.closest('.terms-group');
+      if (!group) return;
+      group.open = true;
+      target.scrollIntoView();
+    };
+
+    groups.forEach((g) => g.addEventListener('toggle', sync));
+    toggle?.addEventListener('click', () => {
+      const open = !groups.every((g) => g.open);
+      groups.forEach((g) => { g.open = open; });
+      sync();
+    });
+
+    let before = null;
+    window.addEventListener('beforeprint', () => {
+      before = groups.map((g) => g.open);
+      groups.forEach((g) => { g.open = true; });
+    });
+    window.addEventListener('afterprint', () => {
+      if (before) groups.forEach((g, i) => { g.open = before[i]; });
+      before = null;
+    });
+
+    window.addEventListener('hashchange', openTarget);
+    openTarget();
+    sync();
+  }
+
   /* ------------------------------------------------------------- cart page */
 
   function cartItemRow(line) {
@@ -695,30 +765,25 @@
   }
 
   /* Under a device with no (or not enough) 3-Year Warranty in the basket,
-     offer it once with a single button. Scanner variants share the base
-     device's warranty, so the offer sits under whichever line comes first. */
+     offer it once with a single button. A scanner version has its own plan,
+     so it gets its own offer. */
   function warrantyOffer(line, lines, products) {
     const p = line.product;
     if (/^(acc|wty|upg)-/.test(p.id)) return '';
-    const base = p.id.replace(/-scanner$/, '');
-    const wty = products.find((x) => x.warrantyFor === base);
+    const wty = products.find((x) => x.warrantyFor === p.id);
     if (!wty) return '';
-    const firstForBase = lines.find((l) => l.product.id.replace(/-scanner$/, '') === base);
-    if (firstForBase !== line) return '';
 
-    const units = lines
-      .filter((l) => !/^(acc|wty|upg)-/.test(l.product.id) && l.product.id.replace(/-scanner$/, '') === base)
-      .reduce((n, l) => n + l.quantity, 0);
     const covered = lines.find((l) => l.product.id === wty.id)?.quantity || 0;
-    const missing = units - covered;
+    const missing = line.quantity - covered;
     if (missing <= 0) return '';
 
-    const device = findItem(products, base)?.name || p.name;
+    const device = p.name;
+    const scanner = /-scanner$/.test(p.id) ? ' and the built-in scanner' : '';
     return `
       <div class="cart-offer">
         <div class="cart-offer-text">
           <p class="cart-offer-title">Cover ${missing === 1 ? 'it' : `all ${missing}`} for 3 years <span class="pick-tag">Recommended</span></p>
-          <p class="cart-offer-meta">36 months against defects on your ${device}, including battery defects. UK carriage paid both ways on accepted claims. <a href="/warranty">How it works</a></p>
+          <p class="cart-offer-meta">36 months against faults on your ${device}, including battery defects${scanner}. UK carriage paid both ways on accepted claims. Not drops, liquid, theft or loss. <a href="/warranty#covered">What is covered</a></p>
         </div>
         <button type="button" class="btn btn-outline cart-offer-btn" data-add-warranty="${wty.id}" data-qty="${missing}">
           Add for ${money(wty.price * missing)}
@@ -946,11 +1011,15 @@
     // here instead of a failed redirect.
     try {
       const products = await getCatalogue();
+      // A plan covers its exact device; an upgrade fits the base device and
+      // its scanner version alike.
       const units = {};
+      const baseUnits = {};
       items.forEach((i) => {
         if (/^(acc|wty|upg)-/.test(i.id)) return;
         const base = i.id.replace(/-scanner$/, '');
-        units[base] = (units[base] || 0) + i.quantity;
+        units[i.id] = (units[i.id] || 0) + i.quantity;
+        baseUnits[base] = (baseUnits[base] || 0) + i.quantity;
       });
       const perGroup = {};
       for (const i of items) {
@@ -959,10 +1028,11 @@
         const device = p.warrantyFor || p.upgradeFor;
         if (!device) continue;
         const count = p.upgradeFor ? (perGroup[`${device}:${p.group}`] = (perGroup[`${device}:${p.group}`] || 0) + i.quantity) : i.quantity;
-        if (count > (units[device] || 0)) {
+        if (count > ((p.upgradeFor ? baseUnits : units)[device] || 0)) {
+          const deviceName = findItem(products, device)?.name || `Tuga ${device.replace('tuga-', '').toUpperCase()}`;
           setStatus(p.upgradeFor
-            ? `${p.name} fits one device each, and a device takes one ${p.group} option. Reduce the ${p.group} upgrades to match the number of Tuga ${device.replace('tuga-', '').toUpperCase()} units in the basket.`
-            : `${p.name} covers one device each. Reduce it to match the number of Tuga ${device.replace('tuga-', '').toUpperCase()} units in the basket.`);
+            ? `${p.name} fits one device each, and a device takes one ${p.group} option. Reduce the ${p.group} upgrades to match the number of ${deviceName} units in the basket.`
+            : `${p.name} covers one device each. Reduce it to match the number of ${deviceName} units in the basket.`);
           return;
         }
       }
@@ -1638,6 +1708,7 @@
     initGallery();
     initFilters();
     initFaq();
+    initTermsGroups();
     initCartPage();
     initForms();
     initOrderSummary();

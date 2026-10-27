@@ -2098,6 +2098,13 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   color: var(--ink-light);
 }
 
+.protect-note {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
 .protect-link {
   display: inline-block;
   margin-top: 0.7rem;
@@ -2311,6 +2318,9 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
 }
 
 .check-list svg { flex-shrink: 0; margin-top: 0.28em; color: var(--green-600); }
+
+/* What a plan does not cover (warranty page). */
+.check-list-no svg { color: var(--copper-text); }
 
 .variant-row {
   display: flex;
@@ -3437,6 +3447,63 @@ a, button, input, select, textarea, summary, [tabindex] { scroll-margin-block: 6
   font-size: var(--step--1);
   font-weight: 500;
   color: var(--copper-text);
+}
+
+/* Plan Terms parts: each folds, so the page reads as a contents list first */
+.terms-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-s);
+}
+
+html:not(.js) .terms-tools { display: none; }
+
+.terms-group { border-top: 1px solid var(--rule); }
+.terms-group:last-of-type { border-bottom: 1px solid var(--rule); }
+
+.terms-group summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 1rem;
+  align-items: center;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.terms-group summary::-webkit-details-marker { display: none; }
+
+.terms-group summary::after {
+  content: '+';
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--green-900);
+  transition: transform var(--fast);
+}
+
+.terms-group[open] summary::after { transform: rotate(45deg); }
+
+.terms-group-title {
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.terms-group-meta {
+  grid-column: 1;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  color: var(--ink-light);
+}
+
+.terms-group .clauses { padding-bottom: var(--space-m); }
+
+@media print {
+  .terms-tools { display: none; }
+  .terms-group summary::after { content: none; }
 }
 
 .clauses > p:target {

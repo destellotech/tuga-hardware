@@ -47,8 +47,10 @@ export function makeWarranty(plan, start, extra = {}) {
   return { plan: p, start, end: addMonths(start, WARRANTY_PLANS[p].months), ...extra };
 }
 
-/** Scanner variants carry their base device's plan (wty-3yr-tuga-w10 covers tuga-w10-scanner). */
+/** A scanner version's base model. Its plan is its own SKU (wty-3yr-tuga-w10-scanner),
+    but orders placed before that bought the base plan for it. */
 const baseModel = (model) => String(model || '').replace(/-scanner$/, '');
+
 
 /**
  * Which plan each dispatched unit gets: the order's 3-Year Warranty lines
@@ -69,19 +71,23 @@ export function allocatePlans(units, lines, chosen = {}) {
   for (const u of units) {
     if (!WARRANTY_PLANS[chosen[u.serial]]) continue;
     out[u.serial] = chosen[u.serial];
-    const b = baseModel(u.model);
-    if (chosen[u.serial] === '3yr' && paid[b]) paid[b]--;
+    if (chosen[u.serial] !== '3yr') continue;
+    const k = [u.model, baseModel(u.model)].find((m) => paid[m] > 0);
+    if (k) paid[k]--;
   }
-  for (const u of units) {
-    if (out[u.serial]) continue;
-    const b = baseModel(u.model);
-    if (paid[b] > 0) {
-      out[u.serial] = '3yr';
-      paid[b]--;
-    } else {
-      out[u.serial] = 'standard';
+  // Each unit's own model's plans first, then any base-model plans left over
+  // for scanner versions (orders placed before they had their own plan).
+  for (const key of [(u) => u.model, (u) => baseModel(u.model)]) {
+    for (const u of units) {
+      if (out[u.serial]) continue;
+      const k = key(u);
+      if (paid[k] > 0) {
+        out[u.serial] = '3yr';
+        paid[k]--;
+      }
     }
   }
+  for (const u of units) out[u.serial] ||= 'standard';
   return out;
 }
 
